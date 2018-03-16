@@ -220,6 +220,7 @@ this.follow.emit("follow");
 **绿色标明的会在更新周期内不断调用，请不用在里面实现复杂的逻辑**
 
 ![](http://images.gitbook.cn/f3fc8050-af2d-11e7-bdfa-890a7a50d411)
+
  hook | 描述 |
 -----| ----- |
  ngOnChanges() | 当改变输入属性时响应。 该方法接受当前和上一属性值的SimpleChanges对象 |
