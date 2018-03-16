@@ -220,13 +220,13 @@ this.follow.emit("follow");
 **绿色标明的会在更新周期内不断调用，请不用在里面实现复杂的逻辑**
 
 ![](http://images.gitbook.cn/f3fc8050-af2d-11e7-bdfa-890a7a50d411)
-| hook | 描述 |
-|-----| ----- |
-| ngOnChanges() | 当改变输入属性时响应。 该方法接受当前和上一属性值的SimpleChanges对象 |
-| ngOnInit() | 在输入属性设置完成之后响应，用于初始化指令/组件。只调用一次。 |
-| ngDoCheck() | 在每次变更检测周期都会被调用， 在 ngOnChanges()和ngOnInit()之后。|
-| ngAfterContentInit() | 当把内容投影进组件之后调用。第一次ngDoCheck()之后调用，只调用一次。|
-| ngAfterContentChecked() | 每次完成被投影组件内容的变更检测之后调用。|
-| ngAfterViewInit() | 初始化完组件视图及其子视图之后调用。|
-| ngAfterViewChecked() | 每次做完组件视图和子视图的变更检测之后调用。|
-| ngOnDestroy() | 当Angular每次销毁指令/组件之前调用并清扫。 在这儿反订阅可观察对象和分离事件处理器，以防内存泄漏。在Angular销毁指令/组件之前调用。|
+ hook | 描述 |
+-----| ----- |
+ ngOnChanges() | 当改变输入属性时响应。 该方法接受当前和上一属性值的SimpleChanges对象 |
+ ngOnInit() | 在输入属性设置完成之后响应，用于初始化指令/组件。只调用一次。 |
+ ngDoCheck() | 在每次变更检测周期都会被调用， 在 ngOnChanges()和ngOnInit()之后。|
+ ngAfterContentInit() | 当把内容投影进组件之后调用。第一次ngDoCheck()之后调用，只调用一次。|
+ ngAfterContentChecked() | 每次完成被投影组件内容的变更检测之后调用。|
+ ngAfterViewInit() | 初始化完组件视图及其子视图之后调用。|
+ ngAfterViewChecked() | 每次做完组件视图和子视图的变更检测之后调用。|
+ ngOnDestroy() | 当Angular每次销毁指令/组件之前调用并清扫。 在这儿反订阅可观察对象和分离事件处理器，以防内存泄漏。在Angular销毁指令/组件之前调用。|
