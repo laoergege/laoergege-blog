@@ -43,6 +43,7 @@ RxJS 是用于基于事件的程序（例如，web客户端应用程序），使
 
 ### Observer Pattern(观察者模式)
 > 附上 观察者模式 的 ES6写法
+
 ```
 function Producer() {
 
