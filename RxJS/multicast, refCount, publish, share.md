@@ -1,4 +1,6 @@
-> 转载 [30 天精通 RxJS(24): Observable operators - multicast, refCount, publish, share](https://github.com/ShaofeiZi/30-days-proficient-in-rxjs/blob/master/30%20%E5%A4%A9%E7%B2%BE%E9%80%9A%20RxJS(24)%EF%BC%9A%20Observable%20operators%20-%20multicast%2C%20refCount%2C%20publish%2C%20share.md)
+> 转载 [30 天精通 RxJS(24): Observable operators - multicast, refCount, publish, share](https://github.com/ShaofeiZi/30-days-proficient-in-rxjs/blob/master/30%20%E5%A4%A9%E7%B2%BE%E9%80%9A%20RxJS(24)
+
+## 前言
 
 昨天我们介绍完了各种 Subject，不晓得各位读者还记不记得在一开始讲到 Subject 时，是希望能够让 Observable 有新订阅时，可以共用前一个订阅的执行而不要从头开始，如下面的例子
 

@@ -231,3 +231,112 @@ this.follow.emit("follow");
  ngAfterViewInit() | 初始化完组件视图及其子视图之后调用。
  ngAfterViewChecked() | 每次做完组件视图和子视图的变更检测之后调用。
  ngOnDestroy() | 当Angular每次销毁指令/组件之前调用并清扫。 在这儿反订阅可观察对象和分离事件处理器，以防内存泄漏。在Angular销毁指令/组件之前调用。
+
+# ShaDowDom
+参考 [Angular 2 ViewEncapsulation](https://segmentfault.com/a/1190000008677532)
+
+# 内容投影
+内容投影可以让组件标签内的内容投影到组件模板内 `ng-content` 预留的位置。
+
+## 投影单块块内容
+
+```html
+// app 组件模板
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <ng-content></ng-content>
+  </div>
+</div>
+```
+```html
+// 外部使用
+<app>
+    <div class="panel-heading">标题</div>
+</app>
+```
+最终渲染：
+```html
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <div class="panel-heading">标题</div>
+  </div>
+</div>
+```
+## 投影多块内容
+当有插座，`ng-content` 可以使用 `select` 属性选择要投影的内容：
+
+```html
+// app 组件模板
+<div class="panel panel-primary">
+  <div class="panel-heading">
+      <ng-content select="h3"></ng-content>
+  </div>
+  <div class="panel-body">
+      <ng-content select=".my-class"></ng-content>
+  </div>
+  <div class="panel-footer">
+      <ng-content select="p"></ng-content>
+  </div>
+</div>
+```
+
+```html
+// 外部使用
+<app>
+    <h3>这是父层投影进来的内容</h3>
+    <p class="my-class">利用CSS选择器</p>
+    <p>这是底部内容</p>
+</app>
+```
+`select` 选择器差不多跟 css 选择器类似。同样支持组件投影，`select` 属性值跟组件标签名一样。
+
+# 指令
+Angular 中指令分为三种：
+![](http://images.gitbook.cn/613b6b00-b3a1-11e7-8a71-f7aeed571f0a)
+
+- Component 是 Directive 的子接口，是一种特殊的指令，Component 可以带有 HTML 模板，Directive 不能有模板。
+- 属性型指令：用来修改 DOM 元素的外观和行为，但是不会改变 DOM 结构，Angular 内置指令里面典型的属性型指令有 ngClass、ngStyle。如果你打算封装自己的组件库，属性型指令是必备的内容。
+- 结构型指令：可以修改 DOM 结构，内置的常用结构型指令有 *ngFor、*ngIf 和 NgSwitch。由于结构型指令会修改 DOM 结构，所以同一个 HTML 标签上面不能同时使用多个结构型指令，否则大家都来改 DOM 结构，到底听谁的呢？如果要在同一个 HTML 元素上面使用多个结构性指令，可以考虑加一层空的元素来嵌套，比如在外面套一层空的 <ng-container></ng-container>，或者套一层空的 <div>。
+
+# 依赖注入
+关于依赖注入的介绍以及由来，可以看官网这篇[依赖注入](https://angular.cn/guide/dependency-injection-pattern)
+总之，依赖注入（DI）是用来管理对象的创建以及它的依赖。
+
+很多 Angular 的装饰器都支持带有 providers 属性的元数据。 最重要的两个例子是 @Component 和 @NgModule。
+
+## NgModule 中注册服务
+
+# NgModule
+NgModules 用于配置注入器和编译器，并帮你把那些相关的东西组织在一起。
+
+NgModule 是一个带有 @NgModule 装饰器的类。 @NgModule 的参数是一个元数据对象，用于描述如何编译组件的模板，以及如何在运行时创建注入器。 它会标出该模块自己的组件、指令和管道，通过 exports 属性公开其中的一部分，以便外部组件使用它们。 NgModule 还能把一些服务提供商添加到应用的依赖注入器中。
+
+## API（部分）
+
+NgModule.declarations：编译器配置，用于告诉编译器指令的选择器并通过选择器匹配的方式决定要把该指令应用到模板中的什么位置。它会使用如下规则来确定这组选择器：
+- 列在 declarations 中的所有指令选择器。
+- 从所导入的 NgModule 中导出的那些指令的选择器。
+
+组件、指令和管道只能属于一个模块。 如果尝试把同一个类声明在多个模块中，编译器就会报告一个错误。
+不要重复声明从其它模块中导入的类。
+
+NgModule.providers：通过 providers 数组提供给注入器的配置。
+
+NgModule.bootstrap：要自动启动的组件列表。通常，在这个列表中只有一个组件，也就是应用的根组件。Angular 也可以引导多个引导组件，它们每一个都在宿主页面中有自己的位置。
+
+启动组件会自动添加到 entryComponents 中。
+
+NgModule.entryComponents：那些可以动态加载进视图的组件列表。引导组件和路由组件都是入口组件。你不用自己把它们加到模块的 entryComponents 列表中，因为它们会被隐式添加进去。但如果你要用其它方式根据类型来命令式的引导或动态加载某个组件，你就必须把它们显式添加到 entryComponents 中了。
+
+## 为什么 Angular 需要入口组件？
+原因在于摇树优化。对于产品化应用，你会希望加载尽可能小而快的代码。 代码中应该仅仅包括那些实际用到的类。 它应该排除那些从未用过的组件，无论该组件是否被声明过。
+
+事实上，大多数库中声明和导出的组件你都用不到。 如果你从未引用它们，那么摇树优化器就会从最终的代码包中把这些组件砍掉。
+
+如果Angular 编译器为每个声明的组件都生成了代码，那么摇树优化器的作用就没有了。
+
+所以，编译器转而采用一种递归策略，它只为你用到的那些组件生成代码。
+
+编译器从入口组件开始工作，为它在入口组件的模板中找到的那些组件生成代码，然后又为在这些组件中的模板中发现的组件生成代码，以此类推。 当这个过程结束时，它就已经为每个入口组件以及从入口组件可以抵达的每个组件生成了代码。
+
+如果该组件不是入口组件或者没有在任何模板中发现过，编译器就会忽略它。
