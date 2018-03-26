@@ -64,7 +64,7 @@ setTimeout(() => {
 // "B complete!"
 ```
 
-看到 “observable” 字面，可能总会让人不免以为这个就是观察者模式，可 observable 并没有像真正意义上的可观察者一样，内部保留观察者的一份清单。**每次订阅 observable 都是分开独立运行的**。
+看到 “observable” 字面，可能总会让人不免以为这个就是观察者模式，可 observable 并没有像真正意义上的可观察者一样，内部保留观察者的一份清单。**每次订阅 observable 都是分开独立运行的，observable 的行为更像 function**。
 
 ## 共享 observable 结果
 我们通过一个中间人来订阅 Observable，再把结果由中间人给转播给其他人
@@ -208,9 +208,9 @@ export declare class Subject<T> extends Observable<T> implements ISubscription {
 
 ## 什么是 Subject？
 从上述实例中，我们能够得出：
-### Subject 同时是 Observable 又是 Observer
+#### Subject 同时是 Observable 又是 Observer
 Subject 实现 RxJS 中的 Observer 的 next、complete、error 操作，又继承了 Observable，能够使用各种 Observable 的 Operate。
-### Subject 就是 Observer Pattern 的实例
+#### Subject 就是 Observer Pattern 的实例
 Subject 会对内部的 observers 清单进行组播(multicast)
 
 ## BehaviorSubject, ReplaySubject, AsyncSubject
@@ -343,3 +343,27 @@ setTimeout(() => {
 
 从上面的代码可以看出来，AsyncSubject 会在 subject 结束后才送出最后一个值，其实这个行为跟 Promise 很像，都是等到事情结束后送出一个值，但实务上我们非常非常少用到 AsyncSubject，绝大部分的时候都是使用 BehaviorSubject 跟 ReplaySubject 或 Subject。
 
+## 何时使用 Subject
+Observable 平时开发满足我们需求了，当我们一个 observable 的操作过程中会发生了 side-effect， 而我们不希望这个 side-effect 因为多个 subscribe 而被触发多次，希望能够共享该 side-effect 的结果，例如下面这段例子：
+
+```javascript
+var result = Rx.Observable.interval(1000).take(6)
+             .map(x => Math.random()); // side-effect，平常有可能是呼叫 API 或其他 side effect
+
+var subA = result.subscribe(x => console.log('A: ' + x));
+var subB = result.subscribe(x => console.log('B: ' + x));
+```
+
+这段代码 A 跟 B 印出来的乱数就不一样，代表 random(side-effect) 被执行了两次，这种情况就一定会用到 subject(或其相关的 operators)
+
+```javascript
+var result = Rx.Observable.interval(1000).take(6)
+             .map(x => Math.random()) // side-effect
+             .multicast(new Rx.Subject())
+             .refCount();
+
+var subA = result.subscribe(x => console.log('A: ' + x));
+var subB = result.subscribe(x => console.log('B: ' + x));
+```
+
+改成这样后我们就可以让 side-effect 不会因为订阅数而多执行，这种情状就是一定要用 subject 的。
