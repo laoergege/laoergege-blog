@@ -55,7 +55,7 @@ export class AppComponent implements AfterViewChecked {
 
 这意味着数据模型到视图过程是单向，不可在视图后发生数据流发生改变。
 
-![a](/assets/a.PNG)
+![a](https://github.com/laoergege/laoergege-blog/blob/master/assets/a.PNG?raw=true)
 
 ## 总结
 从变更检测过程以及渲染输出过程中，可以总结出：
