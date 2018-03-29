@@ -7,6 +7,8 @@
 - <a href="#执行上下文">执行上下文</a>
 - <a href="#闭包">闭包</a>
 - <a href="#继承">继承</a>
+- <a href="#this">this</a>
+- <a href="#apply、call、bind">apply、call、bind</a>
 
 ## [类型](#类型)
 
@@ -281,6 +283,31 @@ Scope = [AO].concat([[Scope]]);
 
 ## [闭包](#闭包)
 
+```
+var scope = "global scope";
+function checkscope(){
+    var scope = "local scope";
+    function f(){
+        return scope;
+    }
+    return f;
+}
+
+var foo = checkscope();
+foo(); //local scope
+```
+
+闭包就是能够读取其他函数内部变量的函数。
+
+**优点**：
+- 一个是前面提到的可以读取函数内部的变量
+- 另一个就是让这些变量的值始终保持在内存中
+
+**缺点**：
+由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题
+
+### 原理
+每次定义一个函数，都会产生一个作用域链（scope chain），将上层上下文的数据保存起来了，即使当前函数A运行结束，只要外部保持着当前函数A内部函数B的引用，依然可以访问到 A函数内部的变量（当JavaScript寻找变量varible时（这个过程称为变量解析），总会优先在当前作用域链的第一个对象中查找属性varible ，如果找到，则直接使用这个属性；否则，继续查找下一个对象的是否存在这个属性；这个过程会持续直至找到这个属性或者最终未找到引发错误为止）。
 
 ## [继承](#继承)
 
@@ -495,5 +522,40 @@ class Child1 extends Parent {
     toString() {
          return this.colors + ' ' + super.toString(); // 调用父类的toString()
     }
-
+}
 ```
+
+关于 ES6 class中代码的 ES5 中的真正样子，可查看这篇[文章](https://segmentfault.com/a/1190000008732290)
+
+## this
+函数有以下几种情况，不同情况 this 指向不同：
+
+- 在全局环境或是普通函数中直接调用
+- 作为对象的方法
+- 使用call、apply、bind
+- 作为构造函数
+- 箭头函数
+
+### 直接调用
+当函数独立调用的时候，在严格模式下它的this指向undefined，在非严格模式下，当this指向undefined的时候，自动指向全局对象(浏览器中就是window)。
+
+### 作为对象方法
+this指向调用它的对象。
+
+### 使用call、apply
+
+### 作为构造函数
+如果函数作为构造函数用，那么其中的this就代表它即将new出来的对象。
+
+new做了下面这些事:
+- 创建一个临时对象
+- this 指向该对象
+- 给临时对象绑定原型
+- 执行构造函数
+- 将临时对象return
+
+### 箭头函数
+箭头函数在创建的时候就已经绑定 this 指针，其值为创建时上下文的this值。
+
+## apply、call、bind
+[深入浅出妙用 Javascript 中 apply、call、bind](https://mp.weixin.qq.com/s/BYbCgTMt7nvChPddWor0Tw)
