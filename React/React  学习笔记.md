@@ -1,57 +1,13 @@
-## ES2015
-- 对象字面量和模板字符串的新特性
-- 块级作用域 和 let/const 和 var 的区别
-- 箭头函数
-- 解构和默认值／剩余参数／扩展运算符
-- 类和继承（用于定义组件，但是避免其他方式使用）
-- 使用类字段语法和箭头函数定义方法
-- Promise 对象以及如何配合 async/await 使用
-- 引入和导出模块（最重要的）
-
-## 学习路线
-
-
-## 思想
-### 组件化
-### 展示组件和容器组件 
-展示组件
-
-主要负责组件内容如何展示
-从props接收父组件传递来的数据
-大多数情况可以通过函数定义组件声明
-
-容器组件
-
-主要关注组件数据如何交互
-拥有自身的state，从服务器获取数据，或与redux等其他数据处理模块协作
-需要通过类定义组件声明，并包含生命周期函数和其他附加方法
-那么这样写具体有什么好处呢？
-
-解耦了界面和数据的逻辑
-更好的可复用性，比如同一个回复列表展示组件可以套用不同数据源的容器组件
-利于团队协作，一个人负责界面结构，一个人负责数据交互
-
-## 基础要点
-### JSX
-元素就是React DOM之中描述UI界面的最小单位。刚才我们说到了，元素其实就是普通的JS对象。不过我们用JSX来描述React元素在理解上可能有些困难，事实上，我们也可以不使用JSX来描述：
-```
-const element = <h1>Hello, world</h1>;
-// 用JSX描述就相当于是调用React的方法创建了一个对象
-const element = React.createElement('h1', null, 'Hello, world');
-```
-
-### Vritual DOM
-在作用上，我们可以把React元素理解为DOM元素；但实际上，React元素只是JS当中普通的对象。React内部实现了一套叫做React DOM的东西，或者我们称之为Virtual DOM也就是虚拟DOM.通过一个树状结构的JS对象来模拟DOM树。
-
-说到这里我们可以稍微讲一下，React为什么会有这一层虚拟DOM呢？在课程介绍中我们曾经提到过，React很快、很轻。它之所以快就是因为这一套虚拟DOM的存在，React内部还实现了一个低复杂度高效率的Diff算法，不同于以往框架，例如angular使用的脏检查。在应用的数据改变之后，React会尽力少地比较，然后根据虚拟DOM只改变真实DOM中需要被改变的部分。React也藉此实现了它的高效率，高性能。
-
-当然这不是虚拟DOM唯一的意义，通过这一层单独抽象的逻辑让React有了无限的可能，就比如react native的实现，可以让你只掌握JS的知识也能在其他平台系统上开发应用，而不只是写网页，甚至是之后会出现的React VR或者React物联网等等别的实现。
 
 
 
-输入
-输出
-事件绑定
+
+
+
+
+
+
+
 
 ### props 、state
 #### props
@@ -73,68 +29,14 @@ const element = React.createElement('h1', null, 'Hello, world');
 - 除非 shouldComponentUpdate() 返回false，否则setState()永远都会导致重渲。我们可以在此优化组件，**仅当新状态不同于之前状态时调用setState()，将避免不必要的重渲**。
 
 
-### 组件生命周期
-React 组件是一个包含 render 方法的对象，也可以选择性的包含其他生命周期方法。
-
-无论是什么组件式的框架，如 Angular、React 或者 Vue，都会设计组件生命，把组件初始化和渲染、更新、卸载各个阶段暴露出来，赋予开发者更多能力，在组件不同生命时刻执行某些操作，如在 `componentDidMount ` 在初次渲染完成之后被触发，也只会触发一次，在这个方法里你已经可以访问渲染出的DOM元素了或者这个函数中进行一些例如ajax请求的操作。
 
 
-#### 挂载
-这些方法会在组件实例被创建和插入DOM中时被调用：
-- constructor()
-- componentWillMount()
-- render()
-- componentDidMount()
-
-#### 更新
-属性或状态的改变会触发一次更新。当一个组件在被重渲时，这些方法将会被调用：
-- componentWillReceiveProps(nextProps)
-- shouldComponentUpdate(nextProps, nextState)
-- componentWillUpdate(nextProps, nextState)
-- render()
-- componentDidUpdate()
-
-#### 卸载
-当一个组件被从DOM中移除时，该方法被调用：
-- componentWillUnmount()
 
 
-#### 组件更新方式（摘自 [React组件生命周期小结](http://www.jianshu.com/p/4784216b8194)）
-- 首次渲染Initial Render
-- 调用this.setState （并不是一次setState会触发一次render，React可能会合并操作，再- 一次性进行render）
-- 父组件发生更新（一般就是props发生改变，但是就算props没有改变或者父子组件之间没有数据交换也会触发render）
-- 调用this.forceUpdate
-
-![](http://upload-images.jianshu.io/upload_images/1814354-4bf62e54553a32b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
 
 
-### 受控和非受控组件
-受控和非受控组件主要是针对表单元素，表单元素和其他元素主要不同点就是：表单元素能够保留内部状态。相应的，其值由React控制的输入表单元素称为“受控组件”。在受控组件中，表单数据由 React 组件处理，相反表单数据由 DOM 处理时，替代方案为使用非受控组件。
 
-要编写一个非受控组件，而非为每个状态更新编写事件处理程序，你可以使用 `ref` 从 DOM 获取表单值。
 
-> ref 属性接受一个回调函数,当给 HTML 元素添加 ref 属性时，ref 回调接收了底层的 DOM 元素作为参数,当给组件类添加 ref 属性时，ref 回调接收该组件实例
-
-React 对 `<input type="text">`, `<textarea>`, 和 `<select>` 都十分类似 - 他们都通过传入一个value属性来实现对组件的控制。
-
-如果你希望 React 可以为其指定初始值，但不再控制后续更新。要解决这个问题，你可以指定一个 defaultValue 属性而不是 value。
-```
-render() {
-  return (
-    <form onSubmit={this.handleSubmit}>
-      <label>
-        Name:
-        <input
-          defaultValue="Bob"
-          type="text"
-          ref={(input) => this.input = input} />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
-  );
-}
-```
-同样，`<input type="checkbox">` 和 `<input type="radio">` 支持 defaultChecked，`<select>` 和 `<textarea>` 支持 defaultValue.
 
 ### 事件处理
 - React事件绑定属性的命名采用驼峰式写法，而不是小写。

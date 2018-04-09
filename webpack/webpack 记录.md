@@ -1,17 +1,4 @@
-# 起步安装
 
-## 安装
-```
-npm install --save-dev webpack
-```
-
-## build
-
-需要通过路径调用 `webpack` bin 文件，
-```
-node_modules\.bin\webpack --config webpack.config.js。
-```
-安装 `webpack-cli` 可省取路径调用。
 
 ## 输出管理
 ### HtmlWebpackPlugin（动态将入口文件引入到主页）
