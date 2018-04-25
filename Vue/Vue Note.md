@@ -1,10 +1,15 @@
-## 模板语法
-**注意**：虽然在模板中 vue 支持的很多表达式，但切勿实现复杂的表达式，不便于模板阅读，复杂逻辑请放在 vue computed 属性中。
+## 目录
+- <a href="#template">模板语法</a>
+
+## [模板语法](#template)
+虽然在模板中 vue 支持的很多表达式，但切勿实现复杂的表达式，不便于模板阅读，复杂逻辑请放在 vue computed 属性中。
 
 主要模板语法及模板指令：
-- 插值表达式 {{}}
-- 属性绑定 v-bind （简写： :[attr]）
-- 事件绑定 v-on （简写： @[click]）
+
+**主要：**
+- 插值表达式 `{{}}`
+- 属性绑定 `v-bind （简写： :attr）`
+- 事件绑定 `v-on （简写： @click）`
     - 接收一个需要调用的方法名称
     ` <button v-on:click="greet">Greet</button>`
     - 内联 JavaScript 语句
@@ -13,7 +18,7 @@
     `<button v-on:click="say('hi', $event)">Say hi</button>`
 - 修饰符
 - 双向绑定 v-model
-- 条件 v-if
+- 条件渲染
     - v-if、v-else-if、v-else
     ```html
     <div v-if="type === 'A'">
@@ -39,8 +44,8 @@
     ```
 
 - 循环 v-for 
-    - `<div v-for="(val, key, index) in object"></div>` 
-    - `<div v-for="(item, index) in items"></div>`
+    - 遍历对象 `<div v-for="(val, key, index) in object"></div>` 
+    - 遍历数组 `<div v-for="(item, index) in items"></div>`
     - v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-for 循环中。
     ```html
     <li v-for="todo in todos" v-if="!todo.isComplete">
@@ -58,6 +63,9 @@
     - 多重值：`<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>` 只会渲染数组中最后一个被浏览器支持的值。
     - 当 v-bind:style 使用需要添加浏览器引擎前缀的 CSS 属性时，如 transform，Vue.js 会自动侦测并添加相应的前缀。
 
+**其他：**
+- v-html 输出 html 代码
+- v-show 控制元素显示
 
 
 ## VM 属性

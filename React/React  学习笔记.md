@@ -86,90 +86,10 @@ class LoggingButton extends React.Component {
 
 **Redux主要由三部分组成：store，reducer，action**。
 
-### Action
-Action 本质上是 JavaScript 普通对象，**用来描述动作，能够承载数据**。action 内必须使用一个字符串类型的 type 字段来表示将要执行的动作。多数情况下，type 会被定义成字符串常量。当应用规模越来越大时，建议使用单独的模块或文件来存放 action。
-```
-/*
- * action 类型
- */
 
-export const ADD_TODO = 'ADD_TODO';
 
-/*
- * action 创建函数
- */
 
-export function addTodo(text) {
-  // 返回action对象
-  return { type: ADD_TODO, text }
-}
 
-```
-### Reducer
-Action 只是描述了有事情发生了这一事实，并没有指明应用如何更新 state。而这正是 reducer 要做的事情（如何执行动作）。
-Reducer 就是一个纯函数，接收旧的 state 和 action，返回新的 state。
-```
-(previousState, action) => newState
-```
->  reducer 一定要保持纯净。只要传入参数相同，返回计算得到的下一个 state 就一定相同。没有特殊情况、没有副作用，没有 API 请求、没有变量修改，单纯执行计算。
-
-> **每个 reducer 只负责管理全局 state 中它负责的一部分**。每个 reducer 的 state 参数都不同，分别对应它管理的那部分 state 数据, 最后把每个 Reducer 合成一个总的应用 Reducer, 每个 Reducer 对应 state 也合成成了整个应用的 state。
-
-实例代码：
-```
-//todo demo
-// todo state
-function todos(state = [], action) {
-  switch (action.type) {
-    case ADD_TODO:
-      return [
-        ...state,
-        {
-          text: action.text,
-          completed: false
-        }
-      ]
-    case TOGGLE_TODO:
-      return state.map((todo, index) => {
-        if (index === action.index) {
-          return Object.assign({}, todo, {
-            completed: !todo.completed
-          })
-        }
-        return todo
-      })
-    default:
-      return state
-  }
-}
-// filter state
-function visibilityFilter(state = SHOW_ALL, action) {
-  switch (action.type) {
-    case SET_VISIBILITY_FILTER:
-      return action.filter
-    default:
-      return state
-  }
-}
-// 整个 state
-function todoApp(state = {}, action) {
-  return {
-    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
-    todos: todos(state.todos, action)
-  }
-}
-```
-### Store
-**Redux 应用只有一个单一的 store**， store 就是保存整个应用的 state，并且将 action 和 reducer 联系起来并改变 state 。
-
-Store 有以下职责：
-- 维持应用的 state；
-- 提供 getState() 方法获取 state；
-- 提供 dispatch(action) 方法更新 state；
-- 通过 subscribe(listener) 注册监听器;
-- 通过 subscribe(listener) 返回的函数注销监听器。
-
-[更多详细内容请查看 Redux 文档](http://cn.redux.js.org)。
 
 ### react + redux + react-redux
 Redux 和 React 之间没有关系，Redux 可作为 React 的数据处理中心，来管理应用状态。一般，我们都在容器组件中做数据处理, 创建一些容器组件把这些展示组件和 Redux 关联起来。技术上讲，容器组件就是使用 `store.subscribe()` 从 Redux state 树中读取部分数据，并通过 props 来把这些数据提供给要渲染的组件。你可以手工来开发容器组件，但建议使用  react-redux 库的 connect() 方法来生成，react-redux 就是为我们把提供  react + redux 联系在一起提供更多方便。

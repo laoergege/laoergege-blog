@@ -1,10 +1,12 @@
-> 以下内容为笔者在学习 React 的一些记录
+> 以下内容为笔者在学习 React 的一些记录，更新日期：2018.04.21
 
 ## 内容列表
 - <a href="#JSX">JSX</a>
 - <a href="#keys">列表 && keys</a>
 - <a href="#control">受控与非受控组件</a>
 - <a href="#lifecycle">生命周期</a>
+- <a href="#redux">Redux</a>
+- <a href="#event">事件系统</a>
 
 
 ## [JSX](#JSX)
@@ -182,6 +184,7 @@ render() {
 同样，`<input type="checkbox">` 和 `<input type="radio">` 支持 defaultChecked，`<select>` 和 `<textarea>` 支持 defaultValue.
 
 ## [生命周期](#lifecycle)
+
 React 组件是一个包含 render 方法的对象，也可以选择性的包含其他生命周期方法。
 
 无论是什么组件式的框架，如 Angular、React 或者 Vue，都会设计组件生命，把组件初始化和渲染、更新、卸载各个阶段暴露出来，赋予开发者更多能力，在组件不同生命时刻执行某些操作，如在 `componentDidMount ` 在初次渲染完成之后被触发，也只会触发一次，在这个方法里你已经可以访问渲染出的DOM元素了或者这个函数中进行一些例如ajax请求的操作。
@@ -212,3 +215,156 @@ React 组件是一个包含 render 方法的对象，也可以选择性的包含
 - 调用this.forceUpdate
 
 ![](http://upload-images.jianshu.io/upload_images/1814354-4bf62e54553a32b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+## [事件系统](#event)
+阅读 [合成事件绑定](https://github.com/wxyyxc1992/Web-Series/blob/master/React/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A.md)
+React 会将所有的事件都绑定在最外层(document)，使用统一的事件监听，并在冒泡阶段处理事件，当挂载或者卸载组件时，只需要在通过的在统一的事件监听位置增加或者删除对象，因此可以提高效率。 并且 React 并没有使用原生的浏览器事件，而是在基于 Virtual DOM 的基础上实现了合成事件(SyntheticEvent)，事件处理程序接收到的是 SyntheticEvent 的实例。SyntheticEvent 完全符合 W3C 的标准，因此在事件层次上具有浏览器兼容性，与原生的浏览器事件一样拥有同样的接口，可以通过 stopPropagation()和 preventDefault()相应的中断。如果需要访问当原生的事件对象，可以通过引用 nativeEvent 获得。
+
+![](https://camo.githubusercontent.com/fab414c711883f2c1006f266ee66fd4209359a9d/68747470733a2f2f7365676d656e746661756c742e636f6d2f696d672f72656d6f74652f313436303030303030383738323634383f773d34303726683d333536)
+
+## [Redux](#redux)
+
+虽然 Redux 并不是 React 的一部分，但在开发过程 React 只是帮我们管理视图部分，数据状态管交给了我们自己，而 Redux 经常搭配 React，作为 React 的状态管理，当然这也是可选的。
+
+目前前端开发主要有两个意识：
+- 组件化
+- MDV（Model Driven View）
+
+所谓组件化，很容易理解，把视图按照功能，切分为若干基本单元，所得的东西就可以称为组件，而组件又可以一级一级组合而成复合组件，从而在整个应用的规模上，形成一棵倒置的组件树。
+
+而 MDV，则是对很多低级 DOM 操作的简化，把对DOM的手动修改屏蔽了，通过从数据到视图的一个映射关系，达到了只要操作数据，就能改变视图的效果。视图只是状态的一种映射，像 Angular、Vue、React 这类框架会帮我们自动同步视图。
+
+但是实际开发中 Model 并不是完全、一对一对应我们的视图，有可能我们仅需要这个 Model 的部分数据进行显示或者我们还需要其他 Model 上的数据，故通常我们会提供一个 ViewModel 层，这个 ViewModel 层才是真正对应我们 View 层，我们在 ViewModel 提供 View 层所需要显示的数据模型和处理用户界面事件的方法。
+
+### Redux主要由三部分组成：store，reducer，action
+
+#### Action
+
+Action 本质上是 JavaScript 普通对象，**用来描述一个动作或事件，并且承载数据**。action 内必须使用一个字符串类型的 type 字段来表示将要执行的动作。多数情况下，type 会被定义成字符串常量。当应用规模越来越大时，建议使用单独的模块或文件来存放 action。
+```
+/*
+ * action 类型
+ */
+
+export const ADD_TODO = 'ADD_TODO';
+
+/*
+ * action 创建函数
+ */
+
+export function addTodo(text) {
+  // 返回action对象
+  return { type: ADD_TODO, text }
+}
+
+```
+
+#### Reducer
+
+Action 只是描述了有事情发生了这一事实，并没有指明应用如何更新 state。而这正是 reducer 要做的事情（如何执行动作）。
+Reducer 就是一个纯函数，接收旧的 state 和 action，返回新的 state。
+```
+(previousState, action) => newState
+```
+> 开发复杂的应用时，不可避免会有一些数据相互引用。建议你尽可能地把 state 范式化，不存在嵌套。把所有数据放到一个对象里，每个数据以 ID 为主键，不同实体或列表间通过 ID 相互引用数据。
+
+>  reducer 一定要保持纯净。只要传入参数相同，返回计算得到的下一个 state 就一定相同。没有特殊情况、没有副作用，没有 API 请求、没有变量修改，单纯执行计算。
+
+> **一个 reducer 代表、处理着一部分 state**。每个 reducer 的 state 参数都不同，分别对应它管理的那部分 state 数据, 最后把每个 Reducer 合成一个总的应用 Reducer, 每个 Reducer 对应 state 也合成成了整个应用的 state。
+
+实例代码：
+```
+//todo demo
+// todo state
+function todos(state = [], action) {
+  switch (action.type) {
+    case ADD_TODO:
+      return [
+        ...state,
+        {
+          text: action.text,
+          completed: false
+        }
+      ]
+    case TOGGLE_TODO:
+      return state.map((todo, index) => {
+        if (index === action.index) {
+          return Object.assign({}, todo, {
+            completed: !todo.completed
+          })
+        }
+        return todo
+      })
+    default:
+      return state
+  }
+}
+// filter state
+function visibilityFilter(state = SHOW_ALL, action) {
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return action.filter
+    default:
+      return state
+  }
+}
+// 整个 state
+function todoApp(state = {}, action) {
+  return {
+    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
+    todos: todos(state.todos, action)
+  }
+}
+```
+
+#### Store
+**Redux 应用只有一个单一的 store**， store 存储着整个应用的 state。
+
+Store 有以下职责：
+- 维持应用的 state；
+- 提供 getState() 方法获取 state；
+- 提供 dispatch(action) 方法更新 state；
+- 通过 subscribe(listener) 注册监听器;
+
+#### store，reducer，action 开发流程
+
+1. 构建 actionCreator 创建 action
+2. 构建 reducer 函数，使用 combineReducers 组合所有 reducer
+3. 调用 creatStore ，传入 reducers，创建 store 
+4. store.subscribe(listener)
+5. store.dispatch(action)
+
+```JavaScript
+// actionCreator
+function addTodo(text) {
+  return {
+    type: ADD_TODO,
+    text
+  }
+}
+
+// reducer
+// 如果 state 是个引用类型，返回新的引用
+function todos(state = [], action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return state.concat([action.text])
+    default:
+      return state
+  }
+}
+​
+// 当有多个 reducer 时， 使用 combineReducers 组合
+const store = createStore(todos, ['Use Redux'])
+
+// 注意 subscribe() 返回一个函数用来注销监听器
+const unsubscribe = store.subscribe(() =>
+  console.log(store.getState())
+)
+​
+// 分发动作
+store.dispatch(addTodo('Read the docs'))
+​
+// 停止监听 state 更新
+unsubscribe();
+```
