@@ -431,7 +431,7 @@ console.log(child2.colors); // ["red", "blue", "green"]
 
 缺点：组合继承最大的缺点是会调用两次父构造函数。在这个例子中，如果我们打印 child1 对象，我们会发现 Child.prototype 和 child1 都有一个属性为colors，属性值为['red', 'blue', 'green']。
 
-![0ZXr7680RnBnmUy5pZeT90ME](/assets/0ZXr7680RnBnmUy5pZeT90ME.PNG)
+![0ZXr7680RnBnmUy5pZeT90ME](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/assets/0ZXr7680RnBnmUy5pZeT90ME.PNG)
 
 这样会造成内存浪费。
 
@@ -464,7 +464,7 @@ let child1 = new Child('lys');
 console.log(child1)
 ```
 
-![t-XY5-xAUgAmN3h8xxcobYbo](/assets/t-XY5-xAUgAmN3h8xxcobYbo.PNG)
+![t-XY5-xAUgAmN3h8xxcobYbo](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/assets/t-XY5-xAUgAmN3h8xxcobYbo.PNG)
 
 之前问题解决了，不过我们发现 child1 的 constructor 是 Parent。
 ```javascript
@@ -504,7 +504,7 @@ let child1 = new Child('lys');
 console.log(child1)
 ```
 
-![9Tholoujav_RtA3FOpTBuLBA](/assets/9Tholoujav_RtA3FOpTBuLBA.PNG)
+![9Tholoujav_RtA3FOpTBuLBA](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/assets/9Tholoujav_RtA3FOpTBuLBA.PNG)
 
 这种方式解决了上面的所有问题，是继承的最完美实现方式。
 

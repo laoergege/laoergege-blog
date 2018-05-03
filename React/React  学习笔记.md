@@ -84,7 +84,7 @@ class LoggingButton extends React.Component {
 
 ![react + redux 应用结构.png](http://upload-images.jianshu.io/upload_images/3368741-5cd73ee4f7e0ab91.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-**Redux主要由三部分组成：store，reducer，action**。
+
 
 
 
@@ -149,19 +149,6 @@ store的三大功能：dispatch，subscribe，getState都不需要手动来写�
 
 如果 state 发生了变化，react-redux 会对新旧两个state进行浅对比，如果不相同则调用 `this.setState()` 触发Connect组件的更新， 并在 shouldComponentUpdate 生命周期 `return true`。传入新的 props 到 ui组件，触发ui组件的更新。
 
-### 中间件
-官网的 [Middleware](http://cn.redux.js.org/docs/advanced/Middleware.html) 讲解。
-一个标准的中间件写法：
-```
-function createMiddleware(store) {
-    return function (next) {
-        return function (action) {
-            ...
-            next(action)
-        }
-    }
-}
-```
 
 ### 异步 Action
 既然 Redux 作为我们的数据处理中心，那 Redux 究竟是如何处理异步数据流的呢?
