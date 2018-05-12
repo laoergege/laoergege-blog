@@ -1,3 +1,4 @@
+## MongoDB window服务安装
 1. 下载 [MongoDB](https://docs.mongodb.com/)
 2. 创建 data 等文件夹以及相应文件 
 
@@ -6,22 +7,40 @@
 
 ![](http://upload-images.jianshu.io/upload_images/3368741-7502736be3f9cd10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+> 3.6版本以上 注意是 .cfg 文件
 
 ![](http://upload-images.jianshu.io/upload_images/3368741-66392588a72fae88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 3. 配置 MongoDB 作为window服务启动
-编辑刚刚创建好的 mongodb.conf 文件。
+编辑刚刚创建好的 mongodb.cfg 文件。
 
-![](http://upload-images.jianshu.io/upload_images/3368741-e1688f25d8d5c0d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+```
+logpath=D:\data\log\mongodb.log
+logappend=true
+dbpath=D:\data\db
+port=27017
+serviceName=MongoDB
+serviceDisplayName=MongoDB
+bind_ip=127.0.0.1
+```
 
 更多[配置详情](https://my.oschina.net/pwd/blog/399374)
 
 4. 安装服务
+
+> 注意要用超级管理员权限
+
 ```
-mongod.exe -f "Yours mongodb.conf" --install
+.\mongod.exe -f "your config" --install
 ``` 
 
-5. 启动服务，进入window管理页面
+5. 启动服务
+
+```
+net start MongoDB
+```
+
+或者进入window图形化服务管理页面
 
 ![](http://upload-images.jianshu.io/upload_images/3368741-be0e4d30308101fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
