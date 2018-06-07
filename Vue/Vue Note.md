@@ -1,7 +1,13 @@
-## 目录
-- <a href="#template">模板语法</a>
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+    - [templating syntax](#templating-syntax)
+    - [ViewModel](#viewmodel)
+    - [Others](#others)
+        - [IS Feature](#is-feature)
+        - [Component Communication](#component-communication)
+    - [响应式原理](#)
 
-## [模板语法](#template)
+### templating syntax 
 虽然在模板中 vue 支持的很多表达式，但切勿实现复杂的表达式，不便于模板阅读，复杂逻辑请放在 vue computed 属性中。
 
 主要模板语法及模板指令：
@@ -68,21 +74,14 @@
 - v-show 控制元素显示
 
 
-## VM 属性
+### ViewModel
 data
 生命周期
 computed
 watch
 
-## 其他
-### key
-Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。
-
-当 Vue.js 用 v-for 正在更新已渲染过的元素列表时，它默认用“就地复用”策略。如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。
-这个默认的模式是高效的，但是只适用于不依赖子组件状态或临时 DOM 状态 (例如：表单输入值) 的列表渲染输出。
-建议尽可能在使用 v-for 时提供 key，除非遍历输出的 DOM 内容非常简单，或者是刻意依赖默认行为以获取性能上的提升。
-
-### is
+### Others
+#### IS Feature
 ```
 <div id="todo-list-example">
   <input
@@ -103,5 +102,25 @@ Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从�
 ```
 注意这里的 is="todo-item" 属性。这种做法在使用 DOM 模板时是十分必要的，因为在 `<ul>` 元素内只有 `<li>` 元素会被看作有效内容。这样做实现的效果与 `<todo-item>` 相同，但是可以避开一些潜在的浏览器解析错误。
 
-## 原理
 
+#### Component Communication
+
+1. 父->子
+
+    - props(v-bind)
+
+    - $refs
+
+2. 子->父
+
+    - events(v-on)
+
+    - `$parent`、`$root`
+
+3. 非父子组件
+
+    - event bus
+
+    - vuex
+
+### 响应式原理
