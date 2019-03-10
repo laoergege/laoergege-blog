@@ -1,0 +1,29 @@
+{
+  "name": "laoergege-blog",
+  "version": "1.0.0",
+  "description": "Laoergege's Learning Track",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laoergege/laoergege-blog.git"
+  },
+  "keywords": [
+    "laoergege",
+    "blog",
+    "javascript",
+    "vue",
+    "react",
+    "webpack",
+    "pwa",
+    "wepy"
+  ],
+  "author": "laoergege",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laoergege/laoergege-blog/issues"
+  },
+  "homepage": "https://github.com/laoergege/laoergege-blog#readme"
+}

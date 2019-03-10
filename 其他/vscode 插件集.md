@@ -1,2 +1,0 @@
-## markdown
-- Markdown Preview Enhanced
