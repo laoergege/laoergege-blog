@@ -12,11 +12,22 @@ eslint yourfile.js
 ```
 
 ## 规则配置
+eslint 有两种配置方式:
 1. Configuration Comments - 使用 JavaScript 注释把配置信息直接嵌入到一个代码源文件中。
 2. Configuration Files - 使用 JavaScript、JSON 或者 YAML 文件为整个目录（处理你的主目录）和它的子目录指定配置信息。可以配置一个独立的 .eslintrc.* 文件，或者直接在 package.json 文件里的 eslintConfig 字段指定配置，ESLint 会查找和自动读取它们，再者，你可以在命令行运行时指定一个任意的配置文件。
 
-.eslintrc.* 文件配置选项 
+### .eslintrc.* 文件配置选项 
+书写规则:
+```
+规则名: [值, 参数1, 参数2...]
+```
+其中值可为:
+- "off" or 0 - 关闭规则
+- "warn" or 1 - 将规则视为一个警告（不会影响退出码）
+- "error" or 2 - 将规则视为一个错误 (退出码为1)
+
 ```javascript
+// eslintrc.js
 {   
     // 指定脚本的运行环境。每种环境都有一组特定的预定义全局变量
     // 更多环境变量 http://eslint.cn/docs/user-guide/configuring#specifying-environments
@@ -28,7 +39,7 @@ eslint yourfile.js
         "eslint:recommended",
         "plugin:vue/essential"
     ],
-    // 脚本在执行期间访问的额外的全局变量。
+    // 当访问当前源文件内未定义的变量时，no-undef 规则将发出警告。你可以使用注释或在配置文件中定义全局变量。
     // xx : "onlyread" | true | false
     //      只读 | 可重写 | 不可重写
     // 注意：要启用no-global-assign规则来禁止对只读的全局变量进行修改。
@@ -39,11 +50,12 @@ eslint yourfile.js
     },
     // 制定解析器
     "parser": "babel-eslint",
-    // 指定解析器选项
+    // 配置解析器
     // 更多配置 http://eslint.cn/docs/user-guide/configuring#specifying-parser-options
     "parserOptions": {
         "ecmaVersion": 2018
     },
+    // 插件名称可以省略 eslint-plugin- 前缀。
     "plugins": [
         "vue"
     ],
@@ -69,12 +81,92 @@ eslint yourfile.js
 }
 ```
 
-JS 注释写法
-```
+### JS 注释写法
+JS 注释写法控制以下三种规则:
+- Environments -指定脚本的运行环境 每种环境都有一组特定的预定义全局变量
+- Globals -脚本在执行期间访问的额外全局变量
+- Rules -启用的规则及各自的错误级别
+  
+```javascript
 env
 /* eslint-env node, mocha */
 
 global
 /* global var1, var2 */
 /* global var1:false, var2:false */
+
+rules
+/* eslint quotes: ["error", "double"], curly: 2 */
 ```
+
+#### 开启关闭 eslint
+注释块，只控制单块 JS 语法
+```
+/* eslint-disable */
+
+alert('foo');
+
+/* eslint-enable */
+```
+
+你也可以对指定的规则启用或禁用警告:
+
+```
+/* eslint-disable no-alert, no-console */
+
+alert('foo');
+console.log('bar');
+
+/* eslint-enable no-alert, no-console */
+```
+
+如果在整个文件范围内禁止规则出现警告，将 /* eslint-disable */ 块注释放在文件顶部：
+
+```
+/* eslint-disable */
+
+alert('foo');
+```
+
+可以在你的文件中使用以下格式的行注释或块注释在某一特定的行上禁用所有规则：
+
+```
+alert('foo'); // eslint-disable-line
+
+// eslint-disable-next-line
+alert('foo');
+```
+
+在某一特定的行上禁用指定单个或者多个的规则：
+
+```
+alert('foo'); // eslint-disable-line no-alert
+
+// eslint-disable-next-line no-alert, quotes, semi
+alert('foo');
+```
+
+### 其他
+
+注：如果想重新定义某插件的规则或者制定特定环境变量时
+
+配置写法
+```
+{
+    "plugins": ["example"],
+    "env": {
+        "example/custom": true
+    },
+    "rules": {
+        "example/custom": 0
+    }
+}
+```
+
+注释写法
+```
+foo(); // eslint-disable-line example/rule-name
+foo(); /* eslint-disable-line example/rule-name */
+```
+
+用 `plugin/xxx` 路径写法。
