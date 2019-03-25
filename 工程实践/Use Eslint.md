@@ -170,3 +170,43 @@ foo(); /* eslint-disable-line example/rule-name */
 ```
 
 用 `plugin/xxx` 路径写法。
+
+## 多重配置优先级
+### 配置文件
+使用配置文件的第一种方式是通过 .eslintrc.* 和 package.json 文件。ESLint 将自动在要检测的文件目录里寻找它们，紧接着是父级目录，一直到文件系统的根目录（除非指定 root: true）。
+
+如果同一个目录下有多个配置文件，ESLint 只会使用一个。优先级顺序如下：
+
+1. .eslintrc.js
+2. .eslintrc.yaml
+3. .eslintrc.yml
+4. .eslintrc.json
+5. .eslintrc(弃用)
+6. package.json
+
+> 注：当前文件目录下的配置文件优先级要高于父目录的配置文件
+
+### 规则优先级
+完整的配置层次结构，从最高优先级最低的优先级，如下:
+
+1. 行内配置
+   1. `/*eslint-disable*/` 和 `/*eslint-enable*/`
+   2. `/*global*/`
+   3. `/*eslint*/`
+   4. `/*eslint-env*/`
+2. 命令行选项（或 CLIEngine 等价物）：
+   1. --global
+   2. --rule
+   3. --env
+   4. -c、--config
+3. 项目级配置：
+   1. 与要检测的文件在同一目录下的 .eslintrc.* 或 package.json 文件
+   2. 继续在父级目录寻找 .eslintrc 或 package.json文件，直到根目录（包括根目录）或直到发现一个有"root": true的配置。
+4. 如果不是（1）到（3）中的任何一种情况，退回到 ~/.eslintrc 中自定义的默认配置。
+
+## 集成到工作流
+
+### vscode
+
+
+### webpack
