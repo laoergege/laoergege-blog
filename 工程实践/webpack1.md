@@ -21,13 +21,13 @@
       - [热模块替换原理](#热模块替换原理)
       - [让代码支持热模块替换](#让代码支持热模块替换)
   - [构建优化](#构建优化)
-    - [代码压缩](#代码压缩)
-    - [代码分离](#代码分离)
-      - [optimization.splitChunks](#optimizationsplitchunks)
-      - [css 样式提取](#css-样式提取)
-    - [tree shaking(跳过)](#tree-shaking跳过)
-    - [`optimization.splitChunks` 提取公共模块](#optimizationsplitchunks-提取公共模块)
-    - [manifest 及缓存](#manifest-及缓存)
+    - [应用优化](#应用优化)
+      - [代码压缩](#代码压缩)
+      - [代码分离](#代码分离)
+        - [`optimization.splitChunks` 提取公共模块](#optimizationsplitchunks-提取公共模块)
+      - [`mini-css-extract-plugin` 提取样式](#mini-css-extract-plugin-提取样式)
+      - [tree shaking(跳过)](#tree-shaking跳过)
+    - [缓存](#缓存)
   - [其他](#其他)
     - [配置思路](#配置思路)
     - [内联语法](#内联语法)
@@ -180,18 +180,62 @@ webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 
 
 - 构建优化
   - 构建速度
-  - 代码
+    - happypack
+    - thread-loader
+  - 应用优化
     - 缓存
     - 分离
     - 压缩
 
-### 代码压缩
+### 应用优化
+#### 代码压缩
 
-### 代码分离
-#### optimization.splitChunks
-#### css 样式提取
+#### 代码分离
+代码分离能够把代码分离到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码分离可以用于获取更小的 bundle，以及控制资源加载优先级，如果使用合理，会极大影响加载时间。
 
-### tree shaking(跳过)
+常用的代码分离方法有三种：
+
+- 入口起点：使用 entry 配置手动地分离代码。
+- 防止重复，提取公共模块：使用 SplitChunksPlugin 去重和分离 chunk。
+- 动态导入：通过模块中的内联函数调用来分离代码。
+
+##### `optimization.splitChunks` 提取公共模块
+webpack v4 开始，`CommonsChunkPlugin ` 被移除，`optimization.splitChunks` 配置选项作为替代，也就是分离模块的功能已作为 webpack 内置功能。
+
+webpack 4 内置的 SplitChunksPlugin 的默认配置：
+
+```javascript
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
+};
+```
+
+#### `mini-css-extract-plugin` 提取样式
+
+#### tree shaking(跳过)
 *tree shaking* 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。
 
 使用 tree shaking 必须注意以下几点:
@@ -203,9 +247,7 @@ webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 
 optimization.usedExports
 optimization.sideEffects
 
-### `optimization.splitChunks` 提取公共模块
-
-### manifest 及缓存
+### 缓存
 [https://webpack.docschina.org/concepts/manifest](https://webpack.docschina.org/concepts/manifest)
 
 ## 其他
