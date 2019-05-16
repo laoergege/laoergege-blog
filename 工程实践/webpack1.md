@@ -3,36 +3,36 @@
 # Content Table
 - [Content Table](#content-table)
   - [webpack-cli](#webpack-cli)
-  - [结合 npx 或者 npm script 运行 webpack 工具](#%E7%BB%93%E5%90%88-npx-%E6%88%96%E8%80%85-npm-script-%E8%BF%90%E8%A1%8C-webpack-%E5%B7%A5%E5%85%B7)
-  - [资源管理](#%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86)
-    - [常用 loader](#%E5%B8%B8%E7%94%A8-loader)
-      - [样式](#%E6%A0%B7%E5%BC%8F)
+  - [结合 npx 或者 npm script 运行 webpack 工具](#结合-npx-或者-npm-script-运行-webpack-工具)
+  - [资源管理](#资源管理)
+    - [常用 loader](#常用-loader)
+      - [样式](#样式)
       - [images、font](#imagesfont)
-  - [输出管理](#%E8%BE%93%E5%87%BA%E7%AE%A1%E7%90%86)
-    - [其他输出方式](#%E5%85%B6%E4%BB%96%E8%BE%93%E5%87%BA%E6%96%B9%E5%BC%8F)
-  - [开发](#%E5%BC%80%E5%8F%91)
-    - [环境变量](#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F)
+  - [输出管理](#输出管理)
+    - [其他输出方式](#其他输出方式)
+  - [开发](#开发)
+    - [环境变量](#环境变量)
     - [SourceMap](#sourcemap)
-      - [什么是 cheap 特性下 sourcemap 不包含列信息，也不包含 loaders 的 sourcemap](#%E4%BB%80%E4%B9%88%E6%98%AF-cheap-%E7%89%B9%E6%80%A7%E4%B8%8B-sourcemap-%E4%B8%8D%E5%8C%85%E5%90%AB%E5%88%97%E4%BF%A1%E6%81%AF%E4%B9%9F%E4%B8%8D%E5%8C%85%E5%90%AB-loaders-%E7%9A%84-sourcemap)
-      - [不同场景下 devtool 的选择](#%E4%B8%8D%E5%90%8C%E5%9C%BA%E6%99%AF%E4%B8%8B-devtool-%E7%9A%84%E9%80%89%E6%8B%A9)
+      - [什么是 cheap 特性下 sourcemap 不包含列信息，也不包含 loaders 的 sourcemap](#什么是-cheap-特性下-sourcemap-不包含列信息也不包含-loaders-的-sourcemap)
+      - [不同场景下 devtool 的选择](#不同场景下-devtool-的选择)
       - [chrome devtool source](#chrome-devtool-source)
     - [webpack-dev-server](#webpack-dev-server)
-      - [启用热模块替换](#%E5%90%AF%E7%94%A8%E7%83%AD%E6%A8%A1%E5%9D%97%E6%9B%BF%E6%8D%A2)
-      - [热模块替换原理](#%E7%83%AD%E6%A8%A1%E5%9D%97%E6%9B%BF%E6%8D%A2%E5%8E%9F%E7%90%86)
-      - [让代码支持热模块替换](#%E8%AE%A9%E4%BB%A3%E7%A0%81%E6%94%AF%E6%8C%81%E7%83%AD%E6%A8%A1%E5%9D%97%E6%9B%BF%E6%8D%A2)
-  - [构建优化](#%E6%9E%84%E5%BB%BA%E4%BC%98%E5%8C%96)
-    - [应用优化](#%E5%BA%94%E7%94%A8%E4%BC%98%E5%8C%96)
-      - [代码压缩](#%E4%BB%A3%E7%A0%81%E5%8E%8B%E7%BC%A9)
-      - [代码拆分](#%E4%BB%A3%E7%A0%81%E6%8B%86%E5%88%86)
-        - [`optimization.splitChunks` 提取公共模块](#optimizationsplitchunks-%E6%8F%90%E5%8F%96%E5%85%AC%E5%85%B1%E6%A8%A1%E5%9D%97)
-      - [`mini-css-extract-plugin` 提取样式](#mini-css-extract-plugin-%E6%8F%90%E5%8F%96%E6%A0%B7%E5%BC%8F)
-      - [tree shaking(跳过)](#tree-shaking%E8%B7%B3%E8%BF%87)
-    - [缓存](#%E7%BC%93%E5%AD%98)
-  - [其他](#%E5%85%B6%E4%BB%96)
-    - [配置思路](#%E9%85%8D%E7%BD%AE%E6%80%9D%E8%B7%AF)
-    - [内联语法](#%E5%86%85%E8%81%94%E8%AF%AD%E6%B3%95)
+      - [启用热模块替换](#启用热模块替换)
+      - [热模块替换原理](#热模块替换原理)
+      - [让代码支持热模块替换](#让代码支持热模块替换)
+  - [构建优化](#构建优化)
+    - [应用优化](#应用优化)
+      - [代码压缩](#代码压缩)
+      - [代码拆分](#代码拆分)
+        - [`optimization.splitChunks` 提取公共模块](#optimizationsplitchunks-提取公共模块)
+      - [`mini-css-extract-plugin` 提取样式](#mini-css-extract-plugin-提取样式)
+      - [tree shaking(跳过)](#tree-shaking跳过)
+    - [缓存](#缓存)
+  - [其他](#其他)
+    - [配置思路](#配置思路)
+    - [内联语法](#内联语法)
     - [mode](#mode)
-    - [构建目标 target](#%E6%9E%84%E5%BB%BA%E7%9B%AE%E6%A0%87-target)
+    - [构建目标 target](#构建目标-target)
 
 ## webpack-cli
 
@@ -195,9 +195,9 @@ webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 
 
 代码拆分可通过以下途径完成：
 
-- 入口起点：使用 entry 配置 webpack 多个为入口，手动地分离代码（如果入口 chunk 之间包含一些重复的模块，那些重复模块都会被引入到各个 bundle 中，并且不能动态地将核心应用程序逻辑中的代码拆分出来。）。
-- 防止重复，提取公共模块：使用 SplitChunksPlugin 去重和分离公共代码。
-- 动态拆分：使用动态 `import()` 语句进行代码拆分，能够做到按需加载。
+- Entry Split：使用 entry 配置 webpack 多个为入口，手动地分离代码（如果入口 chunk 之间包含一些重复的模块，那些重复模块都会被引入到各个 bundle 中，并且不能动态地将核心应用程序逻辑中的代码拆分出来。）。
+- Bundle Split：使用 SplitChunksPlugin 去重和分离公共代码。
+- Code Split：使用动态 `import()` 语句进行代码拆分。动态加载的好处主要是 减小代码打包体积，让程序在运行时按需加载模块，提高应用初始化速度。
 
 ##### `optimization.splitChunks` 提取公共模块
 webpack v4 开始，`CommonsChunkPlugin ` 被移除，`optimization.splitChunks` 配置选项作为替代，也就是分离模块的功能已作为 webpack 内置功能。
