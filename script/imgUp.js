@@ -9,24 +9,39 @@ const author = {
     name: 'laoergege',
     email: '13211239457@163.com'
 }
-const template = (filename) => (`https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/${filename}`)
+const template = (filepath) => (`https://raw.githubusercontent.com/laoergege/laoergege-blog/master/${filepath}`)
 
 async function main () {
+    let message = [];
     let status = await git.statusMatrix({ dir, fs, pattern: 'images/*.{png, jpg, jpeg, gif}' })
-    
+
     let files = status
-        .filter(row => row[HEAD] === row[WORKDIR])
-        .map(row => row[FILE])
+        .filter(row => row[HEAD] !== row[WORKDIR])
 
     await Promise.all(
-        files.map(filepath => { return git.add({ ...repo, filepath: filepath }) })
+        files.map(([filepath, , worktreeStatus], i) => { 
+            if (worktreeStatus) {
+                message.push(`添加 ${filepath} 图片`)
+                return git.add({ ...repo, filepath: filepath })
+            } else {
+                message.push(`删除 ${filepath} 图片`)
+                files.splice(i, 1)
+                return git.remove({ ...repo, filepath: filepath })
+            }
+        })
     )
-    
-    let sha = await git.commit({ ...repo, message: '添加图片', author })
-    console.log(sha)
-    // await git.push({ ...repo, remote: 'origin', ref: 'master', token: 'a1afc6e2251141fd2068b7c67e0172c727a2db76' })
-    
-    // console.log(files.map((file) => (template(file))))
+
+    if (status.length !== 0) {
+        await git.commit({ ...repo, message: message.join(','), author })
+
+        try {
+            await git.push({ ...repo, remote: 'origin', ref: 'master', username: 'laoergege', password: 'a123b456c789.' })
+
+            console.log(files.map(([filepath]) => (filepath)).map((file) => (template(file))))
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 main()
