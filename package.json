@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/laoergege/laoergege-blog/issues"
   },
-  "homepage": "https://github.com/laoergege/laoergege-blog#readme"
+  "homepage": "https://github.com/laoergege/laoergege-blog#readme",
+  "dependencies": {
+    "isomorphic-git": "^0.54.2"
+  }
 }
