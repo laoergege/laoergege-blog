@@ -11,12 +11,11 @@ const author = {
 }
 const template = (filepath) => (`https://raw.githubusercontent.com/laoergege/laoergege-blog/master/${filepath}`)
 
-async function main () {
+async function commitImg () {
     let message = [];
     let status = await git.statusMatrix({ dir, fs, pattern: 'images/*.{png, jpg, jpeg, gif}' })
 
-    let files = status
-        .filter(row => row[HEAD] !== row[WORKDIR])
+    let files = status.filter(row => row[HEAD] !== row[WORKDIR])
 
     await Promise.all(
         files.map(([filepath, , worktreeStatus], i) => { 
@@ -31,19 +30,20 @@ async function main () {
         })
     )
 
-    if (status.length !== 0) {
+    if (files.length !== 0) {
         await git.commit({ ...repo, message: message.join(','), author })
 
         try {
             await git.push({ ...repo, remote: 'origin', ref: 'master', username: 'laoergege', password: 'a123b456c789.' })
 
-            console.log(files.map(([filepath]) => (filepath)).map((file) => (template(file))))
+            return files.map(([filepath]) => (filepath)).map((file) => (template(file)))
         } catch (error) {
             console.log(error)
+            throw(error)
         }
     }
 }
 
-main()
-
-exist ;
+commitImg().then((files) => {
+    console.log(files)
+})

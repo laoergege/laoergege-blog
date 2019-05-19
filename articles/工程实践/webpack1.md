@@ -24,7 +24,6 @@
     - [应用优化](#应用优化)
       - [代码压缩](#代码压缩)
       - [代码拆分](#代码拆分)
-        - [`optimization.splitChunks` 提取公共模块](#optimizationsplitchunks-提取公共模块)
       - [`mini-css-extract-plugin` 提取样式](#mini-css-extract-plugin-提取样式)
       - [tree shaking(跳过)](#tree-shaking跳过)
     - [缓存](#缓存)
@@ -191,47 +190,8 @@ webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 
 #### 代码压缩
 
 #### 代码拆分
-代码拆分能够把代码拆分到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码拆分可以用于获取更小的 bundle，以及控制资源加载优先级，如果使用合理，会极大影响加载时间。
 
-代码拆分可通过以下途径完成：
-
-- Entry Split：使用 entry 配置 webpack 多个为入口，手动地分离代码（如果入口 chunk 之间包含一些重复的模块，那些重复模块都会被引入到各个 bundle 中，并且不能动态地将核心应用程序逻辑中的代码拆分出来。）。
-- Bundle Split：使用 SplitChunksPlugin 去重和分离公共代码。
-- Code Split：使用动态 `import()` 语句进行代码拆分。动态加载的好处主要是 减小代码打包体积，让程序在运行时按需加载模块，提高应用初始化速度。
-
-##### `optimization.splitChunks` 提取公共模块
-webpack v4 开始，`CommonsChunkPlugin ` 被移除，`optimization.splitChunks` 配置选项作为替代，也就是分离模块的功能已作为 webpack 内置功能。
-
-webpack 4 内置的 SplitChunksPlugin 的默认配置：
-
-```javascript
-module.exports = {
-  //...
-  optimization: {
-    splitChunks: {
-      chunks: 'async',
-      minSize: 30000,
-      maxSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      automaticNameDelimiter: '~',
-      name: true,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
-        }
-      }
-    }
-  }
-};
-```
+JS 代码拆分请移步到 [webpack4的optimization.splitChunks实践记录](./webpack4的optimization.splitChunks实践记录.md)。
 
 #### `mini-css-extract-plugin` 提取样式
 
