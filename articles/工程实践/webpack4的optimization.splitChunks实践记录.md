@@ -17,6 +17,10 @@
 ## `optimization.splitChunks`
 webpack v4 开始，`CommonsChunkPlugin ` 被移除，`optimization.splitChunks` 配置选项作为替代，也就是分离模块的功能已作为 webpack 内置功能。
 
+### bundle chunk
+### initial async
+
+### 默认配置
 webpack 4 内置的 SplitChunksPlugin 的默认配置：
 
 ```javascript
@@ -68,14 +72,14 @@ module.exports = {
 - enforce：
 
 根据以上配置，webpack 会有如下默认代码拆分行为：
-默认只作用于按需加载的块，因为拆分初始块会影响到 HTML 的 scirpt 标签，你可以通过配置 HtmlWebpackPlugin，去自动注入 script 标签。
 
-以下情况，webpack 会自动拆分代码：
+- 只针对异步加载的 bundle 优化，因为对初始化 bundle 拆分，必须在 HTML 中引入新拆分的 bundle 才会工作
+- 新产生的 chunk 来自 node_modules 或可被多个地方复用。
+- 新 chunk 需要大于 30kb。
+- 对 chunks 的最大同时请求数小于等于 5。换句话说，如果拆分后导致 bundle 需要同时异步加载的 chunk 数量大于 5 个或更多时，则不会进行拆分，因为增加了请求数，得不偿失。
+- 拆分后需要尽量做到对于入口文件中最大同时请求数控制在 3 个以内。
 
-- New chunk can be shared OR modules are from the node_modules folder
-- New chunk would be bigger than 30kb (before min+gz)
-- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 5
-- Maximum number of parallel requests at initial page load would be lower or equal to 3
+在满足最后两个条件时，决定了 chunks 应越大越好，而不是越多。
 
 ## 实战
 ![](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/微信图片_20190519202505.png)
