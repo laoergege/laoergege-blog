@@ -12,13 +12,12 @@
 - Bundle Split：使用 SplitChunksPlugin 去重和分离公共代码或者第三方库，因此类代码变动较小，可以做浏览器缓存，加快应用访问速度。
 - Code Split：使用 `import()` 语句进行对我们编写的应用程序逻辑代码进行动态拆分。动态加载的好处主要是减小代码打包体积，让程序在运行时按需加载模块，提高应用初始化速度。
 
-而 webpack 中对代码进行拆分，主要是配置 `optimization.splitChunks` 选项。
+而 webpack 中对代码进行 Bundle Split，主要是配置 `optimization.splitChunks` 选项。
 
 ## `optimization.splitChunks`
 webpack v4 开始，`CommonsChunkPlugin ` 被移除，`optimization.splitChunks` 配置选项作为替代，也就是分离模块的功能已作为 webpack 内置功能。
 
-### bundle chunk
-### initial async
+> 注意，以下说的“拆分” 是 Bundle Split，而不是 Code Split
 
 ### 默认配置
 webpack 4 内置的 SplitChunksPlugin 的默认配置：
@@ -53,10 +52,10 @@ module.exports = {
 ```
 参数说明如下：
 
-- chunks：表示针对哪些 chunk 做拆分优化（关于 chunks 字段的更多理解可阅读 [Webpack 4 — Mysterious SplitChunks Plugin](https://medium.com/dailyjs/webpack-4-splitchunks-plugin-d9fbbe091fd0)）
-  - async 仅对按需加载的 chunk
-  - initial 初始的 chunk 和 按需加载的 chunk，但不共享相同的 chunk
-  - all 对所有 chunk 优化
+- chunks：表示针对哪些 chunk 做拆分优化
+  - async 仅对按需加载的 chunk 优化
+  - initial 仅对初始的 chunk 优化
+  - all 对所有 chunk 优化，意味着初始块和按需加载块可以共享相同的块
 - minSize：表示抽取出来的文件在压缩前的最小大小，默认为 30000；
 - maxSize：表示抽取出来的文件在压缩前的最大大小，默认为 0，表示不限制最大大小；
 - minChunks：表示被引用次数，默认为1；
@@ -66,13 +65,21 @@ module.exports = {
 - name：抽取出来文件的名字，默认为 true，表示自动生成文件名；
 - cacheGroups: 缓存组。（这才是配置的关键）
 
+可以通过以下两篇的实验体会 chunks 意思：
+- [Webpack 4 — Mysterious SplitChunks Plugin](https://medium.com/dailyjs/webpack-4-splitchunks-plugin-d9fbbe091fd0)
+- [webapck4 玄妙的 SplitChunks Plugin](https://juejin.im/post/5c08fe7d6fb9a04a0d56a702)
+
+通过观察两篇文章时，我们需要注意的一个点是
+
+> 当为不同的拆分块分配相同的 `name` 时，所有的拆分出来的块都会合并成同一个块，这样可能会导致下载无相关的其他代码
+
 ### cacheGroups
 上面的那么多参数，其实都可以不用管，cacheGroups 才是我们配置的关键。 cacheGroups 可以继承和/或覆盖（ splitChunks 中的任何选项，禁止默认的 cacheGroups 设置为 `default: false`。并且还有多了如下配置属性：
 
 - test: 表示要过滤 modules，默认为所有的 modules，可匹配模块路径或 chunk 名字，当匹配的是 chunk 名字的时候，其里面的所有 modules 都会选中；
 - priority：表示抽取权重，数字越大表示优先级越高。因为一个 module 可能会满足多个 cacheGroups 的条件，那么抽取到哪个就由权重最高的说了算；
 - reuseExistingChunk：表示是否使用已有的 chunk，如果为 true 则表示如果当前的 chunk 包含的模块已经被抽取出去了，那么将不会重新生成新的。
-- enforce：
+- enforce：忽略除 test、priority、reuseExistingChunk 其他的限制条件
 
 根据以上配置，webpack 会有如下默认代码拆分行为：
 
