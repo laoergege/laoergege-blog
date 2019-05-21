@@ -53,13 +53,16 @@ module.exports = {
 ```
 参数说明如下：
 
-- chunks：表示针对哪些 chunk 做提取分离优化，默认为 'async'，即针对异步加载的 chunk；
+- chunks：表示针对哪些 chunk 做拆分优化（关于 chunks 字段的更多理解可阅读 [Webpack 4 — Mysterious SplitChunks Plugin](https://medium.com/dailyjs/webpack-4-splitchunks-plugin-d9fbbe091fd0)）
+  - async 仅对按需加载的 chunk
+  - initial 初始的 chunk 和 按需加载的 chunk，但不共享相同的 chunk
+  - all 对所有 chunk 优化
 - minSize：表示抽取出来的文件在压缩前的最小大小，默认为 30000；
 - maxSize：表示抽取出来的文件在压缩前的最大大小，默认为 0，表示不限制最大大小；
 - minChunks：表示被引用次数，默认为1；
 - maxAsyncRequests：按需加载时的最大并行请求数，默认为 5；
 - maxInitialRequests：最大的初始化加载次数，默认为 3；
-- automaticNameDelimiter：抽取出来 Bundle 的名字由被抽取出来的源文件名组成且由默认分割符 ~ 间隔各个源文件名(e.g. 由 a、b 模块抽取的 bundle名为 vendors~a~b.js)；
+- automaticNameDelimiter：抽取出来 chunk 的名字由被抽取出来的源文件名组成且由默认分割符 ~ 间隔各个源文件名(e.g. 由 a、b chunk抽取的 vender chunk 名为 vendors~a~b.js)；
 - name：抽取出来文件的名字，默认为 true，表示自动生成文件名；
 - cacheGroups: 缓存组。（这才是配置的关键）
 
@@ -73,13 +76,13 @@ module.exports = {
 
 根据以上配置，webpack 会有如下默认代码拆分行为：
 
-- 只针对异步加载的 bundle 优化，因为对初始化 bundle 拆分，必须在 HTML 中引入新拆分的 bundle 才会工作
-- 新产生的 chunk 来自 node_modules 或可被多个地方复用。
+- 只针对异步加载的 chunk 优化，因为对初始化 chunk 拆分，必须在 HTML 中引入新拆分的 chunk 才会工作
+- 新产生的 chunk 来自 node_modules 或者被多个地方复用 2 次以上。
 - 新 chunk 需要大于 30kb。
 - 对 chunks 的最大同时请求数小于等于 5。换句话说，如果拆分后导致 bundle 需要同时异步加载的 chunk 数量大于 5 个或更多时，则不会进行拆分，因为增加了请求数，得不偿失。
 - 拆分后需要尽量做到对于入口文件中最大同时请求数控制在 3 个以内。
 
-在满足最后两个条件时，决定了 chunks 应越大越好，而不是越多。
+在满足最后两个条件时，决定了 chunk 应越大越好，而不是越多。
 
 ## 实战
 ![](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/微信图片_20190519202505.png)
