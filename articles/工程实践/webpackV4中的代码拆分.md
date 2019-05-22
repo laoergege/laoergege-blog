@@ -65,7 +65,7 @@ module.exports = {
 - name：抽取出来文件的名字，默认为 true，表示自动生成文件名；
 - cacheGroups: 缓存组。（这才是配置的关键）
 
-可以通过以下两篇的实验体会 chunks 意思：
+可以通过以下两篇的实验体会 chunks 的意思：
 - [Webpack 4 — Mysterious SplitChunks Plugin](https://medium.com/dailyjs/webpack-4-splitchunks-plugin-d9fbbe091fd0)
 - [webapck4 玄妙的 SplitChunks Plugin](https://juejin.im/post/5c08fe7d6fb9a04a0d56a702)
 
@@ -78,7 +78,7 @@ module.exports = {
 
 - test: 表示要过滤 modules，默认为所有的 modules，可匹配模块路径或 chunk 名字，当匹配的是 chunk 名字的时候，其里面的所有 modules 都会选中；
 - priority：表示抽取权重，数字越大表示优先级越高。因为一个 module 可能会满足多个 cacheGroups 的条件，那么抽取到哪个就由权重最高的说了算；
-- reuseExistingChunk：表示是否使用已有的 chunk，如果为 true 则表示如果当前的 chunk 包含的模块已经被抽取出去了，那么将不会重新生成新的。
+- reuseExistingChunk：如果当前 chunk 包含的模块已存在其他 chunk 中，则复用该 chunk 而不是重新创建（[example](https://github.com/webpack/webpack.js.org/issues/2122)）。
 - enforce：忽略除 test、priority、reuseExistingChunk 其他的限制条件
 
 根据以上配置，webpack 会有如下默认代码拆分行为：
