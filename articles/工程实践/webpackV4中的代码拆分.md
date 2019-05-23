@@ -17,7 +17,7 @@
 ## `optimization.splitChunks`
 webpack v4 开始，`CommonsChunkPlugin ` 被移除，`optimization.splitChunks` 配置选项作为替代，也就是分离模块的功能已作为 webpack 内置功能。
 
-> 注意，以下说的“拆分” 是 Bundle Split，而不是 Code Split
+> 注意，以下说的“拆分” 是指 Bundle Split，而不是 Code Split
 
 ### 默认配置
 webpack 4 内置的 SplitChunksPlugin 的默认配置：
@@ -92,6 +92,12 @@ module.exports = {
 在满足最后两个条件时，决定了 chunk 应越大越好，而不是越多。
 
 ## 实战
+
+- 应用程序的架构及其加载的脚本
+- linghthouse
+- chromw devtool 的 source 面板输入 `show coverage`
+- [webpagetest](https://www.webpagetest.org/)
+
 ![](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/微信图片_20190519202505.png)
 
 ## 本文参考
