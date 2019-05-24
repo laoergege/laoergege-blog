@@ -94,11 +94,9 @@ module.exports = {
 ## 实战
 
 - 应用程序的架构及其加载的脚本
-- linghthouse
+- linghthouse 对 JavaScript 执行时间进行审计
 - chromw devtool 的 source 面板输入 `show coverage`
 - [webpagetest](https://www.webpagetest.org/)
-
-![](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/微信图片_20190519202505.png)
 
 ## 本文参考
 - [webpack 4 Code Splitting 的 splitChunks 配置探索](https://imweb.io/topic/5b66dd601402769b60847149)
