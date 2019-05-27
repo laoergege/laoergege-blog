@@ -21,8 +21,8 @@
       - [热模块替换原理](#热模块替换原理)
       - [让代码支持热模块替换](#让代码支持热模块替换)
   - [构建优化](#构建优化)
+    - [构建速度](#构建速度)
     - [应用优化](#应用优化)
-      - [代码压缩](#代码压缩)
       - [代码拆分](#代码拆分)
       - [`mini-css-extract-plugin` 提取样式](#mini-css-extract-plugin-提取样式)
       - [tree shaking(跳过)](#tree-shaking跳过)
@@ -179,16 +179,20 @@ webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 
 
 - 构建优化
   - 构建速度
-    - happypack
-    - thread-loader
+    - 编译
+      - happypack
+      - thread-loader
+      - webpack.DllPlugin
+    - 压缩
   - 应用优化
     - 缓存
-    - 分离
-    - 压缩
+    - 代码拆分
+
+### 构建速度
+提高 webpack 构建速度，可从提高编译和压缩速度两方面入手。
+
 
 ### 应用优化
-#### 代码压缩
-
 #### 代码拆分
 
 JS 代码拆分请移步到 [webpack4的optimization.splitChunks实践记录](./webpack4的optimization.splitChunks实践记录.md)。
