@@ -91,7 +91,7 @@ module.exports = {
 
 在满足最后两个条件时，决定了 chunk 应越大越好，而不是越多。
 
-## 实战
+## 实践
 
 - 应用程序的架构及其加载的脚本
 - linghthouse 对 JavaScript 执行时间进行审计
