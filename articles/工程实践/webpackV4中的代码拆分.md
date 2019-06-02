@@ -1,3 +1,10 @@
+- [代码拆分](#代码拆分)
+- [`optimization.splitChunks`](#optimizationsplitchunks)
+  - [默认配置](#默认配置)
+  - [cacheGroups](#cachegroups)
+- [实战](#实战)
+  - [体积分析](#体积分析)
+
 ## 代码拆分
 代码拆分能够把代码拆分到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码拆分可以用于获取更小的 bundle，以及控制资源加载优先级，如果使用合理，会极大影响加载时间。
 
@@ -58,11 +65,11 @@ module.exports = {
   - all 对所有 chunk 优化，意味着初始块和按需加载块可以共享相同的块
 - minSize：表示抽取出来的文件在压缩前的最小大小，默认为 30000；
 - maxSize：表示抽取出来的文件在压缩前的最大大小，默认为 0，表示不限制最大大小；
-- minChunks：表示被引用次数，默认为1；
+- minChunks：表示模块被引用次数，默认为1；
 - maxAsyncRequests：按需加载时的最大并行请求数，默认为 5；
 - maxInitialRequests：最大的初始化加载次数，默认为 3；
 - automaticNameDelimiter：抽取出来 chunk 的名字由被抽取出来的源文件名组成且由默认分割符 ~ 间隔各个源文件名(e.g. 由 a、b chunk抽取的 vender chunk 名为 vendors~a~b.js)；
-- name：抽取出来文件的名字，默认为 true，表示自动生成文件名；
+- name：抽取出来文件的名字，默认为 true，表示自动生成文件名(使用 chunk 名和 cache key)；如果名称与入口点名称匹配，则将删除入口点。
 - cacheGroups: 缓存组。（这才是配置的关键）
 
 可以通过以下两篇的实验体会 chunks 的意思：
@@ -78,7 +85,7 @@ module.exports = {
 
 - test: 表示要过滤 modules，默认为所有的 modules，可匹配模块路径或 chunk 名字，当匹配的是 chunk 名字的时候，其里面的所有 modules 都会选中；
 - priority：表示抽取权重，数字越大表示优先级越高。因为一个 module 可能会满足多个 cacheGroups 的条件，那么抽取到哪个就由权重最高的说了算；
-- reuseExistingChunk：如果当前 chunk 包含的模块已存在其他 chunk 中，则复用该 chunk 而不是重新创建（[example](https://github.com/webpack/webpack.js.org/issues/2122)）。
+- reuseExistingChunk：选项 reuseExistingChunk 告诉 SplitChunks 插件在当前cachingGroup 的现有块中进行额外查找，如果可能的话，尽量不为匹配的模块生成额外的块。（[example](https://github.com/webpack/webpack.js.org/issues/2122)）。
 - enforce：忽略除 test、priority、reuseExistingChunk 其他的限制条件
 
 根据以上配置，webpack 会有如下默认代码拆分行为：
@@ -92,12 +99,16 @@ module.exports = {
 在满足最后两个条件时，决定了 chunk 应越大越好，而不是越多。
 
 ## 实战
+webpack 优化策略主要分为构建速度优化和应用体积优化。webpack 应用体积优化策略有：
+- 代码拆分
+- Tree shaking
+- 压缩
 
+那么如何对现有应用进行代码拆分，以达到体积优化？
+
+### 体积分析
+应用体积分析如下方法有：
 - 应用程序的架构及其加载的脚本
 - linghthouse 对 JavaScript 执行时间进行审计
 - chromw devtool 的 source 面板输入 `show coverage`
 - [webpagetest](https://www.webpagetest.org/)
-
-## 本文参考
-- [webpack 4 Code Splitting 的 splitChunks 配置探索](https://imweb.io/topic/5b66dd601402769b60847149)
-- [Webpack 4 — Mysterious SplitChunks Plugin](https://medium.com/dailyjs/webpack-4-splitchunks-plugin-d9fbbe091fd0)
