@@ -85,7 +85,7 @@ module.exports = {
 
 - test: 表示要过滤 modules，默认为所有的 modules，可匹配模块路径或 chunk 名字，当匹配的是 chunk 名字的时候，其里面的所有 modules 都会选中；
 - priority：表示抽取权重，数字越大表示优先级越高。因为一个 module 可能会满足多个 cacheGroups 的条件，那么抽取到哪个就由权重最高的说了算；
-- reuseExistingChunk：选项 reuseExistingChunk 告诉 SplitChunks 插件在当前cachingGroup 的现有块中进行额外查找，如果可能的话，尽量不为匹配的模块生成额外的块。（[example](https://github.com/webpack/webpack.js.org/issues/2122)）。
+- reuseExistingChunk：选项 reuseExistingChunk 告诉 SplitChunks 插件在当前cachingGroup 的现有块中进行额外查找，如果可能的话，尽量不为匹配的模块生成额外的块,复用现有的块。（[example](https://github.com/webpack/webpack.js.org/issues/2122)）。
 - enforce：忽略除 test、priority、reuseExistingChunk 其他的限制条件
 
 根据以上配置，webpack 会有如下默认代码拆分行为：
@@ -98,17 +98,13 @@ module.exports = {
 
 在满足最后两个条件时，决定了 chunk 应越大越好，而不是越多。
 
-<<<<<<< HEAD
 ## 实战
 webpack 优化策略主要分为构建速度优化和应用体积优化。webpack 应用体积优化策略有：
-- 代码拆分
 - Tree shaking
-- 压缩
+- 代码拆分
+- 源码压缩
 
 那么如何对现有应用进行代码拆分，以达到体积优化？
-=======
-## 实践
->>>>>>> 77a97a30bc8dc2eb448274561ee51bd0f70ff2ee
 
 ### 体积分析
 应用体积分析如下方法有：
