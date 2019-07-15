@@ -1,3 +1,5 @@
+![git 命令](./images/git command.PNG)
+
 ### 配置设置
 git 使用前必须设置 git 用户信息（邮箱、用户名）
 
