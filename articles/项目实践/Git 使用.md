@@ -189,6 +189,42 @@ Hello Git!
 
 ```
 
+我们修改 readme.md 内容，并再次上传。
+
+```shell
+PS D:\laoergege-demos\git-demo-project> git log
+commit 5ca8479f1afc822216aebc6e9a164d5a93f4b911 (HEAD -> master)Author: lianyuansheng <lianyuansheng@xiao100.com>Date:   Tue Jul 23 11:57:03 2019 +0800
+
+    修改 readme
+commit 5efd4f420e04e034a3a6335a2b48883a0554da86Author: lianyuansheng <lianyuansheng@xiao100.com>Date:   Mon Jul 22 23:28:06 2019 +0800
+
+    add readme.mdPS D:\laoergege-demos\git-demo-project> git cat-file -p 5ca8479f1afc82221
+tree 6ca17ac94693a5aedc5ca0deead5ffe676e67092parent 5efd4f420e04e034a3a6335a2b48883a0554da86
+author lianyuansheng <lianyuansheng@xiao100.com> 1563854223 +0800
+committer lianyuansheng <lianyuansheng@xiao100.com> 1563854223 +0800
+修改 readme
+
+******************************************************************
+* git log 查看到 5ca8479f1afc822216aebc6e9a164d5a93f4b911 即为
+* 最新的一次提交对象
+******************************************************************
+
+PS D:\laoergege-demos\git-demo-project> git cat-file -p 6ca17ac94693a5aedc
+100644 blob e1bfe2cd62deac1ff0fa1ab584d4354ec30b5144    readme.md
+PS D:\laoergege-demos\git-demo-project> git cat-file -p e1bfe2cd62deac1ff0
+Hello Git!
+123456
+
+******************************************************************
+* 通过查看，我们发现hash值为e1bfe2cd62deac1ff0fa1ab584d4354ec30b5144
+* 的 Object 对象文件内容即为我们刚刚改写的文件内容。git 会在每次 git add 
+* 操作时对每次修改的文件（或者新文件），使用 hash-object 命令对这些文件
+* 重新生成新的 Object 文件存储，这就是 git 和其他版本控制系统的主要差别:
+* 即重新生成快照，而非差异比较。
+******************************************************************
+
+```
+
 当我们在使用 `git add`、`git commit` 等高级命令时，git 实际在调用其底层相关命令。
 
 ![git 命令](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/20190723113201.png)
@@ -197,6 +233,19 @@ Hello Git!
 
 ### commit、tree 和 blob 关系
 
-文件内容相同，git眼里就是唯一的blob ， 这很常见，就是享元模式吧。 lua，Python等语言中，相同字符串，其实只分配一次内存，地址一样，指向同一个对象，可以节省内存。
+- commit 
+- tree
+- blob 文件
+
+|   |   |
+|---|---|
+|   |   |
+
+
+Git对于内容相同的文件只会存一个blob，不同的commit的区别是commit、tree和有差异的blob，多数未变更的文件对应的blob都是相同的，这么设计对于版本管理系统来说可以省很多存储空间。其次，Git还有增量存储的机制，我估计是对于差异很小的blob设计的吧。
+
+现在我们应该明白git底层的运行流程了，当我们添加或者修改了文件并且add到Stage Area之后，首先会根据文件内容创建不同的blob，当进行提交之后马上创建一个tree组件把需要的blob组件添加进去，之后再封装到一个commit组件中完成本次提交。在将来进行reset的时候可以直接使用git reset --hard xxxxx可以恢复到某个特定的版本，在reset之后，git会根据这个commit组件的id快速的找到tree组件，然后根据tree找到blob组件，之后对仓库进行还原，整个过程都是以hash和二进制进行操作，所以git执行效率非常之高。
+
+现在我们应该明白git底层的运行流程了，当我们添加或者修改了文件并且add到Stage Area之后，首先会根据文件内容创建不同的blob，当进行提交之后马上创建一个tree组件把需要的blob组件添加进去，之后再封装到一个commit组件中完成本次提交。在将来进行reset的时候可以直接使用git reset --hard xxxxx可以恢复到某个特定的版本，在reset之后，git会根据这个commit组件的id快速的找到tree组件，然后根据tree找到blob组件，之后对仓库进行还原，整个过程都是以hash和二进制进行操作，所以git执行效率非常之高。
 
 ## 参考学习
