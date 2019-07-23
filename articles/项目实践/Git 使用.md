@@ -141,7 +141,7 @@ PS D:\laoergege-demos\git-demo-project\.git\refs\heads> cat master
 
 ******************************************************************
 * 当前仅有 master 一条分支，查看内容是 40位哈希值字符，
-* 为 git object 文件命名。
+* 为 git object 文件命名(每个object由40位字符组成，前两位字符用来当文件夹，后38位做文件)。
 *
 * Git 核心对象类型分别为
 * - commit
@@ -179,7 +179,21 @@ blob
 PS D:\laoergege-demos\git-demo-project\.git\refs\heads> git cat-file -p fdc3d3cd37c23ae            
 Hello Git!
 
+******************************************************************
+* Object 文件 fdc3d3cd37c23aeb665aa995f395d9c6979bd508 
+* 的内容正是刚刚我们提交的 readme.md 文件内容
+* git 使用内部 hash-object 命令把 readme.md 的当前内容压缩成二进制文件，
+* 存入 Git。压缩后的二进制文件，称为一个 Git 对象，保存
+* 在.git/objects目录。
+******************************************************************
+
 ```
+
+当我们在使用 `git add`、`git commit` 等高级命令时，git 实际在调用其底层相关命令。
+
+![git 命令](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/20190723113201.png)
+
+可参考阮一峰的 [Git 原理入门](http://www.ruanyifeng.com/blog/2018/10/git-internals.html)，去尝试使用下底层相关命令。
 
 ### commit、tree 和 blob 关系
 
