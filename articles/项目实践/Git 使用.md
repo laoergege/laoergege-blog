@@ -198,16 +198,18 @@ commit 5ca8479f1afc822216aebc6e9a164d5a93f4b911 (HEAD -> master)Author: lianyuan
     修改 readme
 commit 5efd4f420e04e034a3a6335a2b48883a0554da86Author: lianyuansheng <lianyuansheng@xiao100.com>Date:   Mon Jul 22 23:28:06 2019 +0800
 
-    add readme.mdPS D:\laoergege-demos\git-demo-project> git cat-file -p 5ca8479f1afc82221
-tree 6ca17ac94693a5aedc5ca0deead5ffe676e67092parent 5efd4f420e04e034a3a6335a2b48883a0554da86
-author lianyuansheng <lianyuansheng@xiao100.com> 1563854223 +0800
-committer lianyuansheng <lianyuansheng@xiao100.com> 1563854223 +0800
-修改 readme
+    add readme.md
 
 ******************************************************************
 * git log 查看到 5ca8479f1afc822216aebc6e9a164d5a93f4b911 即为
 * 最新的一次提交对象
 ******************************************************************
+
+PS D:\laoergege-demos\git-demo-project> git cat-file -p 5ca8479f1afc82221
+tree 6ca17ac94693a5aedc5ca0deead5ffe676e67092parent 5efd4f420e04e034a3a6335a2b48883a0554da86
+author lianyuansheng <lianyuansheng@xiao100.com> 1563854223 +0800
+committer lianyuansheng <lianyuansheng@xiao100.com> 1563854223 +0800
+修改 readme
 
 PS D:\laoergege-demos\git-demo-project> git cat-file -p 6ca17ac94693a5aedc
 100644 blob e1bfe2cd62deac1ff0fa1ab584d4354ec30b5144    readme.md
@@ -216,8 +218,9 @@ Hello Git!
 123456
 
 ******************************************************************
-* 通过查看，我们发现hash值为e1bfe2cd62deac1ff0fa1ab584d4354ec30b5144
-* 的 Object 对象文件内容即为我们刚刚改写的文件内容。git 会在每次 git add 
+* 通过层层查看，我们发现hash值为e1bfe2cd62deac1ff0fa1ab584d4354ec30b5144
+* 的 Object 对象文件（不是原来的 fdc3d3cd37c23aeb665aa995f395d9c6979bd508）
+* 内容即为我们刚刚改写的文件内容。git 会在每次 git add 
 * 操作时对每次修改的文件（或者新文件），使用 hash-object 命令对这些文件
 * 重新生成新的 Object 文件存储，这就是 git 和其他版本控制系统的主要差别:
 * 即重新生成快照，而非差异比较。
@@ -232,14 +235,45 @@ Hello Git!
 可参考阮一峰的 [Git 原理入门](http://www.ruanyifeng.com/blog/2018/10/git-internals.html)，去尝试使用下底层相关命令。
 
 ### commit、tree 和 blob 关系
+在上面操作过程中，我们可能发现一种关系：commit 包含 tree 包含 blob。再添加新的文件夹src，里面再加入 index.html 文件然后提交。 
 
-- commit 
-- tree
-- blob 文件
+```shell
+PS D:\laoergege-demos\git-demo-project> git log
+commit 9eafc20aba47c34295ba9e77984c08b9003a911d (HEAD -> master)
+Author: lianyuansheng <lianyuansheng@xiao100.com>
+Date:   Tue Jul 23 23:42:40 2019 +0800
 
-|   |   |
-|---|---|
-|   |   |
+    add src/index.html
+
+commit 5ca8479f1afc822216aebc6e9a164d5a93f4b911
+Author: lianyuansheng <lianyuansheng@xiao100.com>
+Date:   Tue Jul 23 11:57:03 2019 +0800
+
+    修改 readme
+
+commit 5efd4f420e04e034a3a6335a2b48883a0554da86
+Author: lianyuansheng <lianyuansheng@xiao100.com>
+Date:   Mon Jul 22 23:28:06 2019 +0800
+
+    add readme.md
+PS D:\laoergege-demos\git-demo-project> git cat-file -p 9eafc20aba47c
+tree fb4ffaecbfaddbd6296331a1da949cecec619e69
+parent 5ca8479f1afc822216aebc6e9a164d5a93f4b911
+author lianyuansheng <lianyuansheng@xiao100.com> 1563896560 +0800
+committer lianyuansheng <lianyuansheng@xiao100.com> 1563896560 +0800
+
+add src/index.html
+PS D:\laoergege-demos\git-demo-project> git cat-file -p fb4ffaecbfadd
+100644 blob e1bfe2cd62deac1ff0fa1ab584d4354ec30b5144    readme.md
+040000 tree 8251a50aff5d385ceb293feb338725de7a80a7f4    src
+PS D:\laoergege-demos\git-demo-project> git cat-file -p 8251a50aff5d3
+100644 blob e4fd797cd4752a6d66a59a7e89ae76798b460d1b    index.html
+PS D:\laoergege-demos\git-demo-project> git cat-file -p e1bfe2cd62deac
+Hello Git!
+123456              
+```
+
+![](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/20190726004421.png)
 
 
 Git对于内容相同的文件只会存一个blob，不同的commit的区别是commit、tree和有差异的blob，多数未变更的文件对应的blob都是相同的，这么设计对于版本管理系统来说可以省很多存储空间。其次，Git还有增量存储的机制，我估计是对于差异很小的blob设计的吧。
