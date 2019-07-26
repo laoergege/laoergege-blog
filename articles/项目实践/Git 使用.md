@@ -273,17 +273,12 @@ Hello Git!
 123456              
 ```
 
-通过 commit 对象信息，找到 tree，通过查看 tree，发现了新的子 tree 和 blob（readme.md）,再通过子 tree 发现了新添加的 index.html 文件转存的 blob，整体关系图如下：
+通过 commit 对象信息，找到 tree，通过查看 tree，发现了新的子 tree 和原来 blob（readme.md）,再通过子 tree 发现了新添加的 index.html 文件转存的 blob，整体关系图如下：
 
 ![](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/20190726090455.png)
 
-- commit 
-- tree 提交的文件及相关目录的快照
+Commit 保存的一次提交记录信息，Tree 相当于一次提交的文件目录快照，Blob 叶子节点对应则是文件。
 
-Git对于内容相同的文件只会存一个blob，不同的commit的区别是commit、tree和有差异的blob，多数未变更的文件对应的blob都是相同的，这么设计对于版本管理系统来说可以省很多存储空间。其次，Git还有增量存储的机制，我估计是对于差异很小的blob设计的吧。
-
-现在我们应该明白git底层的运行流程了，当我们添加或者修改了文件并且add到Stage Area之后，首先会根据文件内容创建不同的blob，当进行提交之后马上创建一个tree组件把需要的blob组件添加进去，之后再封装到一个commit组件中完成本次提交。在将来进行reset的时候可以直接使用git reset --hard xxxxx可以恢复到某个特定的版本，在reset之后，git会根据这个commit组件的id快速的找到tree组件，然后根据tree找到blob组件，之后对仓库进行还原，整个过程都是以hash和二进制进行操作，所以git执行效率非常之高。
-
-现在我们应该明白git底层的运行流程了，当我们添加或者修改了文件并且add到Stage Area之后，首先会根据文件内容创建不同的blob，当进行提交之后马上创建一个tree组件把需要的blob组件添加进去，之后再封装到一个commit组件中完成本次提交。在将来进行reset的时候可以直接使用git reset --hard xxxxx可以恢复到某个特定的版本，在reset之后，git会根据这个commit组件的id快速的找到tree组件，然后根据tree找到blob组件，之后对仓库进行还原，整个过程都是以hash和二进制进行操作，所以git执行效率非常之高。
+提交时，Git底层的运行流程大概为：当我们添加或者修改了文件并且 add 到 Stage Area 之后，首先会根据文件内容创建不同的blob，当进行提交之后马上创建一个 tree 组件把需要的 blob 组件添加进去，之后再封装到一个 commit 组件中完成本次提交。对于内容相同的文件只会存一个 blob ，不同的 commit 的区别是 commit、tree 和有差异的 blob，多数未变更的文件对应的 blob 都是相同的，这么设计对于版本管理系统来说可以省很多存储空间。其次，随着 blob 文件的增多，git 还会做 pack 整理。使用增量存储的机制，把内容相近的blob做增量存储。
 
 ## 参考学习
