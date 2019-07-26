@@ -273,8 +273,12 @@ Hello Git!
 123456              
 ```
 
-![](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/20190726004421.png)
+通过 commit 对象信息，找到 tree，通过查看 tree，发现了新的子 tree 和 blob（readme.md）,再通过子 tree 发现了新添加的 index.html 文件转存的 blob，整体关系图如下：
 
+![](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/20190726090455.png)
+
+- commit 
+- tree 提交的文件及相关目录的快照
 
 Git对于内容相同的文件只会存一个blob，不同的commit的区别是commit、tree和有差异的blob，多数未变更的文件对应的blob都是相同的，这么设计对于版本管理系统来说可以省很多存储空间。其次，Git还有增量存储的机制，我估计是对于差异很小的blob设计的吧。
 
