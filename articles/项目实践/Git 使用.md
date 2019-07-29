@@ -1,4 +1,19 @@
 
+## Table Content
+- [Table Content](#table-content)
+- [git 用法](#git-用法)
+  - [开始](#开始)
+  - [配置设置](#配置设置)
+  - [基本使用](#基本使用)
+  - [进阶使用](#进阶使用)
+- [git 原理探索](#git-原理探索)
+  - [探索 .git 目录](#探索-git-目录)
+  - [commit、tree 和 blob 关系](#committree-和-blob-关系)
+- [Git Branch](#git-branch)
+  - [分离头指针](#分离头指针)
+- [GitFlow](#gitflow)
+- [参考学习](#参考学习)
+
 ## git 用法
 ### 开始
 学习使用命令行时，最好的方式就是多用 help 命令查看其他命令的相关用法。在控制台输入 `git help` 可查看 git 不同命令使用场景:
@@ -280,5 +295,18 @@ Hello Git!
 Commit 保存的一次提交记录信息，Tree 相当于一次提交的文件目录快照，Blob 叶子节点对应则是文件。
 
 提交时，Git底层的运行流程大概为：当我们添加或者修改了文件并且 add 到 Stage Area 之后，首先会根据文件内容创建不同的blob，当进行提交之后马上创建一个 tree 组件把需要的 blob 组件添加进去，之后再封装到一个 commit 组件中完成本次提交。对于内容相同的文件只会存一个 blob ，不同的 commit 的区别是 commit、tree 和有差异的 blob，多数未变更的文件对应的 blob 都是相同的，这么设计对于版本管理系统来说可以省很多存储空间。其次，随着 blob 文件的增多，git 还会做 pack 整理。使用增量存储的机制，把内容相近的blob做增量存储。
+
+## Git Branch
+```shell
+git checkout -b <branch> <base branch> // 创建并切换到新分支
+```
+
+### 分离头指针
+分离头指针，即 HEAD 指针没有跟分支进行挂钩。在此 HEAD 上产生的 commit 由于没有跟 branch 挂钩，当你切换其他分支时会被 git 清除掉。
+```shell
+git checkout <commitID> // 切换到指定版本
+```
+
+## GitFlow
 
 ## 参考学习
