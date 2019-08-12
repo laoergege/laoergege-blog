@@ -18,6 +18,7 @@
   - [Git 工作流](#git-工作流)
   - [分离头指针](#分离头指针)
     - [应用场景](#应用场景)
+  - [HEAD^ 和 HEAD~ 区别](#head-和-head-区别)
 - [GitLab](#gitlab)
 - [参考学习](#参考学习)
 
@@ -311,7 +312,7 @@ Hello Git!
 ```shell
 git branch <branch> <base branch> // 创建分支
 git checkout <branch> // 切换分支
-git checkout -b <branch> <base branch> // 创建并切换到新分支
+git checkout -b <branch> <base branch | commitID> // 创建并切换到新分支
 git branch -d <branch> // 删除分支 -D 强制删除分支
 ```
 
@@ -364,12 +365,48 @@ git cherry-pick <commit-ish>...
 ### Git 工作流
 
 ### 分离头指针
-分离头指针，即 HEAD 指针没有跟分支进行挂钩。在此 HEAD 上产生的 commit 由于没有跟 branch 挂钩，当你切换其他分支时会被 git 清除掉。
-```shell
-git checkout <commitID> // 切换到指定版本
+分离头指针，即 HEAD 指针没有跟分支进行挂钩。在此 HEAD 上产生的 commit 由于没有跟 `branch` 和 `tag` 挂钩，在 git 眼里，这种 commit 日后都是要被清除的。
 ```
 
+git checkout <commitID> // 切换到指定版本，会产生分离头指针情况
+
+// 正常情况，HEAD -> master 绑定在一起
+PS D:\laoergege-demos\git-demo-project> git log
+commit d2da0155cc7eee411ebece9aa1021c1ce7bc41d4 (HEAD -> master)
+Author: lianyuansheng <lianyuansheng@xiao100.com>
+Date:   Mon Aug 12 22:21:45 2019 +0800
+
+    修改 readme
+...
+
+
+// 分离头指针，此时 HEAD 指针与 master 分开
+PS D:\laoergege-demos\git-demo-project> git branch -av
+* (HEAD detached at 022a40a) 022a40a 修改 index.html
+  master                     d2da015 修改 readme
+
+```
+
+```
+PS D:\laoergege-demos\git-demo-project> git merge 022a40a850
+Merge made by the 'recursive' strategy.
+ src/index.html | 1 +
+ 1 file changed, 1 insertion(+)
+```
+
+进一步操作发现，当切换 master 分支并 merge 刚刚分离头指针提交的版本时，**我们始终在 git commit 树上工作，无论我们 `git merge <commitID> | <branch> | <HEAD>`，所有本质都是操作到对应的 commitID 节点**。
+
 #### 应用场景
+那么 `git checkout commitId` 会出现分离头指针的情况，这种情况下比较危险，因为这个时候你提交的代码没有和分支对应起来，当切换到其他分支的时候(比如master分支)，容易丢失代码。
+    
+但是分离头指针也有它的应用场景，就是在自己做尝试或者测试的时候可以分离头指针，当尝试完毕没有用的时候可以随时丢弃，但是如果觉得尝试有用，那么可以新建一个分支，使用 `git branch <新分支的名称> commitId `
+
+### HEAD^ 和 HEAD~ 区别
+一个节点可由多个父节点 merge 而来。
+- HEAD^n 第几个父节点
+- HEAD~n 第前几代父节点（类似树的层级关系）
+
+可组合使用，比如 `HEAD^2~2`：第前二代第2个父节点。
 
 ## GitLab
 
