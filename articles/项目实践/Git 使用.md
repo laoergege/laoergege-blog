@@ -19,9 +19,11 @@
     - [应用场景](#应用场景)
   - [分支删除](#分支删除)
     - [数据恢复](#数据恢复)
+  - [git reset](#git-reset)
+    - [重置单文件](#重置单文件)
+    - [git reset && git checkout 区别](#git-reset--git-checkout-区别)
+  - [HEAD^ 和 HEAD~ 区别](#head-和-head-区别)
   - [Git 工作流](#git-工作流)
-  - [其他](#其他)
-    - [HEAD^ 和 HEAD~ 区别](#head-和-head-区别)
 - [GitLab](#gitlab)
 - [参考学习](#参考学习)
 
@@ -427,16 +429,45 @@ git cherry-pick <commit-ish> // 合并丢失的 commitID
 
 ```
 
-### Git 工作流
+### git reset
 
-### 其他
+资料阅读 [Git-工具-重置揭密](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86)。
 
-#### HEAD^ 和 HEAD~ 区别
+`git reset` 用来重置 `HEAD` 版本区、`Index` 暂存区、`Working` 工作区的版本指向。当命令 `git reset <tree-ish>` 时，git 会顺序执行以下过程：
+
+1. 移动 `HEAD` 及 **HEAD 所在的 branch** 指针（指定了 --soft，执行到此步骤为止）
+2. 同步 `Index` 暂存区的版本内容同 `HEAD` 一致（指定了 --mixed，执行到此步骤为止，默认行为）
+3. 同步 `Working` 工作区的版本内容同 `Index` 一致（指定了 --hard，执行到此步骤为止）
+
+> *--hard* 是一种危险的行为，它会强制覆盖工作目录中的文件，以致跟 Index 保持同步
+
+#### 重置单文件
+当执行的是 `git reset [<tree-ish>] <file>` 时，git 不会重置 `HEAD` 指向，即跳过上述第一步。同步 `Index` 暂存的文件跟指定版本的文件一致，第三步不会执行，因为 `git reset` 默认行为只执行到第二步，添加指定参数命令 `git reset --hard [<tree-ish>] <file>` 即可。
+
+> *--patch* 可批量重置多文件
+
+#### git reset && git checkout 区别
+`git reset` 和 `git checkout` 给我的感觉就是两者都能指定 HEAD 指针指向，进而影响 Index 和 Working 的版本内容。
+
+当作为操作 commitID 指向时，`git reset` 和 `git checkout` 的行为区别是：
+- `git reset` 会移动 HEAD 所在分支指针，`git checkout` 则不会。
+- `git checkout` 会一步到位，更新到 Working。`git reset` 默认只更到 Index 步骤为止。
+- 不同于 `reset --hard`，`checkout` 对工作目录是安全的，它会通过检查来确保不会将已更改的文件弄丢。其实它还更聪明一些。它会在工作目录中先试着简单合并一下，这样所有_还未修改过的_文件都会被更新。 而 `reset --hard` 则会不做检查就全面地替换所有东西。
+
+当作为操作对象为 file 时，`git reset [branch] file` 和 `git reset --hard [branch] file` 的行为一样。
+
+总结：`git reset` 和 `git checkout` 两者在使用上总有些相似，那么如何区分使用场景，我觉得应该注意两点：
+- 是否会移动 HEAD 所在的分支
+- 是否对工作目录强覆盖
+
+### HEAD^ 和 HEAD~ 区别
 一个节点可由多个父节点 merge 而来。
 - HEAD^n 第几个父节点
 - HEAD~n 第前几代父节点（类似树的层级关系）
 
 可组合使用，比如 `HEAD^2~2`：第前二代第2个父节点。
+
+### Git 工作流
 
 ## GitLab
 
