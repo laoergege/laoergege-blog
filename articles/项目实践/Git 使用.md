@@ -1,31 +1,32 @@
 
 ## Table Content
 - [Table Content](#table-content)
-- [Git 用法](#git-用法)
-  - [开始](#开始)
-  - [配置设置](#配置设置)
-  - [基本使用](#基本使用)
-  - [进阶使用](#进阶使用)
-- [Git 原理探索](#git-原理探索)
-  - [探索 .git 目录](#探索-git-目录)
-  - [commit、tree 和 blob 关系](#committree-和-blob-关系)
-- [Git 分支](#git-分支)
-  - [分支合并](#分支合并)
+- [Git 用法](#git-%e7%94%a8%e6%b3%95)
+  - [开始](#%e5%bc%80%e5%a7%8b)
+  - [配置设置](#%e9%85%8d%e7%bd%ae%e8%ae%be%e7%bd%ae)
+  - [基本使用](#%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8)
+  - [进阶使用](#%e8%bf%9b%e9%98%b6%e4%bd%bf%e7%94%a8)
+    - [git commit](#git-commit)
+- [Git 原理探索](#git-%e5%8e%9f%e7%90%86%e6%8e%a2%e7%b4%a2)
+  - [探索 .git 目录](#%e6%8e%a2%e7%b4%a2-git-%e7%9b%ae%e5%bd%95)
+  - [commit、tree 和 blob 关系](#committree-%e5%92%8c-blob-%e5%85%b3%e7%b3%bb)
+- [Git 分支](#git-%e5%88%86%e6%94%af)
+  - [分支合并](#%e5%88%86%e6%94%af%e5%90%88%e5%b9%b6)
     - [FastForward Merge](#fastforward-merge)
     - [Merge](#merge)
     - [Rebase](#rebase)
     - [CherryPick](#cherrypick)
-  - [分离头指针](#分离头指针)
-    - [应用场景](#应用场景)
-  - [分支删除](#分支删除)
-    - [数据恢复](#数据恢复)
+  - [分离头指针](#%e5%88%86%e7%a6%bb%e5%a4%b4%e6%8c%87%e9%92%88)
+    - [应用场景](#%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af)
+  - [分支删除](#%e5%88%86%e6%94%af%e5%88%a0%e9%99%a4)
+    - [数据恢复](#%e6%95%b0%e6%8d%ae%e6%81%a2%e5%a4%8d)
   - [git reset](#git-reset)
-    - [重置单文件](#重置单文件)
-    - [git reset && git checkout 区别](#git-reset--git-checkout-区别)
-  - [HEAD^ 和 HEAD~ 区别](#head-和-head-区别)
-  - [Git 工作流](#git-工作流)
+    - [重置单文件](#%e9%87%8d%e7%bd%ae%e5%8d%95%e6%96%87%e4%bb%b6)
+    - [git reset && git checkout 区别](#git-reset--git-checkout-%e5%8c%ba%e5%88%ab)
+  - [HEAD^ 和 HEAD~ 区别](#head-%e5%92%8c-head-%e5%8c%ba%e5%88%ab)
+  - [Git 工作流](#git-%e5%b7%a5%e4%bd%9c%e6%b5%81)
 - [GitLab](#gitlab)
-- [参考学习](#参考学习)
+- [参考学习](#%e5%8f%82%e8%80%83%e5%ad%a6%e4%b9%a0)
 
 ## Git 用法
 ### 开始
@@ -77,6 +78,9 @@ git reset --hard <commit> // 重置工作区和暂存区
 **Tip**:
 - 多用 `git status` 查看文件状态，git 会有接下来相关操作提示。
 - 使用 `git log` 和 `gitk` 能够查看提交日志，`gitk` 会打开图形化界面。(windows 下 gitk 界面乱码，可输入配置命令 `git config gui.encoding utf-8`，重新打开即可。)
+
+#### git commit
+- `git commit --amend` 修改最新commit的message。会创建一个将暂存区的内容生成一个commit，再将当前最新的commit替换成新生成的那一个。
 
 ## Git 原理探索
 
