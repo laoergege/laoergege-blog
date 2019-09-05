@@ -1,3 +1,18 @@
+## Table
+- [Table](#table)
+- [Git 分支](#git-分支)
+  - [创建分支](#创建分支)
+  - [合并分支](#合并分支)
+    - [FastForward Merge](#fastforward-merge)
+    - [Merge](#merge)
+    - [Rebase](#rebase)
+    - [CherryPick](#cherrypick)
+    - [解决冲突](#解决冲突)
+  - [删除分支](#删除分支)
+    - [数据恢复](#数据恢复)
+  - [远程分支](#远程分支)
+  - [其他](#其他)
+
 ## Git 分支
 
 推荐学习 [git book 分支章节](https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%AE%80%E4%BB%8B)。
@@ -62,7 +77,7 @@ git cherry-pick <commit-ish>...
 
 >  一旦暂存这些原本有冲突的文件，Git 就会将它们标记为冲突已解决。
 
-### 分支删除
+### 删除分支
 ```
 /*
  * -d 删除分支 
@@ -85,6 +100,17 @@ git reflog // 查看 HEAD 修改历史
 git checkout -b <branch> <commitID> // 重新从对应的 commitID 建立分支
 
 git cherry-pick <commit-ish> // 合并丢失的 commitID
+```
+
+### 远程分支
+远程跟踪分支（以 [remote]/[branch] 形式命名）是远程分支状态的引用。 它们是你不能移动的本地引用，当你做任何网络通信操作时，它们会自动移动。
+
+```
+// 同步本地与远程分支的引用
+git fetch [remote] 
+
+// 推送
+git push [origin] [branch]:[remote branch]
 ```
 
 ### 其他

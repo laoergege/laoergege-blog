@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "imgup": "node ./script/imgUp"
+    "imgup": "node ./script/imgUp",
+    "push": "git commit -a -m '更新博客'"
   },
   "repository": {
     "type": "git",
