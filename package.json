@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "imgup": "node ./script/imgUp",
-    "push": "git commit -a -m '更新博客'"
+    "push": "git commit -a -m '更新博客' && git push"
   },
   "repository": {
     "type": "git",
