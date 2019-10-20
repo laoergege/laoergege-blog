@@ -1,3 +1,73 @@
+## 文件删除（git rm）
+```
+PS D:\laoergege-demos\git_learning> ls                                                             
+
+    目录: D:\laoergege-demos\git_learning
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         2019/7/14     22:52                images
+d-----         2019/7/14     22:52                js
+d-----        2019/10/16     20:00                styles
+-a----        2019/10/16     20:00           1422 index.html
+-a----        2019/10/20     13:57             53 readme.md
+
+
+PS D:\laoergege-demos\git_learning> rm readme.md                                                   PS D:\laoergege-demos\git_learning> ls                                                             
+
+    目录: D:\laoergege-demos\git_learning
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         2019/7/14     22:52                images
+d-----         2019/7/14     22:52                js
+d-----        2019/10/16     20:00                styles
+-a----        2019/10/16     20:00           1422 index.html
+
+
+PS D:\laoergege-demos\git_learning> git status                                                     On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        deleted:    readme.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS D:\laoergege-demos\git_learning> git rm readme.md                                               rm 'readme.md'
+PS D:\laoergege-demos\git_learning> git status                                                     On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        deleted:    readme.md
+```
+
+在上面我们通过 `rm` 删除文件，再将删除操作暂存。`git rm` 可达到上面两步操作效果。
+
+```
+PS D:\laoergege-demos\git_learning> ls                                                             
+
+    目录: D:\laoergege-demos\git_learning
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         2019/7/14     22:52                images
+d-----         2019/7/14     22:52                js
+d-----        2019/10/16     20:00                styles
+-a----        2019/10/16     20:00           1422 index.html
+-a----        2019/10/20     14:09             53 readme.md
+
+
+PS D:\laoergege-demos\git_learning> git rm readme.md                                               rm 'readme.md'
+PS D:\laoergege-demos\git_learning> git status                                                     On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        deleted:    readme.md
+```
+
 ## 撤销及重置
 资料阅读 [Git-工具-重置揭密](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86)。
 
@@ -45,11 +115,10 @@ git reset [commit] <file>
 
 当作为操作 commitID 指向时，`git reset` 和 `git checkout` 的行为区别是：
 - `git reset` 会移动 HEAD 所在分支指针，`git checkout` 则不会。![](https://git-scm.com/book/en/v2/images/reset-checkout.png)
-- `git reset` 更深的细粒度控制，`git checkout` 会一步到位，更新到 Working。`git reset` 默认只更到 Index 步骤为止。
 - 不同于 `reset --hard`，`checkout` 对工作目录是安全的，它会通过检查来确保不会将已更改的文件弄丢，其实它还更聪明一些。它会在工作目录中先试着简单合并一下,而 `reset --hard` 则会不做检查就全面地替换所有东西。
 
 当作为操作对象为 file 时，`git checkout` 和 `git reset --hard [branch] file` 的行为一样。
 
 总结：`git reset` 和 `git checkout` 两者在使用上总有些相似，那么如何区分使用场景，我觉得应该注意两点：
 - 是否会移动 HEAD 所在的分支
-- 是否对工作目录强覆盖
+- 是否对文件强覆盖
