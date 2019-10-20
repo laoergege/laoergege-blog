@@ -43,3 +43,5 @@ Date:   Sun Jul 14 22:57:12 2019 +0800
 ```
 git rebase -i [commit]
 ```
+
+## 合并
