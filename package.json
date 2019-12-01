@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/laoergege/laoergege-blog#readme",
   "dependencies": {
-    "isomorphic-git": "^0.54.2",
     "vuepress": "^1.2.0"
   }
 }
