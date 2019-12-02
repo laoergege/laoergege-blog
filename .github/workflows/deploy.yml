@@ -21,4 +21,4 @@ jobs:
     - name: install-dep
       run: npm install
     - name: build
-      run: npm run build
+      run: npm run docs:build
