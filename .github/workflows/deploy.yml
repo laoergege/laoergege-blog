@@ -1,12 +1,24 @@
-name: Deloy
+name: Build and Deloy
 
-on: [push]
+on:
+  push:
+    branches: 
+      - master
+  
 
 jobs:
-  build:
+  build-and-deploy:
 
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to vuepress
-      uses: grasilife/github-pages-deploy-action@v1.2
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: install-node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: 10.x 
+    - name: install-dep
+      run: npm install
+    - name: build
+      run: npm run build
