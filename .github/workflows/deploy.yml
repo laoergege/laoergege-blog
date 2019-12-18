@@ -23,6 +23,8 @@ jobs:
       run: npm run docs:build
     - name: deploy
       run: |
+        git config --global user.email "13211239457@163.com"
+        git config --global user.name "laoergege"
         git add .
         git commit -m '更新文章'
         git push
