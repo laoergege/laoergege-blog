@@ -4,13 +4,12 @@ on:
   push:
     branches: 
       - master
-  
+    tags: 
+      - page
 
 jobs:
   build-and-deploy:
-
     runs-on: ubuntu-latest
-
     steps:
     - name: checkout
       uses: actions/checkout@v1
@@ -18,7 +17,12 @@ jobs:
       uses: actions/setup-node@v1
       with: 
         node-version: 10.x 
-    - name: install-dep
+    - name: install
       run: npm install
     - name: build
       run: npm run docs:build
+    - name: deploy
+      run: |
+        git add .
+        git commit -m '更新文章'
+        git push
