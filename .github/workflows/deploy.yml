@@ -21,6 +21,8 @@ jobs:
       run: npm install
     - name: build
       run: npm run docs:build
+    - name: add CNAME
+      run: echo "blog.laoergege.cn" > ./docs/CNAME
     - name: deploy
       run: |
         git config --global user.email "13211239457@163.com"
