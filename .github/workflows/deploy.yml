@@ -11,22 +11,24 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
+    - name: Checkout
       uses: actions/checkout@v2
-    - name: install-node
+      with:
+        token: ${{ secrets.DEPLOY_KEY }}
+    - name: Install-node
       uses: actions/setup-node@v1
       with: 
         node-version: 10.x 
-    - name: install
+    - name: Install
       run: npm install
-    - name: build
+    - name: Build
       run: npm run docs:build
-    - name: add CNAME
+    - name: ADD CNAME
       run: echo "blog.laoergege.cn" > ./docs/CNAME
-    - name: deploy
+    - name: Deploy
       run: |
         git config --global user.email "13211239457@163.com"
         git config --global user.name "laoergege"
         git add .
-        git commit -m '更新文章'
+        git commit -m 'publish'
         git push
