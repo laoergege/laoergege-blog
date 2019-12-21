@@ -31,7 +31,7 @@ jobs:
     - name: Copy Articles
       run: |
         rm -rf ./*
-        mv ../laoergege-blog/docs/* ./
+        mv ../../laoergege-blog/docs/* ./
     - name: Deploy
       run: |
         git config --global user.email "13211239457@163.com"
