@@ -27,7 +27,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: gh-pages
-        path: ${{$GITHUB_WORKSPACE}}/gh-pages
+        path: $GITHUB_WORKSPACE/gh-pages
     - name: Copy Articles
       run: |
         rm -rf ./*
