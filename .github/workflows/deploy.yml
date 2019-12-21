@@ -27,11 +27,11 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: gh-pages
-        path: ../../gh-pages
+        path: ../gh-pages
     - name: Copy Articles
       run: |
         rm -rf ./*
-        mv ../../laoergege-blog/docs/* ./
+        mv ../laoergege-blog/docs/* ./
     - name: Deploy
       run: |
         git config --global user.email "13211239457@163.com"
