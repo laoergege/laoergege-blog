@@ -6,7 +6,7 @@
   "scripts": {
     "docs:dev": "vuepress dev src",
     "docs:build": "vuepress build src",
-    "publish": "git tag -d page && git tag page && git push origin tag -f"
+    "publish": "git tag -d page && git tag page && git push origin page -f"
   },
   "repository": {
     "type": "git",
