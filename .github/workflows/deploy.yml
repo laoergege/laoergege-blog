@@ -23,15 +23,11 @@ jobs:
       run: npm run docs:build
     - name: ADD CNAME
       run: echo "blog.laoergege.cn" > ./docs/CNAME
-    - name: Checkout gh-pages
-      uses: actions/checkout@v2
-      with:
-        ref: gh-pages
-        path: ./gh-pages
-    - name: Copy Articles
+    - name: MV Articles
       run: |
-        rm -rf ./*
-        mv ../../laoergege-blog/docs/* ./
+        mv ./docs/* ../tmp
+        git checkout -b gh-pages origin/gh-pages
+        mv ../tmp/* ./
     - name: Deploy
       run: |
         git config --global user.email "13211239457@163.com"
