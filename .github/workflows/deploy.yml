@@ -25,6 +25,7 @@ jobs:
       run: echo "blog.laoergege.cn" > ./docs/CNAME
     - name: MV Articles
       run: |
+        mkdir ../tmp
         mv ./docs/* ../tmp
         git checkout -b gh-pages origin/gh-pages
         rm -rf ./*
