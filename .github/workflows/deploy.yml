@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: npm run docs:build
     - name: ADD CNAME
-      run: echo "blog.laoergege.cn" > ./docs/CNAME
+      run: echo "f1ae9602b1a181f9.cdn.jiashule.com" > ./docs/CNAME
     - name: MV Articles
       run: |
         mkdir ../tmp
