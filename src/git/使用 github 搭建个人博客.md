@@ -59,9 +59,5 @@ GitHub Pages 支持两种类型的域名
 
 > www 子域名是最稳定的一种自定义域，因为 www 子域名不受 GitHub 服务器 IP 地址变动的影响。 您的网站加载速度也会更快，因为拒绝服务 (DoS) 攻击保护可以更有效地实施。
 
-笔者同时也配置顶级域名，这样方便在在浏览器上输入访问时能解析指定访问到 GitHub pages 主机上，并且 github page 主机会自动将顶级域 `example.com` 重定向到 `www.example.com`。
+笔者同时也配置顶级域名，这样方便在在浏览器上输入顶级域名时就能访问到网站，因为请求解析到 GitHub pages 主机上，github page 主机会自动将顶级域 `example.com` 重定向到 `www.example.com`。
 
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE1NzQ3MDQ2MF19
--->
