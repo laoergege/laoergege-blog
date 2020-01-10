@@ -1,9 +1,7 @@
 const path = require("path")
 
 // gitee 
-const GITEE_RWA_URL = 'https://gitee.com/laoergege/images/raw/master'
-
-const mode = process.env.NODE_ENV
+const GITEE_RWA_URL = 'https://gitee.com/laoergege/images/raw/master/'
 
 module.exports = {
   title: 'Laoergege Blog',
@@ -46,19 +44,21 @@ module.exports = {
     ]
   },
 
-  configureWebpack: {
-    module: {
-      rules: [
-        {
-          test: /\.(png|jpe?g|gif)$/i,
-          loader: 'file-loader',
-          options: {
-            name: '[contenthash].[ext]',
-            outputPath: 'images',
-            publicPath: mode === 'production' ? GITEE_RWA_URL : ''
-          },
-        }
-      ]
-    }
+  chainWebpack: (config, isServer) => {
+
+    config.module
+      .rule('images')
+      .clear()
+    
+    config.module
+      .rule('images')
+      .test(/\.(png|jpe?g|gif)(\?.*)?$/)
+      .use('url-loader')
+        .loader('url-loader')
+        .options({
+          limit: 10 * 1024, // 100KB
+          name: process.env.NODE_ENV === 'production' ? '[name].[hash:8].[ext]' : `assets/img/[name].[hash:8].[ext]`,
+          publicPath: process.env.NODE_ENV === 'production' ? GITEE_RWA_URL : '/'
+        })
   }
 }
