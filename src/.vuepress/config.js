@@ -37,7 +37,7 @@ module.exports = {
         sidebarDepth: 2,    // 可选的, 默认值是 1
         children: [
           '/git/GithubAction Sheet',
-          '/git/使用 github 搭建个人博客',
+          '/git/使用 Github 搭建个人博客',
           '/git/Github Action 开发之 gitee 图床'
         ]
       }
