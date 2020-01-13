@@ -19,9 +19,27 @@ Github Action 分成两类实现：
 - Docker 容器实现，Docker 实现更为强大自由，可以自定义操作系统和工具，但由于构建延迟，Docker 容器操作比JavaScript操作慢。
 - JavaScript 实现，直接运行在机器上，执行速度更快。
 
+## 开发 img-to-gitee-action 
+
 action.yml
 
 input、ouput、environment variables.
+
+input 大写将被转成小写，input的value将被作为环境变量，格式 `INPUT_<VARIABLE_NAME>`
+
+
+```yml
+name: "img-to-gitee-action"
+description: "a github action to sync images to gitee"
+inputs:
+  folder:
+    description: "The files in the folder will be synced to Gitee"
+    required: true
+runs:
+  using: "node12"
+  main: "src/index.js"
+```
+
 
 ## 指定版本
 https://help.github.com/en/actions/automating-your-workflow-with-github-actions/about-actions
