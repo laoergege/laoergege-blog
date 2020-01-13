@@ -15,12 +15,13 @@ jobs:
         uses: ./.github/actions/my-action
 ```
 
-
 Github Action 分成两类实现：
 - Docker 容器实现，Docker 实现更为强大自由，可以自定义操作系统和工具，但由于构建延迟，Docker 容器操作比JavaScript操作慢。
 - JavaScript 实现，直接运行在机器上，执行速度更快。
 
+action.yml
 
+input、ouput、environment variables.
 
 ## 指定版本
 https://help.github.com/en/actions/automating-your-workflow-with-github-actions/about-actions
