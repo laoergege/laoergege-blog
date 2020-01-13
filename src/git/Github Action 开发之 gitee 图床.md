@@ -1,6 +1,6 @@
 # Github Action 开发之 gitee 图床
 
-![image](../images/bg2019120601.jpg)
+一般情况，笔者喜欢将图片和文件置于同个项目中，方便直接引用显示，构建时替换成 Github Raw 线上地址。但由于国内访问 Github 上仓库的图片速度是比较慢的，使用 Github 作为图床是不太理想。我们可以使用国内 Gitee 作为图床，Gitee 的访问速度相对 Github 快。本文中笔者将使用开发一个 Github Action，用于将项目中指定的图片文件夹同步到 Gitee 上。
 
 ## 关于 Github Action
 Github Action 就像是一个库，实现某些功能的脚本，比如说可以读写仓库、发送短信、或者调用 github 或第三方的 API。你能够将某些功能抽成一个 Github Action，使用在你的 workflow 中或者通过公开仓库、 github 商城分享给其他人使用（Docker 实现的 Action 则通过 Docker Hub 等镜像仓库平台分享）。
