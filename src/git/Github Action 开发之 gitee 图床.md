@@ -47,9 +47,9 @@ config.module
 做完上面，接下来的一个主要需求就是：将 `src/images` 目录下的图片同步到 Gitee 上。我们可以将这个功能开发成一个 Github Action，方便以后其他项目使用。
 
 ## 关于 Github Action
-Github Action 就像是一个库，实现某些功能的脚本，比如说可以读写仓库、发送短信、或者调用 github 或第三方的 API。你能够将某些功能抽成一个 Github Action，使用在你的 workflow 中或者通过公开仓库、 github 商城分享给其他人使用（Docker 实现的 Action 则通过 Docker Hub 等镜像仓库平台分享）。
+Github Action 就像是一个实现某些功能的库，比如说可以读写仓库、发送短信、或者调用 github 或第三方的 API。你能够将某些功能抽成一个 Github Action，使用在你的 workflow 中或者通过公开仓库、 github 商城分享给其他人使用（Docker 实现的 Action 则通过 Docker Hub 等镜像仓库平台分享）。
 
-推荐将 Github Action 作为一个独立仓库进行维护，而不是继承在某个应用的仓库中，这样方便分享、跟踪、迭代。如果不是想分享，而是想自我单独快速使用，推荐放在 `.github/actions` 文件下，比如 `.github/actions/action-a` 和 `.github/actions/action-b`，并使用相对路径引用。
+推荐将 Github Action 作为一个独立仓库进行维护，而不是放在在某个应用的仓库中，这样方便**分享、跟踪、迭代**。如果不是想分享，而是想自我单独快速使用，推荐放在 `.github/actions` 文件下，比如 `.github/actions/action-a` 和 `.github/actions/action-b`，并使用相对路径引用。
 
 ```yml
 jobs:
@@ -63,14 +63,22 @@ Github Action 分成两类实现：
 - Docker 容器实现，Docker 实现更为强大自由，可以自定义操作系统和工具，但由于构建延迟，Docker 容器操作比JavaScript操作慢。
 - JavaScript 实现，直接运行在机器上，执行速度更快。
 
+本次开发中我们选择以 JavaScript 实现的方式。
+
 ## 开发 img-to-gitee-action 
 
-action.yml
+### 创建项目
+创建项目我们可以使用官方提供的开发模板 [actions/javascript-action](https://github.com/actions/javascript-action)
 
-input、ouput、environment variables.
+#### 模板调整
+删除多余文件（包括 .github/workflows/test.yml）、调整目录，如下
+
+![test](../../images/20200310140855.png)
+
+#### action.yml
+action.yml 相当 npm 包 package.json ，用于描述 action 包的相关信息。
 
 input 大写将被转成小写，input的value将被作为环境变量，格式 `INPUT_<VARIABLE_NAME>`
-
 
 ```yml
 name: "img-to-gitee-action"
@@ -84,6 +92,43 @@ runs:
   main: "src/index.js"
 ```
 
+更多的 action.yml 语法详情参考 [Metadata syntax for GitHub Actions](https://help.github.com/en/actions/building-actions/metadata-syntax-for-github-actions)
 
-## 指定版本
-https://help.github.com/en/actions/automating-your-workflow-with-github-actions/about-actions
+### 安装 GitHub Actions Toolkit
+[GitHub Actions Toolkit](https://github.com/actions/toolkit) 是 Github 提供的一些列开发工具包用于 action 开发，并且提供各种模板有 JavaScript 开发项目模板和 Typescript 项目模板等。
+
+### 代码实现
+
+### README
+
+创建一个标准的 Action README
+
+A detailed description of what the action does.
+Required input and output arguments.
+Optional input and output arguments.
+Secrets the action uses.
+Environment variables the action uses.
+An example of how to use your action in a workflow.
+
+[参考](https://help.github.com/en/actions/building-actions/creating-a-javascript-action#create-a-readme)
+
+### 代码提交及版本管理
+
+#### release 分支
+
+#### 打包
+action 在 workflow 中作为一个单独的运行程序，所以我们需要将它及其依赖一同打包。
+[zeit/ncc](https://github.com/zeit/ncc) 是一个快速的零配置且内置支持 typescript 的 node module 打包工具。
+
+```
+...
+"package": "ncc build index.js -o dist",
+...
+```
+
+### 在 workflow 中测试你的 action
+
+私有 action
+
+### 发布 Github Marketplace
+https://help.github.com/en/actions/building-actions/publishing-actions-in-github-marketplace
