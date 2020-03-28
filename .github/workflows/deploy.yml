@@ -25,10 +25,10 @@ jobs:
       run: cp CNAME docs/
     - name: Deploy
       run: |
+        git config --global user.email "13211239457@163.com"
+        git config --global user.name "laoergege"
         git checkout -b tmp
         git add .
         git commit -m 'publish'
-        git rebase master
-        git config --global user.email "13211239457@163.com"
-        git config --global user.name "laoergege"
+        git rebase master       
         git push origin tmp:master
