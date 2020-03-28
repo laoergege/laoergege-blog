@@ -9,7 +9,7 @@
         Property dereference syntax: github.sha
         ```
     - 表达式
-      - `{{ <expression> }}`
+      - ::: v-pre `{{ <expression> }}` :::
       - expression 大多数情况与 workflow 中的 `if` 关键词使用 `if: <expression>`
       - 表达式包含
         - [上下文引用](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions#contexts)
