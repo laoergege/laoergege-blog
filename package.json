@@ -28,10 +28,9 @@
     "url": "https://github.com/laoergege/laoergege-blog/issues"
   },
   "homepage": "https://github.com/laoergege/laoergege-blog#readme",
-  "dependencies": {
-    "vuepress": "^1.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "cross-env": "^6.0.3"
+    "cross-env": "^6.0.3",
+    "vuepress": "^1.4.0"
   }
 }
