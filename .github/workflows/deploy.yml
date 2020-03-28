@@ -22,19 +22,4 @@ jobs:
     - name: Build
       run: npm run docs:build
     - name: ADD CNAME
-      run: echo "www.laoergege.cn" > ./docs/CNAME
-    - name: MV Articles
-      run: |
-        mkdir ../tmp
-        mv ./docs/* ../tmp
-        git fetch origin gh-pages
-        git checkout -b gh-pages origin/gh-pages
-        rm -rf ./*
-        mv ../tmp/* ./
-    - name: Deploy
-      run: |
-        git config --global user.email "13211239457@163.com"
-        git config --global user.name "laoergege"
-        git add .
-        git commit -m 'publish'
-        git push
+      run: cp CNAME docs/
