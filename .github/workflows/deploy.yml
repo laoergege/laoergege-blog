@@ -30,5 +30,5 @@ jobs:
         git checkout -b tmp
         git add .
         git commit -m 'publish'
-        git rebase master       
+        git pull origin master --rebase    
         git push origin tmp:master
