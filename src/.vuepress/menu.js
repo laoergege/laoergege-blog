@@ -23,8 +23,7 @@ module.exports = {
                 children: [
                     ['/使用 GithubPage、GithubAction、VuePress 搭建个人博客']
                 ]
-            },
-            'GithubAction'
+            }
         ]
     }
 }
