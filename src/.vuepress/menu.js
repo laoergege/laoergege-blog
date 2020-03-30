@@ -31,8 +31,8 @@ module.exports = {
             
         ],
         '/NodeJS/': [
-            ['安装及基本使用', '1.安装及基本使用'],
-            ['Node Event Loop', '2.Node Event Loop']
+            '安装及基本使用',
+            'Node Event Loop'
         ],
         '/Git/': [
             {

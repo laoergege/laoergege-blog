@@ -1,7 +1,7 @@
 ## 知识体系
 
 - workflow
-  - 一个 workflow 由这 name、on、jobs 三个基本顶级字段组成 
+  - 一个 workflow 由这 name、on、jobs 三个基本顶级字段组成
   - 配置
     - events 定义事件，触发工作流
       - Github 事件
@@ -12,9 +12,11 @@
 - actions
 
 ## workflow
+
 一个 workflow 由这 name、on、jobs 三个基本顶级字段组成
 
 **workflow demo**
+
 ```yml
 # This is a basic workflow to help you get started with Actions
 
