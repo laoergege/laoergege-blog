@@ -5,6 +5,19 @@ module.exports = {
             link: '/JavaScript/'
         },
         {
+            text: '前端框架',
+            items: [
+                { 
+                    text: 'Vue',
+                    link: '/Vue/'
+                },
+                { 
+                    text: 'React',
+                    link: '/React/'
+                }
+            ]
+        },
+        {
             text: 'NodeJS',
             link: '/NodeJS/'
         },
@@ -14,8 +27,12 @@ module.exports = {
         }
     ],
     sidebar: {
+        '/JavaScript/': [
+            
+        ],
         '/NodeJS/': [
-            'Node Event Loop'
+            ['安装及基本使用', '1.安装及基本使用'],
+            ['Node Event Loop', '2.Node Event Loop']
         ],
         '/Git/': [
             {
