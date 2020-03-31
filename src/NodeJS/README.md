@@ -2,9 +2,10 @@
 title: 'NodeJS Learning'
 tags:
   - NodeJS
+  - Node
 ---
 
-## 知识大纲
+## 知识体系
 
 - 简介：Node 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行环境
 - 安装及基本使用
@@ -14,14 +15,23 @@ tags:
   - Generator
   - Async and Await
 - 模块机制
+  - 模块规范
+  - 模块解析机制
 - npm 包管理
+  - npm 配置及切换 npm 源
+  - package.json
+  - npm install 及 lock
+  - npm script/npx
 - 核心知识
   - [Node Event Loop](./Node%20Event%20Loop.md)
     - timers（setTimeout、setIntervel）
     - setImmediate
     - nextTick
 - Node 全局对象
-  - process
+  - process、buffer、__filename 和 __dirname
+  - console 和 setTimeout 之类
+  - ECMAScript 语言定义的全局对象，如 Date
+- Node 标准库
   - readline
   - console
   - worker
@@ -34,4 +44,4 @@ tags:
     - 信号
 - 使用场景
   - Node CLI
-  - Server
+  - Web 后端开发
