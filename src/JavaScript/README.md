@@ -49,7 +49,7 @@ tags:
 - JavaScript 专题
   - 节流和防抖
   - Apply, Call 和 Bind
+- JavaScript 正则表达式
 - 其他
-  - 正则
   - 函数式编程
   - 链式调用
