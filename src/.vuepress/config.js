@@ -2,7 +2,7 @@ const path = require("path")
 const menu = require("./menu")
 
 // gitee 
-const GITEE_RWA_URL = 'https://gitee.com/laoergege/images/raw/master/'
+const IMG_URL = 'http://images.laoergege.cn/'
 
 module.exports = {
   // 基本配置
@@ -30,9 +30,9 @@ module.exports = {
       .use('url-loader')
         .loader('url-loader')
         .options({
-          limit: 10 * 1024, // 100KB
-          name: process.env.NODE_ENV === 'production' ? '[name].[hash:8].[ext]' : `assets/img/[name].[hash:8].[ext]`,
-          publicPath: process.env.NODE_ENV === 'production' ? GITEE_RWA_URL : '/'
+          limit: 10 * 1024, // 10KB
+          name: process.env.NODE_ENV === 'production' ? '[name].[ext]' : `assets/img/[name].[ext]`,
+          publicPath: process.env.NODE_ENV === 'production' ? IMG_URL : '/'
         })
   }
 }
