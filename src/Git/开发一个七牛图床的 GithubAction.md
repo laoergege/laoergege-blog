@@ -79,7 +79,7 @@ Github Action 分成两类实现：
 - Docker 容器实现，Docker 实现更为强大自由，可以自定义操作系统和工具，但由于构建延迟，Docker 容器操作比JavaScript操作慢。
 - JavaScript 实现，直接运行在机器上，执行速度更快（本项目选择 JavaScript Action，故不涉及 Docker Action 相关）。
 
-####  Workflow 中如何使用 Action
+###  Workflow 中如何使用 Action
 
 如果 action 是独立公开仓库，你可以使用 `{owner}/{repo}@{ref}` 或者 `{owner}/{repo}/{path}@{ref}` 去引用
 
@@ -179,9 +179,19 @@ branding:
   color: 'blue'
 ```
 
-其中 `runs.post` 指定后置处理脚本。（截止本文 2020.4.12 编写的时候，Github Action 官方文档并没有说明 `runs.post`，不过在 [actions/checkout](https://github.com/actions/checkout) 中却发现了有这样的用法）
+其中 `runs.post` 指定后置处理脚本。与七牛交互的过程是比较耗时的任务，故需要把该 action 作为后置处理。
 
-### sync-to-qiniu-action 设计思路
+```javascript
+// core from actions/core
+// 通过 save-state command 保存 isPost 状态
+if (core.getState("isPost")) {
+  main()
+} else {
+  core.saveState("isPost", '1');
+}
+```
+
+#### sync-to-qiniu-action 设计思路
 
 ![sync-to-qiniu-action 设计思路](../images/../../images/sync-to-qiniu-action-design.svg)
 
@@ -193,25 +203,36 @@ branding:
 
 具体代码实现可参考 [sync-to-qiniu-action](https://github.com/laoergege/sync-to-qiniu-action)。
 
-### 分支及版本管理
+#### 测试
 
-#### release 分支
+Debug
 
-#### 打包
+本地测试
 
-action 在 workflow 中作为一个单独的运行程序，所以我们需要将它及其依赖一同打包。
-[zeit/ncc](https://github.com/zeit/ncc) 是一个快速的零配置且内置支持 typescript 的 node module 打包工具。
+Mocking inputs
+Mocking the GitHub context
+Mocking webhook event payload
+GITHUB_EVENT_PATH. Since we set that to path.join(__dirname, 'payload.json')
 
+Workflow 测试
+
+#### 分支及版本管理
+
+> [Versioning](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
+
+```yml
+steps:
+    - uses: actions/javascript-action@v1        # recommended. starter workflows use this
+    - uses: actions/javascript-action@v1.0.0    # if an action offers specific releases 
+    - uses: actions/javascript-action@41775a4da8ffae865553a738ab8ac1cd5a3c0044 # sha
 ```
-...
-"package": "ncc build index.js -o dist",
-...
-```
 
-### 在 workflow 中测试你的 action
+step 使用 action 中，我们可以在 `ower/repo` 后指定 `@ref` 版本，ref 可以是一个 **git 分支**、**tag** 甚至 **git 对象的 SHA**。
 
-私有 action
 
 ### 发布 Github Marketplace
 
 <https://help.github.com/en/actions/building-actions/publishing-actions-in-github-marketplace>
+
+
+> 官方教程 [Creating an Action using the GitHub Context](https://github.com/actions/toolkit/blob/master/docs/github-package.md)

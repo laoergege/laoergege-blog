@@ -9,12 +9,19 @@
       - 外部触发事件
     - [syntax]( https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions)
     - context and expression syntax
-- actions
+- [actions](https://help.github.com/en/actions/building-actions)
   - [action.yml](https://help.github.com/en/actions/building-actions/metadata-syntax-for-github-actions)
   - 实现类型
     - JavaScript
     - Docker
-  - toolkit
+  - usage in workflow
+  - [toolkit](https://github.com/actions/toolkit)
+  - 开发
+    - 测试
+    - versioning
+- command
+  - https://help.github.com/en/actions/reference/workflow-commands-for-github-actions
+  - https://github.com/actions/toolkit/blob/master/docs/commands.md
 
 ## workflow
 
