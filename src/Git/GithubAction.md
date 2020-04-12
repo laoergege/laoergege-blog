@@ -10,6 +10,11 @@
     - [syntax]( https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions)
     - context and expression syntax
 - actions
+  - [action.yml](https://help.github.com/en/actions/building-actions/metadata-syntax-for-github-actions)
+  - 实现类型
+    - JavaScript
+    - Docker
+  - toolkit
 
 ## workflow
 

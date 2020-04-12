@@ -2,7 +2,7 @@ const path = require("path")
 const menu = require("./menu")
 
 // gitee 
-const IMG_URL = 'http://images.laoergege.cn/'
+const IMG_URL = 'http://images.laoergege.cn/images'
 
 module.exports = {
   // 基本配置
@@ -26,7 +26,7 @@ module.exports = {
     
     config.module
       .rule('images')
-      .test(/\.(png|jpe?g|gif)(\?.*)?$/)
+      .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
       .use('url-loader')
         .loader('url-loader')
         .options({
