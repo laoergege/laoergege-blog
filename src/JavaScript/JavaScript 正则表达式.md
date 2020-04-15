@@ -1,3 +1,9 @@
+---
+title: 'JavaScript 正则表达式'
+tags:
+  - javascript
+  - regexp
+---
 # JavaScript 正则表达式
 
 正则表达式是搜索和替换字符串的一种强大方式。
