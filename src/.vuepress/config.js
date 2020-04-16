@@ -23,16 +23,30 @@ module.exports = {
     config.module
       .rule('images')
       .clear()
-    
+
+    config.module
+      .rule('svg')
+      .clear()
+
     config.module
       .rule('images')
       .test(/\.(png|jpe?g|gif)(\?.*)?$/)
       .use('url-loader')
-        .loader('url-loader')
-        .options({
-          limit: 10 * 1024, // 10KB
-          name: process.env.NODE_ENV === 'production' ? '[name].[ext]' : `assets/img/[name].[ext]`,
-          publicPath: process.env.NODE_ENV === 'production' ? IMG_URL : '/'
-        })
+      .loader('url-loader')
+      .options({
+        limit: 10 * 1024, // 10KB
+        name: process.env.NODE_ENV === 'production' ? 'images/[name].[ext]' : `assets/img/[name].[ext]`,
+        publicPath: process.env.NODE_ENV === 'production' ? IMG_URL : '/'
+      })
+
+    config.module
+      .rule('svg')
+      .test(/\.(svg)(\?.*)?$/)
+      .use('file-loader')
+      .loader('file-loader')
+      .options({
+        name: process.env.NODE_ENV === 'production' ? 'images/[name].[ext]' : `assets/img/[name].[ext]`,
+        publicPath: process.env.NODE_ENV === 'production' ? IMG_URL : '/'
+      })
   }
 }

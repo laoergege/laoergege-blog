@@ -1,0 +1,27 @@
+# This is a basic workflow to help you get started with Actions
+
+name: UpImages
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  upImages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.DEPLOY_KEY }} 
+        fetch-depth: 2 
+    - uses: laoergege/sync-to-qiniu-action@master
+      with:
+        accessKey: ${{ secrets.accessKey }}
+        secretKey: ${{ secrets.secretKey }}
+        bucket: 'laoergege-blog-images'
+        zone: 'Zone_z2'
+        path: images
+        token: ${{ secrets.GITHUB_TOKEN }}
