@@ -1,5 +1,6 @@
 const path = require("path")
 const menu = require("./menu")
+const markdown = require("./markdown")
 
 // gitee 
 const IMG_URL = 'http://images.laoergege.cn/'
@@ -17,6 +18,9 @@ module.exports = {
   themeConfig: {
     ...menu
   },
+
+  // markdown
+  markdown,
 
   chainWebpack: (config, isServer) => {
 

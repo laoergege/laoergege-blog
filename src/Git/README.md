@@ -11,11 +11,11 @@
 
 **TODO**
 
-- [x] 使用 GithubPage 静态资源托管
-- [x] 自定义域名
-- [x] 使用 VuePress 生成静态网站
-- [x] 使用 GithubAction 自动化构建部署
-- [x] 集成图床到工作流中
+- [X] 使用 GithubPage 静态资源托管
+- [X] 自定义域名
+- [X] 使用 VuePress 生成静态网站
+- [X] 使用 GithubAction 自动化构建部署
+- [X] 集成图床到工作流中
 - [ ] 集成 markdown lint 功能
 - [ ] 为文章添加元数据，包括新建时间及更新时间、标签等
 - [ ] 加速 CI/CD
