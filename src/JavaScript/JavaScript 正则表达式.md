@@ -3,6 +3,7 @@ title: 'JavaScript 正则表达式'
 tags:
   - javascript
   - regexp
+  - 正则表达式
 ---
 # JavaScript 正则表达式
 
@@ -30,9 +31,9 @@ tags:
     - [排除捕获分组](#排除捕获分组)
   - [正则表达式回溯法原理](#正则表达式回溯法原理)
   - [练习题](#练习题)
-      - [将每个单词的首字母转换为大写](#将每个单词的首字母转换为大写)
-      - [字符串 trim 方法模拟](#字符串-trim-方法模拟)
-      - [匹配成对标签](#匹配成对标签)
+    - [将每个单词的首字母转换为大写](#将每个单词的首字母转换为大写)
+    - [字符串 trim 方法模拟](#字符串-trim-方法模拟)
+    - [匹配成对标签](#匹配成对标签)
 
 参考阅读
 
@@ -44,6 +45,7 @@ tags:
 正则表达式（可叫作“regexp”或者“reg”）包含**模式**和可选的**修饰符**。
 
 创建 JavaScript 正则表达式的方式有：
+
 - RegExp 实例 `regexp = new RegExp("pattern", "flags");`
 - 字面量 `regexp = /pattern/flag;`
 
@@ -61,6 +63,7 @@ tags:
 ## 正则是匹配模式，要么匹配字符，要么匹配位置
 
 匹配字符的模式有
+
 - 普通字符
 - 字符类
 - 集合和范围
@@ -70,6 +73,7 @@ tags:
 集合和范围模式赋予匹配单个字符能够有多种模式选择，但如果想匹配多个字符多种模式，可用选择符OR(|)
 
 匹配位置的模式有锚符：
+
 - ^、$
 - \b、\B
 - x(?=y)、x(?!y)、(?<=y)x、(?<!y)x
@@ -85,10 +89,13 @@ tags:
 - .  任意字符，除 \n
 - \p{...} 配合修饰符u，表示 unicode 字符
 
-#### 修饰符 s 与字符类 .
+#### 修饰符 s 与字符类
+
 默认情况下字符类 `.` 不匹配换行符`\n`，但修饰符 **s** 下的模式的字符类 `.` 能够匹配换行符`\n`，但是修饰符 s 在兼容性不是特别高，详见 [https://caniuse.com/#search=dotall](https://caniuse.com/#search=dotall)，我们可以通过 `[\s\S]` 模式表示任意字符，`\s` 和 `\S` 相冲，两者用集合的方式结合起来，就表示全部，类似的还有 `[\d\D]`、`[^]` 等
 
 #### Unicode：修饰符 “u” 和 class \p{...}
+
+TODO 未完成，先占个坑位
 
 ### 集合和范围 [...]
 
@@ -106,7 +113,7 @@ tags:
 
 #### 贪婪匹配和惰性匹配
 
-```
+```javascript
 'a "witch" and her "broom" is one'.match(/".+"/g) // "witch" and her "broom"
 'a "witch" and her "broom" is one'.match(/".+?"/g) // "witch"、"broom"
 ```
@@ -140,7 +147,7 @@ alert( /snow$/.test(str1) ); // true
 
 修饰符 m 开启的多行模式下，^、$ 不仅仅匹配文本的开始与结束，还**匹配每一行的开始与结束**
 
-```
+```javascript
 'aaaab\nccccc'.match(/b$/) // null
 'aaaab\nccccc'.match(/b$/mg) // ['b']
 ```
@@ -178,7 +185,6 @@ alert( /snow$/.test(str1) ); // true
 后瞻否定断言：`(?<!y)x`, 匹配 x, 仅在前面不是 y 的情况。
 
 > 断言括号不会成为捕获分组，即内容不会再去匹配第一个匹配的结果
-
 > 把位置理解空字符，是对位置非常有效的理解方式。
 
 ```javascript
@@ -317,9 +323,13 @@ alert( result.length ); // 2（数组中没有更多项）
 
 `/"candy".match(^(?:can|candy)$/)`
 
+## 正则表达式（RegExp）和字符串（String）的方法
+
+TODO
+
 ## 练习题
 
-####  将每个单词的首字母转换为大写
+#### 将每个单词的首字母转换为大写
 
 ```javascript
 'hello world'.replace(/(?<=\b)\w/g, (e) => (e.toUpperCase())) // "Hello World"

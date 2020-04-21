@@ -18,6 +18,10 @@ module.exports = {
             ]
         },
         {
+            text: '前端工程',
+            link: '/前端工程/'
+        },
+        {
             text: 'NodeJS',
             link: '/NodeJS/'
         },
