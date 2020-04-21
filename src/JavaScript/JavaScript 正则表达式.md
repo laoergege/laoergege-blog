@@ -3,6 +3,7 @@ title: 'JavaScript 正则表达式'
 tags:
   - javascript
   - regexp
+  - 正则表达式
 ---
 # JavaScript 正则表达式
 
@@ -94,6 +95,8 @@ tags:
 
 #### Unicode：修饰符 “u” 和 class \p{...}
 
+TODO 未完成，先占个坑位
+
 ### 集合和范围 [...]
 
 - 集合，如 [eao] 意味着查找在 3 个字符 'a'、'e' 或者 `‘o’ 中的任意一个
@@ -110,7 +113,7 @@ tags:
 
 #### 贪婪匹配和惰性匹配
 
-```
+```javascript
 'a "witch" and her "broom" is one'.match(/".+"/g) // "witch" and her "broom"
 'a "witch" and her "broom" is one'.match(/".+?"/g) // "witch"、"broom"
 ```
@@ -144,7 +147,7 @@ alert( /snow$/.test(str1) ); // true
 
 修饰符 m 开启的多行模式下，^、$ 不仅仅匹配文本的开始与结束，还**匹配每一行的开始与结束**
 
-```
+```javascript
 'aaaab\nccccc'.match(/b$/) // null
 'aaaab\nccccc'.match(/b$/mg) // ['b']
 ```
@@ -319,6 +322,10 @@ alert( result.length ); // 2（数组中没有更多项）
 分支也是具有惰性的，比如 `/can|candy/`，去匹配字符串 "candy"，得到的结果是 "can"，因为分支会一个一个尝试，如果前面的满足了，后面就不会再试验了。但如果接下来表达式整体不匹配时，仍会继续尝试剩下的分支。这种尝试也可以看成一种回溯，例如
 
 `/"candy".match(^(?:can|candy)$/)`
+
+## 正则表达式（RegExp）和字符串（String）的方法
+
+TODO
 
 ## 练习题
 

@@ -16,6 +16,6 @@
 - [X] 使用 VuePress 生成静态网站
 - [X] 使用 GithubAction 自动化构建部署
 - [X] 集成图床到工作流中
+- [ ] npm i 优化
 - [ ] 集成 markdown lint 功能
 - [ ] 为文章添加元数据，包括新建时间及更新时间、标签等
-- [ ] 加速 CI/CD
