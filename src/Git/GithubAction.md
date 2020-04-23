@@ -16,6 +16,12 @@
     - Docker
   - usage in workflow
   - [toolkit](https://github.com/actions/toolkit)
+  - 环境变量
+    - [github 默认环境变量](https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables)
+      - 自定义环境变量时需注意：保留 `GitHub` 环境变量前缀供 GitHub 内部使用。 如果使用 GITHUB 前缀设置环境变量或 secret，则会导致错误。
+      - 设置指向文件系统上某个位置的任何新环境变量都应该有一个 `PATH` 后缀。
+    - [GITHUB_TOKEN](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token)
+    - webhook event payload（GITHUB_EVENT_PATH，）
   - 开发
     - 测试
     - versioning

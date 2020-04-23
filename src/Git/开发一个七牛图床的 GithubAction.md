@@ -193,7 +193,7 @@ if (core.getState("isPost")) {
 
 #### sync-to-qiniu-action 设计思路
 
-![sync-to-qiniu-action 设计思路](../images/../../images/sync-to-qiniu-action-design.svg)
+![sync-to-qiniu-action 设计思路](../../images/sync-to-qiniu-action-design.svg)
 
 主要思路如下：
 1. workflow 事件触发
@@ -203,18 +203,18 @@ if (core.getState("isPost")) {
 
 具体代码实现可参考 [sync-to-qiniu-action](https://github.com/laoergege/sync-to-qiniu-action)。
 
-#### 测试
+### 测试
 
-Debug
+一般为了测试我们编写 action 或者 workflow 是否符合期望，我们每次都会提交并推送到 github 服务器去跑 workflow，这是最常规方法。当然我们也可以本地进行单元测试，但是我们可能需要模拟以下环境变量，如
+  
+- 模拟 action 输入
+- 模拟 [github 上下文环境变量](https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables)
+- 模拟文件系统
+- 模拟 webhook 事件内容（在 workflow 中，GITHUB_EVENT_PATH 变量记录完整的 webhook 事件内容文件存放位置）
 
-本地测试
+等等...
 
-Mocking inputs
-Mocking the GitHub context
-Mocking webhook event payload
-GITHUB_EVENT_PATH. Since we set that to path.join(__dirname, 'payload.json')
-
-Workflow 测试
+#### Debugging
 
 #### 分支及版本管理
 
