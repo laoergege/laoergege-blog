@@ -12,7 +12,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        token: ${{ secrets.DEPLOY_KEY }}
+        token: ${{ secrets.GITHUB_TOKEN  }}
     - name: Install-node
       uses: actions/setup-node@v1
       with: 
