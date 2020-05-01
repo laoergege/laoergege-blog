@@ -1,8 +1,7 @@
 ---
 title: 'NodeJS Learning'
 tags:
-  - NodeJS
-  - Node
+  - nodejs
 ---
 
 ## NodeJS 知识体系
@@ -10,7 +9,7 @@ tags:
 - 简介：Node 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行环境
   - NodeJS 是一个基于 **V8 引擎**的 JavaScript 运行环境
   - NodeJS 使用**事件驱动**，**非阻塞式 I/O 模型**，使其轻量又高效
-- 安装及基本使用
+- [安装及基本使用](./安装及基本使用.md)
 - 异步编程
   - Callbacks
   - Promises
