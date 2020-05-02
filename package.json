@@ -33,6 +33,7 @@
     "vuepress": "^1.4.0"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^6.0.3"
   }
 }

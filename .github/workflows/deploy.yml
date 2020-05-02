@@ -30,8 +30,6 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run docs:build
-    - name: ADD CNAME
-      run: cp CNAME docs/
     - name: Deploy
       run: |
         git config --global user.email "13211239457@163.com"

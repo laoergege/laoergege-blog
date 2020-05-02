@@ -1,6 +1,7 @@
 const path = require("path")
 const menu = require("./menu")
 const markdown = require("./markdown")
+const CopyPlugin = require('copy-webpack-plugin');
 
 // gitee 
 const IMG_URL = 'http://images.laoergege.cn/'
@@ -52,5 +53,12 @@ module.exports = {
         name: process.env.NODE_ENV === 'production' ? 'images/[name].[ext]' : `assets/img/[name].[ext]`,
         publicPath: process.env.NODE_ENV === 'production' ? IMG_URL : '/'
       })
+
+    config.plugin('copy-cname')
+      .use(CopyPlugin, [
+        [
+          { from: 'CNAME' }
+        ]
+      ])
   }
 }
