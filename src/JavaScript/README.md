@@ -46,10 +46,11 @@ tags:
   - *继承与原型链*
   - *模块化*
 - *JavaScript 设计模式*
+- [JavaScript 模块](./JavaScript%20模块.md)
+- [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
 - JavaScript 专题
   - 节流和防抖
   - Apply, Call 和 Bind
-- [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
 - 其他
   - 函数式编程
   - 链式调用
