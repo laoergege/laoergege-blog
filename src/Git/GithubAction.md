@@ -3,12 +3,14 @@
 - workflow
   - 由 name、on、jobs 三个基本顶级字段组成
   - 配置
+  - 一个 workflow 由这 name、on、jobs 三个基本顶级字段组成
+  - [workflow syntax]( https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions)
     - events 定义事件，触发工作流
       - Github 事件
       - 时间调度事件
       - 外部触发事件
-    - [syntax]( https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions)
     - context and expression syntax
+    - [job.needs](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idneeds) 工作流运行由一个或多个作业组成，默认情况下，作业并行运行， 要按顺序运行作业，需要配置 needs 关键字
 - [actions](https://help.github.com/en/actions/building-actions)
   - [action.yml](https://help.github.com/en/actions/building-actions/metadata-syntax-for-github-actions)
   - 实现类型
@@ -26,8 +28,8 @@
     - 测试
     - versioning
 - command
-  - https://help.github.com/en/actions/reference/workflow-commands-for-github-actions
-  - https://github.com/actions/toolkit/blob/master/docs/commands.md
+  - <https://help.github.com/en/actions/reference/workflow-commands-for-github-actions>
+  - <https://github.com/actions/toolkit/blob/master/docs/commands.md>
 
 ## workflow
 
