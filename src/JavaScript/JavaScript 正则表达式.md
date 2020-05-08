@@ -347,3 +347,9 @@ TODO
 '<title>regular expression</title> <title>regular expression</title>'.match(/<(.+)>.*?<\/\1>/g)
 // ["<title>regular expression</title>", "<title>regular expression</title>"]
 ```
+
+#### 获取 URL pathname
+
+```javascript
+'https://github.com/laoergege/laoergege-blog'.replace(/^https?:\/\/[^\/]*/, '') // "laoergege/laoergege-blog"
+```
