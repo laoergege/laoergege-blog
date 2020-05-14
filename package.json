@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.1.1",
-    "cross-env": "^6.0.3"
+    "cross-env": "^6.0.3",
+    "markdown-it-disable-url-encode": "^1.0.1"
   }
 }
