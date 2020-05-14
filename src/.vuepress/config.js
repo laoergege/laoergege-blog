@@ -40,7 +40,7 @@ module.exports = {
       .loader('url-loader')
       .options({
         limit: 10 * 1024, // 10KB
-        name: process.env.NODE_ENV === 'production' ? 'images/[name].[ext]' : `assets/img/[name].[ext]`,
+        name: process.env.NODE_ENV === 'production' ? 'images/[contenthash].[ext]' : `assets/img/[contenthash].[ext]`,
         publicPath: process.env.NODE_ENV === 'production' ? IMG_URL : '/'
       })
 
@@ -50,7 +50,7 @@ module.exports = {
       .use('file-loader')
       .loader('file-loader')
       .options({
-        name: process.env.NODE_ENV === 'production' ? 'images/[name].[ext]' : `assets/img/[name].[ext]`,
+        name: process.env.NODE_ENV === 'production' ? 'images/[contenthash].[ext]' : `assets/img/[contenthash].[ext]`,
         publicPath: process.env.NODE_ENV === 'production' ? IMG_URL : '/'
       })
 

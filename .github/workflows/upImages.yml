@@ -23,5 +23,5 @@ jobs:
         secretKey: ${{ secrets.secretKey }}
         bucket: 'laoergege-blog-images'
         zone: 'Zone_z2'
-        path: images
+        path: docs/images
         token: ${{ secrets.GITHUB_TOKEN }}
