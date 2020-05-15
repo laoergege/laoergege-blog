@@ -40,7 +40,7 @@ jobs:
         git pull origin master --rebase    
         git push origin tmp:master
   upImages:
-    needs: build-and-deploy 
+    needs: build-and-deploy
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
