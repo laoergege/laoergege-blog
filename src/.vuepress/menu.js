@@ -22,6 +22,10 @@ module.exports = {
             link: '/前端工程/'
         },
         {
+            text: '浏览器原理及API',
+            link: '/Browser/'
+        },
+        {
             text: 'NodeJS',
             link: '/NodeJS/'
         },
@@ -36,6 +40,9 @@ module.exports = {
         ],
         '/前端工程/': [
             
+        ],
+        '/浏览器工作原理及API/': [
+            '浏览器渲染流程'
         ],
         '/NodeJS/': [
             '安装及基本使用',
