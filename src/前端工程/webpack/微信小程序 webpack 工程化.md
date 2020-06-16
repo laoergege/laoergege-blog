@@ -157,3 +157,17 @@ class RuntimePlugin {
 
 
 ## 多环境变量
+
+多环境变量支持，很简单，使用 [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack) 插件即可。
+多环境变量没什么好讲，这里主要是调整 webpack 配置代码结构，将输入、修改，输出分离。按照常用习惯，.env 文件默认为通用环境变量，.env.[env-mode] 则为特定环境模式下的变量，优先级更高。
+
+![](../../../images/微信截图_20200616214558.png)
+
+- CLI 为与用户交互，获取输入
+- Input Handle 主要对输入的数据处理
+- Create Config 创建配置对象
+- Merge Default Config 合并默认配置
+- Opreation Config 修改配置操作
+- Ouput Config For Webpack 输出 webpack 配置
+
+这里主要提到下 [webpack-chain](https://github.com/neutrinojs/webpack-chain)， 将 webpack config 配置对象化，并抽象 webpack 配置为可链式操作的API，方便修改配置且修改方式标准化，有助于跨项目共享。非常值得学习。
