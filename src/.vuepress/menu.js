@@ -23,7 +23,7 @@ module.exports = {
         },
         {
             text: '浏览器原理及API',
-            link: '/Browser/'
+            link: '/浏览器原理及API/'
         },
         {
             text: 'NodeJS',
