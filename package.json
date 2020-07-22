@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/laoergege/laoergege-blog#readme",
   "dependencies": {
+    "@vssue/api-github-v3": "^1.4.4",
+    "@vssue/vuepress-plugin-vssue": "^1.4.6",
     "markdown-it-task-lists": "^2.1.1",
     "vuepress": "^1.4.0"
   },

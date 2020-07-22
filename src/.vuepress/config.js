@@ -2,6 +2,7 @@ const path = require("path")
 const menu = require("./menu")
 const markdown = require("./markdown")
 const configWebpack = require('./webpack-chain')
+const plugins = require('./plugins')
 
 module.exports = {
   // 基本配置
@@ -19,6 +20,9 @@ module.exports = {
 
   // markdown
   markdown,
+
+  // plugins
+  plugins,
 
   chainWebpack: configWebpack
 }
