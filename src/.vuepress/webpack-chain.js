@@ -1,4 +1,5 @@
 const CopyPlugin = require('copy-webpack-plugin')
+const path = require('path')
 
 const IMG_URL = 'http://images.laoergege.cn/'
 
@@ -28,4 +29,10 @@ module.exports = function (config, isServer) {
                 { from: 'CNAME' }
             ]
         ])
+    
+    // 添加 vssue-loader
+    config.module
+        .rule('markdown')
+        .use('vssue-loader')
+        .loader(path.resolve( __dirname, './vssue-loader'))
 }

@@ -90,7 +90,7 @@ NgForOf 提供了几个导出值，可以将其替换为局部变量：
 
 - $implicit: T - 表示 ngForOf 绑定的可迭代对象中的每一个独立项。
 
-- ngForOf: NgIterable<T> - 表示迭代表达式的值,如果表达式更复杂，那么在属性访问时很有用，例如使用异步管道时`(userStreams | async)`。
+- ngForOf: `NgIterable<T>` - 表示迭代表达式的值,如果表达式更复杂，那么在属性访问时很有用，例如使用异步管道时`(userStreams | async)`。
 
 - index: number - 表示当前项的索引值。
 
@@ -296,7 +296,7 @@ Angular 中指令分为三种：
 
 - Component 是 Directive 的子接口，是一种特殊的指令，Component 可以带有 HTML 模板，Directive 不能有模板。
 - 属性型指令：用来修改 DOM 元素的外观和行为，但是不会改变 DOM 结构，Angular 内置指令里面典型的属性型指令有 ngClass、ngStyle。如果你打算封装自己的组件库，属性型指令是必备的内容。
-- 结构型指令：可以修改 DOM 结构，内置的常用结构型指令有 *ngFor、*ngIf 和 NgSwitch。由于结构型指令会修改 DOM 结构，所以同一个 HTML 标签上面不能同时使用多个结构型指令，否则大家都来改 DOM 结构，到底听谁的呢？如果要在同一个 HTML 元素上面使用多个结构性指令，可以考虑加一层空的元素来嵌套，比如在外面套一层空的 <ng-container></ng-container>，或者套一层空的 <div>。
+- 结构型指令：可以修改 DOM 结构，内置的常用结构型指令有 *ngFor、*ngIf 和 NgSwitch。由于结构型指令会修改 DOM 结构，所以同一个 HTML 标签上面不能同时使用多个结构型指令，否则大家都来改 DOM 结构，到底听谁的呢？如果要在同一个 HTML 元素上面使用多个结构性指令，可以考虑加一层空的元素来嵌套，比如在外面套一层空的 `<ng-container></ng-container>`，或者套一层空的 `<div>`。
 
 # 依赖注入
 关于依赖注入的介绍以及由来，可以看官网这篇[依赖注入](https://angular.cn/guide/dependency-injection-pattern)
