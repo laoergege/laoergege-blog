@@ -1,7 +1,7 @@
 module.exports = function vssueLoader(content) {
-  content += `
-    <Vssue :title="$title" />
-  `
+  content +=  '\n\n---\n<Vssue :title="$title" />'
+
+  console.log(content)
 
   return content
 }
