@@ -1,7 +1,8 @@
 module.exports = function vssueLoader(content) {
-  content +=  '\n\n---\n<Vssue :title="$title" />'
 
-  console.log(content)
+  if (!/README/i.test(this.resource)) {
+    content +=  '\n\n---\n<Vssue :title="$title" />' 
+  }
 
   return content
 }

@@ -5,7 +5,7 @@ module.exports = {
             link: '/JavaScript/'
         },
         {
-            text: '前端框架',
+            text: '前端框架及库',
             items: [
                 { 
                     text: 'Vue',
@@ -14,16 +14,16 @@ module.exports = {
                 { 
                     text: 'React',
                     link: '/React/'
+                },
+                {
+                    text: 'RxJS',
+                    link: '/RxJS/'
                 }
             ]
         },
         {
             text: '前端工程',
             link: '/前端工程/'
-        },
-        {
-            text: '项目实践',
-            link: '/项目实践/'
         },
         {
             text: '浏览器原理及API',
@@ -44,9 +44,6 @@ module.exports = {
         ],
         '/前端工程/': [
            
-        ],
-        '/项目实践/': [
-            '下载中心功能设计实现'
         ],
         '/浏览器工作原理及API/': [
             '浏览器渲染流程'
