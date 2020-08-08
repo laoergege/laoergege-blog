@@ -28,7 +28,7 @@ tags:
       - bigInt
     - Object
       - *防篡改*
-      – *深拷贝*
+      – 深浅拷贝
       – 序列化
         - JSON
           - [JSON.stringify() 的 5 个秘密特性](https://medium.com/javascript-in-plain-english/5-secret-features-of-json-stringify-c699340f9f27)

@@ -39,19 +39,3 @@ jobs:
         git commit -m 'publish'
         git pull origin master --rebase    
         git push origin tmp:master
-  upImages:
-    needs: build-and-deploy
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }} 
-        fetch-depth: 2 
-    - uses: laoergege/sync-to-qiniu-action@master
-      with:
-        accessKey: ${{ secrets.accessKey }}
-        secretKey: ${{ secrets.secretKey }}
-        bucket: 'laoergege-blog-images'
-        zone: 'Zone_z2'
-        path: docs/images
-        token: ${{ secrets.GITHUB_TOKEN }}
