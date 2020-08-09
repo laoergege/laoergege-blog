@@ -35,13 +35,16 @@ Github 提供三种站点类型：
 
 ### 发布源
 
-用户和组织站点的默认发布来源是 master 分支，即 master 分支上所有的资源都将被静态托管发布，您无法为用户或组织站点选择不同的发布来源或者发布目录。
+至 2020.08.09，github page source 规则发生了变化，可以自行选择分支和发布目录（root 或者 /docs），不再像以前限定 master 上的 /docs 目录或者特定 gh-pages 分支根目录
 
-而项目站点的默认发布来源是 gh-pages 分支。 如果项目站点的仓库有 gh-pages 分支，您的站点将从该分支自动发布。项目站点也选择从 master 分支或 master 分支上的 `/docs` 文件夹发布，详情可参考以下官方文档。
+![](./images/source.png)
 
 > [GitHub Pages 站点的发布源](https://help.github.com/cn/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#choosing-a-publishing-source)
 
-本次博客项目因为为 github 项目站点类型，所以选择 master 分支上的 `/docs` 文件夹作为发布资源，这样方便我们把要发布的资源和笔记、代码环境区分开。
+本次博客项目发布源策略：
+- master 作为写作分支
+- site 作为发布分支，且发布的目录为 docs
+- page tag 作为构建动机（触发 github action）
 
 ## 自定义域名
 
@@ -180,7 +183,6 @@ module.exports = {
 ```yml
 name: Build and Deloy
 
- # 监听 page 标签事件
 on:
   push:
     tags: 
@@ -190,34 +192,36 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    # 拉取项目
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        token: ${{ secrets.DEPLOY_KEY }}
-    # 安装环境
+        ref: site
+    - name: Pull
+      run: |
+        git pull origin master --allow-unrelated-histories
     - name: Install-node
       uses: actions/setup-node@v1
       with: 
-        node-version: 10.x 
-    # 安装依赖
+        node-version: 12 
+    - name: SetCache
+      uses: actions/cache@v1
+      with: 
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - name: Install
-      run: yarn
-    # 构建
+      env: 
+        CI: true
+      run: npm ci
     - name: Build
       run: npm run docs:build
-    # 每次构建都会先清除 docs
-    # 故构建完成后保证 docs 目录下存在 CNAME 文件
-    - name: ADD CNAME
-      run: cp CNAME docs/
-    # 部署
     - name: Deploy
       run: |
         git config --global user.email "13211239457@163.com"
         git config --global user.name "laoergege"
-        git checkout -b tmp
         git add .
-        git commit -m 'publish'
-        git pull origin master --rebase    
-        git push origin tmp:master
+        git commit -m 'release'  
+        git push
+
 ```
