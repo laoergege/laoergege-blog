@@ -12,10 +12,10 @@
 
 **TODO**
 
-- [X] 使用 GithubPage 静态资源托管
-- [X] 自定义域名
 - [X] 使用 VuePress 生成静态网站
+- [X] 使用 GithubPage 静态资源托管
 - [X] 使用 GithubAction 自动化构建部署
+- [X] 自定义域名
 - [X] 集成图床到工作流中
 - [X] npm i 优化加速
 - [ ] 命令工具集成
