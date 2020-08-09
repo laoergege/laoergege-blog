@@ -15,7 +15,7 @@ jobs:
         ref: site
     - name: Pull
       run: |
-        git pull origin master --rebase
+        git pull origin master --allow-unrelated-histories
     - name: Install-node
       uses: actions/setup-node@v1
       with: 
