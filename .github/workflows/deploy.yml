@@ -13,11 +13,12 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: site
+        fetch-depth: 0
     - name: Pull
       run: |
         git config --global user.email "13211239457@163.com"
         git config --global user.name "laoergege"
-        git pull origin master --allow-unrelated-histories
+        git pull origin master
     - name: Install-node
       uses: actions/setup-node@v1
       with: 
