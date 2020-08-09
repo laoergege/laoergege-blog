@@ -12,11 +12,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        token: ${{ secrets.GITHUB_TOKEN  }}
+        ref: site
     - name: Install-node
       uses: actions/setup-node@v1
       with: 
-        node-version: 10.x 
+        node-version: 12 
     - name: SetCache
       uses: actions/cache@v1
       with: 
@@ -34,8 +34,7 @@ jobs:
       run: |
         git config --global user.email "13211239457@163.com"
         git config --global user.name "laoergege"
-        git checkout -b tmp
         git add .
-        git commit -m 'publish'
-        git pull origin master --rebase    
-        git push origin tmp:master
+        git commit -m 'release'
+        git pull origin master    
+        git push
