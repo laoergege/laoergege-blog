@@ -15,7 +15,7 @@ jobs:
         ref: site
     - name: Pull
       run: |
-        git pull origin master
+        git pull origin master --rebase
     - name: Install-node
       uses: actions/setup-node@v1
       with: 
