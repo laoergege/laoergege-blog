@@ -62,7 +62,7 @@ Github 提供三种站点类型：
 
 > [配置 GitHub Pages 网站的自定义域](https://help.github.com/cn/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site#configuring-a-subdomain)
 
-配置了二级域名后，需要注意两点：
+自定义域名，需要注意两点：
 
 1. 在域名服务提供商配置 CNAME 记录，指向你的 `<user>.github.io`
 2. 确保每次发布的资源文件中存在 CNAME 文件，内容为你配置的域名地址
@@ -196,9 +196,12 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: site
+        fetch-depth: 0
     - name: Pull
       run: |
-        git pull origin master --allow-unrelated-histories
+        git config --global user.email "13211239457@163.com"
+        git config --global user.name "laoergege"
+        git pull origin master
     - name: Install-node
       uses: actions/setup-node@v1
       with: 
@@ -223,5 +226,4 @@ jobs:
         git add .
         git commit -m 'release'  
         git push
-
 ```
