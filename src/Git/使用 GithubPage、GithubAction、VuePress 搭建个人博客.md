@@ -199,8 +199,8 @@ jobs:
         fetch-depth: 0
     - name: Pull
       run: |
-        git config --global user.email "13211239457@163.com"
-        git config --global user.name "laoergege"
+        git config --global user.email "xxx"
+        git config --global user.name "xxx"
         git pull origin master
     - name: Install-node
       uses: actions/setup-node@v1
@@ -221,8 +221,8 @@ jobs:
       run: npm run docs:build
     - name: Deploy
       run: |
-        git config --global user.email "13211239457@163.com"
-        git config --global user.name "laoergege"
+        git config --global user.email "xxx"
+        git config --global user.name "xxx"
         git add .
         git commit -m 'release'  
         git push
