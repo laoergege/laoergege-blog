@@ -1,56 +1,84 @@
 ---
 title: 'JavaScript'
 tags:
-	- 'JavaScript'
+	- 'javascript'
 ---
 
-## 知识体系
+## JavaScript
 
+- JavaScript 是一种弱类型的、动态的语言
+  - 使用之前就需要确认其变量数据类型的称为静态语言；而 JavaScript 只有在运行中才能确定变量数据类型，并且同一个变量可以保存不同类型的数据，这类语言称为动态语言
+  - 弱类型语言：支持隐式类型转换的语言称为弱类型语言
+    ![](./images/lanuage.png)
 - 基础
-  - 值与变量
-    - 原始值就像天上的星星是不可变
-    - 变量就像是一条线，指向值。
   - 数据类型
-    - 7 种基本数据类型
+    - 原始类型
       - undefined
       - null
       - boolean
       - number
-        - 特殊标识符
-          - inifi
-        - *浮点计算，精确度*
       - string
-        - \ 转义符号，结合其他字符，表转其他意思
-          - 转义字符 在每门计算机语言里，都有一些字符代表着特殊意义。如果，我们需要使用字符的本意（如：我就希望使用左尖括号），就得用转义字符
-          - 用于表示一些特殊的控制符，如 \n
-          - 其他字符， '\x41' = 'A'
       - symbol
+        - 创建唯一标识
+        - 创建对象的“隐藏”属性
       - bigInt
-    - Object
-      - *防篡改*
-      – 深浅拷贝
-      – 序列化
-        - JSON
-          - [JSON.stringify() 的 5 个秘密特性](https://medium.com/javascript-in-plain-english/5-secret-features-of-json-stringify-c699340f9f27)
-  - *类型判断*
-  - *类型转换*
-  - 运算符
-    - 位运算
-  - *正则*
-- *进阶*
-  - *执行上下文*
-  - *作用域（链）*
-  - *闭包*
-  - *变量提升*
-  - *事件循环*
-  - *继承与原型链*
-  - *模块化*
-- *JavaScript 设计模式*
-- [JavaScript 模块](./JavaScript%20模块.md)
-- [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
-- JavaScript 专题
-  - 节流和防抖
-  - Apply, Call 和 Bind
+    - 引用类型
+      - object（键值对集合）
+        - 属性
+          - 属性名限制
+            - 字符串（其他类型会被自动转成字符串）
+            - symbol
+            - 特殊关键字 `__proto__`
+          - 分类
+            - 自身属性
+            - 继承属性
+            - [Symbol 属性](https://zh.javascript.info/symbol#yin-cang-shu-xing)
+              - 创建对象的“隐藏”属性
+              - 防止对象属性冲突
+            - 枚举属性
+          - 对象属性存在性检测及遍历
+            |                             | 自身属性 | 继承属性 | 枚举属性 | 不可枚举属性 | Symbol 属性 |
+            | --------------------------- | :------: | :------: | :------: | :----------: | :---------: |
+            | in                          |    ✓     |    ✓     |    ✓     |      ✓       |      ✓      |
+            | hasOwnProperty              |    ✓     |          |    ✓     |      ✓       |      ✓      |
+            | for...in                    |    ✓     |    ✓     |    ✓     |              |             |
+            | Object.keys                 |    ✓     |          |    ✓     |              |             |
+            | Object.values               |    ✓     |          |    ✓     |              |             |
+            | Object.entries              |    ✓     |          |    ✓     |              |             |
+            | Object.getOwnPropertyNames  |    ✓     |          |    ✓     |      ✓       |             |
+            | Object.getOwnPropertySymbol |          |          |          |              |      ✓      |
+          - `Object.defineProperty`
+          - 属性排序
+            - 数字：当属性的类型时数字类型时，会按照数字的从大到小的顺序进行排序；
+            - 字符串：当属性的类型是字符串时，会按照时间的先后顺序进行排序；
+            - Symbol：当属性的类型是Symbol时，会按照时间的先后顺序进行排序。
+          - 计算属性
+          - 属性名简写
+          - 扩展运算符
+        - 对象比较
+          - 比较的是否同一引用
+          - 当两个变量引用同一个对象时，它们无论是 == 还是 === 都会返回 true
+        - 对象拷贝
+          - 浅拷贝
+            - `Object.assign()`
+          - 深拷贝
+        - 序列化
+          - JSON
+            - [JSON.stringify() 的 5 个秘密特性](https://medium.com/javascript-in-plain-english/5-secret-features-of-json-stringify-c699340f9f27)
+      - 函数
+        - [形参之按值传递](https://github.com/mqyqingfeng/Blog/issues/10)
+          - 传参（实参到形参赋值的过程）
+            - 按值传递，即复制实参的值
+            - 引用传递，即复制实参的地址
+          - 当变量为引用类型时，传参只是复制该变量的值（即引用的对象地址）
+- 进阶
+  - JavaScript 内存管理机制
 - 其他
-  - 函数式编程
-  - 链式调用
+  - [JavaScript 模块](./JavaScript%20模块.md)
+  - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
+  - JavaScript 专题
+    - 节流和防抖
+    - Apply, Call 和 Bind
+  - 其他
+    - 函数式编程
+    - 链式调用
