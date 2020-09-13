@@ -15,6 +15,9 @@ module.exports = {
 
   // theme
   themeConfig: {
+    logo: '/avatar.png',
+    lastUpdated: '最新更新时间 ',
+    smoothScroll: true,
     ...menu
   },
 
