@@ -39,9 +39,6 @@ module.exports = {
         }
     ],
     sidebar: {
-        '/JavaScript/': [
-            'JavaScript 模块'
-        ],
         '/前端工程/': [
            
         ],
