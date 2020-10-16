@@ -3,7 +3,6 @@ title: 'JavaScript 正则表达式'
 tags:
   - javascript
   - regexp
-  - 正则表达式
 ---
 # JavaScript 正则表达式
 
@@ -13,7 +12,7 @@ tags:
   - [目录](#目录)
   - [正则是匹配模式，要么匹配字符，要么匹配位置](#正则是匹配模式要么匹配字符要么匹配位置)
     - [字符类](#字符类)
-      - [修饰符 s 与字符类 .](#修饰符-s-与字符类-)
+      - [修饰符 s 与字符类](#修饰符-s-与字符类)
       - [Unicode：修饰符 “u” 和 class \p{...}](#unicode修饰符-u-和-class-p)
     - [集合和范围 [...]](#集合和范围-)
     - [量词](#量词)
@@ -25,15 +24,16 @@ tags:
     - [单词边界 \b 和 \B](#单词边界-b-和-b)
     - [前瞻断言和后瞻断言](#前瞻断言和后瞻断言)
   - [分组](#分组)
-    - [捕获分组](#捕获分组)
-    - [嵌套分组](#嵌套分组)
+    - [分组匹配](#分组匹配)
+    - [嵌套分组匹配](#嵌套分组匹配)
     - [分组命名及引用](#分组命名及引用)
     - [排除捕获分组](#排除捕获分组)
   - [正则表达式回溯法原理](#正则表达式回溯法原理)
   - [练习题](#练习题)
-    - [将每个单词的首字母转换为大写](#将每个单词的首字母转换为大写)
-    - [字符串 trim 方法模拟](#字符串-trim-方法模拟)
-    - [匹配成对标签](#匹配成对标签)
+      - [将每个单词的首字母转换为大写](#将每个单词的首字母转换为大写)
+      - [字符串 trim 方法模拟](#字符串-trim-方法模拟)
+      - [匹配成对标签](#匹配成对标签)
+      - [获取 URL pathname](#获取-url-pathname)
 
 参考阅读
 
@@ -208,22 +208,42 @@ alert( /snow$/.test(str1) ); // true
 'Gogogo now!'.match(/(go)+/gi) // "Gogogo"
 ```
 
-**提供了分组，便于我们引用它。引用某个分组结果**，会有两种情形：在 JavaScript 里引用它，在正则表达式里引用它。
+除了组合功能外，还提供了**分组，便于我们引用它。引用某个分组结果**，会有两种情形：在 JavaScript 里引用它，在正则表达式里引用它。
 
-### 捕获分组
+### 分组匹配
 
 如果正则**不带修饰符 g**，正则引擎将用分组顺序匹配前一个匹配的结果
 
 ```javascript
-let str = '<h1>Hello, world!</h1>';
+let str = "I love JavaScript";
 
-let tag = str.match(/<(.*?)>/);
+let result = str.match(/Java(Script)/);
 
-alert( tag[0] ); // <h1>
-alert( tag[1] ); // h1
+alert( result[0] );     // JavaScript（完全匹配）
+alert( result[1] );     // Script（第一个分组）
+alert( result.length ); // 2
 ```
 
-### 嵌套分组
+如果 regexp 带有 g 标记，则不包含分组匹配结果
+
+```javascript
+let str = "I love JavaScript";
+
+let result = str.match(/Java(Script)/g);
+
+alert( result[0] ); // JavaScript
+alert( result.length ); // 1
+```
+
+如果没有匹配项，则无论是否带有标记 g ，都将返回 null
+
+更多 match 用法参考 [String.prototype.match()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/match)
+
+[matchAll](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll) 是 match 的增强版本：match 在修饰符 g 不会包含分组匹配的结果，而 matchAll 则会返回一个包含每个分组匹配的结果数组(格式与不带 g 标记的 str.match 相同)的迭代对象
+
+![matchAll](./images/matchAll.png)
+
+### 嵌套分组匹配
 
 分组里嵌套分组
 
@@ -322,10 +342,6 @@ alert( result.length ); // 2（数组中没有更多项）
 分支也是具有惰性的，比如 `/can|candy/`，去匹配字符串 "candy"，得到的结果是 "can"，因为分支会一个一个尝试，如果前面的满足了，后面就不会再试验了。但如果接下来表达式整体不匹配时，仍会继续尝试剩下的分支。这种尝试也可以看成一种回溯，例如
 
 `/"candy".match(^(?:can|candy)$/)`
-
-## 正则表达式（RegExp）和字符串（String）的方法
-
-TODO
 
 ## 练习题
 
