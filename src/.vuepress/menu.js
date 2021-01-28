@@ -22,8 +22,8 @@ module.exports = {
             ]
         },
         {
-            text: '前端工程',
-            link: '/前端工程/'
+            text: '前端工程化',
+            link: '/前端工程化/'
         },
         {
             text: '浏览器原理及API',
@@ -39,7 +39,7 @@ module.exports = {
         }
     ],
     sidebar: {
-        '/前端工程/': [
+        '/前端工程化/': [
            
         ],
         '/浏览器工作原理及API/': [

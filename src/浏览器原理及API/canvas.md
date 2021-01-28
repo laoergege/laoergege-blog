@@ -7,7 +7,10 @@
   - [Canvas 知识体系](#canvas-知识体系)
   - [开始](#开始)
     - [坐标系](#坐标系)
-    - [绘制路径](#绘制路径)
+    - [路径](#路径)
+      - [描绘路径](#描绘路径)
+      - [绘制路径](#绘制路径)
+    - [画布状态](#画布状态)
   - [绘制图像](#绘制图像)
     - [裁剪、合成](#裁剪合成)
   - [动画](#动画)
@@ -20,14 +23,11 @@
   - 绘制上下文
     - [CanvasRenderingContext2D](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D)
     - API
-      - 设置状态
-        - 样式和颜色
-        - 变形
-      - 绘制图形
-        - 绘制形状
-        - 绘制路径
-        - 绘制文本
-        - 绘制图像
+      - 状态
+      - 绘制
+        - [路径绘制](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D#%E8%B7%AF%E5%BE%84)
+        - 文本绘制
+        - 图像绘制
   - 二次贝塞尔曲线及三次贝塞尔曲线
 - 进阶
   - 动画
@@ -86,30 +86,44 @@ Canvas **元素及画布**的默认大小为一致，且为 300像素×150像素
 
 在画布中所有元素的位置都是在按照以左上角位置为原点（0，0），y 轴向下的坐标系中
 
-![](./images/Canvas_default_grid.png)
+![Canvas_default_grid](./images/Canvas_default_grid.png)
 
-### 绘制路径
+### 路径
 
-CanvasRenderingContext2D 只提供 rect 矩形绘制的 API（fillRect、strokeRect），其他复杂的图形需要我们自己绘制路径形成
+CanvasRenderingContext2D 只提供矩形绘制的 API（fillRect、strokeRect），其他复杂的图形需要我们自己绘制路径形成
 
-路径是有一条或多条直线、曲线形成；而图形都是通过一条或者多条路径闭合形成的
+**路径是有一条或多条直线、曲线形成；而图形都是通过一条或者多条路径闭合形成的**
 
-1. beginPath 声明开始创建路径
+创建图形的步骤如下：
 
-   路径是由很多子路径构成，这些子路径都是在一个**列表**中，所有的子路径（线、弧形、等等）构成图形。而每次这个方法调用之后，列表清空重置，然后我们就可以重新绘制新的图形
+#### 描绘路径
 
-2. moveTo 确定路径起点（可选）
-3. 调用路径绘制指令
+CanvasRenderingContext2D 提供了一些[描绘路径方法列表](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D#%E8%B7%AF%E5%BE%84)，其中：
 
-   调用绘制路径的函数（如 lineTo、arcTo 等）生成子路径，[CanvasRenderingContext2D 路径方法列表](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D#%E8%B7%AF%E5%BE%84)
+- beginPath 声明开始创建路径
+  
+  路径是由很多子路径构成，这些子路径都是在一个**列表**中，所有的子路径（线、弧形、等等）构成图形。而每次这个方法调用之后，列表清空重置，然后我们就可以重新绘制新的图形
 
-4. closePath 闭合路径（可选）
+- moveTo 确定路径起点
+- closePath 闭合路径
+  
+  closePath 会通过绘制一条从当前点到开始点的直线来闭合图形。以 fill 填充方式绘制路径，会自动闭合
 
-   closePath 会通过绘制一条从当前点到开始点的直线来闭合图形。以 fill 填充方式绘制路径，会自动闭合
+还有其他生成路径的，如线型 lineTo、贝赛尔曲线型 bezierCurveTo、圆型 arcTo 等，请参考[文档](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D#%E8%B7%AF%E5%BE%84)
 
-5. 使用 stroke 描边和 fill 填充的方式将路径绘制到画布中
+#### 绘制路径
 
-其中最主要的也是 1、3、5 步骤
+描绘完路径后，就需要把路径绘制到屏幕上，主要有两种方式 stroke 描边和 fill 填充的方式将路径绘制到画布中
+
+### 画布状态
+
+save
+
+restore
+
+- 色彩
+- 透明
+- 线条
 
 ## 绘制图像
 

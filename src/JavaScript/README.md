@@ -9,7 +9,7 @@ tags:
 - JavaScript 是一种弱类型的、动态的语言
   - 使用之前就需要确认其变量数据类型的称为静态语言；而 JavaScript 只有在运行中才能确定变量数据类型，并且同一个变量可以保存不同类型的数据，这类语言称为动态语言
   - 弱类型语言：支持隐式类型转换的语言称为弱类型语言
-    ![](./images/lanuage.png)
+    ![lanuage](./images/lanuage.png)
 - 基础
   - 数据类型
     - 原始类型
@@ -32,10 +32,8 @@ tags:
           - 分类
             - 自身属性
             - 继承属性
-            - [Symbol 属性](https://zh.javascript.info/symbol#yin-cang-shu-xing)
-              - 创建对象的“隐藏”属性
-              - 防止对象属性冲突
-            - 枚举属性
+            - [Symbol 属性](https://zh.javascript.info/symbol#yin-cang-shu-xing)（创建对象的“隐藏”属性、防止对象属性冲突）
+            - 可枚举属性
           - 对象属性存在性检测及遍历
             |                             | 自身属性 | 继承属性 | 枚举属性 | 不可枚举属性 | Symbol 属性 |
             | --------------------------- | :------: | :------: | :------: | :----------: | :---------: |
@@ -72,7 +70,13 @@ tags:
             - 引用传递，即复制实参的地址
           - 当变量为引用类型时，传参只是复制该变量的值（即引用的对象地址）
 - 进阶
+  - this 指针
+  - 继承
+- 深入
   - JavaScript 内存管理机制
+- ES6+
+  - Proxy
+  - Reflect
 - 其他
   - [JavaScript 模块](./JavaScript%20模块.md)
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
