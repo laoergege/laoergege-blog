@@ -1,10 +1,10 @@
 ---
-title: 'NodeJS Learning'
+title: 'NodeJS'
 tags:
   - nodejs
 ---
 
-## NodeJS 知识体系
+## NodeJS
 
 - 简介：NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行环境
 - 特点
@@ -15,6 +15,8 @@ tags:
       - 采用用事件驱动、异步回调的模式
   - 使用 **事件驱动**，**非阻塞式 I/O** 模型，轻量又高效
 - NodeJS 架构
+- NodeJS 核心知识
+  - 事件循环机制
 - [安装及基本使用](./安装及基本使用.md)
 - 异步编程
   - Callbacks
@@ -57,7 +59,7 @@ tags:
 - 使用场景
   - 集成工作流
     - Node CLI
-    - 构建工具 webpack 之类
+    - 构建工具，例如 webpack
   - 客户端应用
   - Web 服务
     - BFF

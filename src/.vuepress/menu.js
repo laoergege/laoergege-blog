@@ -5,6 +5,10 @@ module.exports = {
             link: '/JavaScript/'
         },
         {
+            text: '数据结构与算法',
+            link: '/数据结构与算法/'
+        },
+        {
             text: '前端框架及库',
             items: [
                 { 
@@ -39,6 +43,9 @@ module.exports = {
         }
     ],
     sidebar: {
+        '/数据结构与算法/': [
+           
+        ],
         '/前端工程化/': [
            
         ],
@@ -57,6 +64,9 @@ module.exports = {
                     '开发一个七牛图床的 GithubAction'
                 ]
             }
+        ],
+        '/Vue/': [
+
         ]
     }
 }

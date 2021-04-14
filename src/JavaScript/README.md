@@ -69,20 +69,36 @@ tags:
             - 按值传递，即复制实参的值
             - 引用传递，即复制实参的地址
           - 当变量为引用类型时，传参只是复制该变量的值（即引用的对象地址）
-- 进阶
-  - this 指针
-  - 继承
-- 深入
-  - JavaScript 内存管理机制
-- ES6+
-  - Proxy
-  - Reflect
-- 其他
-  - [JavaScript 模块](./JavaScript%20模块.md)
-  - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
+  
+  
+  
+  
+
+- JavaScript
+  - 编程语言的一般规律：用一定的词法和语法，表达一定语义，从而操作运行时
+  - 语义
+  - 文法
+    - 词法
+    - 语法
+  - 运行时
+    - 数据类型
+      - 基本类型
+      - 引用类型
+        - [对象](./JavaScript 对象.md)
+        - 内置对象
+    - 执行过程
+      - 从最顶层的程序与模块
+      - 事件循环机制和微任务
+      - 调用栈
+      - 执行上下文
+        - [this 指针](./this 指针.md)
+  - 运行环境
+    - 内存管理机制
+      - 堆栈内存
+      - 垃圾回收
+  - ES Next
+    - Proxy & Reflect
   - JavaScript 专题
-    - 节流和防抖
-    - Apply, Call 和 Bind
-  - 其他
-    - 函数式编程
-    - 链式调用
+    - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
+    - [JavaScript 模块](./JavaScript%20模块.md)
+
