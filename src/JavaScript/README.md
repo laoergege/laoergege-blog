@@ -1,27 +1,17 @@
 ---
 title: 'JavaScript'
 tags:
-	- 'javascript'
+	- javascript
 ---
 
 ## JavaScript
 
-- JavaScript 是一种弱类型的、动态的语言
-  - 使用之前就需要确认其变量数据类型的称为静态语言；而 JavaScript 只有在运行中才能确定变量数据类型，并且同一个变量可以保存不同类型的数据，这类语言称为动态语言
-  - 弱类型语言：支持隐式类型转换的语言称为弱类型语言
-    ![lanuage](./images/lanuage.png)
+
+
+
+
 - 基础
   - 数据类型
-    - 原始类型
-      - undefined
-      - null
-      - boolean
-      - number
-      - string
-      - symbol
-        - 创建唯一标识
-        - 创建对象的“隐藏”属性
-      - bigInt
     - 引用类型
       - object（键值对集合）
         - 属性
@@ -53,52 +43,73 @@ tags:
           - 计算属性
           - 属性名简写
           - 扩展运算符
-        - 对象比较
-          - 比较的是否同一引用
-          - 当两个变量引用同一个对象时，它们无论是 == 还是 === 都会返回 true
+          
+          
         - 对象拷贝
           - 浅拷贝
             - `Object.assign()`
           - 深拷贝
-        - 序列化
-          - JSON
-            - [JSON.stringify() 的 5 个秘密特性](https://medium.com/javascript-in-plain-english/5-secret-features-of-json-stringify-c699340f9f27)
-      - 函数
-        - [形参之按值传递](https://github.com/mqyqingfeng/Blog/issues/10)
-          - 传参（实参到形参赋值的过程）
-            - 按值传递，即复制实参的值
-            - 引用传递，即复制实参的地址
-          - 当变量为引用类型时，传参只是复制该变量的值（即引用的对象地址）
+
+        
+
   
-  
-  
+
   
 
 - JavaScript
+  - JavaScript 是一种弱类型的、动态的语言
+    - 使用之前就需要确认其变量数据类型的称为静态语言；而 JavaScript 只有在运行中才能确定变量数据类型，并且同一个变量可以保存不同类型的数据，这类语言称为动态语言
+    - 弱类型语言：支持隐式类型转换的语言称为弱类型语言
   - 编程语言的一般规律：用一定的词法和语法，表达一定语义，从而操作运行时
-  - 语义
+    - 运行时
+      - 运行时库（标准库实现）
+      - 运行时环境/执行环境（语言特性实现）
+    - 操作运行时
+      - 标准库调用
+      - 元编程、异步操作
   - 文法
     - 词法
     - 语法
   - 运行时
-    - 数据类型
-      - 基本类型
-      - 引用类型
-        - [对象](./JavaScript 对象.md)
-        - 内置对象
-    - 执行过程
-      - 从最顶层的程序与模块
-      - 事件循环机制和微任务
-      - 调用栈
-      - 执行上下文
-        - [this 指针](./this 指针.md)
-  - 运行环境
-    - 内存管理机制
-      - 堆栈内存
-      - 垃圾回收
+    - 标准实现
+      - 数据类型
+        - 原始类型
+          - undefined
+          - null
+          - boolean
+          - number
+          - string
+          - symbol
+            - 创建唯一标识
+            - 创建对象的“隐藏”属性
+          - bigInt
+        - 引用类型
+          - [对象](./JavaScript 对象.md)
+          - 内置对象
+        - 函数
+          - [形参之按值传递](https://github.com/mqyqingfeng/Blog/issues/10)
+            - 传参（实参到形参赋值的过程）
+              - 按值传递，即复制实参的值
+              - 引用传递，即复制实参的地址
+            - 当变量为引用类型时，传参只是复制该变量的值（即引用的对象地址）
+      - 实例（API）
+    - 运行时环境
+      - 执行模型
+        - [编译时](./JavaScript 代码执行过程（编译时）.md)
+        - [运行时](./JavaScript 代码执行过程（运行时）.md)
+          - 从最顶层的程序与模块
+          - 事件循环机制和微任务
+          - 调用栈
+          - 执行上下文
+            - [this 指针](./this 指针.md)
+      - 内存管理机制
+        - 堆栈内存
+        - 垃圾回收
   - ES Next
     - Proxy & Reflect
   - JavaScript 专题
     - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
     - [JavaScript 模块](./JavaScript%20模块.md)
+    - 序列化
+      - [JSON.stringify() 的 5 个秘密特性](https://medium.com/javascript-in-plain-english/5-secret-features-of-json-stringify-c699340f9f27)
 

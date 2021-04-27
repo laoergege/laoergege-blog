@@ -1,21 +1,20 @@
 ##  技术栈结构
 
-1. 开发方案化
-2. 工程化
+1. 工程化
    - [前端工程化](./前端工程化/README.md)
-3. 工具链
+2. 工具链、方案化
    - *typescript*
-4. 框架技术
+3. 框架技术
    - [Vue](./Vue/README.md)
    - [浏览器工作原理及API](./浏览器原理及API/README.md)
    - *NodeJS*
    - *Flutter*
-5. 软件工程、设计模式、架构
+4. 软件工程、设计模式、架构
    1. JavaScript 设计模式与开发实践
-6. 语言、运行时原理
+5. 语言、运行时原理
    - [JavaScript](./JavaScript/README.md)
    - [HTML&CSS](./HTML&CSS/README.md)
-7. 计算机基础
+6. 计算机基础
    1. 操作系统
    2. 计算机网络
       - [HTTP](./HTTP/README.md)
