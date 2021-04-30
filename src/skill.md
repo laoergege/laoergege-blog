@@ -25,12 +25,13 @@
 
 - 深入 JS 学习
 - 深入 Vue 框架
-- web、浏览器原理
+- 浏览器渲染原理
 - 数据结构与算法
 - node 学习与应用
 - http
-- 深入 typescript
+- 重学 typescript
   - https://www.typescriptlang.org/docs/handbook/intro.html
+- rust 学习
 
 # 每日时间段安排
 

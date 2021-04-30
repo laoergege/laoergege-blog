@@ -14,10 +14,10 @@
         - 命名规范
           - 文件
           - 变量
-        - 代码风格
         - 代码规范
+          - 代码格式
+          - 代码质量
         - 注释规范
-      - 编码风格
       - 注释规范
     - 管理（git）
       - git flow
@@ -142,9 +142,11 @@
 - 自动化集成方式
 
   - git hooks
+    - husky（git hook）
+    - lint-staged（changed file）
   - npm script + script hooks
   - webpack hooks
   - web hook
-
+  
   
 
