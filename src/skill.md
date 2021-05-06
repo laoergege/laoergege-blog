@@ -32,6 +32,11 @@
   - 资源调度
     - https://github.com/GoogleChromeLabs/preload-webpack-plugin
   - https://www.youtube.com/watch?v=kNzoswFIU9M&list=PLNYkxOF6rcICgS7eFJrGDhMBwWtdTgzpx
+  - 编译
+    - https://www.youtube.com/watch?v=5nmpokoRaZI
+    - https://www.youtube.com/watch?v=KM9coMpy5sQ&t=499s
+    - https://www.youtube.com/watch?v=p-iiEDtpy6I
+    - https://zhuanlan.zhihu.com/p/28590489
 - 数据结构与算法
 - node 学习与应用
   - cli
@@ -42,6 +47,7 @@
 - rust 学习
 - 计算机导论
   - https://www.coursera.org/learn/jisuanji-biancheng/home/week/1
+  - https://www.bilibili.com/video/av21376839/
 
 # 每日时间段安排
 
