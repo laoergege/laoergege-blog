@@ -1,0 +1,19 @@
+- 原始类型
+  - undefined
+  - null
+  - boolean
+  - number
+  - string
+  - symbol
+    - 创建唯一标识
+    - 创建对象的“隐藏”属性
+  - bigInt
+- 引用类型
+  - [对象](./JavaScript 对象.md)
+  - 内置对象
+- 函数
+  - [形参之按值传递](https://github.com/mqyqingfeng/Blog/issues/10)
+    - 传参（实参到形参赋值的过程）
+      - 按值传递，即复制实参的值
+      - 引用传递，即复制实参的地址
+    - 当变量为引用类型时，传参只是复制该变量的值（即引用的对象地址）
