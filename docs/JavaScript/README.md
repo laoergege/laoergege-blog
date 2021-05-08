@@ -34,11 +34,14 @@ tags:
           - 调用栈
           - 执行上下文
             - [this 指针](./this 指针.md)
-          - [事件循环机制和微任务](./JavaScript 事件循环与微任务.md)
+          - [微任务和页面事件循环](./JavaScript 事件循环与微任务.md)
             - Promise
             - Genereate
       - 对象模型
-      - 异步模型
+      - 异步编程模型
+        - 异步回调
+        - promise
+        - async/await（generator + promise）
       - 内存管理机制
         - 堆栈内存
         - 垃圾回收
@@ -47,6 +50,7 @@ tags:
   - JavaScript 专题
     - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
     - [JavaScript 模块](./JavaScript%20模块.md)
+    - 手写 Promise 实现
     - 序列化
       - [JSON.stringify() 的 5 个秘密特性](https://medium.com/javascript-in-plain-english/5-secret-features-of-json-stringify-c699340f9f27)
 
