@@ -1,0 +1,160 @@
+<template><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
+<h2 id="核心概念"><a class="header-anchor" href="#核心概念">#</a> 核心概念</h2>
+<p>容器 === 镜像</p>
+<h2 id="操作命令"><a class="header-anchor" href="#操作命令">#</a> 操作命令</h2>
+<h3 id="下载镜像"><a class="header-anchor" href="#下载镜像">#</a> 下载镜像</h3>
+<ul>
+<li>docker search 查找镜像</li>
+<li>docker pull 获取镜像</li>
+</ul>
+<h3 id="查看镜像"><a class="header-anchor" href="#查看镜像">#</a> 查看镜像</h3>
+<ul>
+<li>docker images 查看镜像</li>
+<li>docker images -a 为了加速镜像构建、重复利用资源，Docker 会利用中间层镜像，-a 显示包括中间层镜像在内的所有镜像的话</li>
+<li>docker inspect 查看容器/镜像详细信息</li>
+<li>docker history 镜像文件由多个层组成，查看镜像各层创建信息</li>
+</ul>
+<blockquote>
+<p><code>docker images</code> 查看镜像大小信息只是表示了该镜像的逻辑体积大小， 实际上由于相同的镜像层本地只会存储一份， 物理上占用的存储空间会小于各镜像逻辑体积之和。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/20190918232256.png" alt=""></p>
+<h3 id="删除、清理镜像"><a class="header-anchor" href="#删除、清理镜像">#</a> 删除、清理镜像</h3>
+<ul>
+<li>docker rmi IMAGE [IMAGE ... ] 删除镜像 -f 强删</li>
+<li>docker image prune 清理些临时的镜像文件， 以及一些没有被使用的镜像</li>
+</ul>
+<blockquote>
+<ul>
+<li>删除可以 tag 或者镜像 ID</li>
+<li>镜像删除行为分为两类，一类是 <code>Untagged</code>，另一类是 <code>Deleted</code></li>
+<li>一个镜像可以对应多个标签，当该镜像所有的标签都被取消了，才会是 <code>Deleted</code> 行为</li>
+<li>镜像是多层存储结构，因此在删除的时候也是从上层向基础层方向依次进行判断删除。如果某个其它镜像正依赖于当前镜像的某一层，是不会触发删除该层的行为</li>
+<li>容器依赖的镜像也不会被删除</li>
+</ul>
+</blockquote>
+<h3 id="创建镜像"><a class="header-anchor" href="#创建镜像">#</a> 创建镜像</h3>
+<ul>
+<li>docker commit 创建镜像</li>
+</ul>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>docker commit [选项] &lt;容器ID或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br></div></div><ul>
+<li>
+<p>docker create 创建容器</p>
+</li>
+<li>
+<p>docker start 启动容器</p>
+</li>
+<li>
+<p>docker ps 查看容器进程</p>
+</li>
+<li>
+<p>docker exec</p>
+</li>
+<li>
+<p>docker run 创建并启动容器</p>
+</li>
+<li>
+<p>docker login</p>
+</li>
+<li>
+<p>docker push</p>
+</li>
+</ul>
+<h3 id="构建镜像"><a class="header-anchor" href="#构建镜像">#</a> 构建镜像</h3>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>// docker build [选项] &lt;上下文路径/URL/-&gt;
+docker build -t xxx:tag .
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="多阶段构建"><a class="header-anchor" href="#多阶段构建">#</a> 多阶段构建</h4>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>FROM
+...
+
+FROM
+...
+
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h3 id="容器的三种运行模式"><a class="header-anchor" href="#容器的三种运行模式">#</a> 容器的三种运行模式</h3>
+<p>概括而言，Docker容器大体上有三种运行模式，如下：</p>
+<h4 id="运行后退出"><a class="header-anchor" href="#运行后退出">#</a> 运行后退出</h4>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>// 下面语句创建的容器，在运行后会退出。
+$ docker run centos echo &quot;hellowrold&quot;
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="常驻内存-就是守护进程的模式"><a class="header-anchor" href="#常驻内存-就是守护进程的模式">#</a> 常驻内存，就是守护进程的模式</h4>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>// 如果容器中运行一个守护进程，则容器会一直处于运行状态，如：
+$ docker run -d -p 80:80 nginx
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="交互式"><a class="header-anchor" href="#交互式">#</a> 交互式</h4>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>// 我们也可以在运行容器时，直接与容器交互。 
+// --rm 容器退出后随之将其删除
+$ docker run -it --rm centos /bin/bash
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>-f, --fiter filter: 过滤输出内容；
+--format string: 格式化输出内容；</p>
+<h2 id="dockerfile"><a class="header-anchor" href="#dockerfile">#</a> dockerfile</h2>
+<p>Dockerfile 是一个文本文件，其内包含了一条条的 指令(Instruction)，每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建。</p>
+<p>构建镜像必须使用 <code>FROM</code> 制定基础镜像，scratch 是一个特殊的镜像，表示一个空白的镜像。</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>FROM scratch
+...
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="构建缓存"><a class="header-anchor" href="#构建缓存">#</a> 构建缓存</h3>
+<p><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache" target="_blank" rel="noopener noreferrer">官方文档<OutboundLink/></a></p>
+<p>Docker 镜像构建是分层的，一条指令一层，在没有带 <code>--no-cache=true</code> 指令的情况下如果某一层没有改动，Docker 就不会重新构建这一层而是会使用缓存。简单来说就是如果第n层有改动，则n层以后的缓存都会失效，大多数情况下判断有无改动的方法是判断这层的指令和缓存中的构建指令是否一致，但是对于 <code>COPY</code> 和 <code>ADD</code> 命令会计算镜像内的文件和构建目录文件的校验和然后做比较来判断本层是否有改动。</p>
+<p>实践应用 <a href="https://segmentfault.com/a/1190000018222648" target="_blank" rel="noopener noreferrer">利用构建缓存机制缩短Docker镜像构建时间<OutboundLink/></a></p>
+<h2 id="数据管理"><a class="header-anchor" href="#数据管理">#</a> 数据管理</h2>
+<p>默认情况下，在容器内创建的所有文件都存储在可写容器层上。这意味着：</p>
+<ul>
+<li>当该容器不再存在时，数据将不会持久保存</li>
+<li>并且很难从容器中取出数据给其他地方共享使用。</li>
+</ul>
+<p>docker 提供了三种将容器的数据挂载到主机文件系统上以做持久化的方式：</p>
+<ul>
+<li>volume 数据卷</li>
+<li>bind mount</li>
+<li>tmpfs</li>
+</ul>
+<p><img src="https://docs.docker.com/storage/images/types-of-mounts.png" alt=""></p>
+<p>无论您选择使用哪种方式，它在容器的文件系统中显示为目录或单个文件。</p>
+<h3 id="volume-数据卷"><a class="header-anchor" href="#volume-数据卷">#</a> volume 数据卷</h3>
+<p>存储在主机文件系统的一部分中，该文件系统由Docker管理，非Docker进程不应修改文件系统的这一部分。卷是在Docker中持久保存数据的最佳方法。</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>docker volume create // 命令显式创建卷
+docker volume ls // 查看卷列表
+docker volume rm // 删除卷
+docker volume prune // 删除未使用的卷
+docker run --mount source=a,target=/b ... // 启动一个挂载数据卷的容器，将容器卷a挂载到容器文件系统 b 目录
+docker volume inspect // 查看卷信息
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><blockquote>
+<p>需要注意的是，与bind mount不同的是，如果volume是空的而container中的目录有内容，那么 docker 会将container目录中的内容拷贝到 volume 中，而 mount 会将外部的目录覆盖容器内部目录。</p>
+</blockquote>
+<h4 id="共享数据-待"><a class="header-anchor" href="#共享数据-待">#</a> 共享数据（待）</h4>
+<h4 id="备份-待"><a class="header-anchor" href="#备份-待">#</a> 备份（待）</h4>
+<h3 id="bind-mount-绑定挂载"><a class="header-anchor" href="#bind-mount-绑定挂载">#</a> bind mount 绑定挂载</h3>
+<ul>
+<li>使用绑定挂载时，可以存储在主机系统上的任何位置，<strong>主机上的文件或目录将安装到容器中</strong>，Docker 主机或 Docker 容器上的非Docker进程可以随时对其进行修改，</li>
+<li>设置挂载文件系统路径时，文件或目录由主机上的完整路径引用。该文件或目录不需要在Docker主机上已经存在。如果尚不存在，则按需创建。绑定挂载性能非常好，但是它们依<strong>赖于具有特定目录结构的主机文件系统</strong>。</li>
+</ul>
+<blockquote>
+<p>安全注意：使用绑定挂载，您可以通过容器中运行的进程来更改主机文件系统 ，包括创建，修改或删除重要的系统文件或目录。</p>
+</blockquote>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>// 挂载主机目录必须时绝对路径
+docker run --mount type=bind,source=/a,target=/b ...
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>// --mount 标记也可以从主机挂载单个文件到容器中
+docker run --rm -it \
+   # -v $HOME/.bash_history:/root/.bash_history \
+   --mount type=bind,source=$HOME/.bash_history,target=/root/.bash_history \
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>相比下，在不保证 Docker 主机具体的目录或文件结构时，使用数据卷可帮助您将Docker主机的配置与容器运行时解耦。</p>
+<h3 id="tmpfs-内存文件系统"><a class="header-anchor" href="#tmpfs-内存文件系统">#</a> tmpfs 内存文件系统</h3>
+<p>tmpfs 存储在主机系统的内存中，并且永远不会写入主机系统的文件系统中。容器在其生存期内可以使用它来存储非持久状态或敏感信息。</p>
+<p><a href="https://docs.docker.com/storage/tmpfs/" target="_blank" rel="noopener noreferrer">官方 tmpfs 文档<OutboundLink/></a></p>
+<h3 id="mount"><a class="header-anchor" href="#mount">#</a> --mount</h3>
+<p>绑定挂载和数据卷都可以使用 <code>-v</code> 或 <code>--volume</code> 标志安装到容器中，但是两者的语法略有不同。对于 tmpfs 安装，您可以使用该 <code>--tmpfs</code> 标志。但是，在 Docker 17.06 及更高版本中，建议将 <code>--mount</code> 统一安装挂载，因为语法更清晰。</p>
+<ul>
+<li><code>-v</code> 或 <code>--volume</code>：由三个字段组成，以冒号（:）分隔。这些字段必须以正确的顺序排列，并且每个字段的含义不是立即显而易见的。
+<ul>
+<li>对于命名卷，第一个字段是卷的名称，在给定的主机上是唯一的。对于匿名卷，将省略第一个字段。</li>
+<li>第二个字段是文件或目录在容器中的安装路径。</li>
+</ul>
+</li>
+<li><code>--mount</code>：包含多个键值对，以逗号分隔，每个键值对都由一个<key>=<value>元组组成。该 <code>--mount</code> 语法比更详细的 <code>-v</code> 或 <code>--volume</code>，但按键的顺序并不显著，并且标志的价值更容易理解。
+<ul>
+<li>type，其可以是bind，volume，或 tmpfs。默认 volume。</li>
+<li>source。对于命名卷，这是卷的名称。对于匿名卷，将省略此字段。可以指定为source 或src。</li>
+<li>destination，其中的文件或目录被安装在容器的路径。可以指定为 destination，dst 或 target。</li>
+<li>readonly，会使绑定安装以只读方式安装到容器中。</li>
+<li>volume-opt可以多次指定的选项采用键值对，该键值对由选项名称及其值组成。</li>
+</ul>
+</li>
+</ul>
+</template>

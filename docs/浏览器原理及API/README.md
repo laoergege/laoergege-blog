@@ -11,4 +11,11 @@
 
 - [Canvas](./Canvas.md)
 - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
+- 页面通信
+  - 同源
+    - Broadcast Channel API
+    - postMessage API
+    - localStorage + storage 事件
+  - 非同源
+    - postMessage API
 

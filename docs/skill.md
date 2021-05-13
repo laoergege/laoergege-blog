@@ -1,6 +1,6 @@
 ##  技术栈结构
 
-1. 工程化
+1. 工程化标准
    - [前端工程化](./前端工程化/README.md)
 2. 方案化及工具链
    - *typescript*
@@ -30,7 +30,9 @@
   - canvas
     - https://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
   - 资源调度
+    - https://mp.weixin.qq.com/s/K24X2uNPvtbD4vZlXwJMYA
     - https://github.com/GoogleChromeLabs/preload-webpack-plugin
+    - https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf
   - https://www.youtube.com/watch?v=kNzoswFIU9M&list=PLNYkxOF6rcICgS7eFJrGDhMBwWtdTgzpx
   - 编译
     - https://www.youtube.com/watch?v=5nmpokoRaZI
@@ -39,8 +41,10 @@
     - https://zhuanlan.zhihu.com/p/28590489
 - 数据结构与算法
 - node 学习与应用
+  - http://nodejs.cn/learn/introduction-to-nodejs
   - cli
     - https://github.com/iwfan/chore-cli
+    - https://github.com/google/zx/blob/main/index.mjs
 - http
 - 重学 typescript
   - https://www.typescriptlang.org/docs/handbook/intro.html
@@ -62,16 +66,10 @@
 - 22 - 23 学习
 - 23 - 睡觉 算法
 
-#  前端面试
+#  跳槽-前端面试
 
-- JS
-  - promise
-- CSS
-- 框架
 - 算法
-- 
-- 面试亮点
-  - vue 框架
+- 设计模式
 
 
 

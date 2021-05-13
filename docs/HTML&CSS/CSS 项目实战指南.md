@@ -1,8 +1,8 @@
 - CSS 实践
 
 - - UI 设计规范
-- global reset & normalize
-  - css 编程扩展
+- **Normalize CSS** vs **CSS Reset**
+- css 编程扩展
 - mixin 复用
   - utils
 - component 框架组件化
@@ -23,3 +23,7 @@
 - [autoprefixer](https://github.com/postcss/autoprefixer#css-in-js) 处理兼容性前缀
 - css 进行规范检查 stylelint
 - css 模块化 css modules
+
+
+
+https://github.com/necolas/normalize.css/blob/master/normalize.css

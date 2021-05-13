@@ -2,30 +2,28 @@ const path = require("path")
 const menu = require("./menu")
 const markdown = require("./markdown")
 const configWebpack = require('./webpack-chain')
-const plugins = require('./plugins')
+// const plugins = require('./plugins')
 
 module.exports = {
   // 基本配置
-  title: 'Laoergege Blog',
-  description: 'Just For Fun',
-  dest: path.resolve(__dirname, '../../docs'),
-  extraWatchFiles: [
-    './menu.js'
-  ],
+  title: "Laoergege Blog",
+  description: "Just For Fun",
+  dest: path.resolve(__dirname, "../../dist"),
+  extraWatchFiles: ["./menu.js"],
 
   // theme
   themeConfig: {
-    logo: '/avatar.png',
-    lastUpdated: '最新更新时间 ',
+    logo: "/avatar.png",
+    lastUpdated: "最新更新时间 ",
     smoothScroll: true,
-    ...menu
+    ...menu,
   },
 
   // markdown
   markdown,
 
   // plugins
-  plugins,
+  // plugins,
 
-  chainWebpack: configWebpack
-}
+  chainWebpack: configWebpack,
+};

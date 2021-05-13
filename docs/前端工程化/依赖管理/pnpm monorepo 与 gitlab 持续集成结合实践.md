@@ -1,6 +1,6 @@
 ---
 title: pnpm monorepo 与 gitlab 持续集成结合实践
-tags
+tags:
  - pnpm
  - monorepo
  - gitlab

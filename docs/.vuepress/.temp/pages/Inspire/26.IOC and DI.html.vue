@@ -1,0 +1,9 @@
+<template><ul>
+<li>自动创建对象</li>
+<li>自动解决对象依赖</li>
+<li>对象获取、对象范围</li>
+</ul>
+<p>https://juejin.cn/post/6881883342623473677</p>
+<p>https://github.com/inversify/InversifyJS</p>
+<p>https://github.com/AerospaceXu/vue3-di-helper</p>
+</template>

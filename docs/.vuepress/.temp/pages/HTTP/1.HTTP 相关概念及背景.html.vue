@@ -1,0 +1,78 @@
+<template><h1 id="http-相关概念及背景"><a class="header-anchor" href="#http-相关概念及背景">#</a> Http 相关概念及背景</h1>
+<h4 id="背景"><a class="header-anchor" href="#背景">#</a> 背景</h4>
+<p>1989 年，任职于欧洲核子研究中心（CERN）的蒂姆·伯纳斯 - 李（Tim Berners-Lee）发表了一篇论文，提出了在互联网上构建超链接文档系统的构想。这篇论文中他确立了三项关键技术：</p>
+<ol>
+<li>
+<p>URI：即统一资源标识符，作为互联网上资源的唯一身份；</p>
+</li>
+<li>
+<p>HTML：即超文本标记语言，描述超文本文档；</p>
+<p><em>超文本相较于纯文本，就是含有超链接，超链接的本质就是从当前的HTML文档跳转到另一个HTML文档，所以是网状结构，文档与文档之间可以相互联系</em></p>
+</li>
+<li>
+<p>HTTP：即超文本传输协议，用来传输超文本。</p>
+</li>
+</ol>
+<p>基于它们，就可以把超文本系统完美地运行在互联网上，让各地的人们能够自由地共享信息，蒂姆把这个系统称为“万维网”（World Wide Web），也就是我们现在所熟知的 Web。</p>
+<blockquote>
+<p>随着时代发展，web 从最初提供文本信息（超文本）到多媒体（超媒体）到提供软件应用服务，即 Web App，是 Web 的一种进化。硬核的翻译过来大概是“基于万维网的应用”，比如你在 Web 浏览器中使用的 Youtube、Twitter、Medium、Github 等等，<strong>它们之间仍然可以通过网址（URL）随意互相链接，遵循 Web 开放标准，并且你几乎可以在任何一个具备浏览器的平台上使用这项服务，因此 Web App 同样是开放的。</strong></p>
+<p>PWA(Progressive Web Apps) 正是对 Web App 更好的衍生发展，并遵循 web 开放准则</p>
+<p><strong>Web 的本质是 Open（开放）与 Decentralized （去中心化），这才是万维网（WWW）的初衷，这才是所有这些特性能成立的前提。</strong></p>
+<p>而 Hybrid App 或者小程序等，他们只是借用了 web 平台技术标准、以 Web 范式为 Native 平台进行开发，封闭自己生态。<strong>无论他们长得有多像 Web</strong>，<strong>他们都不是 Open Web 平台的一员</strong>。</p>
+</blockquote>
+<h4 id="http-发展历程"><a class="header-anchor" href="#http-发展历程">#</a> HTTP 发展历程：</h4>
+<ol>
+<li>HTTP 协议始于三十年前蒂姆·伯纳斯 - 李的一篇论文；</li>
+<li>HTTP/0.9 是个简单的文本协议，只能获取文本资源；</li>
+<li>HTTP/1.0 确立了大部分现在使用的技术，但它不是正式标准；</li>
+<li>HTTP/1.1 是目前互联网上使用最广泛的协议，功能也非常完善；</li>
+<li>HTTP/2 基于 Google 的 SPDY 协议，<strong>注重性能改善</strong>，但还未普及；</li>
+<li>HTTP/3 基于 Google 的 QUIC 协议，是将来的发展方向。</li>
+</ol>
+<p>更多详细可参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP" target="_blank" rel="noopener noreferrer">HTTP的发展<OutboundLink/></a>。</p>
+<p>HTTP/2 的制定充分考虑了现今互联网的现状：宽带、移动、不安全，在高度兼容 HTTP/1.1 的同时在性能改善方面做了很大努力，主要的特点有：</p>
+<ol>
+<li><strong>二进制协议，不再是纯文本</strong>；</li>
+<li>可发起多个请求，废弃了 1.1 里的管道；</li>
+<li>使用专用算法压缩头部，减少数据传输量；</li>
+<li>允许服务器主动向客户端推送数据；</li>
+<li>增强了安全性，“事实上”要求加密通信。</li>
+</ol>
+<h4 id="http-超文本传输协议"><a class="header-anchor" href="#http-超文本传输协议">#</a> HTTP：超文本传输协议</h4>
+<p><strong>超文本</strong>，有两层含义：</p>
+<ol>
+<li>
+<p>超文本相较于纯文本，就是含有超链接，能够从一个“超文本”跳跃到另一个“超文本”，形成复杂的非线性、网状的结构关系。</p>
+<p>我们最熟悉的超文本应该是 HTML 了，它本身只是纯文字文件，但内部用很多标签定义了对图片、音频、视频等的链接，再经过浏览器的解释，呈现在我们面前的就是一个含有多种视听信息的页面。</p>
+<p>但是 HTTP 不是 HTML，这个可能要特别强调一下，千万不要把 HTTP 与 HTML 混为一谈，虽然这两者经常是同时出现。<strong>HTML 是超文本的载体，是一种标记语言，使用各种标签描述文字、图片、超链接等资源，并且可以嵌入 CSS、JavaScript 等技术实现复杂的动态效果</strong>。单论次数，在<strong>互联网上 HTTP 传输最多的可能就是 HTML</strong>，但要是论数据量，HTML 可能要往后排了，图片、音频、视频这些类型的资源显然更大。</p>
+</li>
+<li>
+<p>在互联网早期只是提供纯文本信息，但发展到现在，“文本”的涵义已经被大大地扩展了，图片、音频、视频、甚至是压缩包，在 HTTP 眼里都可以算做是“文本”，故HTTP 传输的是文字、图片、音频、视频等超文本数据。</p>
+</li>
+</ol>
+<p><strong>传输协议</strong>，计算机之间数据交流通信的规范。</p>
+<blockquote>
+<p>PS 如今“超文本”容易让人误解，感觉 HTTP 称作“超媒体传输协议” 更恰当。</p>
+</blockquote>
+<h4 id="相关协议及软件应用"><a class="header-anchor" href="#相关协议及软件应用">#</a> 相关协议及软件应用</h4>
+<p>HTTP 是构建互联网的重要基础技术，它没有实体，依赖许多其他的技术来实现，但同时许多技术也都依赖于它，我们可以把 HTTP 定义为“与 HTTP 协议相关的所有应用层技术的总和”。</p>
+<img src="${images}/2781919e73f5d258ff1dc371af632acc.png" alt="img" style="zoom:80%;" />
+<p>互联网(Internet)，包含各式各样的资源，也对应着各式各样的协议，例如超文本资源使用 HTTP，普通文件使用 FTP，电子邮件使用 SMTP 和 POP3 等，而 HTTP 是构成万维网(web)的基础，故万维网只是互联网的一个子集。</p>
+<p>在 HTTP 协议里，浏览器本质上是一个 HTTP 协议中的请求方，浏览器的角色被称为“User Agent”即“用户代理”，意思是作为访问者的“代理”来发起 HTTP 请求。不过在不引起混淆的情况下，我们通常都简单地称之为“客户端”。</p>
+<p>Web 服务器，在 HTTP 协议里扮演响应方，“Web 服务器”时有两个层面的含义：硬件和软件。软件方面指能够处理 http 请求，并且响应 HTTP 请求的资源或者提供 Web 服务的应用程序，故分为两类</p>
+<ul>
+<li>静态服务，提供静态资源服务能力，仅仅托管文件，并原样传送给请求方，如 nginx、Tomcat等，当然它们把请求转发给 、Java、Node.js 等业务应用，返回动态的信息。</li>
+<li>动态服务，服务器会动态处理返回的资源内容</li>
+</ul>
+<img src="${images}/image-20210410162757172.png" alt="image-20210410162757172" style="zoom:50%;" />
+<p>HTTP 是一个client-server 架构协议，中间会经过重重关卡</p>
+<img src="${images}/Client-server-chain.png" alt="img" style="zoom:65%;" />
+<p>CDN(Content Delivery Network) 是中间一个重要的角色，翻译过来就是“内容分发网络”。它应用了 HTTP 协议里的缓存和代理技术，代替源站响应客户端的请求，让浏览器的请求不用“千里迢迢”地到达源站服务器，直接在“半路”就可以获取响应。如果 CDN 的调度算法很优秀，更可以找到离用户最近的节点，大幅度缩短响应时间。除了基本的网络加速外，还提供负载均衡、安全防护、边缘计算、跨运营商网络等功能，能够成倍地“放大”源站服务器的服务能力。</p>
+<p>Web Service，它的名字与 Web Server 很像，但却是一个完全不同的东西。service通常是指服务程序，跑在server上，server可以理解成容器、平台。Web Service 是一种<strong>应用服务开发规范</strong>，使用 client-server 主从架构，<strong>基于 Web（HTTP）的服务架构技术</strong>。</p>
+<p>参考</p>
+<ul>
+<li>《透视HTTP协议》</li>
+<li><a href="https://zhuanlan.zhihu.com/p/22561084" target="_blank" rel="noopener noreferrer">Web 在继续离我们远去<OutboundLink/></a></li>
+</ul>
+<p><img src="$%7Bimages%7D/image-20210411181253730.png" alt="image-20210411181253730"></p>
+</template>
