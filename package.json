@@ -4,9 +4,9 @@
   "description": "Laoergege's Learning Track",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vuepress dev docs --debug",
-    "docs:build": "vuepress build docs",
-    "publish": "git tag -d page && git tag page && git push origin page -f"
+    "docs:dev": "cross-env NODE_ENV=development vuepress dev docs",
+    "docs:build": "cross-env NODE_ENV=production vuepress build docs",
+    "publish": "git tag page -f && git push origin page -f"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/laoergege/laoergege-blog#readme",
   "dependencies": {
+    "@vssue/api-github-v3": "^1.4.4",
+    "@vssue/vuepress-plugin-vssue": "^1.4.6",
     "markdown-it-task-lists": "^2.1.1"
   },
   "devDependencies": {
