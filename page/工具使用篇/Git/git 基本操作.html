@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>文件删除（git rm）</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just For Fun">
+    
+    <link rel="preload" href="/assets/css/0.styles.14a0fce1.css" as="style"><link rel="preload" href="/assets/js/app.b7d5ce1b.js" as="script"><link rel="preload" href="/assets/js/2.58d55c73.js" as="script"><link rel="preload" href="/assets/js/112.f633de2f.js" as="script"><link rel="prefetch" href="/assets/js/10.127f7c73.js"><link rel="prefetch" href="/assets/js/100.9ebf9689.js"><link rel="prefetch" href="/assets/js/101.063c6bfc.js"><link rel="prefetch" href="/assets/js/102.ccd50173.js"><link rel="prefetch" href="/assets/js/103.1d853931.js"><link rel="prefetch" href="/assets/js/104.aa34f156.js"><link rel="prefetch" href="/assets/js/105.2da6f929.js"><link rel="prefetch" href="/assets/js/106.9b3bb292.js"><link rel="prefetch" href="/assets/js/107.07a31b47.js"><link rel="prefetch" href="/assets/js/108.e5340c39.js"><link rel="prefetch" href="/assets/js/109.fbba8bba.js"><link rel="prefetch" href="/assets/js/11.9d965b57.js"><link rel="prefetch" href="/assets/js/110.0316be43.js"><link rel="prefetch" href="/assets/js/111.f04f7640.js"><link rel="prefetch" href="/assets/js/113.46ec055e.js"><link rel="prefetch" href="/assets/js/114.05c0a9bb.js"><link rel="prefetch" href="/assets/js/115.d6c495f6.js"><link rel="prefetch" href="/assets/js/116.e21c911d.js"><link rel="prefetch" href="/assets/js/117.0f7fccc8.js"><link rel="prefetch" href="/assets/js/118.91cd1ba2.js"><link rel="prefetch" href="/assets/js/119.989059d5.js"><link rel="prefetch" href="/assets/js/12.77ad07db.js"><link rel="prefetch" href="/assets/js/120.ad2a9eac.js"><link rel="prefetch" href="/assets/js/121.13a0e5cc.js"><link rel="prefetch" href="/assets/js/122.8d6d6cd7.js"><link rel="prefetch" href="/assets/js/123.0bcb106f.js"><link rel="prefetch" href="/assets/js/124.ca67d8fa.js"><link rel="prefetch" href="/assets/js/125.0a717bcc.js"><link rel="prefetch" href="/assets/js/126.31db520e.js"><link rel="prefetch" href="/assets/js/127.1b663925.js"><link rel="prefetch" href="/assets/js/128.34e8a268.js"><link rel="prefetch" href="/assets/js/129.47675795.js"><link rel="prefetch" href="/assets/js/13.2dfde925.js"><link rel="prefetch" href="/assets/js/130.75c0c356.js"><link rel="prefetch" href="/assets/js/131.3665190f.js"><link rel="prefetch" href="/assets/js/132.7aa85c50.js"><link rel="prefetch" href="/assets/js/133.f0dcd688.js"><link rel="prefetch" href="/assets/js/134.6a1f7a46.js"><link rel="prefetch" href="/assets/js/135.e3f660ae.js"><link rel="prefetch" href="/assets/js/136.abea33ce.js"><link rel="prefetch" href="/assets/js/14.af80208a.js"><link rel="prefetch" href="/assets/js/15.1fc81dc5.js"><link rel="prefetch" href="/assets/js/16.b80627a4.js"><link rel="prefetch" href="/assets/js/17.7c29ba2a.js"><link rel="prefetch" href="/assets/js/18.1904b1f4.js"><link rel="prefetch" href="/assets/js/19.3561b363.js"><link rel="prefetch" href="/assets/js/20.7b6cc11c.js"><link rel="prefetch" href="/assets/js/21.2fa5daff.js"><link rel="prefetch" href="/assets/js/22.0dccfd6c.js"><link rel="prefetch" href="/assets/js/23.dc5016b8.js"><link rel="prefetch" href="/assets/js/24.972432d0.js"><link rel="prefetch" href="/assets/js/25.626daefd.js"><link rel="prefetch" href="/assets/js/26.ac0bea25.js"><link rel="prefetch" href="/assets/js/27.4122b1a0.js"><link rel="prefetch" href="/assets/js/28.4f3edba1.js"><link rel="prefetch" href="/assets/js/29.418495d4.js"><link rel="prefetch" href="/assets/js/3.25aba017.js"><link rel="prefetch" href="/assets/js/30.f16a391c.js"><link rel="prefetch" href="/assets/js/31.d35fdde3.js"><link rel="prefetch" href="/assets/js/32.ba13dfc9.js"><link rel="prefetch" href="/assets/js/33.7aff1ba6.js"><link rel="prefetch" href="/assets/js/34.c965cf5e.js"><link rel="prefetch" href="/assets/js/35.53aa5d2c.js"><link rel="prefetch" href="/assets/js/36.12e8c65a.js"><link rel="prefetch" href="/assets/js/37.7196f328.js"><link rel="prefetch" href="/assets/js/38.7ce3ecd1.js"><link rel="prefetch" href="/assets/js/39.58c32b60.js"><link rel="prefetch" href="/assets/js/4.38ef2dc8.js"><link rel="prefetch" href="/assets/js/40.c00a56ca.js"><link rel="prefetch" href="/assets/js/41.7a8ca0d1.js"><link rel="prefetch" href="/assets/js/42.087df371.js"><link rel="prefetch" href="/assets/js/43.c0165146.js"><link rel="prefetch" href="/assets/js/44.1c65afec.js"><link rel="prefetch" href="/assets/js/45.4dcaae0c.js"><link rel="prefetch" href="/assets/js/46.a0dbfdea.js"><link rel="prefetch" href="/assets/js/47.b0135a9c.js"><link rel="prefetch" href="/assets/js/48.3d281bb4.js"><link rel="prefetch" href="/assets/js/49.8bc043e6.js"><link rel="prefetch" href="/assets/js/5.7a795789.js"><link rel="prefetch" href="/assets/js/50.41992575.js"><link rel="prefetch" href="/assets/js/51.197458d8.js"><link rel="prefetch" href="/assets/js/52.e7540de4.js"><link rel="prefetch" href="/assets/js/53.9a586ba4.js"><link rel="prefetch" href="/assets/js/54.4bda774c.js"><link rel="prefetch" href="/assets/js/55.ad817fad.js"><link rel="prefetch" href="/assets/js/56.00d446bd.js"><link rel="prefetch" href="/assets/js/57.a3b81d2f.js"><link rel="prefetch" href="/assets/js/58.b9ac4e93.js"><link rel="prefetch" href="/assets/js/59.075b88fe.js"><link rel="prefetch" href="/assets/js/6.b8410451.js"><link rel="prefetch" href="/assets/js/60.035ab9fd.js"><link rel="prefetch" href="/assets/js/61.e586bd70.js"><link rel="prefetch" href="/assets/js/62.5fd36739.js"><link rel="prefetch" href="/assets/js/63.7776de40.js"><link rel="prefetch" href="/assets/js/64.1de35757.js"><link rel="prefetch" href="/assets/js/65.f1608ec2.js"><link rel="prefetch" href="/assets/js/66.e829ad46.js"><link rel="prefetch" href="/assets/js/67.0cec672c.js"><link rel="prefetch" href="/assets/js/68.10a38458.js"><link rel="prefetch" href="/assets/js/69.5f2bfd54.js"><link rel="prefetch" href="/assets/js/7.eeac9598.js"><link rel="prefetch" href="/assets/js/70.83bff2f0.js"><link rel="prefetch" href="/assets/js/71.df615734.js"><link rel="prefetch" href="/assets/js/72.4103ff8b.js"><link rel="prefetch" href="/assets/js/73.0df13cf6.js"><link rel="prefetch" href="/assets/js/74.edf05a9a.js"><link rel="prefetch" href="/assets/js/75.3fa581f4.js"><link rel="prefetch" href="/assets/js/76.3fcd176f.js"><link rel="prefetch" href="/assets/js/77.df0b150f.js"><link rel="prefetch" href="/assets/js/78.17ea7723.js"><link rel="prefetch" href="/assets/js/79.63a3c76d.js"><link rel="prefetch" href="/assets/js/8.71b267d8.js"><link rel="prefetch" href="/assets/js/80.787bd1ed.js"><link rel="prefetch" href="/assets/js/81.c7fc7ef3.js"><link rel="prefetch" href="/assets/js/82.fa5e4590.js"><link rel="prefetch" href="/assets/js/83.299bf0ec.js"><link rel="prefetch" href="/assets/js/84.01cdfd40.js"><link rel="prefetch" href="/assets/js/85.7f2bc726.js"><link rel="prefetch" href="/assets/js/86.63ae645b.js"><link rel="prefetch" href="/assets/js/87.957dfd69.js"><link rel="prefetch" href="/assets/js/88.86edec36.js"><link rel="prefetch" href="/assets/js/89.2417dc78.js"><link rel="prefetch" href="/assets/js/9.598c0281.js"><link rel="prefetch" href="/assets/js/90.c306eadf.js"><link rel="prefetch" href="/assets/js/91.77d3f359.js"><link rel="prefetch" href="/assets/js/92.0337f027.js"><link rel="prefetch" href="/assets/js/93.2f4062c7.js"><link rel="prefetch" href="/assets/js/94.026842bc.js"><link rel="prefetch" href="/assets/js/95.a7e24ed5.js"><link rel="prefetch" href="/assets/js/96.ee2f7a88.js"><link rel="prefetch" href="/assets/js/97.d03b8db4.js"><link rel="prefetch" href="/assets/js/98.10a01579.js"><link rel="prefetch" href="/assets/js/99.4d181a96.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.14a0fce1.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/avatar.png" alt="" class="logo"> <!----></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/JavaScript/" class="nav-link">
+  JavaScript
+</a></div><div class="nav-item"><a href="/数据结构与算法/" class="nav-link">
+  数据结构与算法
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端框架及库" class="dropdown-title"><span class="title">前端框架及库</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端框架及库" class="mobile-dropdown-title"><span class="title">前端框架及库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Vue/" class="nav-link">
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/React/" class="nav-link">
+  React
+</a></li><li class="dropdown-item"><!----> <a href="/RxJS/" class="nav-link">
+  RxJS
+</a></li></ul></div></div><div class="nav-item"><a href="/前端工程化/" class="nav-link">
+  前端工程化
+</a></div><div class="nav-item"><a href="/浏览器原理及API/" class="nav-link">
+  浏览器原理及API
+</a></div><div class="nav-item"><a href="/NodeJS/" class="nav-link">
+  NodeJS
+</a></div><div class="nav-item"><a href="/Git/" class="nav-link">
+  Git
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/JavaScript/" class="nav-link">
+  JavaScript
+</a></div><div class="nav-item"><a href="/数据结构与算法/" class="nav-link">
+  数据结构与算法
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端框架及库" class="dropdown-title"><span class="title">前端框架及库</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端框架及库" class="mobile-dropdown-title"><span class="title">前端框架及库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/Vue/" class="nav-link">
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/React/" class="nav-link">
+  React
+</a></li><li class="dropdown-item"><!----> <a href="/RxJS/" class="nav-link">
+  RxJS
+</a></li></ul></div></div><div class="nav-item"><a href="/前端工程化/" class="nav-link">
+  前端工程化
+</a></div><div class="nav-item"><a href="/浏览器原理及API/" class="nav-link">
+  浏览器原理及API
+</a></div><div class="nav-item"><a href="/NodeJS/" class="nav-link">
+  NodeJS
+</a></div><div class="nav-item"><a href="/Git/" class="nav-link">
+  Git
+</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="文件删除-git-rm"><a href="#文件删除-git-rm" class="header-anchor">#</a> 文件删除（git rm）</h2> <div class="language- extra-class"><pre class="language-text"><code>PS D:\laoergege-demos\git_learning&gt; ls                                                             
+
+    目录: D:\laoergege-demos\git_learning
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         2019/7/14     22:52                images
+d-----         2019/7/14     22:52                js
+d-----        2019/10/16     20:00                styles
+-a----        2019/10/16     20:00           1422 index.html
+-a----        2019/10/20     13:57             53 readme.md
+
+
+PS D:\laoergege-demos\git_learning&gt; rm readme.md                                                   PS D:\laoergege-demos\git_learning&gt; ls                                                             
+
+    目录: D:\laoergege-demos\git_learning
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         2019/7/14     22:52                images
+d-----         2019/7/14     22:52                js
+d-----        2019/10/16     20:00                styles
+-a----        2019/10/16     20:00           1422 index.html
+
+
+PS D:\laoergege-demos\git_learning&gt; git status                                                     On branch master
+Changes not staged for commit:
+  (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+        deleted:    readme.md
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+PS D:\laoergege-demos\git_learning&gt; git rm readme.md                                               rm 'readme.md'
+PS D:\laoergege-demos\git_learning&gt; git status                                                     On branch master
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+        deleted:    readme.md
+</code></pre></div><p>在上面我们通过 <code>rm</code> 删除文件，再将删除操作暂存。<code>git rm</code> 可达到上面两步操作效果。</p> <div class="language- extra-class"><pre class="language-text"><code>PS D:\laoergege-demos\git_learning&gt; ls                                                             
+
+    目录: D:\laoergege-demos\git_learning
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         2019/7/14     22:52                images
+d-----         2019/7/14     22:52                js
+d-----        2019/10/16     20:00                styles
+-a----        2019/10/16     20:00           1422 index.html
+-a----        2019/10/20     14:09             53 readme.md
+
+
+PS D:\laoergege-demos\git_learning&gt; git rm readme.md                                               rm 'readme.md'
+PS D:\laoergege-demos\git_learning&gt; git status                                                     On branch master
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+        deleted:    readme.md
+</code></pre></div><h2 id="撤销及重置"><a href="#撤销及重置" class="header-anchor">#</a> 撤销及重置</h2> <p>资料阅读 <a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86" target="_blank" rel="noopener noreferrer">Git-工具-重置揭密<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。</p> <p>在工作过程，我们肯定会有错误的操作，当发生错误时，我们希望撤销操作或者重置，恢复回原来我们想要的样子。</p> <h3 id="恢复工作区、暂存区、版本区"><a href="#恢复工作区、暂存区、版本区" class="header-anchor">#</a> 恢复工作区、暂存区、版本区</h3> <p><img src="https://git-scm.com/book/en/v2/images/reset-workflow.png" alt=""></p> <p>git 的基本工作流如上图，其中：</p> <ul><li>版本区，一般 git 仓库中有多条分支，HEAD 指向当前分支及其最后提交版本</li> <li>暂存区，预期的下一次提交的快照</li> <li>工作区，工作目录</li></ul> <p>当发生某些情况时想要恢复时，一般情况：</p> <ol><li>暂存区恢复成HEAD：<code>git reset</code></li> <li>工作区恢复成暂存区：<code>git checkout -- &lt;file&gt;</code></li></ol> <p><img src="https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/微信截图_20191020124515.png" alt=""></p> <h4 id="git-reset"><a href="#git-reset" class="header-anchor">#</a> git reset</h4> <div class="language- extra-class"><pre class="language-text"><code>git reset [--soft | --mixed | --hard ] [-q] [&lt;commit&gt;]
+</code></pre></div><p><code>git reset</code> 可用来重置 <code>HEAD</code> 版本区、<code>Index</code> 暂存区、<code>Working</code> 工作区内容，reset，若如其名，重置，具有一定毁灭，强制的操作性，会完全覆盖指定区域的内容，checkout 则会相对智能些（下述）。</p> <p><code>git reset</code> 执行时有三个参数可用于指定执行步骤时，一般情况下，git 会顺序执行以下过程：</p> <ol><li>更新 HEAD：移动 <code>HEAD</code> 及 <strong>HEAD 所在的 branch</strong> 指针（若只指定了 --soft，执行到此步骤为止）</li> <li>更新 Index：同步 <code>Index</code> 暂存区的版本内容同 <code>HEAD</code> 一致（若只指定了 --mixed，执行到此步骤为止，默认执行到 mixed 步骤）</li> <li>更新 Work：同步 <code>Working</code> 工作区的版本内容同 <code>Index</code> 一致（若指定了 --hard，执行到此步骤）</li></ol> <blockquote><p><em>--hard</em> 是一种危险的行为，它会强制覆盖工作目录中的文件，以致跟 Index 保持同步</p></blockquote> <h4 id="git-reset-单个文件"><a href="#git-reset-单个文件" class="header-anchor">#</a> git reset 单个文件</h4> <div class="language- extra-class"><pre class="language-text"><code>git reset [commit] &lt;file&gt;
+</code></pre></div><p>若指定了一个文件路径，reset 将会跳过上述第 1 步，因为其作用范围限定为指定的文件或文件集合，而 HEAD 指向的是一个 commit 对象，故跳过更新 HEAD 的步骤。但第三步不会执行，因为 <code>git reset</code> 默认行为只执行到第二步，添加指定参数命令 <code>git reset --hard &lt;file&gt;</code> 即可。</p> <blockquote><p><em>--patch</em> 可批量重置多文件</p></blockquote> <h4 id="git-reset-和-git-checkout-区别"><a href="#git-reset-和-git-checkout-区别" class="header-anchor">#</a> git reset 和 git checkout 区别</h4> <p><code>git reset</code> 和 <code>git checkout</code> 都能更新 HEAD、Index、Work 三个区域内容，但主要区别：</p> <p>当作为操作 commitID 指向时，<code>git reset</code> 和 <code>git checkout</code> 的行为区别是：</p> <ul><li><code>git reset</code> 会移动 HEAD 所在分支指针，<code>git checkout</code> 则不会。<img src="https://git-scm.com/book/en/v2/images/reset-checkout.png" alt=""></li> <li>不同于 <code>reset --hard</code>，<code>checkout</code> 对工作目录是安全的，它会通过检查来确保不会将已更改的文件弄丢，其实它还更聪明一些。它会在工作目录中先试着简单合并一下,而 <code>reset --hard</code> 则会不做检查就全面地替换所有东西。</li></ul> <p>当作为操作对象为 file 时，<code>git checkout</code> 和 <code>git reset --hard [branch] file</code> 的行为一样。</p> <p>总结：<code>git reset</code> 和 <code>git checkout</code> 两者在使用上总有些相似，那么如何区分使用场景，我觉得应该注意两点：</p> <ul><li>是否会移动 HEAD 所在的分支</li> <li>是否对文件强覆盖</li></ul> <h2 id="gitignore"><a href="#gitignore" class="header-anchor">#</a> .gitignore</h2> <p>以下规则会了，也基本熟悉写 .gitignore 文件。</p> <div class="language- extra-class"><pre class="language-text"><code># 注释
+! 相反
+\ 转义字符
+? 正则，单一字符，除 /
+[a-zA-Z]，正则，可选字符范围，除 /
+* 匹配所有文件或者目录
+a 匹配任意字符，除 /
+*.js 匹配js结尾的文件
+/a 匹配根目录下的a文件或者目录
+/a/b a/b 匹配根目录下的a目录的b文件或者目录
+a/ 匹配任何a目录
+a/* 匹配任何a目录下的文件和目录，相比 a/ 可防止git继续在a目录匹配a目录
+**/a/b 任何路径下a目录里的b文件或者目录
+a/** 深度匹配root下a目录的文件或者目录
+a/**/b  matches &quot;a/b&quot;, &quot;a/x/b&quot;, &quot;a/x/y/b&quot; and so on
+</code></pre></div><hr> <!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最新更新时间 :</span> <span class="time">5/8/2021, 5:52:10 PM</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.b7d5ce1b.js" defer></script><script src="/assets/js/2.58d55c73.js" defer></script><script src="/assets/js/112.f633de2f.js" defer></script>
+  </body>
+</html>

@@ -12,7 +12,7 @@
 
 无论我们运行任何语言写的程序都会经历以下内存生命周期
 
-![memory life](../images/1_slxXgq_TO38TgtoKpWa_jQ.png)
+![memory life](./images/1_slxXgq_TO38TgtoKpWa_jQ.png)
 
 1. 分配内存：向操作系统申请分配内存。某些底层语言（如 C）需要显示申请操作，在高级语言当中，就不需要这样的操作
 2. 使用内存：在代码中使用分配变量的进行读取和写入操作
@@ -25,7 +25,7 @@
 - 程序的代码，包括操作系统的代码
 - 所有程序使用的所有变量和其他数据
 
-![JavaScript 内存模型](../images/memory.png)
+![JavaScript 内存模型](./images/memory.png)
 
 栈空间就是我们之前反复提及的调用栈
 
