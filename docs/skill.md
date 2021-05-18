@@ -27,6 +27,9 @@
 - 深入 JS 学习
 - 深入 Vue 框架
 - 浏览器渲染原理
+  - 渲染管道
+    - https://docs.google.com/presentation/d/1ak7YVrJITGXxqQ7tyRbwOuXB1dsLJlfpgC4wP7lykeo/edit#slide=id.p
+    - https://docs.google.com/document/d/1aitSOucL0VHZa9Z2vbRJSyAIsAz24kX8LFByQ5xQnUg/edit?pli=1#heading=h.dr7ct95ht2sw
   - canvas
     - https://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
   - 资源调度

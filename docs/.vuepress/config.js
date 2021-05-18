@@ -8,7 +8,7 @@ module.exports = {
   // 基本配置
   title: "",
   description: "Just For Fun",
-  dest: path.resolve(__dirname, "../../dist"),
+  dest: path.resolve(__dirname, "../../page"),
   extraWatchFiles: ["./menu.js"],
 
   // theme
