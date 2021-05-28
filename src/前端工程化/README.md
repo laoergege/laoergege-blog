@@ -9,20 +9,19 @@
 
   - 代码
 
-    - 规范
+    - 规范（eslint、prettier、[editorConfig](https://docs.microsoft.com/zh-cn/visualstudio/ide/create-portable-custom-editor-options?view=vs-2019)）
       - 代码
         - 命名规范
-          - 文件
-          - 变量
-        - 代码规范
+        - 代码风格
           - 代码格式
           - 代码质量
-        - 注释规范
       - 注释规范
     - 管理（git）
-      - git flow
-      - commit
-      - merge request & code review	
+      - git flow 分支规范
+      - commit msg 提交信息
+      - merge request & code review
+    - 相关文章
+      - [《前端代码规范实践总结》](./前端代码规范实践总结.md)
 
   - 项目
 
@@ -101,6 +100,7 @@
       - [CSS 项目实践指南](../HTML&CSS/CSS 项目实践指南.md)
       - h5
         - 移动端适配
+        - 混合开发
       - pc
 
     - 服务端渲染（SSR）
@@ -151,12 +151,13 @@
 
 - 自动化集成方式
 
+  - 编辑器 vscode
   - git hooks
     - husky（git hook）
     - lint-staged（changed file）
   - npm script + script hooks
   - webpack hooks
-  - web hook
-  
+  - web hooks
+
   
 

@@ -62,6 +62,12 @@
   - https://www.coursera.org/learn/jisuanji-biancheng/home/week/1
   - https://www.bilibili.com/video/av21376839/
 
+## 系列教程
+
+- vue3 conf https://node.fequan.com/videodetail/1621773573110
+- canvas 
+  - https://joshondesign.com/p/books/canvasdeepdive/toc.html
+
 # 每日时间段安排
 
 - 7 - 8 学习
@@ -77,8 +83,17 @@
 
 #  跳槽-前端面试
 
-- 算法
+- 数据结构与算法
+- http
+- h5
+  - 适配
+  - 混合开发
 - 设计模式
+- 工程化
+
+
+
+
 
 
 
