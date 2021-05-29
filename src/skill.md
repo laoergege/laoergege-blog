@@ -6,14 +6,15 @@
    - *typescript*
 3. 框架技术
    - [Vue](./Vue/README.md)
-   - [浏览器工作原理及API](./浏览器原理及API/README.md)
-   - *NodeJS*
-   - *Flutter*
+   - 微前端
 4. 软件工程、设计模式、架构
    - JavaScript 设计模式与开发实践
 5. 语言、运行时原理
-   - [JavaScript](./JavaScript/README.md)
    - [HTML&CSS](./HTML&CSS/README.md)
+   - [JavaScript](./JavaScript/README.md)
+   - [浏览器工作原理及API](./浏览器原理及API/README.md)
+   - *NodeJS*
+   - *Flutter*
 6. 计算机基础
    1. 计算机导论
    2. 操作系统
@@ -21,6 +22,10 @@
       - [HTTP](./HTTP/README.md)
    4. [数据结构与算法](./数据结构与算法/README.md)
    5. 编译原理
+      - babel
+        - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
+        - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
+        - https://github.com/estree/estree
 
 ## 2021 技术目标
 
@@ -90,6 +95,7 @@
   - 混合开发
 - 设计模式
 - 工程化
+- 微前端
 
 
 
