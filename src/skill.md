@@ -6,7 +6,6 @@
    - *typescript*
 3. 框架技术
    - [Vue](./Vue/README.md)
-   - 微前端
 4. 软件工程、设计模式、架构
    - JavaScript 设计模式与开发实践
 5. 语言、运行时原理
