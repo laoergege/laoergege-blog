@@ -17,17 +17,29 @@
  * @param {Node|null} root
  * @return {number[][]}
  */
-var levelOrder = function(root, res) {
-    if(root) {
-        if(root.children) {
-            root.children.forEach(child => {
-                preorder(child, res)
-            });
-        }
-        res.push([root.val)
+var levelOrder = function(root) {
+    if(!root) return root
+
+    let queue = [root]
+    const res = []
+    while (queue.length) {
+        let tmp = []
+        res.push(
+            queue.map(e => {
+                if(e && e.children) {
+                    tmp.push(...e.children)
+                }
+                return e && e.val
+            })
+        )
+        queue = tmp
     }
 
     return res
 };
+/**
+ * 队列实现 广度优先遍历
+ */
+
 // @lc code=end
 

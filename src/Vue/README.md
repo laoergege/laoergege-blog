@@ -6,7 +6,6 @@ VUE
   - vnode
   - render
   - reactive
-  
 - 组件化
   - VNode
   - 组件渲染流程
@@ -14,14 +13,12 @@ VUE
     - 渲染 vnode（diff）
     - 生成 DOM（path）
   - 模板编译器
-  
 - MDV
 
   - 数据劫持
     - vue2 Object.defineProperty
     - vue3 proxy
   - 更新策略（调度）
-  
 - 数据流
 
   - 父子组件
@@ -47,8 +44,9 @@ VUE
     - 缺点
 
     - 命名冲突和数据来源不清晰
-  
 - 前端路由
+- web component
+  - https://mp.weixin.qq.com/s/kqG7xUnpVRg0XU5HLxjARw
 
 
 

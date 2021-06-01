@@ -10,9 +10,9 @@ module.exports = function (config, isServer) {
             ]
         ])
     
-    // 添加 vssue-loader
-    config.module
-        .rule('markdown')
-        .use('vssue-loader')
-        .loader(path.resolve( __dirname, './vssue-loader'))
+    // // 添加 vssue-loader
+    // config.module
+    //     .rule('markdown')
+    //     .use('vssue-loader')
+    //     .loader(path.resolve( __dirname, './vssue-loader'))
 }
