@@ -66,7 +66,8 @@ tags:
       - 对客户端提供 HTTP 服务
       - 使用后端 RPC 服务
 
-
-
-- file
-  - watcher https://github.com/paulmillr/chokidar
+- 生态
+  - file
+    - watcher https://github.com/paulmillr/chokidar
+  - 监控
+    - [easy-monitor](https://github.com/hyj1991/easy-monitor)

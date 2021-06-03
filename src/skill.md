@@ -13,6 +13,7 @@
    - [HTML&CSS](./HTML&CSS/README.md)
    - [JavaScript](./JavaScript/README.md)
    - [浏览器工作原理及API](./浏览器原理及API/README.md)
+     - https://github.com/Troland/how-javascript-works
    - *NodeJS*
    - *Flutter*
 6. 计算机基础
