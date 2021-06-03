@@ -17,7 +17,7 @@ export default defineUserConfig<DefaultThemeOptions>({
   dest: path.resolve(__dirname, "../../docs"),
   // chainWebpack: configWebpack,
 
-  // theme
+  // 主题
   themeConfig: {
     logo: "/avatar.png",
     repo: "laoergege/laoergege-blog",

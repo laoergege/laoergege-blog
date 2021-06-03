@@ -67,7 +67,15 @@ tags:
       - 使用后端 RPC 服务
 
 - 生态
+  - server example
+    - https://github.com/koajs/examples
   - file
-    - watcher https://github.com/paulmillr/chokidar
+    - watcher
+      - https://github.com/paulmillr/chokidar
+  - 控制台
+    - 日志 
+      - [consola](https://github.com/unjs/consola)
+    - 美化
+      - [chalk](https://github.com/chalk/chalk)
   - 监控
     - [easy-monitor](https://github.com/hyj1991/easy-monitor)

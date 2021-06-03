@@ -1,11 +1,14 @@
-import path from "path";
-console.log(__dirname)
+import { resolve } from "./utils/path";
 
 export default [
   [
-    path.resolve(__dirname, './plugins/watcher.ts'),
+    resolve('./plugins/watcher.ts'),
     {
-      paths: []
+      paths: [
+        resolve('plugins.ts'),
+        resolve('menu.ts'),
+        resolve('plugins/*')
+      ]
     }
   ],
 ]
