@@ -3,7 +3,8 @@
 1. 工程化标准
    - [前端工程化](./前端工程化/README.md)
 2. 工具链及方案化
-   - *typescript*
+   - typescript
+     - https://github.com/type-challenges/type-challenges
    - 微前端
 3. 框架技术
    - [Vue](./Vue/README.md)
@@ -19,6 +20,7 @@
 6. 计算机基础
    1. 计算机导论
    2. 操作系统
+      1. [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
    3. 计算机网络
       - [HTTP](./HTTP/README.md)
    4. [数据结构与算法](./数据结构与算法/README.md)
