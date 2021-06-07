@@ -40,6 +40,7 @@ tags:
           - 调用栈
           - 执行上下文
             - [this 指针](./this 指针.md)
+          - 闭包
           - [微任务、Promise](./JavaScript 微任务、Promise.md)
       - 对象模型
       - 异步编程
@@ -47,6 +48,8 @@ tags:
         - promise 链式
         - async/await（generator + promise）同步
       - [内存管理机制](./JavaScript 内存管理机制.md)
+        - 堆栈内存
+        - 标记-清除
       - 元编程
         - defineObjectProperty
         - Proxy & Reflect

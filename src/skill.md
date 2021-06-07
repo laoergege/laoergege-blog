@@ -10,6 +10,8 @@
    - [Vue](./Vue/README.md)
 4. 软件工程、设计模式、架构
    - JavaScript 设计模式与开发实践
+   - 依赖注入
+     - https://github.com/mgechev/injection-js
 5. 语言、运行时原理
    - [HTML&CSS](./HTML&CSS/README.md)
    - [JavaScript](./JavaScript/README.md)
@@ -24,11 +26,17 @@
    3. 计算机网络
       - [HTTP](./HTTP/README.md)
    4. [数据结构与算法](./数据结构与算法/README.md)
+      - 极客算法训练营
    5. 编译原理
       - babel
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
+
+
+
+- 切勿心傲
+- 有问题多向别人请教，切勿一直沉迷
 
 ## 2021 技术目标
 
