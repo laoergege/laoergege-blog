@@ -77,5 +77,7 @@ tags:
       - [consola](https://github.com/unjs/consola)
     - 美化
       - [chalk](https://github.com/chalk/chalk)
+  - 调试
+    - [debug](https://github.com/visionmedia/debug)
   - 监控
     - [easy-monitor](https://github.com/hyj1991/easy-monitor)

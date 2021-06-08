@@ -55,7 +55,7 @@ tags:
 
 **在同一业务范畴内，使用 monorepo 方案去统一维护代码项目**，比如人事与招聘两条业务线分成两个 monorepo，HRMS monorepo 下自个维护子业务、子模块、不同终端实现...，monorepo 可控制保持在一定体量，防止体积超大，目录结构过度复杂。
 
-接下来，探索使用 pnpm monorepo 和 gitlab CI/CD 功能结合，完成一条代码集成、增量构建部署自动化流程。
+接下来，探索使用 pnpm monorepo 和 CI/CD 的 pipeline 功能结合，完成一条代码集成、增量构建部署自动化流程。
 
 ## pnpm monorepo
 
@@ -79,3 +79,6 @@ pnpm add 需要进入子项目 workspace 操作， 操作需要在子项目 work
 script 执行
 
 调试
+
+## gitlab CICD with Docker
+

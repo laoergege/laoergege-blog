@@ -23,6 +23,7 @@
    1. 计算机导论
    2. 操作系统
       1. [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
+      2. Docker
    3. 计算机网络
       - [HTTP](./HTTP/README.md)
    4. [数据结构与算法](./数据结构与算法/README.md)
@@ -96,17 +97,6 @@
 - 21 - 22 阅读
 - 22 - 23 学习
 - 23 - 睡觉 算法
-
-#  跳槽-前端面试
-
-- 数据结构与算法
-- http
-- h5
-  - 适配
-  - 混合开发
-- 设计模式
-- 工程化
-- 微前端
 
 
 
