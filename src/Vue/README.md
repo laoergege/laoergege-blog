@@ -42,8 +42,8 @@ VUE
   - *mixin*
 
     - 缺点
-
-    - 命名冲突和数据来源不清晰
+  - 命名冲突和数据来源不清晰
+  - 指令
 - 前端路由
 - web component
   - https://mp.weixin.qq.com/s/kqG7xUnpVRg0XU5HLxjARw
