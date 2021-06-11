@@ -8,6 +8,8 @@
    - 微前端
 3. 框架技术
    - [Vue](./Vue/README.md)
+   - 容器技术
+     - Docker
 4. 软件工程、设计模式、架构
    - JavaScript 设计模式与开发实践
    - 依赖注入
@@ -23,7 +25,6 @@
    1. 计算机导论
    2. 操作系统
       1. [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
-      2. Docker
    3. 计算机网络
       - [HTTP](./HTTP/README.md)
    4. [数据结构与算法](./数据结构与算法/README.md)
@@ -67,6 +68,8 @@
     - https://zhuanlan.zhihu.com/p/28590489
 - 数据结构与算法
 - node 学习与应用
+  - [Introduction to the Node.js reference architecture, Part 3: Code consistency](https://developers.redhat.com/articles/2021/05/17/introduction-nodejs-reference-architecture-part-3-code-consistency?utm_source=ESnextNews.com&utm_medium=Weekly+Newsletter&utm_campaign=2021-05-25#)
+
   - http://nodejs.cn/learn/introduction-to-nodejs
   - cli
     - https://github.com/iwfan/chore-cli
