@@ -2,7 +2,7 @@
 
   最常见的错误类型可以描述为类型错误：在期望使用其他类型的值的情况下，使用了某种类型的值。
 
-  TypeScript的目标是成为JavaScript程序的静态类型检查器。
+  TypeScript 是 JavaScript 程序的静态类型检查器。
 
   [TypeScript的类型系统是*结构性的*，类型为集合，类型匹配只是结构上匹配相似，集合关系。](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html#types-as-sets)
 
