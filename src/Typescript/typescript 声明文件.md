@@ -1,4 +1,9 @@
-TS 声明用于 TS 编译器提供类型声明或者可配合 IDE 上 ts server 提供对应的代码补全、接口提示等功能。
+TS 环境声明允许你在 Typescript 能力下更好得使用现有的 JavaScript 库，比如
+
+1. 编译时类型检测
+2. IDE 上搭配 ts server 提供对应的代码补全、接口提示等功能。
+
+
 
 1. TS 源代码在编译的时候让 TS 编译器自动生成声明文件
 2. 使用第三方没有 TS 声明文件的包
@@ -19,3 +24,6 @@ TS 声明用于 TS 编译器提供类型声明或者可配合 IDE 上 ts server 
   - 扩展
 - 模块声明文件
 
+
+
+https://github.com/DefinitelyTyped/DefinitelyTyped

@@ -8,6 +8,8 @@
    - 微前端
 3. 框架技术
    - [Vue](./Vue/README.md)
+   - React
+     - [react-router-5-course](https://github.com/ReactTraining/react-router-5-course)
    - 容器技术
      - Docker
 4. 软件工程、设计模式、架构
@@ -22,14 +24,32 @@
    - *NodeJS*
    - *Flutter*
 6. 计算机基础
-   1. 计算机导论
+   1. 计算机组成原理
+   
+      讲述的是计算机是什么？计算是怎么回事？硬件如何为应用提供计算？
+   
    2. 操作系统
+   
+      如何合理规划应用的生命周期以及资源使用？
+   
       1. [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
+   
    3. 计算机网络
+   
+      网络中的不同节点的应用之间如何进行通信？
+   
       - [HTTP](./HTTP/README.md)
+   
    4. [数据结构与算法](./数据结构与算法/README.md)
+   
+      算法是解决某个实际问题的计算步骤，研究如何让这个计算步骤以最小的代价实现。
+   
       - 极客算法训练营
-   5. 编译原理
+   
+   5. 图形学
+   
+   6. 编译原理
+   
       - babel
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
@@ -39,6 +59,7 @@
 
 - 切勿心傲
 - 有问题多向别人请教，切勿一直沉迷
+- 收起你的自卑、任性等坏毛病，多观察其他人
 
 ## 2021 技术目标
 

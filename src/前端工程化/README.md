@@ -7,36 +7,67 @@
 
 - 前端工作流
 
-  - 代码
+  - 规范
+    - [开发工具](./前端开发工具合集.md)
+    - 代码
+      - 规范 [《前端代码规范实践总结》](./前端代码规范实践总结.md)
+        - 代码
+          - 命名规范
+          - 代码格式 prettier
+          - 代码质量 eslint
+        - 注释
+      - 管理（git）
+        - git flow 分支规范
+        - commit msg 提交信息
+        - merge request & code review
+    - 项目
+      - 项目组织管理
+        - multirepo
+        - monorepo
+      - 项目架构
+        - 组织结构
+      - 结构组织
+        - 模块、分层
+        - 基础库
+          - 组件库
+          - http
+      - 项目搭建
+        - 脚手架工具
+          - 创建项目模板(用于快速生成新项目的目录模板，并集成一系列体系化工具的安装，能够提升前端开发人员的效率，减少copy操作)，参考 vue-cli 交互及设计思路
+  - 本地开发
+  - CI/CD
+    - CI
+      - lint
+      - 构建
 
-    - 规范（eslint、prettier、[editorConfig](https://docs.microsoft.com/zh-cn/visualstudio/ide/create-portable-custom-editor-options?view=vs-2019)）
-      - 代码
-        - 命名规范
-        - 代码风格
-          - 代码格式
-          - 代码质量
-      - 注释规范
-    - 管理（git）
-      - git flow 分支规范
-      - commit msg 提交信息
-      - merge request & code review
-    - 相关文章
-      - [《前端代码规范实践总结》](./前端代码规范实践总结.md)
+        - webpack
+        - vite
+        - rollup
+      - 测试
+
+        - unit（单元） jest
+        - e2e（端对端） jest + puppeteer
+      - 文档
+    - CD
+      - 发版日志
+
+      - 部署
+  - 线上运维
+    - 前端监控
+      - 性能
+        - 性能优化
+          - 网络
+          - 页面
+            - 可见
+            - 可交互
+            - 文件大小
+              - tree-shaking
+      - 安全
+
+- 前端工作流
 
   - 项目
 
-    - 项目组织
-      - multirepo
-      - monorepo
-    - 项目搭建
-      - 目录结构
-        - 模块、分层
-      - 基础文件
-      - 脚手架工具
-        - 创建项目模板(用于快速生成新项目的目录模板，并集成一系列体系化工具的安装，能够提升前端开发人员的效率，减少copy操作)，参考 vue-cli 交互及设计思路
-    - 基础库
-      - 组件库
-      - http
     - 依赖管理
       - 包管理
         - npm
@@ -123,38 +154,6 @@
 
     - mock
     - hot replace
-
-  - lint
-
-  - 构建
-
-    - webpack
-    - vite
-    - rollup
-
-  - 测试
-
-    - unit（单元） jest
-    - e2e（端对端） jest + puppeteer
-
-  - 文档
-
-  - 发版、日志
-
-  - 部署
-
-  - 监控
-
-  - 性能优化
-
-    - 网络
-    - 页面
-      - 可见
-      - 可交互
-      - 文件大小
-        - tree-shaking
-
-  - 安全
 
 - 自动化集成方式
 
