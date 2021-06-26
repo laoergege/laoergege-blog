@@ -5,31 +5,35 @@
 知识准备
 
 - 基础知识
-  - JS
-    - ES next
-  - HTML&CSS
-  - 浏览器原理
-  - http
-  - 数据结构与算法
-    - 树
-    - 数组
-    - 字符串
-    - 链表
-    - 数字
-  - Vue
-  - nodejs
-  - 工程
-    - docker
-    - webpack
-      - plugin 和 loader 区别
-    - cli
+
+  1. js 手写专题
+
+  2. js 深入
+
+  3. es6+
+
+  4. 框架 Vue
+
+  5. 网络
+
+  6. 算法
+  7. 设计模式
+
+  7. nodejs
+
 - 项目经验
+  - 性能优化?
+  - 监控?
+  - H5 
+    - 滚动穿透
   - 抓包工具
     - Wireshark
   - 技术、规范相关
-  - 难点
+  - 项目难点
     - UI 交互
+  
 - 规划发展
+
 - 提问事项
 
 
@@ -37,6 +41,7 @@
 单词
 
 - stopPropagation
+- yield
 
 
 

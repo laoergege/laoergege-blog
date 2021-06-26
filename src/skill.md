@@ -8,6 +8,7 @@
    - 微前端
 3. 框架技术
    - [Vue](./Vue/README.md)
+     - vue3 conf https://node.fequan.com/videodetail/1621773573110
    - React
      - [react-router-5-course](https://github.com/ReactTraining/react-router-5-course)
    - 容器技术
@@ -18,6 +19,7 @@
      - https://github.com/mgechev/injection-js
 5. 语言、运行时原理
    - [HTML&CSS](./HTML&CSS/README.md)
+     - https://web.dev/learn/css/box-model/
    - [JavaScript](./JavaScript/README.md)
    - [浏览器工作原理及API](./浏览器原理及API/README.md)
      - https://github.com/Troland/how-javascript-works
@@ -106,7 +108,6 @@
 
 ## 系列教程
 
-- vue3 conf https://node.fequan.com/videodetail/1621773573110
 - canvas 
   - https://joshondesign.com/p/books/canvasdeepdive/toc.html
 

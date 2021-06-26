@@ -3,9 +3,15 @@
     - @rule
     - 选择器
     - 单位
+    
   - 响应式
-    - madie
-    - viewport
+    - Media Queries
+    - Flexbox
+    - Grid
+    - 容器查询 `@container`
+    
+    - Viewport
+    
   - 绘制相关
     - 颜色形状
     - 布局
@@ -15,14 +21,17 @@
     - 层叠上下文和层叠顺序
     - 变形
       - [zoom和transform:scale的区别](https://www.zhangxinxu.com/wordpress/2015/11/zoom-transform-scale-diff/)
+    
   - 多媒体
     - 图片
+    
   - 交互
     - 动画
       - 库
         - **anime.js**
         - [GSAP](https://github.com/greensock/GSAP)
     - 过度
+    
   - 预处理器
     - 文件模块
     - 变量

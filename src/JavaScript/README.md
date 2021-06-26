@@ -13,18 +13,26 @@ tags:
     - 弱类型语言：支持隐式类型转换的语言称为弱类型语言
     
       <img src="${images}/36f0f5bdce0a6d8c36cbb8a76931cff0.png" alt="img" style="zoom:50%;" />
+    
   - 编程语言的一般规律：用一定的词法和语法，表达一定语义，从而操作运行时
+
+    JavaScript 模块会从运行时、文法和执行过程三个角度去剖析 JS 的知识体系
+
     - 运行时
+      - 标准库
+      - 数据类型
       - 运行时库（标准实现）
       - 运行时系统（又称运行时环境、执行环境，实现语言特性，启动、执行程序）
     - 操作运行时
       - 标准库调用
       - 元编程
+
   - 语言规范
     - 词法（定义组成语言的单词， 是语言中最小单元）
     - 语法（将单子组织成有含义的短语和句子的规则）
       - JavaScript 的赋值操作都是值复制
     - 语义（结合上下文，可以推导出语句的真实含义）
+    
   - 运行时
     - 运行时库
       - 数据类型
@@ -53,7 +61,9 @@ tags:
       - 元编程
         - defineObjectProperty
         - Proxy & Reflect
+    
   - ES Next
+
   - JavaScript 专题
     - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
     - [JavaScript 模块](./JavaScript%20模块.md)
@@ -62,6 +72,8 @@ tags:
       - [JSON.stringify() 的 5 个秘密特性](https://medium.com/javascript-in-plain-english/5-secret-features-of-json-stringify-c699340f9f27)
 
 
+
+- [ ] JavaScript 字符串 Unicode
 
 1. javascript 是如何怎么实现变量动态类型？
 
