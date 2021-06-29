@@ -42,6 +42,7 @@
 
 - stopPropagation
 - yield
+- fibonacci 斐波那契
 
 
 
