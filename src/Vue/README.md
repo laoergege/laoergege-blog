@@ -59,16 +59,16 @@ VUE
 
   
 
-VUE3 系文
+VUE3 深度系文
 
-1. [vue 组件渲染流程](./2.vue 组件渲染流程.md)
-
+1. [vue3 的升级优化](./1.vue3的升级优化.md)
+2. [vue 组件渲染流程](./2.vue组件渲染流程.md)
 
 
 推荐好文
 
 - 数据流
   - [一切前端概念，都是纸老虎](https://mp.weixin.qq.com/s/oF-MJ39zh0-R65Q4vPX8Dw)
-
+- [Vue 3 的 SFC Style CSS Variable Injection 提案实现的背后](https://mp.weixin.qq.com/s/N1AoRSuK00V5QoZr4TWWvQ)
 
 

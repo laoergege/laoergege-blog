@@ -1,10 +1,11 @@
-##  技术栈结构
+## 技术栈结构
 
 1. 工程化
    - [前端工程化](./前端工程化/README.md)
 2. 工具链及方案化
    - typescript
      - https://github.com/type-challenges/type-challenges
+     - [api-extractor](https://api-extractor.com/)
    - 微前端
 3. 框架技术
    - [Vue](./Vue/README.md)
@@ -21,43 +22,41 @@
    - [HTML&CSS](./HTML&CSS/README.md)
      - https://web.dev/learn/css/box-model/
    - [JavaScript](./JavaScript/README.md)
-   - [浏览器工作原理及API](./浏览器原理及API/README.md)
+   - [浏览器工作原理及 API](./浏览器原理及API/README.md)
      - https://github.com/Troland/how-javascript-works
-   - *NodeJS*
-   - *Flutter*
+   - _NodeJS_
+   - _Flutter_
 6. 计算机基础
+
    1. 计算机组成原理
-   
+
       讲述的是计算机是什么？计算是怎么回事？硬件如何为应用提供计算？
-   
+
    2. 操作系统
-   
+
       如何合理规划应用的生命周期以及资源使用？
-   
+
       1. [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
-   
+
    3. 计算机网络
-   
+
       网络中的不同节点的应用之间如何进行通信？
-   
+
       - [HTTP](./HTTP/README.md)
-   
+      - [Web协议详解与抓包实战](https://www.youtube.com/playlist?list=PLoZQ0sz6CBHGLlYNKB-yzDRasrAYytelS)
+
    4. [数据结构与算法](./数据结构与算法/README.md)
-   
+
       算法是解决某个实际问题的计算步骤，研究如何让这个计算步骤以最小的代价实现。
-   
+
       - 极客算法训练营
-   
+
    5. 图形学
-   
    6. 编译原理
-   
       - babel
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
-
-
 
 - 切勿心傲
 - 有问题多向别人请教，切勿一直沉迷
@@ -91,6 +90,7 @@
     - https://zhuanlan.zhihu.com/p/28590489
 - 数据结构与算法
 - node 学习与应用
+
   - [Introduction to the Node.js reference architecture, Part 3: Code consistency](https://developers.redhat.com/articles/2021/05/17/introduction-nodejs-reference-architecture-part-3-code-consistency?utm_source=ESnextNews.com&utm_medium=Weekly+Newsletter&utm_campaign=2021-05-25#)
 
   - http://nodejs.cn/learn/introduction-to-nodejs
@@ -98,6 +98,7 @@
     - https://github.com/iwfan/chore-cli
     - https://github.com/google/zx/blob/main/index.mjs
     - https://github.com/Tencent/feflow
+
 - http
 - 重学 typescript
   - https://www.typescriptlang.org/docs/handbook/intro.html
@@ -108,7 +109,7 @@
 
 ## 系列教程
 
-- canvas 
+- canvas
   - https://joshondesign.com/p/books/canvasdeepdive/toc.html
 
 # 每日时间段安排
@@ -124,15 +125,7 @@
 - 22 - 23 学习
 - 23 - 睡觉 算法
 
-
-
-
-
-
-
 ![image-20210401233716231](${images}/image-20210401233716231.png)
-
-
 
 - web 安全
 
@@ -148,7 +141,7 @@
 - 构建工具
 
   - 工作流命令工具 npm script
-  - 打包工具 
+  - 打包工具
     - webpack
     - rollup
   - lint & prettier
@@ -161,7 +154,7 @@
 
   - BEM
   - CSS Modules
-  - CSS in JS 
+  - CSS in JS
   - Atom css
 
 - Web component
