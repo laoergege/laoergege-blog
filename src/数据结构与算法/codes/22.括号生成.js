@@ -11,27 +11,22 @@
  */
 var generateParenthesis = function(n) {
     const res = []
-    dfs(0, 0, n, str = '', res)
+    dfs(str = '', n, n, res)
     return res
 };
 
-var dfs = function(left, right, n, str, res) {
-    // 保证左括号>=右括号，并且不超过n
-    if(left < right || left > n || right > n) {
-        return
-    }
-
-    if(left === n && right === n) {
+var dfs = function (str, left, right, res) {
+    if (left === 0 && right === 0) {
         res.push(str)
         return
     }
 
-    if(left < n) {
-        r(left + 1, right, n, str + '(', res)
+    if (left !== 0) {
+        dfs(str + '(', left - 1, right, res)
     }
 
-    if(right < n) {
-        r(left, right + 1, n, str + ')', res)
+    if (right !== 0 && right > left) {
+        dfs(str + ')', left, right - 1, res)
     }
 }
 

@@ -1,8 +1,8 @@
 ## 技术栈结构
 
-1. 工程化
+1. 工程化（工具链 + 方案化 + 定制化 = 统一标准工程化）
    - [前端工程化](./前端工程化/README.md)
-2. 工具链及方案化
+2. 工具链
    - typescript
      - https://github.com/type-challenges/type-challenges
      - [api-extractor](https://api-extractor.com/)
@@ -24,43 +24,31 @@
    - [JavaScript](./JavaScript/README.md)
    - [浏览器工作原理及 API](./浏览器原理及API/README.md)
      - https://github.com/Troland/how-javascript-works
+     - canvas
+       - https://joshondesign.com/p/books/canvasdeepdive/toc.html
    - _NodeJS_
    - _Flutter_
 6. 计算机基础
-
    1. 计算机组成原理
-
       讲述的是计算机是什么？计算是怎么回事？硬件如何为应用提供计算？
-
    2. 操作系统
-
       如何合理规划应用的生命周期以及资源使用？
-
       1. [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
-
    3. 计算机网络
-
-      网络中的不同节点的应用之间如何进行通信？
-
       - [HTTP](./HTTP/README.md)
+      - 趣谈网络协议
+        - [ ] 刷完22讲 
       - [Web协议详解与抓包实战](https://www.youtube.com/playlist?list=PLoZQ0sz6CBHGLlYNKB-yzDRasrAYytelS)
-
    4. [数据结构与算法](./数据结构与算法/README.md)
-
-      算法是解决某个实际问题的计算步骤，研究如何让这个计算步骤以最小的代价实现。
-
       - 极客算法训练营
-
+      - 数据结构与算法之美
+        - [ ] 刷完基础篇
    5. 图形学
    6. 编译原理
       - babel
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
-
-- 切勿心傲
-- 有问题多向别人请教，切勿一直沉迷
-- 收起你的自卑、任性等坏毛病，多观察其他人
 
 ## 2021 技术目标
 
@@ -107,25 +95,6 @@
   - https://www.coursera.org/learn/jisuanji-biancheng/home/week/1
   - https://www.bilibili.com/video/av21376839/
 
-## 系列教程
-
-- canvas
-  - https://joshondesign.com/p/books/canvasdeepdive/toc.html
-
-# 每日时间段安排
-
-- 7 - 8 学习
-- 8 - 10 阅读
-- 10 - 12 工作
-- 13 - 14 阅读
-- 14 - 16 工作
-- 16 - 17 学习
-- 17 - 18 工作
-- 21 - 22 阅读
-- 22 - 23 学习
-- 23 - 睡觉 算法
-
-![image-20210401233716231](${images}/image-20210401233716231.png)
 
 - web 安全
 
