@@ -9,18 +9,21 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var dfs = function (nums, res, level = 0, arr) {
-   if(level === nums.length - 1) {
-      res.push(arr)
+var dfs = function (level, nums, res, total) {
+   if (level >= nums.length) {
+      total.push(res)
+      return;
    }
-   dfs(nums, res, level + 1, arr.concat())
-   dfs(nums, res, level + 1, arr.concat(nums[level]))
+
+   const s = nums[level]
+   dfs(level + 1, nums, [...res, s], total)
+   dfs(level + 1, nums, [...res], total)
 }
 
 var subsets = function(nums) {
-    const res = []
-    dfs(nums, res, nums, [])
-    return res
+   const total = []
+   dfs(level = 0, nums, res = [], total)
+   return total
 };
 // @lc code=end
 

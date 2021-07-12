@@ -48,3 +48,19 @@ patch 、processXXX、mountXXX/updateXXX、... 、hostXXX
 4. reactive 中的 flush
 
 5. diff children
+
+shapeFlag 是什么
+
+optimized
+
+面试
+1. 为什么需要响应式数据
+2. diff 算法，vue2 与 vue3 diff算法区别
+
+
+updateComponentPreRender(instance, next, optimized)
+
+shapeFlag 是什么，有什么作用
+
+更新过程，patchFlag 是什么、作用？
+patchFlag 是编译器生成的优化提示，在diff 阶段优化模式下，由优化编译器产的 vdom 只需处理带有 patchFlag 的更新

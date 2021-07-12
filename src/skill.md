@@ -6,12 +6,12 @@
    - typescript
      - https://github.com/type-challenges/type-challenges
      - [api-extractor](https://api-extractor.com/)
-   - 微前端
 3. 框架技术
    - [Vue](./Vue/README.md)
      - vue3 conf https://node.fequan.com/videodetail/1621773573110
    - React
      - [react-router-5-course](https://github.com/ReactTraining/react-router-5-course)
+   - 微前端
    - 容器技术
      - Docker
 4. 软件工程、设计模式、架构
@@ -50,6 +50,15 @@
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
 
+## Ing
+
+- 基础加强
+  - 数据结构与算法
+    - 极客算法训练营
+- 5篇阅读
+- 刻意练习
+- 新技术学习
+- 深入加强
 ## 2021 技术目标
 
 - 深入 JS 学习
