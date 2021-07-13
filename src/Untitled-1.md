@@ -60,7 +60,18 @@ optimized
 
 updateComponentPreRender(instance, next, optimized)
 
-shapeFlag 是什么，有什么作用
-
 更新过程，patchFlag 是什么、作用？
 patchFlag 是编译器生成的优化提示，在diff 阶段优化模式下，由优化编译器产的 vdom 只需处理带有 patchFlag 的更新
+packages/shared/src/patchFlags.ts
+patchElement
+
+
+
+
+
+shapeFlag 是什么，有什么作用？
+
+vite(f):
+1. cli
+2. server、ESModule
+3. build system、rollup
