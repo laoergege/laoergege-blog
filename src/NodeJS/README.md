@@ -6,65 +6,41 @@ tags:
 
 ## NodeJS
 
-- 简介：NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行环境
+- 简介：NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行时环境
 - 特点
-  - 单线程
-    - 减少了线程切换开销
-    - 基于 **V8 引擎** 的 JavaScript 运行环境
-      - JavaScript 是一个单线程的语言，相比多线程编程，简化了编程模式
-      - 采用用事件驱动、异步回调的模式
-  - 使用 **事件驱动**，**非阻塞式 I/O** 模型，轻量又高效
-- NodeJS 架构
-- NodeJS 核心知识
-  - 事件循环机制
+  - 基于 **V8 引擎** 的 JavaScript 运行环境
+  - 使用 **事件驱动**，**异步非阻塞 I/O** 模型
 - [安装及基本使用](./安装及基本使用.md)
-- 异步编程
-  - Callbacks
-  - Promises
-  - Generator
-  - Async and Await
-  - [Node Event Loop](./Node%20Event%20Loop.md)
-    - timers（setTimeout、setIntervel）
-    - setImmediate
-    - nextTick
+- NodeJS 架构
+  - js 是单线程、通过事件循环分发将异步任务分发到其他线程
+- [异步编程](../JavaScript/JavaScript%20异步编程.md)
+- [NodeJS 事件循环机制](./Node%20Event%20Loop.md)
+  - timers（setTimeout、setIntervel）
+  - setImmediate
+  - nextTick
 - 模块机制
   - CommonJS 模块规范
   - 模块解析机制
-- npm 包管理
-  - npm 配置及切换 npm 源
-  - package.json
-  - npm install 及 lock
-  - npm script/npx
+- [npm 包管理](./npm.md)
 - 调试及日志
   - console.log 只能打印不超过三层嵌套对象
     - JSON.stringify(obj, null, 2)
-- Node 全局对象
+- NodeJS 全局对象
   - process、buffer、__filename 和 __dirname
   - console 和 setTimeout 之类
   - ECMAScript 语言定义的全局对象，如 Date
-- Node 标准库
-  - readline
-  - console
-  - worker
-  - events
-    - NodeJS Event Emitter是NodeJS的核心API，它使您可以将侦听器功能附加到特定事件，一旦事件触发，该事件将被调用。此行为看起来像异步的，因为事件处理程序通常在其最初注册为事件处理程序的时间之后才调用。但是 Event Emitter 是 Node 观察者模式的内置实现，Node 不会在事件循环队列中安排任何事件，一旦事件触发，它将在调用栈上同步的执行监听器，观察者模式能够解耦代码，使代码可读性更强
-- 操作系统相关知识
-  - 异步 IO
-  - 进程与线程
-  - 中断机制
-  - 进程管理
-    - 进程通信
-      - 信号
-  - RPC 调用
+- NodeJS 模块
+  - buffer
+  - stream
+  - file
 - 使用场景
   - 集成工作流
     - Node CLI
     - 构建工具，例如 webpack
   - 客户端应用
-  - Web 服务
-    - BFF
-      - 对客户端提供 HTTP 服务
-      - 使用后端 RPC 服务
+  - BFF
+  - RPC 调用
+  - HTTP 服务
 
 - 生态
   - server example
@@ -81,3 +57,6 @@ tags:
     - [debug](https://github.com/visionmedia/debug)
   - 监控
     - [easy-monitor](https://github.com/hyj1991/easy-monitor)
+  - 命令行
+    - 输入
+    - 输出
