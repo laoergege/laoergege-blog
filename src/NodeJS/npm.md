@@ -1,3 +1,5 @@
+# npm
+
 - npm
   - 配置相关
     - npm 配置及切换 npm 源
@@ -5,17 +7,32 @@
       - [语义化版本](http://nodejs.cn/learn/semantic-versioning-using-npm)
   - 依赖相关
     - npm install 及 lock
-    - npm list 查看 npm 包安装的版本
+    - 包操作
   - npm script/npx
 
+## 依赖相关
 
+### 包操作
 
-npm view cowsay version
+```shell
+// 查看依赖版本
+npm view <package-name> version
 
+// 安装制定版本的依赖
 npm install <package>@<version>
 
-npm outdated、 npm update
+// 依赖查看
+npm list
 
+// 依赖过期查看
+npm outdated
+
+// 依赖更新
+npm update
+
+// 卸载依赖
 npm uninstall <package-name>
 
-npm install --production 避免安装这些开发依赖项
+// 避免安装开发依赖项
+npm install --production 
+```
