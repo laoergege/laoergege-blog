@@ -49,17 +49,6 @@
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
-
-## Ing
-
-- 基础加强
-  - 数据结构与算法
-    - 极客算法训练营
-- 5篇阅读
-- 刻意练习
-- 新技术学习
-  - http
-- 深入加强
 ## 2021 技术目标
 
 - 深入 JS 学习
