@@ -8,12 +8,12 @@ tags:
 - 简介：NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行时环境
 - 特点
   - 基于 **V8 引擎** 的 JavaScript 运行环境
-  - 使用 **事件驱动**，**异步非阻塞 I/O** 模型
+  - 使用 **事件驱动**，**非阻塞 I/O** 模型
 - [安装及基本使用](./安装及基本使用.md)
 - NodeJS 架构
   - js 是单线程、通过事件循环分发将异步任务分发到其他线程
 - [异步编程](../JavaScript/JavaScript%20异步编程.md)
-- [NodeJS 事件循环机制](./Node%20Event%20Loop.md)
+- [事件循环机制](./Node%20Event%20Loop.md)
   - timers（setTimeout、setIntervel）
   - setImmediate
   - nextTick
@@ -31,6 +31,9 @@ tags:
 - NodeJS 模块
   - buffer
   - stream
+    - [Node Stream](https://github.com/zoubin/streamify-your-node-program/blob/master/README.md)
+    - [Node.js Streams: Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
+    - [stream-handbook](https://github.com/substack/stream-handbook)
   - file
 - 使用场景
   - 集成工作流

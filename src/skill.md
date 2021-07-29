@@ -2,6 +2,7 @@
 
 1. 工程化（工具链 + 方案化 + 定制化 = 统一标准工程化）
    - [前端工程化](./前端工程化/README.md)
+   - web 前端性能优化
 2. 工具链
    - typescript
      - https://github.com/type-challenges/type-challenges
@@ -14,6 +15,11 @@
    - 微前端
    - 容器技术
      - Docker
+   - [浏览器工作原理及 API](./浏览器原理及API/README.md)
+     - https://github.com/Troland/how-javascript-works
+     - canvas
+       - https://joshondesign.com/p/books/canvasdeepdive/toc.html
+   - NodeJS
 4. 软件工程、设计模式、架构
    - JavaScript 设计模式与开发实践
    - 依赖注入
@@ -22,11 +28,6 @@
    - [HTML&CSS](./HTML&CSS/README.md)
      - https://web.dev/learn/css/box-model/
    - [JavaScript](./JavaScript/README.md)
-   - [浏览器工作原理及 API](./浏览器原理及API/README.md)
-     - https://github.com/Troland/how-javascript-works
-     - canvas
-       - https://joshondesign.com/p/books/canvasdeepdive/toc.html
-   - _NodeJS_
    - _Flutter_
 6. 计算机基础
    1. 计算机组成原理
