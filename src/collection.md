@@ -21,6 +21,11 @@
     - [前端人应该知道的 Centos/Docker/Nginx/Node/Jenkins 的基本操作](https://mp.weixin.qq.com/s/LSAYtaV-8hfPDjnzomMQgA)
   - 构建工具
     - https://bazel.build/
+  - monorepos
+    - makefiles https://seisman.github.io/how-to-write-makefile/recipes.html
+    - [Why I Prefer Makefiles Over package.json Scripts](https://spin.atomicobject.com/2021/03/22/makefiles-vs-package-json-scripts/?utm_source=ESnextNews.com&utm_medium=Weekly+Newsletter&utm_campaign=2021-04-13)
+    - https://github.com/wix/lerna-script
+    - [rushstack](https://github.com/microsoft/rushstack)
 - 框架技术
   - vue
     https://juejin.cn/post/6965057432544346143#heading-13
@@ -38,6 +43,7 @@
   - WebAssembly
     - [Making JavaScript run fast on WebAssembly](https://bytecodealliance.org/articles/making-javascript-run-fast-on-webassembly?utm_source=ESnextNews.com&utm_medium=Weekly+Newsletter&utm_campaign=2021-06-08)
     - [**An Introduction to WebAssembly for JavaScript Developers**](https://pascalpares.appspot.ovh/webassembly-for-javascript-developers/?utm_source=ESnextNews.com&utm_medium=Weekly+Newsletter&utm_campaign=2021-06-08)
+    - [assemblyscript](https://github.com/AssemblyScript/assemblyscript)
   - CSS
     - 动画
       - [lottie](http://airbnb.io/lottie/#/README)
@@ -68,10 +74,6 @@
   - [当面试官问Webpack的时候他想知道什么](https://mp.weixin.qq.com/s/2-zNlGrKUngWdQNvlcgESw)
 - http
   - [Deep dive in CORS: History, how it works, and best practices](https://ieftimov.com/post/deep-dive-cors-history-how-it-works-best-practices/)
-- monorepos
-  - makefiles https://seisman.github.io/how-to-write-makefile/recipes.html
-  - [Why I Prefer Makefiles Over package.json Scripts](https://spin.atomicobject.com/2021/03/22/makefiles-vs-package-json-scripts/?utm_source=ESnextNews.com&utm_medium=Weekly+Newsletter&utm_campaign=2021-04-13)
-  - https://github.com/wix/lerna-script
 - 动画
   - https://github.com/greensock/GSAP
   - http://svga.io/article.html
