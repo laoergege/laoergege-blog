@@ -30,8 +30,7 @@
   "homepage": "https://github.com/laoergege/laoergege-blog#readme",
   "dependencies": {
     "chalk": "^4.1.1",
-    "consola": "^2.15.3",
-    "vuepress": "^2.0.0-beta.22"
+    "consola": "^2.15.3"
   },
   "devDependencies": {
     "chokidar": "^3.5.2",
@@ -39,6 +38,7 @@
     "cross-env": "^6.0.3",
     "markdown-it-disable-url-encode": "^1.0.1",
     "markdown-it-task-lists": "^2.1.1",
+    "vuepress-vite": "^2.0.0-beta.23",
     "zx": "^1.15.2"
   }
 }

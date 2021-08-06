@@ -42,8 +42,7 @@
       - [Web协议详解与抓包实战](https://www.youtube.com/playlist?list=PLoZQ0sz6CBHGLlYNKB-yzDRasrAYytelS)
    4. [数据结构与算法](./数据结构与算法/README.md)
       - 极客算法训练营
-      - 数据结构与算法之美
-        - [ ] 刷完基础篇
+        - [] 刷到期中、动态、排序、字符串
    5. 图形学
    6. 编译原理
       - babel
@@ -52,8 +51,27 @@
         - https://github.com/estree/estree
 ## 2021 技术目标
 
-- 深入 JS 学习
-- 深入 Vue 框架
+- JavaScript 深入
+- Typescript 重学
+- 前端框架 Vue 深入
+- Web 进阶
+  - 浏览器渲染原理 学习
+- 数据结构与算法
+- Node 学习与应用
+- HTTP 学习
+- Rust 学习
+## 收集
+
+- 框架
+  - NodeJS
+    - 架构
+      - https://developers.redhat.com/blog/2021/03/08/introduction-to-the-node-js-reference-architecture-part-1-overview#
+    - 内存泄漏
+      - https://www.arbazsiddiqui.me/a-practical-guide-to-memory-leaks-in-nodejs/
+  - 浏览器
+
+
+
 - 浏览器渲染原理
   - 渲染管道
     - https://docs.google.com/presentation/d/1ak7YVrJITGXxqQ7tyRbwOuXB1dsLJlfpgC4wP7lykeo/edit#slide=id.p
@@ -76,10 +94,7 @@
     - https://www.youtube.com/watch?v=KM9coMpy5sQ&t=499s
     - https://www.youtube.com/watch?v=p-iiEDtpy6I
     - https://zhuanlan.zhihu.com/p/28590489
-- 数据结构与算法
-- node 学习与应用
 
-  - [Introduction to the Node.js reference architecture, Part 3: Code consistency](https://developers.redhat.com/articles/2021/05/17/introduction-nodejs-reference-architecture-part-3-code-consistency?utm_source=ESnextNews.com&utm_medium=Weekly+Newsletter&utm_campaign=2021-05-25#)
 
   - http://nodejs.cn/learn/introduction-to-nodejs
   - cli
@@ -87,10 +102,10 @@
     - https://github.com/google/zx/blob/main/index.mjs
     - https://github.com/Tencent/feflow
 
-- http
+
 - 重学 typescript
   - https://www.typescriptlang.org/docs/handbook/intro.html
-- rust 学习
+
 - 计算机导论
   - https://www.coursera.org/learn/jisuanji-biancheng/home/week/1
   - https://www.bilibili.com/video/av21376839/

@@ -5,7 +5,8 @@ tags:
 ---
 ## NodeJS
 
-- 简介：NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行时环境
+- NodeJS
+  简介：NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行时环境
 - 特点
   - 基于 **V8 引擎** 的 JavaScript 运行环境
   - 使用 **事件驱动**，**非阻塞 I/O** 模型
@@ -35,14 +36,6 @@ tags:
     - [Node.js Streams: Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
     - [stream-handbook](https://github.com/substack/stream-handbook)
   - file
-- 使用场景
-  - 集成工作流
-    - Node CLI
-    - 构建工具，例如 webpack
-  - 客户端应用
-  - BFF
-  - RPC 调用
-  - HTTP 服务
 
 - 生态
   - server example
@@ -62,3 +55,14 @@ tags:
   - 命令行
     - 输入
     - 输出
+- 实践
+  - 项目架构
+  - RPC
+  - 内存泄漏
+- 资料
+  - [使用 Node.js 构建 JavaScript 应用程序](https://docs.microsoft.com/zh-cn/learn/paths/build-javascript-applications-nodejs/)
+  - [NodeJS Design Patterns](https://www.packtpub.com/mapt/book/web-development/9781783287314)
+  - [An Introduction to libuv](http://nikhilm.github.io/uvbook/)
+- Deno
+  - 资料
+    - [Deno 运行时入门教程：Node.js 的替代品](https://www.ruanyifeng.com/blog/2020/01/deno-intro.html)

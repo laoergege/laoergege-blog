@@ -2,10 +2,10 @@
 // const configWebpack = require('./webpack-chain')
 
 import path from "path";
-import { defineUserConfig } from 'vuepress'
-import type { DefaultThemeOptions } from 'vuepress'
+import { defineUserConfig } from 'vuepress-vite'
+import type { DefaultThemeOptions } from 'vuepress-vite'
 import menu from "./menu";
-import plugins from "./plugins";
+import { resolve } from "./utils/path";
 
 export default defineUserConfig<DefaultThemeOptions>({
   // 站点信息配置
@@ -15,6 +15,8 @@ export default defineUserConfig<DefaultThemeOptions>({
 
   // 构建配置
   dest: path.resolve(__dirname, "../../docs"),
+  // vite 打包工具
+  bundler: '@vuepress/vite',
   // chainWebpack: configWebpack,
 
   // 主题
@@ -26,5 +28,18 @@ export default defineUserConfig<DefaultThemeOptions>({
     ...menu,
   },
   // markdown,
-  plugins
+
+  // 插件
+  plugins: [
+    [
+      resolve('./plugins/watcher.ts'),
+      {
+        paths: [
+          resolve('plugins.ts'),
+          resolve('menu.ts'),
+          resolve('plugins/*')
+        ]
+      }
+    ],
+  ]
 })
