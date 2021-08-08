@@ -57,8 +57,11 @@ tags:
     - 输出
 - 实践
   - 项目架构
-  - RPC
+  - [RPC 通信](./RPC%20通信.md)
   - 内存泄漏
+  - 数据类型验证
+    - JSON Schema
+    - typescript 运行验证
 - 资料
   - [使用 Node.js 构建 JavaScript 应用程序](https://docs.microsoft.com/zh-cn/learn/paths/build-javascript-applications-nodejs/)
   - [NodeJS Design Patterns](https://www.packtpub.com/mapt/book/web-development/9781783287314)
@@ -66,3 +69,20 @@ tags:
 - Deno
   - 资料
     - [Deno 运行时入门教程：Node.js 的替代品](https://www.ruanyifeng.com/blog/2020/01/deno-intro.html)
+
+
+Farrow
+类型安全的服务端框架设计目标
+Prevent Hanging Request（阻止请求意外挂起）
+Refuse Wrong Response（拒绝错误响应内容）
+No need to Monkey-Patching（无需篡改对象属性）
+Embedded Runtime-Validation（内置运行时验证）
+
+
+
+
+
+
+
+
+

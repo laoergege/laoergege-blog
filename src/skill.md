@@ -15,7 +15,8 @@
    - 微前端
    - 容器技术
      - Docker
-   - [浏览器工作原理及 API](./浏览器原理及API/README.md)
+   - Web
+     - [浏览器工作原理及 API](./浏览器原理及API/README.md)
      - https://github.com/Troland/how-javascript-works
      - canvas
        - https://joshondesign.com/p/books/canvasdeepdive/toc.html
@@ -55,7 +56,6 @@
 - Typescript 重学
 - 前端框架 Vue 深入
 - Web 进阶
-  - 浏览器渲染原理 学习
 - 数据结构与算法
 - Node 学习与应用
 - HTTP 学习
@@ -69,7 +69,8 @@
     - 内存泄漏
       - https://www.arbazsiddiqui.me/a-practical-guide-to-memory-leaks-in-nodejs/
   - 浏览器
-
+- 设计模式、架构
+  - [复杂系统架构设计应对之道](https://mp.weixin.qq.com/s/u5hW529GczJNZU0RdVPgeg)
 
 
 - 浏览器渲染原理
