@@ -10,32 +10,34 @@ tags:
   - 特点
     - 基于 **V8 引擎** 的 JavaScript 运行环境
     - 使用 **事件驱动**，**非阻塞 I/O** 模型
-- [安装及基本使用](./安装及基本使用.md)
-- NodeJS 架构
-  - js 是单线程、通过事件循环分发将异步任务分发到其他线程
-- [异步编程](../JavaScript/JavaScript%20异步编程.md)
-- [事件循环机制](./Node%20Event%20Loop.md)
-  - timers（setTimeout、setIntervel）
-  - setImmediate
-  - nextTick
-- 模块机制
-  - CommonJS 模块规范
-  - 模块解析机制
-- [npm 包管理](./npm.md)
-- 调试及日志
-  - console.log 只能打印不超过三层嵌套对象
-    - JSON.stringify(obj, null, 2)
-- NodeJS 全局对象
-  - process、buffer、__filename 和 __dirname
-  - console 和 setTimeout 之类
-  - ECMAScript 语言定义的全局对象，如 Date
-- NodeJS 模块
-  - buffer
-  - stream
-    - [Node Stream](https://github.com/zoubin/streamify-your-node-program/blob/master/README.md)
-    - [Node.js Streams: Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
-    - [stream-handbook](https://github.com/substack/stream-handbook)
-  - file
+  - [安装及基本使用](./安装及基本使用.md)
+  - NodeJS 架构
+    - js 是单线程、通过事件循环分发将异步任务分发到其他线程
+  - [异步编程](../JavaScript/JavaScript%20异步编程.md)
+  - [事件循环机制](./Node%20Event%20Loop.md)
+    - timers（setTimeout、setIntervel）
+    - setImmediate
+    - nextTick
+  - 模块机制
+    - CommonJS 模块规范
+    - 模块解析机制
+  - [npm 包管理](./npm.md)
+  - 调试及日志
+    - console.log 只能打印不超过三层嵌套对象
+      - JSON.stringify(obj, null, 2)
+  - NodeJS 全局对象
+    - process、buffer、__filename 和 __dirname
+    - console 和 setTimeout 之类
+    - ECMAScript 语言定义的全局对象，如 Date
+  - API 模块
+    - buffer
+    - stream
+      - [Node Stream](https://github.com/zoubin/streamify-your-node-program/blob/master/README.md)
+      - [Node.js Streams: Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
+      - [stream-handbook](https://github.com/substack/stream-handbook)
+    - file
+    - worker thread
+      - [深入理解 Node.js Worker Threads](https://zhuanlan.zhihu.com/p/167920353)
 - 实践
   - 开发环境
     - [nodemon](https://github.com/remy/nodemon)
@@ -47,11 +49,17 @@ tags:
     - JSON Schema
     - typescript 运行验证
   - http 服务
-    - 路由
+    - 路由层
     - 模板渲染
-      - ES6 模板引擎
-      - include 模板
-      - xss 过滤、模板 helper 函数
+      - 模板引擎
+        - ES6 模板引擎
+        - include 模板
+        - xss 过滤、模板 helper 函数
+      - SSR 同构
+        - 数据？
+    - Rest API
+    - GraphQL 专注数据聚合，前端要什么返回什么
+      - 对接后台服务？
 - 资料
   - [使用 Node.js 构建 JavaScript 应用程序](https://docs.microsoft.com/zh-cn/learn/paths/build-javascript-applications-nodejs/)
   - [NodeJS Design Patterns](https://www.packtpub.com/mapt/book/web-development/9781783287314)
@@ -89,4 +97,11 @@ Embedded Runtime-Validation（内置运行时验证）
 
 
 
+1. 需求分析
+2. 技术预研
+3. 项目开发
+4. 性能优化
+5. 框架和工程化
 
+
+template + es6 模板字符串 + new Function + with

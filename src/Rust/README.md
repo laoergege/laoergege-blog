@@ -103,3 +103,26 @@ println! 宏
     - 函数的定义位置无所谓
     - 返回值类型 `-> <type>`
     - 在 Rust 中，始终返回代码块 ({ ... }) 中最后一个表达式的值。 可以根据需要显式使用 return 关键字。
+- 资料
+  - [rust-training](https://github.com/tyrchen/rust-training)
+  - [透过 Rust 探索系统的本原：编程语言](https://zhuanlan.zhihu.com/p/365905673)
+
+
+核心价值观：
+- Memory safety
+- Speed (Zero cost abstraction)
+- Productivity
+
+
+引入了所有权（ownership）和借用机制来提供内存安全
+创造性地使用了类型安全来辅助并发安全
+golang 对异步 IO 支持有 green thread，Rust 在 async/await，高级的抽象并不必然以牺牲性能或者添加额外的运行时为代价？
+公开透明，Rust 将所有你需要了解的细节明确地在编译环节暴露出来，并且把什么可为什么不可为的边界清晰地展现。很多语言没有明确的边界，有些地方做很多限制，有些地方却什么限制都没有，使得编程本身需要靠开发者额外的自觉或者规范才能保证代码的正确性。
+
+
+在一个作用域（scope）内，一个值（value）只能有一个所有者（owner）：
+当所有者离开作用域时，值被丢弃（Drop）
+值可以从一个作用域移动（move）到另一个作用域，但当前所有者立刻失去对值的所有权
+值可以被借用（reference），但借用的生存期不能超过所有者的生存期（lifetime）：
+在一个作用域内，允许有多个不可变借用
+或者至多一个可变借用（可变借用是独占的）
