@@ -1,4 +1,4 @@
-# HTTP HEAD 字段总结
+# 常用 HTTP HEAD 字段总结
 
 > 学习笔记 《透视 http 协议》 进阶篇
 
@@ -180,24 +180,24 @@ Host: www.xxx.com\r\n
 
 ## HTTP 缓存
 
+http 中缓存控制字段有一下三个：
+
 1. Cache-Control(HTTP/1.1，优先级高)
 2. Expires(HTTP/1.0)
 3. Pragma: no-cache(相当于 Cache-Control: no-cache，主要是为了兼容 HTTP/1.0s)
 
-- Cache-Control
+### Cache-Control
   - no-store，不允许缓存
   - no-cache，不允许先使用缓存资源
   - must-revalidate，缓存失效必须与**回源服务器验证**
     > 测试发现，缓存失效，有无 must-revalidate，**只要有 If 验证条件存在，服务器大多都会进行协商验证**，**must-revalidate 更多与 proxy-revalidate 做区分，强调是源服务器验证还是代理服务器**。
   - max-age，缓存时间，相对响应报文的创建时刻
-    > 当没有显示设置 cache-control 或是 expire 时, 大部分浏览器会使用**启发式缓存**, 把资源缓存下来; 如果真的不想用缓存, 还是主动设置一下cache-control。  
-    >
+    > 当没有显示设置 cache-control 或是 expire 时, 大部分浏览器会使用**启发式缓存**, 把资源缓存下来; 如果真的不想用缓存, 还是主动设置一下cache-control: no-store。  
     > 启发式计算缓存在 RFC 里的建议是 **(Date - Last-modified) * 10%**
 
 **Cache-Control**，应答的双方都可以用这个字段进行缓存控制，互相协商缓存的使用策略。
 
-> 💡 浏览器刷新行为会自动请求带上 `max-age=0`，`max-age=0` 的效果和 `Cache-Control: no-cache` 一样，刷新时就不会走强缓存，甚至某些浏览器可能屏蔽 If 条件验证，不做协商缓存，直接请求返回 200 情况。
-
+> 💡 浏览器刷新行为会自动请求带上 `Cache-Control:max-age=0`，导致缓存失效，甚至带上 `Cache-Control: no-cache` ，屏蔽 If 条件验证，不做协商缓存。
 ### 协商缓存（条件验证请求）
 
 HTTP 协议就定义了一系列“If”开头的“条件请求”字段，专门用来与服务器检查验证资源是否过期。
@@ -254,13 +254,13 @@ html no-cache
 css js must-revalidate
 
 浏览器判断缓存流程
+0. 除非 no-store，不然现代浏览器都会启发式缓存
 1. 是否命中缓存
    1. service worker
    2. memory cache
       1. preloader
       2. preload
    3. disk cache
-      1. 启发式缓存
 2. 缓存是否失效
 3. 缓存是否要验证
 
@@ -268,3 +268,6 @@ css js must-revalidate
 服务器响应慢
 网络有问题
  - 丢包，需要不断重传
+
+http
+- 半双工

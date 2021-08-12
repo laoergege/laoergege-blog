@@ -51,19 +51,16 @@
 
 ```txt
 left, right = 0, len(array) - 1
-while left <= right # 可能没有等于
+while left <= right # 可能没有等于，不需要 if array[mid] == target 时就不要等于
   mid = (left + right) / 2
   if array[mid] == target:
     # break or return 
+  # 大于等于、加一减一的边界，如果数据已经判断使用过了就不需要等于
   elif array[mid] < target:
     left = mid + 1
   else 
     right = mid - 1
 ```
-
-
-
-搜索旋转排序数组
 
 
 计算机就是运算

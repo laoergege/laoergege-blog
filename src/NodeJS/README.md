@@ -7,12 +7,12 @@ tags:
 
 - NodeJS
   NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行时环境
-  - 特点
-    - 基于 **V8 引擎** 的 JavaScript 运行环境
-    - 使用 **事件驱动**，**非阻塞 I/O** 模型
-  - [安装及基本使用](./安装及基本使用.md)
   - NodeJS 架构
+    - 特点
+      - 基于 **V8 引擎** 的 JavaScript 运行环境
+      - 使用 **事件驱动**，**非阻塞 I/O** 模型
     - js 是单线程、通过事件循环分发将异步任务分发到其他线程
+  - [安装及基本使用](./安装及基本使用.md)
   - [异步编程](../JavaScript/JavaScript%20异步编程.md)
   - [事件循环机制](./Node%20Event%20Loop.md)
     - timers（setTimeout、setIntervel）
@@ -22,9 +22,11 @@ tags:
     - CommonJS 模块规范
     - 模块解析机制
   - [npm 包管理](./npm.md)
-  - 调试及日志
-    - console.log 只能打印不超过三层嵌套对象
-      - JSON.stringify(obj, null, 2)
+  - 调试及性能分析
+    - [调试指南](https://nodejs.org/zh-cn/docs/guides/debugging-getting-started/)
+    - [Node Profile](https://nodejs.org/zh-cn/docs/guides/simple-profiling/)
+    - [node-in-debugging](https://github.com/nswbmw/node-in-debugging)
+    - [Debugging Node.js with Chrome DevTools](https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27)
   - NodeJS 全局对象
     - process、buffer、__filename 和 __dirname
     - console 和 setTimeout 之类
@@ -60,6 +62,10 @@ tags:
     - Rest API
     - GraphQL 专注数据聚合，前端要什么返回什么
       - 对接后台服务？
+    - 性能测试
+      - 压测 http 服务（ab）网络
+      - top（cpu、men）、iostat（硬盘） 监控进程、硬件
+      - node 性能分析
 - 资料
   - [使用 Node.js 构建 JavaScript 应用程序](https://docs.microsoft.com/zh-cn/learn/paths/build-javascript-applications-nodejs/)
   - [NodeJS Design Patterns](https://www.packtpub.com/mapt/book/web-development/9781783287314)
@@ -100,8 +106,9 @@ Embedded Runtime-Validation（内置运行时验证）
 1. 需求分析
 2. 技术预研
 3. 项目开发
-4. 性能优化
-5. 框架和工程化
+4. 测试
+5. 性能优化
+6. 框架和工程化
 
 
 template + es6 模板字符串 + new Function + with
