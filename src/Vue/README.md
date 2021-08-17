@@ -1,11 +1,9 @@
 # VUE（3.x）
 
 - 组件化
-  - VNode
+  - vnode、vdom
   - 组件渲染流程
-    - 创建 vnode
-    - 渲染 vnode（diff）
-    - 生成 DOM（path）
+    - diff 算法
   - 模板编译器
 - MDV
   - 数据劫持
@@ -28,7 +26,8 @@
   - 命名冲突和数据来源不清晰
   - 指令
 - 前端路由
-- 其他
+- Vue API
+- 生态
   - JSX
   - web component
     - https://mp.weixin.qq.com/s/kqG7xUnpVRg0XU5HLxjARw

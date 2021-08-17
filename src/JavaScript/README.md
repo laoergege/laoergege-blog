@@ -17,6 +17,11 @@ tags:
     - 对象类型（引用类型）
     - [函数类型（特殊对象类型）](./JavaScript%20函数.md)
     - 类型检测
+      - typeof
+        - 缺点 `typeof null === 'object'`
+      - instanceof
+        - 缺点 `[引用类型] instanceof Object // true`
+      - Object.prototype.toString
   - 语言范式
     - 面向对象编程
     - 函数式编程
