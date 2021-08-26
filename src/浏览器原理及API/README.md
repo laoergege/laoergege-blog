@@ -12,10 +12,12 @@ tags:
 ## 浏览器原理
 
 - [多进程架构](./Chrome%20多进程架构.md)
-- [资源加载流程](./资源加载流程.md)
+- [页面导航流程](./页面导航流程.md)
 - [页面渲染流程](./页面渲染流程.md)
 - [事件更新流程](./事件更新流程.md)
 - 任务调度之事件循环
+
+## Web 应用性能优化
 ## Web API
 
 - [Canvas](./Canvas.md)
@@ -29,7 +31,12 @@ tags:
     - postMessage API
 - PWA
 - Web Component
-- Web Work
+  - Custom Elements
+  - Shadow DOM
+  - Template
+  - [Constructable Stylesheets](https://developers.google.com/web/updates/2019/02/constructable-stylesheets)
+- WebWork
+- ServiceWork
 - WebAss
 
 

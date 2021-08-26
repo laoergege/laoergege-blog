@@ -1,8 +1,11 @@
 # VUE（3.x）
 
 - 组件化
-  - vnode、vdom
-  - 组件渲染流程
+  > 组件是视图复用和更新的最小单位
+  - vnode
+    - component tree
+    - vdom
+  - 组件渲染、更新流程
     - diff 算法
   - 模板编译器
 - MDV
@@ -34,11 +37,11 @@
 
   
 
-VUE3 深度系文
+Vue3 系文
 
 1. [vue3 的升级优化](./1.vue3的升级优化.md)
 2. [vue 组件渲染流程](./2.vue组件渲染流程.md)
-3. [vue 组件更新流程](./2.vue组件更新流程.md)
+3. [vdom diff 更新流程](./vdom%20diff%20更新流程.md)
 
 
 推荐好文
@@ -47,4 +50,13 @@ VUE3 深度系文
   - [一切前端概念，都是纸老虎](https://mp.weixin.qq.com/s/oF-MJ39zh0-R65Q4vPX8Dw)
 - [Vue 3 的 SFC Style CSS Variable Injection 提案实现的背后](https://mp.weixin.qq.com/s/N1AoRSuK00V5QoZr4TWWvQ)
 
+业务架构
 
+分层
+U hook 工具代码
+M 业务数据、业务逻辑 通过 hook 封装可复用
+S 单例、运行时依赖注入、服务栈管理服务生命周期，Container 启动服务（封装 Vue-Router）
+V 视图层只关注消费视图相关的数据以及交互逻辑 Vue
+E 渲染引擎 dom
+
+支持 SSR

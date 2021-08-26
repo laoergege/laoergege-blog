@@ -21,7 +21,7 @@
      - canvas
        - https://joshondesign.com/p/books/canvasdeepdive/toc.html
    - NodeJS
-4. 软件工程、设计模式、架构
+4. 设计模式、架构模式
    - JavaScript 设计模式与开发实践
    - 依赖注入
      - https://github.com/mgechev/injection-js
@@ -29,6 +29,7 @@
    - [HTML&CSS](./HTML&CSS/README.md)
      - https://web.dev/learn/css/box-model/
    - [JavaScript](./JavaScript/README.md)
+     - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
    - _Flutter_
 6. 计算机基础
    1. 计算机组成原理

@@ -6,13 +6,13 @@ tags:
 ## NodeJS
 
 - NodeJS
-  NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行时环境
-  - NodeJS 架构
+  > NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行时环境
+  - [Node.js 异步事件驱动架构](./Node.js%20异步事件驱动架构.md)
     - 特点
       - 基于 **V8 引擎** 的 JavaScript 运行环境
       - 使用 **事件驱动**，**非阻塞 I/O** 模型
     - js 是单线程、通过事件循环分发将异步任务分发到其他线程
-    - [事件循环机制](./Node%20Event%20Loop.md)
+    - [事件循环机制](./Event%20Loop.md)
       - timers（setTimeout、setIntervel）
       - setImmediate
       - nextTick
@@ -30,10 +30,10 @@ tags:
     - 日志
       - console.log
   - 第三方扩展
-    - C++ addons
     - C++ addons NAPI
     - DLL
       - [node-ffi](https://github.com/node-ffi/node-ffi)
+    - WebAssembly
   - NodeJS 全局对象
     - process、buffer、__filename 和 __dirname
     - console 和 setTimeout 之类
@@ -88,7 +88,7 @@ tags:
         - 内存泄漏，导致 GC 过久
 - 资料
   - [使用 Node.js 构建 JavaScript 应用程序](https://docs.microsoft.com/zh-cn/learn/paths/build-javascript-applications-nodejs/)
-  - [NodeJS Design Patterns](https://www.packtpub.com/mapt/book/web-development/9781783287314)
+  - Node.js 设计模式
   - [An Introduction to libuv](http://nikhilm.github.io/uvbook/)
   - [node-in-debugging](https://github.com/nswbmw/node-in-debugging)
 - 生态

@@ -58,3 +58,9 @@ tags:
 
 - 学习资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
+
+
+强制类型
+- 报错
+- 返回错误值
+- 类型转换
