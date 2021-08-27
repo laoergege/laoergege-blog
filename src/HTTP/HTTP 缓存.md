@@ -8,11 +8,13 @@ tags:
 # HTTP 缓存
 
 - HTTP 缓存
-  - 字段
-    - Cache-Control
-    - If-* 条件字段
-  - 代理缓存
-  - 缓存策略
+  - [Cache-Control](#cache-control)
+  - [协商缓存](#协商缓存)
+  - [代理缓存](#代理缓存)
+  - [缓存策略](#缓存策略)
+    - 服务端缓存控制
+    - 客户端缓存控制
+    - 现代 Web 前端资源缓存策略
 ## Cache-Control
 
 http 中控制缓存的主要字段有一下三个：
@@ -51,10 +53,21 @@ http 中控制缓存的主要字段有一下三个：
   - private，表示缓存只能在客户端保存，不能放在代理上与别人共享
   - public，缓存完全开放，谁都可以存，谁都可以用
   - proxy-revalidate，缓存失效时代理服务器验证即可
-  - s-maxage，代理服务器缓存时间
+  - s-maxage，单独设置代理服务器缓存时间，与 max-age 区别开
   - no-transform，禁止代理服务对资源做转换
+### Vary
 
-## 协商缓存（条件验证请求）
+URL 原则上是一种网络上的资源概念，同个 URL 可以有多种资源版本形式。
+
+![图 10](images/a88d34744c98992ce0bd38df170fbf74743743e010f0f7e558738bd9d1d72dfd.png)  
+
+比如，你可以 `Accept: text/html`，也可以 `Accept: text/csv` 改为以不同的格式获取相同的资源，这些都是源服务器[内容协商](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Content_negotiation)的结果。
+
+Vary 字段是带在响应头部，它代表源服务器在内容协商阶段所使用的头部条件，通常被缓存服务器作为缓存决策的依据。
+
+![图 9](images/7d679f31875e7cfb7cc3f3f99efc6030698374dbedcc437da771db25f34c7551.png)  
+
+## 协商缓存
 
 HTTP 协议就定义了一系列“If”开头的“条件请求”字段，专门用来与服务器检查验证资源是否过期。**当请求带有条件字段，服务器就会验证资源是否过期**。
 
@@ -71,7 +84,12 @@ ETag 工作原理：
 
 Last-modified 也同样类似。 
 
-## 缓存策略总结
+## 缓存策略
+
+缓存代理有时候也会带来负面影响，缓存不良数据，需要及时刷新或删除
+### 服务端缓存控制
+
+![](images/server-cache-control.svg)  
 
 1. 内容长期不变的：版本化 URL 的长期缓存 max-age
 2. 经常变化的内容：协商缓存
@@ -80,13 +98,7 @@ Last-modified 也同样类似。
 像 js、css 之类长期变化
 
 index.html 不做版本化控制，不缓存控制 no-cache，协商验证
-
-服务端缓存设置：
-
-![图 1](images/d05f2c3b77e38574320e986da3758c6df883161910a5363f9f8e8c74219e4e12.png)  
-
-
-## 更多参考学习资料
+## 参考学习
 
 - [HTTP 缓存](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching#Cache_validation)
 - [可能是最被误用的 HTTP 响应头之一 Cache-Control: must-revalidate](https://zhuanlan.zhihu.com/p/60357719)

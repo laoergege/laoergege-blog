@@ -1,4 +1,4 @@
-# 常用 HTTP HEAD 字段总结
+# 常用 http head 字段总结
 
 > 学习笔记 《透视 http 协议》 进阶篇
 

@@ -70,6 +70,8 @@
     - 内存泄漏
       - https://www.arbazsiddiqui.me/a-practical-guide-to-memory-leaks-in-nodejs/
   - 浏览器
+  - React
+    - [手写系列-实现一个铂金段位的 React](https://mp.weixin.qq.com/s/C4pjEzYPZocRnJOaF1q0Jg)
 - 设计模式、架构
   - [复杂系统架构设计应对之道](https://mp.weixin.qq.com/s/u5hW529GczJNZU0RdVPgeg)
 
