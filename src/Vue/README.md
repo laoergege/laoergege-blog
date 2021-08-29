@@ -29,20 +29,19 @@
   - 命名冲突和数据来源不清晰
   - 指令
 - 前端路由
-- Vue API
+- API
+  - nextTick
 - 生态
   - JSX
+  - SSR
   - web component
     - https://mp.weixin.qq.com/s/kqG7xUnpVRg0XU5HLxjARw
-
-  
 
 Vue3 系文
 
 1. [vue3 的升级优化](./1.vue3的升级优化.md)
-2. [vue 组件渲染流程](./2.vue组件渲染流程.md)
+2. [vue 组件渲染流程](./vue%20组件渲染流程.md)
 3. [vdom diff 更新流程](./vdom%20diff%20更新流程.md)
-
 
 推荐好文
 
@@ -60,3 +59,32 @@ V 视图层只关注消费视图相关的数据以及交互逻辑 Vue
 E 渲染引擎 dom
 
 支持 SSR
+
+
+onVnodeUpdated
+
+
+
+
+
+updateComponentPreRender
+renderComponentRoot 
+shouldUpdateComponent
+
+vdom
+本质，描述视图的js对象
+精确更新，减少 DOM 操作
+抽象视图，跨平台
+
+
+
+
+component
+- vnode
+- subTree
+- props
+- slots
+
+fragment
+
+view = f(data) + effect()

@@ -4,6 +4,7 @@
 
 
 
+
 为了保证安全和协同，只有内核才能与硬件直接打交互
 
 系统调用过程
@@ -95,9 +96,32 @@
 
 ![图 2](images/34f1c3be7010029f60170ade1b23010c142b39b74b92a2c254966c7d676aa0c1.png)  
 
-缺点：请求越多线程越多，线程上下文切换占据的时间和内存浪费的也就越多。
+缺点：请求越多线程越多，**线程上下文切换占据的时间和内存浪费的也就越多**。
 
-除了阻塞 I/O 系统调用外，大多数现代操作系统还支持另一种访问资源的机制，称为非阻塞 I/O。
+除了阻塞 I/O 系统调用外，大多数现代操作系统还支持另一种访问资源的机制，称为非阻塞 I/O，即发起  I/O 系统调用时线程不会被阻塞，但对于资源的获取，你得主动轮询。**没必要的轮询也只会浪费 CPU 时间**。
+
+```c
+resources = [socketA, socketB, fileA]
+while (!resources.isEmpty()) {
+  for (resource of resources) {
+    // try to read
+    data = resource.read()
+    if (data === NO_DATA_AVAILABLE) {
+      // there is no data to read at the moment
+      continue
+    }
+    if (data === RESOURCE_CLOSED) {
+      // the resource was closed, remove it from the list
+      resources.remove(i)
+    } else {
+      //some data was received, process it
+      consumeData(data)
+    }
+  }
+}
+```
+
+
 
 非阻塞 I/O 模型
 - 主动轮询

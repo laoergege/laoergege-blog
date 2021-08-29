@@ -6,14 +6,13 @@ tags:
 
 # vue 组件渲染流程
 
-任何前端框架，最主要的核心功能就是渲染视图。在 Vue 中，整个应用的页面都是通过组件来构成并渲染来实现的。
+任何前端框架，最主要的核心功能就是渲染视图。在 Vue 中，整个应用的页面都是通过组件来构成并渲染成页面。
 
 ![picture 2](images/1281db002d7238b2948c8b50b3bb8882d7353ff9248c5f3049de3d0e3277a27d.png)  
 
-
 ## VNode 与 Vue 组件
 
-Vue 的内部渲染机制中引入 Virtual DOM 去抽象描述真实的 DOM。Virtual DOM 中每一个节点叫做 VNode，VNode 本质上是用来描述 DOM 的 JavaScript 对象，通过 `type` 指定不同的类型，比如普通元素节点、组件节点等。
+Vue 的内部渲染机制中引入 Virtual DOM 去抽象描述真实的 DOM。Virtual DOM 中每一个节点叫做 VNode，VNode 本质上是用来描述 DOM 节点的 JavaScript 对象。
 
 ```html
 <button class="btn" style="width:100px;height:50px">click me</button>
@@ -61,32 +60,31 @@ export interface VNode<
 }
 ```
 
-我们可以用 vnode 这样表示`<button>`节点。一个 VNode 节点属性最主要的是 `type`，`props`，`children`。
+我们可以用 vnode 这样表示`<button>`节点。一个 VNode 节点属性最主要的是节点类型 `type`，节点属性 `props`，字节点 `children`。
 
 引入 VNode 的好处：
 
-1. 任何常规的 GUI 都能用**类 DOM 数据结构**去描述，引入 VNode，做一层界面**抽象**，提供了**跨平台**能力。
-2. 赋予 JSX 更丰富的界面表达能力
-
-前面我们说过，可以通过 vnode 的 type 属性是指定节点类型，在 vue 中如何声明组件类型的节点?
+1. 任何常规的 GUI 都能用**类 DOM 数据结构**去描述，引入 VNode，主要是将视图**抽象化**，提供了**跨平台**能力。
+2. 提高开发效率，MDV 思维模式开发，避免了手动操作 DOM 效率地下以及某些场景下引发导致的性能问题，可通过 diff 算法精准计算 DOM 的最小变更操作。
+  
+通过 `type` 指定节点不同的类型，比如普通元素节点、组件节点等。在 vue 中组件类型的节点声明：
 
 ```javascript
-// 模板中引入一个组件标签
+// 模板中使用自定义组件
 <custom-component msg="test"></custom-component>
-
 
 // 组件标签 转换对于的 vnode 
 const CustomComponent = {
   // 在这里定义组件对象
 }
 
+// 组件对应的 vnode
 const vnode = {
   type: CustomComponent,
   props: { 
     msg: 'test'
   }
 }
-
 ```
 
 **组件类型的 vnode 在 Virtual DOM 树中是个抽象节点，Virtual DOM 到真实 DOM 的映射中是不包含抽象节点，即组件类型节点是不会被渲染在页面上，真正反映在页面的是组件的模板**。

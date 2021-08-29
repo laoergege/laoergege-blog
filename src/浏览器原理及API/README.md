@@ -17,11 +17,15 @@ tags:
 - [事件更新流程](./事件更新流程.md)
 - 任务调度之事件循环
 
+Web 安全策略
+- 同源策略
+- 内容安全策略（CSP）
+
 ## Web 应用性能优化
 ## Web API
 
-- [Canvas](./Canvas.md)
-- [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
+- DOM
+  - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
 - 页面通信
   - 同源
     - Broadcast Channel API
@@ -29,17 +33,10 @@ tags:
     - localStorage + storage 事件
   - 非同源
     - postMessage API
-- PWA
-- Web Component
-  - Custom Elements
-  - Shadow DOM
-  - Template
-  - [Constructable Stylesheets](https://developers.google.com/web/updates/2019/02/constructable-stylesheets)
+- [PWA](./PWA.md)
+- [WebComponent](./WebComponent.md)
 - WebWork
-- ServiceWork
-- WebAss
-
-
+- [Canvas](./Canvas.md)
 
 ## Blink（渲染引擎）
 
