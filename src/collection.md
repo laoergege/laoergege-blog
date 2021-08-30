@@ -86,4 +86,4 @@
 
 
 
-<img src="${images}/image-20210511100718498.png" alt="image-20210511100718498" style="zoom:80%;" />
+<img src="./images/image-20210511100718498.png" alt="image-20210511100718498" style="zoom:80%;" />

@@ -16,7 +16,7 @@ babel 的主要作用是代码转换
 
 ### babel 编译流程
 
-<img src="${images}/image-20210528194109636.png" alt="image-20210528194109636" style="zoom:80%;" />
+<img src="./images/image-20210528194109636.png" alt="image-20210528194109636" style="zoom:80%;" />
 
 ## Babel AST Ndoe Type
 
@@ -40,7 +40,7 @@ AST 是对源码的抽象，可以分为以下几类结点，有些语法比较�
 
   **有的表达式可以单独执行，符合语句的特点，所以也是语句，比如赋值表达式、数组表达式等**，但有的表达式不能单独执行，需要和其他类型的节点组合在一起构成语句。比如匿名函数表达式和匿名 class 表达式单独执行会报错
 
-  <img src="${images}/image-20210528214125057.png" alt="image-20210528214125057" style="zoom:80%;" />
+  <img src="./images/image-20210528214125057.png" alt="image-20210528214125057" style="zoom:80%;" />
 
 - 特殊
 
@@ -48,17 +48,17 @@ AST 是对源码的抽象，可以分为以下几类结点，有些语法比较�
 
     - import
 
-      <img src="${images}/image-20210528214514249.png" alt="image-20210528214514249" style="zoom:80%;" />
+      <img src="./images/image-20210528214514249.png" alt="image-20210528214514249" style="zoom:80%;" />
 
     - export
 
-      <img src="${images}/image-20210528214624847.png" alt="image-20210528214624847" style="zoom:80%;" />
+      <img src="./images/image-20210528214624847.png" alt="image-20210528214624847" style="zoom:80%;" />
 
   - class 语法
 
     class 的语法比较特殊，有专门的 AST 节点来表示
 
-    <img src="${images}/image-20210528214335053.png" alt="image-20210528214335053" style="zoom:80%;" />
+    <img src="./images/image-20210528214335053.png" alt="image-20210528214335053" style="zoom:80%;" />
 
   - File、program、comments 
 

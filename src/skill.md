@@ -117,7 +117,7 @@
 
 - web 安全
 
-  <img src="${images}/image-20210401233238173.png" alt="image-20210401233238173" style="zoom:50%;" />
+  <img src="./images/image-20210401233238173.png" alt="image-20210401233238173" style="zoom:50%;" />
 
 - 包管理工具
 
@@ -157,7 +157,7 @@
 
 - 性能测试工具
 
-  <img src="${images}/image-20210401230801709.png" alt="image-20210401230801709" style="zoom:50%;" />
+  <img src="./images/image-20210401230801709.png" alt="image-20210401230801709" style="zoom:50%;" />
 
 7FC8A9
 D5EEBB

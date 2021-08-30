@@ -19,7 +19,7 @@ Linux 对用户、文件、系统调用等都进行了完善的抽象，让系�
 
 内核是操作系统连接硬件，提供操作硬件、磁盘、内存分页、进程等最核心的能力，并拥有直接操作全部内存的权限，因此内核不能把自己的全部能力都提供给用户，而且也不能允许用户通过shell指令进行系统调用。Linux 下内核把部分进程需要的系统调用以 C 语言 API 的形式提供出来。部分系统调用会有权限检查，比如说设置系统时间的系统调用。
 
-<img src="${images}/image-20210605173152604.png" alt="image-20210605173152604" style="zoom:80%;" />
+<img src="./images/image-20210605173152604.png" alt="image-20210605173152604" style="zoom:80%;" />
 
 权限架构思想
 
@@ -49,9 +49,9 @@ Linux 对用户、文件、系统调用等都进行了完善的抽象，让系�
 
       `ls -l` 命令可查看
 
-      ![img](${images}/Ciqc1F91G6qACantAAC4GIUeips460.png)
+      ![img](./images/Ciqc1F91G6qACantAAC4GIUeips460.png)
 
-      ![img](${images}/CgqCHl91G9aADTBZAADD7IOpjac809.png)
+      ![img](./images/CgqCHl91G9aADTBZAADD7IOpjac809.png)
 
   - 文件初始权限
 

@@ -38,7 +38,7 @@
     "cross-env": "^6.0.3",
     "markdown-it-disable-url-encode": "^1.0.1",
     "markdown-it-task-lists": "^2.1.1",
-    "vuepress-vite": "^2.0.0-beta.23",
-    "zx": "^1.15.2"
+    "vuepress-vite": "^2.0.0-beta.24",
+    "zx": "^4.0.0"
   }
 }

@@ -94,7 +94,7 @@
 
 传统并发模型：多线程 + 阻塞 I/O
 
-![图 2](images/34f1c3be7010029f60170ade1b23010c142b39b74b92a2c254966c7d676aa0c1.png)  
+![图 2](./images/34f1c3be7010029f60170ade1b23010c142b39b74b92a2c254966c7d676aa0c1.png)  
 
 缺点：请求越多线程越多，**线程上下文切换占据的时间和内存浪费的也就越多**。
 
@@ -135,7 +135,7 @@ reactor 模式
 
 1. 如何防止单线程被阻塞？
 2. 单线程如何实现高并发？
-![图 3](images/93e7ee9714431158f6fb8e209627b8bbbdbd8adafc6af389d511ca786f34c1ff.png)  
+![图 3](./images/93e7ee9714431158f6fb8e209627b8bbbdbd8adafc6af389d511ca786f34c1ff.png)  
 
 
 

@@ -22,7 +22,7 @@ tags:
 
 无论我们运行任何语言写的程序都会经历以下内存生命周期
 
-<img src="${images}/1_slxXgq_TO38TgtoKpWa_jQ.png" alt="memory life" style="zoom:80%;" />
+<img src="./images/1_slxXgq_TO38TgtoKpWa_jQ.png" alt="memory life" style="zoom:80%;" />
 
 1. 分配内存：向操作系统申请分配内存。某些底层语言（如 C）需要显示申请操作，在高级语言当中，就不需要这样的操作
 2. 使用内存：在代码中使用分配变量的进行读取和写入操作
@@ -46,7 +46,7 @@ tags:
 
 JavaScript 引擎并将该对象类型数据分配存放到堆空间里面，分配后该对象会有一个在“堆”中的地址，然后再将该数据的地址写进到栈中的引用变量值，最终分配好内存的示意图如下所示：
 
-<img src="${images}/22100df5c75fb51037d7a929777c57bc.png" alt="img" style="zoom:80%;" />
+<img src="./images/22100df5c75fb51037d7a929777c57bc.png" alt="img" style="zoom:80%;" />
 
 #### Why 栈堆内存
 
@@ -87,7 +87,7 @@ f();
 
 ### 调用栈中的数据是如何回收的
 
-![img](${images}/b899cb27c0d92c31f9377db59939aaf3.jpg)
+![img](./images/b899cb27c0d92c31f9377db59939aaf3.jpg)
 
 当一个函数执行结束之后，JavaScript 引擎会通过向下移动 ESP 来销毁该函数保存在栈中的执行上下文，再次调用另外一个函数时，原来旧内容块会被直接覆盖掉，用来存放另外一个函数的执行上下文。
 
@@ -105,7 +105,7 @@ f();
 - **副垃圾回收器，主要负责新生代的垃圾回收。**
 - **主垃圾回收器，主要负责老生代的垃圾回收**。
 
-![img](${images}/4f9310c7da631fa5a57f871099bfbeaf.png)
+![img](./images/4f9310c7da631fa5a57f871099bfbeaf.png)
 
 
 
@@ -136,21 +136,21 @@ f();
 
 可以理解这个过程是清除掉红色标记数据的过程，可参考下图大致理解下其清除过程：
 
-![img](${images}/d015db8ad0df7f0ccb1bdb8e31f96e85.png)
+![img](./images/d015db8ad0df7f0ccb1bdb8e31f96e85.png)
 
 清除算法后，会产生大量不连续的内存碎片，因此需要 **标记 - 整理（Mark-Compact）**，这个标记过程仍然与标记 - 清除算法里的是一样的：
 
-![img](${images}/652bd2df726d0aa5e67fe8489f39a18c.png)
+![img](./images/652bd2df726d0aa5e67fe8489f39a18c.png)
 
 #### 增量标记算法
 
 JavaScript 是运行在主线程之上的，一旦执行垃圾回收算法，如果都需要将正在执行的 JavaScript 脚本暂停下来，待垃圾回收完毕后再恢复脚本执行，那么我们把这种行为叫做**全停顿（Stop-The-World）**。这种情况，应用的性能和响应能力都会直线下降。
 
-![img](${images}/9898646a08b46bce4f12f918f3c1e60c.png)
+![img](./images/9898646a08b46bce4f12f918f3c1e60c.png)
 
 在 V8 新生代的垃圾回收中，因其空间较小，且存活对象较少，所以全停顿的影响不大，但老生代就不一样了。为了降低老生代的垃圾回收而造成的卡顿，V8 将标记过程分为一个个的子标记过程，同时让垃圾回收标记和 JavaScript 应用逻辑交替进行，直到标记阶段完成，我们把这个算法称为**增量标记（Incremental Marking）算法**。
 
-![img](${images}/de117fc96ae425ed90366e9060aa14e7.png)
+![img](./images/de117fc96ae425ed90366e9060aa14e7.png)
 
 使用增量标记算法，可以把一个完整的垃圾回收任务拆分为很多小的任务，与其他任务交替执行，避免阻塞线程造成页面卡顿的感觉。
 

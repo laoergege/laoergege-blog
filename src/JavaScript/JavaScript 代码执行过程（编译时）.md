@@ -50,7 +50,7 @@ V8 架构下，使用编译的方式把高级语言的代码编译成机器码�
 
 编译器和解释器工作流程对比：
 
-![img](${images}/4e196603ecb78188e99e963e251b9781.png)
+![img](./images/4e196603ecb78188e99e963e251b9781.png)
 
 编译器和解释器都会将原码编译成中间码或者字节码。这个编译过程一般有三个阶段：
 
@@ -66,7 +66,7 @@ V8 架构下，使用编译的方式把高级语言的代码编译成机器码�
 
 词法分析，目的就是在连续的字符中识别出一个一个的不可能再分的、最小的单个字符或字符串（token），并尽可能地识别出符号的属性。
 
-<img src="${images}/838028071f63a132cc8b27b23960e5f5.png" alt="img" style="zoom: 50%;" />
+<img src="./images/838028071f63a132cc8b27b23960e5f5.png" alt="img" style="zoom: 50%;" />
 
 ### 语法分析
 
@@ -76,7 +76,7 @@ V8 架构下，使用编译的方式把高级语言的代码编译成机器码�
 
 该结构是计算机容易理解和处理的，和渲染引擎将 HTML 格式文件转换为计算机可以理解的 DOM 树的情况类似。
 
-<img src="${images}/7320526ef14d974be8393effcf25b436.png" alt="img" style="zoom: 50%;" />
+<img src="./images/7320526ef14d974be8393effcf25b436.png" alt="img" style="zoom: 50%;" />
 
 ### 语义分析
 
@@ -96,7 +96,7 @@ AST 不仅要以结构化地方式展示源码，而且在语义分析中扮演�
 
 V8 执行一段代码流程图：
 
-<img src="${images}/1af282bdc4036096c03074da53eb84ae.png" alt="img" style="zoom:80%;" />
+<img src="./images/1af282bdc4036096c03074da53eb84ae.png" alt="img" style="zoom:80%;" />
 
 按照中间不同产物划分阶段：
 
@@ -110,7 +110,7 @@ V8 执行一段代码流程图：
 
 解释器 Ignition 会根据 AST 生成字节码。字节码就是介于 AST 和机器码之间的一种代码。但是与特定类型的机器码无关，字节码需要通过解释器将其转换为机器码后才能执行。
 
-<img src="${images}/87d1ab147d1dc4b78488e2443d58a3ff.png" alt="img" style="zoom:80%;" />
+<img src="./images/87d1ab147d1dc4b78488e2443d58a3ff.png" alt="img" style="zoom:80%;" />
 
 #### 为什么使用字节码
 
@@ -123,13 +123,13 @@ V8 使用两种代码缓存策略来缓存生成的机器代码：
 1. 内存缓存（in-memory cache)：第一次执行一段代码时，会编译源 JavaScript 代码，并将编译后的二进制代码缓存在内存中，
 2. 硬盘缓存：关闭了浏览器，下次重新打开浏览器再次执行相同代码时，也可以直接重复使用编译好的二进制代码。
 
-<img src="${images}/a6f2ea6df895eb6940a9db95f54fa360.jpg" alt="img" style="zoom:50%;" />
+<img src="./images/a6f2ea6df895eb6940a9db95f54fa360.jpg" alt="img" style="zoom:50%;" />
 
 但是这也只是提高了启动效率，内存占用还是没解决。
 
 所以 v8 退而求其次，采用惰性编译，也就是先编译最外层的 js 代码，惰性编译除了能提升 JavaScript 启动速度，还可以解决部分内存占用的问题。
 
-<img src="${images}/v2-dc4229874fd1638b2edaebed1e4082fd_1440w.png" alt="img" style="zoom:50%;" />
+<img src="./images/v2-dc4229874fd1638b2edaebed1e4082fd_1440w.png" alt="img" style="zoom:50%;" />
 
 但这段代码必须被解析多次——绿色的代码一次、黄色的代码再解析一次（当 new Person 被调用）、红色的代码再解析一次（当 doWork() 被调用）。因此，如果你的 js 代码的闭包套了 n 层，那么最终他们至少会被 v8 解析 n 次！
 
@@ -139,15 +139,15 @@ V8 使用两种代码缓存策略来缓存生成的机器代码：
 
 1. 字节码虽然占用的空间比原始的 JavaScript 多，但是相较于机器代码，字节码还是小了太多，所以可以**将全部的代码直接编译成字节码，然后按需解释执行，同时也解决之前惰性编译、初始代码带来的问题**。
 
-   <img src="${images}/27d30dbb95e3bb3e55b9bc2a56e14d4b.jpg" alt="img" style="zoom:50%;" />
+   <img src="./images/27d30dbb95e3bb3e55b9bc2a56e14d4b.jpg" alt="img" style="zoom:50%;" />
 
 2. 生产字节码的花费时间比生成机器代码更少。
 
-   <img src="${images}/9e441845eb4af12642fe5385cdd1b05b.jpg" alt="img" style="zoom:50%;" />
+   <img src="./images/9e441845eb4af12642fe5385cdd1b05b.jpg" alt="img" style="zoom:50%;" />
 
 3. 字节码也是编译过程中的中间代码，可以看成是机器代码的抽象，引入了字节码，就可以统一将字节码转换为不同平台的二进制代码。总而言之，就是**抽象了代码、降低代码的复杂度，提供了跨平台能力**。
 
-   <img src="${images}/0b207ca6b427bf6281dce67d4f96835d.jpg" alt="img" style="zoom:50%;" />
+   <img src="./images/0b207ca6b427bf6281dce67d4f96835d.jpg" alt="img" style="zoom:50%;" />
 
 ### 执行代码
 
@@ -155,7 +155,7 @@ V8 使用两种代码缓存策略来缓存生成的机器代码：
 
 在 Ignition 执行字节码的过程中，如果发现有热点代码（HotSpot），比如一段代码被重复执行多次，这种就称为热点代码，那么后台的编译器 TurboFan 就会把该段热点的字节码编译为高效的机器码，然后当再次执行这段被优化的代码时，只需要执行编译后的机器码就可以了，这样就大大提升了代码的执行效率。
 
-<img src="${images}/662413313149f66fe0880113cb6ab98a.png" alt="img" style="zoom:67%;" />
+<img src="./images/662413313149f66fe0880113cb6ab98a.png" alt="img" style="zoom:67%;" />
 
 Ignition + TurboFan 的组合，就是字节码解释器 + 优化编译器的黄金组合，我们把这种技术称为即时编译（JIT）。除了 V8 使用了“字节码 +JIT”技术之外，苹果的 SquirrelFish Extreme 和 Mozilla 的 SpiderMonkey 也都使用了该技术。
 
@@ -181,7 +181,7 @@ JIT 技术的兴起，使得 JavaScript 的解释器不再是“单纯的”，�
 
 
 
-<img src="${images}/image-20210430000225043.png" alt="image-20210430000225043" style="zoom:50%;" />
+<img src="./images/image-20210430000225043.png" alt="image-20210430000225043" style="zoom:50%;" />
 
 V8 实现了 script 流和代码缓存技术。Script 流即当脚本开始下载的时候，async 和 deferred 的脚本在单独的线程中进行解析。这意味着解析会在脚本下载完成时立即完成。这会提升 10% 的页面加载速度。
 

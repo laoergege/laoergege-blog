@@ -34,11 +34,11 @@ JavaScript 的出现主要是为了服务浏览器，作为浏览器脚本语言
 
 我们使用宿主环境提供的异步 API （如 settimeout、setinterval 等）去注册回调任务到事件循环系统的任务队列中。
 
-<img src="${images}/1*iHhUyO4DliDwa6x_cO5E3A.gif" alt="img"  />
+<img src="./images/1*iHhUyO4DliDwa6x_cO5E3A.gif" alt="img"  />
 
 每次的执行一次循环过程，就相当从消息队列取一次任务到回调栈中进行完成。
 
-<img src="${images}/01e40e30db7e8a91eb70ce02fd8a6985.png" alt="img" style="zoom: 50%;" />
+<img src="./images/01e40e30db7e8a91eb70ce02fd8a6985.png" alt="img" style="zoom: 50%;" />
 
 在 ES5 之后，JavaScript 引入了 Promise，这样，不需要浏览器的安排，JavaScript 引擎本身也可以发起异步任务了。由于我们这里主要讲 JavaScript 语言，那么采纳 JSC 引擎的术语，我们把宿主发起的任务称为**宏任务**，把 JavaScript 引擎发起的任务称为**微任务**。
 
@@ -50,7 +50,7 @@ JavaScript 的出现主要是为了服务浏览器，作为浏览器脚本语言
 
 宏任务中产生的微任务会插入到微任务队尾，宏任务完成后清空微任务队列
 
-<img src="${images}/16f70a9a51a65d5302166b0d78414d65.jpg" alt="img" style="zoom:50%;" />
+<img src="./images/16f70a9a51a65d5302166b0d78414d65.jpg" alt="img" style="zoom:50%;" />
 
 Promise
 

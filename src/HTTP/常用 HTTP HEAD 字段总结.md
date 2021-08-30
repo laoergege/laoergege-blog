@@ -6,7 +6,7 @@
 
 数据类型、压缩编码、语言、字符集
 
-![图 1](images/66086af4ea623dad08f02c0d6d9cd5d44a45fec60f9831b12ecad7922577bcce.png)  
+![图 1](./images/66086af4ea623dad08f02c0d6d9cd5d44a45fec60f9831b12ecad7922577bcce.png)  
 
 1. 数据类型表示实体数据的内容是什么，使用的是 MIME type，相关的头字段是 Accept 和 Content-Type；
 2. 数据编码表示实体数据的压缩方式，相关的头字段是 Accept-Encoding 和 Content-Encoding；
@@ -39,7 +39,7 @@ Content-* 是实体字段，所以请求和响应里都可以用，作用是指�
 
 响应体格式：
 
-![图 2](images/90c620889c4d7759379dd6edba9e432f4586db49577fc24c7661230c86beb158.png)  
+![图 2](./images/90c620889c4d7759379dd6edba9e432f4586db49577fc24c7661230c86beb158.png)  
 
 ### 分段请求
 范围请求可以只获取部分数据，即“分块请求”，实现视频拖拽或者断点续传.
@@ -63,7 +63,7 @@ Content-* 是实体字段，所以请求和响应里都可以用，作用是指�
 
 响应体格式：
 
-![图 3](images/d05532155eab8744b5327d9dc6b3ee678a9910e3f075088c8183008a0aafd670.png)  
+![图 3](./images/d05532155eab8744b5327d9dc6b3ee678a9910e3f075088c8183008a0aafd670.png)  
 
 ## 连接管理
 
@@ -89,7 +89,7 @@ Content-* 是实体字段，所以请求和响应里都可以用，作用是指�
 
 同一条连接中，即使是长连接，由于 http 的请求应答模式，决定了 http 是“半双工”，只能一来一回收发数据，这就是队头阻塞的根源，后面的连接复用请求会被阻塞。
 
-![图 4](images/21eeea004e945f9c27eede678a686d7137192c66f916bafb1c5fe2caab24c90c.png)  
+![图 4](./images/21eeea004e945f9c27eede678a686d7137192c66f916bafb1c5fe2caab24c90c.png)  
 
 “队头阻塞”问题会导致性能下降，可以用“并发连接”和“域名分片”技术缓解，
 并发连接就是是一个浏览器并发多个连接，访问服务器，    
@@ -119,7 +119,7 @@ Cookie 技术，就相似给客户端贴上小纸条，上面写了一些只有�
 
 Cookie 机制的工作流程：
 
-![图 5](images/339958149815fd3d3c86c2ef66aa0b27018f34031b47066578b0c1582fa2b3e2.png)  
+![图 5](./images/339958149815fd3d3c86c2ef66aa0b27018f34031b47066578b0c1582fa2b3e2.png)  
 
 1. **Set-Cookie** 在客户端设置 cookie 信息
 2. 服务端通过 **Cookie** 字段获取 cookie 信息
@@ -155,7 +155,7 @@ Cookie 机制的工作流程：
 
 **Via** 是一个通用字段，请求头或响应头里都可以出现。每当报文经过一个代理节点，代理服务器就会把自身的信息追加到字段的末尾,追加的是代理主机名（或者域名）。
 
-![图 8](images/cdd8c967033ea1d1298bec785f0f3e3e92fcfaffc4e5be93c7cb6b0fb166adc1.png)  
+![图 8](./images/cdd8c967033ea1d1298bec785f0f3e3e92fcfaffc4e5be93c7cb6b0fb166adc1.png)  
 
 **X-Forwarded-For**，字面意思是“为谁而转发”，形式上和“Via”差不多，追加的是请求方的 IP 地址。
 

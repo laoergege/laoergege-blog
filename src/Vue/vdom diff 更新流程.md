@@ -9,7 +9,7 @@ tags:
 
 页面在 Vue 中就是由 component vnode 嵌套构成的树形结构的对象。
 
-![](images/component%20tree.svg)
+![](./images/component%20tree.svg)
 
 Vue 的更新粒度是组件级的，页面更新的本质就是递归对比新旧组件的 vdom （subTress）的差异变化再去调用对应平台的渲染操作相关的 API。
 
@@ -224,11 +224,11 @@ next [1, 3, 2, 6, 4, 5]
 1. 找到相同的前置元素和后置元素
 2. 对齐后存在三种情况
    1. 只有新子序列中有剩余要添加的新节点
-   ![图 7](images/58671c556dfbbe383fb40d5cbde60526b1c696a727506c8b011b8c27d77b1891.png)  
+   ![图 7](./images/58671c556dfbbe383fb40d5cbde60526b1c696a727506c8b011b8c27d77b1891.png)  
    1. 只有旧子序列中有剩余要删除的新节点
-   ![图 8](images/061fc7cc5bbfbda4db890940db416c0321e5aea40ae9a06d68c0bf54887dad08.png)  
+   ![图 8](./images/061fc7cc5bbfbda4db890940db416c0321e5aea40ae9a06d68c0bf54887dad08.png)  
    1. 双方都存在未知子序列
-   ![](images/tree%20diff.svg)
+   ![](./images/tree%20diff.svg)
 
 ### 源码分析
 
@@ -582,7 +582,7 @@ next [1, 3, 2, 6, 4, 5]
 
 Vue.js 的更新粒度是组件级别的，整体逻辑流程，如图
 
-![](images/diff-flow.svg)
+![](./images/diff-flow.svg)
 
 整个更新过程还是利用了树的深度遍历，递归执行 patch 方法。
 

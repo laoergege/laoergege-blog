@@ -12,5 +12,5 @@ generator 函数与普通函数区别：能够暂停执行，多次返回值
 
 
 
-![picture 1](images/3e95f6e1731b9694eb9f0fb9ccd9119e0c782cd1278183af2d2317d064dff7e7.png)  
+![picture 1](./images/3e95f6e1731b9694eb9f0fb9ccd9119e0c782cd1278183af2d2317d064dff7e7.png)  
 

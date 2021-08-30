@@ -54,9 +54,9 @@ HTTP 是纯粹的文本协议，它是规定了使用 TCP 协议来传输文本�
 
 ### 请求头、响应头常见字段
 
-![picture 1](images/dd11ef231b3da0c30d3d9a8d9356949d6e62db0a91e43814382abce59c4de6af.png)  
+![picture 1](./images/dd11ef231b3da0c30d3d9a8d9356949d6e62db0a91e43814382abce59c4de6af.png)  
 
-![picture 2](images/49a18b9426fce1bb4be130fdbdef3e32c0306a8a2318bf8fe919c4e0779c610e.png)  
+![picture 2](./images/49a18b9426fce1bb4be130fdbdef3e32c0306a8a2318bf8fe919c4e0779c610e.png)  
 
 ## http 版本发展
 

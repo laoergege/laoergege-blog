@@ -25,11 +25,11 @@
 
 - 数据结构
 
-  <img src="${images}/image-20210326000013315.png" alt="image-20210326000013315" style="zoom: 67%;" />
+  <img src="./images/image-20210326000013315.png" alt="image-20210326000013315" style="zoom: 67%;" />
 
 - 算法
 
-  <img src="${images}/image-20210326000114352.png" alt="image-20210326000114352" style="zoom:67%;" />
+  <img src="./images/image-20210326000114352.png" alt="image-20210326000114352" style="zoom:67%;" />
 
 - 数据结构
 - 算法

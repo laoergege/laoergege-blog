@@ -30,7 +30,7 @@ console.log(bar.getName())
 4. 由于 test2 并没有被内部函数引用，所以 test2 依然保存在调用栈中。
 5. 当执行到 foo 函数时，闭包就产生了；当 foo 函数执行结束之后，返回的 getName 和 setName 方法都引用“clourse(foo)”对象，所以即使 foo 函数退出了，**“clourse(foo)”依然被其内部的 getName 和 setName 方法引用**。所以在下次调用bar.setName或者bar.getName时，创建的执行上下文中就包含了“clourse(foo)”。
 
-![img](${images}/f9dd29ff5371c247e10546393c904edb.png)
+![img](./images/f9dd29ff5371c247e10546393c904edb.png)
 
 总的来说，产生闭包的核心有两步：**第一步是需要预扫描内部函数；第二步是把内部函数引用的外部变量保存到堆中**。
 

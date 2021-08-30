@@ -64,7 +64,7 @@ JavaScript 默认情况下是同步的，并且是单线程的，这就意味着
 
 
 
-<img src="${images}/01e40e30db7e8a91eb70ce02fd8a6985.png" alt="img" style="zoom:80%;" />
+<img src="./images/01e40e30db7e8a91eb70ce02fd8a6985.png" alt="img" style="zoom:80%;" />
 
 
 

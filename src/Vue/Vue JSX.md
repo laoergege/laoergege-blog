@@ -6,7 +6,7 @@
 
 
 
-<img src="${images}/1600333581745-d351a708-a861-4a59-ae1d-86e3b739f635.png" alt="img" style="zoom:50%;" />
+<img src="./images/1600333581745-d351a708-a861-4a59-ae1d-86e3b739f635.png" alt="img" style="zoom:50%;" />
 
 尼玛，组件库不支持，要自研，实现成本高，要延期，和历史设计规范不一致，改设计，总之各种借口和理由开始各方撕逼了。
 
@@ -26,13 +26,11 @@ https://mp.weixin.qq.com/s/VEtPc2PkJDJmWHn8YuRZHw
 
 vue2
 
-<img src="${images}/640" alt="图片" style="zoom:50%;" />
 
 https://github.com/vuejs/jsx
 
 vue3
 
-<img src="${images}/640-20210617140322634" alt="图片" style="zoom:50%;" />
 
 https://github.com/vuejs/jsx-next
 

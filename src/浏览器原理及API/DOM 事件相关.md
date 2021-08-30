@@ -1,6 +1,6 @@
 ### DOM 事件模型
 
-<img src="${images}/4e7271d6d2d04c449bcd1d073122e8c1~tplv-k3u1fbpfcp-zoom-1.image" alt="img" style="zoom:80%;" />
+<img src="./images/4e7271d6d2d04c449bcd1d073122e8c1~tplv-k3u1fbpfcp-zoom-1.image" alt="img" style="zoom:80%;" />
 
 DOM2 Events 规范规定事件流分为 3 个阶段: **事件捕获、到达目标 和 事件冒泡**。
 
@@ -55,9 +55,9 @@ scrollable 对象可分为两种类型（详见[W3C规范](https://www.w3.org/TR
 1. viewport ，target 为 Document
 2. overflow scroll element，element 上的 scroll 事件是不冒泡的，document 上的 scroll 事件冒泡。
 
-![image-20210623225043316](${images}/image-20210623225043316.png)
+![image-20210623225043316](./images/image-20210623225043316.png)
 
-<img src="${images}/image-20210623225120045.png" alt="image-20210623225120045" style="zoom:80%;" />
+<img src="./images/image-20210623225120045.png" alt="image-20210623225120045" style="zoom:80%;" />
 
 **并不是所有的事件都会冒泡**，也就是说并不是遮罩元素触发 scroll 冒泡到外层元素导致滚动。如果当前元素没有设置 overflow scroll 这样的属性，同时也没有 preventDefault 处理掉原生的滚动/滑动事件，那么此时触发的是 viewport 的滚动，即目标为 document。
 

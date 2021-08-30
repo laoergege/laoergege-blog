@@ -16,7 +16,7 @@
 
 ## Chrome 多进程架构
 
-![图 10](images/77a95ee1daecd5a8f856a67ef018eaedc6ddd42f36a1b9afe7f907341f4ee984.png)  
+![图 10](./images/77a95ee1daecd5a8f856a67ef018eaedc6ddd42f36a1b9afe7f907341f4ee984.png)  
 
 - 浏览器进程，主要负责界面显示、用户交互、子进程管理，同时提供存储等功能。
 - GPU进程 
@@ -47,9 +47,9 @@
 
 将浏览器主进程中更多的内部功能分出来，独立化成服务。
 
-![图 11](images/55d4ea2b3d3d922340c5b11c603730743f96bcae572796ea901dbb5046ea7c6d.png)  
+![图 11](./images/55d4ea2b3d3d922340c5b11c603730743f96bcae572796ea901dbb5046ea7c6d.png)  
 
-![图 12](images/a5290636c7ca45028a89e4f44865979d39e9202905d38263af29e63075cd085d.png)  
+![图 12](./images/a5290636c7ca45028a89e4f44865979d39e9202905d38263af29e63075cd085d.png)  
 
 ## 多进程协同工作
 
@@ -63,7 +63,7 @@
 
 ### 导航阶段  
 
-![图 13](images/570644fa5c7d55a4cd29eb698c30f482f40cdc78a10b47769141c245e10ab1d0.png)  
+![图 13](./images/570644fa5c7d55a4cd29eb698c30f482f40cdc78a10b47769141c245e10ab1d0.png)  
 
 1. 用户输入处理  
    浏览器进程处理用户输入，将 URL 转发给网络进程

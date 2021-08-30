@@ -45,7 +45,7 @@ http 中控制缓存的主要字段有一下三个：
 
 ## 代理缓存
 
-![图 6](images/6561aa12c52e04d459ba53c9d9eaba278a41bcacba1af8a51f64bda2ecfb6db9.png)  
+![图 6](./images/6561aa12c52e04d459ba53c9d9eaba278a41bcacba1af8a51f64bda2ecfb6db9.png)  
 
 缓存代理身份特殊，即是客户端也是服务端，所以还需要有一些新的“Cache-Control”属性来对它做细致的控制。
 
@@ -59,13 +59,13 @@ http 中控制缓存的主要字段有一下三个：
 
 URL 原则上是一种网络上的资源概念，同个 URL 可以有多种资源版本形式。
 
-![图 10](images/a88d34744c98992ce0bd38df170fbf74743743e010f0f7e558738bd9d1d72dfd.png)  
+![图 10](./images/a88d34744c98992ce0bd38df170fbf74743743e010f0f7e558738bd9d1d72dfd.png)  
 
 比如，你可以 `Accept: text/html`，也可以 `Accept: text/csv` 改为以不同的格式获取相同的资源，这些都是源服务器[内容协商](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Content_negotiation)的结果。
 
 Vary 字段是带在响应头部，它代表源服务器在内容协商阶段所使用的头部条件，通常被缓存服务器作为缓存决策的依据。
 
-![图 9](images/7d679f31875e7cfb7cc3f3f99efc6030698374dbedcc437da771db25f34c7551.png)  
+![图 9](./images/7d679f31875e7cfb7cc3f3f99efc6030698374dbedcc437da771db25f34c7551.png)  
 
 ## 协商缓存
 
@@ -80,7 +80,7 @@ ETag 还有“强”“弱”之分。强 ETag 要求资源在字节级别必须
 
 ETag 工作原理：
 
-![图 7](images/afaff54aeae0a40176e285f89da7fe10d6a1cd77a34b4da13dcb4ffb3b6b67b4.png)  
+![图 7](./images/afaff54aeae0a40176e285f89da7fe10d6a1cd77a34b4da13dcb4ffb3b6b67b4.png)  
 
 Last-modified 也同样类似。 
 
@@ -89,7 +89,7 @@ Last-modified 也同样类似。
 缓存代理有时候也会带来负面影响，缓存不良数据，需要及时刷新或删除
 ### 服务端缓存控制
 
-![](images/server-cache-control.svg)  
+![](./images/server-cache-control.svg)  
 
 1. 内容长期不变的：版本化 URL 的长期缓存 max-age
 2. 经常变化的内容：协商缓存

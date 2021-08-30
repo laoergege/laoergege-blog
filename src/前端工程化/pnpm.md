@@ -46,11 +46,11 @@ pnpm 特点：
 
       **而且你的代码就只能加载到项目 node_modules 里的依赖，保证安全性、严谨性**
 
-      <img src="${images}/image-20210324174810561.png" alt="image-20210324174810561" style="zoom:50%;" />
+      <img src="./images/image-20210324174810561.png" alt="image-20210324174810561" style="zoom:50%;" />
 
       但点开 qiankun 并没有发 node_modules，那 qiankun 的依赖呢？
 
-      <img src="${images}/image-20210324220122020.png" alt="image-20210324220122020" style="zoom:50%;" />
+      <img src="./images/image-20210324220122020.png" alt="image-20210324220122020" style="zoom:50%;" />
 
     - qiankun 只是个**软链接**，映射到 .pnpm/qiankun@2.4.0
 
@@ -62,13 +62,13 @@ pnpm 特点：
       >
       > `<name>@<version>` 的命名模式保证了包之间的相互隔离
       
-      <img src="${images}/image-20210327112011578.png" alt="image-20210327112011578" style="zoom:50%;" />
+      <img src="./images/image-20210327112011578.png" alt="image-20210327112011578" style="zoom:50%;" />
       
     - pnpm 会把 qiankun 及其依赖平级放在 node_modules 目录下
 
       这种设计巧妙得利用并兼容 Node Module Resolution 机制使用 qiankun 能够访问其依赖，而它的依赖也同样是**软链接**，映射到 .pnpm 下的包
 
-      <img src="${images}/image-20210327112333206.png" alt="image-20210327112333206" style="zoom:50%;" />
+      <img src="./images/image-20210327112333206.png" alt="image-20210327112333206" style="zoom:50%;" />
 
 在最后 `node_modules/.pnpm/qiankun@2.4.0` 是**硬链接**到全局存储的文件中去，节省磁盘空间！
 
@@ -82,7 +82,7 @@ pnpm 特点：
 
 如果仔细发现上面的案例，`node_modules/.pnpm` 路径下竟然会有 `node_modules` 文件，这样虽然我们自己的代码是被严格限制了，但第三方依赖包还是可以根据 Node Module Resolution 机制偷偷访问到其他包！
 
-<img src="${images}/image-20210611145816518.png" alt="image-20210611145816518" style="zoom:50%;" />
+<img src="./images/image-20210611145816518.png" alt="image-20210611145816518" style="zoom:50%;" />
 
 默认情况下，pnpm v5 创建一个“半严格” 的 node_modules。
 默认配置如下所示：

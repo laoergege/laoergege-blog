@@ -8,7 +8,7 @@ tags:
 
 任何前端框架，最主要的核心功能就是渲染视图。在 Vue 中，整个应用的页面都是通过组件来构成并渲染成页面。
 
-![picture 2](images/1281db002d7238b2948c8b50b3bb8882d7353ff9248c5f3049de3d0e3277a27d.png)  
+![picture 2](./images/1281db002d7238b2948c8b50b3bb8882d7353ff9248c5f3049de3d0e3277a27d.png)  
 
 ## VNode 与 Vue 组件
 
@@ -160,7 +160,7 @@ const rendererOptions = extend({ patchProp, forcePatchProp }, nodeOps)
 
 nodeOps(packages/runtime-dom/src/nodeOps.ts)
 
-<img src="${images}/image-20210415164529699.png" alt="image-20210415164529699" style="zoom:50%;" />
+<img src="./images/image-20210415164529699.png" alt="image-20210415164529699" style="zoom:50%;" />
 
 ```javascript
 // packages/runtime-core/src/renderer.ts
@@ -403,7 +403,7 @@ const setupRenderEffect = (instance, initialVNode, container, anchor, parentSusp
 
 这里要注意别把 subTree 和 initialVNode 弄混了（其实在 Vue.js 3.0 中，根据命名我们已经能很好地区分它们了，而在 Vue.js 2.x 中它们分别命名为 _vnode 和 $vnode），下图把 vnode、subTree、el 引用关系标记出来。
 
-![picture 3](images/6695ff886904a788fe1e8e6027a22e78f84e7310d28b17292c8f97b3000beda3.png)  
+![picture 3](./images/6695ff886904a788fe1e8e6027a22e78f84e7310d28b17292c8f97b3000beda3.png)  
 
 
 经过 patch 函数的递归处理，对这个子树的 vnode 类型进行判断，普通元素类型的节点才会被最终渲染到界面上。函数调用过程 patch => processElement => mountElement。
