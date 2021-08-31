@@ -1,6 +1,5 @@
 ### DOM 事件模型
 
-<img src="./images/4e7271d6d2d04c449bcd1d073122e8c1~tplv-k3u1fbpfcp-zoom-1.image" alt="img" style="zoom:80%;" />
 
 DOM2 Events 规范规定事件流分为 3 个阶段: **事件捕获、到达目标 和 事件冒泡**。
 

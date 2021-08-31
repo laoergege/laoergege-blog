@@ -9,7 +9,7 @@ tags:
 
 页面在 Vue 中就是由 component vnode 嵌套构成的树形结构的对象。
 
-![](./images/component%20tree.svg)
+![](./images/component tree.svg)
 
 Vue 的更新粒度是组件级的，页面更新的本质就是递归对比新旧组件的 vdom （subTress）的差异变化再去调用对应平台的渲染操作相关的 API。
 
@@ -228,7 +228,7 @@ next [1, 3, 2, 6, 4, 5]
    1. 只有旧子序列中有剩余要删除的新节点
    ![图 8](./images/061fc7cc5bbfbda4db890940db416c0321e5aea40ae9a06d68c0bf54887dad08.png)  
    1. 双方都存在未知子序列
-   ![](./images/tree%20diff.svg)
+   ![](./images/tree diff.svg)
 
 ### 源码分析
 
@@ -589,7 +589,7 @@ Vue.js 的更新粒度是组件级别的，整体逻辑流程，如图
 其中子节点的更新又分为多种情况，其中最复杂的情况为数组到数组的更新，核心 diff 算法是对于所有字节点进行同层比较，使用**去头尾的最长递增子序列**算法。
 ## 参考学习
 
-- [190.精读《DOM diff 原理详解》](https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/190.%E7%B2%BE%E8%AF%BB%E3%80%8ADOM%20diff%20%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E3%80%8B.md)
+- [190.精读《DOM diff 原理详解》](https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/190.%E7%B2%BE%E8%AF%BB%E3%80%8ADOM diff %E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E3%80%8B.md)
 - Vue.js 3.0 核心源码解析
 
 

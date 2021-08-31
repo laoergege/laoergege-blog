@@ -6,9 +6,9 @@
 
 **系列文**
 
-- [使用 GithubPage、GithubAction、VuePress 搭建个人博客](./使用%20GithubPage、GithubAction、VuePress%20搭建个人博客.md)
-- [开发一个七牛图床的 GithubAction](./开发一个七牛图床的%20GithubAction.md)
-- [npm i 优化加速](../前端工程/npm&yarn/npm%20i%20优化加速.md)
+- [使用 GithubPage、GithubAction、VuePress 搭建个人博客](./使用 GithubPage、GithubAction、VuePress 搭建个人博客.md)
+- [开发一个七牛图床的 GithubAction](./开发一个七牛图床的 GithubAction.md)
+- [npm i 优化加速](../前端工程/npm&yarn/npm i 优化加速.md)
 
 **TODO**
 

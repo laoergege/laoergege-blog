@@ -11,7 +11,7 @@ tags:
 > - [Inside look at modern web browser 系列](https://developers.google.com/web/updates/2018/09/inside-browser-part1)
 ## 浏览器原理
 
-- [多进程架构](./Chrome%20多进程架构.md)
+- [多进程架构](./Chrome 多进程架构.md)
 - [页面导航流程](./页面导航流程.md)
 - [页面渲染流程](./页面渲染流程.md)
 - [事件更新流程](./事件更新流程.md)
