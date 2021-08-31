@@ -29,16 +29,16 @@ export default defineUserConfig<DefaultThemeOptions>({
   // markdown,
 
   // 插件
-  plugins: [
-    [
-      resolve('./plugins/watcher.ts'),
-      {
-        paths: [
-          resolve('plugins.ts'),
-          resolve('menu.ts'),
-          resolve('plugins/*')
-        ]
-      }
-    ],
-  ]
+  // plugins: [
+  //   [
+  //     resolve('./plugins/watcher.ts'),
+  //     {
+  //       paths: [
+  //         resolve('plugins.ts'),
+  //         resolve('menu.ts'),
+  //         resolve('plugins/*')
+  //       ]
+  //     }
+  //   ],
+  // ]
 })
