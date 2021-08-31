@@ -41,7 +41,7 @@ jobs:
       with:
         ref: 'deploy'
         fetch-depth: 0
-      run: |
+    - run: |
         git config --global user.email "826037047@qq.com"
         git config --global user.name "lys"
         git add .
