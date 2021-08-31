@@ -4,4 +4,4 @@ src/.vuepress/.temp/
 
 src/.vuepress/.cache/
 
-docs
+dist
