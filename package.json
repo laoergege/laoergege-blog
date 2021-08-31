@@ -4,8 +4,8 @@
   "description": "Laoergege's Learning Track",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "cross-env DEBUG=vuepress* && vuepress dev src",
-    "docs:build": "cross-env NODE_ENV=production vuepress build src",
+    "docs:dev": "cross-env DEBUG=vuepress* && vuepress dev",
+    "docs:build": "cross-env NODE_ENV=production vuepress build",
     "publish": "git tag page -f && git push origin page -f"
   },
   "repository": {
