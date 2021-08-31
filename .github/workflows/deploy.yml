@@ -12,24 +12,26 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        ref: site
         fetch-depth: 0
     - name: Pull
       run: |
         git config --global user.email "13211239457@gmail.com"
         git config --global user.name "lys"
         git pull origin master
+    # 安装 node 环境
     - name: Install-node
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with: 
-        node-version: 12 
-    - name: SetCache
-      uses: actions/cache@v1
+        node-version: '14' 
+    # 使用缓存，加速构建
+    - name: Cache
+      uses: actions/cache@v2
       with: 
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
+    # 安装依赖
     - name: Install
       env: 
         CI: true
