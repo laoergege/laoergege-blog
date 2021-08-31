@@ -84,12 +84,24 @@ ETag 工作原理：
 
 Last-modified 也同样类似。 
 
-## 缓存策略
+## 缓存控制策略
 
 缓存代理有时候也会带来负面影响，缓存不良数据，需要及时刷新或删除
-### 服务端缓存控制
+### 服务端的缓存控制
 
 ![](./images/server-cache-control.svg)  
+### 客户端的缓存控制
+
+前面说过，客户端也可以发送附带 `Cache-Control` 缓存指令的请求。客户端在 HTTP 缓存体系里要面对的是代理和源服务器。
+
+![图 1](images/9b4fa558a294f0716e7dad1d5d8e20b9ffdd5056ac5ad2efa02d3c2ed9cc0756.png) 
+
+- max-stale，表明客户端愿意接收一个超过指定过期时间范围内的资源，比如 `max-stale：3，max-age: 5` 条件下相当于 `max-age: 8`
+- min-fresh，表示客户端只接受一个靠近过期时间的最小过期时间的资源，比如 `min-fresh：3，max-age: 5` 条件下相当于 `max-age: 2`
+- only-if-cached，表示只接受代理缓存的数据，不接受源服务器的响应
+- no-transform，
+
+### 现代 Web 前端 http 缓存策略
 
 1. 内容长期不变的：版本化 URL 的长期缓存 max-age
 2. 经常变化的内容：协商缓存
@@ -99,6 +111,7 @@ Last-modified 也同样类似。
 
 index.html 不做版本化控制，不缓存控制 no-cache，协商验证
 ## 参考学习
+ 
 
 - [HTTP 缓存](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching#Cache_validation)
 - [可能是最被误用的 HTTP 响应头之一 Cache-Control: must-revalidate](https://zhuanlan.zhihu.com/p/60357719)
