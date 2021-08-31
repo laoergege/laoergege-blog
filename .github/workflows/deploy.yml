@@ -35,7 +35,6 @@ jobs:
     - name: Build
       run: npm run docs:build
     # 博客部署
-    ## 
     - run: mv ./dist ../dist
     - uses: actions/checkout@v2
       with:
