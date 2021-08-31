@@ -36,12 +36,13 @@ jobs:
       run: npm run docs:build
     # 博客部署
     ## 
-    - run: move ./dist ../dist
+    - run: mv ./dist ../dist
     - uses: actions/checkout@v2
       with:
         ref: 'deploy'
         fetch-depth: 0
     - run: |
+        mv ../dist/* .
         git config --global user.email "826037047@qq.com"
         git config --global user.name "lys"
         git add .
