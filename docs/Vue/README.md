@@ -67,6 +67,7 @@ onVnodeUpdated
 
 
 
+
 updateComponentPreRender
 renderComponentRoot 
 shouldUpdateComponent
@@ -88,3 +89,8 @@ component
 fragment
 
 view = f(data) + effect()
+
+业务数据
+1. 散落在 vm，组件通信
+2. Redux，单向数据流，将散落在组件里面的状态聚拢起来成唯一单例
+3. 面向对象编程（建立 业务模型） + 响应式编程 + 规范

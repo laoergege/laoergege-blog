@@ -49,6 +49,8 @@ tags:
     - ChildProcess
     - WorkerThreads
       - [深入理解 Node.js Worker Threads](https://zhuanlan.zhihu.com/p/167920353)
+    - VM
+      - [NPM酷库：vm2，安全的沙箱环境](https://segmentfault.com/a/1190000012672620)
 - 实践
   - 开发环境
     - [nodemon](https://github.com/remy/nodemon)
@@ -124,12 +126,7 @@ Embedded Runtime-Validation（内置运行时验证）
 
 
 
-1. 需求分析
-2. 技术预研
-3. 项目开发
-4. 测试
-5. 性能优化
-6. 框架和工程化
+
 
 
 template + es6 模板字符串 + new Function + with

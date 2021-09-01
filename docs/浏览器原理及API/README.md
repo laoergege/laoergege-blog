@@ -38,6 +38,11 @@ Web 安全策略
 - WebWork
 - [Canvas](./Canvas.md)
 
+### 场景分类
+
+- 下载
+  - [文件下载，搞懂这9种场景就够了](https://mp.weixin.qq.com/s/PysSe6MykjYzVrWQCKJXvg)
+
 ## Blink（渲染引擎）
 
 浏览器是如何将 web content 转变成屏幕显示的像素，也就是我们看到的页面

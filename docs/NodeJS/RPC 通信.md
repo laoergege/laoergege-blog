@@ -16,3 +16,9 @@
   - [Protocol Buffers](https://developers.google.com/protocol-buffers)
 
 
+RPC
+- 网络协议
+- 序列化协议
+
+
+- [聊聊字节跳动 Node.js RPC 的设计实现](https://mp.weixin.qq.com/s/1GBK1q_X9vF_bnDBL0qfog)
