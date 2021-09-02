@@ -12,4 +12,4 @@
 ## 参考学习
 
 - [Web Components](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)
-- [Building Components ](https://developers.google.com/web/fundamentals/web-components)
+- [Building Components](https://developers.google.com/web/fundamentals/web-components)
