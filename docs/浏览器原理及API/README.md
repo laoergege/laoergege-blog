@@ -77,3 +77,18 @@ Blink 就像是胶水一样，连接调用不同基础组件（V8、Skia等）�
 
 
 > 注：由于 Chrome 对 Blank 引擎某些实现的修改，某些我们之前熟知的类名有了变化，比如 RenderObject 变成了 LayoutObject，RenderLayer 变成了 PaintLayer。感兴趣的看以参阅 [Slimming Paint](https://www.chromium.org/blink/slimming-paint?spm=taofed.bloginfo.blog.2.1d175ac8atKvCQ)
+
+
+MVC，其核心思想就是将数据和视图分离
+通过通信方式和控制器的不同实现，又分为
+MVP
+MVVM
+
+![基于 React 和 Redux 构建 MVC 模型](./images/57897eba6bdf54af31cda81e4d711d4d3a621ceac859a695227275d476ec3576.png) 
+
+DOM 操作会引发浏览器重排、重绘、合成操作
+对 DOM 操作不当的话甚至还会触发强制同步布局和布局抖动的问题
+
+虚拟 DOM？
+
+浏览器 GC 触发时机

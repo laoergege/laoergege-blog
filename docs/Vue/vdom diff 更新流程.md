@@ -7,9 +7,11 @@ tags:
 ---
 # vdom diff 更新流程
 
+> 以下示例代码基于 vue3.2 版本
+
 页面在 Vue 中就是由 component vnode 嵌套构成的树形结构的对象。
 
-![](./images/component tree.svg)
+![](./images/component-tree.svg)
 
 Vue 的更新粒度是组件级的，页面更新的本质就是递归对比新旧组件的 vdom （subTress）的差异变化再去调用对应平台的渲染操作相关的 API。
 
@@ -582,14 +584,14 @@ next [1, 3, 2, 6, 4, 5]
 
 Vue.js 的更新粒度是组件级别的，整体逻辑流程，如图
 
-![](./images/diff-flow.svg)
+![](./images/render-flow.svg)
 
 整个更新过程还是利用了树的深度遍历，递归执行 patch 方法。
 
 其中子节点的更新又分为多种情况，其中最复杂的情况为数组到数组的更新，核心 diff 算法是对于所有字节点进行同层比较，使用**去头尾的最长递增子序列**算法。
 ## 参考学习
 
-- [190.精读《DOM diff 原理详解》](https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/190.%E7%B2%BE%E8%AF%BB%E3%80%8ADOM diff %E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E3%80%8B.md)
+- [190.精读《DOM diff 原理详解》](https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/190.%E7%B2%BE%E8%AF%BB%E3%80%8ADOM20%diff20%%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E3%80%8B.md)
 - Vue.js 3.0 核心源码解析
 
 

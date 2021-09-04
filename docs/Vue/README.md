@@ -67,7 +67,7 @@ onVnodeUpdated
 
 
 
-
+setupComponent
 updateComponentPreRender
 renderComponentRoot 
 shouldUpdateComponent
@@ -94,3 +94,20 @@ view = f(data) + effect()
 1. 散落在 vm，组件通信
 2. Redux，单向数据流，将散落在组件里面的状态聚拢起来成唯一单例
 3. 面向对象编程（建立 业务模型） + 响应式编程 + 规范
+
+
+> 技巧提升:bulb: 
+> 1. 阅读代码技巧：要分清代码角色关系、流程关系
+> 2. 提高代码扩展性：分开标准流程和自定义插件
+
+生命周期
+
+在响应式数据中除了数据逻辑外，其他都是称为副作用。
+
+
+
+
+
+组件类型 children slots patch(subTree)
+元素类型 children 递归遍历
+

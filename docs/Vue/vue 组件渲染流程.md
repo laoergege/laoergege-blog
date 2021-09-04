@@ -3,16 +3,19 @@ tags:
  - vue
  - vnode
 ---
-
 # vue 组件渲染流程
+
+> 以下示例代码基于 vue3.0 版本
 
 任何前端框架，最主要的核心功能就是渲染视图。在 Vue 中，整个应用的页面都是通过组件来构成并渲染成页面。
 
 ![picture 2](./images/1281db002d7238b2948c8b50b3bb8882d7353ff9248c5f3049de3d0e3277a27d.png)  
 
-## VNode 与 Vue 组件
+## VNode
 
-Vue 的内部渲染机制中引入 Virtual DOM 去抽象描述真实的 DOM。Virtual DOM 中每一个节点叫做 VNode，VNode 本质上是用来描述 DOM 节点的 JavaScript 对象。
+Vue 的渲染原理中使用 Virtual DOM 机制去抽象描述真实的 DOM。Virtual DOM 中每一个节点叫做 VNode。
+
+我们可以用 vnode 这样表示`<button>`节点。一个 VNode 的属性最主要的是节点类型 `type`，节点属性 `props`，字节点 `children`。
 
 ```html
 <button class="btn" style="width:100px;height:50px">click me</button>
@@ -35,6 +38,15 @@ const vnode = {
 
 ```
 
+总结来说，什么是 VNode？VNode 本质上是用来描述视图的 JavaScript 对象。
+
+引入 VNode 的好处：
+
+1. 任何常规的 GUI 都能用**类 DOM 数据结构**去描述，引入 VNode，主要是将视图**抽象化**，提供了**跨平台**能力。
+2. 基于 vnode 实现 MDV 的功能，避免了手动操作 DOM 效率地下以及某些场景下引发导致的性能问题，可通过 diff vnode 精准计算 DOM 的最小变更操作。
+
+vue 提供更多的 vnode 类型：
+
 ```javascript
 // packages/runtime-core/src/vnode.ts
 export type VNodeTypes =
@@ -42,7 +54,7 @@ export type VNodeTypes =
   | VNode // slot
   | Component // 组件
   | typeof Text // 文本
-  | typeof Static // 
+  | typeof Static // 静态
   | typeof Comment // 注释
   | typeof Fragment // 片段
   | typeof TeleportImpl // 传送组件
@@ -59,15 +71,15 @@ export interface VNode<
 	...
 }
 ```
-
-我们可以用 vnode 这样表示`<button>`节点。一个 VNode 节点属性最主要的是节点类型 `type`，节点属性 `props`，字节点 `children`。
-
-引入 VNode 的好处：
-
-1. 任何常规的 GUI 都能用**类 DOM 数据结构**去描述，引入 VNode，主要是将视图**抽象化**，提供了**跨平台**能力。
-2. 提高开发效率，MDV 思维模式开发，避免了手动操作 DOM 效率地下以及某些场景下引发导致的性能问题，可通过 diff 算法精准计算 DOM 的最小变更操作。
+## Vue 组件
   
-通过 `type` 指定节点不同的类型，比如普通元素节点、组件节点等。在 vue 中组件类型的节点声明：
+组件是一种抽象概念、一种复用手段。前端领域视图组件化，即
+
+视图组件 = 视图模板 + 数据 + 视图交互逻辑
+
+TODO: 
+
+在 vue 中组件类型的节点声明：
 
 ```javascript
 // 模板中使用自定义组件
@@ -87,19 +99,12 @@ const vnode = {
 }
 ```
 
-**组件类型的 vnode 在 Virtual DOM 树中是个抽象节点，Virtual DOM 到真实 DOM 的映射中是不包含抽象节点，即组件类型节点是不会被渲染在页面上，真正反映在页面的是组件的模板**。
+那么一个组件类型的 vnode 是怎么渲染成我们看到的视图？
 
 ## 组件渲染流程
 
-> 渲染流程分初始渲染和更新渲染，以下分析主要为初始渲染，更新渲染下篇介绍。
-
-1. 使用特定渲染器的 createApp 创建应用实例
-2. 挂载应用（app.mount）
-   1. 创建 vnode （createVNode）
-   2. 渲染 vnode（render）
-         
-
-### 使用特定渲染器的 createApp 创建应用实例
+> 渲染流程分初始渲染和更新渲染，以下分析主要为初始渲染。
+### 应用初始化（createApp 创建应用实例）
 
 ```javascript
 // 在 Vue.js 3.0 中，标准初始化一个应用的方式如下
@@ -130,35 +135,24 @@ const createApp = ((...args) => {
 })
 
 ```
-
-其实 createApp = renderer + apiCreateApp
-
-- renderer 渲染器，相当于可自定义的扩展插件
-- apiCreateApp 标准化应用创建
-
-> 技巧提升:bulb: 
-> 1. 阅读代码技巧：要分清代码角色关系、流程关系
-> 2. 提高代码扩展性：分开标准流程和自定义插件
-
 #### 渲染器 renderer
-
-vue 是跨平台支持，不同平台根据接口标准实现自定义渲染器。`renderer = createRenderer(nodeOps)`
 
 ```javascript
 // packages/runtime-dom/src/index.ts
 const app = ensureRenderer().createApp(...args) // 延迟创建渲染，方便 tree-shakable
 
 // 创建自定义渲染器
+// vue 为了跨平台支持，抽象标准化渲染器的平台渲染接口。
+// renderer = createRenderer(nodeOps)
 function ensureRenderer() {
   return renderer || (renderer = createRenderer<Node, Element>(rendererOptions))
 }
 
 // 实现不同平台的渲染操作接口
 const rendererOptions = extend({ patchProp, forcePatchProp }, nodeOps)
-
 ```
 
-nodeOps(packages/runtime-dom/src/nodeOps.ts)
+nodeOps(packages/runtime-dom/src/nodeOps.ts)，节点的操作方法。
 
 <img src="./images/image-20210415164529699.png" alt="image-20210415164529699" style="zoom:50%;" />
 
@@ -166,11 +160,12 @@ nodeOps(packages/runtime-dom/src/nodeOps.ts)
 // packages/runtime-core/src/renderer.ts
 
 // createRenderer 是 vue 自定义渲染器的核心方法
-function createRenderer(options) {
-  return baseCreateRenderer(options)
+function createRenderer(nodeOps) {
+  return baseCreateRenderer(nodeOps)
 }
 
-function baseCreateRenderer(options) {
+function baseCreateRenderer(nodeOps) {
+  // 利用闭包，将 nodeOps 保存下来
   function render(vnode, container) {
     // 组件渲染的核心逻辑
   }
@@ -184,9 +179,10 @@ function baseCreateRenderer(options) {
 
 ```
 
+除了将渲染器标准化，还将应用流程创建也标准化。
 #### createAppAPI
 
-createApp 函数内部的 app.mount 方法是一个标准的可跨平台的组件渲染流程：**标准的跨平台渲染流程是先创建 vnode，再渲染 vnode**。
+createApp 函数内部的 app.mount 方法是一个标准的跨平台的组件渲染流程：**先创建 vnode，再渲染 vnode，生成 DOM**。
 
 ```javascript
 // Vue.js 利用闭包和函数柯里化，createAppAPI 包装 render
@@ -214,8 +210,7 @@ function createAppAPI(render) {
 
 进入应用挂载阶段后，接下来就是核心渲染流程。
 
-### 核心渲染流程：创建 vnode 和渲染 vnode
-
+### 应用挂载
 #### 创建 vnode
 
 ```javascript
@@ -228,6 +223,10 @@ function _createVNode(
   dynamicProps: string[] | null = null,
   isBlockNode = false
 ): VNode {
+
+  if (props) {
+    // 处理 props 相关逻辑，标准化 class 和 style
+  }
 
   // 对 vnode 类型信息编码
   // 以便在后面的 patch 阶段，可以根据不同的类型执行相应的处理逻辑
@@ -259,6 +258,8 @@ function _createVNode(
 
 工厂模式创建 vnode，并且对 props、children 做标准化处理、对 vnode 的 type 做编码。
 
+TODO: shapeFlag 是干什么用，编码有什么好处
+
 #### 渲染 vnode
 
 ```javascript
@@ -279,6 +280,8 @@ const render: RootRenderFunction = (vnode, container, isSVG) => {
 ```
 
 patch 的功能是对比新旧节点，然后挂载 DOM 或者更新 DOM。
+
+path 主要接受新 vnode、旧 vnode、容器等参数。
 
 patch 会根据不同的组件类型派发任务给 process 处理。根 vnode 是个组件类型，故 processComponent进行处理，调用 mountComponent 方法渲染组件。
 
@@ -351,7 +354,7 @@ const mountComponent = (initialVNode, container, anchor, parentComponent, parent
   // 创建组件实例
   const instance = (initialVNode.component = createComponentInstance(initialVNode, parentComponent, parentSuspense))
 
-  // 设置组件实例，调用组件的 setup 
+  // 调用组件的 setup 
   setupComponent(instance)
 
   // 设置并运行带副作用的渲染函数，渲染组件内容
@@ -359,11 +362,9 @@ const mountComponent = (initialVNode, container, anchor, parentComponent, parent
 }
 ```
 
-`mountComponent` 方法渲染组件中最主要的是 `setupRenderEffect`，该函数利用响应式库的 effect 函数创建了一个副作用渲染函数 componentEffect，当组件的数据发生变化时，effect 函数包裹的内部渲染函数 componentEffect 会重新执行一遍，从而达到重新渲染组件的目的。
+`mountComponent` 方法渲染组件中最主要的是 `setupRenderEffect`，**该函数利用响应式库的 effect 函数创建了一个组将渲染的副作用，当组件的数据发生变化时，effect 函数包裹的组件渲染函数会重新执行一遍，从而达到重新渲染组件的目的**。
 
-Vue 最重要的特性之一就是数据驱动视图，响应式数据的变化会引起影响组件的变化。
-
-在响应式数据中除了数据逻辑外，其他都是称为副作用。组件的渲染也是副作用，Vue 通过副作用渲染函数 `setupRenderEffect` 把组件的渲染跟响应式数据建立关联。
+除了创建渲染副作用外，还有调起初始渲染。
 
 ```javascript
 const setupRenderEffect = (instance, initialVNode, container, anchor, parentSuspense, isSVG, optimized) => {
@@ -397,18 +398,21 @@ const setupRenderEffect = (instance, initialVNode, container, anchor, parentSusp
 
   }, prodEffectOptions)
 
+
+  // 初始渲染
+  instance.update()
 }
 ```
-初始渲染会调用组件的 `render` 方法生成 subTree，subTree 也是一个 vnode 对象。组件 vnode 只是个抽象节点，实际是 patch subTree 渲染到页面。
+渲染组件生成 subTree（又模板生成而来），subTree 也是一个 vnode 对象。**组件 vnode 只是个抽象节点，实际是 patch 组件的 subTree 渲染到页面**。
 
 这里要注意别把 subTree 和 initialVNode 弄混了（其实在 Vue.js 3.0 中，根据命名我们已经能很好地区分它们了，而在 Vue.js 2.x 中它们分别命名为 _vnode 和 $vnode），下图把 vnode、subTree、el 引用关系标记出来。
 
 ![picture 3](./images/6695ff886904a788fe1e8e6027a22e78f84e7310d28b17292c8f97b3000beda3.png)  
 
-
-经过 patch 函数的递归处理，对这个子树的 vnode 类型进行判断，普通元素类型的节点才会被最终渲染到界面上。函数调用过程 patch => processElement => mountElement。
+经过 patch 函数的递归处理，对这个子树的 vnode 类型进行判断，普通元素类型的节点才会被最终渲染到界面上。
 
 ```javascript
+// patch => processElement => mountElement
 const mountElement = (vnode, container, anchor, parentComponent, parentSuspense, isSVG, optimized) => {
 
   let el
@@ -456,22 +460,28 @@ const mountElement = (vnode, container, anchor, parentComponent, parentSuspense,
   hostInsert(el, container, anchor)
 
 }
-
 ```
 
-最后调用抽象的 host 相关方法，比如 `hostCreateElement`，在 web 平台底层就是调用 `document.createElement` 方法。
+**最后调用抽象的 host 相关方法，比如 `hostCreateElement`，在 web 平台底层就是调用 `document.createElement` 方法**。
 
 如果子节点是数组，则执行 `mountChildren` 方法， 递归 patch 挂载 child，**挂载的顺序是先子节点，后父节点，最终挂载到最外层的容器上**，完成渲染。
-
 ## 总结
 
-1. 创建特定渲染器（createRenderer render）
-2. 创建应用实例（createApp apiCreateApp）
-3. 应用挂载 app.mount
-   1. 创建 app vnode createVnode
-render(vnode)
-patch(resiu)
-组件节点 processComponent 、mountComponent、setupRenderEffect、
-renderComponentRoot
-processElement、mountElement
-hostXXX
+vue 渲染流程：
+
+1. 应用初始化（createApp 创建应用实例）
+2. 挂载应用（app.mount）
+   1. 创建 根组件 vnode （createVNode）
+   2. 渲染 根组件 vnode（render）
+3. 递归 patch 根组件 vnode
+   
+整个渲染逻辑流程，就是**不断递归 patch vnode 这种深度优先遍历树的方式，最终调用平台的渲染接口，生成真实的 DOM**。其中 
+
+1. **vue 组件是抽象节点，是不会生成真实节点，调用组件模板生成 subTree 去渲染**
+2. **元素类型的节点才会最终落实渲染成真实 DOM 节点**
+
+> 下图为 vue 渲染流程，其中更新流程也包括在里面
+
+![](./images/render-flow.svg)
+
+下篇 [vdom diff 更新流程](./vdom%20diff%20更新流程.md)。
