@@ -8,7 +8,8 @@
   - 组件渲染、更新流程
     - diff 算法
   - 模板编译器
-- MDV
+- MDV（数据驱动视图）
+  - 响应式系统
   - 数据劫持
     - vue2 Object.defineProperty
     - vue3 proxy
