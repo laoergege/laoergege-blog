@@ -5,7 +5,7 @@ tags:
  - control
  - 缓存
 ---
-# HTTP 缓存
+# http 缓存
 
 - HTTP 缓存
   - [Cache-Control](#cache-control)
@@ -21,8 +21,11 @@ http 中控制缓存的主要字段有一下三个：
 
 1. Cache-Control(HTTP/1.1，优先级高)
 2. Expires(HTTP/1.0)
-3. Pragma: no-cache(相当于 Cache-Control: no-cache，主要是为了兼容 HTTP/1.0)
-  
+   > HTTP 1.0 的字段，表示缓存到期时间，是一个绝对的时间 (当前时间+缓存时间)
+3. Pragma: no-cache(相当于 Cache-Control: no-cache，主要是为了兼容 HTTP/1.0) 
+
+重点学习 `Cache-Control`
+
 - Cache-Control
   - no-store，不允许存储缓存资源
   - no-cache，不允许使用缓存资源，强制发送请求（协商缓存验证）
@@ -103,10 +106,10 @@ Last-modified 也同样类似。
 > - 刷新行为会自动请求带上 `Cache-Control:max-age=0`，导致浏览器缓存失效
 > - 禁止缓存会带上 `Cache-Control: no-cache` ，屏蔽 If 条件验证，强制请求，不做协商。
 
-### 现代 Web 前端 http 缓存策略
+### 前端缓存最佳实践
 
-1. 内容长期不变的：版本化 URL 的长期缓存 max-age
-2. 经常变化的内容：协商缓存
+1. 内容长期不变的：版本化 URL 的长期缓存 `max-age`
+2. 经常变化的内容：`no-cache` 协商缓存
 
 版本化 URL，就是在 URL 后面（通常是文件名后面）会加上版本号。像 js、css
 像 js、css 之类长期变化
@@ -123,15 +126,18 @@ index.html 不做版本化控制，不缓存控制 no-cache，协商验证
 
 
 浏览器判断缓存流程
+
 1. 除非 no-store，不然现代浏览器都会启发式缓存
 2. 是否命中缓存
    1. service worker
    2. memory cache
-      1. preloader
-      2. preload
+      1. 普通请求
+      2. preloader
+      3. preload
    3. disk cache
 3. 缓存是否失效
-4. 缓存是否要验证
+4. 缓存是否要重新验证 no-cache must-revalidate
+5. 网络请求
 
 
 服务器响应慢

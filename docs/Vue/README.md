@@ -1,19 +1,20 @@
 # VUE（3.x）
 
+- 响应性系统
+  - 响应性原理
+  - MDV（数据驱动视图）
 - 组件化
   > 组件是视图复用和更新的最小单位
   - vnode
     - component tree
     - vdom
-  - 组件渲染、更新流程
-    - diff 算法
+  - 渲染机制
+    - 渲染流程
+    - 更新流程
+      - diff 算法
+    - 调度机制
+  - 更新机制
   - 模板编译器
-- MDV（数据驱动视图）
-  - 响应式系统
-  - 数据劫持
-    - vue2 Object.defineProperty
-    - vue3 proxy
-  - 更新调度策略
 - 数据流
   - 父子组件
     - props、event

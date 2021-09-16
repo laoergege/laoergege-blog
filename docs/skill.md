@@ -61,7 +61,7 @@
 - Node 学习与应用
 - HTTP 学习
 - Rust 学习
-## 收集
+## 收集待看
 
 - 框架
   - NodeJS
@@ -72,6 +72,8 @@
   - 浏览器
   - React
     - [手写系列-实现一个铂金段位的 React](https://mp.weixin.qq.com/s/C4pjEzYPZocRnJOaF1q0Jg)
+    - [React技术揭秘](https://react.iamkasong.com)
+    - [react-illustration-series](https://github.com/7kms/react-illustration-series)
 - 设计模式、架构
   - [复杂系统架构设计应对之道](https://mp.weixin.qq.com/s/u5hW529GczJNZU0RdVPgeg)
 
@@ -171,3 +173,6 @@ D5EEBB
 以领域模型为基础进行复杂设计
 让技术专家与领域专家进行合作，以迭代的方式来解决特性领域的概念模型
 说白了就是由在某个领域摸爬滚打了多年的专家来梳理业务逻辑，与技术人员合作设计领域模型，然后再由技术人员根据领域模型进行实现的一套软件设计与迭代方法。
+
+
+当你脑海里有怎样的想法，你就会有怎样的行为。

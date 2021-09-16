@@ -1,17 +1,17 @@
 ---
-title: 'JavaScript'
 tags:
 	- javascript
 ---
-## JavaScript
+# JavaScript
 
 - JavaScript
-  - JavaScript 是一种弱类型的、动态的语言
-    - 使用之前就需要确认其变量数据类型的称为静态语言；而 JavaScript 只有在运行中才能确定变量数据类型，意味着同一个变量可以保存不同类型的数据，这类语言称为动态语言
-  - 语言规范
-    - 词法（定义组成语言的单词， 是语言中最小单元）
-    - 语法（将单子组织成有含义的短语和句子的规则）
-    - 语义（结合上下文，可以推导出语句的真实含义）
+  - 高级特性
+    - 面向对象编程
+    - 函数式编程
+    - 异步编程
+      - Promise
+    - 元编程
+    - 内存管理机制
   - 类型系统
     - 原始类型
     - 对象类型（引用类型）
@@ -22,9 +22,6 @@ tags:
       - instanceof
         - 缺点 `[引用类型] instanceof Object // true`
       - Object.prototype.toString
-  - 语言范式
-    - 面向对象编程
-    - 函数式编程
   - 运行时
     - 原型系统
     - [内存管理机制](./JavaScript 内存管理机制.md)
@@ -60,11 +57,5 @@ tags:
 - 学习资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
 
+font-family: trebuchet ms,Verdana,verdana ref,segoe ui,Candara,lucida grande,lucida sans unicode,lucida sans,Tahoma,sans-serif;
 
-强制类型
-- 报错
-- 返回错误值
-- 类型转换
-
-
-JavaScript 创始人 Brendan Eich 在“原型运行时”的基础上引入了 new、this 等语言特性，使之“看起来语法更像 Java”，而 Java 正是基于类的面向对象的代表语言之一。

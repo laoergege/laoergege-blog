@@ -24,3 +24,10 @@
   - 资料
     - [Microsoft Rust 教程](https://docs.microsoft.com/zh-cn/learn/paths/rust-first-steps/)
     - [rust-training](https://github.com/tyrchen/rust-training)
+
+
+
+- 语言规范
+    - 词法（定义组成语言的单词， 是语言中最小单元）
+    - 语法（将单子组织成有含义的短语和句子的规则）
+    - 语义（结合上下文，可以推导出语句的真实含义）

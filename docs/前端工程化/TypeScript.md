@@ -8,7 +8,5 @@
   - 类型声明库 [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)
   - VSCode 集成
     - TypeScript Language Service
-
-
-全 TS
-JS + DTS
+  - 实践
+    - JS + JSDoc + DTS

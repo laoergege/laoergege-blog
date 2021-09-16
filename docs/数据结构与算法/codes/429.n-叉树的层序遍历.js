@@ -18,24 +18,19 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    if(!root) return root
+    if (!root) return [];
 
     let queue = [root]
-    const res = []
+    let result = []
     while (queue.length) {
-        let tmp = []
-        res.push(
-            queue.map(e => {
-                if(e && e.children) {
-                    tmp.push(...e.children)
-                }
-                return e && e.val
-            })
+        result.push(
+            queue.map(e => e.val)
         )
-        queue = tmp
+
+        queue = queue.map(e => e.children).flat()
     }
 
-    return res
+    return result
 };
 /**
  * 队列实现 广度优先遍历
