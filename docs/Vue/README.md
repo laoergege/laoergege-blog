@@ -1,4 +1,4 @@
-# VUE（3.x）
+# Vue
 
 - 响应性系统
   - 响应性原理
@@ -39,11 +39,12 @@
   - web component
     - https://mp.weixin.qq.com/s/kqG7xUnpVRg0XU5HLxjARw
 
-Vue3 系文
+## Vue3 系文
 
 1. [vue3 的升级优化](./1.vue3的升级优化.md)
-2. [vue 组件渲染流程](./vue 组件渲染流程.md)
-3. [vdom diff 更新流程](./vdom diff 更新流程.md)
+2. [vue 组件渲染流程](./vue%20组件渲染流程.md)
+3. [vdom diff 更新流程](./vdom%20diff%20更新流程.md)
+4. slots(WIP)
 
 推荐好文
 
@@ -82,11 +83,7 @@ vdom
 
 
 
-component
-- vnode
-- subTree
-- props
-- slots
+
 
 fragment
 
@@ -97,10 +94,6 @@ view = f(data) + effect()
 2. Redux，单向数据流，将散落在组件里面的状态聚拢起来成唯一单例
 3. 面向对象编程（建立 业务模型） + 响应式编程 + 规范
 
-
-> 技巧提升:bulb: 
-> 1. 阅读代码技巧：要分清代码角色关系、流程关系
-> 2. 提高代码扩展性：分开标准流程和自定义插件
 
 生命周期
 
@@ -113,3 +106,10 @@ view = f(data) + effect()
 组件类型 children slots patch(subTree)
 元素类型 children 递归遍历
 
+- scheduler
+  - invalidateJob，删除任务，用于删除任务队列中的子组件渲染任务
+
+
+renderComponentRoot
+
+shouldUpdateComponent

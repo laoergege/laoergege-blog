@@ -13,6 +13,7 @@ const fileWatcher: PluginFunction<Config> = ({ paths, options = {} }) => {
     return {
         name: 'FileWatcher',
         onWatched(app, watchers, restart) {
+
             const watcher = chokidar.watch(paths, options)
 
             if(isDev) {

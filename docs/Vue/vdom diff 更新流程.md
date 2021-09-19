@@ -9,18 +9,17 @@ tags:
 
 > 以下示例代码基于 vue3.2 版本
 
-页面在 Vue 中就是由 component vnode 嵌套构成的树形结构的对象。
+在 Vue 中，页面是由组件构成的树形结构，整个组件树的 vnode tree 结构如下
 
 ![](./images/component-tree.svg)
 
 Vue 的更新粒度是组件级的，页面更新的本质就是递归对比新旧组件的 vdom （subTress）的差异变化再去调用对应平台的渲染操作相关的 API。
-
 ## 更新流程
 
 一个组件重新渲染可能会有两种场景：
 
-- 响应式数据引发对应依赖的组件更新（next: null）
-- 父组件引发的更新（next: vnode）  
+- 响应式数据触发的组件更新（next: null）
+- 父组件数据流触发的更新（next: vnode）  
 
 ```javascript
 // packages/runtime-core/src/renderer.ts
@@ -80,11 +79,13 @@ const setupRenderEffect: SetupRenderEffectFn = (
 
 组件的更新渲染主要任务：
 
-1. 更新组件 vnode 节点信息  
+1. 更新组件实例的 vnode、props、slots 等信息
 2. 生成新的 subTree
 3. 根据新旧子树 vnode 执行 patch 逻辑
 
-进入 patch 阶段，就是一个 diff 过程，在这个过程中，首先判断新旧节点是否是相同的 vnode 类型，如果不同则销毁掉旧的节点。如果是相同的 vnode 类型，继续 diff 更新流程了，接着会根据不同的 vnode 类型执行不同的处理逻辑。
+进入 patch 阶段开始 diff 新旧子树。
+
+在这个过程中，首先判断新旧节点是否是相同的 vnode 类型，如果不同则销毁掉旧的节点。如果是相同的 vnode 类型，继续 diff 更新流程了，接着会根据不同的 vnode 类型执行不同的处理逻辑。
 
 ```js
 const patch: PatchFn = (
@@ -152,7 +153,7 @@ const patch: PatchFn = (
       //...
         // normal update
         instance.next = n2
-        // 防止重复更新
+        // 去除子组件的渲染任务，防止重复更新
         invalidateJob(instance.update)
         // 子组件更新
         instance.update()
@@ -166,9 +167,9 @@ const patch: PatchFn = (
   }
 ```
 
-其中 next 从何而来？触发更新的组件在 update 的过程中，生成了新 subtree，在 diff 子节点过程中，shouldUpdateComponent 决定组件类型的子节点是否需要重新渲染，next 保存新的 vnode。
+子组件 update 时 next 就是来自父组件在 update 的过程中，生成了新 subtree。在 diff 子节点过程中，shouldUpdateComponent 决定组件类型的子节点是否需要重新渲染，next 保存新的 vnode。
 
-**整个 diff 过程是是一个树的深度优先遍历过程，Component 是抽象节点，实现最终的更新是在处理 element 类型的时候**。
+整个 diff 过程是是一个树的深度优先遍历过程，Component 是抽象节点，实现最终的更新是在处理 element 类型的时候。
 
 ```js
 // processElement => patchElement
@@ -187,14 +188,31 @@ const patchElement = (n1, n2, parentComponent, parentSuspense, isSVG, optimized)
 }
 ```
 
-更新元素的过程主要做两件事情：更新自身 props 和继续 diff 更新子节点。
+更新普通元素的过程主要做两件事情：更新自身 props 和继续 diff 子节点。
 
-`patchChildren` 会先根据子节点类型预处理下，对于一个元素的子节点类型可能会有三种情况：纯文本、vnode 数组和空。那么根据排列组合对于新旧子节点来说就有九种情况，比如：旧节点是文本，如果新子节点是空，那么删除旧子节点即可；旧子节点是空，如果新子节点是 vnode 数组，那么直接去旧子节点的父容器下添加多个新子节点即可等等。
+`patchChildren` 会先根据子节点类型预处理下，对于一个元素的子节点类型可能会有三种情况：纯文本、vnode 数组和空。
+- 旧：空
+  - 直接挂载 文本节点、数组子节点
+- 旧：文本
+  - 新：空
+    - 删除文本节点
+  - 新：文本
+    - 更新文本节点
+  - 新：数组
+    - 删除文本节点
+    - 挂载数组节点
+- 旧：数组
+  - 新：空
+    - 删除数组节点
+  - 新：文本
+    - 删除数组所有节点
+    - 挂载文本节点
+  - 新：数组
 
-**但新旧子节点类型都是数组时，才是真正的 diff 算法的核心**。
+**如果新旧子节点类型都是数组时，才是真正的 diff 算法的核心**。
 ## 核心 diff 算法
 
-核心 diff 算法，主要是如何高效得 diff 子节点数组，以较低的成本（减少 DOM 操作、提高节点复用）完成子节点的更新。
+核心 diff 算法，主要是如何高效得 diff 子节点数组，以较低的成本（**减少 DOM 操作、提高节点复用**）完成子节点的更新。
 
 理想情况（复用所有能复用的节点）的算法的时间复杂度 O(n³) 无法接受。
 
@@ -230,11 +248,12 @@ next [1, 3, 2, 6, 4, 5]
    1. 只有旧子序列中有剩余要删除的新节点
    ![图 8](./images/061fc7cc5bbfbda4db890940db416c0321e5aea40ae9a06d68c0bf54887dad08.png)  
    1. 双方都存在未知子序列
-   ![](./images/tree diff.svg)
+   ![](./images/tree-diff.svg)
 
 ### 源码分析
 
-> 以下笔者仅仅只是注释代码。。。具体源码过程分析推荐看 [Vue 3.0 diff 算法及原理](https://juejin.cn/post/6844904104834105351)
+> 以下笔者仅仅只是注释代码。。。  
+> 具体源码过程分析推荐看 [Vue 3.0 diff 算法及原理](https://juejin.cn/post/6844904104834105351)
 
 ```js
   // packages/runtime-core/src/renderer.ts
@@ -473,8 +492,8 @@ next [1, 3, 2, 6, 4, 5]
       j = increasingNewIndexSequence.length - 1
       // looping backwards so that we can use last patched node as anchor
       // 倒序遍历新序列
-      // 为什么倒序，DOM 平台上对插入和移动都是使用 node.insertBefor
-      // node.insertBefor 对节点的移动都得使用 anchor
+      // 为什么倒序，DOM 平台上对插入和移动都是使用 node.insertBefore
+      // node.insertBefore 对节点的移动都得使用 anchor
       // 使用倒序，保证了前面的节点是最新处理过的
       for (i = toBePatched - 1; i >= 0; i--) {
         const nextIndex = s2 + i
@@ -586,9 +605,9 @@ Vue.js 的更新粒度是组件级别的，整体逻辑流程，如图
 
 ![](./images/render-flow.svg)
 
-整个更新过程还是利用了树的深度遍历，递归执行 patch 方法。
+整个更新过程还是对树的深度递归执行 patch 方法。
 
-其中子节点的更新又分为多种情况，其中最复杂的情况为数组到数组的更新，核心 diff 算法是对于所有字节点进行同层比较，使用**去头尾的最长递增子序列**算法。
+先对比更新父节点，然后对子节点数组进行同层对比，其中子节点数组的更新又分为多种情况，其中最复杂的情况为数组到数组的更新，这正是核心 diff 所在，使用**去头尾的最长递增子序列**算法，最后在深度 diff 单个子节点，如此递归下去。
 ## 参考学习
 
 - [190.精读《DOM diff 原理详解》](https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/190.%E7%B2%BE%E8%AF%BB%E3%80%8ADOM20%diff20%%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E3%80%8B.md)

@@ -21,7 +21,8 @@
    1. CommonJS
    2. AMD
       1. RequireJS
-   3. UMD
+   3. CMD
+   4. UMD
 3. ES Modules
 ### 文件划分、对象命名空间方式、IIFE
 

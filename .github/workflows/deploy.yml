@@ -22,10 +22,11 @@ jobs:
     - name: Cache
       uses: actions/cache@v2
       with: 
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+    # 安装 pnpm
+    - name: Install pnpm
+      run: sudo npm install -g pnpm
     # 安装依赖
     - name: Install
       env: 

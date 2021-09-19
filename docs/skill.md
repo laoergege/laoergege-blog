@@ -30,18 +30,13 @@
      - https://web.dev/learn/css/box-model/
    - [JavaScript](./JavaScript/README.md)
      - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
-   - _Flutter_
+   - Flutter
 6. 计算机基础
    1. 计算机组成原理
-      讲述的是计算机是什么？计算是怎么回事？硬件如何为应用提供计算？
    2. 操作系统
-      如何合理规划应用的生命周期以及资源使用？
-      1. [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
+      - [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
    3. 计算机网络
       - [HTTP](./HTTP/README.md)
-      - 趣谈网络协议
-        - [ ] 刷完22讲 
-      - [Web协议详解与抓包实战](https://www.youtube.com/playlist?list=PLoZQ0sz6CBHGLlYNKB-yzDRasrAYytelS)
    4. [数据结构与算法](./数据结构与算法/README.md)
       - 极客算法训练营
         - [] 刷到期中、动态、排序、字符串
@@ -76,6 +71,10 @@
     - [react-illustration-series](https://github.com/7kms/react-illustration-series)
 - 设计模式、架构
   - [复杂系统架构设计应对之道](https://mp.weixin.qq.com/s/u5hW529GczJNZU0RdVPgeg)
+- 计算基础
+  - 计算机网络
+    - 趣谈网络协议
+    - [Web协议详解与抓包实战](https://www.youtube.com/playlist?list=PLoZQ0sz6CBHGLlYNKB-yzDRasrAYytelS)
 
 
 - 浏览器渲染原理
