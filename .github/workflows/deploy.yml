@@ -31,7 +31,7 @@ jobs:
     - name: Install
       env: 
         CI: true
-      run: npm ci
+      run: pnpm install
     # 博客构建
     - name: Build
       run: npm run docs:build
