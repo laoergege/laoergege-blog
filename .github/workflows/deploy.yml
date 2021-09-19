@@ -42,6 +42,7 @@ jobs:
         ref: 'deploy'
         fetch-depth: 0
     - run: |
+        ls ../dist
         mv ../dist/* .
         git config --global user.email "826037047@qq.com"
         git config --global user.name "lys"
