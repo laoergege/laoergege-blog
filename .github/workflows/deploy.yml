@@ -26,7 +26,7 @@ jobs:
         key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
     # 安装 pnpm
     - name: Install pnpm
-      run: sudo npm install -g pnpm
+      run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
     # 安装依赖
     - name: Install
       env: 
