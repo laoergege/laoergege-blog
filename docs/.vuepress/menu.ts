@@ -1,4 +1,4 @@
-import type { DefaultThemeOptions } from 'vuepress-vite'
+import type { DefaultThemeOptions } from 'vuepress'
 
 export default ({
     navbar: [

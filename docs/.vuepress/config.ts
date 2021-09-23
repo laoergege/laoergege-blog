@@ -1,11 +1,8 @@
-// const markdown = require("./markdown")
-// const configWebpack = require('./webpack-chain')
-
 import path from "path";
 import { defineUserConfig } from 'vuepress'
 import type { DefaultThemeOptions } from 'vuepress'
 import menu from "./menu";
-import { resolve } from "./utils/path";
+import { docRelease } from "@laoergege/vuepress-plugin-blog-utils";
 
 export default defineUserConfig<DefaultThemeOptions>({
   // 站点信息配置
@@ -29,21 +26,10 @@ export default defineUserConfig<DefaultThemeOptions>({
     ...menu,
   },
 
-
-
   // 插件
-  // plugins: [
-  //   [
-  //     path.resolve(__dirname, './plugins/watcher.ts'),
-  //     // {
-  //     //   paths: [
-  //     //     resolve('plugins.ts'),
-  //     //     resolve('menu.ts'),
-  //     //     resolve('plugins/*')
-  //     //   ]
-  //     // }
-  //   ],
-  // ]
+  plugins: [
+    [docRelease]
+  ]
   // plugins: [
   //   [
   //     require("@vssue/vuepress-plugin-vssue-compat-next"),

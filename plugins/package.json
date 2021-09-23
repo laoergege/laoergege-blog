@@ -1,0 +1,14 @@
+{
+  "name": "@laoergege/vuepress-plugin-blog-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "types",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

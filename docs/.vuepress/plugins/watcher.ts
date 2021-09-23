@@ -1,4 +1,4 @@
-import type { PluginFunction } from 'vuepress-vite'
+import type { PluginFunction } from 'vuepress'
 import type { WatchOptions } from "chokidar";
 import chokidar from "chokidar";
 import { isDev, logger } from "./utils";
@@ -12,7 +12,19 @@ export interface Config{
 const fileWatcher: PluginFunction<Config> = ({ paths, options = {} }) => {
     return {
         name: 'FileWatcher',
+        onInitialized: (app) => {
+            const result = []
+            for (const page of app.pages) {
+                if(page.frontmatter.release) {
+                    console.log(page)
+                    result.push(page)
+                }
+            }
+            app.pages = result
+        },
         onWatched(app, watchers, restart) {
+
+            
 
             const watcher = chokidar.watch(paths, options)
 

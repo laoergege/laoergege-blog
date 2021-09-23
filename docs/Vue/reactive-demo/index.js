@@ -1,5 +1,5 @@
 const effectStack = [] // 副作用栈，解决嵌套副作用场景
-let activeEffect = null // 记录当前执行的副作用，以便依赖跟踪
+let activeEffect = null // 记录副作用栈栈顶，以便依赖跟踪
 
 const depsMap = new Map()
 const reactiveMap = new WeakMap()
@@ -96,3 +96,17 @@ product.price = 100
 product.quantity = 8
 
 
+const ref = raw => {
+    const r = {
+        get value() {
+            track(r, 'value');
+            return raw;
+        },
+
+        set value(newVal) {
+            raw = newVal;
+            trigger(r, 'value');
+        }
+    }
+    return r;
+}

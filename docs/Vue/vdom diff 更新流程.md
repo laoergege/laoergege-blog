@@ -1,4 +1,5 @@
 ---
+release: true,
 tags:
  - vue
  - 更新渲染
