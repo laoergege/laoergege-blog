@@ -20,7 +20,7 @@ tags:
   - [异步编程](../JavaScript/JavaScript 异步编程.md)
   - 模块机制
     - CommonJS 模块规范
-    - 模块解析机制
+    - 模块解析以及加载机制
   - [npm 包管理](./npm.md)
   - 调试及性能分析
     - [调试指南](https://nodejs.org/zh-cn/docs/guides/debugging-getting-started/)

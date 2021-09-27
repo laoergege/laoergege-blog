@@ -3,6 +3,8 @@ import { defineUserConfig } from 'vuepress'
 import type { DefaultThemeOptions } from 'vuepress'
 import menu from "./menu";
 import { docRelease } from "@laoergege/vuepress-plugin-blog-utils";
+import mermaidjs from "vuepress-plugin-mermaidjs";
+import { blogPlugin } from "./plugin";
 
 export default defineUserConfig<DefaultThemeOptions>({
   // 站点信息配置
@@ -28,7 +30,16 @@ export default defineUserConfig<DefaultThemeOptions>({
 
   // 插件
   plugins: [
-    [docRelease]
+    [docRelease],
+    [
+      mermaidjs, 
+      {
+        theme: 'base',
+        themeVariables: {
+          background: '#7FC8A9'
+        }
+      }
+    ]
   ]
   // plugins: [
   //   [

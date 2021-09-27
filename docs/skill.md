@@ -1,13 +1,17 @@
 ## 技术栈结构
 
-1. 工程化（工具链 + 方案化 + 定制化 = 统一标准工程化）
+1. 软件工程
+   - 流程图
+   - UML
+     - [什么是统一建模语言（UML）？](https://www.visual-paradigm.com/cn/guide/uml-unified-modeling-language/what-is-uml/)
+2. 工程化（工具链 + 方案化 + 定制化 = 统一标准工程化）
    - [前端工程化](./前端工程化/README.md)
    - web 前端性能优化
-2. 工具链
+3. 工具链
    - typescript
      - https://github.com/type-challenges/type-challenges
      - [api-extractor](https://api-extractor.com/)
-3. 框架技术
+4. 框架技术
    - [Vue](./Vue/README.md)
      - vue3 conf https://node.fequan.com/videodetail/1621773573110
    - React
@@ -21,17 +25,17 @@
      - canvas
        - https://joshondesign.com/p/books/canvasdeepdive/toc.html
    - NodeJS
-4. 设计模式、架构模式
+5. 设计模式、架构模式
    - JavaScript 设计模式与开发实践
    - 依赖注入
      - https://github.com/mgechev/injection-js
-5. 语言、运行时原理
+6. 编程语言、运行时原理
    - [HTML&CSS](./HTML&CSS/README.md)
      - https://web.dev/learn/css/box-model/
    - [JavaScript](./JavaScript/README.md)
      - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
    - Flutter
-6. 计算机基础
+7. 计算机基础
    1. 计算机组成原理
    2. 操作系统
       - [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
@@ -69,6 +73,11 @@
     - [手写系列-实现一个铂金段位的 React](https://mp.weixin.qq.com/s/C4pjEzYPZocRnJOaF1q0Jg)
     - [React技术揭秘](https://react.iamkasong.com)
     - [react-illustration-series](https://github.com/7kms/react-illustration-series)
+    - 状态管理
+      - https://github.com/umijs/hox
+    - [你可能不知道的流式 React Hooks（关于组织代码的最佳实践）](https://zhuanlan.zhihu.com/p/413141904)
+  - Flutter
+    - [企业微信超大型工程-跨全平台UI框架最佳实践](https://mp.weixin.qq.com/s/JdQmgQ57nWQM99JW_ueFVg)
 - 设计模式、架构
   - [复杂系统架构设计应对之道](https://mp.weixin.qq.com/s/u5hW529GczJNZU0RdVPgeg)
 - 计算基础

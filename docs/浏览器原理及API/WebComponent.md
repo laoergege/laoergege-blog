@@ -4,6 +4,8 @@
 - Shadow DOM
 - HTML templates
 - [Constructable Stylesheets](https://developers.google.com/web/updates/2019/02/constructable-stylesheets)
+- HTML Slot
+  - [HTML slot 插槽元素深入](https://www.zhangxinxu.com/wordpress/2021/09/html-slot-dom/)
 
 ## Shadow DOM
 

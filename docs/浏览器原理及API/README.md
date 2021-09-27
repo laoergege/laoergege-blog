@@ -14,7 +14,6 @@ tags:
 - [多进程架构](./Chrome 多进程架构.md)
 - [页面导航流程](./页面导航流程.md)
 - [页面渲染流程](./页面渲染流程.md)
-- [事件更新流程](./事件更新流程.md)
 - 任务调度之事件循环
 
 Web 安全策略
@@ -22,6 +21,12 @@ Web 安全策略
 - 内容安全策略（CSP）
 
 ## Web 应用性能优化
+
+- [Web 前端性能优化](./Web%20前端性能优化.md)
+- 性能测试监控工具
+  - Chrome DevTools
+  - Lighthouse
+  - [PagesTest](https://webpagetest.org/)
 ## Web API
 
 - DOM

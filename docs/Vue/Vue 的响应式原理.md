@@ -1,13 +1,10 @@
-# Vue 的响应性系统
+# Vue 的响应式系统
 
-1. 响应式原理
-2. 基于响应式原理的 MDV（数据驱动视图）
-
+- Vue 的响应式系统
+  - 响应式原理
+  - Reative API
+  - Vue 的 MDV 机制
 ## 响应式原理
-
-传统
-
-“响应式”是 Vue 最重要的特性之一。说起响应式，又会关联到响应式编程，比如
 
 ```js
 let A = 1
@@ -20,52 +17,171 @@ A = 2
 console.log(C) // 3
 ```
 
-如果上面数据模型具有响应性，那么理想情况下，A 发生改变，C 也将随之重新计算赋值为 4，可惜 JavaScript 是过程式的，以上情况并不会发生。
+传统过程式编程下，A 发生改变，`C = A + B` 并不会重新运算，因为已经执行过了。为了能够重新计算就需要包装成可复用的函数，并且观察 A 的行为以便发生改变时调用该函数。**响应式原理的本质就是观察者模式**。
 
+Vue2 和 Vue3 的响应式实现并其实没多大区别，大致都是需要以下重要三步：
 
+1. 数据劫持（defineProperty => proxy 劫持数据操作事件）
+2. 依赖收集（监听属性数据的 getter 事件） 
+3. 变更通知（监听属性数据的 setter 事件） 
 
-Vue2 和 Vue3 的响应式实现原理其实没多大区别，本质都是通过数据操作劫持去依赖收集、变更通知。
-
-主要是区别是底层使用的原生 api 从 `Object.defineProperty` 改为 `Proxy`，
-
-Object.defineProperty 缺点 
-
-- 不能监听对象属性新增和删除
-- 对象属性递归响应式化消耗性能
-- 数组原型方法覆盖
-
-Proxy 优点
-
-- 劫持整个对象
-- 按需响应式
-
-## Map & WeakMap
-
-### 源码分析
-
-Vue 提供了四种响应式类型及 API，参数目标必须是引用类型（除了 null）
-
-- reactive
-- readonly
-- ref
-- shallow 变种
-  - shallowReactive
-  - shallowReadonly
-
-1. 原始数据 target 必须是对象或者数组
-2. 同一原始对象数据返回的都是同一响应代理
-3. 已经是响应式的对象再次执行 reactive，还应该返回这个响应式对象
-4. 数据类型，__v_skip 属性的对象、被冻结的对象，以及不在白名单内的对象类型如 Date 类型的对象实例是不能变成响应式的。
-
-
-
-## 响应式 API 原理实现
+### Vue3 响应式实现
 
 ```js
-function createReactiveObject(target) {
-    if(typeof target !== 'object') {
-        return target
+let product = reactive({ price: 10, quantity: 2 });
+let total = 0
+effect(() => {
+    console.log(total = product.price * product.quantity)
+})
+
+product.price = 100
+
+// total 200
+
+product.quantity = 8
+
+// total 800
+```
+
+```js
+function reactive(target) {
+    // case... 比如 target 类型判断
+
+    return new Proxy(target, {
+        get(target, property, receiver) {
+            // 依赖跟踪
+            track(target, property)
+            return Reflect.get(...arguments)
+        },
+        set(target, property, receiver) {
+            const result = Reflect.set(...arguments)
+            trigger(target, property)
+            return result
+        }
+    })
+}
+
+function track(target, key) {
+    let depsMap = reactiveMap.get(target);
+
+    if (!depsMap) {
+        reactiveMap.set(target, (depsMap = new Map()))
     }
+
+    let deps = depsMap.get(key);
+
+    if (!deps) {
+        depsMap.set(key, (deps = new Set()));
+    }
+
+    // 依赖收集
+    if (!deps.has(activeEffect)) {
+        // 收集当前激活的 effect 作为依赖
+        deps.add(activeEffect)
+        // 当前激活的 effect 收集 deps 集合作为依赖
+        activeEffect.deps.push(deps)
+    }
+}
+```
+
+响应式对象（即代理对象）的缓存结构
+
+```js
+// 代理缓存结构
+// proxyMap => depsMap => deps
+// deps = new Set()
+const depsMap = new Map()
+const reactiveMap = new WeakMap()
+```
+
+## Vue Reactive API
+
+- ReactiveObject
+  - reactive
+    - shallowReactive
+  - readonly：只读响应，不会被跟踪
+    - shallowReadonly
+  - ref
+- ReactiveEffect
+  - effect
+  - effectScope
+  - watchEffect
+  - watch
+  - computed
+
+### ReactiveObject
+
+```js
+// packages/reactivity/src/reactive.ts
+
+function createReactiveObject(
+  target: Target,
+  isReadonly: boolean,
+  baseHandlers: ProxyHandler<any>,
+  collectionHandlers: ProxyHandler<any>,
+  proxyMap: WeakMap<Target, any>
+) {
+  //proxy 对象再次 reactive 还是原 proxy，除非转是 readyonly
+  //...
+
+  //同一原始 target 多次执行 reactive 都会得到同一 proxy
+  const existingProxy = proxyMap.get(target)
+  if (existingProxy) {
+    return existingProxy
+  }
+
+  // 只允许普通对象或者集合类型，内置对象类型如 Date、Function 类型则不可以
+  const targetType = getTargetType(target)
+  if (targetType === TargetType.INVALID) {
+    return target
+  }
+
+  const proxy = new Proxy(
+    target,
+    targetType === TargetType.COLLECTION ? collectionHandlers : baseHandlers
+  )
+  proxyMap.set(target, proxy)
+  return proxy
+}
+
+function targetTypeMap(rawType: string) {
+  switch (rawType) {
+    case 'Object':
+    case 'Array':
+      return TargetType.COMMON
+    case 'Map':
+    case 'Set':
+    case 'WeakMap':
+    case 'WeakSet':
+      return TargetType.COLLECTION
+    default:
+      return TargetType.INVALID
+  }
+}
+```
+
+1. proxy 对象再次 reactive 还是原 proxy，除非转是 readyonly
+2. 同一原始 target 多次执行 reactive 都会得到同一 proxy（proxyMap 缓存）
+3. 只允许普通对象或者集合类型，内置对象类型如 Date、Function 类型则不可以
+4. __v_skip 属性的对象、被冻结的对象
+   
+### ProxyMap 缓存结构
+deps
+depsMap
+proxyMap
+
+### ReactiveFlags
+
+ReactiveFlags 作为响应式对象的内部特殊 key。
+
+> 为什么不用 Symbol 去私有 key？:thinking:
+
+```ts
+export const enum ReactiveFlags {
+  SKIP = '__v_skip', // 跳过响应化
+  IS_REACTIVE = '__v_isReactive', // 是否响应式数据
+  IS_READONLY = '__v_isReadonly', // 是否只读数据
+  RAW = '__v_raw' // 获取原始数据
 }
 ```
 
@@ -73,31 +189,30 @@ function createReactiveObject(target) {
 
 
 
-export const enum ReactiveFlags {
-  SKIP = '__v_skip', // 跳过响应化
-  IS_REACTIVE = '__v_isReactive', // 是否响应式数据
-  IS_READONLY = '__v_isReadonly', // 是否只读数据
-  RAW = '__v_raw' // 获取原始数据
-}
 
 
-get
-
-特殊 key
-数组
-
-res
-
-ref
-object
-
-track
-
-Vue 3 实现响应式，本质上是通过 Proxy API 劫持了数据对象的读写，当我们访问数据时，会触发 getter 执行依赖收集；修改数据时，会触发 setter 派发通知。
-
-
-effect
+1. createReactiveObject
+   1. collectionHandlers
+   2. baseHandlers
+      1. getter
+      2. setter
 
 Vue.js 另一个核心设计思想就是响应式。它的本质是当数据变化后会自动执行某个函数，映射到组件的实现就是，当数据变化后，会自动触发组件的重新渲染。响应式是 Vue.js 组件化更新渲染的一个核心机制。
 
-数据劫持、依赖收集、变更通知
+
+变更的源头
+
+props 变更：即父组件传递给组件的 props 发生变更
+事件 event：如点击，如上文的 window resize 事件。对事件，需要将事件回调包装成 state
+调度器：即 animationFrame / interval / timeout
+
+
+流式 Hooks
+
+react 事件流单位是组件
+vue 事件流单位是 effect
+
+rxjs 的难是函数式数据流形式，流式 hook 看起来还是跟平常的命令式逻辑流
+
+
+·

@@ -1,4 +1,5 @@
 ---
+release: true,
 tags:
  - http
  - cache
@@ -7,10 +8,11 @@ tags:
 ---
 # http 缓存
 
-- HTTP 缓存
+- http 缓存
   - [Cache-Control](#cache-control)
   - [缓存代理](#缓存代理)
   - [协商缓存](#协商缓存)
+  - 浏览器缓存
   - [缓存策略](#缓存策略)
     - 服务端缓存控制
     - 客户端缓存控制
@@ -36,7 +38,7 @@ http 中控制缓存的主要字段有一下三个：
     >  当缓存失效时，其实带不带 must-revalidate，都会发送请求，那么 must-revalidate 好像没什么作用？主要有一下两个使用场景:
     > 1. HTTP 规范是允许客户端在某些特殊情况下直接使用过期缓存的，比如服务器关闭或失去连接，导致请求发送失败的时候，即使设置了 `Cache-Control: max-age=0` 还是回继续使用缓存；还有比如有配置一些特殊指令（stale-while-revalidate、stale-if-error等）的时候也会导致继续使用缓存，可以使用 must-revalidate 进行阻止。
     > 2. 与 proxy-revalidate（下文介绍）做区别，must-revalidate 强调**回源服务器**
-### 缓存代理
+## 缓存代理
 
 ![图 6](./images/6561aa12c52e04d459ba53c9d9eaba278a41bcacba1af8a51f64bda2ecfb6db9.png)  
 
@@ -48,7 +50,7 @@ http 中控制缓存的主要字段有一下三个：
   - proxy-revalidate，缓存失效时代理服务器验证即可
   - s-maxage，单独设置代理服务器缓存时间，与 max-age 区别开
   - no-transform，禁止代理服务对资源做转换
-#### Vary
+### Vary
 
 > vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在响应头部，表示一个内容版本
 > 但却作为代理缓存的缓存决策依据
@@ -80,6 +82,21 @@ ETag 工作原理：
 
 Last-modified 也同样类似。 
 
+## 浏览器缓存机制
+
+1. http 请求
+2. 缓存查找
+   1. memory
+   2. service worker
+   3. http cache
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 ## 缓存控制策略
 
 缓存代理有时候也会带来负面影响，缓存不良数据，需要及时刷新或删除
