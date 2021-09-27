@@ -55,6 +55,7 @@
 - yield
 - recursion
 - Expires
+- revalidate
 
 
 
@@ -192,6 +193,35 @@ let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
 
 
 
+- es
+- es6的问题
+
+箭头函数和普通函数的区别
+什么是暂时性死区，什么是变量提升
+for of 和for in的区别，怎么让for of可以遍历一个对象？
+es6的Map和WeakMap的区别，WeakMap解决了什么问题？
+promise哪些方法是原型上的，哪些方法是实例上的
+
+- JS
+  - 0.1 + 0.2 !== 0.3？为什么？
+    - IEEE 754 二进制浮点数运算
+    - 解决
+      - Math.js、big.js
+      - BigInt
+  - 闭包
+    - 说一下闭包的本质是什么？会造成哪些问题、形成
+  - 什么是作用域？什么是作用域链？函数执行上下文包含了哪些内容？
+  - this
+  - 原型链
+  - event loop
+    - 你刚刚说到js是单线程，那线程跟进程有什么区别？
+浏览器新开了一个页面，有几个线程？
+为什么要设计成微任务先执行，宏任务后执行。
+  - 垃圾回收机制
+你刚刚提到的标记清除法有什么缺点？怎么解决？
+你刚刚提到的引用计数法有什么缺点吗？
+v8里面的垃圾回收机制是什么？
+v8是怎么解决循环引用的？
 - CSS
   - 盒子模型&BFC
   - Flex
@@ -201,14 +231,16 @@ let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
   - [http1.1和http2.0有什么区别？](./HTTP/http%20版本对比.md)
   - http2, TCP 丢包阻塞问题
   - UDP 有哪些特性
-webpack
-1. Webpack 了解多少
-   1. webapck的四个核心概念，并介绍一些其他的模块，例如mode，依赖图的概念等等。
-   2. 介绍几个webpack的插件，如压缩gzip、如何处理dev中的console.log的模块等等
-2. loader&plugin
-3. Tree Shaking
-4. 代码分割
-5. 打包优化技巧
+  - [https为什么比http安全、https 原理](./HTTP/https.md)
+  - 说一下三次握手四次挥手
+- webpack
+  - Webpack 了解多少
+    1. webapck的四个核心概念，并介绍一些其他的模块，例如mode，依赖图的概念等等。
+    2. 介绍几个webpack的插件，如压缩gzip、如何处理dev中的console.log的模块等等
+  - loader&plugin
+  - Tree Shaking
+  - 代码分割
+  - 打包优化技巧
 
 关键的 webpack 事件节点
 compile 开始编译

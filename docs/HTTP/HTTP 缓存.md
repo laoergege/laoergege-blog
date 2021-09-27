@@ -2,17 +2,15 @@
 release: true,
 tags:
  - http
- - cache
- - control
- - 缓存
+ - http 缓存
 ---
 # http 缓存
 
 - http 缓存
   - [Cache-Control](#cache-control)
   - [缓存代理](#缓存代理)
+  - [浏览器缓存机制](#浏览器缓存机制)
   - [协商缓存](#协商缓存)
-  - 浏览器缓存
   - [缓存策略](#缓存策略)
     - 服务端缓存控制
     - 客户端缓存控制
@@ -38,6 +36,7 @@ http 中控制缓存的主要字段有一下三个：
     >  当缓存失效时，其实带不带 must-revalidate，都会发送请求，那么 must-revalidate 好像没什么作用？主要有一下两个使用场景:
     > 1. HTTP 规范是允许客户端在某些特殊情况下直接使用过期缓存的，比如服务器关闭或失去连接，导致请求发送失败的时候，即使设置了 `Cache-Control: max-age=0` 还是回继续使用缓存；还有比如有配置一些特殊指令（stale-while-revalidate、stale-if-error等）的时候也会导致继续使用缓存，可以使用 must-revalidate 进行阻止。
     > 2. 与 proxy-revalidate（下文介绍）做区别，must-revalidate 强调**回源服务器**
+
 ## 缓存代理
 
 ![图 6](./images/6561aa12c52e04d459ba53c9d9eaba278a41bcacba1af8a51f64bda2ecfb6db9.png)  
@@ -65,6 +64,38 @@ URL 原则上是一种网络上的资源概念，同个 URL 可以有多种资�
 
 ![图 9](./images/7d679f31875e7cfb7cc3f3f99efc6030698374dbedcc437da771db25f34c7551.png)  
 
+
+## 浏览器缓存机制
+
+```mermaid
+flowchart TB
+  start([http 请求]) --> find
+  subgraph find[缓存查找]
+    direction TB
+    m(memory) --> s(service-work) --> h("disk (http-cache)")
+  end
+  find --> cached{cached?}
+  cached -- no --> server([服务器])
+  cached -- yes --> revalidate[缓存是否要重新验证\ncache-control: no-cach 或者 must-revalidate]
+  revalidate --> r{ }
+  r -- no --> expires[缓存是否过期\n cache-control:max-age=xxx 或 expires]
+  expires --> e{ }
+  e -- 未失效 --> read["读取缓存（强缓存）"]
+  e -- 失效 --> talk
+  r -- yes --> talk{ETag & Last-Modified?}
+  talk -- yes --> If[/携带 If-None-Match & If-Modified-Since/]
+  If --> 协商缓存 <--> server
+  talk -- no --> server
+```
+### 用户行为
+
+💡 浏览器某些用户行为会在请求头带上“私货”以控制缓存：  
+
+1. 地址栏访问，链接跳转是正常用户行为，将会触发浏览器缓存机制
+2. 前进后退也会触发浏览器缓存机制，但某些情况浏览器会直接缓存内存到时直接读取即可（[Back/forward cache](https://web.dev/bfcache/) ）
+3. 刷新行为会自动请求带上 `Cache-Control:max-age=0`，导致浏览器缓存失效
+4. 强刷或者禁止缓存会带上 `Cache-Control: no-cache` ，不携带 If 条件验证，强制请求，不做协商。
+
 ## 协商缓存
 
 HTTP 协议就定义了一系列“If”开头的“条件请求”字段，专门用来与服务器检查验证资源是否过期。**当请求带有条件字段，服务器就会验证资源是否过期**。
@@ -72,7 +103,9 @@ HTTP 协议就定义了一系列“If”开头的“条件请求”字段，专�
 - If-Modified-Since 、Last-modified，根据文件修改日期做验证
 - If-None-Match 、ETag，
 
-ETag 是“实体标签”（Entity Tag）的缩写，是资源的一个唯一标识。比 Last-modified 做判断更精准，做验证时**优先级比 Last-modified 高**， 因为有时一个文件内容没什么变化，但修改时间发生了变化。
+ETag 是“实体标签”（Entity Tag）的缩写，是资源的一个唯一标识，文件内容的 hash 值。比 Last-modified 做判断更精准，做验证时**优先级比 Last-modified 高**， 因为
+1. Last-Modified 的时间单位是秒，如果某个文件在1秒内改变了多次，那么他们的 Last-Modified 其实并没有体现出来修改
+2. 有时一个文件内容没什么变化，但修改时间发生了变化。
 
 ETag 还有“强”“弱”之分。强 ETag 要求资源在字节级别必须完全相符，弱 ETag 在值前有个“W/”标记，只要求资源在语义上没有变化，但内部可能会有部分发生了改变（例如 HTML 里的标签顺序调整，或者多了几个空格）。
 
@@ -82,56 +115,32 @@ ETag 工作原理：
 
 Last-modified 也同样类似。 
 
-## 浏览器缓存机制
-
-1. http 请求
-2. 缓存查找
-   1. memory
-   2. service worker
-   3. http cache
-
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
 ## 缓存控制策略
 
-缓存代理有时候也会带来负面影响，缓存不良数据，需要及时刷新或删除
 ### 服务端的缓存控制
 
 服务端的缓存控制主要面向客户端，如浏览器缓存、缓存代理
 
 ![](./images/server-cache-control.svg)  
+
 ### 客户端的缓存控制
 
-`Cache-Control` 是个通用字段，客户端也可以发送附带 `Cache-Control` 缓存指令的请求。客户端在 HTTP 缓存体系里要面对的是代理和源服务器。
+`Cache-Control` 是个通用字段，客户端也可以发送附带 `Cache-Control` 缓存指令的请求。
 
-> `Cache-Control` 是个可选选项，
+客户端在 HTTP 缓存体系里要面对的是代理和源服务器。
 
 ![图 1](./images/9b4fa558a294f0716e7dad1d5d8e20b9ffdd5056ac5ad2efa02d3c2ed9cc0756.png) 
 
-- max-stale，表明客户端愿意接收一个超过指定过期时间范围内的资源，比如 `max-stale：3，max-age: 5` 条件下相当于 `max-age: 8`
-- min-fresh，表示客户端只接受一个靠近过期时间的最小过期时间的资源，比如 `min-fresh：3，max-age: 5` 条件下相当于 `max-age: 2`
+- max-stale，表明客户端愿意接收一个超过指定过期时间范围内的资源，比如 `max-stale: 5` 过期后 5 秒内都可以
+- min-fresh，相当于缩短过期时间，比如 `min-fresh：5`，只允许到期前 5 秒之前的时间内
 - only-if-cached，表示只接受代理缓存的数据，不接受源服务器的响应
 - no-transform，禁止代理服务对资源做转换
 
-
-> 💡 浏览器某些行为会在请求头带上“私货”以控制缓存：  
-> - 刷新行为会自动请求带上 `Cache-Control:max-age=0`，导致浏览器缓存失效
-> - 禁止缓存会带上 `Cache-Control: no-cache` ，屏蔽 If 条件验证，强制请求，不做协商。
-
 ### 前端缓存最佳实践
 
-1. 内容长期不变的：版本化 URL 的长期缓存 `max-age`
+1. 内容长期不变的： 如 js、css 做 URL 版本化 的长期缓存 `max-age`
 2. 经常变化的内容：`no-cache` 协商缓存
-
-版本化 URL，就是在 URL 后面（通常是文件名后面）会加上版本号。像 js、css
-像 js、css 之类长期变化
-
-index.html 不做版本化控制，不缓存控制 no-cache，协商验证
+3. html 文件不做 URL 版本化控制，`no-cache`，协商验证
 ## 参考学习
 
 - [HTTP 缓存](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching#Cache_validation)
@@ -140,30 +149,3 @@ index.html 不做版本化控制，不缓存控制 no-cache，协商验证
 
 
 
-
-
-浏览器判断缓存流程
-
-1. 除非 no-store，不然现代浏览器都会启发式缓存
-2. 是否命中缓存
-   1. service worker
-   2. memory cache
-      1. 普通请求
-      2. preloader
-      3. preload
-   3. disk cache
-3. 缓存是否失效
-4. 缓存是否要重新验证 no-cache must-revalidate
-5. 网络请求
-
-
-服务器响应慢
-网络有问题
- - 丢包，需要不断重传
-
-
-
-浏览器
-- 缓存
-  - service worker cache
-  - http cache
