@@ -1,5 +1,5 @@
 ---
-release: true,
+release: true
 tags:
  - http
  - http 缓存
@@ -12,9 +12,7 @@ tags:
   - [浏览器缓存机制](#浏览器缓存机制)
   - [协商缓存](#协商缓存)
   - [缓存策略](#缓存策略)
-    - 服务端缓存控制
-    - 客户端缓存控制
-    - 现代 Web 前端资源缓存策略
+  
 ## Cache-Control
 
 http 中控制缓存的主要字段有一下三个：
@@ -138,9 +136,8 @@ Last-modified 也同样类似。
 
 ### 前端缓存最佳实践
 
-1. 内容长期不变的： 如 js、css 做 URL 版本化 的长期缓存 `max-age`
-2. 经常变化的内容：`no-cache` 协商缓存
-3. html 文件不做 URL 版本化控制，`no-cache`，协商验证
+[前端缓存最佳实践](../前端工程化/前端缓存最佳实践.md)
+
 ## 参考学习
 
 - [HTTP 缓存](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching#Cache_validation)

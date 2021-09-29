@@ -6,33 +6,31 @@ tags:
 # JavaScript
 
 - JavaScript
-  - 基础
-    - 变量、值和类型
-      - 类型系统
-        - 类型分类
-          - 原始类型
-          - 引用类型
-        - 类型检测和类型转换
+  - 类型系统
+    - 类型分类
+      - 原始类型
+      - 引用类型
+        - 内置对象
+        - 数据结构
+    - 动态类型：类型判断
+    - 弱类型：类型转换
+  - 基础（过程式编程）
+    - 变量、值和类型声明
     - 表达式及运算
     - 控制流
       - 循环
       - 分支
     - 函数
     - 注释
-  - 工程
-    - 数据结构
-    - [JavaScript 模块](./JavaScript%20模块.md)
-    - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
-  - 进阶
-    - 编程范式
-      - 面向对象编程
-      - 函数式编程
-    - 异步编程
-      - 异步模型
-        - 异步回调
-        - Promise
-        - async/await（generator + promise）同步
-    - 元编程
+  - [JavaScript 模块](./JavaScript%20模块.md)
+  - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
+  - 面向对象编程
+  - 函数式编程
+  - 异步编程
+    - 事件循环和异步回调
+    - Promise
+    - async/await（generator + promise
+  - 元编程
   - 实现原理
     - [内存管理机制](./JavaScript%20内存管理机制.md)
       - 堆栈内存

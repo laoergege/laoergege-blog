@@ -40,7 +40,7 @@ Web 安全策略
     - postMessage API
 - [PWA](./PWA.md)
 - [WebComponent](./WebComponent.md)
-- WebWork
+- [WebWork](./WebWork.md)
 - [Canvas](./Canvas.md)
 
 ### 场景分类
