@@ -26,11 +26,11 @@
      - canvas
        - https://joshondesign.com/p/books/canvasdeepdive/toc.html
    - NodeJS
-5. 设计模式、架构模式
+5. [软件设计、软件工程](./编程语言/软件设计与工程.md)
    - JavaScript 设计模式与开发实践
    - 依赖注入
      - https://github.com/mgechev/injection-js
-6. 编程语言、运行时原理
+6. 编程语言
    - [HTML&CSS](./HTML&CSS/README.md)
      - https://web.dev/learn/css/box-model/
    - [JavaScript](./JavaScript/README.md)
@@ -59,11 +59,17 @@
 - 前端框架 Vue 深入
 - Web 进阶
 - 数据结构与算法
-- Node 学习与应用
 - HTTP 学习
+- Node 学习与应用
 - Rust 学习
+- Flutter 学习
 ## 收集待看
 
+- WebAssembly
+  - https://github.com/WasmEdge/WasmEdge
+- 微前端
+  - https://github.com/bytedance/magic-portal
+  - https://github.com/bytedance/magic-microservices
 - 框架
   - NodeJS
     - 架构
@@ -175,14 +181,3 @@
 D5EEBB
 5F7A61
 444941
-
-
-领域驱动设计 (DDD) 是一种将代码结构、命名与业务领域概念相匹配的方法论。领域驱动设计基于以下几个目标：
-
-将项目重心放在核心领域与领域逻辑上
-以领域模型为基础进行复杂设计
-让技术专家与领域专家进行合作，以迭代的方式来解决特性领域的概念模型
-说白了就是由在某个领域摸爬滚打了多年的专家来梳理业务逻辑，与技术人员合作设计领域模型，然后再由技术人员根据领域模型进行实现的一套软件设计与迭代方法。
-
-
-当你脑海里有怎样的想法，你就会有怎样的行为。

@@ -22,7 +22,7 @@ http 中控制缓存的主要字段有一下三个：
    > HTTP 1.0 的字段，表示缓存到期时间，是一个绝对的时间 (当前时间+缓存时间)
 3. Pragma: no-cache(相当于 Cache-Control: no-cache，主要是为了兼容 HTTP/1.0) 
 
-重点学习 `Cache-Control`
+> 重点学习 `Cache-Control`
 
 - Cache-Control
   - no-store，不允许存储缓存资源

@@ -7,6 +7,7 @@
       - 可选属性
       - 只读属性(onlyread)
       - 索引签名
+        - 索引签名 & Record
   - 类型推断
   - tsconfig
   - 类型声明文件(d.ts)

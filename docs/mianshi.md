@@ -191,7 +191,7 @@ let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
 
 
 
-题目整理
+## 题目整理
 
 - 设计模式
   - 什么是抽象工厂模式
@@ -205,19 +205,18 @@ let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
   - promise哪些方法是原型上的，哪些方法是实例上的
 - JS
   - 面向对象
-    - 继承
+    - 原型 + 原型链
   - 0.1 + 0.2 !== 0.3？为什么？
     - IEEE 754 二进制浮点数运算
     - 解决
       - Math.js、big.js
       - BigInt
   - 闭包
-    - 说一下闭包的本质是什么？会造成哪些问题、形成
-      - 作用域链
-      - 内存泄漏
+    - 说一下闭包的本质是什么？
+      - 形成：作用域链
+      - 问题：内存泄漏
   - 什么是作用域？什么是作用域链？函数执行上下文包含了哪些内容？
   - this
-  - 原型链
   - event loop
     - 你刚刚说到js是单线程，那线程跟进程有什么区别？
 浏览器新开了一个页面，有几个线程？
@@ -236,7 +235,7 @@ v8是怎么解决循环引用的？
   - [http1.1和http2.0有什么区别？](./HTTP/http%20版本对比.md)
   - http2, TCP 丢包阻塞问题
   - UDP 有哪些特性
-  - [https为什么比http安全、https 原理](./HTTP/https.md)
+  - [https为什么比http安全(https 原理)](./HTTP/https.md)
   - 说一下三次握手四次挥手
 - webpack
   - Webpack 了解多少

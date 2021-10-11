@@ -7,22 +7,23 @@ tags:
 
 - JavaScript
   - 类型系统
+    - 动态类型：类型判断
+    - 弱类型：类型转换
     - 类型分类
       - 原始类型
       - 引用类型
+        - 对象
         - 内置对象
         - 数据结构
-    - 动态类型：类型判断
-    - 弱类型：类型转换
-  - 基础（过程式编程）
-    - 变量、值和类型声明
+  - 命令式编程
+    - 变量、值和类型
     - 表达式及运算
     - 控制流
       - 循环
       - 分支
-    - 函数
+    - 函数/过程
     - 注释
-  - [JavaScript 模块](./JavaScript%20模块.md)
+    - [JavaScript 模块](./JavaScript%20模块.md)
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
   - 面向对象编程
   - 函数式编程
@@ -30,20 +31,15 @@ tags:
     - 事件循环和异步回调
     - Promise
     - async/await（generator + promise
-  - 元编程
-  - 实现原理
+    - [微任务、Promise](./JavaScript 微任务、Promise.md)
+  - 执行原理
     - [内存管理机制](./JavaScript%20内存管理机制.md)
       - 堆栈内存
       - 标记-清除
     - 执行过程
       - [编译时](./JavaScript%20代码执行过程（编译时）.md)
       - [运行时](./JavaScript%20代码执行过程（运行时）.md)
-        - 作用域
-        - 变量提升
-        - 调用栈
-        - 执行上下文
-          - this
-        - 闭包
-        - [微任务、Promise](./JavaScript 微任务、Promise.md)
+  - 元编程
 - 学习资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
+  - [ES6 入门教程](https://es6.ruanyifeng.com/)
