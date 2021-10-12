@@ -15,6 +15,7 @@ tags:
 - [页面导航流程](./页面导航流程.md)
 - [页面渲染流程](./页面渲染流程.md)
 - 任务调度之事件循环
+  - [Jake Archibald: 在循环 - JSConf.Asia](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
 
 Web 安全策略
 - 同源策略
@@ -27,6 +28,7 @@ Web 安全策略
   - Chrome DevTools
   - Lighthouse
   - [PagesTest](https://webpagetest.org/)
+
 ## Web API
 
 - DOM

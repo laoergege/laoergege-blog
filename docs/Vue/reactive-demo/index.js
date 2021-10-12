@@ -5,8 +5,9 @@ let activeEffect = null // 记录副作用栈栈顶，以便依赖跟踪
 // proxyMap => depsMap => deps
 // deps = new Set()
 const depsMap = new Map()
-const reactiveMap = new WeakMap()
+const targetMap = new WeakMap()
 
+// 副作用
 function effect(fn) {
     const _effect = (...args) => {
         activeEffect = _effect
@@ -43,11 +44,11 @@ function reactive(target) {
     // case...
 
     return new Proxy(target, {
-        get(target, property, receiver) {
+        get(target, property) {
             track(target, property)
             return Reflect.get(...arguments)
         },
-        set(target, property, receiver) {
+        set(target, property) {
             const result = Reflect.set(...arguments)
             trigger(target, property)
             return result
@@ -55,12 +56,11 @@ function reactive(target) {
     })
 }
 
-// 依赖跟踪
 function track(target, key) {
-    let depsMap = reactiveMap.get(target);
+    let depsMap = targetMap.get(target);
 
     if (!depsMap) {
-        reactiveMap.set(target, (depsMap = new Map()))
+        targetMap.set(target, (depsMap = new Map()))
     }
 
     let deps = depsMap.get(key);
@@ -78,7 +78,7 @@ function track(target, key) {
 }
 
 function trigger(target, key) {
-    const depsMap = reactiveMap.get(target);
+    const depsMap = targetMap.get(target);
     if (!depsMap) return;
     let deps = depsMap.get(key);
 
@@ -90,32 +90,3 @@ function trigger(target, key) {
 }
 
 
-let product = reactive({ price: 10, quantity: 2 });
-let total = 0
-effect(() => {
-    total = product.price * product.quantity
-
-    effect(() => {
-        console.log(total, product.quantity)
-    })
-})
-
-product.price = 100
-
-product.quantity = 8
-
-
-// const ref = raw => {
-//     const r = {
-//         get value() {
-//             track(r, 'value');
-//             return raw;
-//         },
-
-//         set value(newVal) {
-//             raw = newVal;
-//             trigger(r, 'value');
-//         }
-//     }
-//     return r;
-// }

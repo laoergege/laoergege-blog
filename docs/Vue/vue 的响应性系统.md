@@ -1,9 +1,10 @@
-# Vue 的响应式系统
+# Vue 的响应性机制
 
-- Vue 的响应式系统
+- Vue 的响应性机制
   - 响应式原理
   - Reative API
-  - Vue 的 MDV 机制
+  - Vue 的更新机制
+
 ## 响应式原理
 
 ```js
@@ -17,7 +18,7 @@ A = 2
 console.log(C) // 3
 ```
 
-传统过程式编程下，A 发生改变，`C = A + B` 并不会重新运算，因为已经执行过了。为了能够重新计算就需要包装成可复用的函数，并且观察 A 的行为以便发生改变时调用该函数。**响应式原理的本质就是观察者模式**。
+传统命令式编程下，A 发生改变，`C = A + B` 并不会重新执行。为了能够重新计算就需要包装成可复用的函数，并且观察 A 的行为以便发生改变时调用该函数。
 
 Vue2 和 Vue3 的响应式实现并其实没多大区别，大致都是需要以下重要三步：
 
@@ -25,74 +26,9 @@ Vue2 和 Vue3 的响应式实现并其实没多大区别，大致都是需要以
 2. 依赖收集（监听属性数据的 getter 事件） 
 3. 变更通知（监听属性数据的 setter 事件） 
 
+**响应式原理的实现本质就是观察者模式**。
+
 ### Vue3 响应式实现
-
-```js
-let product = reactive({ price: 10, quantity: 2 });
-let total = 0
-effect(() => {
-    console.log(total = product.price * product.quantity)
-})
-
-product.price = 100
-
-// total 200
-
-product.quantity = 8
-
-// total 800
-```
-
-```js
-function reactive(target) {
-    // case... 比如 target 类型判断
-
-    return new Proxy(target, {
-        get(target, property, receiver) {
-            // 依赖跟踪
-            track(target, property)
-            return Reflect.get(...arguments)
-        },
-        set(target, property, receiver) {
-            const result = Reflect.set(...arguments)
-            trigger(target, property)
-            return result
-        }
-    })
-}
-
-function track(target, key) {
-    let depsMap = reactiveMap.get(target);
-
-    if (!depsMap) {
-        reactiveMap.set(target, (depsMap = new Map()))
-    }
-
-    let deps = depsMap.get(key);
-
-    if (!deps) {
-        depsMap.set(key, (deps = new Set()));
-    }
-
-    // 依赖收集
-    if (!deps.has(activeEffect)) {
-        // 收集当前激活的 effect 作为依赖
-        deps.add(activeEffect)
-        // 当前激活的 effect 收集 deps 集合作为依赖
-        activeEffect.deps.push(deps)
-    }
-}
-```
-
-响应式对象（即代理对象）的缓存结构
-
-```js
-// 代理缓存结构
-// proxyMap => depsMap => deps
-// deps = new Set()
-const depsMap = new Map()
-const reactiveMap = new WeakMap()
-```
 
 ## Vue Reactive API
 

@@ -1,20 +1,16 @@
 # Vue
 
-- 响应式系统
-  - 响应性原理
-  - MDV（数据驱动视图）
+- 响应性系统
 - 组件化
   > 组件是视图复用和更新的最小单位
   - vnode
     - component tree
     - vdom
   - 渲染机制
-    - 渲染流程
-    - 更新流程
-      - props 处理
-      - diff 算法
+  - 更新机制（MDV）
+    - props 处理
+    - diff 机制
     - 调度机制
-  - 更新机制
   - 模板编译器
 - 数据流
   - 父子组件
@@ -42,10 +38,13 @@
 
 ## Vue3 系文
 
+- vue
 1. [vue3 的升级优化](./1.vue3的升级优化.md)
 2. [vue 组件渲染流程](./vue%20组件渲染流程.md)
-3. [vdom diff 更新流程](./vdom%20diff%20更新流程.md)
-4. slots(WIP)
+3. [vue 的响应性系统](./vue%20的响应性系统.md)
+4. [vue 的更新渲染机制](./vue%20的更新渲染机制.md)
+5. [vdom diff 更新流程](./vdom%20diff%20更新流程.md)
+6. slots(WIP)
 
 推荐好文
 
