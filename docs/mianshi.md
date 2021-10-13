@@ -47,15 +47,7 @@
   - 项目难点
     - UI 交互
 
-单词
 
-- stopPropagation
-- yield
-- fibonacci 斐波那契
-- yield
-- recursion
-- Expires
-- revalidate
 
 
 
@@ -160,17 +152,12 @@ WeakMap 和 Map 了解吗? 说下他们的区别？
 let str = "ABCDABA"
 
 
-0.1 + 0.2 !== 0.3 为什么
-IEEE 754 了解吗
-
 
 TCP 拥塞控制？
 
 不知道，只了解丢包阻塞的情况，(网络的知识就看过图解HTTP和面经, 唉...)...
 
 TCP 和 UDP 的区别
-
-三次挥手四次握手
 
 
 TypeScript 高级用法， Pick 和 Omit
@@ -193,6 +180,18 @@ let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
 
 ## 题目整理
 
+- 浏览器
+  - 重绘和重排？
+  - 介绍一下同源策略？你知道那些跨域方法？cors跨域的原理是什么有了解过吗？
+  - 浏览器渲染过程
+- css
+  - flex: 1代表什么意思
+  - 用过flex布局吗？都有哪些属性？
+  - 说说什么是BFC，一般你都用来干什么，解决了什么问题？
+  - 实现元素水平垂直居中？尽可能说多一些方法？
+  - 左侧固定 + 右侧自适应布局？说说几种方案？
+- 数据结构与算法
+  - 排序算法
 - 设计模式
   - 什么是抽象工厂模式
   - 发布订阅模式和观察者模式有什么区别
@@ -226,11 +225,6 @@ let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
 你刚刚提到的引用计数法有什么缺点吗？
 v8里面的垃圾回收机制是什么？
 v8是怎么解决循环引用的？
-- CSS
-  - 盒子模型&BFC
-  - Flex
-  - 局中
-  - Grid
 - http
   - [http1.1和http2.0有什么区别？](./HTTP/http%20版本对比.md)
   - http2, TCP 丢包阻塞问题
@@ -331,3 +325,14 @@ DFS
 
 项目架构经验等
 如何设计一个好的组件
+
+
+## 单词
+
+- stopPropagation
+- yield
+- fibonacci 斐波那契
+- yield
+- recursion
+- Expires
+- revalidate

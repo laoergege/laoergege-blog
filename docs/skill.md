@@ -54,15 +54,16 @@
         - https://github.com/estree/estree
 ## 2021 技术目标
 
-- JavaScript 深入
+- deep JavaScript
 - Typescript 重学
-- 前端框架 Vue 深入
+- deep Vue
 - Web 进阶
 - 数据结构与算法
 - HTTP 学习
 - Node 学习与应用
 - Rust 学习
 - Flutter 学习
+  
 ## 收集待看
 
 - WebAssembly
