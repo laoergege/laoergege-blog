@@ -43,13 +43,16 @@ function cleanup(effect) {
 function reactive(target) {
     // case...
 
+    // 数据代理、操作劫持
     return new Proxy(target, {
         get(target, property) {
+            // 依赖跟踪、收集
             track(target, property)
             return Reflect.get(...arguments)
         },
         set(target, property) {
             const result = Reflect.set(...arguments)
+            // 变更通知
             trigger(target, property)
             return result
         }

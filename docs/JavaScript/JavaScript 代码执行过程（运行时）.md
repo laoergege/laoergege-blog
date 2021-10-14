@@ -45,6 +45,7 @@
 在 ES6 之前，ES 的作用域只有两种：全局作用域和函数作用域。var 声明的变量具有全局或者函数级别作用域，而且由于变量提升机制，使得某个函数内的变量声明都被提升到函数顶部，这就导致 JavaScript 的代码并不像其他语言直观。
 
 ```js
+console.log(myname); // undefined
 var myname = "极客时间"
 function showName(){
   if(true){
@@ -53,7 +54,6 @@ function showName(){
   console.log(myname); // "极客邦"
 }
 showName()
-console.log(myname); // "极客时间"
 ```
 
 而且变量容易在不被察觉的情况下被覆盖掉
@@ -79,6 +79,25 @@ function foo(){
   console.log(i); 
 }
 foo()
+```
+
+#### 函数声明与块级作用域：
+
+1. 允许在块级作用域内声明函数。
+2. 函数声明类似于var，即会提升到全局作用域或函数作用域的头部。
+3. 同时，函数声明还会提升到所在的块级作用域的头部。
+
+```js
+console.log(f) // outside f
+function f() { console.log('I am outside!'); }
+
+(function () {
+  console.log(f) // undefined
+  if (true) {
+    console.log(f) // inside f
+    function f() { console.log('I am inside!'); }
+  }
+}());
 ```
 
 ### let、const 声明的块级作用域原理及暂时性死区

@@ -6,15 +6,7 @@ tags:
 # JavaScript
 
 - JavaScript
-  - 类型系统
-    - 动态类型：类型判断
-    - 弱类型：类型转换
-    - 类型分类
-      - 原始类型
-      - 引用类型
-        - 对象
-        - 内置对象
-        - 数据结构
+  - [类型系统](./JavaScript%20类型系统.md)
   - 基础：命令式编程
     - 变量、值和类型
     - 表达式及运算
@@ -27,6 +19,7 @@ tags:
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
   - 面向对象编程
   - 函数式编程
+    - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
   - 异步编程
     - 事件循环和异步回调
     - Promise

@@ -47,6 +47,7 @@ http 中控制缓存的主要字段有一下三个：
   - proxy-revalidate，缓存失效时代理服务器验证即可
   - s-maxage，单独设置代理服务器缓存时间，与 max-age 区别开
   - no-transform，禁止代理服务对资源做转换
+
 ### Vary
 
 > vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在响应头部，表示一个内容版本
@@ -70,7 +71,7 @@ flowchart TB
   start([http 请求]) --> find
   subgraph find[缓存查找]
     direction TB
-    m(memory) --> s(service-work) --> h("disk (http-cache)")
+    m(memory) --> s("service work") --> h("http-cache")
   end
   find --> cached{cached?}
   cached -- no --> server([服务器])

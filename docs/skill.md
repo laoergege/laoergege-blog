@@ -96,11 +96,6 @@
 
 
 - 浏览器渲染原理
-  - 渲染管道
-    - https://docs.google.com/presentation/d/1ak7YVrJITGXxqQ7tyRbwOuXB1dsLJlfpgC4wP7lykeo/edit#slide=id.p
-    - https://docs.google.com/document/d/1aitSOucL0VHZa9Z2vbRJSyAIsAz24kX8LFByQ5xQnUg/edit?pli=1#heading=h.dr7ct95ht2sw
-    - https://fed.taobao.org/blog/taofed/do71ct/performance-composite/?spm=taofed.homepage.header.13.7eab5ac8Ut2aYd
-    - https://docs.google.com/presentation/d/1boPxbgNrTU0ddsc144rcXayGA_WF53k96imRH8Mp34Y/edit#slide=id.g60f92a5151_40_0
   - canvas
     - https://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
     - https://joshondesign.com/p/books/canvasdeepdive/toc.html

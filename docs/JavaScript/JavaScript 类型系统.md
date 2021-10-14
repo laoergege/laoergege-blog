@@ -4,26 +4,44 @@ tags:
  - 数据类型
  - 浮点精确
 ---
-# JavaScript 数据类型
+# JavaScript 类型系统
 
-- 数据类型（8种）
-  - 原始类型
-    - undefined
-    - null
-    - boolean
-    - number
-    - string
-    - symbol
-      - 创建唯一标识
-      - 创建对象的“隐藏”属性
-    - bigInt
-  - 对象类型（引用类型）
-  - 函数（特殊的对象）
-    - [形参之按值传递](https://github.com/mqyqingfeng/Blog/issues/10)
-      - 传参（实参到形参赋值的过程）
-        - 按值传递，即复制实参的值
-        - 引用传递，即复制实参的地址
-      - 当变量为引用类型时，传参只是复制该变量的值（即引用的对象地址）  
+- JavaScript 类型系统
+  - 动态类型：类型检查
+  - 弱类型：类型转换
+  - 类型分类
+    - 原始类型
+      - undefined
+      - Null
+      - Boolean
+      - Number
+      - String
+      - Symbol
+        - 创建唯一标识
+        - 创建对象的“隐藏”属性
+      - BigInt
+    - 引用类型
+      - Object
+      - 内置对象
+        - Array
+        - RegExp
+        - Date
+        - Math
+        - Function
+          - 按值传递
+            > 按值传递，即复制实参的值  
+            > 引用传递，即复制实参的地址
+      - 数据结构
+        - Set、WeakSet
+        - Map、WeakMap
+
+## 动态类型：类型检查
+
+- typeof
+- instanceof
+- Object.prototype.toString
+
+## 弱类型：类型转换
 
 ## 为什么有的编程规范要求用 void 0 代替 undefined？
 
