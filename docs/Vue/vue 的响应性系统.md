@@ -28,7 +28,7 @@ console.log(C) // 3
 
 传统命令式编程下，A 发生改变，`C = A + B` 并不会重新执行。为了能够重新计算就需要将 `C = A + B` 语句包装成可复用的函数，并且观察 A 的行为以便发生改变时调用该函数。
 
-响应式原理的实现本质就是观察者模式，Subject、Observer 在 Vue 响应式设计中即是 Reactive 响应式数据、Effect 副作用。
+响应式原理的实现本质就是观察者模式，Subject、Observer 在 Vue 响应式设计中分别对应的是 Reactive 响应式数据、Effect 副作用。
 
 Vue2 和 Vue3 的响应式实现并其实没多大区别，大致都是需要以下重要三步：
 
@@ -68,6 +68,8 @@ function reactive(target) {
 const depsMap = new Map()
 const targetMap = new WeakMap()
 ```
+
+![](./images/c933683d4c9d4ba9febc57a188238b4d6438454844c7c072e7ff125c18f4f44c.png)  
 
 
 ## Vue Reactive API 源码分析
@@ -174,7 +176,7 @@ get 代理操作主要做了 3 件事：
 
 1. 依赖收集
 2. 数组操作代理
-3. 懒响应
+3. 延迟响应式
 
 ```js
 function createGetter(isReadonly = false, shallow = false) {
@@ -232,10 +234,17 @@ _test.push(4); // 返回 _test.length 会再触发 get
 console.log(_test.length);
 ```
 
-### track
+### Effect
+
+依赖收集和变更触发的是 Effect（副作用）
+
+#### track
+
+整个 get 函数最核心的部分其实是执行 track 函数收集依赖。
 
 track 的大致实现跟上面一致，v3.2 版本优化
 
+### set 变更通知
 
 1. createReactiveObject
    1. collectionHandlers

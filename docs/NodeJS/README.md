@@ -34,7 +34,7 @@ tags:
     - DLL
       - [node-ffi](https://github.com/node-ffi/node-ffi)
     - WebAssembly
-  - NodeJS 全局对象
+  - 全局对象
     - process、buffer、__filename 和 __dirname
     - console 和 setTimeout 之类
     - ECMAScript 语言定义的全局对象，如 Date

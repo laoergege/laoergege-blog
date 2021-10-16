@@ -98,8 +98,6 @@ CSRF 攻击了解吗？
 不知道啊，然后面试官给我讲了一些关于 dns 劫持
 
 
-http 和 https
-
 说了对称加密和非对称加密，具体不清楚
 
 那你说下 https 握手过程？
@@ -123,7 +121,7 @@ webpack
 loader 和 plugins 的区别
 - plugins 对打包过程各个生命阶段及结果进行干预
 
-说了下 webpack 构建流程
+
 
 
 你所知道的白屏原因
@@ -138,52 +136,31 @@ flex: 1; 是复合属性，说下其他属性？
 扩展比例，缩放比列，基准大小（x轴覆盖宽度，y 轴覆盖高度）
 
 
-Symbol 有用过吗？
-
-手写 bind 的时候用过，防止覆盖掉对象上的原有属性
-
-
 WeakMap 和 Map 了解吗? 说下他们的区别？
 - WeakMap 的键必须是对象
 - 原生weakmap持有对关键对象的“弱”引用。由于这样的原生weakmap不阻止垃圾收集，从而最终删除对键对象的引用。“弱”引用还避免了对映射中的值进行垃圾收集。当将键映射到只有在键未被垃圾收集时才有价值的键的信息时，weakmap是特别有用的构造。
 
-
-回文字符串(这个问题好常见)，判断一个字符串最多只删1个字符，是否能成为一个回文字符串
-let str = "ABCDABA"
-
-
-
-TCP 拥塞控制？
-
-不知道，只了解丢包阻塞的情况，(网络的知识就看过图解HTTP和面经, 唉...)...
-
-TCP 和 UDP 的区别
-
-
-TypeScript 高级用法， Pick 和 Omit
-
-泛型的理解
-
-
-devServe 做了哪些优化了解吗
-
-热模块更新
-
-
-讲讲常用的 hook 打出来
-
-
-用正则表达式获取 url 中 query 参数
-let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
-
-
-
 ## 题目整理
 
+- 前端工程
+  - babel转换代码的过程
+    - parser => transfrom => generator，可以根据自己的理解，展开说说
+  - tree-shaking原理？
+    - 利用ES Module做静态分析
+    - 利用ES Module做静态分析，通过分析ast语法树，对每个模块维护了一个作用域，收集模块内部使用的变量，然后分析作用域，将import进来未被使用的模块删除，最后递归处理文件。
+- js 手写题
+  - 回文字符串(这个问题好常见)，判断一个字符串最多只删1个字符，是否能成为一个回文字符串，let str = "ABCDABA"
+- typescript
+  - TypeScript 高级用法， Pick 和 Omit
+- react
+  - 讲讲常用的 hook 打出来
+- 正则
+  - 用正则表达式获取 url 中 query 参数 let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
 - 浏览器
   - 重绘和重排？
   - 介绍一下同源策略？你知道那些跨域方法？cors跨域的原理是什么有了解过吗？
   - 浏览器渲染过程
+  - 键入网址再按下回车，后面究竟发生了什么？
 - css
   - flex: 1代表什么意思
   - 用过flex布局吗？都有哪些属性？
@@ -198,11 +175,12 @@ let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
   - 你项目里面都用了哪些设计模式
 - es
   - 箭头函数和普通函数的区别
-  - let\var\const 什么是暂时性死区，什么是变量提升
   - for of 和for in的区别，怎么让for of可以遍历一个对象？
   - es6的Map和WeakMap的区别，WeakMap解决了什么问题？
   - promise哪些方法是原型上的，哪些方法是实例上的
+  - Symbol 有用过吗？
 - JS
+  - 模块发展史
   - 面向对象
     - 原型 + 原型链
   - 0.1 + 0.2 !== 0.3？为什么？
@@ -214,7 +192,6 @@ let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
     - 说一下闭包的本质是什么？
       - 形成：作用域链
       - 问题：内存泄漏
-  - 什么是作用域？什么是作用域链？函数执行上下文包含了哪些内容？
   - this
   - event loop
     - 你刚刚说到js是单线程，那线程跟进程有什么区别？
@@ -231,15 +208,29 @@ v8是怎么解决循环引用的？
   - UDP 有哪些特性
   - [https为什么比http安全(https 原理)](./HTTP/https.md)
   - 说一下三次握手四次挥手
+  - TCP 和 UDP 的区别
 - webpack
   - Webpack 了解多少
     1. webapck的四个核心概念，并介绍一些其他的模块，例如mode，依赖图的概念等等。
     2. 介绍几个webpack的插件，如压缩gzip、如何处理dev中的console.log的模块等等
-  - loader&plugin
+  - loader、plugin 区别
+    - loader 主要是对源文件进行转换处理
+    - plugin 可以用来监听 webpack 构建生命周期，做一些操作，去扩展 webpack 功能
+    - loader本质是一个函数，plugin本质是一个类，
+  - loader 执行顺序
+    - 从右往左
   - Tree Shaking
   - 代码分割
   - 打包优化技巧
-  - hash
+  - webpack有几种 hash，它们有什么区别？一般你在项目里面是用哪种hash？
+    - hash，是整个项目的hash值，每次编译之后都会生成新的hash
+    - chunkhash，根据不同的入口文件(Entry)进行依赖文件解析、构建对应的chunk，生成对应的哈希值（来源于同一个chunk，则hash值就一样）
+    - contenthash，根据文件内容生成hash值，文件内容相同hash值就相同
+  - 热模块更新
+  - 说了下 webpack 构建流程
+  - webpack性能优化你是怎么做的？
+    - https://juejin.cn/post/6844904093463347208
+  - webpack5 介绍
 
 关键的 webpack 事件节点
 compile 开始编译

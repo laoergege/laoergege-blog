@@ -45,3 +45,13 @@ tags:
 - 
 - process.nextTick
 - setImmediate
+
+
+JavaScript 的执行机制：先编译，再执行
+
+this、 面向对象 原型继承/原型链
+
+
+单线程
+异步回调
+事件循环
