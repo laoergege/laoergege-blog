@@ -89,7 +89,7 @@ const targetMap = new WeakMap()
   - watch
   - computed
 
-### Reactive
+### reactive
 
 ```js
 // packages/reactivity/src/reactive.ts
@@ -170,7 +170,7 @@ export const enum ReactiveFlags {
 
 ![](./images/flag.png)
 
-### get 依赖收集（baseHandlers）
+#### get 依赖收集（baseHandlers）
 
 get 代理操作主要做了 3 件事：
 
@@ -211,7 +211,7 @@ function createGetter(isReadonly = false, shallow = false) {
 }
 ```
 
-#### 数组代理
+##### 数组代理
 
 ![](./images/array-proxy.png)
 
@@ -234,7 +234,7 @@ _test.push(4); // 返回 _test.length 会再触发 get
 console.log(_test.length);
 ```
 
-### Effect
+### effect
 
 依赖收集和变更触发的是 Effect（副作用）
 
@@ -252,6 +252,15 @@ track 的大致实现跟上面一致，v3.2 版本优化
       1. getter
          1. track
       2. setter
+
+### ref
+
+```js
+export function ref(value?: unknown) {
+  return createRef(value)
+}
+```
+
 
 
 

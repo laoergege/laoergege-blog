@@ -49,6 +49,8 @@ Web 安全策略
   - [WebComponent](./WebComponent.md)
   - [WebWork](./WebWork.md)
   - [Canvas](./Canvas.md)
+  - WebAssembly
+    - [A cartoon intro to WebAssembly](https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/)
 
 ### 场景分类
 

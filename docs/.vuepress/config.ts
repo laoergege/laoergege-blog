@@ -39,7 +39,7 @@ export default defineUserConfig<DefaultThemeOptions>({
           background: '#7FC8A9'
         }
       }
-    ]
+    ],
   ]
   // plugins: [
   //   [

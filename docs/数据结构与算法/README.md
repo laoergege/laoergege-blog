@@ -10,7 +10,7 @@
         - array 数组
         - linked list 链表
       - 高级
-        - stack 栈
+        - stack 栈（先进后出）
         - queue 队列、双端队列
         - set 集合
         - map 映射
