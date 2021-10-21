@@ -16,7 +16,12 @@ export const docRelease: PluginFunction<Options> = function({ glob = '**/README.
             return glob.some((g) => minimatch(file, g))
         }
 
-        return minimatch(file, glob)
+        try {
+            return minimatch(file, glob)
+        } catch (error) {
+            console.log(file, glob)
+            return false
+        }
     }
 
 
@@ -25,11 +30,10 @@ export const docRelease: PluginFunction<Options> = function({ glob = '**/README.
         onInitialized: (app) => {
              const result = []
              for (const page of app.pages) {
-                 console.log(page)
                  if(
-                     page.frontmatter.release &&
-                     glob &&
-                     match(page.filePathRelative as string)
+                     page.frontmatter.release ||
+                     (glob &&
+                     match(page.filePathRelative as string))
                     ) {
                      result.push(page)
                  }

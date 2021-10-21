@@ -116,3 +116,27 @@ view = f(data) + effect()
 renderComponentRoot
 
 shouldUpdateComponent
+
+
+流式 Hooks
+
+react 事件流单位是组件
+vue 事件流单位是 effect
+
+rxjs 的难是函数式数据流形式，流式 hook 看起来还是跟平常的命令式逻辑流
+
+
+view = f(data) + effect(data)
+view = effect(f(data))
+
+active 副作用调度激活标志？
+
+1. createReactiveObject
+   1. collectionHandlers
+   2. baseHandlers
+      1. getter
+         1. track
+      2. setter
+
+
+尽量忽略其他不相干 case 情况，保持主逻辑功能流程分析

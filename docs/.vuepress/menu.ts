@@ -27,12 +27,8 @@ export default ({
                     link: '/HTML&CSS/'
                 },
                 {
-                    text: 'Web API',
-                    link: '/Web API/'
-                },
-                {
-                    text: '浏览器原理',
-                    link: '/浏览器原理/'
+                    text: '浏览器原理及API',
+                    link: '/浏览器原理及API/'
                 }
             ]
         },

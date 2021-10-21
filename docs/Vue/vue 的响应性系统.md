@@ -74,7 +74,9 @@ const targetMap = new WeakMap()
 
 ## Vue Reactive API 源码分析
 
-> Vue Reactive API 实现原理上面大概实现了，下面源码分析其实只是做一些细节查看
+> Vue Reactive API 基本实现原理大概类似上面，下面仅对部分源码细节分析
+
+Vue Reactive API 大致分为两类：
 
 - Reactive（响应式数据）
   - reactive
@@ -82,12 +84,13 @@ const targetMap = new WeakMap()
   - readonly：只读响应，不会被依赖收集
     - shallowReadonly
   - ref
-- Effect（副作用）
+  - computed
+  - deferredComputed
+- ReactiveEffect（响应式副作用）
   - effect
   - effectScope
   - watchEffect
   - watch
-  - computed
 
 ### reactive
 
@@ -170,15 +173,16 @@ export const enum ReactiveFlags {
 
 ![](./images/flag.png)
 
-#### get 依赖收集（baseHandlers）
+#### get 依赖收集
 
 get 代理操作主要做了 3 件事：
 
-1. 依赖收集
+1. 依赖跟踪、收集
 2. 数组操作代理
 3. 延迟响应式
 
 ```js
+// packages/reactivity/src/baseHandlers.ts
 function createGetter(isReadonly = false, shallow = false) {
   return function get(target: Target, key: string | symbol, receiver: object) {
     // 内部特殊 key 处理... 
@@ -211,7 +215,7 @@ function createGetter(isReadonly = false, shallow = false) {
 }
 ```
 
-##### 数组代理
+#### 数组代理
 
 ![](./images/array-proxy.png)
 
@@ -234,43 +238,250 @@ _test.push(4); // 返回 _test.length 会再触发 get
 console.log(_test.length);
 ```
 
-### effect
+### ReactiveEffect
 
-依赖收集和变更触发的是 Effect（副作用）
+响应式副作用，就是在响应式数据发生变化时能够执行某些操作。
 
-#### track
-
-整个 get 函数最核心的部分其实是执行 track 函数收集依赖。
-
-track 的大致实现跟上面一致，v3.2 版本优化
-
-### set 变更通知
-
-1. createReactiveObject
-   1. collectionHandlers
-   2. baseHandlers
-      1. getter
-         1. track
-      2. setter
-
-### ref
+那要在如何把响应式数据和副作用函数自动关联，就需要把这些副作用操作封装成 Vue 响应性系统中的 ReactiveEffect。
 
 ```js
-export function ref(value?: unknown) {
-  return createRef(value)
+export interface ReactiveEffectOptions extends DebuggerOptions {
+  lazy?: boolean // 延迟执行
+  scheduler?: EffectScheduler // 副作用执行调度器
+  scope?: EffectScope // 副作用作用域
+  allowRecurse?: boolean
+  onStop?: () => void
+}
+
+export function effect<T = any>(
+  fn: () => T,
+  options?: ReactiveEffectOptions
+): ReactiveEffectRunner {
+  if ((fn as ReactiveEffectRunner).effect) {
+    fn = (fn as ReactiveEffectRunner).effect.fn
+  }
+  // 将副作用 fn 封装成响应式副作用
+  const _effect = new ReactiveEffect(fn)
+  if (options) {
+    extend(_effect, options)
+    if (options.scope) recordEffectScope(_effect, options.scope)
+  }
+  // 延迟执行控制
+  if (!options || !options.lazy) {
+    _effect.run()
+  }
+  const runner = _effect.run.bind(_effect) as ReactiveEffectRunner
+  runner.effect = _effect
+  return runner
+}
+
+export class ReactiveEffect<T = any> {
+  active = true // active 副作用调度激活标志？
+  deps: Dep[] = [] // effect 存储相关响应式数据的 dep
+
+  // can be attached after creation
+  computed?: boolean
+  allowRecurse?: boolean
+  onStop?: () => void
+  // dev only
+  onTrack?: (event: DebuggerEvent) => void
+  // dev only
+  onTrigger?: (event: DebuggerEvent) => void
+
+  constructor(
+    public fn: () => T,
+    public scheduler: EffectScheduler | null = null,
+    scope?: EffectScope | null
+  ) {
+    recordEffectScope(this, scope)
+  }
+
+  run() {
+    // 副作用执行
+  }
+
+  stop() {
+    // 停止副作用
+  }
 }
 ```
 
+ReactiveEffect 对象除了封装副作用外还记录其他一些信息，比如收集相关响应式数据的 dep。
 
+在上面 mini 响应式实现中，每次副作用重新执行前都要 `clearup()` 清除副作用的所有依赖，然后再在执行过程中重新收集依赖。
 
+这个过程牵涉到大量对 Set 集合的添加和删除操作。在许多场景下，依赖关系是很少改变的，因此这里存在一定的优化空间。
 
-流式 Hooks
+Vue3.2 采用大概思路就是标记清除：
 
-react 事件流单位是组件
-vue 事件流单位是 effect
+1. 执行前先对所有依赖进行“已收集”标记
+2. 执行过程对依赖重新标记为“新收集”
+3. 删除掉所有不是最新收集的依赖
 
-rxjs 的难是函数式数据流形式，流式 hook 看起来还是跟平常的命令式逻辑流
+### ReactiveEffect.run 副作用执行（3.2）
 
+```js
+export const createDep = (effects) => {
+  const dep = new Set(effects)
+  dep.w = 0 // 标记已收集
+  dep.n = 0 // 标记新收集
+  return dep
+}
+```
 
-view = f(data) + effect(data)
-view = effect(f(data))
+```js
+const effectStack: ReactiveEffect[] = [] // 副作用栈
+let activeEffect: ReactiveEffect | undefined // 栈顶副作用
+
+let effectTrackDepth = 0 // 副作用栈深度
+export let trackOpBit = 1 // 用于标识依赖收集的状态
+const maxMarkerBits = 30 // 表示最大标记的位数，trackOpBit 超过时则执行 clearup() 依赖全清
+
+//...
+// 响应式副作用执行
+run() {
+ if (!this.active) {
+   return this.fn()
+ }
+ if (!effectStack.includes(this)) {
+   try {
+     // 入栈
+     effectStack.push((activeEffect = this))
+     enableTracking()
+     // 将栈深度转换成二进制
+     trackOpBit = 1 << ++effectTrackDepth
+
+     if (effectTrackDepth <= maxMarkerBits) {
+       // 将所有依赖初始化为已收集
+       initDepMarkers(this)
+     } else {
+       cleanupEffect(this)
+     }
+     // 副作用执行
+     return this.fn()
+   } finally {
+     if (effectTrackDepth <= maxMarkerBits) {
+       // 清除旧依赖
+       finalizeDepMarkers(this)
+     }
+
+     trackOpBit = 1 << --effectTrackDepth
+
+     resetTracking()
+     // 出栈
+     effectStack.pop()
+     const n = effectStack.length
+     activeEffect = n > 0 ? effectStack[n - 1] : undefined
+   }
+ }
+}
+//...
+
+const initDepMarkers = ({ deps }) => {
+  if (deps.length) {
+    for (let i = 0; i < deps.length; i++) {
+      deps[i].w |= trackOpBit // 赋值给 w 标记依赖已经被收集
+    }
+  }
+}
+```
+
+重新依赖收集。
+
+```js
+export function trackEffects(
+  dep: Dep,
+  debuggerEventExtraInfo?: DebuggerEventExtraInfo
+) {
+  let shouldTrack = false
+  if (effectTrackDepth <= maxMarkerBits) {
+    // 判断依赖是否被标记为新的
+    if (!newTracked(dep)) {
+      dep.n |= trackOpBit // 标记为最新依赖
+      // 如果依赖已经被收集，则不需要再次收集
+      shouldTrack = !wasTracked(dep)
+    }
+  } else {
+    // Full cleanup mode.
+    shouldTrack = !dep.has(activeEffect!)
+  }
+
+  if (shouldTrack) {
+    dep.add(activeEffect!)
+    activeEffect!.deps.push(dep)
+  }
+}
+```
+
+清除旧依赖。
+
+```js
+export const finalizeDepMarkers = (effect: ReactiveEffect) => {
+  const { deps } = effect
+  if (deps.length) {
+    let ptr = 0
+    for (let i = 0; i < deps.length; i++) {
+      const dep = deps[i]
+      if (wasTracked(dep) && !newTracked(dep)) {
+        dep.delete(effect) // 删除旧依赖
+      } else {
+        deps[ptr++] = dep // 调整 deps 数组
+      }
+      // 重置上一层状态
+      dep.w &= ~trackOpBit
+      dep.n &= ~trackOpBit
+    }
+    deps.length = ptr
+  }
+}
+```
+
+#### trackOpBit 的设计
+
+trackOpBit 设计为二进制位是跟踪响应式数据在 effect 嵌套深度的被收集位置，如果使用数组方式去记录状态，空间及运算效率不如二进制高。
+
+> js 二进制数据前缀表示 0b
+
+1. 初始时 trackOpBit = 0，w = 0
+2. 数据在第一层使用时: trackOpBit = 0b10， w |= trackOpBit = 0b10
+3. 数据在第二层使用 trackOpBit = 0b100， w |= trackOpBit = 0b110
+4. trackOpBit = 0b100 可以表示当前是在第二层，w 通过或运算可以记录数据在哪几层使用过
+
+```js
+const wasTracked = (dep) => (dep.w & trackOpBit) > 0
+```
+
+通过与运算就可以知道该依赖是否在当前层收集过。
+
+### 副作用调度器
+
+```js
+function createSetter(shallow = false) {
+  return function set(
+    target: object,
+    key: string | symbol,
+    value: unknown,
+    receiver: object
+  ): boolean {
+    let oldValue = (target as any)[key]
+    
+    // 更新原始对象数据
+    const result = Reflect.set(target, key, value, receiver)
+    // 如果目标的原型链也是一个 proxy，通过 Reflect.set 修改原型链上的属性会再次触发 setter，这种情况下就没必要触发两次 trigger 了
+    if (target === toRaw(receiver)) {
+      if (!hadKey) {
+        trigger(target, TriggerOpTypes.ADD, key, value)
+
+        // 数据发生改变，变更通知
+      } else if (hasChanged(value, oldValue)) {
+        trigger(target, TriggerOpTypes.SET, key, value, oldValue)
+      }
+    }
+    return result
+  }
+}
+```
+
+## 参考学习
+
+- [细说 Vue.js 3.2 关于响应式部分的优化](https://mp.weixin.qq.com/s/02-6xMskeTMuTwrJ1fkZow)

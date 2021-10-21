@@ -37,20 +37,23 @@ tags:
 
 ## 动态类型：类型检查
 
-- typeof
-- instanceof
-- Object.prototype.toString
+- typeof，引用数据类型中，无法判断除了 function 类型以外的类型，比如 `typeof null === 'object'`
+- instanceof，instanceof 可以准确地判断复杂引用数据类型，但是不能正确判断基础数据类型
+- Object.prototype.toString，能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
 
 ## 弱类型：类型转换
+
+类型强制
+
+- 类型转换
+  - 显示转换
+  - 隐式转换
+
+强制操作（+、==）
 
 ## 为什么有的编程规范要求用 void 0 代替 undefined？
 
 JavaScript 的代码 undefined 是一个变量，而并非是一个关键字，为了避免无意中被篡改，我建议使用 void 0 来获取 undefined 值。
-
-### undefined、null 区别使用
-
-- undefined: 表示未初始化、未赋值的自然状态
-- null：表示空值
 
 ## String
 
