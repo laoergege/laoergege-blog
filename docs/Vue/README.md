@@ -47,7 +47,8 @@
 3. [vue 的响应性系统](./vue%20的响应性系统.md)
 4. [vue 的更新渲染机制](./vue%20的更新渲染机制.md)
 5. [vdom diff 更新流程](./vdom%20diff%20更新流程.md)
-6. slots(WIP)
+6. Vue API
+   1. slots
 
 推荐好文
 
@@ -118,12 +119,7 @@ renderComponentRoot
 shouldUpdateComponent
 
 
-流式 Hooks
 
-react 事件流单位是组件
-vue 事件流单位是 effect
-
-rxjs 的难是函数式数据流形式，流式 hook 看起来还是跟平常的命令式逻辑流
 
 
 view = f(data) + effect(data)

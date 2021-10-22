@@ -26,9 +26,9 @@ A = 2
 console.log(C) // 3
 ```
 
-传统命令式编程下，A 发生改变，`C = A + B` 并不会重新执行。为了能够重新计算就需要将 `C = A + B` 语句包装成可复用的函数，并且观察 A 的行为以便发生改变时调用该函数。
+传统命令式编程下，A 发生改变，`C = A + B` 并不会重新执行。为了能够重新计算就需要将 `C = A + B` 语句包装成可复用的函数，并且观察 A 的变化以便发生改变时调用该函数。
 
-响应式原理的实现本质就是观察者模式，Subject、Observer 在 Vue 响应式设计中分别对应的是 Reactive 响应式数据、Effect 副作用。
+Vue 的响应式原理的实现本质就是观察者模式，Subject、Observer 角色在 Vue 响应式设计中分别对应的是 Reactive 响应式数据、Effect 副作用的概念。
 
 Vue2 和 Vue3 的响应式实现并其实没多大区别，大致都是需要以下重要三步：
 
@@ -45,7 +45,7 @@ function reactive(target) {
     // 数据代理、操作劫持
     return new Proxy(target, {
         get(target, property) {
-            // 依赖跟踪、收集
+            // 依赖收集
             track(target, property)
             return Reflect.get(...arguments)
         },
@@ -59,18 +59,118 @@ function reactive(target) {
 }
 ```
 
-缓存结构
+JS Proxy 代理的是一个对象，对象属性能够任意访问，我们需要跟踪数据被访问的地方，将“观察者”收集起来。
+
+为了能够方便在代码上下文中找到对应响应式数据，设计一个缓存结构 `targetMap => depsMap => deps`。
 
 ```js
-// 代理对象缓存结构
-// proxyMap => depsMap => deps
-// deps = new Set()
-const depsMap = new Map()
-const targetMap = new WeakMap()
+// 缓存结构
+// targetMap => depsMap => deps
+// deps = new Set() // 收集响应式数据对应的依赖
+const depsMap = new Map() // 存放代理对象的数据属性
+const targetMap = new WeakMap() // 存放代理对象
 ```
 
-![](./images/c933683d4c9d4ba9febc57a188238b4d6438454844c7c072e7ff125c18f4f44c.png)  
+![](./images/c933683d4c9d4ba9febc57a188238b4d6438454844c7c072e7ff125c18f4f44c.png) 
 
+reactive 包装下我们已经可以对数据进行访问、修改劫持。
+
+那么数据被访问，我们需要收集的是什么？
+
+上面说到 `为了能够重新计算就需要将 `C = A + B` 语句包装成可复用的函数`，可是用户自定义函数在执行过程中，我们是无法获取该函数对象。
+
+将该需要观察数据重复调用的函数进行高阶函数封装成“副作用”，在“副作用”环境中依赖到响应式数据需要将当前“副作用”进行收集。
+
+```js
+const effectStack = [] // 副作用栈，解决嵌套副作用场景
+let activeEffect = null // 当前执行的副作用环境
+
+// 副作用
+function effect(fn) {
+    const _effect = (...args) => {
+        // 指向当前执行的副作用环境
+        activeEffect = _effect
+
+        // 清除响应式数据收集的当前副作用依赖
+        cleanup(activeEffect)
+
+        effectStack.push(fn)
+        fn(...args)
+        effectStack.pop()
+        activeEffect = effectStack[effectStack.length - 1]
+    }
+
+    _effect.deps = []
+
+    return _effect()
+}
+```
+
+在响应式作用下，每次副作用重新运行时都会触发响应式数据重新收集当前副作用，但并不是当前所有响应式数据都会，比如响应式数据 A 和 B，在下次重新运行因为 if 条件可能只使用到了 B，故需要清除 A 之前对当前副作用的收集。
+
+总而言之，为了防止某个场景下，某个依赖已经不是当前副作用的依赖，该依赖发生变化会导致该副作用重新执行，故需要清除无效依赖。
+
+一个简单方法就是将副作用之前的依赖全部清除，然后重新进行收集。
+
+```js
+// 清除依赖
+function cleanup(effect) {
+    const { deps } = effect
+    if (deps.length) {
+        for (let i = 0; i < deps.length; i++) {
+            // 将副作用从当前响应式数据的依赖收集中删除
+            deps[i].delete(effect)
+        }
+        deps.length = 0
+    }
+}
+``` 
+
+副作用收集。
+
+```js
+function track(target, key) {
+    // 获取响应式数据的依赖集
+    let depsMap = targetMap.get(target);
+
+    if (!depsMap) {
+        targetMap.set(target, (depsMap = new Map()))
+    }
+
+    let deps = depsMap.get(key);
+
+    if (!deps) {
+        depsMap.set(key, (deps = new Set()));
+    }
+
+    if (!deps.has(activeEffect)) {
+        // 收集当前激活的 effect
+        deps.add(activeEffect)
+        // 当前响应式数据的 dpes 作为 effect 的依赖
+        // clearup 时能够将副作用从响应式数据的 deps 中清除
+        activeEffect.deps.push(deps)
+    }
+}
+```
+
+![图 3](./images/ee125fb4132319ddfa602c751d70f938510597caf5fdcc0b8788517fa0ee4207.svg)  
+
+
+响应式数据修改触发副作用执行，即相当于观察者模式下的变更通知。
+
+```js
+function trigger(target, key) {
+    const depsMap = targetMap.get(target);
+    if (!depsMap) return;
+    let deps = depsMap.get(key);
+
+    if (deps) {
+        for (const effect of [...deps]) {
+            effect()
+        }
+    }
+}
+```
 
 ## Vue Reactive API 源码分析
 
@@ -481,6 +581,8 @@ function createSetter(shallow = false) {
   }
 }
 ```
+
+还未完。。。
 
 ## 参考学习
 

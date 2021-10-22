@@ -1,27 +1,17 @@
 - monorepo
-  > 把一个项目拆分或者内聚
   - 依赖安装
-    - 依赖安装算法
-    - hoist，提升依赖，利用 nodejs 依赖机制节省空间
-    - nohoist
-      - yarn [nohoist in Workspaces](https://classic.yarnpkg.com/blog/2018/02/15/nohoist/)
-  - link 各个相互关联的包，便于开发
-  - scripts
-    - 依赖关系图
-    - 子集操作
-    - 增量操作 git diff
-  - 发版流程
-    - independent 模式
-    - fixed 模式
-  - 变更日志
+    - 依赖提升（hoist）：将相同依赖提升安装到 root 目录下，再配合 nodejs 模块查找机制
+      - 好处：节省相同依赖占据的空间
+      - 坏处：给其他项目“幽灵依赖”可能
+  - 开发 link 模式
+    - 自动关联各个的包
+    - 指定版本，非 link 模式？
+  - 构建
+    - 对依赖关系进行拓扑排序
+    - 增量构建
+  - 发版模式
+    - independent
+    - fixed
 - 工具栈
   - lerna + yarn + yarn workspaces
-  - pnpm + rush
-
-
-需要什么安装什么，别想着幽灵复用
-
-https://github.com/microsoft/rushstack
-
-- pnpm
-  - 
+  - pnpm + [rush](https://github.com/microsoft/rushstack)
