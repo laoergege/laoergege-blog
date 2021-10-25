@@ -14,30 +14,26 @@ var relativeSortArray = function (arr1, arr2) {
     let map = new Map()
     let obj = {}
     for (const e of arr2) {
-        map.set(e, 0)
+        map.set(e, [])
     }
 
     for (const e of arr1) {
         if (map.has(e)) {
-            map.set(e, map.get(e) + 1)
+            let t = map.get(e)
+            t.push(e)
         } else {
-            obj[e] = obj[e] ? obj[e] + 1 : 1
+            let t = obj[e] ? obj[e] : (obj[e] = [])
+            t.push(e)
         }
     }
 
-    const result = []
-    for (let [key, val] of map) {
-        while (val !== 0) {
-            result.push(key)
-            val--
-        }
+    let result = []
+    for (let [, val] of map) {
+        result = result.concat(val)
     }
-    for (let key in obj) {
-        let val = obj[key]
-        while (val !== 0) {
-            result.push(key)
-            val--
-        }
+    let keys = Object.keys(obj)
+    for (let key of keys) {
+        result = result.concat(obj[key])
     }
 
     return result

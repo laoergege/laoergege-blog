@@ -19,7 +19,7 @@ tags:
       - 函数声明
     - 词法环境
     - scopes 作用域链
-    - this
+    - [this](#this-指针)
 
 ## 变量提升（Hoisting）
 
@@ -290,21 +290,25 @@ console.log(bar.getName())
 
 ## this 指针
 
-JavaScirpt 的变量查找机制有两种，一个是面向函数作用域一个是面向对象机制：
+JavaScirpt 的变量查找机制有两种：
 
-- 作用域链
-- this、原型链
+- 作用域链机制
+- this、原型链机制
   > this 是面向对象机制的 JavaScript 变量查找，即通过对象属性，面向对象还有一个继承机制，对应在 JavaScript 中也就是原型链查找机制 
 
-> 本小节主要是针对 this，JavaScirpt 对象[查看](./JavaScript%20对象.md)。
+this 存在执行上下文中
 
-- this 指向
-  - 默认情况下普通函数执行上下文中的 this 是指向全局对象 window 的，但在严格模式下，this 值则是 undefined
-  - 对象调用
-  - call、bind、apply
-  - 构造函数（this 指向新创建的对象）
-  - 箭头函数（执行上下文没有 this，依靠作用域链继承外层作用域的 this）
+![图 9](./images/0e0b49e0cc45d950e4c501bdf06e1e462963953279126406b2d4db49f7af613c.png)  
 
+### this 指向
+
+- 默认情况下普通函数执行上下文中的 this 是指向全局对象 window 的，但在严格模式下，this 值则是 undefined
+- 对象方法调用（指向该对象）
+- call、bind、apply（指向传入的参数对象）
+- 构造函数（this 指向新创建的对象）
+- 箭头函数（执行上下文没有 this，依靠作用域链继承外层作用域的 this）
+
+题目
 
 ```js
 // 嵌套函数中的 this 不会从外层函数中继承

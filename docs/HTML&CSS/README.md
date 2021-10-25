@@ -30,11 +30,17 @@
         - **anime.js**
         - [GSAP](https://github.com/greensock/GSAP)
     - 过度
-  - 预处理器
-    - 文件模块
-    - 变量
-    - 嵌套
-    - 复用
+  - CSS 工程
+    - 预处理
+      - 文件模块
+      - 变量
+      - 嵌套
+      - 复用
+    - 样式封装
+      - BEM
+      - CSS-In-JS
+      - CSSModule
+      - ShadowDOM
 - HTML
   - 元素分类
     - 文档元信息
