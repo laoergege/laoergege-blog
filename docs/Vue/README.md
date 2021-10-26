@@ -136,3 +136,14 @@ active 副作用调度激活标志？
 
 
 尽量忽略其他不相干 case 情况，保持主逻辑功能流程分析
+
+vnode
+- type
+- props
+- children
+
+component
+- props
+- slots
+- data
+- render

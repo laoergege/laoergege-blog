@@ -1,10 +1,23 @@
-# Vue 的 MDV 原理
+# Vue 的响应式更新渲染机制
+
+Vue 的响应式更新渲染机制，也就是 MDV（Model-Driven-View）数据驱动视图的原理。
 
 只需要关注业务数据变化，状态如何映射到 UI，就交给视图层框架
 
-## 响应式 API 
+```js
+{
+  data: () => {
+    return {}
+  },
+  setup(){
+    return {}
+  }
+  render() {}
+}
+```
 
-## 渲染上下文
+
+## 渲染上下文建立数据与模板联系
 
 模板对数据的引用是通过代理访问渲染上下文
 
@@ -80,4 +93,9 @@ function setupStatefulComponent(
     finishComponentSetup(instance, isSSR)
   }
 }
-``
+```
+
+
+劫持数据的方式改成用 Proxy 实现 ， 以及收集的依赖由 watcher 实例变成了组件副作用渲染函数 。
+
+组件 复用 数据+视图模板

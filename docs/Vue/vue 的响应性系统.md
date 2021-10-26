@@ -7,7 +7,7 @@ tags:
 # Vue 的响应式
 
 - Vue 的响应式
-  - 响应式原理
+  - [响应式原理](#响应式原理)
   - Reative API
   - 响应式更新渲染机制
 
@@ -59,30 +59,18 @@ function reactive(target) {
 }
 ```
 
-JS Proxy 代理的是一个对象，对象属性能够任意访问，我们需要跟踪数据被访问的地方，将“观察者”收集起来。
-
-为了能够方便在代码上下文中找到对应响应式数据，设计一个缓存结构 `targetMap => depsMap => deps`。
-
-```js
-// 缓存结构
-// targetMap => depsMap => deps
-// deps = new Set() // 收集响应式数据对应的依赖
-const depsMap = new Map() // 存放代理对象的数据属性
-const targetMap = new WeakMap() // 存放代理对象
-```
-
-![](./images/c933683d4c9d4ba9febc57a188238b4d6438454844c7c072e7ff125c18f4f44c.png) 
+JS Proxy 代理的是一个对象，对象属性能够任意访问，我们需要跟踪数据被访问的地方，并将这些“观察者”收集起来。
 
 reactive 包装下我们已经可以对数据进行访问、修改劫持。
 
-那么数据被访问，我们需要收集的是什么？
+那么数据被访问时，我们要收集的是什么、怎么收集？
 
-上面说到 `为了能够重新计算就需要将 `C = A + B` 语句包装成可复用的函数`，可是用户自定义函数在执行过程中，我们是无法获取该函数对象。
+上面说到 `为了能够重新计算就需要将 C = A + B 语句包装成可复用的函数`，可是用户自定义的函数在执行过程中，我们是无法获取该函数对象。
 
-将该需要观察数据重复调用的函数进行高阶函数封装成“副作用”，在“副作用”环境中依赖到响应式数据需要将当前“副作用”进行收集。
+将该需要重复调用的函数进行高阶函数封装成“副作用”，在“副作用”环境中有依赖到响应式数据时需要将当前“副作用”进行收集。
 
 ```js
-const effectStack = [] // 副作用栈，解决嵌套副作用场景
+const effectStack = [] // 副作用栈
 let activeEffect = null // 当前执行的副作用环境
 
 // 副作用
@@ -106,9 +94,20 @@ function effect(fn) {
 }
 ```
 
-在响应式作用下，每次副作用重新运行时都会触发响应式数据重新收集当前副作用，但并不是当前所有响应式数据都会，比如响应式数据 A 和 B，在下次重新运行因为 if 条件可能只使用到了 B，故需要清除 A 之前对当前副作用的收集。
+#### `effectStack`，表示嵌套副作用场景。
 
-总而言之，为了防止某个场景下，某个依赖已经不是当前副作用的依赖，该依赖发生变化会导致该副作用重新执行，故需要清除无效依赖。
+```js
+const A = effect(() => { xxx })
+const B = effect(() => { A() })
+```
+
+嵌套场景主要是 vue 组件嵌套，vue 组件的渲染也是副作用（[vue 组件响应式更新渲染机制](./vue%20组件响应式更新渲染机制.md)）。
+
+#### `cleanup(activeEffect)`，清除当前副作用。
+
+在响应式作用下，每次副作用重新运行时都会触发响应式数据重新收集当前副作用，但并不是所有响应式数据都会重新被访问到，比如响应式数据 A 和 B，在下次重新运行因为 if 条件可能只使用到了 B，故需要清除 A 的依赖。
+
+总而言之，就是为了防止某个场景下，某个依赖已经不是当前副作用的依赖，该依赖发生变化会导致该副作用重新执行，故需要清除无效依赖。
 
 一个简单方法就是将副作用之前的依赖全部清除，然后重新进行收集。
 
@@ -126,7 +125,21 @@ function cleanup(effect) {
 }
 ``` 
 
-副作用收集。
+#### 缓存结构
+
+为了能够方便在代码上下文中找到对应响应式数据，设计一个缓存结构 `targetMap => depsMap => deps`。
+
+```js
+// 缓存结构
+// targetMap => depsMap => deps
+// deps = new Set() // 收集响应式数据对应的依赖
+const depsMap = new Map() // 存放所有响应式数据的依赖集
+const targetMap = new WeakMap() // 存放与响应式数据关联的代理对象
+```
+
+![](./images/c933683d4c9d4ba9febc57a188238b4d6438454844c7c072e7ff125c18f4f44c.png) 
+
+#### 副作用收集
 
 ```js
 function track(target, key) {
@@ -249,7 +262,7 @@ function targetTypeMap(rawType: string) {
 }
 ```
 
-1. proxy 对象再次 reactive 还是原 proxy，除非转是 readyonly
+1. proxy 对象再次 reactive 还是原 proxy，除非转 readyonly
 2. 同一原始 target 多次执行 reactive 都会得到同一 proxy（proxyMap 缓存）
 3. 只允许普通对象或者集合类型，内置对象类型如 Date、Function 类型则不可以
 4. __v_skip 属性的对象、被冻结的对象
@@ -257,8 +270,6 @@ function targetTypeMap(rawType: string) {
 #### 内部 ReactiveFlags key
 
 ReactiveFlags 作为响应式对象的内部特殊 key。
-
-> 为什么不用 Symbol 去私有 key？:thinking:
 
 ```ts
 export const enum ReactiveFlags {
@@ -273,7 +284,7 @@ export const enum ReactiveFlags {
 
 ![](./images/flag.png)
 
-#### get 依赖收集
+### get 依赖收集
 
 get 代理操作主要做了 3 件事：
 
@@ -282,6 +293,7 @@ get 代理操作主要做了 3 件事：
 3. 延迟响应式
 
 ```js
+// createReactiveObject => baseHandlers => createGetter
 // packages/reactivity/src/baseHandlers.ts
 function createGetter(isReadonly = false, shallow = false) {
   return function get(target: Target, key: string | symbol, receiver: object) {
@@ -303,7 +315,7 @@ function createGetter(isReadonly = false, shallow = false) {
     // case...
 
     if (isObject(res)) {
-      // 响应式子属性数据，不像以前初始化时递归响应，性能优化
+      // 延迟响应化，性能优化，不像以前初始化时递归响应化
       // Convert returned value into a proxy as well. we do the isObject check
       // here to avoid invalid value warning. Also need to lazy access readonly
       // and reactive here to avoid circular dependency.
@@ -340,7 +352,7 @@ console.log(_test.length);
 
 ### ReactiveEffect
 
-响应式副作用，就是在响应式数据发生变化时能够执行某些操作。
+响应式副作用，就是在响应式数据发生变化时能够重新执行某些操作。
 
 那要在如何把响应式数据和副作用函数自动关联，就需要把这些副作用操作封装成 Vue 响应性系统中的 ReactiveEffect。
 
