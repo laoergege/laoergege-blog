@@ -35,6 +35,7 @@ tags:
   - 元编程
 - api
   - [call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
+  - [Promise](https://github.com/laoergege/laoergege-blog/issues/81)
 - 学习资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
   - [ES6 入门教程](https://es6.ruanyifeng.com/)

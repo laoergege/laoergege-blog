@@ -39,6 +39,7 @@
     - https://github.com/ykfe/ssr
   - web component
     - https://mp.weixin.qq.com/s/kqG7xUnpVRg0XU5HLxjARw
+    - https://github.com/yyx990803/vue-lit
 
 ## Vue3 系文
 
