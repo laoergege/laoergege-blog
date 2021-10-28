@@ -34,8 +34,10 @@ tags:
       - [运行时](./JavaScript%20代码执行过程（运行时）.md)
   - 元编程
 - api
-  - [call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
-  - [Promise](https://github.com/laoergege/laoergege-blog/issues/81)
+  - [手写 call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
+  - [手写 Promise](https://github.com/laoergege/laoergege-blog/issues/81)
+    - [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/#introduction)
+  - [手写 instanceof](https://github.com/laoergege/laoergege-blog/issues/74)
 - 学习资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
   - [ES6 入门教程](https://es6.ruanyifeng.com/)

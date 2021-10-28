@@ -8,6 +8,13 @@ tags:
 
 - JavaScript 类型系统
   - 动态类型：类型检查
+    - typeof
+      - 无法判断除了 function 类型以外的其他具体引用类型
+      - `typeof null === 'object'`
+    - instanceof
+      - 可以判断具体引用类型，但是不能正确判断基础数据类型
+    - Object.prototype.toString.call
+      - 能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
   - 弱类型：类型转换
   - 类型分类
     - 原始类型
@@ -34,12 +41,6 @@ tags:
       - 数据结构
         - Set、WeakSet
         - Map、WeakMap
-
-## 动态类型：类型检查
-
-- typeof，引用数据类型中，无法判断除了 function 类型以外的类型，比如 `typeof null === 'object'`
-- instanceof，instanceof 可以准确地判断复杂引用数据类型，但是不能正确判断基础数据类型
-- Object.prototype.toString，能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
 
 ## 弱类型：类型转换
 
