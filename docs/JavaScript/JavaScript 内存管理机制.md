@@ -197,3 +197,12 @@ JavaScript 是运行在主线程之上的，一旦执行垃圾回收算法，如
 如何判断 JavaScript 中内存泄漏的？
 
 可通过 Performance来观察，如果是有规律的周期平稳变化，则不存在内存泄漏，如果整体趋势上涨则说明存在内存泄漏。
+
+
+[通过垃圾回收机制理解 JavaScript 内存管理](https://juejin.im/post/5c4409fbf265da616f703d5a)
+[如何处理 JavaScript 内存泄漏](https://mp.weixin.qq.com/s?__biz=MzA5NzkwNDk3MQ==&mid=2650585408&idx=1&sn=4de7b5bbfa969d9587c163e98bc90684&source=41#wechat_redirect)
+[垃圾回收](https://segmentfault.com/a/1190000003641343)
+[编写内存友好的代码](https://segmentfault.com/a/1190000007887891)
+[JavaScript 中 4 种常见的内存泄漏陷阱](https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651551451&idx=1&sn=b8447a12eceb467992d432b014d9c026&chksm=8025a11ab752280c7915db4ef726611f645d2fee590d6f0f3f9aeedd55c956454f66f786873a&scene=0#wechat_redirect)
+[记一次网页内存溢出分析及解决实践](https://juejin.im/post/5c3dce07e51d4551e960d840)
+

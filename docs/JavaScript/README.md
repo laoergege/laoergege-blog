@@ -25,13 +25,13 @@ tags:
     - Promise
     - async/await（generator + promise
     - [微任务、Promise](./JavaScript 微任务、Promise.md)
-  - 执行原理
+  - 运行时
     - [内存管理机制](./JavaScript%20内存管理机制.md)
       - 堆栈内存
       - 标记-清除
-    - 执行过程
+    - 运行原理
       - [编译时](./JavaScript%20代码执行过程（编译时）.md)
-      - [运行时](./JavaScript%20代码执行过程（运行时）.md)
+      - [JavaScript 代码执行机制](./JavaScript%20代码执行机制.md)
   - 元编程
 - api
   - [手写 call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
@@ -52,11 +52,12 @@ tags:
 - setImmediate
 
 
-JavaScript 的执行机制：先编译，再执行
-
-this、 面向对象 原型继承/原型链
 
 
 单线程
 异步回调
 事件循环
+
+
+
+

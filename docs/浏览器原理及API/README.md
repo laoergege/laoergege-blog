@@ -20,6 +20,7 @@ tags:
 - [页面渲染流程](./页面渲染流程.md)
 - [消息队列与事件循环](./消息队列与事件循环.md)
   - [Jake Archibald: 在循环 - JSConf.Asia](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
+  - [Tasks, microtasks, queues and schedules](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
 
 Web 安全策略
 - 同源策略

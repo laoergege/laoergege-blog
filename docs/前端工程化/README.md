@@ -68,6 +68,7 @@
   - 架构化及方案沉淀
     - 组件库
     - 微前端
+      - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
 
 
 

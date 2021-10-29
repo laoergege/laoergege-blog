@@ -222,9 +222,7 @@ emit 把各个chunk输出到结果文
 
 
 
-Promise
 
-Promise 及其方法的实现
 
 
 HTTP 1/2
