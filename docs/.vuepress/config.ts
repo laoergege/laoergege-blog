@@ -4,7 +4,6 @@ import type { DefaultThemeOptions } from 'vuepress'
 import menu from "./menu";
 import { docRelease } from "@laoergege/vuepress-plugin-blog-utils";
 import mermaidjs from "vuepress-plugin-mermaidjs";
-import { blogPlugin } from "./plugin";
 
 export default defineUserConfig<DefaultThemeOptions>({
   // 站点信息配置
@@ -40,6 +39,15 @@ export default defineUserConfig<DefaultThemeOptions>({
         }
       }
     ],
+    () => {
+      return {
+        extendsPageData: (page) => {
+          if(page?.filePath?.includes('lastUpdated')) {
+            console.log(page.key)
+          }
+        },
+      }
+    }
   ]
   // plugins: [
   //   [

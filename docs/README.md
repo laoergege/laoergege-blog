@@ -1,6 +1,6 @@
 ---
 sidebar: false
+lastUpdated: false
 ---
-hello world！
 
-<vssue-element v-pre/>
+<home />

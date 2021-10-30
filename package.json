@@ -31,7 +31,8 @@
   "dependencies": {
     "@laoergege/vuepress-plugin-blog-utils": "workspace:^1.0.0",
     "chalk": "^4.1.1",
-    "consola": "^2.15.3"
+    "consola": "^2.15.3",
+    "hash-sum": "^2.0.0"
   },
   "devDependencies": {
     "chokidar": "^3.5.2",

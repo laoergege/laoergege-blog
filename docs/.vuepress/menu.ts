@@ -34,19 +34,15 @@ export default ({
         },
         {
             text: '工程化与架构',
-            link: '/NodeJS/'
+            link: '/Nodejs/'
         },
         {
-            text: 'NodeJS',
+            text: 'Nodejs',
             link: '/NodeJS/'
         },
         {
             text: 'Http',
             link: '/Http/'
-        },
-        {
-            text: 'Tags',
-            link: '/JavaScript/'
         },
     ]
 } as DefaultThemeOptions)
