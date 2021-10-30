@@ -290,3 +290,4 @@ DFS
 - recursion
 - Expires
 - revalidate
+- traverse

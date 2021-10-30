@@ -22,20 +22,18 @@ var levelOrder = function (root) {
         return []
     }
 
-    const queue = [[root]]
+    let queue = [root]
     const result = []
-
     while (queue.length) {
-        const nodes = queue.pop()
+        result.push(queue.map(node => node.val))
 
-        result.push(nodes.map(node => node.val))
-
-        const tmp = []
-        nodes.forEach(node => {
+        queue = queue.flatMap(node => {
+            const tmp = []
             node.left && tmp.push(node.left)
             node.right && tmp.push(node.right)
+
+            return tmp
         })
-        tmp.length && queue.push(tmp)
     }
 
     return result
