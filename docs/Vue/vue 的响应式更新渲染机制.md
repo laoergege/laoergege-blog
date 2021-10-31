@@ -99,3 +99,23 @@ function setupStatefulComponent(
 劫持数据的方式改成用 Proxy 实现 ， 以及收集的依赖由 watcher 实例变成了组件副作用渲染函数 。
 
 组件 复用 数据+视图模板
+
+## 异步更新机制
+vue 异步更新
+- callbacks 存放异步执行的回调
+- flushCallbacks 同步执行callbacks中回调 
+- 优先微任务、否则宏任务
+- 数据更改 -> setter -> Dep -> Watcher -> nextTick -> patch -> 更新视图
+
+浏览器环境中常见的异步任务种类，按照优先级：
+
+macro task ：同步代码、setImmediate、MessageChannel、setTimeout/setInterval
+micro task：Promise.then、MutationObserver
+
+- queueJob
+- queueFlush
+- resolvedPromise.then(flushJobs)
+
+- pendingPreFlushCbs
+- queue
+- pendingPostFlushCbs

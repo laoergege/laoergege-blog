@@ -59,6 +59,10 @@ Web 安全策略
   - WebAssembly
     - [A cartoon intro to WebAssembly](https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/)
     - [Debugging WebAssembly with modern tools](https://developer.chrome.com/blog/wasm-debugging-2020/)
+  - ResourceHints
+    - [prerender](https://web.dev/speculative-prerendering/)
+  - SanitizerAPI
+    - [Safe DOM manipulation with the Sanitizer API](https://web.dev/sanitizer/)
 
 ### 场景分类
 

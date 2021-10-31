@@ -17,6 +17,7 @@
 - container 布局网格线、行列、区
   - grid-template-[columns|rows]
     - fr 弹性单位
+      - [An Introduction to the `fr` CSS unit](https://css-tricks.com/introduction-fr-css-unit/)
     - 关键词
       - min-content
       - max-content
