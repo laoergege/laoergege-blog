@@ -291,3 +291,5 @@ DFS
 - Expires
 - revalidate
 - traverse
+- justify-items: stretch;
+- align-content: space-evenly;    

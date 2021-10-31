@@ -66,6 +66,8 @@
               - tree-shaking
       - 安全
   - 架构化及方案沉淀
+    - table
+      - [tabulator](https://github.com/olifolkerd/tabulator)
     - 组件库
     - 微前端
       - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)

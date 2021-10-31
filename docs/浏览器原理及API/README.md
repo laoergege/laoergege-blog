@@ -2,6 +2,8 @@
 tags:
  - chrome
  - 浏览器原理
+ - web
+ - html
 ---
 # 浏览器原理及API
 
@@ -56,6 +58,7 @@ Web 安全策略
   - [Canvas](./Canvas.md)
   - WebAssembly
     - [A cartoon intro to WebAssembly](https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/)
+    - [Debugging WebAssembly with modern tools](https://developer.chrome.com/blog/wasm-debugging-2020/)
 
 ### 场景分类
 

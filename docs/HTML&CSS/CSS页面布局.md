@@ -7,3 +7,59 @@
       - 标准模型元素宽度 width=content
   - 常见页面布局
     - 垂直水平居中
+  - flex
+  - grid
+    - [A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
+    - [网格布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout)
+
+## grid 属性
+
+- container 布局网格线、行列、区
+  - grid-template-[columns|rows]
+    - fr 弹性单位
+    - 关键词
+      - min-content
+      - max-content
+      - auto
+      - fit-content
+    - 函数
+      - repeat()
+      - minmax()
+  - grid-template
+    - none
+    - `<grid-template-rows>  / <grid-template-columns>`
+  - grid-auto-[columns|rows] 自动扩充
+  - grid-auto-flow 项目排序
+    - row 从左往右填充个行，换行
+    - column 从上到下填充列，换列
+    - [column|row] | dense 如果后面出现了稍小的元素，则会试图去填充网格中前面留下的空白
+  - grid-template-areas
+    - `<grid-area-name>` – 指定的网格区域的名称 grid-area
+    - . – 句点表示一个空的网格单元
+    - none – 没有定义网格区域
+    - 区域的起始行行和起始列行的名称将是 xxx-start，其最后一行行和最后一列行的名称将是 xxx-end
+  - column-gap
+  - row-gap
+  - `gap: <grid-row-gap> <grid-column-gap>;`
+  - flex
+    - justify-items
+    - align-items
+    - `place-items: <align-items> / <justify-items> | value`
+    - justify-content
+    - align-content
+    - `place-content: <align-content> / <justify-content> `
+- item（根据网格线、行列、区去定位）
+  - grid-[column|row]-[start|end]
+    - number 网线编号
+      - -1 表示倒数编号 1 开始
+    - span [number|name] 横跨多少行/列 
+    - name 网格线名
+      - name count 重名时 count 表示第几个
+  - `grid-[column|row] : <start> / <end> | number`
+  - `grid-area: <row-start> /  <column-start> /  <row-end> / <column-end> | name`
+  - `grid-areas: <row-start> /  <column-start> /  <row-end> / <column-end>`
+  - flex
+    - order
+    - align-self
+    - justify-self
+    - place-self
