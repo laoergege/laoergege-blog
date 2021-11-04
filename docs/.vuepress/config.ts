@@ -2,12 +2,12 @@ import path from "path";
 import { defineUserConfig } from 'vuepress'
 import type { DefaultThemeOptions } from 'vuepress'
 import menu from "./menu";
-import { docRelease } from "@laoergege/vuepress-plugin-blog-utils";
+import { docRelease, lastUpdated } from "@laoergege/vuepress-plugin-blog-utils";
 import mermaidjs from "vuepress-plugin-mermaidjs";
 
 export default defineUserConfig<DefaultThemeOptions>({
   // 站点信息配置
-  lang: 'zh-CN',
+  lang: "zh-CN",
   title: "",
   description: "Just For Fun",
 
@@ -21,7 +21,7 @@ export default defineUserConfig<DefaultThemeOptions>({
     lastUpdated: true,
     smoothScroll: true,
     sidebar: false,
-    lastUpdatedText: '最近更新时间',
+    lastUpdatedText: "最近更新时间",
     contributors: false,
     editLink: false,
     ...menu,
@@ -29,26 +29,37 @@ export default defineUserConfig<DefaultThemeOptions>({
 
   // 插件
   plugins: [
-    [docRelease],
+    docRelease,
     [
-      mermaidjs, 
+      lastUpdated,
       {
-        theme: 'base',
+        exclude: "**/README.md",
+        render(page) {
+          return `<list-item title="${page.title}" routeKey="${
+            page.key
+          }" :tags='${JSON.stringify(page.frontmatter.tags)}'/>`;
+        },
+      },
+    ],
+    [
+      mermaidjs,
+      {
+        theme: "base",
         themeVariables: {
-          background: '#7FC8A9'
-        }
-      }
+          background: "#7FC8A9",
+        },
+      },
     ],
     () => {
       return {
         extendsPageData: (page) => {
-          if(page?.filePath?.includes('lastUpdated')) {
-            console.log(page.key)
+          if (page?.filePath?.includes("lastUpdated")) {
+            console.log(page.key);
           }
         },
-      }
-    }
-  ]
+      };
+    },
+  ],
   // plugins: [
   //   [
   //     require("@vssue/vuepress-plugin-vssue-compat-next"),
@@ -61,4 +72,4 @@ export default defineUserConfig<DefaultThemeOptions>({
   //     }
   //   ]
   // ]
-})
+});

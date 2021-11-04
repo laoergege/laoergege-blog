@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="wrapper">
         <div class="info">
             <img class="avatar" src="/avatar.png">
         </div>
         <div>
             <h3>最近更新</h3>
-            <Content :page-key="lastUpdatedKey"/>
+            <Content :page-key="lastUpdatedKey" class="list"/>
         </div>
     </div>
 </template>
@@ -26,14 +26,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper{
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
 .info {
     display: flex;
     justify-content: center;
 
     .avatar{
-        width: 50px;
-        height: 50px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
     }
+}
+.list{
+    list-style: auto;
 }
 </style>

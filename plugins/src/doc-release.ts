@@ -19,7 +19,6 @@ export const docRelease: PluginFunction<Options> = function({ glob = '**/README.
         try {
             return minimatch(file, glob)
         } catch (error) {
-            console.log(file, glob)
             return false
         }
     }

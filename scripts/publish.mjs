@@ -1,5 +1,5 @@
 import 'zx/globals'
-import { lastUpdated } from './lastUpdated.mjs'
+import { lastUpdated } from './lastUpdated.js'
 
 export async function publish() {
     await lastUpdated()

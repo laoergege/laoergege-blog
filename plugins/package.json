@@ -12,7 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "minimatch": "^3.0.4"
+    "dayjs": "^1.10.7",
+    "minimatch": "^3.0.4",
+    "zx": "^4.2.0"
   },
   "devDependencies": {
     "@types/minimatch": "^3.0.5"
