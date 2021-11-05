@@ -1,10 +1,10 @@
 <template>
     <div>
-        <p>{{title}}</p>
+        <router-link :to="{ name: routeKey }"><h3>{{title}}</h3></router-link>
         <p>
             <span v-for="tag in tags" :key="tag">{{tag}}</span>
         </p>
-        <router-link :to="routeKey">readme</router-link>
+        
     </div>
 </template>
 

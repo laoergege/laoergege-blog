@@ -19,3 +19,17 @@
 - 微任务
   - Promise
   - MutationObserver
+
+
+
+浏览器环境中常见的异步任务种类，按照优先级：
+
+macro task ：同步代码、setImmediate、MessageChannel、setTimeout/setInterval
+micro task：Promise.then、MutationObserver
+
+1. 理解功能需求
+2. 实现猜想
+3. 功能源码主流程 debugger
+4. 源码细节
+   1. 看 issue
+   2. 看测试用例

@@ -2,9 +2,9 @@
     <div class="wrapper">
         <div class="info">
             <img class="avatar" src="/avatar.png">
+            <div>Hi</div>
         </div>
         <div>
-            <h3>最近更新</h3>
             <Content :page-key="lastUpdatedKey" class="list"/>
         </div>
     </div>

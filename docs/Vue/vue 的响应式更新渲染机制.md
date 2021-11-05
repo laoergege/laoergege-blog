@@ -1,8 +1,12 @@
 ---
 release: true
+tags: 
+ - vue
 ---
 
 # Vue 的响应式更新渲染机制
+
+> 以下代码示例版本 vue3.2
 
 Vue 的响应式更新渲染机制，也就是 MDV（Model-Driven-View）数据驱动视图的原理。在 MDV 的理念之下，我们只需要关注业务数据变化，状态如何映射到 UI，就交给视图层框架
 
@@ -18,8 +22,9 @@ Vue 的响应式更新渲染机制，也就是 MDV（Model-Driven-View）数据�
 }
 ```
 
+## 渲染副作用
 
-## 渲染上下文建立数据与模板联系
+## 渲染上下文：建立数据与模板联系
 
 模板对数据的引用是通过代理访问渲染上下文
 
@@ -104,7 +109,7 @@ function setupStatefulComponent(
 
 ## 异步更新机制
 
-当响应式数据发生变化时并不会立即更新视图，而是将视图更新任务派发给**调度器**进行调度执行。也就是说 vue 的视图更新是异步的，这是因为当你有多个响应式数据修改的时候，不可能每修改一个就同步一次更新操作，而是将所有的更新任务都缓冲到下一个 tick 中去执行。
+当响应式数据发生变化时并不会立即更新视图，而是将视图更新任务派发给**调度器**调度执行。也就是说 vue 的视图更新是异步的，这是因为当你有多个响应式数据修改的时候，不可能每修改一个就同步一次更新操作，而是将所有的更新任务都缓冲到下一个 tick 中去执行。
 
 ```ts
 // packages/runtime-core/src/scheduler.ts
@@ -117,7 +122,7 @@ const effect = new ReactiveEffect(
 //...
 ```
 
-视图更新任务都会放进异步队列。但为了保证渲染一致性，vue 根据渲染前后分为
+视图更新任务都会放进异步队列。但为了保证渲染一致性，vue 根据渲染前后分为了不同队列：
 
 - pendingPreFlushCbs（pre queue）
 - queue（render queue）
@@ -138,7 +143,7 @@ render 任务是存放进 render queue 中，watcher 则根据属性控制：
 - sync 直接同步执行
 
 了解了任务类型及对应的任务队列后，我们再了解 vue 是如何异步更新，其实很简单：
-**在同一个 tick 中对触发的 watcher、render 任务用任务队列进行缓冲收集并且在运行时环境创建一个异步任务用于负责执行这些更新任务**。
+**在同一个 tick 中对触发的 watcher、render 任务用对应的任务队列进行缓冲收集并且在运行时环境创建一个异步任务用于负责执行这些更新任务**。
 
 ```ts
 // queueJob 将异步更新任务插入到 render queue 队列中
@@ -157,6 +162,7 @@ function queueFlush() {
   // 防止重复触发
   if (!isFlushing && !isFlushPending) {
     isFlushPending = true
+    // 发起异步任务
     currentFlushPromise = resolvedPromise.then(flushJobs)
   }
 }
@@ -231,17 +237,17 @@ function flushJobs(seen?: CountMap) {
 这主要跟 vue 组件的渲染机制有关，一个 vue 组件发生更新有两种情况：
 
 - 依赖的 state 发生修改
-- props 发生修改
+- 自身 props 发生修改
 
-props 是由父组件传入，整个组件树遵循自顶向下单向数据流原则，当 props 发生改，子组件也会发生更新，组件的创建更新顺序都是从父到子。
+props 是由父组件传入，是在 render 过程中。当 props 发生改，子组件也会发生更新，整个组件树的创建更新顺序都是从父到子。
 
 但有一种情况，就是父子组件刚好依赖到同一个 state，这会导致 render queue 里同时存在父子组件的 render 任务，更坏的情况是子 render 任务可能排在父 render 前。
 
 ![图 3](./images/acbc4b0074832fb14e21c94698f615b0ddea65f867c36f62799b38462ddf735b.png)  
 
-子 render 任务会更新子组件并且父 render 任务可能修改子组件的 props 同样也触发子组件更新，这就导致子组建在同一个 tick 中 render 两次。
+子 render 任务会更新子组件并且父 render 任务可能修改子组件的 props 同样也触发子组件更新，也就是说 父 rennder 任务其实可能包含子 render 任务，那这样就会导致子组件在同一个 tick 中 render 两次。
 
-我们先执行父 render 任务，并且在更新子组件之前先 `invalidateJob(instance.update)` 把队列中的子 render 任务删除，这样做就不会重复更新子组件。
+源码中先进行父子排序，先执行父 render 任务，并且在更新子组件之前先 `invalidateJob(instance.update)` 把队列中的子 render 任务删除，这样做就不会重复更新子组件。
 
 ```ts
 const updateComponent = (n1: VNode, n2: VNode, optimized: boolean) => {
@@ -265,7 +271,7 @@ const updateComponent = (n1: VNode, n2: VNode, optimized: boolean) => {
   }
 ```
 
-接下来看，一个组件依赖的多个状态发生变更时：
+接下来看，当一个组件依赖的多个状态同时发生变更时：
 
 ![图 4](./images/b3766b1e7bfc8ec2f01ec549b741d3211a2e5afc8eeec080bb3020a2983933e4.png)  
 
@@ -289,36 +295,129 @@ export function queueJob(job: SchedulerJob) {
 }
 ```
 
-1. flushPending 即收集缓冲任务时去重
-2. 但 flushing 时又可以根据 `job.allowRecurse` 条件插入任务重复调用自己，这是为什么？
+其中
 
+1. 在执行清空所有任务队列前先去重。（这时还没 flushing， flushIndex 为 0，意味着即整个队列去重）
+2. 但执行队列任务过程又可以根据 `job.allowRecurse` 条件插入任务、或者重复任务，这是为什么？
 
+![图 8](./images/27aeb69368ce52b357658061f5a963e57877cef2a29913bd8bab0a355a09b8f3.png)  
 
+图上有两处循环：
 
-- 队列执行前
-  1. 任务去重
-- 队列执行
-  1. watcher
-     1. 新的 watcher
-     2. render
-  2. render => props => watcher
-  3. 父 => 子组件渲染，删除子组件 render 任务
+在执行 pre queue 中的 watcher 时，watcher 可能会修改 state，产生新的 watcher 插入 pre queue 中，所以必须循环处理完 pre queue 中任务，保证在执行 render 后视图数据一致。
 
+```ts
+export function flushPreFlushCbs(
+  seen?: CountMap,
+  parentJob: SchedulerJob | null = null
+) {
+  if (pendingPreFlushCbs.length) {
+    currentPreFlushParentJob = parentJob // 先忽略
+    activePreFlushCbs = [...new Set(pendingPreFlushCbs)]
+    pendingPreFlushCbs.length = 0
+    
+    for (
+      preFlushIndex = 0;
+      preFlushIndex < activePreFlushCbs.length;
+      preFlushIndex++
+    ) {
+      
+      activePreFlushCbs[preFlushIndex]()
+    }
+    activePreFlushCbs = null
+    preFlushIndex = 0
+    currentPreFlushParentJob = null
+    // recursively flush until it drains
+    // 递归处理
+    flushPreFlushCbs(seen, parentJob)
+  }
+}
+```
 
+在执行 render 任务时，这时 props 的改变可能会触发子组件的 watcher，在渲染子组件前同样必须先清空 pre queue。同时要注意防止往 render queue 中插入子 render 任务，因为 render 任务包含了子 render 任务要执行。
 
+```ts
+// packages/runtime-core/src/renderer.ts
+const updateComponentPreRender = (
+ instance: ComponentInternalInstance,
+ nextVNode: VNode,
+ optimized: boolean
+) => {
+ // 省略代码...
 
+ // props update may have triggered pre-flush watchers.
+ // flush them before the render update.
+ // 渲染前清空 pre queue
+ // 第二参数记录当前调用栈中的父任务，此时即为子 render
+ flushPreFlushCbs(undefined, instance.update)
+ 
+ // ...
+}
 
+export function flushPreFlushCbs(
+  seen?: CountMap,
+  parentJob: SchedulerJob | null = null
+) {
+  if (pendingPreFlushCbs.length) {
+    // 全局变量标记
+    currentPreFlushParentJob = parentJob
+    
+    // ... 任务执行
 
+    // recursively flush until it drains
+    flushPreFlushCbs(seen, parentJob)
+  }
+}
 
+export function queueJob(job: SchedulerJob) {
+  if (
+    (!queue.length ||
+      !queue.includes(
+        job,
+        isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex
+      )) &&
+    // 任务对比，防止重复插入
+    job !== currentPreFlushParentJob
+  ) {
+    //...
+  }
+}
+```
 
-浏览器环境中常见的异步任务种类，按照优先级：
+但是我们同样也需要注意个问题：上面虽然解决了子 render 重复的问题，但 watcher 中可能会修改了父组件的依赖！
 
-macro task ：同步代码、setImmediate、MessageChannel、setTimeout/setInterval
-micro task：Promise.then、MutationObserver
+一个 render 任务其实分为两个过程：
 
-1. 理解功能需求
-2. 实现猜想
-3. 功能源码主流程 debugger
-4. 源码细节
-   1. 看 issue
-   2. 看测试用例
+1. 创建新的 vnode
+2. patch 新旧 vnode
+
+在 patch 过程，子组件 props 发生了修改而触发的 watcher 修改到父组件依赖状态。那么这时新的 vnode 其实已经不是最新状态的映射了，导致最后视图不一致，所以需要个**弥补机制**，父组件再 render 一次。
+
+ ![图 10](./images/4ff7bb1779ac06cecfc9eb0ffc81380fbbdfba59c94c65e7681cdd32c56f59de.png)  
+
+queueJob 中 `isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex` 里 `flushIndex + 1` 使得能够插入重复 render 任务。
+
+> 这里有个 [issue](https://github.com/vuejs/vue-next/issues/1801) 上面的示例可以去调试看看。
+
+#### effect.allowRecurse
+
+### nextTick
+
+```ts
+export function nextTick<T = void>(
+  this: T,
+  fn?: (this: T) => void
+): Promise<void> {
+  const p = currentFlushPromise || resolvedPromise
+  return fn ? p.then(this ? fn.bind(this) : fn) : p
+}
+```
+
+使用 promise 链式调用，保证 nextTick 的任务在异步更新任务后执行。
+
+## 总结
+
+- vue 的异步更新机制
+  - 先队列缓冲再异步执行
+  - 在执行之前任务会去重
+  - 执行过程遵循自顶向下、单向数据流更新原则，注意在 watcher 改变数据流规则可能会导致重复渲染
