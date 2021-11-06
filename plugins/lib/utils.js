@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.utf8ToText = void 0;
+exports.isExistPlugin = exports.utf8ToText = void 0;
 // 将 utf8 编码的文本转换为普通文本
 function utf8ToText(str) {
     var decoder = new TextDecoder();
@@ -10,3 +10,9 @@ function utf8ToText(str) {
     });
 }
 exports.utf8ToText = utf8ToText;
+// 查看是否存在否插件
+function isExistPlugin(pluginName, app) {
+    var plugins = app.pluginApi.plugins;
+    return plugins.some(function (p) { return p.name === pluginName; });
+}
+exports.isExistPlugin = isExistPlugin;

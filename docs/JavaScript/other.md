@@ -33,3 +33,13 @@ micro task：Promise.then、MutationObserver
 4. 源码细节
    1. 看 issue
    2. 看测试用例
+
+
+
+js debug
+- debugger client
+  - cmd
+    - node debugger
+  - ui
+    - chrome devtool
+    - vscode debugger

@@ -11,4 +11,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./doc-release"), exports);
-__exportStar(require("./last-updated"), exports);
+__exportStar(require("./last-updated-list"), exports);

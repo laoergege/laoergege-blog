@@ -1,6 +1,7 @@
 import type { PluginFunction, Page } from "vuepress";
 import { createPage } from "vuepress";
 import minimatch from "minimatch";
+import { isExistPlugin } from "./utils";
 
 interface Options {
   max: number; // 最近最新的数量，默认 20
@@ -16,8 +17,12 @@ export const lastUpdated: PluginFunction<Options> = function ({
   render,
 }) {
   return {
-    name: "lastUpdated",
+    name: "last-updated-list",
     async onInitialized(app) {
+      if (!isExistPlugin("@vuepress/plugin-git", app)) {
+        throw "Need to install @vupress/plugin-git dependency first!";
+      }
+
       const { pages } = app;
 
       const _pages = [...pages].sort((a, b) => {
