@@ -4,6 +4,7 @@ import type { DefaultThemeOptions } from 'vuepress'
 import menu from "./menu";
 
 const HTML_TEMPLATE = path.resolve(__dirname, "index.html");
+const PUBLIC_PATH = "https://cdn.laergege.cn/";
 
 export default defineUserConfig<DefaultThemeOptions>({
   // 站点信息配置
@@ -13,8 +14,10 @@ export default defineUserConfig<DefaultThemeOptions>({
 
   // 构建配置
   dest: path.resolve(__dirname, "../../dist"),
+  base:
+    process.env.NODE_ENV === "development" ? "/" : "https://cdn.laergege.cn/",
   templateDev: HTML_TEMPLATE,
-  templateSSR: HTML_TEMPLATE,
+  // templateSSR: HTML_TEMPLATE,
 
   // 主题
   theme: path.resolve(__dirname, "theme"),
