@@ -2,8 +2,8 @@ import path from "path";
 import { defineUserConfig } from 'vuepress'
 import type { DefaultThemeOptions } from 'vuepress'
 import menu from "./menu";
-import { docRelease, lastUpdated } from "@laoergege/vuepress-plugin-blog-utils";
-import mermaidjs from "vuepress-plugin-mermaidjs";
+
+const HTML_TEMPLATE = path.resolve(__dirname, "index.html");
 
 export default defineUserConfig<DefaultThemeOptions>({
   // 站点信息配置
@@ -13,8 +13,11 @@ export default defineUserConfig<DefaultThemeOptions>({
 
   // 构建配置
   dest: path.resolve(__dirname, "../../dist"),
+  templateDev: HTML_TEMPLATE,
+  templateSSR: HTML_TEMPLATE,
 
   // 主题
+  theme: path.resolve(__dirname, "theme"),
   themeConfig: {
     logo: "/avatar.png",
     repo: "laoergege",
@@ -27,49 +30,11 @@ export default defineUserConfig<DefaultThemeOptions>({
     ...menu,
   },
 
-  // 插件
-  plugins: [
-    docRelease,
-    [
-      lastUpdated,
-      {
-        exclude: "**/README.md",
-        render(page) {
-          return `<list-item title="${page.title}" routeKey="${
-            page.key
-          }" :tags='${JSON.stringify(page.frontmatter.tags)}'/>`;
-        },
+  bundlerConfig: {
+    postcss: {
+      postcssOptions: {
+        plugins: [require("autoprefixer"), require("tailwindcss")],
       },
-    ],
-    [
-      mermaidjs,
-      {
-        theme: "base",
-        themeVariables: {
-          background: "#7FC8A9",
-        },
-      },
-    ],
-    () => {
-      return {
-        extendsPageData: (page) => {
-          if (page?.filePath?.includes("lastUpdated")) {
-            console.log(page.key);
-          }
-        },
-      };
     },
-  ],
-  // plugins: [
-  //   [
-  //     require("@vssue/vuepress-plugin-vssue-compat-next"),
-  //     {
-  //       platform: 'github',
-  //       owner: 'laoergege',
-  //       repo: 'laoergege-blog',
-  //       clientId: 'b3d7df2f67f7f9ac06a7',
-  //       clientSecret: 'a3356093fe41a32ca9015d03ad465da80a2e1dbf',
-  //     }
-  //   ]
-  // ]
+  },
 });

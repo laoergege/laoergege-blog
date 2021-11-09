@@ -15,7 +15,14 @@
   - 页面
     - 颜色形状
     - [布局](./CSS页面布局.md)
-    - 字体、文本排版
+    - 文本排版
+      - [Typography for Developers](https://css-tricks.com/typography-for-developers/)
+      - [Typography in CSS](https://cssreference.io/typography/)
+      - [CSS Typography: The Basics](https://www.webfx.com/blog/web-design/css-typography-01/)
+      - 工具
+        - [opentype.js](https://github.com/opentypejs/opentype.js)
+        - [awesome web typography](https://github.com/deanhume/typography)
+        - [Typography.js](http://kyleamathews.github.io/typography.js/)
     - 层叠上下文和层叠顺序
     - 变形
       - [zoom和transform:scale的区别](https://www.zhangxinxu.com/wordpress/2015/11/zoom-transform-scale-diff/)

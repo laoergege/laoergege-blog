@@ -9,7 +9,14 @@
 
 ## Shadow DOM
 
-通过 Shadow DOM 可以隔离 CSS 和 DOM，
+通过 Shadow DOM 隔离 CSS 和 DOM。
+
+### 样式定制
+
+0. ::shodow、/deep/ 废弃
+1. open 模式下 import、style、link
+2. host css 变量
+3. ::part、::theme
 
 ## 参考学习
 

@@ -254,7 +254,7 @@ printSquare(5);
 
 另外总结下变量查找过程：
 
-```mermaid
+```
 flowchart LR
   subgraph 当前执行上下文
   direction LR

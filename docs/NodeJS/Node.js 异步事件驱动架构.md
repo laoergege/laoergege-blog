@@ -43,7 +43,7 @@
 
 除了阻塞 I/O 系统调用外，大多数现代操作系统还支持另一种访问资源的机制，称为非阻塞 I/O，即发起  I/O 系统调用时线程不会被阻塞，但对于资源的获取，你得主动轮询。**没必要的轮询也只会浪费 CPU 时间**。
 
-```c
+```
 resources = [socketA, socketB, fileA]
 while (!resources.isEmpty()) {
   for (resource of resources) {

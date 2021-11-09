@@ -84,7 +84,7 @@ V8 架构下，使用编译的方式把高级语言的代码编译成机器码�
 
 比如类型检查时，下面两句函数传参类型不符合。
 
-```java
+```javascript
 function test(int p) {}
 
 test("abc")

@@ -1,7 +1,70 @@
-.logo{
-    border-radius: 50%;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.logo {
+  border-radius: 50%;
 }
 
-.navbar{
-    border-bottom: none;
+.navbar {
+  border-bottom: none;
+}
+
+:root {
+  // back-to-top
+  .back-to-top {
+    --back-to-top-z-index: 5;
+    --back-to-top-color: theme("colors.primary");
+    --back-to-top-color-hover: theme("colors.primary-focus");
+  }
+
+  // nprogress
+  --nprogress-color: theme("colors.accent-focus");
+  --nprogress-z-index: 1031;
+
+  // vssue
+  --vssue-theme-color: theme("colors.primary");
+}
+
+.vssue {
+  font-family: theme("fontFamily.mono");
+  // color: theme("colors.primary");
+
+  :not(.vssue-comment-content) a {
+    color: theme("colors.accent");
+  }
+
+  .vssue-button:not(:disabled).vssue-button-primary {
+    color: theme("colors.accent-focus");
+    border-color: theme("colors.accent");
+  }
+}
+
+.line-numbers-mode{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: baseline;
+
+  .line-numbers{
+    margin-right: -2em;
+    font-size: inherit;
+    z-index: 1;
+    text-align: center;
+    width: 2em;
+    background: white;
+    font-size: 12px;
+    @screen sm {
+      font-size: 14px;
+    }
+    @screen lg {
+      font-size: 16px;
+    }
+  }
+
+  .shiki{
+    padding-left: 2.5em;
+    flex: 1;
+    margin: 0;
+    width: 0;
+  }
 }
