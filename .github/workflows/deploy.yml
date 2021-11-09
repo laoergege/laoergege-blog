@@ -23,9 +23,7 @@ jobs:
       uses: actions/cache@v2
       with: 
         path: ~/.pnpm-store
-        key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+        key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
     # 安装 pnpm
     - name: Install pnpm
       run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
