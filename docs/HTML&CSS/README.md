@@ -14,7 +14,7 @@
     - Viewport
   - 页面
     - 颜色形状
-    - [布局](./CSS页面布局.md)
+    - [页面布局](./CSS页面布局.md)
     - 文本排版
       - [Typography for Developers](https://css-tricks.com/typography-for-developers/)
       - [Typography in CSS](https://cssreference.io/typography/)

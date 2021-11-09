@@ -103,3 +103,13 @@ Object.getOwnPropertyDescriptor
 - 对象
   - 动态对象原型设计
   - 原型继承
+
+
+- Object.create()
+
+- Object.prototype
+- isPrototypeOf
+- hasOwnProperty
+- valueOf
+- toString
+- toLocaleString

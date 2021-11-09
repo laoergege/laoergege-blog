@@ -7,7 +7,10 @@
       - 标准模型元素宽度 width=content
   - 常见页面布局
     - 垂直水平居中
-  - flex
+  - flexbox
+    - [解决用flex布局时内容可能溢出的问题](https://stackoverflow.com/questions/43809612/prevent-a-child-element-from-overflowing-its-parent-in-flexbox)
+      - 本质：flex item 元素初始值 `min-width: auto`
+      - 解决：`min-width: 0` 、`overflow: hidden`
   - grid
     - [A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
     - [网格布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout)
