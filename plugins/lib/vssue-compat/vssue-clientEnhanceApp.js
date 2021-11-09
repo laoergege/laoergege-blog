@@ -35,12 +35,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("systemjs/dist/system.js");
-var vssue_1 = require("vssue");
 // @ts-ignore
 var api_1 = __importDefault(require("@vssue/api"));
 require("vssue/dist/vssue.min.css");
@@ -48,71 +63,79 @@ var vue_1 = require("vue");
 exports.default = (function (_a) {
     var app = _a.app;
     return __awaiter(void 0, void 0, void 0, function () {
-        var _Vue, vpOptions;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var loaded, _b, codes, Vue2, fn, context, vpOptions;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
                 case 0:
+                    loaded = (0, vue_1.ref)(false);
                     app.component("vssue", {
                         setup: function () {
-                            var vssue = (0, vue_1.ref)(null);
-                            var createVssue = function () {
-                                console.log(vssue.value);
-                                var v = new _Vue({
-                                    el: vssue.value,
-                                    props: {
-                                        title: {
-                                            type: String,
-                                            required: false,
-                                            default: undefined,
-                                        },
-                                        issueId: {
-                                            type: [Number, String],
-                                            required: false,
-                                            default: undefined,
-                                        },
-                                        options: {
-                                            type: Object,
-                                            required: false,
-                                            default: undefined,
-                                        },
-                                    },
-                                    mounted: function () {
-                                        var root = this.$parent.$options.shadowRoot;
-                                        var linkElem = document.createElement("link");
-                                        linkElem.setAttribute("rel", "stylesheet");
-                                        linkElem.setAttribute("href", "//unpkg.com/vssue/dist/vssue.min.css");
-                                        root.appendChild(linkElem);
-                                    },
-                                    render: function (h) {
-                                        var _a = this, title = _a.title, issueId = _a.issueId, options = _a.options;
-                                        return h(vssue_1.VssueComponent, {
-                                            attrs: {
-                                                part: "vssue",
+                            var vssueEl = (0, vue_1.ref)(null);
+                            var stop = (0, vue_1.watchEffect)(function () {
+                                if (vssueEl.value && loaded.value) {
+                                    new Vue2({
+                                        el: vssueEl.value,
+                                        props: {
+                                            title: {
+                                                type: String,
+                                                required: false,
+                                                default: undefined,
                                             },
-                                            props: {
-                                                title: title,
-                                                issueId: issueId,
-                                                options: Object.assign({
-                                                    api: api_1.default,
-                                                }, vpOptions, options),
+                                            issueId: {
+                                                type: [Number, String],
+                                                required: false,
+                                                default: undefined,
                                             },
-                                        });
-                                    },
-                                });
-                            };
+                                            options: {
+                                                type: Object,
+                                                required: false,
+                                                default: undefined,
+                                            },
+                                        },
+                                        render: function (h) {
+                                            var _a = this, title = _a.title, issueId = _a.issueId, options = _a.options;
+                                            return h("vssue", {
+                                                attrs: {
+                                                    part: "vssue",
+                                                },
+                                                props: {
+                                                    title: title,
+                                                    issueId: issueId,
+                                                    options: Object.assign({
+                                                        api: api_1.default,
+                                                    }, vpOptions, options),
+                                                },
+                                            });
+                                        },
+                                    });
+                                    stop();
+                                }
+                            });
                             return function () {
                                 return (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, (0, vue_1.h)("div", {
-                                    ref: vssue,
-                                    onVnodeMounted: function () {
-                                        createVssue();
-                                    },
+                                    ref: vssueEl,
                                 }));
                             };
                         },
                     });
-                    return [4 /*yield*/, System.import("//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js")];
+                    // @ts-ignore
+                    if (__VUEPRESS_SSR__)
+                        return [2 /*return*/];
+                    return [4 /*yield*/, Promise.all([
+                            fetch("//unpkg.com/vssue/dist/vssue.github.min.js").then(function (res) {
+                                return res.text();
+                            }),
+                            System.import("//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js"),
+                        ])];
                 case 1:
-                    _Vue = (_b.sent()).default;
+                    _b = __read.apply(void 0, [_c.sent(), 2]), codes = _b[0], Vue2 = _b[1].default;
+                    fn = new Function("\n    with(this) {\n      " + codes + "\n    }\n  ");
+                    context = { Vue: Vue2 };
+                    // context.Vue = Vue2;
+                    // @ts-ignore
+                    context["__proto"] = window;
+                    fn.apply(context);
+                    loaded.value = true;
                     vpOptions = window.__VSSUE_OPTIONS__ || {
                         platform: "github",
                         owner: "laoergege",

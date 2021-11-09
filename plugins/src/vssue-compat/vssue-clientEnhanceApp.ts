@@ -1,86 +1,98 @@
 import "systemjs/dist/system.js";
-import { VssueComponent } from "vssue";
 // @ts-ignore
 import VssueAPI from "@vssue/api";
 import "vssue/dist/vssue.min.css";
 
-import { h, App, resolveComponent, ref } from "vue";
+import { h, App, resolveComponent, ref, watchEffect } from "vue";
 
 export default async ({ app }: { app: App }) => {
+  const loaded = ref(false);
+
   app.component("vssue", {
     setup() {
-      const vssue = ref(null);
-      const createVssue = () => {
-        console.log(vssue.value);
-        const v = new _Vue({
-          el: vssue.value,
-          props: {
-            title: {
-              type: String,
-              required: false,
-              default: undefined,
-            },
-            issueId: {
-              type: [Number, String],
-              required: false,
-              default: undefined,
-            },
-            options: {
-              type: Object,
-              required: false,
-              default: undefined,
-            },
-          },
-          mounted() {
-            const root: ShadowRoot = this.$parent.$options.shadowRoot;
-            const linkElem = document.createElement("link");
-            linkElem.setAttribute("rel", "stylesheet");
-            linkElem.setAttribute(
-              "href",
-              "//unpkg.com/vssue/dist/vssue.min.css"
-            );
-            root.appendChild(linkElem);
-          },
-          render(h: any) {
-            const { title, issueId, options } = this;
-            return h(VssueComponent, {
-              attrs: {
-                part: "vssue",
+      const vssueEl = ref(null);
+
+      const stop = watchEffect(() => {
+        if (vssueEl.value && loaded.value) {
+          new Vue2({
+            el: vssueEl.value,
+            props: {
+              title: {
+                type: String,
+                required: false,
+                default: undefined,
               },
-              props: {
-                title,
-                issueId,
-                options: Object.assign(
-                  {
-                    api: VssueAPI,
-                  },
-                  vpOptions,
-                  options
-                ),
+              issueId: {
+                type: [Number, String],
+                required: false,
+                default: undefined,
               },
-            });
-          },
-        });
-      };
+              options: {
+                type: Object,
+                required: false,
+                default: undefined,
+              },
+            },
+            render(h: any) {
+              const { title, issueId, options } = this;
+              return h("vssue", {
+                attrs: {
+                  part: "vssue",
+                },
+                props: {
+                  title,
+                  issueId,
+                  options: Object.assign(
+                    {
+                      api: VssueAPI,
+                    },
+                    vpOptions,
+                    options
+                  ),
+                },
+              });
+            },
+          });
+
+          stop();
+        }
+      });
 
       return () =>
         h(
           resolveComponent("ClientOnly"),
           {},
           h("div", {
-            ref: vssue,
-            onVnodeMounted() {
-              createVssue();
-            },
+            ref: vssueEl,
           })
         );
     },
   });
 
+  // @ts-ignore
+  if (__VUEPRESS_SSR__) return;
+
   // load vue2.x runtime
-  const { default: _Vue } = await System.import(
-    "//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js"
-  );
+  // @ts-ignore
+  const [codes, { default: Vue2 }] = await Promise.all([
+    fetch("//unpkg.com/vssue/dist/vssue.github.min.js").then((res) =>
+      res.text()
+    ),
+    System.import("//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js"),
+  ]);
+
+  const fn = new Function(`
+    with(this) {
+      ${codes}
+    }
+  `);
+  const context = { Vue: Vue2 };
+  // context.Vue = Vue2;
+  // @ts-ignore
+  context["__proto"] = window;
+  fn.apply(context);
+
+  loaded.value = true;
 
   // options come from vuepress plugin config
   // @ts-ignore
