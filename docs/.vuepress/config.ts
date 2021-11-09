@@ -30,6 +30,10 @@ export default defineUserConfig<DefaultThemeOptions>({
     ...menu,
   },
 
+  // markdown: {
+  //   emoji: true
+  // },
+
   bundlerConfig: {
     postcss: {
       postcssOptions: {
