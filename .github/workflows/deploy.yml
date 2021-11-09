@@ -19,11 +19,11 @@ jobs:
       with: 
         node-version: '14' 
     # 使用缓存，加速构建
-    - name: Cache
-      uses: actions/cache@v2
-      with: 
-        path: ~/.pnpm-store
-        key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+    # - name: Cache
+    #   uses: actions/cache@v2
+    #   with: 
+    #     path: ~/.pnpm-store
+    #     key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
     # 安装 pnpm
     - name: Install pnpm
       run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
