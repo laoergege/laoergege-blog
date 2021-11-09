@@ -39,7 +39,6 @@
   },
   "devDependencies": {
     "@vuepress/plugin-active-header-links": "^2.0.0-beta.27",
-    "@vuepress/plugin-prismjs": "^2.0.0-beta.27",
     "@vuepress/plugin-register-components": "^2.0.0-beta.27",
     "@vuepress/plugin-shiki": "^2.0.0-beta.27",
     "autoprefixer": "^10.4.0",
