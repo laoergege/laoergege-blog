@@ -3,7 +3,7 @@ import type { ThemeConfig } from "@vuepress/core";
 import menu from "./menu";
 
 const HTML_TEMPLATE = path.resolve(__dirname, "index.html");
-const PUBLIC_PATH = "https://cdn.laoergege.cn/";
+const PUBLIC_PATH = "/laoergege-blog/";
 
 export default {
   // 站点信息配置
@@ -13,6 +13,7 @@ export default {
 
   // 构建配置
   dest: path.resolve(__dirname, "../../dist"),
+  base: process.env.NODE_ENV === "development" ? "/" : PUBLIC_PATH,
   // templateDev: HTML_TEMPLATE,
   // templateSSR: HTML_TEMPLATE,
 
