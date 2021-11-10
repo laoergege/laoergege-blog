@@ -32,7 +32,6 @@ jobs:
       # 安装依赖
     - name: Install
       run: pnpm install
-    - run: tree -L 4 node_modules/.pnpm/shiki@0.9.12
     # 博客构建
     - name: Build
       run: npm run docs:build

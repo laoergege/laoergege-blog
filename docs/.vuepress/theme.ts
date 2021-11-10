@@ -33,7 +33,7 @@ export default {
           "json",
           "python",
         ],
-        theme: "gitHub-light",
+        theme: "github-light",
       },
     ],
     [
