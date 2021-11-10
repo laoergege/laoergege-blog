@@ -1,4 +1,4 @@
-import type { PluginFunction } from "vuepress";
+import type { PluginFunction } from "@vuepress/core";
 interface Options {
     glob?: string | string[];
 }

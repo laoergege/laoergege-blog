@@ -1,4 +1,4 @@
-import type { PluginFunction, Page } from "vuepress";
+import type { PluginFunction, Page } from "@vuepress/core";
 interface Options {
     max: number;
     exclude?: string;

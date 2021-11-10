@@ -1,4 +1,4 @@
-import type { PluginFunction } from "vuepress";
+import type { PluginFunction } from "@vuepress/core";
 export interface Option {
     platform: string;
     [index: string]: any;

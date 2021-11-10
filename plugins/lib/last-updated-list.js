@@ -65,7 +65,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.lastUpdated = void 0;
-var vuepress_1 = require("vuepress");
+var core_1 = require("@vuepress/core");
 var minimatch_1 = __importDefault(require("minimatch"));
 var utils_1 = require("./utils");
 var MAX = 20;
@@ -98,7 +98,7 @@ var lastUpdated = function (_a) {
                             })
                                 .map(function (p) { return (render ? render(p) : "- [" + p.title + "](" + p.path + ")"); })
                                 .join("\n");
-                            return [4 /*yield*/, (0, vuepress_1.createPage)(app, {
+                            return [4 /*yield*/, (0, core_1.createPage)(app, {
                                     path: "/lastUpdated.html",
                                     content: "" + links,
                                 })];

@@ -1,12 +1,11 @@
 import path from "path";
-import { defineUserConfig } from 'vuepress'
-import type { DefaultThemeOptions } from 'vuepress'
+import type { ThemeConfig } from "@vuepress/core";
 import menu from "./menu";
 
 const HTML_TEMPLATE = path.resolve(__dirname, "index.html");
 const PUBLIC_PATH = "https://cdn.laoergege.cn/";
 
-export default defineUserConfig<DefaultThemeOptions>({
+export default {
   // 站点信息配置
   lang: "zh-CN",
   title: "",
@@ -14,8 +13,7 @@ export default defineUserConfig<DefaultThemeOptions>({
 
   // 构建配置
   dest: path.resolve(__dirname, "../../dist"),
-  base: process.env.NODE_ENV === "development" ? "/" : PUBLIC_PATH,
-  templateDev: HTML_TEMPLATE,
+  // templateDev: HTML_TEMPLATE,
   // templateSSR: HTML_TEMPLATE,
 
   // 主题
@@ -32,10 +30,6 @@ export default defineUserConfig<DefaultThemeOptions>({
     ...menu,
   },
 
-  // markdown: {
-  //   emoji: true
-  // },
-
   bundlerConfig: {
     postcss: {
       postcssOptions: {
@@ -43,4 +37,4 @@ export default defineUserConfig<DefaultThemeOptions>({
       },
     },
   },
-});
+} as ThemeConfig;

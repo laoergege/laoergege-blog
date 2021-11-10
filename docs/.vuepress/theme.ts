@@ -1,15 +1,12 @@
-import type { ThemeConfig } from "vuepress";
 import path from "path";
 import {
   vssuePlugin,
   docRelease,
   lastUpdated,
 } from "@laoergege/vuepress-plugin-blog-utils";
-// import mermaidjs from "vuepress-plugin-mermaidjs";
 
 export default {
   name: "my-theme",
-  // 继承默认主题
   layouts: {
     Layout: path.resolve(__dirname, "components/Layout.vue"),
   },
@@ -67,4 +64,4 @@ export default {
       },
     ],
   ],
-} as ThemeConfig;
+};

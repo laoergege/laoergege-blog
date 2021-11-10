@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.docRelease = void 0;
 var minimatch_1 = __importDefault(require("minimatch"));
 var docRelease = function (_a) {
-    var _b = _a.glob, glob = _b === void 0 ? '**/README.md' : _b;
+    var _b = _a.glob, glob = _b === void 0 ? "**/README.md" : _b;
     var match = function (file) {
         if (!glob) {
             return false;
@@ -33,7 +33,7 @@ var docRelease = function (_a) {
         }
     };
     return {
-        name: 'DocRelease',
+        name: "DocRelease",
         onInitialized: function (app) {
             var e_1, _a;
             var result = [];
@@ -41,8 +41,7 @@ var docRelease = function (_a) {
                 for (var _b = __values(app.pages), _c = _b.next(); !_c.done; _c = _b.next()) {
                     var page = _c.value;
                     if (page.frontmatter.release ||
-                        (glob &&
-                            match(page.filePathRelative))) {
+                        (glob && match(page.filePathRelative))) {
                         result.push(page);
                     }
                 }

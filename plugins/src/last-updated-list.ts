@@ -1,5 +1,5 @@
-import type { PluginFunction, Page } from "vuepress";
-import { createPage } from "vuepress";
+import type { PluginFunction, Page } from "@vuepress/core";
+import { createPage } from "@vuepress/core";
 import minimatch from "minimatch";
 import { isExistPlugin } from "./utils";
 

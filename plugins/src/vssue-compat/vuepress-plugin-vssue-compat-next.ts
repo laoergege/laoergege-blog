@@ -1,4 +1,4 @@
-import type { PluginFunction } from "vuepress";
+import type { PluginFunction } from "@vuepress/core";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
 export interface Option {
