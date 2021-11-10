@@ -12,7 +12,7 @@
 
 <script>
 import Post from "./Post.vue";
-import Home from "./Man.vue";
+import Home from "./Main.vue";
 
 export default {
     components: {
