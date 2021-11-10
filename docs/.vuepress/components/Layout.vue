@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import Post from "./Post";
-import Home from "./Home";
+import Post from "./Post.vue";
+import Home from "./Man.vue";
 
 export default {
     components: {
