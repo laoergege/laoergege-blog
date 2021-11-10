@@ -19,15 +19,18 @@ jobs:
       with: 
         node-version: '14' 
     # 使用缓存，加速构建
-    # - name: Cache
-    #   uses: actions/cache@v2
-    #   with: 
-    #     path: ~/.pnpm-store
-    #     key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+    - name: Cache
+      uses: actions/cache@v2
+      with: 
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     # 安装 pnpm
     - name: Install pnpm
       run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
-    # 安装依赖
+    - run: tree -L 4 node_modules/.pnpm/shiki@0.9.12
+      # 安装依赖
     - name: Install
       run: pnpm install
     # 博客构建
