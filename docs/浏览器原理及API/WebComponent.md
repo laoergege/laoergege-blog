@@ -14,8 +14,8 @@
 ### 样式定制
 
 0. ::shodow、/deep/ 废弃
-1. open 模式下 import、style、link
-2. host css 变量
+1. open 模式下的 import、style、link
+2. host 的 css 变量
 3. ::part、::theme
 
 ## 参考学习
