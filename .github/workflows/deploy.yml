@@ -39,7 +39,7 @@ jobs:
     - name: deploy
       if: success()
       uses: crazy-max/ghaction-github-pages@v2
-      with: 
-        - repo: laoergege.github.io
-        - env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        repo: laoergege.github.io
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
