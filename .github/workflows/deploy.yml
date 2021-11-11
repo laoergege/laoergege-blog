@@ -36,17 +36,10 @@ jobs:
     - name: Build
       run: npm run docs:build
     # 博客部署
-    - run: |
-        mv ./dist ../dist
-    - uses: actions/checkout@v2
-      with:
-        ref: 'deploy'
-        fetch-depth: 0
-    - run: |
-        git rm -rf *
-        mv ../dist/* .
-        git config --global user.email "826037047@qq.com"
-        git config --global user.name "lys"
-        git add .
-        git commit -m 'publish'  
-        git push
+    - name: deploy
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v2
+      with: 
+        - repo: laoergege.github.io
+        - env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

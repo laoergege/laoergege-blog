@@ -2,8 +2,7 @@ import path from "path";
 import type { ThemeConfig } from "@vuepress/core";
 import menu from "./menu";
 
-const HTML_TEMPLATE = path.resolve(__dirname, "index.html");
-const PUBLIC_PATH = "/laoergege-blog/";
+// const PUBLIC_PATH = "https://laoergege/";
 
 export default {
   // 站点信息配置
@@ -13,9 +12,8 @@ export default {
 
   // 构建配置
   dest: path.resolve(__dirname, "../../dist"),
-  base: process.env.NODE_ENV === "development" ? "/" : PUBLIC_PATH,
-  // templateDev: HTML_TEMPLATE,
-  // templateSSR: HTML_TEMPLATE,
+  templateDev: path.resolve(__dirname, "templates/index.dev.html"),
+  templateSSR: path.resolve(__dirname, "templates/index.ssr.html"),
 
   // 主题
   theme: path.resolve(__dirname, "theme"),
@@ -32,6 +30,13 @@ export default {
   },
 
   bundlerConfig: {
+    // chainWebpack() {
+    //   return process.env.NODE_ENV === "development" ? {} : {
+    //     output: {
+    //       publicPath:
+    //     }
+    //   }
+    // },
     postcss: {
       postcssOptions: {
         plugins: [require("autoprefixer"), require("tailwindcss")],
