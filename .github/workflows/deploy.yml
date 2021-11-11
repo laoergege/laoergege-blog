@@ -41,6 +41,8 @@ jobs:
       uses: crazy-max/ghaction-github-pages@v2
       with:
         repo: laoergege.github.io
-        build_dir: docs
+        build_dir: dist
+        jekyll: false
+        target_branch: main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
