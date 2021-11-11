@@ -36,10 +36,11 @@ jobs:
     - name: Build
       run: npm run docs:build
     # 博客部署
-    - name: deploy
+    - name: Deploy
       if: success()
       uses: crazy-max/ghaction-github-pages@v2
       with:
         repo: laoergege.github.io
+        build_dir: docs
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
