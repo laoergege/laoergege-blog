@@ -20,11 +20,7 @@ tags:
   - 面向对象编程
   - 函数式编程
     - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
-  - 异步编程
-    - 事件循环和异步回调
-    - Promise
-    - async/await（generator + promise
-    - [微任务、Promise](./JavaScript 微任务、Promise.md)
+  - [异步编程](./JavaScript%20异步编程.md)
   - 运行时
     - [内存管理机制](./JavaScript%20内存管理机制.md)
       - 堆栈内存

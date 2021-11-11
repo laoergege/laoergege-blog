@@ -2,8 +2,9 @@
 
 - JavaScript 异步编程
   - 事件循环和异步回调
-  - [微任务、Promise](./JavaScript 微任务、Promise.md)
-  - async/await（generator + promise)
+  - Promise
+  - Generator + Promise
+  - Async/Await
 
 ## 同步异步
 
