@@ -40,7 +40,7 @@ jobs:
       if: success()
       uses: crazy-max/ghaction-github-pages@v2
       with:
-        repo: laergege/laoergege.github.io
+        repo: laoergege/laoergege.github.io
         build_dir: dist
         jekyll: false
         target_branch: main
