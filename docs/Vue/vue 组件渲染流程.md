@@ -313,7 +313,7 @@ function _createVNode(
 }
 ```
 
-工厂模式创建 vnode，并且对 props、children 做标准化处理、对 vnode 的 type 做编码等。
+工厂模式创建 vnode，并且对 props、children 做标准化处理、对 vnode 的 type、childre 做信息编码等。
 
 #### 渲染 vnode（patch vnode）
 
