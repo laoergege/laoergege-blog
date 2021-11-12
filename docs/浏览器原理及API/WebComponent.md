@@ -15,6 +15,7 @@
 
 0. ::shodow、/deep/ 废弃
 1. open 模式下的 import、style、link
+   - [Web Components中引入外部CSS的3种方法](https://www.zhangxinxu.com/wordpress/2021/02/web-components-import-css/)
 2. host 的 css 变量
 3. ::part、::theme
 
