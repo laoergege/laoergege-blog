@@ -118,8 +118,6 @@ flex: 1; 是复合属性，说下其他属性？
   - 回文字符串(这个问题好常见)，判断一个字符串最多只删1个字符，是否能成为一个回文字符串，let str = "ABCDABA"
 - typescript
   - TypeScript 高级用法， Pick 和 Omit
-- react
-  - 讲讲常用的 hook 打出来
 - 正则
   - 用正则表达式获取 url 中 query 参数 let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
 - 浏览器
@@ -260,12 +258,11 @@ DFS
 
 输入URL 到页面展示发生了什么
 
-错误监控， 收集，分析
-
+- http
 - 框架 vue
-  - 虚拟 DOM，以及为什么
-  - diff 算法
-  - vue 新旧生命周期
+  - [x] 虚拟 DOM，以及为什么
+  - [ ] diff 算法，vue2、vue3 区别
+  - [ ] vue 新旧生命周期
 
 
 ## 单词

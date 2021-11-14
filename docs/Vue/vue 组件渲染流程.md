@@ -1,23 +1,24 @@
 ---
 release: true
 tags:
- - vue
- - vnode
- - VirtualDOM
+  - vue
+  - vnode
+  - VirtualDOM
 ---
+
 # vue 组件渲染流程
 
-> 以下示例代码、内容都是基于 vue3 为主
+> 以下示例代码、内容都是基于 vue3.0、vue3.2（后续修改）
 
 任何前端框架，最主要的核心功能就是渲染视图。在 Vue 中，整个应用的页面都是通过**组件**来构成并渲染成页面。
 
-![picture 2](./images/1281db002d7238b2948c8b50b3bb8882d7353ff9248c5f3049de3d0e3277a27d.png)  
+![picture 2](./images/1281db002d7238b2948c8b50b3bb8882d7353ff9248c5f3049de3d0e3277a27d.png)
 
 ## VNode
 
-Vue 的渲染原理中使用 **Virtual DOM 机制去抽象描述真实的 DOM**。**Virtual DOM 本质是一个 JS 对象**，用 JS 对象来模拟 DOM 结构。
+Vue 的渲染原理中使用 **VirtualDOM 机制**，**VirtualDOM 本质上是用来描述 DOM 的 JavaScript 对象**。
 
-> 在 vue 中 Virtual DOM 为 vnode
+> 在 vue 中 VirtualDOM 被称为 vnode
 
 我们可以用一个 vnode 对象去表示`<button>`节点。一个 VNode 的属性最主要的是节点类型 `type`，节点属性 `props`，字节点 `children`。
 
@@ -27,23 +28,23 @@ Vue 的渲染原理中使用 **Virtual DOM 机制去抽象描述真实的 DOM**�
 
 ```javascript
 const vnode = {
-  type: 'button',
-  props: { 
-    'class': 'btn',
+  type: "button",
+  props: {
+    class: "btn",
     style: {
-      width: '100px',
-      height: '50px'
-    }
+      width: "100px",
+      height: "50px",
+    },
   },
-  children: 'click me'
-}
+  children: "click me",
+};
 ```
 
 引入 VNode 的好处：
 
-1. 任何常规的 GUI 都能用**类 DOM 数据结构**去描述，引入 VNode主要是将视图**抽象化**，提供了**跨平台**能力
-2. **UI is a value** 视图也是一种变量值，能够进行编程化
-3. 基于虚拟 DOM 实现 MDV（状态驱动视图） 的 UI 开发方式：避免了手动操作 DOM 效率低下；以及某些场景下操作不当引发导致的性能问题。比如布局抖动，可利用虚拟 DOM 去缓存状态变更，最后通过 diff 精准计算 DOM 的最小变更操作
+1. 任何常规的 GUI 都能用**类 DOM 数据结构**去描述，引入 VNode 主要是将视图**抽象化**，提供了**跨平台**能力
+2. **UI is a value** 视图也是一种变量值，能够进行**编程化**
+3. 基于虚拟 DOM 实现 MDV（状态驱动视图） 的 UI 开发方式：避免了手动操作 DOM 效率低下；以及某些场景下操作不当引发导致的性能问题，比如布局抖动，可利用虚拟 DOM 去缓存状态变更，最后通过 diff 精准计算 DOM 的最小变更操作
 
 vue 还提供很多的 VNode 类型：
 
@@ -73,18 +74,18 @@ export interface VNode<
 ```
 
 ## Vue 组件
-  
+
 组件是一种抽象概念、一种复用手段。
 
 前端领域的组件化，即以视图为单位进行页面分割及复用，组件 = 视图模板 + 逻辑状态。
 
 > 但是以这样的组件为基本复用单位，在前端领域你会发现很难复用。有时视图模板符合了但逻辑状态稍微得修改，代码只会加入更多的 case by case；有时逻辑状态符合了模板样式却不符合 UI。
-> 
+>
 > 最佳形式是**视图模板与逻辑状态可分开，与组件都是最小复用单位**。
 
 Vue 组件是 vue 渲染的基本单位，是视图与状态的连接的桥梁。一个 vue 组件的主要构成分层：
 
-![图 1](./images/8356d52a612ce3d9e97f7d55e59732c2a0f9471408a55b8a8f2c962d5d3f373b.png)  
+![图 1](./images/8356d52a612ce3d9e97f7d55e59732c2a0f9471408a55b8a8f2c962d5d3f373b.png)
 
 每一层都是自顶向下依赖：
 
@@ -96,7 +97,7 @@ Vue 组件是 vue 渲染的基本单位，是视图与状态的连接的桥梁�
 定义并渲染一个组件：
 
 ```js
-import { createVNode, render, h } from 'vue';
+import { createVNode, render, h } from "vue";
 
 // 组件定义
 const CustomComponent = {
@@ -109,39 +110,41 @@ const CustomComponent = {
     };
   },
   render() {
-    return h('div', [this.resolveName, this.$slots.default()]);
+    return h("div", [this.resolveName, this.$slots.default()]);
   },
 };
 
-// 组件渲染
+// 组件 vnode
 // 1. 创建组件的 vnode
 const vnode = createVNode(
   CustomComponent,
-  { name: 'world' },
+  { name: "world" },
   {
-    default: '!',
+    default: "!",
   }
 );
 // vnode
 //{
 //  type: CustomComponent,
-//  props: { 
+//  props: {
 //    name: 'test'
 //  },
 //  children: '!'
 //}
 
 // 2. 渲染 vnode（patch vnode）
-render(vnode, document.querySelector('#app'));
+render(vnode, document.querySelector("#app"));
 // <div>hello world!</div>
 ```
 
 渲染组件核心就两步：
 
 1. 创建 vnode
-2. 渲染 vnode（patch vnode） 
+2. 渲染 vnode（patch vnode）
 
-## 组件渲染流程
+**patch vnode 操作本质上是对新旧 vnode 做对比，然后执行系统平台对应的渲染命令**。
+
+## vue 组件渲染流程
 
 渲染流程分初始渲染和更新渲染，下面源码分析先从初始渲染流程。
 
@@ -176,63 +179,63 @@ const createApp = ((...args) => {
 })
 
 ```
+
 #### 渲染器 renderer
 
 ```javascript
 // packages/runtime-dom/src/index.ts
-const app = ensureRenderer().createApp(...args) // 延迟创建渲染，方便 tree-shakable
+const app = ensureRenderer().createApp(...args); // 延迟创建渲染，方便 tree-shakable
 
 // 创建自定义渲染器
 // vue 为了跨平台支持，抽象标准化渲染器的平台渲染接口。
 // renderer = createRenderer(nodeOps)
 function ensureRenderer() {
-  return renderer || (renderer = createRenderer<Node, Element>(rendererOptions))
+  return (
+    renderer || ((renderer = createRenderer < Node), Element > rendererOptions)
+  );
 }
 
 // 实现不同平台的渲染操作接口
-const rendererOptions = extend({ patchProp, forcePatchProp }, nodeOps)
+const rendererOptions = extend({ patchProp, forcePatchProp }, nodeOps);
 ```
 
 nodeOps(packages/runtime-dom/src/nodeOps.ts)，实现了 web 平台下的渲染接口。通过创建自定义渲染器我们可以实现不同平台下的渲染。
 
-![图 2](images/ed6e1c8d4a17343bfaba663aeead7351695e7aab510b56a6a390153715c25438.png)  
-
+![图 2](./images/ed6e1c8d4a17343bfaba663aeead7351695e7aab510b56a6a390153715c25438.png)
 
 ```javascript
 // packages/runtime-core/src/renderer.ts
 
 // createRenderer 是 vue 自定义渲染器的核心方法
 function createRenderer(nodeOps) {
-  return baseCreateRenderer(nodeOps)
+  return baseCreateRenderer(nodeOps);
 }
 
 function baseCreateRenderer(nodeOps) {
-
   //接口定义
-  const remove: RemoveFn = vnode => {
+  const remove: RemoveFn = (vnode) => {
     // 接口调用
-    nodeOps.remove()
-  }
+    nodeOps.remove();
+  };
 
   //...
 
   // 利用闭包，将 nodeOps 保存下来
   function render(vnode, container) {
     // 组件渲染的核心逻辑
-    patch(vnode, container)
+    patch(vnode, container);
   }
 
   // 返回包含 render 方法的渲染器
   return {
     render,
-    // createAppAPI 创建 createApp 
-    createApp: createAppAPI(render)
-  }
+    // createAppAPI 创建 createApp
+    createApp: createAppAPI(render),
+  };
 }
-
 ```
 
-除了将渲染器的跨平台渲染标准化，还将应用创建流程也标准化。
+除了将渲染器跨平台渲染标准化，还将应用创建流程也标准化。
 
 #### createAppAPI
 
@@ -250,19 +253,51 @@ function createAppAPI(render) {
       _props: rootProps,
       mount(rootContainer) {
         // 创建根组件的 vnode
-        const vnode = createVNode(rootComponent, rootProps)
+        const vnode = createVNode(rootComponent, rootProps);
         // 调用渲染器的 render vnode
-        render(vnode, rootContainer)
-        app._container = rootContainer
-        return vnode.component.proxy
-      }
-    }
-    return app
-  }
+        render(vnode, rootContainer);
+        app._container = rootContainer;
+        return vnode.component.proxy;
+      },
+    };
+    return app;
+  };
 }
 ```
 
-这里的代码的执行逻辑都是与平台无关的，启动标准渲染流程。但我们可能需要在外部重写这个方法，来完善特定平台下的渲染逻辑。
+这里的代码的执行逻辑都是与平台无关的，启动标准渲染流程。如果有需要可以在外部重写这个方法，来完善特定平台下的渲染逻辑。
+
+比如 web 平台：
+
+```ts
+// packages/runtime-dom/src/index.ts
+const { mount } = app
+  app.mount = (containerOrSelector: Element | ShadowRoot | string): any => {
+    // 标准化 root el 获取
+    const container = normalizeContainer(containerOrSelector)
+    if (!container) return
+
+    const component = app._component
+    // 支持 html root 元素作为 template
+    if (!isFunction(component) && !component.render && !component.template) {
+      // __UNSAFE__
+      // Reason: potential execution of JS expressions in in-DOM template.
+      // The user must make sure the in-DOM template is trusted. If it's
+      // rendered by the server, the template should not contain any user data.
+      component.template = container.innerHTML
+    }
+
+    // clear content before mounting
+    // 清除 root 内容
+    container.innerHTML = ''
+    const proxy = mount(container, false, container instanceof SVGElement)
+    if (container instanceof Element) {
+      container.removeAttribute('v-cloak')
+      container.setAttribute('data-v-app', '')
+    }
+    return proxy
+  }
+```
 
 进入应用挂载阶段后，接下来就是核心的组件渲染流程。
 
@@ -305,7 +340,7 @@ function _createVNode(
     key: props && normalizeKey(props),
     ...
   }
-	
+
   // 标准化子节点，把不同数据类型的 children 转成数组或者文本类型
   normalizeChildren(vnode, children)
 
@@ -313,7 +348,7 @@ function _createVNode(
 }
 ```
 
-工厂模式创建 vnode，并且对 props、children 做标准化处理、对 vnode 的 type、childre 做信息编码等。
+工厂模式创建 vnode，并且对 props、children 做标准化处理、对 vnode 的 type、children 做信息编码，以便在后面可以根据不同的类型执行相应的处理逻辑。
 
 #### 渲染 vnode（patch vnode）
 
@@ -322,16 +357,16 @@ const render: RootRenderFunction = (vnode, container, isSVG) => {
   if (vnode == null) {
     // 销毁组件
     if (container._vnode) {
-      unmount(container._vnode, null, null, true)
+      unmount(container._vnode, null, null, true);
     }
   } else {
     // 创建或者更新组件
-    patch(container._vnode || null, vnode, container, null, null, null, isSVG)
+    patch(container._vnode || null, vnode, container, null, null, null, isSVG);
   }
-  
+
   // 缓存 vnode 节点，表示已经渲染
-  container._vnode = vnode
-}
+  container._vnode = vnode;
+};
 ```
 
 **patch 的功能是 diff 新旧 vnode，然后根据不同的 vnode 类型派发任务给 process 处理**。
@@ -340,7 +375,7 @@ const render: RootRenderFunction = (vnode, container, isSVG) => {
 
 `diff => process => mount`
 
-比如根 vnode 是个组件类型，故 processComponent进行处理，调用 mountComponent 方法渲染组件。
+比如根 vnode 是个组件类型，故 processComponent 进行处理，调用 mountComponent 方法渲染组件。
 
 ```ts
 const patch: PatchFn = (
@@ -390,7 +425,7 @@ const patch: PatchFn = (
           ...
         }
     }
-          
+
 
  const processComponent = (n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, optimized) => {
 
@@ -403,7 +438,7 @@ const patch: PatchFn = (
     updateComponent(n1, n2, parentComponent, optimized)
   }
 }
- 
+
 
 // 挂载组件
 const mountComponent = (initialVNode, container, anchor, parentComponent, parentSuspense, isSVG, optimized) => {
@@ -411,7 +446,7 @@ const mountComponent = (initialVNode, container, anchor, parentComponent, parent
   // 创建组件实例
   const instance = (initialVNode.component = createComponentInstance(initialVNode, parentComponent, parentSuspense))
 
-  // 调用组件的 setup 
+  // 调用组件的 setup
   setupComponent(instance)
 
   // 设置并运行渲染副作用
@@ -422,39 +457,36 @@ const mountComponent = (initialVNode, container, anchor, parentComponent, parent
 `mountComponent` 方法渲染组件中最主要的是 `setupRenderEffect`，**该函数利用响应式库的 effect 函数创建了一个组件的渲染副作用，当组件的数据发生变化时，effect 函数包裹的组件渲染函数会重新执行一遍，从而达到重新渲染组件的目的**。
 
 ```javascript
-const setupRenderEffect = (instance, initialVNode, container, anchor, parentSuspense, isSVG, optimized) => {
-
+const setupRenderEffect = (
+  instance,
+  initialVNode,
+  container,
+  anchor,
+  parentSuspense,
+  isSVG,
+  optimized
+) => {
   // 创建响应式的副作用渲染函数
-
   instance.update = effect(function componentEffect() {
-
     if (!instance.isMounted) {
-
       // 调用组件的 render 方法，生成 subTree
-      const subTree = (instance.subTree = renderComponentRoot(instance))
+      const subTree = (instance.subTree = renderComponentRoot(instance));
 
-      // patch subTree 
-      patch(null, subTree, container, anchor, instance, parentSuspense, isSVG)
+      // patch subTree
+      patch(null, subTree, container, anchor, instance, parentSuspense, isSVG);
 
       // 保留渲染生成的子树根 DOM 节点
-      initialVNode.el = subTree.el
+      initialVNode.el = subTree.el;
 
-      instance.isMounted = true
-
-    }
-
-    else {
-
+      instance.isMounted = true;
+    } else {
       // 更新组件
-
     }
-
-  }, prodEffectOptions)
-
+  }, prodEffectOptions);
 
   // 初始渲染
-  instance.update()
-}
+  instance.update();
+};
 ```
 
 **组件在 vnode tree 中只是个抽象节点，实际渲染的是组件的 render 函数生成 subTree，故还要继续 patch subTree**。
@@ -463,54 +495,57 @@ const setupRenderEffect = (instance, initialVNode, container, anchor, parentSusp
 
 ```javascript
 // patch => processElement => mountElement
-const mountElement = (vnode, container, anchor, parentComponent, parentSuspense, isSVG, optimized) => {
+const mountElement = (
+  vnode,
+  container,
+  anchor,
+  parentComponent,
+  parentSuspense,
+  isSVG,
+  optimized
+) => {
+  let el;
 
-  let el
-
-  const { type, props, shapeFlag } = vnode
+  const { type, props, shapeFlag } = vnode;
 
   // 创建 DOM 元素节点
 
-  el = vnode.el = hostCreateElement(vnode.type, isSVG, props && props.is)
+  el = vnode.el = hostCreateElement(vnode.type, isSVG, props && props.is);
 
   if (props) {
-
     // 处理 props，比如 class、style、event 等属性
 
     for (const key in props) {
-
       if (!isReservedProp(key)) {
-
-        hostPatchProp(el, key, null, props[key], isSVG)
-
+        hostPatchProp(el, key, null, props[key], isSVG);
       }
-
     }
-
   }
 
   if (shapeFlag & 8 /* TEXT_CHILDREN */) {
-
     // 处理子节点是纯文本的情况
-    hostSetElementText(el, vnode.children)
-  }
-
-  else if (shapeFlag & 16 /* ARRAY_CHILDREN */) {
-
+    hostSetElementText(el, vnode.children);
+  } else if (shapeFlag & 16 /* ARRAY_CHILDREN */) {
     // 处理子节点是数组的情况
-    mountChildren(vnode.children, el, null, parentComponent, parentSuspense, isSVG && type !== 'foreignObject', optimized || !!vnode.dynamicChildren)
-
+    mountChildren(
+      vnode.children,
+      el,
+      null,
+      parentComponent,
+      parentSuspense,
+      isSVG && type !== "foreignObject",
+      optimized || !!vnode.dynamicChildren
+    );
   }
 
   // 把创建的 DOM 元素节点挂载到 container 上
-  hostInsert(el, container, anchor)
-}
+  hostInsert(el, container, anchor);
+};
 ```
 
 **在 mountElement 方法调用平台渲染方法，比如 `hostCreateElement`，在 web 平台底层就是调用 `document.createElement` 方法**。
 
 深度递归 vnode tree 的过程，**挂载的顺序是先子节点，后父节点，最终挂载到最外层的容器上**，完成渲染。
-
 
 ## 总结
 
@@ -519,13 +554,12 @@ const mountElement = (vnode, container, anchor, parentComponent, parentSuspense,
    1. 创建组件类型的 vnode
    2. 渲染 vnode（patch vnode）
       > 在深度递归 patch 时其实涉及到一个 diff 算法，这主要应用在更新流程，因为初始渲染时并没有 old tree 需要对比。
-3. vue 组件是抽象节点，是不会生成真实节点，调用组件模板生成 subTree 去渲染
+3. 组件 vnode 是抽象节点，是不会生成真实节点，调用组件模板生成 subTree 去渲染
 4. 元素类型的节点才会最终落实渲染成真实 DOM 节点
 5. 渲染的最终是调用平台的渲染接口，生成真实的 DOM
 
 > 下图为 vue 渲染流程，其中更新流程也包括在里面
 
-![图 3](./images/b62bca678e5ae80dc006b07702ca235638ee1240011cf9980ab960cce5024b16.png)  
-
+![图 3](./images/b62bca678e5ae80dc006b07702ca235638ee1240011cf9980ab960cce5024b16.png)
 
 下篇 [vdom diff 更新流程](./vdom%20diff%20更新流程.md)。

@@ -14,13 +14,14 @@ tags:
 
 ![](./images/component-tree.svg)
 
-Vue 的更新粒度是组件级的，页面更新的本质就是递归对比新旧组件的 vdom （subTress）的差异变化再去调用对应平台的渲染操作相关的 API。
+Vue 的更新粒度是组件级的，页面更新的本质就是递归 diff 新旧 vnode 的差异变化再去调用对应平台的渲染操作相关的 API。
+
 ## 更新流程
 
 一个组件重新渲染可能会有两种场景：
 
-- 响应式数据触发的组件更新（next: null）
-- 父组件数据流触发的更新（next: vnode）  
+- 组件 state 发生变更（next: null）
+- 组件 props 发生变更（next: vnode）  
 
 ```javascript
 // packages/runtime-core/src/renderer.ts
@@ -83,6 +84,8 @@ const setupRenderEffect: SetupRenderEffectFn = (
 1. 更新组件实例的 vnode、props、slots 等信息
 2. 生成新的 subTree
 3. 根据新旧子树 vnode 执行 patch 逻辑
+
+## 如何 diff
 
 进入 patch 阶段开始 diff 新旧子树。
 
