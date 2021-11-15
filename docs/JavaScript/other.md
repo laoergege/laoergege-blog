@@ -47,3 +47,26 @@ js debug
 
 
 - 系统路径大小写及系统分割符号问题
+
+Block Tree
+
+createVnode
+
+createComponentInstance
+setupComponent
+setupRenderEffect
+
+renderComponentRoot
+updateComponentPreRender
+
+
+vnode
+- type
+- props
+- children
+
+component
+- props
+- setup
+- render
+- slots

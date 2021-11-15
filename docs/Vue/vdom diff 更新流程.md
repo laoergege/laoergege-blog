@@ -6,22 +6,25 @@ tags:
  - vdom
  - diff
 ---
+
 # vdom diff 更新流程
 
 > 以下示例代码基于 vue3.2 版本
 
-在 Vue 中，页面是由组件构成的树形结构，整个组件树的 vnode tree 结构如下
+在 Vue 中，页面是由组件构成的树形结构，整个组件树的 vnode tree 结构如下：
 
-![](./images/component-tree.svg)
+![图 4](./images/b130a506b4998e0a5143175af337c9a7eb9a8b2fb9356d698522f5e3f9d9e1e8.png)  
 
 Vue 的更新粒度是组件级的，页面更新的本质就是递归 diff 新旧 vnode 的差异变化再去调用对应平台的渲染操作相关的 API。
 
-## 更新流程
+## 组件更新流程
 
 一个组件重新渲染可能会有两种场景：
 
-- 组件 state 发生变更（next: null）
-- 组件 props 发生变更（next: vnode）  
+- 组件 state 发生变更
+- 组件 props 发生变更
+
+渲染副作用会重新执行。
 
 ```javascript
 // packages/runtime-core/src/renderer.ts
@@ -44,6 +47,8 @@ const setupRenderEffect: SetupRenderEffectFn = (
         let originNext = next
 
         // next 代表为新组件的 vnode，组件实例需更新对应的 vnode。
+        // 1. 当组件 state 发生变更（next: null）
+        // 2. 当组件 props 发生变更（next: vnode）  
         if (next) {
           next.el = vnode.el
           // 更新组件 vnode 节点信息
@@ -83,72 +88,11 @@ const setupRenderEffect: SetupRenderEffectFn = (
 
 1. 更新组件实例的 vnode、props、slots 等信息
 2. 生成新的 subTree
-3. 根据新旧子树 vnode 执行 patch 逻辑
+3. diff 新旧 subTree
 
-## 如何 diff
+递归 patch 过程，父组件对子组件的更新处理：
 
-进入 patch 阶段开始 diff 新旧子树。
-
-在这个过程中，首先判断新旧节点是否是相同的 vnode 类型，如果不同则销毁掉旧的节点。如果是相同的 vnode 类型，继续 diff 更新流程了，接着会根据不同的 vnode 类型执行不同的处理逻辑。
-
-```js
-const patch: PatchFn = (
-    n1,
-    n2,
-    container,
-    anchor = null,
-    parentComponent = null,
-    parentSuspense = null,
-    isSVG = false,
-    slotScopeIds = null,
-    optimized = __DEV__ && isHmrUpdating ? false : !!n2.dynamicChildren
-  ) => {
-    if (n1 === n2) {
-      return
-    }
-
-    // patching & not same type, unmount old tree
-    if (n1 && !isSameVNodeType(n1, n2)) {
-      anchor = getNextHostNode(n1)
-      unmount(n1, parentComponent, parentSuspense, true)
-      n1 = null
-    }
-
-    const { type, ref, shapeFlag } = n2
-    switch (type) {
-      case Text: //...
-      case Comment: //...
-      case Static: //...
-      case Fragment: //...
-      default:
-        if (shapeFlag & ShapeFlags.ELEMENT) {
-          // 实际上 ELEMENT 的处理流程才是真正做 DOM 的更新
-        } else if (shapeFlag & ShapeFlags.COMPONENT) {
-          // 组件是渲染调度的基本单位，这里我们优先关注组件的更新逻辑
-          processComponent(
-            n1,
-            n2,
-            container,
-            anchor,
-            parentComponent,
-            parentSuspense,
-            isSVG,
-            slotScopeIds,
-            optimized
-          )
-        } else if (shapeFlag & ShapeFlags.TELEPORT) {
-          //...
-        } else if (__FEATURE_SUSPENSE__ && shapeFlag & ShapeFlags.SUSPENSE) {
-          //...
-        } 
-        //...
-    }
-  }
-```
-
-组件类型节点的更新处理
-
-```js
+```ts
   // processComponent => updateComponent
   const updateComponent = (n1: VNode, n2: VNode, optimized: boolean) => {
     const instance = (n2.component = n1.component)!
@@ -171,32 +115,111 @@ const patch: PatchFn = (
   }
 ```
 
-子组件 update 时 next 就是来自父组件在 update 的过程中，生成了新 subtree。在 diff 子节点过程中，shouldUpdateComponent 决定组件类型的子节点是否需要重新渲染，next 保存新的 vnode。
+子组件是否需要更新通过 `shouldUpdateComponent` 判断。
 
-整个 diff 过程是是一个树的深度优先遍历过程，Component 是抽象节点，实现最终的更新是在处理 element 类型的时候。
+```ts
+// packages/runtime-core/src/componentRenderUtils.ts
+export function shouldUpdateComponent(
+  prevVNode: VNode,
+  nextVNode: VNode,
+  optimized?: boolean
+): boolean {
+  const { props: prevProps, children: prevChildren, component } = prevVNode
+  const { props: nextProps, children: nextChildren, patchFlag } = nextVNode
+  const emits = component!.emitsOptions
 
-```js
-// processElement => patchElement
-// 简化版
-const patchElement = (n1, n2, parentComponent, parentSuspense, isSVG, optimized) => {
-  const oldProps = (n1 && n1.props) || EMPTY_OBJ
-  const newProps = n2.props || EMPTY_OBJ
-  // 更新 props
-  patchProps(
-    //...
-  )
-  // 更新子节点
-  patchChildren(n1, n2,
-   //...
-  )
+  // force child update for runtime directive or transition on component vnode.
+  if (nextVNode.dirs || nextVNode.transition) {
+    return true
+  }
+
+  if (optimized && patchFlag >= 0) {
+    // 编译优化
+  } else {
+    // this path is only taken by manually written render functions
+    // so presence of any children leads to a forced update
+    if (prevChildren || nextChildren) {
+      if (!nextChildren || !(nextChildren as any).$stable) {
+        return true
+      }
+    }
+    if (prevProps === nextProps) {
+      return false
+    }
+    if (!prevProps) {
+      return !!nextProps
+    }
+    if (!nextProps) {
+      return true
+    }
+    return hasPropsChanged(prevProps, nextProps, emits)
+  }
+
+  return false
+}
+
+function hasPropsChanged(
+  prevProps: Data,
+  nextProps: Data,
+  emitsOptions: ComponentInternalInstance['emitsOptions']
+): boolean {
+  const nextKeys = Object.keys(nextProps)
+  if (nextKeys.length !== Object.keys(prevProps).length) {
+    return true
+  }
+  for (let i = 0; i < nextKeys.length; i++) {
+    const key = nextKeys[i]
+    if (
+      nextProps[key] !== prevProps[key] &&
+      !isEmitListener(emitsOptions, key)
+    ) {
+      return true
+    }
+  }
+  return false
 }
 ```
 
-更新普通元素的过程主要做两件事情：更新自身 props 和继续 diff 子节点。
+在非编译优化下，主要是通过检测和对比组件 vnode 中的 **props、chidren、dirs、transiton** 来决定子组件是否需要更新。
 
-`patchChildren` 会先根据子节点类型预处理下，对于一个元素的子节点类型可能会有三种情况：纯文本、vnode 数组和空。
+**默认情况下有 chidren、dirs、transiton 都会直接发生更新**，而 props 的判断依据很简单：
+
+1. props 长度判断
+2. 基本类型做值判断
+3. 引用类型做引用判断
+
+这是很好理解的，因为在一个组件的子组件是否需要更新，我们主要依据子组件 vnode 是否存在一些会影响组件更新的属性变化进行判断，如果存在就会更新子组件。
+
+当需要更新时，赋值新的 vnode 到 next，触发子组件的渲染副作用，并删除任务队列子组件的渲染任务防止重复更新（当一个状态发生改变可以能触发父子组件更新，父组件的更新可能会导致子组件更新，这时就要去重任务队列中的子组件渲染任务，更多了解 [vue 的响应式更新渲染机制](./vue%20的响应式更新渲染机制.md)）。
+
+**vue 从组件树角度以组件为更新粒度，缩小了 vnode tree 的 diff 范围**。但即使是一颗 subTree 也会存在很多不必要的更新，还是需要通过 diff 算法优化去找出需要更新操作的节点。
+
+## diff 算法
+
+组件更新进入 patch 阶段就开始 diff 新旧 subTree。
+
+diff 算法主要是关于如何高效得 diff vnode tree 之间的差异，以较低的成本（**减少 DOM 操作、提高节点复用**）完成子节点的更新。
+
+理想情况（复用所有能复用的节点，实在遇到新增或删除时，才执行插入或删除）的算法的时间复杂度 O(n³) 无法接受。
+
+> 关于 O(n³) 的由来。由于左树中任意节点都可能出现在右树，所以必须在对左树深度遍历的同时，对右树进行深度遍历，找到每个节点的对应关系，这里的时间复杂度是 O(n²)，之后需要对树的各节点进行增删移的操作，这个过程简单可以理解为加了一层遍历循环，因此再乘一个 n。
+
+优化后的算法主要有三点：
+
+1. 根据 type & key 去判断是否为相同节点
+   1. 如果是同一类型则继续比较更新
+   2. 如果不是则重新销毁创建新的节点
+2. 只在同层比较（根据启发跨层 DOM 复用在实际业务场景中很少出现）
+3. 同层节点采用 “**去头尾的最长递增子序列算法**” 进行比较
+
+同层节点比较可能出现的三种操作情况：增、删、移；而对于一个 vnode 的 children 类型可能会有三种情况：纯文本、vnode 数组和空。那么就有以下不同的类型组合操作有：
+
 - 旧：空
-  - 直接挂载 文本节点、数组子节点
+  - 新：空
+  - 新：文本
+    - 挂载文本节点
+  - 新：数组
+    - 挂载数组节点
 - 旧：文本
   - 新：空
     - 删除文本节点
@@ -205,30 +228,26 @@ const patchElement = (n1, n2, parentComponent, parentSuspense, isSVG, optimized)
   - 新：数组
     - 删除文本节点
     - 挂载数组节点
-- 旧：数组
+- **旧：数组**
   - 新：空
     - 删除数组节点
   - 新：文本
     - 删除数组所有节点
     - 挂载文本节点
-  - 新：数组
+  - **新：数组**
 
-**如果新旧子节点类型都是数组时，才是真正的 diff 算法的核心**。
-## 核心 diff 算法
+其中最为复杂情况就是如果新旧 vnode 的 children 都是 vnode 数组，为了尽可能提高 diff 效率、节点复用，vue3 采用了去头尾的最长递增子序列算法。
+### 去头尾的最长递增子序列算法
 
-核心 diff 算法，主要是如何高效得 diff 子节点数组，以较低的成本（**减少 DOM 操作、提高节点复用**）完成子节点的更新。
+1. 先对齐的前置元素和后置元素
+2. 对齐后存在三种情况
+   1. 只有新子序列中有剩余要添加的新节点
+   ![图 7](./images/58671c556dfbbe383fb40d5cbde60526b1c696a727506c8b011b8c27d77b1891.png)  
+   1. 只有旧子序列中有剩余要删除的新节点
+   ![图 8](./images/061fc7cc5bbfbda4db890940db416c0321e5aea40ae9a06d68c0bf54887dad08.png)  
+   1. 双方都存在未知子序列
+   ![](./images/tree-diff.svg)
 
-理想情况（复用所有能复用的节点）的算法的时间复杂度 O(n³) 无法接受。
-
-> 关于 O(n³) 的由来。由于左树中任意节点都可能出现在右树，所以必须在对左树深度遍历的同时，对右树进行深度遍历，找到每个节点的对应关系，这里的时间复杂度是 O(n²)，之后需要对树的各节点进行增删移的操作，这个过程简单可以理解为加了一层遍历循环，因此再乘一个 n。
-
-根据启发：跨层 DOM 复用在实际业务场景中很少出现，故降级为**同层对比**。
-
-> 网上好多文章写只按层比较，算法复杂度可以从 O(n^3) 优化到 O(n) ，子节点是直接按顺序深度优先 diff，如果 type 和 key 不一致就直接替换或删除掉？？？
-
-同层 diff 可能出现的三种情况：增、删、移。
-
-### Vue diff 原理
 
 #### 最长递增子序列
 
@@ -243,16 +262,6 @@ next [1, 3, 2, 6, 4, 5]
 如果选择了 [1, 3, 6] 作为递增子序列，那么要移动三次，如果选择了 [1, 2, 4, 5] 作为递增子序列，遇到 5、4、2、1 不动，遇到 6、3 移动即可，也就只需要移动两次，故只要找最长递增子序列。
 
 [最长递增子序列算法传送门](https://leetcode-cn.com/problems/longest-increasing-subsequence/)。
-#### diff 原理
-
-1. 找到相同的前置元素和后置元素
-2. 对齐后存在三种情况
-   1. 只有新子序列中有剩余要添加的新节点
-   ![图 7](./images/58671c556dfbbe383fb40d5cbde60526b1c696a727506c8b011b8c27d77b1891.png)  
-   1. 只有旧子序列中有剩余要删除的新节点
-   ![图 8](./images/061fc7cc5bbfbda4db890940db416c0321e5aea40ae9a06d68c0bf54887dad08.png)  
-   1. 双方都存在未知子序列
-   ![](./images/tree-diff.svg)
 
 ### 源码分析
 
@@ -538,7 +547,9 @@ next [1, 3, 2, 6, 4, 5]
 >
 > 更多详情、例子可阅读 [《我用index作为key也没啥问题啊》](https://juejin.cn/post/6999932053466644517#comment)
 
-还有不带 key 的情况下，vue diff 子节点是直接按顺序对比，多余的节点就删除或者新增。
+## 不带 key
+
+不带 key 的情况下，vue diff 子节点是直接按顺序对比，多余的节点就删除或者新增。
 如果子节点类型不同，就直接删除新增，造成更频繁的 DOM 操作。
 
 ```js
@@ -605,13 +616,13 @@ next [1, 3, 2, 6, 4, 5]
 ```
 ## 总结
 
-Vue.js 的更新粒度是组件级别的，整体逻辑流程，如图
+1. vue 的更新粒度是组件级别的，
+2. 一个组件发生更新有两种情况：state、props 发生变更
+3. diff 流程  
+   整个更新过程还是对树的深度递归 diff：先对比更新父节点，然后对子节点进行同层对比，其中子节点数组的更新又分为多种情况，其中最复杂的情况为数组到数组的更新，使用**去头尾的最长递增子序列**算法，最后再单独深度 diff 单个子节点，如此递归下去。
 
-![](./images/render-flow.svg)
+![](./images/b62bca678e5ae80dc006b07702ca235638ee1240011cf9980ab960cce5024b16.png)
 
-整个更新过程还是对树的深度递归执行 patch 方法。
-
-先对比更新父节点，然后对子节点数组进行同层对比，其中子节点数组的更新又分为多种情况，其中最复杂的情况为数组到数组的更新，这正是核心 diff 所在，使用**去头尾的最长递增子序列**算法，最后在深度 diff 单个子节点，如此递归下去。
 ## 参考学习
 
 - [190.精读《DOM diff 原理详解》](https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/190.%E7%B2%BE%E8%AF%BB%E3%80%8ADOM20%diff20%%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E3%80%8B.md)

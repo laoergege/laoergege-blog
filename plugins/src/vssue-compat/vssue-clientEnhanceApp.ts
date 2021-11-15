@@ -2,8 +2,10 @@ import "systemjs/dist/system.js";
 // @ts-ignore
 import VssueAPI from "@vssue/api";
 import "vssue/dist/vssue.min.css";
-
 import { h, App, resolveComponent, ref, watchEffect } from "vue";
+
+declare const __VSSUE_OPTIONS__: any;
+const options = __VSSUE_OPTIONS__;
 
 export default async ({ app }: { app: App }) => {
   const loaded = ref(false);
@@ -95,12 +97,5 @@ export default async ({ app }: { app: App }) => {
   loaded.value = true;
 
   // options come from vuepress plugin config
-  // @ts-ignore
-  const vpOptions = window.__VSSUE_OPTIONS__ || {
-    platform: "github",
-    owner: "laoergege",
-    repo: "laoergege-blog",
-    clientId: "b3d7df2f67f7f9ac06a7",
-    clientSecret: "a3356093fe41a32ca9015d03ad465da80a2e1dbf",
-  };
+  const vpOptions = options;
 };

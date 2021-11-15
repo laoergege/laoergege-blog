@@ -446,7 +446,7 @@ const mountComponent = (initialVNode, container, anchor, parentComponent, parent
   // 创建组件实例
   const instance = (initialVNode.component = createComponentInstance(initialVNode, parentComponent, parentSuspense))
 
-  // 调用组件的 setup
+  // 初始化 Props、Slots、调用 setup 初始状态
   setupComponent(instance)
 
   // 设置并运行渲染副作用

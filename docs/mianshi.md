@@ -258,10 +258,14 @@ DFS
 
 输入URL 到页面展示发生了什么
 
+- 数据结构算法
+- web
+- js
 - http
 - 框架 vue
   - [x] 虚拟 DOM，以及为什么
-  - [ ] diff 算法，vue2、vue3 区别
+  - [ ] diff 算法，vue2、vue3 区别，index key 问题
+    - key：建立索引，快速找到复用节点
   - [ ] vue 新旧生命周期
 
 

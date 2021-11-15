@@ -60,6 +60,7 @@ require("systemjs/dist/system.js");
 var api_1 = __importDefault(require("@vssue/api"));
 require("vssue/dist/vssue.min.css");
 var vue_1 = require("vue");
+var options = __VSSUE_OPTIONS__;
 exports.default = (function (_a) {
     var app = _a.app;
     return __awaiter(void 0, void 0, void 0, function () {
@@ -136,13 +137,7 @@ exports.default = (function (_a) {
                     context["__proto"] = window;
                     fn.apply(context);
                     loaded.value = true;
-                    vpOptions = window.__VSSUE_OPTIONS__ || {
-                        platform: "github",
-                        owner: "laoergege",
-                        repo: "laoergege-blog",
-                        clientId: "b3d7df2f67f7f9ac06a7",
-                        clientSecret: "a3356093fe41a32ca9015d03ad465da80a2e1dbf",
-                    };
+                    vpOptions = options;
                     return [2 /*return*/];
             }
         });
