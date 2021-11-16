@@ -8,7 +8,7 @@ tags:
 
 # vue 组件渲染流程
 
-> 以下示例代码、内容都是基于 vue3.0、vue3.2（后续修改）
+> 以下示例代码基于 vue3.0、vue3.2（后续修改）
 
 任何前端框架，最主要的核心功能就是渲染视图。在 Vue 中，整个应用的页面都是通过**组件**来构成并渲染成页面。
 
@@ -16,7 +16,7 @@ tags:
 
 ## VNode
 
-Vue 的渲染原理中使用 **VirtualDOM 机制**，**VirtualDOM 本质上是用来描述 DOM 的 JavaScript 对象**。
+Vue 的渲染原理中使用 **VirtualDOM 机制**，**VirtualDOM 本质上是用来描述 真实 DOM 的 JavaScript 对象**。
 
 > 在 vue 中 VirtualDOM 被称为 vnode
 
@@ -44,7 +44,7 @@ const vnode = {
 
 1. 任何常规的 GUI 都能用**类 DOM 数据结构**去描述，引入 VNode 主要是将视图**抽象化**，提供了**跨平台**能力
 2. **UI is a value** 视图也是一种变量值，能够进行**编程化**
-3. 基于虚拟 DOM 实现 MDV（状态驱动视图） 的 UI 开发方式：避免了手动操作 DOM 效率低下；以及某些场景下操作不当引发导致的性能问题，比如布局抖动，可利用虚拟 DOM 去缓存状态变更，最后通过 diff 精准计算 DOM 的最小变更操作
+3. 基于虚拟 DOM 实现状态驱动的 UI 开发方式：避免了手动操作 DOM 效率低下
 
 vue 还提供很多的 VNode 类型：
 
@@ -99,7 +99,7 @@ Vue 组件是 vue 渲染的基本单位，是视图与状态的连接的桥梁�
 ```js
 import { createVNode, render, h } from "vue";
 
-// 组件定义
+// 1. 组件定义
 const CustomComponent = {
   props: {
     name: String,
@@ -115,7 +115,7 @@ const CustomComponent = {
 };
 
 // 组件 vnode
-// 1. 创建组件的 vnode
+// 2. 创建组件的 vnode
 const vnode = createVNode(
   CustomComponent,
   { name: "world" },
@@ -132,10 +132,13 @@ const vnode = createVNode(
 //  children: '!'
 //}
 
-// 2. 渲染 vnode（patch vnode）
+// 3. 渲染 vnode（patch vnode）
 render(vnode, document.querySelector("#app"));
 // <div>hello world!</div>
 ```
+
+![图 5](./images/7ee986a634dd61fe939f7b3ca3cc0091d55e72f55293c52e59a843001111731d.png)  
+
 
 渲染组件核心就两步：
 
@@ -369,11 +372,9 @@ const render: RootRenderFunction = (vnode, container, isSVG) => {
 };
 ```
 
-**patch 的功能是 diff 新旧 vnode，然后根据不同的 vnode 类型派发任务给 process 处理**。
+patch 会根据不同的 vnode 类型派发任务给 process 处理。但初始渲染时旧 vnode 为 null，最终处理结果基本是 mount 操作:
 
-但初始渲染时旧 vnode 为 null，最终处理结果基本是 mount 操作:
-
-`diff => process => mount`
+`diff type => process => mount`
 
 比如根 vnode 是个组件类型，故 processComponent 进行处理，调用 mountComponent 方法渲染组件。
 
@@ -454,7 +455,7 @@ const mountComponent = (initialVNode, container, anchor, parentComponent, parent
 }
 ```
 
-`mountComponent` 方法渲染组件中最主要的是 `setupRenderEffect`，**该函数利用响应式库的 effect 函数创建了一个组件的渲染副作用，当组件的数据发生变化时，effect 函数包裹的组件渲染函数会重新执行一遍，从而达到重新渲染组件的目的**。
+`mountComponent` 方法渲染组件中最主要的是 `setupRenderEffect`，**该函数利用响应式库的 effect 函数创建了一个组件的渲染副作用。在响应式系统下，当组件的数据发生变化时，effect 函数包裹的组件渲染函数会重新执行一遍，从而达到重新渲染组件的目的**。
 
 ```javascript
 const setupRenderEffect = (
@@ -509,12 +510,10 @@ const mountElement = (
   const { type, props, shapeFlag } = vnode;
 
   // 创建 DOM 元素节点
-
   el = vnode.el = hostCreateElement(vnode.type, isSVG, props && props.is);
 
   if (props) {
     // 处理 props，比如 class、style、event 等属性
-
     for (const key in props) {
       if (!isReservedProp(key)) {
         hostPatchProp(el, key, null, props[key], isSVG);
@@ -545,7 +544,7 @@ const mountElement = (
 
 **在 mountElement 方法调用平台渲染方法，比如 `hostCreateElement`，在 web 平台底层就是调用 `document.createElement` 方法**。
 
-深度递归 vnode tree 的过程，**挂载的顺序是先子节点，后父节点，最终挂载到最外层的容器上**，完成渲染。
+深度递归 vnode tree 的过程，**挂载的顺序是先子节点，后父节点，最终挂载到最外层的容器上**，完成整个渲染流程。
 
 ## 总结
 
@@ -560,6 +559,6 @@ const mountElement = (
 
 > 下图为 vue 渲染流程，其中更新流程也包括在里面
 
-![图 3](./images/b62bca678e5ae80dc006b07702ca235638ee1240011cf9980ab960cce5024b16.png)
+![图 6](./images/089ea60df2fe1490c5fb0c69e460a9681c509346e0486d52a95d131902cbbc92.png) 
 
 下篇 [vdom diff 更新流程](./vdom%20diff%20更新流程.md)。

@@ -1,10 +1,10 @@
 ---
-release: true,
+release: true
 tags:
  - vue
+ - vnode
  - 更新渲染
- - vdom
- - diff
+ - vdom diff
 ---
 
 # vdom diff 更新流程
@@ -15,7 +15,7 @@ tags:
 
 ![图 4](./images/b130a506b4998e0a5143175af337c9a7eb9a8b2fb9356d698522f5e3f9d9e1e8.png)  
 
-Vue 的更新粒度是组件级的，页面更新的本质就是递归 diff 新旧 vnode 的差异变化再去调用对应平台的渲染操作相关的 API。
+Vue 的更新粒度是组件级的，当数据变化的时候就会执行组件的渲染副作用来触发组件的更新。页面更新的本质就是递归 diff 新旧 vnode 的差异变化再去调用对应平台的渲染操作相关的 API。
 
 ## 组件更新流程
 
@@ -180,9 +180,11 @@ function hasPropsChanged(
 }
 ```
 
+> 为了提高 diff 效率，vue 源码中还包含着许多编译优化的 case，我们先忽略这些，关注主流程。
+
 在非编译优化下，主要是通过检测和对比组件 vnode 中的 **props、chidren、dirs、transiton** 来决定子组件是否需要更新。
 
-**默认情况下有 chidren、dirs、transiton 都会直接发生更新**，而 props 的判断依据很简单：
+**默认情况下有 chidren、dirs、transiton 都会导致直接发生更新**，而 props 的判断依据很简单：
 
 1. props 长度判断
 2. 基本类型做值判断
@@ -192,9 +194,9 @@ function hasPropsChanged(
 
 当需要更新时，赋值新的 vnode 到 next，触发子组件的渲染副作用，并删除任务队列子组件的渲染任务防止重复更新（当一个状态发生改变可以能触发父子组件更新，父组件的更新可能会导致子组件更新，这时就要去重任务队列中的子组件渲染任务，更多了解 [vue 的响应式更新渲染机制](./vue%20的响应式更新渲染机制.md)）。
 
-**vue 从组件树角度以组件为更新粒度，缩小了 vnode tree 的 diff 范围**。但即使是一颗 subTree 也会存在很多不必要的更新，还是需要通过 diff 算法优化去找出需要更新操作的节点。
+**vue 从组件树角度以组件为更新粒度，缩小了 vnode tree 的 diff 范围**，更近一步提高 diff 效率，接下来了解 vue3 的 diff 算法。
 
-## diff 算法
+## vue diff 算法
 
 组件更新进入 patch 阶段就开始 diff 新旧 subTree。
 
@@ -246,7 +248,8 @@ diff 算法主要是关于如何高效得 diff vnode tree 之间的差异，以�
    1. 只有旧子序列中有剩余要删除的新节点
    ![图 8](./images/061fc7cc5bbfbda4db890940db416c0321e5aea40ae9a06d68c0bf54887dad08.png)  
    1. 双方都存在未知子序列
-   ![](./images/tree-diff.svg)
+   ![图 7](./images/1fcbe5f39d6f1879588feba75d76f01ef5b64bedeaa807eac9ca97cea3909daa.png)  
+
 
 
 #### 最长递增子序列
@@ -265,8 +268,7 @@ next [1, 3, 2, 6, 4, 5]
 
 ### 源码分析
 
-> 以下笔者仅仅只是注释代码。。。  
-> 具体源码过程分析推荐看 [Vue 3.0 diff 算法及原理](https://juejin.cn/post/6844904104834105351)
+> 以下笔者仅仅只是注释代码，可结合上面例子理解。
 
 ```js
   // packages/runtime-core/src/renderer.ts
@@ -614,18 +616,23 @@ next [1, 3, 2, 6, 4, 5]
     }
   }
 ```
+
+## 编译优化
+
+Vue3 diff 算法的主要优势是结合**编译优化**，在编译阶段对静态模板分析，生成 Block tree，收集动态更新的节点，然后在 patch 阶段就可以只比对 Block tree 中的节点，达到提升 diff 性能的目的。而核心 diff 算法，也就是**去头尾的最长递增子序列算法**和 vue2 **双端比较算法**就性能而言差别并不大。详见 [vue 编译优化](./vue%20编译优化.md)。
+
 ## 总结
 
-1. vue 的更新粒度是组件级别的，
+1. vue 的渲染更新都是以组件为单位的
 2. 一个组件发生更新有两种情况：state、props 发生变更
-3. diff 流程  
-   整个更新过程还是对树的深度递归 diff：先对比更新父节点，然后对子节点进行同层对比，其中子节点数组的更新又分为多种情况，其中最复杂的情况为数组到数组的更新，使用**去头尾的最长递增子序列**算法，最后再单独深度 diff 单个子节点，如此递归下去。
+3. diff 算法流程：整个更新过程树的深度递归 diff，先对比父节点，然后对子节点进行同层对比，其中子节点数组的更新又分为多种情况，其中最复杂的情况为数组到数组的更新，使用**去头尾的最长递增子序列**算法，再对每个子节点深度递归 diff。
 
-![](./images/b62bca678e5ae80dc006b07702ca235638ee1240011cf9980ab960cce5024b16.png)
+![图 6](./images/089ea60df2fe1490c5fb0c69e460a9681c509346e0486d52a95d131902cbbc92.png)  
 
-## 参考学习
+## 学习参考
 
 - [190.精读《DOM diff 原理详解》](https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/190.%E7%B2%BE%E8%AF%BB%E3%80%8ADOM20%diff20%%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E3%80%8B.md)
 - Vue.js 3.0 核心源码解析
+- [diff 算法原理概述](https://github.com/NervJS/nerv/issues/3)
 
 

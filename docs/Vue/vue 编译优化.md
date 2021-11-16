@@ -63,9 +63,10 @@ component
 - transiton
 
 element
-- style
-- class
 - props
+  - style
+  - class
+  - props
 - children
 
 1. 快速更新判断
@@ -78,4 +79,8 @@ element
 
 默认下 jsx 角度，
 默认情况下有 chidren、dirs、transiton 都会直接发生更新
-children， $table 可以跳过 slots 校验
+
+diff 少 props
+
+非编译优化 children， $table 可以跳过 slots 校验
+PatchFlags.DYNAMIC_SLOTS 优化判断
