@@ -18,6 +18,7 @@ tags:
     - [JavaScript 模块](./JavaScript%20模块.md)
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
   - 面向对象编程
+    - 原型及原型链
   - 函数式编程
     - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
   - [异步编程](./JavaScript%20异步编程.md)

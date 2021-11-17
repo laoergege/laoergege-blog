@@ -2,7 +2,7 @@ import path from "path";
 import {
   vssuePlugin,
   docRelease,
-  lastUpdated,
+  pageTables,
 } from "@laoergege/vuepress-plugin-blog-utils";
 
 export default {
@@ -55,7 +55,7 @@ export default {
     ],
     docRelease,
     [
-      lastUpdated,
+      pageTables,
       {
         exclude: "**/README.md",
         render(page) {

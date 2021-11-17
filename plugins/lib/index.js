@@ -11,5 +11,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./doc-release"), exports);
-__exportStar(require("./last-updated-list"), exports);
+__exportStar(require("./page-tables"), exports);
 __exportStar(require("./vssue-compat/vuepress-plugin-vssue-compat-next"), exports);

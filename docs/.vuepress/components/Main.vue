@@ -31,20 +31,45 @@
         </p>
       </div>
     </div>
-    <Content :page-key="lastUpdatedKey" />
+    <div>
+       <Content :page-key="key"  v-for="key in resolveKeys" :key="key" />
+       <button v-show="hasMore" class="btn btn-block my-10 btn-ghost" :class="loadingRef.value && 'loading'" :disabled="loadingRef.value" @click="loadMore">加载更多</button>
+    </div>
   </div>
 </template>
 
 <script>
-import hash from "hash-sum";
+import { reactive, ref, computed } from "vue";
+
+const keys = __TABLE_KEYS__
 
 export default {
   name: "home",
   setup() {
+    const _key = reactive([...keys])
+    const hasMore = computed(() => !!_key.length)
+    const loadingRef = ref(false)
+    const resolveKeys = reactive([])
+    addKeys()
+    function addKeys() {
+      if(keys.length) {
+        loadingRef.value = true
+        Array.prototype.push.apply(resolveKeys, _key.splice(0, 1))
+      } else {
+        // TODO: 提示
+      }
+    }
+
     return {
-      // reference @vuepress/core packages/@vuepress/core/src/page/createPage.ts
-      // dont use pathInferred
-      lastUpdatedKey: `v-${hash("/lastUpdated.html")}`,
+      resolveKeys,
+      loadingRef,
+      loadMore() {
+        addKeys()
+      },
+      onMounted() {
+        loadingRef.value = false
+      },
+      hasMore
     };
   },
 };
