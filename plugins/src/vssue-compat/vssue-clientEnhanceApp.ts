@@ -88,10 +88,11 @@ export default async ({ app }: { app: App }) => {
       ${codes}
     }
   `);
-  const context = { Vue: Vue2 };
-  // context.Vue = Vue2;
-  // @ts-ignore
-  context["__proto"] = window;
+  const context = Object.create(window, {
+    Vue: {
+      value: Vue2,
+    },
+  });
   fn.apply(context);
 
   loaded.value = true;

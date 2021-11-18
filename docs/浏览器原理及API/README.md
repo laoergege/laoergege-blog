@@ -24,7 +24,8 @@ tags:
   - [Jake Archibald: 在循环 - JSConf.Asia](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
   - [Tasks, microtasks, queues and schedules](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
 
-Web 安全策略
+## Web 安全策略
+
 - 同源策略
   - 跨域资源共享(CORS)
 - 内容安全策略（CSP）
@@ -45,6 +46,7 @@ Web 安全策略
   - DOM
     - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
     - [DOM 事件模型](./DOM%20事件模型.md)
+  - Storage
   - 页面通信
     - 同源
       - Broadcast Channel API

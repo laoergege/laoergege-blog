@@ -131,10 +131,11 @@ exports.default = (function (_a) {
                 case 1:
                     _b = __read.apply(void 0, [_c.sent(), 2]), codes = _b[0], Vue2 = _b[1].default;
                     fn = new Function("\n    with(this) {\n      " + codes + "\n    }\n  ");
-                    context = { Vue: Vue2 };
-                    // context.Vue = Vue2;
-                    // @ts-ignore
-                    context["__proto"] = window;
+                    context = Object.create(window, {
+                        Vue: {
+                            value: Vue2,
+                        },
+                    });
                     fn.apply(context);
                     loaded.value = true;
                     vpOptions = options;

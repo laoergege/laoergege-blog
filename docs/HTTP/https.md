@@ -1,8 +1,9 @@
-# Https
+# https
 
-Https 协议，其协议内容基本跟 http 一样，多一个 SSL/TLS 安全协议，而且默认端口号 443。
+Https 协议，其协议内容基本跟 http 一样，在 HTTP 协议栈中引入多一个 SSL/TLS 安全协议层，而且默认端口号 443。
 
-![图 10](images/206486ac61e7ca6e1c52fe3488655f0cef05d3bb95ff94947db96357e450067e.png)  
+![图 9](./images/266e6a36239b598f1baa5333f52f6c41503c66538440fbea035c44f3f386306e.png)  
+
 
 SSL/TLS 为 http 增加了四个安全特性：
 
