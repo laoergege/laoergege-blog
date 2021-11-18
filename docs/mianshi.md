@@ -269,6 +269,8 @@ DFS
   - [ ] vue 新旧生命周期
   - [ ] vue2、vue3 区别
   - [ ] vue 响应式原理
+  - [ ] vue2、vue3 的 nextTick 原理
+  - [x] vue 异步更新机制
 
 
 ## 单词

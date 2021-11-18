@@ -565,6 +565,10 @@ const wasTracked = (dep) => (dep.w & trackOpBit) > 0
 
 通过与运算就可以知道该依赖是否在当前层收集过。
 
+### ReactiveEffect.allowRecurse
+
+[ReactiveEffect.allowRecurse](./vue%20的响应式更新渲染机制.md#Effect.allowRecurse)。
+
 ### 副作用调度器
 
 ```js

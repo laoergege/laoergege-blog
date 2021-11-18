@@ -12,20 +12,16 @@
 
 单线程
 异步回调
+
 事件循环
-
-- 宏任务
-  - MessageChannel
-- 微任务
-  - Promise
-  - MutationObserver
-
 
 
 浏览器环境中常见的异步任务种类，按照优先级：
 
 macro task ：同步代码、setImmediate、MessageChannel、setTimeout/setInterval
 micro task：Promise.then、MutationObserver
+
+
 
 1. 理解功能需求
 2. 实现猜想

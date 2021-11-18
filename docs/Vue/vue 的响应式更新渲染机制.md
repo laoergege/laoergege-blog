@@ -173,7 +173,7 @@ vue3 为开发者提供了方便的可变数据功能，却复杂了自己内部
 
 其中 effect 是底层响应式副作用 api 生成的，是响应式同步触发；而 render 和 watcher 是 effect 基础上实现的，是给开发者们优先使用的，并且接入调度机制中。
 
-render 任务是存放进 render queue 中，watcher 则根据属性控制：
+render 任务是存放进 render queue 中，watcher 则可根据属性控制：
 
 - pre 对应 pre queue
 - post 对应 post queue
@@ -207,7 +207,7 @@ function queueFlush() {
 const resolvedPromise: Promise<any> = Promise.resolve()
 ```
 
-这里有点一跟 vue2 不同的是：vue3 中直接只使用 Promise 去做异步任务，并没有像 vue2 去做兼容降级方案。能够支持 vue3 的环境，也就是支持 proxy api，大体基本都有 Promise。
+这里有点一跟 vue2 不同的是：vue3 中直接只使用 Promise 去做异步任务，并没有像 vue2 去做兼容降级方案。能够支持 vue3 的环境，也就是支持 proxy api，大体基本都支持 Promise。
 
 ### 调度细节
 
@@ -273,19 +273,19 @@ function flushJobs(seen?: CountMap) {
    
 这主要跟 vue 组件的渲染机制有关，一个 vue 组件发生更新有两种情况：
 
-- 依赖的 state 发生修改
+- 依赖的响应性 state 发生修改
 - 自身 props 发生修改
 
-props 是由父组件传入，是在 render 过程中。当 props 发生改，子组件也会发生更新，整个组件树的创建更新顺序都是从父到子。
+props 是由父组件传入，是在 render 过程中。当 props 发生改，子组件也会发生更新，**整个组件树的创建更新顺序都是从父到子**。
 
 但有一种情况，就是父子组件刚好依赖到同一个 state，这会导致 render queue 里同时存在父子组件的 render 任务，更坏的情况是子 render 任务可能排在父 render 前。
 
 ![图 12](./images/0f8bc010ae31abd663a9a31301c36e79ac2b0165e3f52274b53bae1dd0268173.png)  
 
 
-子 render 任务会更新子组件并且父 render 任务可能修改子组件的 props 同样也触发子组件更新，也就是说 父 rennder 任务其实可能包含子 render 任务，那这样就会导致子组件在同一个 tick 中 render 两次。
+子 render 任务本来就会更新子组件，而父 render 任务可能修改子组件的 props 同样也可能会导致子组件更新，也就是说 父 rennder 任务其实可能包含子 render 任务，那这样就会导致子组件在同一个 tick 中 render 两次。
 
-源码中先进行父子排序，先执行父 render 任务，并且在更新子组件之前先 `invalidateJob(instance.update)` 把队列中的子 render 任务删除，这样做就不会重复更新子组件。
+源码中先进行父子排序，先执行父 render 任务，并且在更新子组件之前先能够 `invalidateJob(instance.update)` 把队列中的子 render 任务删除，这样做就不会重复更新子组件。
 
 ```ts
 const updateComponent = (n1: VNode, n2: VNode, optimized: boolean) => {
@@ -422,14 +422,14 @@ export function queueJob(job: SchedulerJob) {
 }
 ```
 
-但是我们同样也需要注意个问题：上面虽然解决了子 render 重复的问题，但 watcher 中可能会修改了父组件的依赖！
+但是我们同样也需要注意个问题：上面虽然解决了子 render 重复的问题，但 watcher 中可能会**修改到了父组件的依赖**！
 
-一个 render 任务其实分为两个过程：
+一个 render 任务执行的时候有两个重要过程：
 
-1. 创建新的 vnode
-2. patch 新旧 vnode
+1. 创建新的 subTree
+2. diff 新旧 subTree
 
-在 patch 过程，子组件 props 发生了修改而触发的 watcher 修改到父组件依赖状态。那么这时新的 vnode 其实已经不是最新状态的映射了，导致最后视图不一致，所以需要个**弥补机制**，父组件再 render 一次。
+在 patch 过程，子组件 props 发生了修改而触发的 watcher 修改到父组件依赖状态。那么这时父 render 过程生成的新的 subTree 其实已经不是最新状态的映射了，导致最后视图不一致，所以需要个**弥补机制**，父组件再 render 一次。
 
 ![图 15](./images/90c2621f65c020b6b2695cec35bdb6bf2fe9a74acd9a81bc4d5ae44e2b975f9a.png)  
 
@@ -437,11 +437,64 @@ queueJob 中 `isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex` 里 
 
 > 这里有个 [issue](https://github.com/vuejs/vue-next/issues/1801) 上面的示例可以去调试看看。
 
-#### effect.allowRecurse
+## [ReactiveEffect.allowRecurse](#Effect.allowRecurse)
 
+ReactiveEffect.allowRecurse 并没有过多的注释，但我们可以从 `packages/runtime-core/src/scheduler.ts` 中发现相关注释，其实 Render ReactiveEffect 就是 SchedulerJob。
 
+```ts
+export interface SchedulerJob extends Function {
+  id?: number
+  active?: boolean
+  computed?: boolean
+  /**
+   * Indicates whether the effect is allowed to recursively trigger itself
+   * when managed by the scheduler.
+   *
+   * By default, a job cannot trigger itself because some built-in method calls,
+   * e.g. Array.prototype.push actually performs reads as well (#1740) which
+   * can lead to confusing infinite loops.
+   * The allowed cases are component update functions and watch callbacks.
+   * Component update functions may update child component props, which in turn
+   * trigger flush: "pre" watch callbacks that mutates state that the parent
+   * relies on (#1801). Watch callbacks doesn't track its dependencies so if it
+   * triggers itself again, it's likely intentional and it is the user's
+   * responsibility to perform recursive state mutation that eventually
+   * stabilizes (#1727).
+   */
+  allowRecurse?: boolean
+  /**
+   * Attached by renderer.ts when setting up a component's render effect
+   * Used to obtain component information when reporting max recursive updates.
+   * dev only.
+   */
+  ownerInstance?: ComponentInternalInstance
+}
+```
 
-### nextTick
+ReactiveEffect 创建实例时其 allowRecurse 是为 undefined，可以说是 false，在同一 effect 下是不会触发重复递归的。
+
+```ts
+export function triggerEffects(
+  dep: Dep | ReactiveEffect[],
+  debuggerEventExtraInfo?: DebuggerEventExtraInfo
+) {
+  // spread into array for stabilization
+  for (const effect of isArray(dep) ? dep : [...dep]) {
+    // 防止 effect 重复调用
+    if (effect !== activeEffect || effect.allowRecurse) {
+      //...
+    }
+  }
+}
+```
+
+下面例子中，effect 中修改 test 值，但副作用只执行了一次。
+
+![图 11](./images/a631cc0e1963f36f38f2426fc6dae0f9a7e799bf70325b35062b05462f495af8.png)  
+
+而 **render、watcher 是可以重复递归**，其中可重复 render 是有场景需求，而watcher 则是不想违背模式，如果 watcher 里修改数据重新触发了 watcher，那更多是用户的一种责任行为。
+
+## nextTick
 
 ```ts
 export function nextTick<T = void>(
@@ -453,11 +506,9 @@ export function nextTick<T = void>(
 }
 ```
 
-使用 promise 链式调用，保证 nextTick 的任务在异步更新任务后执行。
+使用 promise 链式调用，保证 nextTick 的任务在异步更新任务后执行，这样某些插件就可以获得更新后的 DOM。
 
 ## 总结
 
-- vue 的异步更新机制
-  - 先队列缓冲再异步执行
-  - 在执行之前任务会去重
-  - 执行过程遵循自顶向下、单向数据流更新原则，注意在 watcher 改变数据流规则可能会导致重复渲染
+1. vue 的异步更新机制：使用队列缓存更新任务，在事件循环中安排一个异步任务执行队列中所有任务
+2. 组件树的更新过程遵循自顶向下、单向数据流原则，注意在组件更新后发生数据修改，改变数据流规则可能会导致重复渲染
