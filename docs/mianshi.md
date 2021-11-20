@@ -246,22 +246,15 @@ CSRF
 浏览器 Cookie 相关
 
 
-基础的数据结构和算法
-
-Tree,
-BFS
-DFS
-递归
-动态规划
-
 
 
 输入URL 到页面展示发生了什么
 
-- 数据结构算法
 - web
+  - cookie localStorage sessionStorage 区别以及使用场景
 - js
 - http
+  - http1.0/1.1/2.0/3.0
 - 框架 vue
   - [x] 虚拟 DOM，以及为什么
   - [x] diff 算法，index key 问题
@@ -271,6 +264,11 @@ DFS
   - [ ] vue 响应式原理
   - [ ] vue2、vue3 的 nextTick 原理
   - [x] vue 异步更新机制
+- 项目
+  - 性能优化
+    - 虚拟列表
+  - 微前端
+    - 场景：老项目技术栈升级兼容维护难、多种技术栈混合场景
 
 
 ## 单词
