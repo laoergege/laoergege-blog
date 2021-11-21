@@ -43,9 +43,10 @@
    3. 计算机网络
       - [HTTP](./HTTP/README.md)
    4. [数据结构与算法](./数据结构与算法/README.md)
-      - 极客算法训练营
-        - [] 刷到期中、动态、排序、字符串
+      - [ ] 极客算法训练营
       - [leetcode 图解算法数据结构](https://leetcode-cn.com/leetbook/detail/illustration-of-algorithm/)
+      - 数据结构与算法之美
+        - [ ] 入门和基础篇
    5. 图形学
    6. 编译原理
       - babel
