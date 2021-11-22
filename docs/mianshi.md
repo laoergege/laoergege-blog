@@ -170,8 +170,6 @@ v8是怎么解决循环引用的？
   - http2, TCP 丢包阻塞问题
   - UDP 有哪些特性
   - [https为什么比http安全(https 原理)](./HTTP/https.md)
-  - 说一下三次握手四次挥手
-  - TCP 和 UDP 的区别
 - webpack
   - Webpack 了解多少
     1. webapck的四个核心概念，并介绍一些其他的模块，例如mode，依赖图的概念等等。
@@ -207,54 +205,22 @@ emit 把各个chunk输出到结果文
 
 
 
-
-
-性能问题
-
-有没有做过性能优化
-如何定位性能问题
-如何解决的
-
-
-
-
-
-
-
-
-
-HTTP 1/2
-
-HTTP 有什么缺点
-HTTP2 有什么好处
-HTTPS 有什么好处， 有什么缺点，为什么。
-TCP, UDP 的区别， 最佳场景
-为什么说HTTPS 是安全的
-解释一下加密过程
-三次握手的过程，为什么握手三次, 为什么挥手四次
-
-
-安全相关
-
-XSS
-CSRF
-
-
-浏览器缓存策略
-
-缓存头相关
-浏览器 Cookie 相关
-
-
-
-
 输入URL 到页面展示发生了什么
 
 - web
   - cookie localStorage sessionStorage 区别以及使用场景
+  - 安全
+    - XSS
+    - CSRF
+    - 浏览器 Cookie 相关
 - js
 - http
-  - http1.0/1.1/2.0/3.0
+  - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
+  - [ ] http1.0/1.1/2.0/3.0
+  - [x] http 缓存
+  - [ ] get 和 post 区别
+  - [ ] 说一下三次握手四次挥手
+  - [ ] TCP, UDP 的区别
 - 框架 vue
   - [x] 虚拟 DOM，以及为什么
   - [x] diff 算法，index key 问题
@@ -262,11 +228,12 @@ CSRF
   - [ ] vue 新旧生命周期
   - [ ] vue2、vue3 区别
   - [ ] vue 响应式原理
-  - [ ] vue2、vue3 的 nextTick 原理
+  - [x] vue2、vue3 的 nextTick 原理
   - [x] vue 异步更新机制
 - 项目
   - 性能优化
     - 虚拟列表
+    - excel 文件下载
   - 微前端
     - 场景：老项目技术栈升级兼容维护难、多种技术栈混合场景
 

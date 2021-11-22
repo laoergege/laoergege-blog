@@ -12,6 +12,9 @@
      - https://github.com/type-challenges/type-challenges
      - [api-extractor](https://api-extractor.com/)
      - https://github.com/dsherret/ts-morph
+     - 测试
+       - 端到端测试
+         - https://playwright.dev/
 4. 框架技术
    - [Vue](./Vue/README.md)
      - vue3 conf https://node.fequan.com/videodetail/1621773573110
