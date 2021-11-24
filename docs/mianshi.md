@@ -214,6 +214,8 @@ emit 把各个chunk输出到结果文
     - CSRF
     - 浏览器 Cookie 相关
 - js
+  - [x] 手写 new
+  - [ ] 手写 instanceof
 - http
   - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
   - [ ] http1.0/1.1/2.0/3.0
@@ -237,7 +239,6 @@ emit 把各个chunk输出到结果文
   - 微前端
     - 场景：老项目技术栈升级兼容维护难、多种技术栈混合场景
 
-
 ## 单词
 
 - stopPropagation
@@ -249,4 +250,5 @@ emit 把各个chunk输出到结果文
 - revalidate
 - traverse
 - justify-items: stretch;
-- align-content: space-evenly;    
+- align-content: space-evenly;   
+- prototype 

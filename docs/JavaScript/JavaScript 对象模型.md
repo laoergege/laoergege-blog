@@ -47,3 +47,14 @@ object（属性和值构成的集合）
   - 浅拷贝
     - `Object.assign()`
   - 深拷贝
+
+
+- 属性
+  - Object.defineProperty
+  - Object.getOwnPropertyDescriptor
+- 原型
+  - Object.create
+  - Object.getPrototypeOf
+  - Object.setPrototypeOf
+  - new
+  - instanceof
