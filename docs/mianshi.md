@@ -215,11 +215,12 @@ emit 把各个chunk输出到结果文
     - 浏览器 Cookie 相关
 - js
   - [x] 手写 new
-  - [ ] 手写 instanceof
+  - [x] 手写 instanceof
+  - [x] [原型及原型链](./JavaScript/JavaScript%20对象.md)
 - http
   - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
   - [ ] http1.0/1.1/2.0/3.0
-  - [x] http 缓存
+  - [x] 浏览器 http 缓存
   - [ ] get 和 post 区别
   - [ ] 说一下三次握手四次挥手
   - [ ] TCP, UDP 的区别

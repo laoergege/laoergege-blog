@@ -46,7 +46,11 @@ tags:
   - DOM
     - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
     - [DOM 事件模型](./DOM%20事件模型.md)
-  - Storage
+  - 存储
+    - cookie
+    - indexDB
+    - localStorage
+    - sessionStorage
   - 页面通信
     - 同源
       - Broadcast Channel API

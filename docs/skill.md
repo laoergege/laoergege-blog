@@ -47,9 +47,10 @@
       - [HTTP](./HTTP/README.md)
    4. [数据结构与算法](./数据结构与算法/README.md)
       - [ ] 极客算法训练营
+        - [x] 堆及二叉堆
+        - [ ] 排序算法
       - [leetcode 图解算法数据结构](https://leetcode-cn.com/leetbook/detail/illustration-of-algorithm/)
       - 数据结构与算法之美
-        - [ ] 入门和基础篇
    5. 图形学
    6. 编译原理
       - babel
@@ -70,6 +71,8 @@
   
 ## 收集待看
 
+- 可视化
+  - [如何1人5天开发完3D数据可视化大屏 【一】](https://mp.weixin.qq.com/s?__biz=MzA4MzMwMzQ5Nw==&mid=2650620371&idx=1&sn=ba4e5946d7ed5497a6f839cc833f177f&chksm=87f16cf5b086e5e3512659e44cc6587463974bfa43d658ec7317299d27810a83858c7f0934df&scene=21#wechat_redirect)
 - WebAssembly
   - https://github.com/WasmEdge/WasmEdge
 - 微前端
