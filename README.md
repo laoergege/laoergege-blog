@@ -18,10 +18,10 @@ Thanks for the help of the following projects.
 4. [x] 文章排版
 5. [x] CDN 缓存
 6. [ ] service-work
-7. [ ] issue 同步
-8. [ ] tag 管理
-9.  [ ] 可视化知识体系
-10. [ ] 博客订阅
-11. [ ] 内容搜索
+7. [ ] 内容搜索
+8. [ ] issue 同步
+9. [ ] tag 管理
+10. [ ] 可视化知识体系
+11. [ ] 博客订阅
 
 ## Vuepress Plugins
