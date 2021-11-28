@@ -16,9 +16,14 @@ tags:
     - 函数/过程
     - 注释
     - [JavaScript 模块](./JavaScript%20模块.md)
+  - 数据结构
+    - 数组
+    - Set
+    - Map
   - [JavaScript 对象](./JavaScript%20对象.md)
   - 函数式编程
     - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
+    - 函数柯里化
   - [异步编程](./JavaScript%20异步编程.md)
   - 运行时
     - [内存管理机制](./JavaScript%20内存管理机制.md)

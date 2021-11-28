@@ -59,15 +59,15 @@
         - https://github.com/estree/estree
 ## 2021 技术目标
 
-- deep JavaScript
-- Typescript 重学
-- deep Vue
-- Web 进阶
-- 数据结构与算法
-- HTTP 学习
-- Node 学习与应用
-- Rust 学习
-- Flutter 学习
+1. deep JavaScript
+2. deep Vue 框架源码
+3. Web 进阶
+4. 数据结构与算法
+5. HTTP 学习
+6. Node 学习与应用
+7. Typescript 重学
+8. Flutter 学习
+9. Rust 学习
   
 ## 收集待看
 
@@ -135,10 +135,6 @@
   - https://www.coursera.org/learn/jisuanji-biancheng/home/week/1
   - https://www.bilibili.com/video/av21376839/
 
-
-- web 安全
-
-  <img src="./images/image-20210401233238173.png" alt="image-20210401233238173" style="zoom:50%;" />
 
 - 包管理工具
 

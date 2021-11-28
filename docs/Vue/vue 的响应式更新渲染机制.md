@@ -14,6 +14,17 @@ Vue 的响应式更新渲染机制，也就是 MDV（Model-Driven-View）数据�
 
 ![图 11](./images/e42d0897f1ae88b0b163646ca8b25880307282361ccb232159ade5ed8b796d52.png)  
 
+响应式更新渲染机制:
+
+![图 2](images/2aa3f18582022b697f8312ccbbb6a029a91e761ccdaa4f8e3cdabf3bc8896862.png)  
+
+vue3 的响应式渲染机制跟 vue2 其实区别不大，其中：
+
+1. 渲染改成副作用为单位
+2. 收集渲染副作用
+3. 数据变化触发更新任务进入异步队列
+4. Scheduler 进行调度任务渲染
+
 ## 渲染副作用
 
 setupRenderEffect 创建渲染副作用。

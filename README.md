@@ -16,11 +16,12 @@ Thanks for the help of the following projects.
    1. [ ] 列表页重复渲染(Hydration completed but contains mismatches)
 3. [x] 文章评论
 4. [x] 文章排版
-5. [x] CDN 部署
-6. [ ] issue 同步
-7. [ ] tag 管理
-8.  [ ] 可视化知识体系
-9.  [ ] 博客订阅
-10. [ ] 内容搜索
+5. [x] CDN 缓存
+6. [ ] service-work
+7. [ ] issue 同步
+8. [ ] tag 管理
+9.  [ ] 可视化知识体系
+10. [ ] 博客订阅
+11. [ ] 内容搜索
 
 ## Vuepress Plugins

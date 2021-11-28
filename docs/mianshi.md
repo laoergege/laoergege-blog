@@ -218,9 +218,15 @@ emit 把各个chunk输出到结果文
   - [x] 手写 instanceof
   - [x] [原型及原型链](./JavaScript/JavaScript%20对象.md)
 - http
+  - [ ] http、https 区别
   - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
   - [ ] http1.0/1.1/2.0/3.0
   - [x] 浏览器 http 缓存
+  - [x] Etag、last-modified 区别
+    - Etag 优先级高
+    - 为什么要 Etag
+    - ETag 是资源的一个唯一标识，文件内容的 hash 值。
+    - ETag 还有“强”“弱”之分。强 ETag 要求资源在字节级别必须完全相符，弱 ETag 在值前有个“W/”标记，只要求资源在语义上没有变化，但内部可能会有部分发生了改变
   - [ ] get 和 post 区别
   - [ ] 说一下三次握手四次挥手
   - [ ] TCP, UDP 的区别
@@ -233,6 +239,7 @@ emit 把各个chunk输出到结果文
   - [ ] vue 响应式原理
   - [x] vue2、vue3 的 nextTick 原理
   - [x] vue 异步更新机制
+  - [ ] computed与watch区别
 - 项目
   - 性能优化
     - 虚拟列表
