@@ -9,6 +9,13 @@ export default {
   lang: "zh-CN",
   title: "",
   description: "Just For Fun",
+  head: [
+    ["link", { rel: "manifest", href: "/manifest.webmanifest" }],
+    [
+      "link",
+      { rel: "shortcut icon", href: "/favicon.ico", type: "image/x-icon" },
+    ],
+  ],
 
   // 构建配置
   dest: path.resolve(__dirname, "../../dist"),

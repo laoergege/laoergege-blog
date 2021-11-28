@@ -11,6 +11,7 @@ export default {
     Layout: path.resolve(__dirname, "components/Layout.vue"),
   },
   plugins: [
+    // 官方插件
     ["@vuepress/medium-zoom"],
     ["@vuepress/back-to-top"],
     ["@vuepress/nprogress"],
@@ -33,6 +34,13 @@ export default {
         theme: "github-light",
       },
     ],
+    [
+      "@vuepress/pwa",
+      {
+        skipWaiting: true,
+      },
+    ],
+    // laoergege 插件
     [
       "@vuepress/register-components",
       {
