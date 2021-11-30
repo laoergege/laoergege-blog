@@ -19,11 +19,12 @@ tags:
           - Object.create
           - Object.getPrototypeOf
           - Object.setPrototypeOf
-  - 完全运行时能力
+  - 具有完全运行时能力
   - 原型体系下的基于类面向对象编程支持
     - [new + 构造器模拟“类”行为](#new--构造器模拟类行为)
     - [继承](#继承)
     - [ES6 中的类 class](#es6-中的类-class)
+  - 函数对象
 
 ## 什么是面向对象
 
@@ -183,7 +184,7 @@ o2.p2();
 
 > [JavaScript 多种继承方式对比](https://tsejx.github.io/javascript-guidebook/object-oriented-programming/inheritance/prototype-chain#%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%AE%9E%E4%BE%8B)。
 
-**JavaScript 实现继承即通过借用构造函数来继独享属性，通过原型链继承共享属性**。
+**JavaScript 实现继承的本质即通过借用构造函数来继独享属性，通过原型链继承共享属性**（PS：原型链的修改方式有三种参考上面）。
 
 以下是寄生组合式继承（PS：sb 名称）代码示例：
 
@@ -224,6 +225,22 @@ instance1.colors.push("2"); // ["red", "blue", "green", "2"]
 instance1.colors.push("3"); // ["red", "blue", "green", "3"]
 ```
 
+简化版
+
+```js
+// new + 构造器，寄生组合式继承
+function A() {}
+function B() {}
+
+// 关键
+B.prototype = Object.create(A)
+B.prototype.constructor = B
+
+B.prototype.xxx = function() {}
+```
+
+注意不要 `B.prototype=A.prototype` 当对 B 的原型对象添加属性时，相当 A 的实例也能访问到。
+
 ### ES6 中的类 class
 
 ES6 中加入了新特性 class、extends，new、this 跟 function 搭配的怪异行为终于可以不使用了，但是类的写法依旧是基于原型机制的语法糖，JavaScript 的原型体系同时作为一种编程范式和运行时机制存在。**推荐在任何场景，我都推荐使用 ES6 的语法来定义类，而令 function 回归原本的函数语义**。
@@ -262,4 +279,8 @@ const p = new P("123");
 p.showName();
 p.desp;
 ```
+
+## 原型链
+
+## 函数对象
 

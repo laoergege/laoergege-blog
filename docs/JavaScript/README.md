@@ -40,6 +40,8 @@ tags:
     - [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/#introduction)
   - [手写 instanceof](https://github.com/laoergege/laoergege-blog/issues/74)
   - [手写 new](https://github.com/laoergege/laoergege-blog/issues/78)
+  - [数组扁平化](https://github.com/laoergege/laoergege-blog/issues/64)
+  - [数组去重](https://github.com/laoergege/laoergege-blog/issues/63)
 - 学习资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
   - [ES6 入门教程](https://es6.ruanyifeng.com/)

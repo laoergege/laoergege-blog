@@ -5,8 +5,9 @@ tags:
 # HTTP
 
 - HTTP
-  - [http 缓存](./http%20缓存.md)
+  - [http 各版本协议对比](./http%20各版本协议对比.md)
   - [https](./https.md)
+  - [http 缓存](./http%20缓存.md)
 
 
 缓存位置
@@ -18,10 +19,4 @@ tags:
 - http cache
 - push cache
 
-
-原则上，URL 代表的不是网页，而是概念资源，
-
-Accept: text/html在您的请求中包含类似内容的原因。
-
-Vary: Accept，表示服务器根据资源变种判断
 
