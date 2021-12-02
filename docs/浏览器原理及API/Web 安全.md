@@ -67,12 +67,12 @@ XSS 全称是 Cross Site Scripting，为了与“CSS”区分开来，故简称 
   1. 反射型 XSS 攻击是将恶意代码拼接在 URL 处，常见于网站搜索、跳转等，一个特点是需要黑客诱导用户点击 URL 实现代码注入
   2. 服务端不做处理直接拼接在 HTML 处返回
 
-  反射型 XSS 跟存储型 XSS 的区别是：存储型 XSS 的恶意代码存在数据库里，反射型 XSS 的恶意代码存在 URL 里。
+  反射型 XSS 跟存储型 XSS 的区别是：**存储型 XSS 的恶意代码存在数据库里，反射型 XSS 的恶意代码存在 URL 里**。
 
 - 基于 DOM 的 XSS 攻击
   
   通过修改页面 DOM 节点形成的 XSS，称之为 DOM Based XSS。
-  1. 网络劫持在页面传输过程中修改 HTML 页面的内容
+  1. 中间人劫持在页面传输过程中修改 HTML 页面的内容
   2. 由于前端页面不严谨的代码产生的安全漏洞，导致注入了恶意代码。比如使用 `.innerHTML`、`document.write()`、`document.outerHTML` 这些能够修改页面结构的 API 时要注意防范恶意代码，尽量使用 `.textContent`、`.setAttribute()` 等。
 
 DOM 型 XSS 跟前两种 XSS 的区别：DOM 型 XSS 攻击中，取出和执行恶意代码由浏览器端完成，属于前端 JavaScript 自身的安全漏洞，而其他两种 XSS 都属于服务端的安全漏洞。

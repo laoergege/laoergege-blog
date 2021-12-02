@@ -7,7 +7,7 @@ tags:
 
 - JavaScript
   - [类型系统](./JavaScript%20类型系统.md)
-  - 基础（命令式编程）
+  - 基础
     - 变量、值和类型
     - 表达式及运算
     - 控制流
@@ -17,7 +17,7 @@ tags:
     - 注释
     - [JavaScript 模块](./JavaScript%20模块.md)
   - 数据结构
-    - 数组
+    - [数组](./数组API总结.md)
     - Set
     - Map
   - [JavaScript 对象](./JavaScript%20对象.md)

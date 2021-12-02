@@ -1,3 +1,5 @@
+# 数组API总结
+
 - 数组构造
   - 构造器
     - `new Array(arg1, arg2,…)`
@@ -12,25 +14,35 @@
     - Array.from
     - 使用**类数组借用数组方法转数组**特点
       - `Array.prototype.slice.call(likeArray)`
-- 数组判断
+- 数组类型判断
   - Array.isArray
 - api
-  - 改变自身的方法（改动到内部元素位置）
+  > 💡 可根据“是否改动到内部元素位置”去判断一个方法是否会改变数组自身
+  - 改变自身的方法
     - pop
     - push
     - reverse
     - shift
     - sort
+      - 默认排序顺序是先将元素转换为字符串，按照转换为字符串的各个字符的 Unicode 位点进行排序
+      - `a-b>0`，倒序
+      - `a-b<0`，正序
+      - `a-b=0`，不变
     - **splice**
     - unshift
     - copyWithin
-    - fill
-    - flat
+    - **fill(value[, start[, end]])**，填充替换数组元素
+    - **flat([depth])**
+      - 使用 Infinity，可展开任意深度的嵌套数组
     - flatMap
-  - 不改变自身的方法（数组整体）
-    - concat
+  - 不改变自身的方法
+    - **concat**
+      - 参数：数组或参数列表
     - join
-    - **slice**
+    - **slice([begin[, end]])**，提取原数组中索引从 begin 到 end 的所有元素
+      - begin 可选，默认 0 ，包含在结果集中
+        - 负数，则表示从原数组中的倒数第几个元素开始提取
+      - end 可选，不会被包含在结果集中
   - 遍历
     - indexOf
     - lastIndexOf
@@ -47,13 +59,5 @@
     - entries
     - keys
     - values
-- sort
-
-    默认排序顺序是先将元素转换为字符串，按照转换为字符串的各个字符的 Unicode 位点进行排序
 
 
-合并两个有序数组
-可迭代对象
-循环操作
-数组遍历
-对象属性遍历

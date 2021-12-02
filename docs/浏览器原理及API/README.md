@@ -27,10 +27,11 @@ tags:
 ## Web 安全策略
 
 - 同源策略
+  - js设置document.domain实现跨域
   - 跨域资源共享(CORS)
 - 内容安全策略（CSP）
 
-## Web 应用性能优化
+## Web 性能优化
 
 - [Web 前端性能优化](./Web%20前端性能优化.md)
 - 性能测试监控工具
@@ -43,21 +44,33 @@ tags:
 - Web API 参考资料
   - [MDN](https://developer.mozilla.org/)
 - Web API
-  - DOM
+  - DOM（同源限制）
     - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
     - [DOM 事件模型](./DOM%20事件模型.md)
-  - 存储
+  - 数据存储（同源限制）
     - cookie
-    - indexDB
     - localStorage
     - sessionStorage
-  - 页面通信
-    - 同源
-      - Broadcast Channel API
-      - postMessage API
-      - localStorage + storage 事件
-    - 非同源
-      - postMessage API
+    - indexDB
+  - 通信
+    - 页面之间
+      - 同源
+        - window.opener + iframe.contentWindow（引用通信）
+        - localStorage + storageEvent
+        - window.postMessage
+        - MessageChannel
+        - BroadcastChannel
+        - SharedWorker
+      - 非同源
+        - window.postMessage
+    - 与后端
+      - 同源
+        - ajax
+        - fetch
+      - 非同源
+        - CORS
+        - JSONP
+        - (ProxyServer)
   - [PWA](./PWA.md)
   - [WebComponent](./WebComponent.md)
   - [WebWork](./WebWork.md)
@@ -88,6 +101,3 @@ DOM 操作会引发浏览器重排、重绘、合成操作
 
 虚拟 DOM？
 
-浏览器 GC 触发时机？
-
-事件触发流程
