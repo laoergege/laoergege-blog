@@ -15,8 +15,10 @@ tags:
         - [CSP 内容安全策略](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)
       - 跨域资源共享（CORS）
       - 跨文档消息机制（window.postMessage）
+    - CSRF 攻击与 cookie 机制
     - web 前端框架的安全防范
   - 浏览器网络安全
+    - [https](../HTTP/https.md)
   - 浏览器系统安全
 
 ## 同源策略
@@ -86,3 +88,19 @@ DOM 型 XSS 跟前两种 XSS 的区别：DOM 型 XSS 攻击中，取出和执行
 ### CSP 策略
 
 [MDN 内容安全策略( CSP )](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)。
+
+## CSRF 攻击与 cookie
+
+Cookie 是浏览器和服务器之间维护登录状态的一种方式，浏览器处理 cookie 的机制是当某个域的请求，自动会把这个域的 cookie 带上，而大多数 CSRF 攻击正是利用这一点。
+
+CSRF（Cross-site request forgery），称为“跨站请求伪造”，是指黑客引诱用户打开黑客的网站，在黑客的网站中，利用用户的登录状态发起的跨站请求。简单来讲，**CSRF 攻击就是黑客利用了用户的登录状态，并通过第三方的站点来做一些坏事**。
+
+**和 XSS 不同的是，CSRF 攻击不需要将恶意代码注入用户的页面，仅仅是利用服务器的漏洞和用户的登录状态来实施攻击**。
+
+### 防止 CSRF 攻击
+
+1. 将登陆 cookie 机制改成 token 机制
+2. 重要接口加验证参数
+3. cookie：httpOnly + SameSite
+4. 验证请求的来源站点（通过 HTTP 请求头中的 Referer 和 Origin 属性）
+5. CSRF Token

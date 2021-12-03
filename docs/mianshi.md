@@ -208,11 +208,10 @@ emit 把各个chunk输出到结果文
 输入URL 到页面展示发生了什么
 
 - web
-  - cookie localStorage sessionStorage 区别以及使用场景
+  - cookie、localStorage、sessionStorage 区别以及使用场景
   - 安全
-    - XSS
-    - CSRF
-    - 浏览器 Cookie 相关
+    - [x] XSS
+    - [x] CSRF
 - js
   - [x] 手写 new
   - [x] 手写 instanceof
