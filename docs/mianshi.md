@@ -205,24 +205,27 @@ emit 把各个chunk输出到结果文
 
 
 
-输入URL 到页面展示发生了什么
-
 - web
   - cookie、localStorage、sessionStorage 区别以及使用场景
   - 安全
     - [x] XSS
     - [x] CSRF
+  - 输入URL到页面展示发生了什么
 - js
   - [x] 手写 new
   - [x] 手写 instanceof
+    - 往左边对象原型链上查找是否存在右边构造器的 prototype
   - [x] [原型及原型链](./JavaScript/JavaScript%20对象.md)
     - 原型链的3种修改方式
   - [x] 继承
-  - [ ] 数组方法
+  - [x] 数组方法
     - [x] 数组扁平化
     - [x] 数组去重
+  - [ ] 节流、防抖
+  - [ ] 事件订阅
+  - [ ] 手写 call、apply、bind
 - http
-  - [ ] http、https 区别
+  - [x] http、https 区别
   - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
   - [ ] http1.0/1.1/2.0/3.0
   - [x] 浏览器 http 缓存

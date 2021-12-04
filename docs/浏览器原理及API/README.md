@@ -87,6 +87,10 @@ tags:
 
 - 下载
   - [文件下载，搞懂这9种场景就够了](https://mp.weixin.qq.com/s/PysSe6MykjYzVrWQCKJXvg)
+- 登陆鉴权
+  - session
+  - token
+    - JWT
 
 
 MVC，其核心思想就是将数据和视图分离
