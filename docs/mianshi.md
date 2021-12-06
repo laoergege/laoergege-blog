@@ -210,7 +210,7 @@ emit 把各个chunk输出到结果文
   - 安全
     - [x] XSS
     - [x] CSRF
-  - 输入URL到页面展示发生了什么
+  - [ ] 输入URL到页面展示发生了什么
 - js
   - [x] 手写 new
   - [x] 手写 instanceof
@@ -221,9 +221,14 @@ emit 把各个chunk输出到结果文
   - [x] 数组方法
     - [x] 数组扁平化
     - [x] 数组去重
-  - [ ] 节流、防抖
-  - [ ] 事件订阅
+  - [x] 节流、防抖
+  - [x] 手写 EventEmitter
+  - [ ] 设计模式
+    - [ ] 发布-订阅与观察者模式区别
   - [ ] 手写 call、apply、bind
+  - [ ] js 执行机制
+  - [ ] 类型转换
+  - [ ] 手写对象深浅拷贝
 - http
   - [x] http、https 区别
   - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
@@ -244,9 +249,12 @@ emit 把各个chunk输出到结果文
   - [ ] vue 新旧生命周期
   - [ ] vue2、vue3 区别
   - [ ] vue 响应式原理
+  - [ ] vue 双向绑定原理？
   - [x] vue2、vue3 的 nextTick 原理
   - [x] vue 异步更新机制
   - [ ] computed与watch区别
+  - [ ] vue2 和 vue3 对比
+  - [ ] vue 和 react 对比
 - 项目
   - 性能优化
     - 虚拟列表

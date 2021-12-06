@@ -12,10 +12,11 @@
 - 数据流
   - 父子组件
     - props、event
+    - 实例引用 `$parent`、`$children`
   - 模块领域
     - provide/inject
   - 全局单例模式  
-    - 事件订阅
+    - 事件订阅 eventBus
     - 组合、响应
     - 单向数据流框架 vuex（规范统一用法、支持同步异步、结合框架更新机制）
 - 复用
