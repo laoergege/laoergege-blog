@@ -54,6 +54,8 @@ JavaScript 作用域是由源码中指定词法位置进行划分，分为
 
 作用域与作用域形成嵌套关系，内层作用域能够访问外层作用域的变量，当前作用域查找不到就会往外层作用域进行查找，依次类推，这一条查找链路就是作用域链。
 
+以下是 JavaScript 词法作用域形成的作用域链：
+
 ![图 10](./images/db09c4e7adfde3898f824d5b5572639d585af3402a3a396419c1dabe2c8372e1.png) 
 
 ### let、const 声明的块级作用域原理及暂时性死区
@@ -127,7 +129,7 @@ foo()
 
 #### 暂时性死区
 
-由于变量提升机制，所有的声明（function、var、let、const 和 class）都在 JavaScript 编译期间被提升，而 var 声明的变量提升会被初始化为 undefined，而 let 和 const 则未初始化。
+**由于变量提升机制，所有的声明（function、var、let、const 和 class）都在 JavaScript 编译期间被提升，而 var 声明的变量提升会被初始化为 undefined，而 let 和 const 则未初始化**。
 
 只有在 JavaScript 引擎在执行源代码中声明的位置时，它们才会被初始化。
 

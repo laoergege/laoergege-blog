@@ -15,6 +15,8 @@
     - 使用**类数组借用数组方法转数组**特点
       - `Array.prototype.slice.call(likeArray)`
 - 数组类型判断
+  - xxx instanceof Array
+  - Object.prototype.toString.call(xxx)
   - Array.isArray
 - api
   > 💡 可根据“是否改动到内部元素位置”去判断一个方法是否会改变数组自身
@@ -44,20 +46,22 @@
         - 负数，则表示从原数组中的倒数第几个元素开始提取
       - end 可选，不会被包含在结果集中
   - 遍历
-    - indexOf
-    - lastIndexOf
-    - includes
     - forEach
     - every
     - some
     - filter
     - map
-    - **reduce**
+    - **reduce(previousValue, currentValue, currentIndex, array)**
     - **reduceRight**
     - find
     - findIndex
-    - entries
-    - keys
-    - values
+    - 查找
+      - indexOf
+      - lastIndexOf
+      - includes
+    - 获取结果
+      - entries
+      - keys
+      - values
 
 

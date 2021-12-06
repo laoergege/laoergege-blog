@@ -225,8 +225,14 @@ emit 把各个chunk输出到结果文
   - [x] 手写 EventEmitter
   - [ ] 设计模式
     - [ ] 发布-订阅与观察者模式区别
-  - [ ] 手写 call、apply、bind
+  - [x] 手写 call、apply、bind
   - [ ] js 执行机制
+    - [ ] 变量提升机制
+    - [ ] 作用域和作用域链
+    - [ ] 执行上下文和调用栈
+    - [ ] 作用域链和闭包
+    - [ ] this
+  - [ ] 普通函数和箭头函数区别
   - [ ] 类型转换
   - [ ] 手写对象深浅拷贝
 - http
@@ -255,6 +261,7 @@ emit 把各个chunk输出到结果文
   - [ ] computed与watch区别
   - [ ] vue2 和 vue3 对比
   - [ ] vue 和 react 对比
+- webpack
 - 项目
   - 性能优化
     - 虚拟列表

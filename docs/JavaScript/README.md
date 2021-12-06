@@ -17,7 +17,7 @@ tags:
     - 注释
     - [JavaScript 模块](./JavaScript%20模块.md)
   - 数据结构
-    - [数组](./数组API总结.md)
+    - [数组](./JavaScript%20数组%20API%20总结.md)
     - Set
     - Map
   - [JavaScript 对象](./JavaScript%20对象.md)
