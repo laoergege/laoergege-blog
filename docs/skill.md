@@ -69,6 +69,7 @@
 8. Flutter 学习
 9. Rust 学习
   
+
 ## 收集待看
 
 - 可视化
@@ -151,9 +152,7 @@
     - rollup
   - lint & prettier
 
-- 前端框架
 
-  - vue
 
 - 现代化 CSS
 
