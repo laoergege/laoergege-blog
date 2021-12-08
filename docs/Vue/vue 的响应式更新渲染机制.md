@@ -2,34 +2,43 @@
 release: true
 tags: 
  - vue
+summary: 通过本文你将了解到
 ---
 
 # Vue 的响应式更新渲染机制
 
 > 以下代码示例版本 vue3.2
 
-Vue 的响应式更新渲染机制，也就是 MDV（Model-Driven-View）数据驱动视图的实现原理。首先在 MDV 的理念下，我们只需要关注业务数据变化，至于状态如何自动化同步映射成 UI 就交给视图层框架解决。
+Vue 的响应式更新渲染机制，也就是 MDV（Model-Driven-View）数据驱动视图的实现原理。在 MDV 的理念下，我们只需要关注业务数据变化，至于状态变化如何自动化同步映射成 UI 就交给视图层框架解决。
 
-在 vue 的响应式系统下，渲染其实也是一种副作用。
+在 vue 的响应式系统里，数据即响应式数据，而视图渲染则是一种副作用。
 
 ![图 11](./images/e42d0897f1ae88b0b163646ca8b25880307282361ccb232159ade5ed8b796d52.png)  
 
-响应式更新渲染机制:
+vue 响应式更新渲染机制:
 
 ![图 2](images/2aa3f18582022b697f8312ccbbb6a029a91e761ccdaa4f8e3cdabf3bc8896862.png)  
 
 vue3 的响应式渲染机制跟 vue2 其实区别不大，其中：
 
 1. 渲染改成副作用为单位
-2. 收集渲染副作用
+2. 渲染副作用执行过程触发数据依赖收集
 3. 数据变化触发更新任务进入异步队列
-4. Scheduler 进行任务调度
+4. Scheduler 进行异步调度
 
+## 渲染副作用：建立数据与视图联系
 
+回顾 vue 组件渲染流程：
 
-## 渲染副作用
+1. 创建组件类型 vnode
+2. 渲染 vnode
+   1. 创建组件实例
+   2. 初始化组件
+   3. 创建组件渲染副作用并执行
 
-setupRenderEffect 创建渲染副作用。
+> 更多参考 [vue 组件渲染流程](./vue%20组件渲染流程.md)。
+
+通过 setupRenderEffect 创建渲染副作用并执行。
 
 ```ts
 // packages/runtime-core/src/renderer.ts
@@ -42,8 +51,10 @@ setupRenderEffect 创建渲染副作用。
     isSVG,
     optimized
   ) => {
-    // 渲染函数
+    // 组件更新函数
     const componentUpdateFn = () => { 
+      //...
+      // 执行组件 render 方法
       //...
     }
 
@@ -65,7 +76,25 @@ setupRenderEffect 创建渲染副作用。
   }
 ```
 
-## 渲染上下文：建立数据与模板联系
+其中最主要的是执行组件的**渲染函数**，**渲染函数是视图访问数据，建立响应式关联的关键所在**。
+
+可以通过线上[模板编译器](https://vue-next-template-explorer.netlify.app/)，查看编译后的渲染函数。
+
+```html
+<div>{{name}}</div>
+```
+
+```js
+import { toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+
+export function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createElementBlock("div", null, _toDisplayString(_ctx.name), 1 /* TEXT */))
+}
+```
+
+访问 name 时得通过 `_ctx.name`，**ctx 是数据访问的上下文环境**。
+
+## 渲染上下文：视图的数据访问代理
 
 ```js
 {
@@ -79,9 +108,7 @@ setupRenderEffect 创建渲染副作用。
 }
 ```
 
-组件 = 数据 + 视图模板
-
-模板对数据的引用是通过代理访问渲染上下文
+数据访问代理
 
 渲染上下文
 1. setupState
