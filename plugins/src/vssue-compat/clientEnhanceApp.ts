@@ -88,7 +88,7 @@ export default async ({ app }: { app: App }) => {
       ${codes}
     }
   `);
-  const context = Object.create(window, {
+  const context = Object.create(null, {
     Vue: {
       value: Vue2,
     },

@@ -10,7 +10,7 @@ export default {
   title: "",
   description: "Just For Fun",
   head: [
-    ["link", { rel: "manifest", href: "/manifest.webmanifest" }],
+    ["link", { rel: "manifest", href: "/site.webmanifest.json" }],
     [
       "link",
       { rel: "shortcut icon", href: "/favicon.ico", type: "image/x-icon" },

@@ -35,7 +35,7 @@ var vssuePlugin = function (_a) {
     }
     return {
         name: "vssue",
-        clientAppEnhanceFiles: path.resolve(__dirname, "vssue-clientEnhanceApp.js"),
+        clientAppEnhanceFiles: path.resolve(__dirname, "clientEnhanceApp.js"),
         define: {
             __VSSUE_OPTIONS__: options,
         },

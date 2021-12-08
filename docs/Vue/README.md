@@ -152,59 +152,20 @@ component
 - render
 
 
-[LifecycleHooks.BEFORE_CREATE]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.CREATED]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.BEFORE_MOUNT]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.MOUNTED]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.BEFORE_UPDATE]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.UPDATED]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.BEFORE_UNMOUNT]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.UNMOUNTED]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.RENDER_TRACKED]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.RENDER_TRIGGERED]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.ACTIVATED]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.DEACTIVATED]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.ERROR_CAPTURED]: LifecycleHook
-  /**
-   * @internal
-   */
-  [LifecycleHooks.SERVER_PREFETCH]: LifecycleHook<() => Promise<unknown>>
+- before-created
+- created
+- before-mount
+- mounted
+- before-updated
+- updated
+- before-unmount
+- unmounted 
+- render-tracked
+- render-triggered 
+- activated  
+- deactivated 
+- error-captured
+- server-prefetch
 
 
 - ctx 渲染上下文：用户选项、用户自定义数据
