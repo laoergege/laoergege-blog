@@ -5,10 +5,8 @@
         {{ title }}
         <!-- <span v-for="tag in tags" :key="tag" class="badge mx-2">{{ tag }}</span> -->
       </h1>
-      <p>
-        Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit
-        necessitatibus veritatis sed molestiae voluptates incidunt iure
-        sapiente.
+      <p v-if="desc">
+        {{ desc }}
       </p>
       <div class="justify-end card-actions">
         <router-link :to="{ name: routeKey }">
@@ -25,12 +23,13 @@
 <script>
 export default {
   setup(props, { attrs }) {
-    const { title, routeKey, tags } = attrs;
+    const { title, routeKey, tags, desc } = attrs;
 
     return {
       title,
       routeKey,
       tags,
+      desc
     };
   },
 };

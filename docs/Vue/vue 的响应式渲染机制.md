@@ -2,14 +2,14 @@
 release: true
 tags: 
  - vue
-summary: 通过本文你将了解到
+desc: 通过本文你将了解到 vue 是如何将响应式系统和 VirtualDOM 渲染机制结合起来，响应式更新视图。
 ---
 
-# Vue 的响应式更新渲染机制
+# Vue 的响应式渲染机制
 
 > 以下代码示例版本 vue3.2
 
-Vue 的响应式更新渲染机制，也就是 MDV（Model-Driven-View）数据驱动视图的实现原理。在 MDV 的理念下，我们只需要关注业务数据变化，至于状态变化如何自动化同步映射成 UI 就交给视图层框架解决。
+Vue 的响应式渲染机制，也就是 MDV（Model-Driven-View）数据驱动视图的实现原理。在 MDV 的理念下，我们只需要关注业务数据变化，至于状态变化如何自动化同步映射成 UI 就交给视图层框架解决。
 
 在 vue 的响应式系统里，数据即响应式数据，而视图渲染则是一种副作用。
 
@@ -17,11 +17,11 @@ Vue 的响应式更新渲染机制，也就是 MDV（Model-Driven-View）数据�
 
 vue 响应式更新渲染机制:
 
-![图 2](images/2aa3f18582022b697f8312ccbbb6a029a91e761ccdaa4f8e3cdabf3bc8896862.png)  
+![图 2](./images/2aa3f18582022b697f8312ccbbb6a029a91e761ccdaa4f8e3cdabf3bc8896862.png)  
 
 vue3 的响应式渲染机制跟 vue2 其实区别不大，其中：
 
-1. 渲染改成副作用为单位
+1. 组件渲染变成成副作用
 2. 渲染副作用执行过程触发数据依赖收集
 3. 数据变化触发更新任务进入异步队列
 4. Scheduler 进行异步调度
@@ -92,35 +92,67 @@ export function render(_ctx, _cache, $props, $setup, $data, $options) {
 }
 ```
 
-访问 name 时得通过 `_ctx.name`，**ctx 是数据访问的上下文环境**。
+访问 name 时得通过 `_ctx.name`，**ctx 是数据访问的上下文环境代理**。
 
 ## 渲染上下文：视图的数据访问代理
 
-```js
-{
-  data: () => {
-    return {}
-  },
-  setup(){
-    return {}
-  }
-  render() {}
-}
-```
+统一代理访问，主要是因为视图访问的数据源有多处：
 
-数据访问代理
-
-渲染上下文
 1. setupState
 2. data
 3. props
-4. instance
+4. 用户自定义添加在实例上的属性 `this.xxx = xxx`
+5. 组件实例 vue 公开方法：如 `$options`、`$refs` 等
+6. 全局属性： `app.config.globalProperties` 配置
 
-代理访问顺序
+> 源码位置： packages/runtime-core/src/componentPublicInstance.ts @PublicInstanceProxyHandlers 
 
-渲染上下文创建过程
+💡 数据访问顺序的影响，下面示例将输出 setup 的 msg。
 
-```js
+```vue
+<template>
+  <p>{{msg}}</p>
+</template>
+
+<script>
+  import { ref } from 'vue'
+  export default {
+    data() {
+      return {
+        msg: 'msg from data'
+      }
+    },
+    setup() {
+      const msg = ref('msg from setup')
+      return {
+        msg
+      }
+    }
+  }
+</script>
+```
+
+### 渲染上下文相关源码分析
+
+创建组件实例时生成渲染上下文。
+
+```ts
+// packages/runtime-core/src/component.ts@createComponentInstance
+export function createComponentInstance(){
+  // ...
+  instance.ctx = { _: instance }
+  // ...
+  return instance
+}
+```
+
+创建渲染上下文代理 `instance.proxy`，并使用 accessCache 属性代理访问缓存，因为每次代理访问数据都要经过多处数据源判断。
+
+> 源码位置： packages/runtime-core/src/componentPublicInstance.ts @PublicInstanceProxyHandlers 
+
+缓存 key 和对应的数据源，能够直达访问，减少很多判断，性能提升。
+
+```ts
 // mountComponent => setupComponent => setupStatefulComponent
 function setupStatefulComponent(
   instance: ComponentInternalInstance,
@@ -139,50 +171,198 @@ function setupStatefulComponent(
   // 2. call setup()
   const { setup } = Component
   if (setup) {
-    const setupContext = (instance.setupContext =
-      setup.length > 1 ? createSetupContext(instance) : null)
-
-    setCurrentInstance(instance)
-    pauseTracking()
-    const setupResult = callWithErrorHandling(
-      setup,
-      instance,
-      ErrorCodes.SETUP_FUNCTION,
-      [__DEV__ ? shallowReadonly(instance.props) : instance.props, setupContext]
-    )
-    resetTracking()
-    unsetCurrentInstance()
-
-    if (isPromise(setupResult)) {
-      setupResult.then(unsetCurrentInstance, unsetCurrentInstance)
-
-      if (isSSR) {
-        // return the promise so server-renderer can wait on it
-        return setupResult
-          .then((resolvedResult: unknown) => {
-            handleSetupResult(instance, resolvedResult, isSSR)
-          })
-          .catch(e => {
-            handleError(e, instance, ErrorCodes.SETUP_FUNCTION)
-          })
-      } else if (__FEATURE_SUSPENSE__) {
-        // async setup returned Promise.
-        // bail here and wait for re-entry.
-        instance.asyncDep = setupResult
-      } else if (__DEV__) {
-        warn(
-          `setup() returned a Promise, but the version of Vue you are using ` +
-            `does not support it yet.`
-        )
-      }
-    } else {
-      handleSetupResult(instance, setupResult, isSSR)
-    }
-  } else {
-    finishComponentSetup(instance, isSSR)
-  }
+    // 执行 setup ... 
+  } 
 }
 ```
+
+执行渲染函数并应用渲染上下文。
+
+```ts
+export function renderComponentRoot(
+  instance: ComponentInternalInstance
+): VNode {
+const {
+ type: Component,
+ vnode,
+ proxy,
+ withProxy,
+ props,
+ propsOptions: [propsOptions],
+ slots,
+ attrs,
+ emit,
+ render,
+ renderCache,
+ data,
+ setupState,
+ ctx,
+ inheritAttrs
+} = instance
+
+let result
+const prev = setCurrentRenderingInstance(instance)
+if (__DEV__) {
+ accessedAttrs = false
+}
+try {
+ let fallthroughAttrs
+ if (vnode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
+   // withProxy is a proxy with a different `has` trap only for
+   // runtime-compiled render functions using `with` block.
+   const proxyToUse = withProxy || proxy
+   result = normalizeVNode(
+     render!.call(
+       proxyToUse,
+       proxyToUse!,
+       renderCache,
+       props,
+       setupState,
+       data,
+       ctx
+     )
+   )
+   fallthroughAttrs = attrs
+ } else {
+   // functional
+   const render = Component as FunctionalComponent
+   
+   result = normalizeVNode(
+     render.length > 1
+       ? render(
+           props,
+           __DEV__
+             ? {
+                 get attrs() {
+                   markAttrsAccessed()
+                   return attrs
+                 },
+                 slots,
+                 emit
+               }
+             : { attrs, slots, emit }
+         )
+       : render(props, null as any /* we know it doesn't need it */)
+   )
+ }
+ //...
+} 
+```
+
+1. 参数传递方式，上面模板编译例子中经过模板编译的渲染函数即可通过参数 ctx 代理访问数据
+2. this 绑定，在自定义的 render 里可通过 this 访问数据
+    ```jsx
+    {
+      render() {
+        return <div>{ this.name }</div>
+      }
+    }
+    ```
+
+### proxy 和 withProxy
+
+在看 vue 源码过程发现组件属性上为什么有两个渲染上下文代理 proxy 和 withProxy。
+
+```ts
+export interface ComponentInternalInstance {
+  // ...
+
+  // main proxy that serves as the public instance (`this`)
+  proxy: ComponentPublicInstance | null
+  /**
+   * alternative proxy used only for runtime-compiled render functions using
+   * `with` block
+   * @internal
+   */
+  withProxy: ComponentPublicInstance | null
+
+  // ...
+}
+```
+
+withProxy 是针对动态模板编译的场景。
+
+随手写了两个组件，一个是动态模板编译一个是 SFC 组件编译，并打印了其渲染函数。
+
+![图 4](./images/47baf14950ffeb8be704d559277b00b7ceda6ffc41a854e4a93bab241931c8f1.png)  
+
+使用模板 DSL 最大的一点就是限制用户写法，从而提供安全及性能。
+
+> vue 的模板表达式都被放在沙盒中，只能访问一个受限的[全局变量列表](https://github.com/vuejs/vue-next/blob/master/packages/shared/src/globalsWhitelist.ts#L3)，如 Math 和 Date。你不应该在模板表达式中试图访问用户定义的全局变量，就上面示例访问全局变量 history。
+
+但有一点让我感到困惑的是为什么两者编译后的代码不相同，一个通过作用域链一个通过原型链访问，理论上来说两者可达到同样的目的效果，那为什么不统一使用下面的方式？
+
+**这里有个小技巧：看源码过程一般建议关注主线逻辑，像各种特殊情况可通过注释、commit message、issue 或者测试用例查看原由**。
+
+源码中模板表达式的处理逻辑：
+
+```ts
+// packages/compiler-core/src/transforms/transformExpression.ts@processExpression
+
+// Important: since this function uses Node.js only dependencies, it should
+// always be used with a leading !__BROWSER__ check so that it can be
+// tree-shaken from the browser build.
+export function processExpression(
+  node: SimpleExpressionNode,
+  context: TransformContext,
+  // some expressions like v-slot props & v-for aliases should be parsed as
+  // function params
+  asParams = false,
+  // v-on handler values may contain multiple statements
+  asRawStatements = false
+): ExpressionNode {
+  if (__BROWSER__) {
+    if (__DEV__) {
+      // simple in-browser validation (same logic in 2.x)
+      validateBrowserExpression(node, context, asParams, asRawStatements)
+    }
+    return node
+  }
+
+  // `__BROWSER__` 环境下，下面代码会被删除
+
+  // ....
+
+  const needPrefix = shouldPrefix(node, parent!, parentStack)
+
+  //...
+```
+
+正常本地 AOT 编译的情况下该函数会执行到 `shouldPrefix` 方法，该函数会根据全局变量白名单判断是否要添加 `_ctx.` 前缀。比如 history 是禁止的，那么就限制在 _ctx 的原型链上查找，否则可通过作用域链到全局查找。
+
+但在线上浏览器中动态编译时，打包编译器代码会把包含 `@babel/parse` 代码给包含进去，这就导致整个 complie runtime 很大（有个相关 [issue](https://github.com/vuejs/vue-next/issues/2515) 讨论）。所以在 `__BROWSER__` 环境下通过 tree-shaking 删除代码，这样子表达式相当于不做处理直接返回。
+
+那么如何限制 history ？就只能通过 `with` 限制作用链查找。对于使用 with 块运行时编译的渲染函数，渲染上下文的代理是 RuntimeCompiledPublicInstanceProxyHandlers。它是在之前渲染上下文代理 PublicInstanceProxyHandlers 的基础上进行的扩展，主要对 has 函数的实现做了优化：
+
+```ts
+// packages/runtime-core/src/componentPublicInstance.ts@RuntimeCompiledPublicInstanceProxyHandlers
+export const RuntimeCompiledPublicInstanceProxyHandlers = /*#__PURE__*/ extend(
+  {},
+  PublicInstanceProxyHandlers,
+  {
+    get(target: ComponentRenderContext, key: string) {
+      // fast path for unscopables when using `with` block
+      if ((key as any) === Symbol.unscopables) {
+        return
+      }
+      return PublicInstanceProxyHandlers.get!(target, key, target)
+    },
+    has(_: ComponentRenderContext, key: string) {
+      const has = key[0] !== '_' && !isGloballyWhitelisted(key)
+      if (__DEV__ && !has && PublicInstanceProxyHandlers.has!(_, key)) {
+        warn(
+          `Property ${JSON.stringify(
+            key
+          )} should not start with _ which is a reserved prefix for Vue internals.`
+        )
+      }
+      return has
+    }
+  }
+)
+```
+
+这里如果 key 以 _ 开头，或者 key 在全局变量的白名单内，则 has 为 false，此时则直接命中警告，不用再进行之前那一系列的判断了。
 
 ## 异步更新机制
 
@@ -550,5 +730,6 @@ export function nextTick<T = void>(
 
 ## 总结
 
-1. vue 的异步更新机制：使用队列缓存更新任务，在事件循环中安排一个异步任务执行队列中所有任务
-2. 组件树的更新过程遵循自顶向下、单向数据流原则，注意在组件更新后发生数据修改，改变数据流规则可能会导致重复渲染
+1. 响应式渲染机制：将组件渲染封装成渲染副作用，收集响应式依赖，异步调度更新。
+2. vue 的异步更新机制：使用队列缓存更新任务，在事件循环中安排一个异步任务执行队列中所有任务。
+3. 单向数据流原则：组件树的更新过程是自顶向下，如果发生逆向数据流修改，会导致当前渲染的数据和视图映射不一致，需要重复多一次渲染。

@@ -30,6 +30,8 @@ export default {
           "yaml",
           "json",
           "python",
+          "jsx",
+          "vue",
         ],
         theme: "github-light",
       },
@@ -69,7 +71,9 @@ export default {
         render(page) {
           return `<ListItem title="${page.title}" routeKey="${
             page.key
-          }" :tags='${JSON.stringify(page.frontmatter.tags)}'/>`;
+          }" :tags='${JSON.stringify(page.frontmatter.tags)}' desc="${
+            page.frontmatter.desc
+          }"/>`;
         },
       },
     ],
