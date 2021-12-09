@@ -72,8 +72,8 @@ export default {
           return `<ListItem title="${page.title}" routeKey="${
             page.key
           }" :tags='${JSON.stringify(page.frontmatter.tags)}' desc="${
-            page.frontmatter.desc
-          }"/>`;
+            page.frontmatter.desc || ""
+          }" :updateDate="${page.frontmatter.updatedTime}"/>`;
         },
       },
     ],

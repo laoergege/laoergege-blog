@@ -3,8 +3,8 @@
     <div class="card-body">
       <h1 class="card-title text-secondary-focus text-2xl">
         {{ title }}
-        <!-- <span v-for="tag in tags" :key="tag" class="badge mx-2">{{ tag }}</span> -->
       </h1>
+      <div class="text-xs italic mb-2">更新时间：{{updateTime}}</div>
       <p v-if="desc">
         {{ desc }}
       </p>
@@ -15,21 +15,24 @@
       </div>
     </div>
     <div class="divider">
-      <span v-for="tag in tags" :key="tag" class="mx-2">{{ tag }}</span>
+      {{tags}}
     </div> 
   </div>
 </template>
 
 <script>
+import dayjs from "dayjs";
+
 export default {
   setup(props, { attrs }) {
-    const { title, routeKey, tags, desc } = attrs;
-
+    const { title, routeKey, tags, desc, updateTime } = attrs;
+  
     return {
       title,
       routeKey,
-      tags,
-      desc
+      tags: tags.join(" / "),
+      desc,
+      updateTime: dayjs(updateTime).format('YYYY-MM')
     };
   },
 };
