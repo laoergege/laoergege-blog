@@ -37,13 +37,6 @@ export default {
   },
 
   bundlerConfig: {
-    configureWebpack(config, isServer, isBuild) {
-      console.log(config.devtool);
-      config.devtool = "source-map";
-      return {
-        devtool: "source-map",
-      };
-    },
     // chainWebpack() {
     //   return process.env.NODE_ENV === "development" ? {} : {
     //     output: {
