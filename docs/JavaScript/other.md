@@ -68,3 +68,43 @@ component
 - slots
 
 
+setupComponent
+updateComponentPreRender
+renderComponentRoot 
+shouldUpdateComponent
+
+尽量忽略其他不相干 case 情况，保持主逻辑功能流程分析
+**这里有个小技巧：看源码过程一般建议关注主线逻辑，像各种特殊情况可通过注释、issue 或者测试用例查看原由**。
+
+生命周期
+api 抽象
+
+
+vnode
+- type
+- props
+- children
+
+component
+- props
+- slots
+- data
+- render
+
+
+- before-created
+- created
+- before-mount
+- mounted
+- before-updated
+- updated
+- before-unmount
+- unmounted 
+- render-tracked
+- render-triggered 
+- activated  
+- deactivated 
+- error-captured
+- server-prefetch
+
+“With” 和 “eval” — ECMAScript中的动态作用域

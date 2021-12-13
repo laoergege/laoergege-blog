@@ -37,7 +37,6 @@
    - [HTML&CSS](./HTML&CSS/README.md)
      - https://web.dev/learn/css/box-model/
    - [JavaScript](./JavaScript/README.md)
-     - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
    - Flutter
 7. 计算机基础
    1. 计算机组成原理
@@ -48,11 +47,17 @@
    4. [数据结构与算法](./数据结构与算法/README.md)
       - [ ] 极客算法训练营
         - [x] 堆及二叉堆
+        - [x] 链表
         - [ ] 排序算法
+        - [ ] 分治算法
+        - [ ] 二叉树
+        - [ ] 数组
       - [leetcode 图解算法数据结构](https://leetcode-cn.com/leetbook/detail/illustration-of-algorithm/)
       - 数据结构与算法之美
    5. 图形学
-   6. 编译原理
+   6. 程序语言设计及实现
+      - [计算机程序的构造和解释](https://github.com/DeathKing/Learning-SICP)
+   7. 编译原理
       - babel
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
@@ -68,10 +73,12 @@
 7. Typescript 重学
 8. Flutter 学习
 9. Rust 学习
-  
 
 ## 收集待看
 
+- SSR
+  - [能让你纵享丝滑的 SSR 技术，转转这样实践](https://mp.weixin.qq.com/s/JO5SWE9wd93ICM5ccZ71FQ)
+  - [Nuxt实现的SSR页面性能优化的进一步探索与实践](https://mp.weixin.qq.com/s?__biz=MzU0OTExNzYwNg==&mid=2247484670&idx=1&sn=b56e53dd80b27fa73db05aa0f87fe864&st=44750C9EB200D36504EB6D425B420DBB6B15C56ACA80A204C54C8323EDC1801EA5A5F3B820B554A82F62E4033B31A51709D75E975D62F9DF6D44CAE16D1789B8AD72E2CD5F9B783F67AD99F4F2798CF2C68E30FA529A9493650C4F2DBC668A6BDF60C19EBD53E8095436171B77B43F8379F0786B6B7CC24FF5D8D3F7E9234CB1AAF8E432ACBF7660C8D5A46943940625F334223CFD292F52C622C9D71CA23109&vid=1688853671357556&cst=84C66BDBB38DB9209F2CBE20568358526FE0CB352D65E68D84CDC8560959A5D0CF245948AFF68C1B51377FEEFF49EFA4&deviceid=28ea5b9c-c888-47c9-a3cf-e19b1d9eaf5c&version=3.0.40.6184&platform=mac&scene=21#wechat_redirect)
 - 可视化
   - [如何1人5天开发完3D数据可视化大屏 【一】](https://mp.weixin.qq.com/s?__biz=MzA4MzMwMzQ5Nw==&mid=2650620371&idx=1&sn=ba4e5946d7ed5497a6f839cc833f177f&chksm=87f16cf5b086e5e3512659e44cc6587463974bfa43d658ec7317299d27810a83858c7f0934df&scene=21#wechat_redirect)
 - WebAssembly
@@ -79,6 +86,7 @@
 - 微前端
   - https://github.com/bytedance/magic-portal
   - https://github.com/bytedance/magic-microservices
+  - [让iframe焕发新生](https://zhuanlan.zhihu.com/p/442815952)
 - 框架
   - NodeJS
     - 架构

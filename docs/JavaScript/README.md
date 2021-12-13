@@ -24,6 +24,7 @@ tags:
   - 函数式编程
     - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
     - 函数柯里化
+    - [ts-belt](https://github.com/mobily/ts-belt)
   - [异步编程](./JavaScript%20异步编程.md)
   - 运行时
     - [内存管理机制](./JavaScript%20内存管理机制.md)
@@ -49,7 +50,26 @@ tags:
   - [ES6 入门教程](https://es6.ruanyifeng.com/)
   - 重新前端
   - [JavaScript开发者应懂的33个概念](https://github.com/stephentian/33-js-concepts)
-
-
-
-
+  - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
+- js 学习路线
+  - 开始
+    - 基本语法
+    - api
+  - 深入
+    1. 变量提升机制（历史问题）
+    2. 类型系统
+    3. 静态作用域（链）
+    4. 对象模型
+    5. 原型（链）
+    6. 闭包
+    7. 元编程
+       1. function
+       2. eval
+       3. with
+  - 更深
+    - ES 语言规范
+    - 了解 V8 JS 编译原理
+    - 关注 JS 编译器比如 V8 团队，及周边发展
+  - 底层
+    - 研究 V8 源码
+    - 语言设计及编译原理

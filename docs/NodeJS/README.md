@@ -114,6 +114,8 @@ tags:
 - Deno
   - 资料
     - [Deno 运行时入门教程：Node.js 的替代品](https://www.ruanyifeng.com/blog/2020/01/deno-intro.html)
+- awasome
+  - 线程池 [piscina](https://github.com/piscinajs/piscina)
 
 
 Farrow

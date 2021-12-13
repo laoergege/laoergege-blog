@@ -17,65 +17,40 @@
  * @param {number} k
  * @return {ListNode}
  */
-var reverseKGroup = function(head, k) {
-    // if(!head) {
-    //     return head
-    // }
-
-    // let cur = head
-    // let first = head
-    // let next = null
-
-    // let i = 1
-    // while (i < k && cur.next) {
-    //     cur = cur.next
-    //     i++
-    // }
-
-    // if(i < k) {
-    //     return first
-    // }
-
-    // let pre = reverseKGroup(cur.next, k)
-
-    // // 重置
-    // cur = first
-
-    // // reserve
-    // while (cur && cur.next && i > 0) {
-    //     next = cur.next
-    //     cur.next = pre
-
-    //     pre = cur
-    //     cur = next
-    //     i--
-    // }
-    
-    // return pre
-
+var reverseKGroup = function (head, k) {
     if(!head) {
         return head
     }
 
+    let temp = [head]
     let cur = head
-    let first = head
-    let pre = null
-    let next = null
-    let i = 1
+    let i = 0
     while (cur) {
-        next = cur.next
-        cur.next = pre
-
-        if(i < 2) {
-            pre = cur
-            cur = next
-            i++
+        cur = cur.next
+        i++
+        if (i % k === 0) {
+            temp.push(cur)
         }
     }
+};
 
-    first.next = reverseKGroup(next, k)
+function reverse(head, k) {
+    let pre = null
+    let cur = head
+    let next = head.next
+    let i = 0
+    while (cur && i < k) {
+        cur.next = pre
+
+        pre = cur
+        cur = next
+        next = cur.next
+        i++
+    }
+
+    head.next = reverseKGroup(next, k)
 
     return cur
-};
+}
 // @lc code=end
 
