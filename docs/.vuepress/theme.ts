@@ -71,9 +71,9 @@ export default {
         render(page) {
           return `<ListItem title="${page.title}" routeKey="${
             page.key
-          }" :tags='${JSON.stringify(page.frontmatter.tags)}' desc="${
+          }" tags='${page.frontmatter.tags.toString()}' desc="${
             page.frontmatter.desc || ""
-          }" :updateDate="${page.frontmatter.updatedTime}"/>`;
+          }" updateDate="${page.frontmatter.updatedTime}"/>`;
         },
       },
     ],

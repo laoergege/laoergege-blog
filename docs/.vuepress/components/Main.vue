@@ -33,7 +33,7 @@
     </div>
     <div>
        <Content :page-key="key"  v-for="key in resolveKeys" :key="key" />
-       <button v-show="hasMore" class="btn btn-block my-10 btn-ghost" :class="loadingRef.value && 'loading'" :disabled="loadingRef.value" @click="loadMore">加载更多</button>
+       <button v-if="hasMore" class="btn btn-block my-10 btn-ghost" @click="loadMore">加载更多</button>
     </div>
   </div>
 </template>
@@ -65,9 +65,6 @@ export default {
       loadingRef,
       loadMore() {
         addKeys()
-      },
-      onMounted() {
-        loadingRef.value = false
       },
       hasMore
     };

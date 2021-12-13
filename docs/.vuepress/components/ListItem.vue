@@ -30,7 +30,7 @@ export default {
     return {
       title,
       routeKey,
-      tags: tags.join(" / "),
+      tags: tags.replace(",", " / "),
       desc,
       updateTime: dayjs(updateTime).format('YYYY-MM')
     };

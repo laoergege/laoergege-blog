@@ -13,7 +13,7 @@ Thanks for the help of the following projects.
 
 1. [x] github action 自动化部署 github page
 2. [x] 首页列表自动化
-   1. [ ] 列表页重复渲染(Hydration completed but contains mismatches)
+   1. [x] 列表页重复渲染(Hydration completed but contains mismatches)
 3. [x] 文章评论
 4. [x] 文章排版
 5. [x] CDN 缓存
