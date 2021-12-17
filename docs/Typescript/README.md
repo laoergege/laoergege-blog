@@ -7,7 +7,6 @@
   [TypeScript的类型系统是*结构性的*，类型为集合，类型匹配只是结构上匹配相似，集合关系。](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html#types-as-sets)
 
   - 类型系统
-
     - 基础类型
       - `null`和`undefined`
     - 高级类型
@@ -18,23 +17,22 @@
       - 文本类型
         - [as const](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-inference)
       - Enums
-
   - 类型推导
-
   - 声明文件
-
   - tsc 编译器
-
   - tsc config
-
     - noImplicitAny
     - strictNullChecks
-
   - 工程
-
     - [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/)
-
     - [type search tool](https://www.typescriptlang.org/dt/search?search=)
+  - 类型元编程
+    - 数组长度 => number 类型
+    - ... 累加
+    - extends
+    - ![图 5](./images/fc92b1ec4160b18ca2cf37ccdc6d909144c27650a44c7619d621fea2ff3f9d97.png)  
+    - https://mp.weixin.qq.com/s/suNZY5iSveVjqmGKCpJloQ
+
 
 
 
