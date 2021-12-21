@@ -45,15 +45,18 @@
    3. 计算机网络
       - [HTTP](./HTTP/README.md)
    4. [数据结构与算法](./数据结构与算法/README.md)
+      - 数据结构与算法之美
+        - [ ] 入门篇
+        - [ ] 基础篇
       - [ ] 极客算法训练营
         - [x] 堆及二叉堆
         - [x] 链表
+        - [ ] 二分查找
         - [ ] 排序算法
         - [ ] 分治算法
         - [ ] 二叉树
         - [ ] 数组
       - [leetcode 图解算法数据结构](https://leetcode-cn.com/leetbook/detail/illustration-of-algorithm/)
-      - 数据结构与算法之美
    5. 图形学
    6. 程序语言设计及实现
       - [计算机程序的构造和解释](https://github.com/DeathKing/Learning-SICP)
@@ -192,7 +195,3 @@
 
   <img src="./images/image-20210401230801709.png" alt="image-20210401230801709" style="zoom:50%;" />
 
-7FC8A9
-D5EEBB
-5F7A61
-444941
