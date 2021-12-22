@@ -13,6 +13,7 @@
     - 图形库
       - [SpriteJS](https://spritejs.org/#/)
       - ThreeJS
+      - [pixijs](https://pixijs.com/)
     - 工具
     - 数据驱动框架
       - [D3.js](https://d3js.org/)
