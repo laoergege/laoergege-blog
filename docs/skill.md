@@ -65,6 +65,11 @@
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
+   8. 数学与**应用**
+      - 数学分析
+      - 概率论
+      - 线性代数
+
 ## 2021 技术目标
 
 1. deep JavaScript
@@ -90,15 +95,15 @@
   - [designable](https://github.com/alibaba/designable)
 - SSR
   - [能让你纵享丝滑的 SSR 技术，转转这样实践](https://mp.weixin.qq.com/s/JO5SWE9wd93ICM5ccZ71FQ)
-  - [Nuxt实现的SSR页面性能优化的进一步探索与实践](https://mp.weixin.qq.com/s?__biz=MzU0OTExNzYwNg==&mid=2247484670&idx=1&sn=b56e53dd80b27fa73db05aa0f87fe864&st=44750C9EB200D36504EB6D425B420DBB6B15C56ACA80A204C54C8323EDC1801EA5A5F3B820B554A82F62E4033B31A51709D75E975D62F9DF6D44CAE16D1789B8AD72E2CD5F9B783F67AD99F4F2798CF2C68E30FA529A9493650C4F2DBC668A6BDF60C19EBD53E8095436171B77B43F8379F0786B6B7CC24FF5D8D3F7E9234CB1AAF8E432ACBF7660C8D5A46943940625F334223CFD292F52C622C9D71CA23109&vid=1688853671357556&cst=84C66BDBB38DB9209F2CBE20568358526FE0CB352D65E68D84CDC8560959A5D0CF245948AFF68C1B51377FEEFF49EFA4&deviceid=28ea5b9c-c888-47c9-a3cf-e19b1d9eaf5c&version=3.0.40.6184&platform=mac&scene=21#wechat_redirect)
+  - [Nuxt 实现的 SSR 页面性能优化的进一步探索与实践](https://mp.weixin.qq.com/s?__biz=MzU0OTExNzYwNg==&mid=2247484670&idx=1&sn=b56e53dd80b27fa73db05aa0f87fe864&st=44750C9EB200D36504EB6D425B420DBB6B15C56ACA80A204C54C8323EDC1801EA5A5F3B820B554A82F62E4033B31A51709D75E975D62F9DF6D44CAE16D1789B8AD72E2CD5F9B783F67AD99F4F2798CF2C68E30FA529A9493650C4F2DBC668A6BDF60C19EBD53E8095436171B77B43F8379F0786B6B7CC24FF5D8D3F7E9234CB1AAF8E432ACBF7660C8D5A46943940625F334223CFD292F52C622C9D71CA23109&vid=1688853671357556&cst=84C66BDBB38DB9209F2CBE20568358526FE0CB352D65E68D84CDC8560959A5D0CF245948AFF68C1B51377FEEFF49EFA4&deviceid=28ea5b9c-c888-47c9-a3cf-e19b1d9eaf5c&version=3.0.40.6184&platform=mac&scene=21#wechat_redirect)
 - 可视化
-  - [如何1人5天开发完3D数据可视化大屏 【一】](https://mp.weixin.qq.com/s?__biz=MzA4MzMwMzQ5Nw==&mid=2650620371&idx=1&sn=ba4e5946d7ed5497a6f839cc833f177f&chksm=87f16cf5b086e5e3512659e44cc6587463974bfa43d658ec7317299d27810a83858c7f0934df&scene=21#wechat_redirect)
+  - [如何 1 人 5 天开发完 3D 数据可视化大屏 【一】](https://mp.weixin.qq.com/s?__biz=MzA4MzMwMzQ5Nw==&mid=2650620371&idx=1&sn=ba4e5946d7ed5497a6f839cc833f177f&chksm=87f16cf5b086e5e3512659e44cc6587463974bfa43d658ec7317299d27810a83858c7f0934df&scene=21#wechat_redirect)
 - WebAssembly
   - https://github.com/WasmEdge/WasmEdge
 - 微前端
   - https://github.com/bytedance/magic-portal
   - https://github.com/bytedance/magic-microservices
-  - [让iframe焕发新生](https://zhuanlan.zhihu.com/p/442815952)
+  - [让 iframe 焕发新生](https://zhuanlan.zhihu.com/p/442815952)
 - 框架
   - NodeJS
     - 架构
@@ -108,22 +113,23 @@
   - 浏览器
   - React
     - [手写系列-实现一个铂金段位的 React](https://mp.weixin.qq.com/s/C4pjEzYPZocRnJOaF1q0Jg)
-    - [React技术揭秘](https://react.iamkasong.com)
+    - [React 技术揭秘](https://react.iamkasong.com)
     - [react-illustration-series](https://github.com/7kms/react-illustration-series)
     - 状态管理
       - https://github.com/umijs/hox
     - [你可能不知道的流式 React Hooks（关于组织代码的最佳实践）](https://zhuanlan.zhihu.com/p/413141904)
   - Flutter
-    - [企业微信超大型工程-跨全平台UI框架最佳实践](https://mp.weixin.qq.com/s/JdQmgQ57nWQM99JW_ueFVg)
+    - [企业微信超大型工程-跨全平台 UI 框架最佳实践](https://mp.weixin.qq.com/s/JdQmgQ57nWQM99JW_ueFVg)
 - 设计模式、架构
   - [复杂系统架构设计应对之道](https://mp.weixin.qq.com/s/u5hW529GczJNZU0RdVPgeg)
 - 计算基础
+
   - 计算机网络
     - 趣谈网络协议
-    - [Web协议详解与抓包实战](https://www.youtube.com/playlist?list=PLoZQ0sz6CBHGLlYNKB-yzDRasrAYytelS)
-
+    - [Web 协议详解与抓包实战](https://www.youtube.com/playlist?list=PLoZQ0sz6CBHGLlYNKB-yzDRasrAYytelS)
 
 - 浏览器渲染原理
+
   - canvas
     - https://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
     - https://joshondesign.com/p/books/canvasdeepdive/toc.html
@@ -136,11 +142,11 @@
     - https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf
   - https://www.youtube.com/watch?v=kNzoswFIU9M&list=PLNYkxOF6rcICgS7eFJrGDhMBwWtdTgzpx
   - 编译
+
     - https://www.youtube.com/watch?v=5nmpokoRaZI
     - https://www.youtube.com/watch?v=KM9coMpy5sQ&t=499s
     - https://www.youtube.com/watch?v=p-iiEDtpy6I
     - https://zhuanlan.zhihu.com/p/28590489
-
 
   - http://nodejs.cn/learn/introduction-to-nodejs
   - cli
@@ -148,14 +154,14 @@
     - https://github.com/google/zx/blob/main/index.mjs
     - https://github.com/Tencent/feflow
 
-
 - 重学 typescript
+
   - https://www.typescriptlang.org/docs/handbook/intro.html
 
 - 计算机导论
+
   - https://www.coursera.org/learn/jisuanji-biancheng/home/week/1
   - https://www.bilibili.com/video/av21376839/
-
 
 - 包管理工具
 
@@ -171,8 +177,6 @@
     - webpack
     - rollup
   - lint & prettier
-
-
 
 - 现代化 CSS
 
@@ -194,4 +198,3 @@
 - 性能测试工具
 
   <img src="./images/image-20210401230801709.png" alt="image-20210401230801709" style="zoom:50%;" />
-

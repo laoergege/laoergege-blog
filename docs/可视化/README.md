@@ -2,10 +2,16 @@
   - 视觉
     - **理论基础**
       - 数学
+        - 描述几何信息
+          - 几何图形维度划分：点、边、线、面、体
+          - 坐标系、向量、矩阵运算
       - 图形学
     - 图形系统（Web）
       - HTML 和 CSS
-      - [SVG](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial)
+      - SVG
+        - https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial
+        - viewBox
+          - https://www.zhangxinxu.com/wordpress/2014/08/svg-viewport-viewbox-preserveaspectratio/
       - Canvas2D
         - https://github.com/jhildenbiddle/canvas-size
         - 局部图形、分层
@@ -34,3 +40,11 @@
 4. SVG 的图形元素会非常多，这会导致 DOM 渲染成为性能瓶颈。
 5. SVG 生成某些图形，然后用 Canvas 来渲染。这样，我们就既可以享受 SVG 的便利性，又可以享受 Canvas 的高性能了
 
+代数
+
+为什么
+怎么做
+更好做
+
+坐标换算（矩阵运算）
+坐标系变换来代替坐标换算

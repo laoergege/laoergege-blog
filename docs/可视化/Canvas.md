@@ -19,6 +19,7 @@ Canvas API 支持
 - canvas
   - 基础
     - 画布及坐标系
+      - 画布跟坐标系初始重叠
     - 绘制指令
       - 状态
         - save 和 restore
@@ -29,7 +30,7 @@ Canvas API 支持
         - [路径](#路径)
         - 文本
         - 图像
-      - 变形
+      - 坐标系变换
         - 没有 transform-origin
     - 二次贝塞尔曲线及三次贝塞尔曲线
   - 进阶
