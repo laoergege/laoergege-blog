@@ -163,37 +163,7 @@
   - https://www.coursera.org/learn/jisuanji-biancheng/home/week/1
   - https://www.bilibili.com/video/av21376839/
 
-- 包管理工具
 
-- CSS 处理工具
-
-  - scss
-  - postcss
-
-- 构建工具
-
-  - 工作流命令工具 npm script
-  - 打包工具
-    - webpack
-    - rollup
-  - lint & prettier
-
-- 现代化 CSS
-
-  - BEM
-  - CSS Modules
-  - CSS in JS
-  - Atom css
-
-- Web component
-
-- 测试
-
-  - Jest
-
-- 类型检测
-
-  - Typescript
 
 - 性能测试工具
 

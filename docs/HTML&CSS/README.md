@@ -35,17 +35,20 @@
         - [GSAP](https://github.com/greensock/GSAP)
     - 过度
   - CSS 工程
-    - 预处理
+    - 工程化
       - 文件模块
       - 变量
       - 嵌套
       - 复用
+    - 工程化工具
+      - scss
+      - postcss
     - 样式封装
       - BEM
-      - CSS-In-JS
-      - CSSModule
+      - CSS Modules
+      - CSS in JS
       - ShadowDOM
-    - 原子CSS
+    - Atom CSS
       - https://github.com/antfu/unocss
 - HTML
   - 元素分类
