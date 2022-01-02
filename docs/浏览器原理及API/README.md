@@ -82,13 +82,15 @@ tags:
     - [prerender](https://web.dev/speculative-prerendering/)
   - SanitizerAPI
     - [Safe DOM manipulation with the Sanitizer API](https://web.dev/sanitizer/)
+  - WebRTC
+    - [做一个视频通话给自己用吧](https://juejin.cn/post/7047309196445876231#heading-18)
 
 ### 场景分类
 
 - 下载
   - [文件下载，搞懂这9种场景就够了](https://mp.weixin.qq.com/s/PysSe6MykjYzVrWQCKJXvg)
 - 登陆鉴权
-  - session
+  - session-cookie
   - token
     - JWT
 

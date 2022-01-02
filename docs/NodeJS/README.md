@@ -51,6 +51,8 @@ tags:
       - [深入理解 Node.js Worker Threads](https://zhuanlan.zhihu.com/p/167920353)
     - VM
       - [NPM酷库：vm2，安全的沙箱环境](https://segmentfault.com/a/1190000012672620)
+- 深入
+  - [Node.js 源码剖析](https://theanarkh.github.io/understand-nodejs/)
 - 实践
   - 开发环境
     - [nodemon](https://github.com/remy/nodemon)
