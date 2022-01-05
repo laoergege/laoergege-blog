@@ -199,7 +199,7 @@ Vue Reactive API 大致分为两类：
   - ref
   - computed
   - deferredComputed
-- ReactiveEffect（响应式副作用）
+- [ReactiveEffect（响应式副作用）](#reactiveeffect)
   - effect
   - effectScope
   - watchEffect
@@ -352,7 +352,7 @@ console.log(_test.length);
 
 ### ReactiveEffect
 
-响应式副作用，就是在响应式数据发生变化时能够重新执行某些操作。
+在响应式副作用下，能够自动收集响应式依赖并且在其发生变化时重新执行某些操作。
 
 那要在如何把响应式数据和副作用函数自动关联，就需要把这些副作用操作封装成 Vue 响应性系统中的 ReactiveEffect。
 

@@ -253,7 +253,7 @@ emit 把各个 chunk 输出到结果文
   - [x] vue2、vue3 的 nextTick 原理
   - [x] vue 异步更新机制
     - 使用队列缓存更新任务，在事件循环中安排一个异步任务执行队列中所有任务
-  - [ ] computed 与 watch 区别
+  - [ ] 普通函数、computed、watch 对比区别
   - [ ] vue2 和 vue3 对比
   - [ ] vue 和 react 对比
 - 前端工程
