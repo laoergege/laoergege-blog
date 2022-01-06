@@ -1,7 +1,7 @@
 ---
 release: true
 tags:
- - javascript
+  - javascript
 ---
 
 # JavaScript 代码执行机制
@@ -25,20 +25,54 @@ tags:
 
 所谓的变量提升，相当于代码执行之前 JavaScript 引擎把**变量的声明部分和函数的声明部分**提升到代码开头的“行为”。
 
-![图 3](./images/88c7ce0dcf04f89a50e15ea72293ca242378e4b35486d2b2de6a1c2b1b7ad998.png)  
-
-> 如果一段代码如果定义了两个相同名字的函数，那么最终生效的是最后一个函数；  
-> 如果函数声明名称跟变量名相同，函数声明优先
+![图 3](./images/88c7ce0dcf04f89a50e15ea72293ca242378e4b35486d2b2de6a1c2b1b7ad998.png)
 
 **变量提升，发生在 JavaScript 代码编译阶段。实际上变量和函数声明在代码里的位置是不会改变的，而且是在编译阶段被 JavaScript 引擎放入内存中**。一段 JavaScript 经过编译后，会生成两部分内容：**执行上下文（Execution context）和可执行代码（会被编译为字节码）**。
 
-![图 4](./images/733bc7f970934ca264426d36b79f605cc41a41a9f2d1109ecb61c03ce0681f22.png)  
+![图 4](./images/733bc7f970934ca264426d36b79f605cc41a41a9f2d1109ecb61c03ce0681f22.png)
 
 - 执行上下文是 JavaScript 执行一段代码时的运行环境
 - 执行上下文中存在一个变量环境的对象（Viriable Environment）
 - 变量环境的对象保存了变量提升的内容
 
 有了执行上下文和可执行代码了，那么接下来就到了执行阶段了，JavaScript 引擎会从执行上下文中的变量环境去查找自定义的变量和函数。
+
+### 变量声明的提升总结
+
+所有的声明 function、var、let、const 和 class 都会在 JavaScript 编译期间被提升。
+
+- var
+  - var 声明永远作用于脚本、模块和函数体这个级别
+  - 初始为 undefined
+- function
+  - 作用域：脚本、模块、函数体
+  - 初始赋值
+    - 如果一段代码如果定义了两个相同名字的函数，那么最终生效的是最后一个函数
+    - 如果函数声明名称跟变量名相同，函数声明优先
+  - ES6 支持函数块级声明：
+    - 函数声明会被提升到块级外但不会赋值，初始为 undefined
+    - 块内提升则会赋值
+  
+    ```js
+      console.log(f); // outside f
+      function f() {
+        console.log("I am outside!");
+      }
+
+      (function () {
+        console.log(f); // undefined
+        if (true) {
+          console.log(f); // inside f
+          function f() {
+            console.log("I am inside!");
+          }
+        }
+      })();
+    ```
+
+- class、let、const
+  - 暂存性死区
+  - 块级别作用域
 
 ## 调用栈
 
@@ -55,8 +89,7 @@ tags:
 
 大多数命令式编程语言都支持过程式调用，都使用栈的数据结构来动态管理代码之间的嵌套调用关系。
 
-![图 5](./images/9d1ff0fa83857785c90abd14974958ea964190751a17a38c061ff4823e205585.png)  
-
+![图 5](./images/9d1ff0fa83857785c90abd14974958ea964190751a17a38c061ff4823e205585.png)
 
 JavaScript 引擎也是利用栈的这种结构来管理执行上下文的。在执行上下文创建好后，JavaScript 引擎会将执行上下文压入栈中，通常把这种用来管理执行上下文的栈称为执行上下文栈，又称**调用栈**。
 
@@ -73,7 +106,7 @@ function printSquare(x) {
 printSquare(5);
 ```
 
-![图 9](./images/20bc07b5deed579457df4f5dfc2281e1643f2a5d9b26fc1c4549a5b0ee419813.png)  
+![图 9](./images/20bc07b5deed579457df4f5dfc2281e1643f2a5d9b26fc1c4549a5b0ee419813.png)
 
 其中
 
@@ -103,7 +136,7 @@ JavaScript 是词法（静态）作用域，作用域在编译时静态确定，
 
 以下是 JavaScript 词法作用域形成的作用域链：
 
-![图 10](./images/db09c4e7adfde3898f824d5b5572639d585af3402a3a396419c1dabe2c8372e1.png) 
+![图 10](./images/db09c4e7adfde3898f824d5b5572639d585af3402a3a396419c1dabe2c8372e1.png)
 
 ### let、const 声明的块级作用域原理及暂时性死区
 
@@ -115,64 +148,76 @@ var 声明的变量具有全局或者函数级别作用域，因为变量提升�
 
 ```js
 console.log(myname); // undefined
-var myname = "极客时间"
-function showName(){
-  if(true){
-   var myname = "极客邦"
+var myname = "极客时间";
+function showName() {
+  if (true) {
+    var myname = "极客邦";
   }
   console.log(myname); // "极客邦"
 }
-showName()
+showName();
 ```
 
 而且变量容易在不被察觉的情况下被覆盖掉
 
 ```js
-var myname = "极客时间"
-function showName(){
+var myname = "极客时间";
+function showName() {
   console.log(myname); // undefined
-  if(true){
-   var myname = "极客邦"
+  if (true) {
+    var myname = "极客邦";
   }
   console.log(myname); // 极客邦
 }
-showName()
+showName();
 ```
 
 本应销毁的变量没有被销毁
 
 ```js
-function foo(){
-  for (var i = 0; i < 7; i++) {
-  }
-  console.log(i); 
+for (var i = 1; i <= 5; i++) {
+  setTimeout(function () {
+    console.log(i); // 5 5 5 5 5
+  }, 0);
 }
-foo()
+```
+
+早期使用 “立即执行的函数表达式（IIFE）”来产生“块级作用域”。
+
+```js
+// IIFE 闭包
+for (var i = 1; i <= 5; i++) {
+  (function (j) {
+    setTimeout(function timer() {
+      console.log(j); // 1 2 3 4 5
+    }, 0);
+  })(i);
+}
 ```
 
 ES6 引入了 let 和 const 关键字作为块级作用域变量声明，同时为了保证向下兼容，ES6 在执行上下文新增加了**词法环境**。
 
 ```js
-function foo(){
-    var a = 1
-    let b = 2
-    {
-      let b = 3
-      var c = 4
-      let d = 5
-      console.log(a)
-      console.log(b)
-    }
-    console.log(b) 
-    console.log(c)
-    console.log(d)
-}   
-foo()
+function foo() {
+  var a = 1;
+  let b = 2;
+  {
+    let b = 3;
+    var c = 4;
+    let d = 5;
+    console.log(a);
+    console.log(b);
+  }
+  console.log(b);
+  console.log(c);
+  console.log(d);
+}
+foo();
 ```
 
 词法环境内部，维护了一个小型栈结构，进入一个作用域块后，就会把该作用域块内部的变量压到栈顶，**JavaScript 查找变量时沿着词法环境的栈顶向下查询，然后变量环境**。
 
-![图 6](./images/4045250b79269be3fb95da41a366f055a60a03c88331a333d2d8737bc963ca24.png)  
+![图 6](./images/4045250b79269be3fb95da41a366f055a60a03c88331a333d2d8737bc963ca24.png)
 
 #### 暂时性死区 TDZ
 
@@ -201,33 +246,14 @@ let a = 3;
 
 ```js
 function foo(arg1 = arg2, arg2) {
-    // let arg1 = xxx || arg2
-    // let arg2 = xxx
-    console.log(`${arg1} ${arg2}`)
+  // let arg1 = xxx || arg2
+  // let arg2 = xxx
+  console.log(`${arg1} ${arg2}`);
 }
 
-foo(undefined, 'arg2')
+foo(undefined, "arg2");
 
 // Uncaught ReferenceError: arg2 is not defined
-```
-
-#### 函数声明与块级作用域：
-
-1. 允许在块级作用域内声明函数。
-2. 函数声明类似于var，即会提升到全局作用域或函数作用域的头部。
-3. 同时，函数声明还会提升到所在的块级作用域的头部。
-
-```js
-console.log(f) // outside f
-function f() { console.log('I am outside!'); }
-
-(function () {
-  console.log(f) // undefined
-  if (true) {
-    console.log(f) // inside f
-    function f() { console.log('I am inside!'); }
-  }
-}());
 ```
 
 ## 闭包
@@ -273,24 +299,24 @@ flowchart LR
 
 ```javascript
 function foo() {
-    var myName = "极客时间"
-    let test1 = 1
-    const test2 = 2
-    var innerBar = { 
-        setName:function(newName){
-            myName = newName
-        },
-        getName:function(){
-            console.log(test1)
-            return myName
-        }
-    }
-    return innerBar
+  var myName = "极客时间";
+  let test1 = 1;
+  const test2 = 2;
+  var innerBar = {
+    setName: function (newName) {
+      myName = newName;
+    },
+    getName: function () {
+      console.log(test1);
+      return myName;
+    },
+  };
+  return innerBar;
 }
-var bar = foo()
-bar.setName("极客邦")
-bar.getName()
-console.log(bar.getName())
+var bar = foo();
+bar.setName("极客邦");
+bar.getName();
+console.log(bar.getName());
 ```
 
 1. 当在编译 foo 函数过程中，遇到内部函数 setName，JavaScript 引擎会**对内部函数做一次快速的词法扫描**，发现该内部函数引用了 foo 函数中的 myName 变量，由于是内部函数引用了外部函数的变量，所以 JavaScript 引擎判断这是一个闭包，于是在堆空间创建换一个 `closure(foo)` 的对象（这是一个内部对象，JavaScript 是无法访问的），用来保存 myName 变量，`closure(foo)` 保存在 setName 的作用域链属性 `[[scopes]]` 上。
@@ -298,11 +324,11 @@ console.log(bar.getName())
 3. 由于 test2 并没有被内部函数引用，所以 test2 依然保存在调用栈中，当调用结束，test2 也就会被销毁。
 4. 当执行到 foo 函数时，闭包就产生了；当 foo 函数执行结束之后，返回的 getName 和 setName 方法都引用 `clourse(foo)` 对象，所以即使 foo 函数退出了，**`clourse(foo)`依然被其内部的 getName 和 setName 方法引用**。所以在下次调用 bar.setName 或者 bar.getName 时，通过作用域链上的 `clourse(foo)` 找到相应变量。
 
-![图 2](./images/2f43f90a426f1669a1aa590d59363ed7202bd15f0d4cabf28489af944acedba3.png)  
+![图 2](./images/2f43f90a426f1669a1aa590d59363ed7202bd15f0d4cabf28489af944acedba3.png)
 
 `closure(foo)` 只会保留使用到的变量。
 
-![图 3](./images/b5a8dad980822faf751e18fca305d4dff5a6292816a1a53b0c67e4b228d00316.png)  
+![图 3](./images/b5a8dad980822faf751e18fca305d4dff5a6292816a1a53b0c67e4b228d00316.png)
 
 通过作用域链上的 `clourse(foo)` 找到相应变量。
 
@@ -319,7 +345,7 @@ console.log(bar.getName())
 
 ### 闭包缺点
 
-![图 2](./images/5c16478b0d56c37b0a8cd4b26a46cec28c7e828aa3e949e9962db9dbe57a24a5.png)  
+![图 2](./images/5c16478b0d56c37b0a8cd4b26a46cec28c7e828aa3e949e9962db9dbe57a24a5.png)
 
 发现多层嵌套情况下，内部函数闭包的形成会在外部函数作用域链的基础上继续扩展。
 
@@ -339,11 +365,11 @@ JavaScirpt 的变量查找机制有两种：
 
 - 作用域链机制
 - this、原型链机制
-  > this 是面向对象的 JavaScript 变量查找机制，即通过对象属性，面向对象还有一个继承机制，在 JavaScript 中即原型链查找机制 
+  > this 是面向对象的 JavaScript 变量查找机制，即通过对象属性，面向对象还有一个继承机制，在 JavaScript 中即原型链查找机制
 
 this 存在执行上下文中
 
-![图 9](./images/0e0b49e0cc45d950e4c501bdf06e1e462963953279126406b2d4db49f7af613c.png)  
+![图 9](./images/0e0b49e0cc45d950e4c501bdf06e1e462963953279126406b2d4db49f7af613c.png)
 
 ### this 指向
 
@@ -362,48 +388,50 @@ this 的指向，是在调用函数时根据执行上下文所动态确定的。
 ```js
 // 嵌套函数中的 this 不会从外层函数中继承
 var myObj = {
-  name : "极客时间", 
-  showThis: function(){
-    console.log(this) // myObj
-    function bar(){console.log(this)} // window
-    bar()
-  }
-}
-myObj.showThis()
+  name: "极客时间",
+  showThis: function () {
+    console.log(this); // myObj
+    function bar() {
+      console.log(this);
+    } // window
+    bar();
+  },
+};
+myObj.showThis();
 
 // 缓存 this
 // 把 this 体系转换为了作用域的体系，通过作用域链去继承
 var myObj = {
-  name : "极客时间", 
-  showThis: function(){
-    console.log(this)
-    var self = this
-    function bar(){
-      self.name = "极客邦"
+  name: "极客时间",
+  showThis: function () {
+    console.log(this);
+    var self = this;
+    function bar() {
+      self.name = "极客邦";
     }
-    bar()
-  }
-}
-myObj.showThis()
-console.log(myObj.name)
-console.log(window.name)
+    bar();
+  },
+};
+myObj.showThis();
+console.log(myObj.name);
+console.log(window.name);
 
 // 箭头函数
 // ES6 中的箭头函数其自身的执行上下文没有 this，所以箭头函数中的 this 取决于它的外部函数。
 var myObj = {
-  name : "极客时间", 
-  showThis: function(){
-    console.log(this)
-    var bar = ()=>{
-      this.name = "极客邦"
-      console.log(this)
-    }
-    bar()
-  }
-}
-myObj.showThis()
-console.log(myObj.name)
-console.log(window.name)
+  name: "极客时间",
+  showThis: function () {
+    console.log(this);
+    var bar = () => {
+      this.name = "极客邦";
+      console.log(this);
+    };
+    bar();
+  },
+};
+myObj.showThis();
+console.log(myObj.name);
+console.log(window.name);
 ```
 
 ## 执行上下文

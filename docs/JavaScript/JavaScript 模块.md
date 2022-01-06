@@ -17,6 +17,7 @@
    3. CMD
    4. UMD
 3. ES Modules
+
 ### 文件划分、对象命名空间方式、IIFE
 
 - 文件划分：以文件形式上模块化划分变量
@@ -64,6 +65,7 @@
 </body>
 </html>
 ```
+
 ### 模块化标准
 
 - CommonJS  
@@ -71,9 +73,21 @@
   通过 require 函数载入模块  
   module.exports 导出成员
 - AMD  
-  适用于浏览器的异步模块加载机制 
+  适用于浏览器的异步模块加载机制
 - UMD  
   通用模块标准
 - ES Modules
+
 ## ES Modules
 
+- export 声明
+  - `export let a` 单变量名导出
+  - `export {a, b, c}` export 变量名列表
+  - `export default let a` 默认导出 
+  - `export default a` 表达式导出 
+- import 声明
+  - `import x from "./a.js"` 引入模块中导出的默认值
+  - `import {a as x, modify} from "./a.js"` 引入模块中的变量
+  - `import * as x from "./a.js"` 把模块中所有的变量以类似对象属性的方式引入
+- 导入导出
+  - `export * from 'a.js'`
