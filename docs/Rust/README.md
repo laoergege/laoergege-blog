@@ -39,9 +39,9 @@
   - 生态
     - WSAI
   - 工具
-    - rustup 管理 rust 版本
-    - rustc 编译 rust 代码
-    - cargo rust 项目依赖管理工具
+    - rustup：工具链管理工具
+    - rustc：rust 代码编译工具
+    - cargo：项目依赖管理工具
   - 资料
     - [Microsoft Rust 教程](https://docs.microsoft.com/zh-cn/learn/paths/rust-first-steps/)
     - [rust-training](https://github.com/tyrchen/rust-training)
