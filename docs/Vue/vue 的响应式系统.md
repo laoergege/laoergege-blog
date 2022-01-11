@@ -2,14 +2,14 @@
 release: true
 tags:
   - vue
-  - 响应式
+desc: 除了组件化，Vue.js 另一个核心设计思想就是响应式。
 ---
 
 # Vue 的响应式系统
 
 - Vue 的响应式系统
   - [响应式原理](#响应式原理)
-  - [Reative API](#vue-reactive-api-源码分析)
+  - [Reative API 分析](#vue-reactive-api-源码分析)
   - [响应式更新渲染机制](./vue%20的响应式渲染机制.md)
 
 除了组件化，Vue.js 另一个核心设计思想就是响应式。
@@ -34,10 +34,10 @@ Vue 的响应式原理的实现本质就是观察者模式，Subject、Observer 
 Vue2 和 Vue3 的响应式实现并其实没多大区别，大致都是需要以下重要三步：
 
 1. 数据劫持（defineProperty => proxy 劫持数据操作事件）
-2. 依赖收集（监听属性数据的 getter 事件）
-3. 变更通知（监听属性数据的 setter 事件）
+2. 依赖收集（监听属性数据的 getter 事件，收集相关依赖的副作用）
+3. 变更通知（监听属性数据的 setter 事件，通知调用副作用执行）
 
-### Vue3 响应式原理 mini 实现
+### Vue3 响应式原理 mini 版本实现
 
 ```js
 function reactive(target) {
@@ -60,7 +60,7 @@ function reactive(target) {
 }
 ```
 
-JS Proxy 代理的是一个对象，对象属性能够任意访问，我们需要跟踪数据被访问的地方，并将这些“观察者”收集起来。
+Proxy 代理的是一个对象，对象属性能够任意访问，我们需要跟踪数据被访问的地方，并将这些“观察者”收集起来。
 
 reactive 包装下我们已经可以对数据进行访问、修改劫持。
 
@@ -95,7 +95,7 @@ function effect(fn) {
 }
 ```
 
-#### `effectStack`，表示嵌套副作用场景。
+#### `effectStack`，用于副作用嵌套场景。
 
 ```js
 const A = effect(() => {
@@ -108,11 +108,11 @@ const B = effect(() => {
 
 嵌套场景主要是 vue 组件嵌套，vue 组件的渲染也是副作用（[vue 组件响应式更新渲染机制](./vue%20组件响应式更新渲染机制.md)）。
 
-#### `cleanup(activeEffect)`，清除当前副作用。
+#### `cleanup(activeEffect)`，解决动态依赖场景。
 
-在响应式作用下，每次副作用重新运行时都会触发响应式数据重新收集当前副作用，但并不是所有响应式数据都会重新被访问到，比如响应式数据 A 和 B，在下次重新运行因为 if 条件可能只使用到了 B，故需要清除 A 的依赖。
+在响应式作用下，每次副作用重新运行时都会触发响应式数据重新收集当前副作用，但并不是所有响应式数据在下次重新执行过程中被访问到，比如响应式数据 A 和 B，在下次重新运行因为 if 条件可能只使用到了 B，故需要清除 A 的依赖。
 
-总而言之，就是为了防止某个场景下，某个依赖已经不是当前副作用的依赖，该依赖发生变化会导致该副作用重新执行，故需要清除无效依赖。
+总而言之，就是为了解决动态依赖场景下，某个依赖已经不是当前副作用的依赖，故需要清除无效依赖。
 
 一个简单方法就是将副作用之前的依赖全部清除，然后重新进行收集。
 
@@ -196,11 +196,12 @@ function trigger(target, key) {
 Vue Reactive API 大致分为两类：
 
 - Reactive（响应式数据）
-  - reactive
+  - [reactive](#reactive)
     - shallowReactive 浅响应式对象
   - readonly：只读响应，不会被依赖收集
     - shallowReadonly
-  - ref
+  - refs
+    - ref
   - computed
   - deferredComputed
 - [ReactiveEffect（响应式副作用）](#reactiveeffect)
@@ -285,7 +286,7 @@ export const enum ReactiveFlags {
 }
 ```
 
-工具函数 isReactive、isReadonly、isProxy、markRaw 都是 flag key 快速实现。
+工具函数 isReactive、isReadonly、isProxy、markRaw 等都是 flag key 快速实现。
 
 ![](./images/flag.png)
 
@@ -336,8 +337,8 @@ function createGetter(isReadonly = false, shallow = false) {
 
 ![](./images/array-proxy.png)
 
-1. includes、indexOf、lastIndexOf 等搜索结果会因为元素变化导致结果可能发生变化，故需要对元素同样依赖收集。
-2. push、pop 等数组操作会导致数组长度变化，并返回 length 导致再次触发 get。
+1. 保证 includes、indexOf、lastIndexOf 方法传参是 raw。
+2. 防止 push、pop 等数组操作会导致数组长度变化，并返回 length 导致再次触发 get。
 
 ```js
 const test = [1, 2, 3];

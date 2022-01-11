@@ -85,10 +85,11 @@ tags:
   - WebRTC
     - [做一个视频通话给自己用吧](https://juejin.cn/post/7047309196445876231#heading-18)
 
-### 场景分类
+## 场景分类
 
 - 下载
   - [文件下载，搞懂这9种场景就够了](https://mp.weixin.qq.com/s/PysSe6MykjYzVrWQCKJXvg)
+  - [动态表格大文件下载可以这样优化！](https://mp.weixin.qq.com/s/14bJxJ9U9mG76tw-Z93UqQ)
 - 登陆鉴权
   - session-cookie
   - token
