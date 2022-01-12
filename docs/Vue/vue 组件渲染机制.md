@@ -6,7 +6,7 @@ tags:
   - VirtualDOM
 ---
 
-# vue 组件渲染流程
+# vue 组件渲染机制
 
 > 以下示例代码基于 vue3.0、vue3.2（后续修改）
 
@@ -14,11 +14,11 @@ tags:
 
 ![picture 2](./images/1281db002d7238b2948c8b50b3bb8882d7353ff9248c5f3049de3d0e3277a27d.png)
 
+在了解 vue 组件之前，先了解 VirtualDOM（在 vue 中则称为 vnode）。
+
 ## VNode
 
-Vue 的渲染原理中使用 **VirtualDOM 机制**，**VirtualDOM 本质上是用来描述 真实 DOM 的 JavaScript 对象**。
-
-> 在 vue 中 VirtualDOM 被称为 vnode
+Vue 的渲染原理中使用 **VirtualDOM 机制**，**VirtualDOM 本质上是用来描述真实 DOM 的 JavaScript 对象**。
 
 我们可以用一个 vnode 对象去表示`<button>`节点。一个 VNode 的属性最主要的是节点类型 `type`，节点属性 `props`，字节点 `children`。
 
@@ -43,7 +43,7 @@ const vnode = {
 引入 VNode 的好处：
 
 1. 任何常规的 GUI 都能用**类 DOM 数据结构**去描述，引入 VNode 主要是将视图**抽象化**，提供了**跨平台**能力
-2. **UI is a value** 视图也是一种变量值，能够进行**编程化**
+2. **UI is a value** ：把视图当作一种变量值，能够进行**编程化**
 3. 基于虚拟 DOM 实现状态驱动的 UI 开发方式：避免了手动操作 DOM 效率低下
 
 vue 还提供很多的 VNode 类型：
@@ -79,7 +79,7 @@ export interface VNode<
 
 前端领域的组件化，即以视图为单位进行页面分割及复用，组件 = 视图模板 + 逻辑状态。
 
-> 但是以这样的组件为基本复用单位，在前端领域你会发现很难复用。有时视图模板符合了但逻辑状态稍微得修改，代码只会加入更多的 case by case；有时逻辑状态符合了模板样式却不符合 UI。
+> 但是以这样的组件为基本复用单位，在前端领域你会发现很难复用。有时视图模板符合了但逻辑状态稍微得修改，代码只会加入更多的 case by case；有时逻辑状态符合了但模板样式却不符合 UI 需求。
 >
 > 最佳形式是**视图模板与逻辑状态可分开，与组件都是最小复用单位**。
 
@@ -113,7 +113,11 @@ const CustomComponent = {
     return h("div", [this.resolveName, this.$slots.default()]);
   },
 };
+```
 
+### 渲染组件
+
+```js
 // 组件 vnode
 // 2. 创建组件的 vnode
 const vnode = createVNode(
@@ -147,7 +151,7 @@ render(vnode, document.querySelector("#app"));
 
 **patch vnode 操作本质上是对新旧 vnode 做对比，然后执行系统平台对应的渲染命令**。
 
-## vue 组件渲染流程
+## vue 组件渲染流程源码分析
 
 渲染流程分初始渲染和更新渲染，下面源码分析先从初始渲染流程。
 

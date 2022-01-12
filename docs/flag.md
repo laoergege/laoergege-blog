@@ -89,10 +89,10 @@
 
 ## 收集待看
 
+- NodeJS
+  - [Node.js 进程、线程调试和诊断的设计和实现](https://mp.weixin.qq.com/s?__biz=MzkxNDIzNTg4MA==&mid=2247486092&idx=1&sn=1c330dfab4398b8dc3eafa23f4905367&scene=21#wechat_redirect)
 - 语言设计及编译原理
   - [如何用JavaScript实现一门编程语言 - 保护堆栈](https://zhuanlan.zhihu.com/p/455124551)
-- 可视化
-  - 层次 [d3-hierarchy](https://github.com/d3/d3-hierarchy)
 - 表单
   - [x-render](https://github.com/alibaba/x-render)
   - [formilyjs](https://v2.formilyjs.org/)
@@ -105,6 +105,8 @@
   - [Nuxt 实现的 SSR 页面性能优化的进一步探索与实践](https://mp.weixin.qq.com/s?__biz=MzU0OTExNzYwNg==&mid=2247484670&idx=1&sn=b56e53dd80b27fa73db05aa0f87fe864&st=44750C9EB200D36504EB6D425B420DBB6B15C56ACA80A204C54C8323EDC1801EA5A5F3B820B554A82F62E4033B31A51709D75E975D62F9DF6D44CAE16D1789B8AD72E2CD5F9B783F67AD99F4F2798CF2C68E30FA529A9493650C4F2DBC668A6BDF60C19EBD53E8095436171B77B43F8379F0786B6B7CC24FF5D8D3F7E9234CB1AAF8E432ACBF7660C8D5A46943940625F334223CFD292F52C622C9D71CA23109&vid=1688853671357556&cst=84C66BDBB38DB9209F2CBE20568358526FE0CB352D65E68D84CDC8560959A5D0CF245948AFF68C1B51377FEEFF49EFA4&deviceid=28ea5b9c-c888-47c9-a3cf-e19b1d9eaf5c&version=3.0.40.6184&platform=mac&scene=21#wechat_redirect)
 - 可视化
   - [如何 1 人 5 天开发完 3D 数据可视化大屏 【一】](https://mp.weixin.qq.com/s?__biz=MzA4MzMwMzQ5Nw==&mid=2650620371&idx=1&sn=ba4e5946d7ed5497a6f839cc833f177f&chksm=87f16cf5b086e5e3512659e44cc6587463974bfa43d658ec7317299d27810a83858c7f0934df&scene=21#wechat_redirect)
+  - [3D 可视化入门：渲染管线原理与实践](https://mp.weixin.qq.com/s?__biz=Mzg3OTYwMjcxMA==&mid=2247485777&idx=1&sn=a8f78f645b88602a1ed6d5222cc89d26&scene=21#wechat_redirect)
+  - 层次 [d3-hierarchy](https://github.com/d3/d3-hierarchy)
 - WebAssembly
   - https://github.com/WasmEdge/WasmEdge
 - 微前端

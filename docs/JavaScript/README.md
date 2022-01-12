@@ -15,6 +15,7 @@ tags:
       - 循环
     - 表达式及运算符
     - 注释
+  - [JavaScript 语法结构](./JavaScript%20语法结构.md)
   - [类型系统](./JavaScript%20类型系统.md)
   - 数据结构
     - [数组](./JavaScript%20数组%20API%20总结.md)
@@ -53,13 +54,10 @@ tags:
 - 学习资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
   - [ES6 入门教程](https://es6.ruanyifeng.com/)
-  - 重新前端
+  - 极客《重新前端》
   - [JavaScript开发者应懂的33个概念](https://github.com/stephentian/33-js-concepts)
   - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
 - js 学习路线
-  - 开始
-    - 基本语法
-    - api
   - 深入
     1. 变量提升机制（历史问题）
     2. 类型系统

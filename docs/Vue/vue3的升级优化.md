@@ -2,7 +2,7 @@
   - [RFC](https://github.com/vuejs/rfcs)
   - monorepo 方案
     将项目分成多个可独立使用的包
-  - TypeScript
+  - 更好的 TypeScript 支持
 - 性能优化
   - 源码体积优化
     - 移除一些冷门的 feature（比如 filter、inline-template 等）
@@ -19,44 +19,19 @@
   - diff 算法优化
   - Slot 的编译优化
   - 事件侦听函数的缓存优化
-- 语法 API 优化：Composition API
-  - 逻辑组织（关注点聚焦）
-  - 逻辑复用
-    - 极致复用（回归 原生 JS 函数）
-    - 函数可组合
+- API
+  - Reactive API
   - Composition API
-    - reactive api
-    - 生命周期函数
-    - 依赖注入
-
-vue3
-
-- 函数式
-  - 更好 ts 支持
-- api 简化
+    - 逻辑组织（关注点聚焦）
+    - 逻辑复用
+      - 极致复用（回归 原生 JS 函数）
+      - 函数可组合
+    - Composition API
+      - reactive api
+      - 生命周期函数
+      - 依赖注入
+  - Fragment
+  - Protal
   - h
-  - 自定义指令
-  - sync 和 v-model
-- tree-shaking
-  - createApp 工厂方式
-- 逻辑复用 composition-api
-- 性能优化
-  - 响应式系统
-  - 编译器及运行时
-- 扩展性
-  - 自定义渲染器
-    - 让用户根据不同平台的渲染 API 定制渲染器
-  - 独立响应式系统
-
-- createApp
-  - createRenderer
-  - renderer.createApp
-    - render
-    - createAppAPI
-- render
-- patch
-- processComponent
-- mountComponent
-  - instantce
-  - setupComponent
-  - setupUpdateEffelect
+- 扩展
+  - 支持自定义渲染器，让用户根据不同平台的渲染 API 定制渲染器
