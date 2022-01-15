@@ -7,40 +7,136 @@
       - token
         - 标识符
         - 关键词
-        - 运算符号
+        - 运算符
         - 字面量
           - 数字直接量
           - 字符串直接量
           - 字符串模板
           - 等
   - 语法
-    - 函数/过程
+    - JavaScript 有两种源文件
+      - 脚本
+      - 模块
+    - 指令序言（JavaScript 的指令序言是只有一个字符串直接量的表达式语句，它只能出现在脚本、模块和函数体的最前面）
+      - `"use strict"`
+    - 变量声明
+      - var
+      - function
+      - let
+      - const
+      - class
+    - 函数
+      - 普通函数
+      - 异步函数（async）
+      - 生成器函数（generator）
+      - 异步生成器函数
     - 控制流
       - 分支
+        - if
+        - switch
       - 循环
-    - 表达式及运算符
+        - 递归
+        - while/do while
+        - for
+        - for in
+          - 对象属性枚举
+        - for of
+          - 迭代器模式
+            - 生成器
+        - for await of
+      - try-catch-finally
+        - 即使在 try 中出现了 return，finally 中的语句也一定要被执行
+    - [表达式](#表达式)及运算符
 
 ## 自动插入分号规则
 
-大部分 LineTerminator 在被词法分析器扫描出之后，会被语法分析器丢弃，但是换行符会影响 JavaScript 的两个重要语法特性：自动插入分号和“no line terminator”规则
+JavaScript 代码可以不用写分号符，因为编译器会对自动判断插入分号，但在某些情况下最好写上分号符，因为编译器区分不出是否要插入分号。
 
-多行注释中是否包含换行符号，会对 JavaScript 语法产生影响，对于“no line terminator”规则来说，带换行的多行注释与换行符是等效的
+```js
+function f() {
+  return 1 + 2;
+}
+f(); // 3
+```
+
+```js
+let a = 1;
+let b = 2;
+// 相当于
+// let a = 1; let b= 2
+```
+
+自动插入分号规则总结如下：
+
+1. 有换行符，且下一个符号是不符合语法的，那么就尝试插入分号。
+2. 有换行符，且语法中规定此处**不能有换行符**，那么就自动插入分号。
+3. 源代码结束处，不能形成完整的脚本或者模块结构，那么就自动插入分号。
+
+### no LineTerminator here （不能有换行符）规则
+
+![图 9](./images/1641360549128.png)
+
+比如后自增、后自减运算符：
+
+```js
+let a = 1
+
+a /*no LineTerminator here*/
+++
+// a; ++
+
+console.log(a) // 1
+```
+
+### 手写分号的特殊情况
+
+需要手写分号的都是编译器无法区分的情况，即上一个符号与下一个符号之间组合可能存在意义比如
+
+```js
+let a = [[1]][0].map((e) => 2);
+// 被当作数组下标运算 [][]
+// let a = [[1]][0].map(e => 2)
+
+console.log(a); // [2]
+```
+
+总结有：
+
+1. 以**括号**开头的语句，比如 IIFE。
+
+   ```js
+   (function (a) {
+     console.log(a);
+   })()(function (a) {
+     console.log(a);
+   })();
+   ```
+
+   JavaScript 引擎会认为第一个 IIFE 返回的是一个函数，第二 IIFE 会被当作函数调用传参，导致抛出错误。
+
+2. 以**数组**开头的语句。
+3. 以正则表达式开头的语句，正则的第一个**斜杠**被理解成了除号。
+4. 以 Template 开头的语句。
 
 ## 表达式
 
+事实上，真正能干活的就只有表达式语句，其它语句的作用都是产生各种结构，来控制表达式语句执行，或者改变表达式语句的意义。
+
 表达式语句实际上就是一个表达式，它是由运算符连接变量或者直接量构成的。
+
+以下只是 [ECMA 表达式](https://tc39.es/ecma262/#sec-ecmascript-language-expressions)部分，从高优先级、粒度由小到大排序：
 
 1. PrimaryExpression 主要表达式
    - 各种直接字面量， 如 `123`、`[]`
    - this
    - 变量名
-   - 任何表达式加上圆括号，都被认为是 Primary Expression，这个机制使得圆括号成为改变运算优先顺序的手段
+   - **任何表达式加上圆括号，都被认为是 Primary Expression，这个机制使得圆括号成为改变运算优先顺序的手段**
 2. LeftHandSideExpression 左值表达式
    1. MemberExpression 成员表达式
       - 如 `a.b`、`a["b"]`
       - 以下两种特殊 JS 语法，仅仅意味着它们跟属性运算属于同一优先级，没有任何语义上的关联
         - 带函数的模板，`` f`a${b}c`; ``
-        - 带参数列表的 new 运算，`new Cls();`
+        - **带参数列表的 new 运算**，`new Cls();`
    2. NewExpression NEW 表达式
       - 特指没有参数列表的表达式，`new Cls`
    3. CallExpression 函数调用表达式

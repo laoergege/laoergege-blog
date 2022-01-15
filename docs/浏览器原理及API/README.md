@@ -20,7 +20,7 @@ tags:
 - [多进程架构](./Chrome 多进程架构.md)
 - [页面导航流程](./页面导航流程.md)
 - [页面渲染流程](./页面渲染流程.md)
-- [消息队列与事件循环](./消息队列与事件循环.md)
+- [事件循环与消息队列](./消息队列与事件循环.md)
   - [Jake Archibald: 在循环 - JSConf.Asia](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
   - [Tasks, microtasks, queues and schedules](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
 

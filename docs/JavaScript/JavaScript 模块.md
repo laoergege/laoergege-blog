@@ -81,13 +81,13 @@
 ## ES Modules
 
 - export 声明
-  - `export let a` 单变量名导出
-  - `export {a, b, c}` export 变量名列表
+  - `export let a` 单变量声明导出
+  - `export {a, b, c}`  变量名列表导出
   - `export default let a` 默认导出 
   - `export default a` 表达式导出 
 - import 声明
-  - `import x from "./a.js"` 引入模块中导出的默认值
-  - `import {a as x, modify} from "./a.js"` 引入模块中的变量
+  - `import x from "./a.js"` 默认引入
+  - `import {a as x, modify} from "./a.js"` 成员引入
   - `import * as x from "./a.js"` 把模块中所有的变量以类似对象属性的方式引入
 - 导入导出
   - `export * from 'a.js'`
@@ -95,3 +95,6 @@
 
 - 第一种方法是在函数的 package.json 文件中指定“类型”。通过将类型设置为“module”，您可以将包中的所有“.js”文件指定为 ES 模块。
 - 以文件扩展名指定类型，以 .cjs 结尾的文件名始终被视为 CommonJS 模块，以.mjs结尾的文件名始终被视为 ES 模块。以.js结尾的文件名从 package.json 中继承其类型（默认情况下，package.json 被指定为 CommonJS）
+
+
+引用传递？

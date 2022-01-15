@@ -6,7 +6,6 @@ tags:
 ## NodeJS
 
 - NodeJS
-  > NodeJS 为我们提供了一个无需依赖浏览器、能够直接与操作系统进行交互的 JavaScript 代码运行时环境
   - [Node.js 异步事件驱动架构](./Node.js 异步事件驱动架构.md)
     - 特点
       - 基于 **V8 引擎** 的 JavaScript 运行环境
@@ -29,16 +28,7 @@ tags:
     - [node-clinic](https://github.com/clinicjs/node-clinic)
     - 日志
       - console.log
-  - 第三方扩展
-    - C++ addons NAPI
-    - DLL
-      - [node-ffi](https://github.com/node-ffi/node-ffi)
-    - WebAssembly
-  - 全局对象
-    - process、buffer、__filename 和 __dirname
-    - console 和 setTimeout 之类
-    - ECMAScript 语言定义的全局对象，如 Date
-  - 模块
+  - 内置模块
     - Buffer
       - 内存分配策略
     - stream
@@ -51,8 +41,17 @@ tags:
       - [深入理解 Node.js Worker Threads](https://zhuanlan.zhihu.com/p/167920353)
     - VM
       - [NPM酷库：vm2，安全的沙箱环境](https://segmentfault.com/a/1190000012672620)
+  - 全局对象
+    - process、buffer、__filename 和 __dirname
+    - console 和 setTimeout 之类
+    - ECMAScript 语言定义的全局对象，如 Date
 - 深入
   - [Node.js 源码剖析](https://theanarkh.github.io/understand-nodejs/)
+  - 第三方扩展
+    - C++ addons NAPI
+    - DLL
+      - [node-ffi](https://github.com/node-ffi/node-ffi)
+    - WebAssembly
 - 实践
   - 开发环境
     - [nodemon](https://github.com/remy/nodemon)
