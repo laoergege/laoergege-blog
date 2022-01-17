@@ -27,8 +27,8 @@
       - class
     - 函数
       - 普通函数
-      - 异步函数（async）
       - 生成器函数（generator）
+      - 异步函数（async）
       - 异步生成器函数
     - 控制流
       - 分支
@@ -124,7 +124,7 @@ console.log(a); // [2]
 
 表达式语句实际上就是一个表达式，它是由运算符连接变量或者直接量构成的。
 
-以下只是 [ECMA 表达式](https://tc39.es/ecma262/#sec-ecmascript-language-expressions)部分，从高优先级、粒度由小到大排序：
+以下只是 [ECMA 表达式](https://tc39.es/ecma262/#sec-ecmascript-language-expressions)部分，表达式都是从高优先级、粒度从小逐级构成：
 
 1. PrimaryExpression 主要表达式
    - 各种直接字面量， 如 `123`、`[]`
@@ -140,29 +140,40 @@ console.log(a); // [2]
    2. NewExpression NEW 表达式
       - 特指没有参数列表的表达式，`new Cls`
    3. CallExpression 函数调用表达式
+   4. 可选链 `?.`
+   5. 空值合并运算符 `??`
 3. 右值表达式（左值与运算符结合）
    1. 更新表达式 UpdateExpression
    2. 一元运算表达式 UnaryExpression
-      1. `~` 按位取非运算符
-   3. 乘方表达式 ExponentiationExpression
-      1. `2**3 === 8`
-   4. 乘法表达式 MultiplicativeExpression
-      - 乘法表达式有三种运算符：`* / %`
-   5. 加法表达式 AdditiveExpression
-      - 加法表达式有加号和减号两种运算符
-   6. 移位表达式 ShiftExpression
-      - `<<` 向左移位
-      - `>>` 向右移位
-      - `>>>` 无符号向右移位
-   7. 关系表达式 RelationalExpression
-      1. in
-   8. 相等表达式 EqualityExpression
-   9. 位运算表达式
-      - 按位与表达式 BitwiseANDExpression
-      - 按位异或表达式 BitwiseANDExpression
-      - 按位或表达式 BitwiseORExpression
-   10. 逻辑表达式：`&&`、`||`、`!`
-   11. 条件表达式 ConditionalExpression：`condition ? branch1 : branch2`
+      - `~` 按位取非运算符
+   3. 二元运算表达式
+      1. 乘方表达式 ExponentiationExpression
+         - `2**3 === 8`，\*\* 运算是右结合的
+      2. 乘法表达式 MultiplicativeExpression
+         - 乘法表达式有三种运算符：`* / %`
+      3. 加法表达式 AdditiveExpression
+         - 加法表达式有加号和减号两种运算符
+      4. 移位表达式 ShiftExpression
+         - `<<` 向左移位
+         - `>>` 向右移位
+           - 右移 n 位相当于除以 2 取整 n 次
+         - `>>>` 无符号向右移位
+      5. 关系表达式 RelationalExpression
+         - in
+      6. 相等表达式 EqualityExpression
+      7. 位运算表达式
+         - 按位与表达式 BitwiseANDExpression
+         - 按位异或表达式 BitwiseANDExpression
+           - 异或运算
+             - 两次异或运算相当于取消，可以用异或运算来交换两个整数的值。
+             - 按位或运算常常被用在一种叫做 Bitmask 的技术上。Bitmask 相当于使用一个整数来当做多个布尔型变量
+         - 按位或表达式 BitwiseORExpression
+      8. 逻辑运算符
+         - `&&`
+         - `||`
+         - `??`
+   4. 三元运算符
+      - 条件表达式 ConditionalExpression：`condition ? branch1 : branch2`
 4. AssignmentExpression 赋值表达式
 5. 逗号运算符
 
@@ -175,23 +186,15 @@ new Cls().x
 new new Cls()
 new Cls.x()
 
-并发
 
-- 多线程多进程
-- 异步编程
 
-右移 n 位相当于除以 2 取整 n 次
 
-普通移位会保持正负数。无符号移位会把减号视为符号位 1，同时参与移位：-1 >>> 1 这个会得到 2147483647，也就是 2 的 31 次方，跟负数的二进制表示法相关，这里就不详细讲解了。
 
-类型不同的变量比较时==运算只有三条规则：
 
-- undefined 与 null 相等
-- 字符串和 bool 都转为数字再比较
-- 对象转换成 primitive 类型再比较
 
-按位或运算常常被用在一种叫做 Bitmask 的技术上。Bitmask 相当于使用一个整数来当做多个布尔型变量
 
-合并
-编译
-压缩
+
+
+
+最后留一个小作业，请你找出所有具有 Symbol.iterator 的原生对象，并且看看它们的 for of 遍历行为。确认放弃笔记？放弃后所记笔记将不保留。
+

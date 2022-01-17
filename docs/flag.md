@@ -89,6 +89,8 @@
 
 ## 收集待看
 
+- JS
+  - [理解 ECMAScript 规范, 第1部分](https://v8.js.cn/blog/understanding-ecmascript-part-1/)
 - NodeJS
   - [Node.js 进程、线程调试和诊断的设计和实现](https://mp.weixin.qq.com/s?__biz=MzkxNDIzNTg4MA==&mid=2247486092&idx=1&sn=1c330dfab4398b8dc3eafa23f4905367&scene=21#wechat_redirect)
 - 语言设计及编译原理

@@ -40,11 +40,14 @@ tags:
       - [编译时](./JavaScript%20代码执行过程（编译时）.md)
       - [JavaScript 代码执行机制](./JavaScript%20代码执行机制.md)
   - 元编程
+      1. function
+      2. eval
+      3. with
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
 - api
   - [手写 call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
   - [手写 Promise](https://github.com/laoergege/laoergege-blog/issues/81)
-    - [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/#introduction)
+    - [JavaScript Promise 迷你书（中文版）](http://liubin.org/promises-book/#introduction)
   - [手写 instanceof](https://github.com/laoergege/laoergege-blog/issues/74)
   - [手写 new](https://github.com/laoergege/laoergege-blog/issues/78)
   - [数组扁平化](https://github.com/laoergege/laoergege-blog/issues/64)
@@ -55,7 +58,7 @@ tags:
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
   - [ES6 入门教程](https://es6.ruanyifeng.com/)
   - 极客《重新前端》
-  - [JavaScript开发者应懂的33个概念](https://github.com/stephentian/33-js-concepts)
+  - [JavaScript 开发者应懂的 33 个概念](https://github.com/stephentian/33-js-concepts)
   - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
 - js 学习路线
   - 深入
@@ -66,9 +69,6 @@ tags:
     5. 原型（链）
     6. 闭包
     7. 元编程
-       1. function
-       2. eval
-       3. with
   - 更深
     - ES 语言规范
     - 了解 V8 JS 编译原理
@@ -77,17 +77,11 @@ tags:
     - 研究 V8 源码
     - 语言设计及编译原理
 
-
-
-
-
 一段脚本：
+
 1. 脚本
 2. 模块
 3. 函数
-
-
-
 
 - var 声明永远作用于脚本、模块和函数体这个级别
 - function 声明作用于脚本、模块和函数体这个级别、初始赋原值
