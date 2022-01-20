@@ -58,9 +58,7 @@ dns 解析的过程？
 
 登录鉴权
 
-CSRF 攻击了解吗？
 
-怎么预防那？还有其他办法吗?
 
 如果不通过 img 或者 script 标签，或者说用户不通过点击第三方连接怎么造成 CSRF 攻击吗？
 
@@ -188,11 +186,16 @@ emit 把各个 chunk 输出到结果文
 - web
   - cookie、localStorage、sessionStorage 区别以及使用场景
   - 安全
-    - [x] XSS
-    - [x] CSRF
+    - [x] XSS（跨站脚本攻击）
+      - 类型
+        - 存储型 XSS 攻击
+        - 反射型 XSS 攻击
+        - 基于 DOM 的 XSS 攻击
+      - 防范
+    - [x] CSRF（跨站请求伪造）
   - [ ] 输入 URL 到页面展示发生了什么
 - js
-  - 变量交换
+  - [x] 变量交换
   - [x] 手写 new
   - [x] 手写 instanceof
     - 往左边对象原型链上查找是否存在右边构造器的 prototype

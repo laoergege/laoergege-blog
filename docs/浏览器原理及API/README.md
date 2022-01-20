@@ -7,13 +7,10 @@ tags:
 ---
 # 浏览器原理及API
 
-本系列都是以 chrome/chromium 为主  
-参考学习资料：
+本系列都是以 chrome/chromium 为主，参考学习资料：
 - 极客时间《浏览器原理及API》
 - [Inside look at modern web browser 系列](https://developers.google.com/web/updates/2018/09/inside-browser-part1)
-
 - [Blink 文档链接](https://www.chromium.org/blink)
-
 
 ## 浏览器原理
 
@@ -44,10 +41,10 @@ tags:
 - Web API 参考资料
   - [MDN](https://developer.mozilla.org/)
 - Web API
-  - DOM（同源限制）
+  - 页面 DOM（同源限制）
     - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
     - [DOM 事件模型](./DOM%20事件模型.md)
-  - 数据存储（同源限制）
+  - 数据（同源限制）
     - cookie
     - localStorage
     - sessionStorage

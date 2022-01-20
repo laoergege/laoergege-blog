@@ -361,11 +361,10 @@ console.log(bar.getName());
 
 ## this 指针
 
-JavaScirpt 的变量查找机制有两种：
+JavaScirpt 函数的变量查找机制有两种：
 
 - 作用域链机制
-- this、原型链机制
-  > this 是面向对象的 JavaScript 变量查找机制，即通过对象属性，面向对象还有一个继承机制，在 JavaScript 中即原型链查找机制
+- this（原型链机制）
 
 this 存在执行上下文中
 
