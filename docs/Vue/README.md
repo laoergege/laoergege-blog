@@ -5,6 +5,7 @@
   - 渲染函数及 vnode
   - 组件化及组件树
   - 组件渲染机制
+    - patch vnode
     - 响应式渲染
     - diff 算法
       - props

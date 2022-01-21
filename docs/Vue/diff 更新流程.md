@@ -2,12 +2,11 @@
 release: true
 tags:
  - vue
- - vnode
- - 更新渲染
- - vdom diff
+ - diff
+desc: 了解 vue 的 diff 算法过程
 ---
 
-# vdom diff 更新流程
+# diff 更新流程
 
 > 以下示例代码基于 vue3.2 版本
 

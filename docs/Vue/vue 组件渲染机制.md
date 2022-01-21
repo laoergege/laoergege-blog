@@ -91,10 +91,10 @@ Vue 组件是 vue 渲染的基本单位，是视图与状态的连接的桥梁�
 
 1. props/provide 外部对组件的输入
 2. setup(data) 组件内部逻辑组织、视图状态输出
-3. render 渲染视图状态
+3. render 视图渲染
 4. slots 对外部提供自定义渲染接口
 
-定义并渲染一个组件：
+定义 vue 组件：
 
 ```js
 import { createVNode, render, h } from "vue";
@@ -118,7 +118,6 @@ const CustomComponent = {
 ### 渲染组件
 
 ```js
-// 组件 vnode
 // 2. 创建组件的 vnode
 const vnode = createVNode(
   CustomComponent,
@@ -143,10 +142,9 @@ render(vnode, document.querySelector("#app"));
 
 ![图 5](./images/7ee986a634dd61fe939f7b3ca3cc0091d55e72f55293c52e59a843001111731d.png)  
 
-
 渲染组件核心就两步：
 
-1. 创建 vnode
+1. 创建组件类型的 vnode
 2. 渲染 vnode（patch vnode）
 
 **patch vnode 操作本质上是对新旧 vnode 做对比，然后执行系统平台对应的渲染命令**。
@@ -565,4 +563,4 @@ const mountElement = (
 
 ![图 6](./images/089ea60df2fe1490c5fb0c69e460a9681c509346e0486d52a95d131902cbbc92.png) 
 
-下篇 [vdom diff 更新流程](./vdom%20diff%20更新流程.md)。
+下篇 [diff 更新流程](./diff%20更新流程.md)。

@@ -177,11 +177,3 @@ console.log(a); // [2]
       - 条件表达式 ConditionalExpression：`condition ? branch1 : branch2`
 4. AssignmentExpression 赋值表达式
 5. 逗号运算符
-
-## 其他
-
-new Cls().x
-new new Cls()
-new Cls.x()
-
-最后留一个小作业，请你找出所有具有 Symbol.iterator 的原生对象，并且看看它们的 for of 遍历行为。确认放弃笔记？放弃后所记笔记将不保留。
