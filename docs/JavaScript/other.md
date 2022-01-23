@@ -143,3 +143,7 @@ with语句和catch语句会在它们的代码执行阶段替代掉当前的执�
 JavaScript 性能提升：
 1. typescript + JIT
 2. WebAssembly（就如js的“+”操作，我们最终极的目标就是“+”能够直接被转换为一条简单CPU指令操作。）
+
+- 文档编辑器
+  - HTML + CSS
+  - contenteditable

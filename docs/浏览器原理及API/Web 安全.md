@@ -1,8 +1,8 @@
 ---
 release: true
 tags:
- - web 安全
  - web
+ - 安全
 ---
 # Web 安全
 
@@ -20,9 +20,14 @@ tags:
       - [防止 CSRF 攻击](#防止-csrf-攻击)
     - web 前端框架的安全防范
   - 网络安全
-    - [中间人攻击](#中间人攻击)
-    - [https](../HTTP/https.md)
+    - DNS 劫持
+    - HTTP/1 明文传输：[中间人攻击](#中间人攻击)
+      - [HTTPS](../HTTP/https.md)
   - 浏览器系统安全
+    - 多进程架构
+      ![图 12](./images/1642869618173.png)  
+    - 渲染进程沙箱隔离
+    - 站点隔离
 
 ## 同源策略
 
@@ -112,10 +117,10 @@ CSRF（Cross-site request forgery），称为“跨站请求伪造”，攻击�
 2. 验证请求的来源站点（通过 HTTP 请求头中的 Referer 和 Origin 属性）
 3. CSRF Token
 
-## 中间人攻击
 
-HTTP 是明文传输，这就导致内容很容易被中间人窃取、伪造和篡改，通常我们把这种攻击方式称为中间人攻击。
 
-![图 3](./images/104aec457857fcb4136af9bfdfb9d7ce2707aa9a1c55922cdb8883ca6de440f0.png)  
 
-对内容进行加密（[https](../HTTP/https.md)）。
+- DOM：页面
+- 持久层
+- 网络通信
+- 硬件

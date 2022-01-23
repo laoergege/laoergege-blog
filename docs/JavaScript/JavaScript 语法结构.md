@@ -1,3 +1,12 @@
+---
+release: true
+tags:
+ - javascript
+ - 语法
+---
+
+## JavaScript 语法结构
+
 - JavaScript 文法
   - 词法
     - [自动插入分号规则](#自动插入分号规则)
@@ -32,6 +41,7 @@
         - 普通函数/成员函数
         - 箭头函数
         - 生成器函数（generator）
+          - 协程 + 生成器模式
         - 异步函数（async）
         - 异步生成器函数
       - 控制流
