@@ -12,27 +12,28 @@ tags:
     - 对象的特征：唯一、状态、行为
   - [对象模型设计](#javascript-对象模型)
     - 属性集合
-    - [基于原型](基于原型的面向对象编程)
-      - 原型修改方法
-        - `__proto__`
-        - new + 构造器.prototype
-        - es5
-          - Object.create
-          - Object.getPrototypeOf
-          - Object.setPrototypeOf
-  - 具有完全运行时能力
-  - 原型体系下的基于类面向对象编程支持
+    - 具有动态能力
+  - [基于原型的面向对象编程](#基于原型的面向对象编程)
+    - [原型系统](#javascript-的原型机制)
+    - 原型修改方法
+      - `__proto__`
+      - new + 构造器.prototype
+      - es5
+        - Object.create
+        - Object.getPrototypeOf
+        - Object.setPrototypeOf
+  - 原型体系下的面向对象编程支持
     - [new + 构造器模拟“类”行为](#new--构造器模拟类行为)
-    - [继承](#继承)
     - [ES6 中的类 class](#es6-中的类-class)
-  - 函数对象
+    - [原型继承](#原型继承)
+  - [函数对象](#函数对象)
 
 ## JavaScript 对象模型
 
 JavaScript 对象的设计要点：
 
 1. 在 JavaScript 中，对象的状态和行为其实都被抽象为了**属性**
-2. 属性分为数据属性和访问器属性（getter/setter）两类
+2. 属性分为数据属性和访问器属性两类
 
    - 数据属性
      - value，就是属性的值
@@ -40,17 +41,18 @@ JavaScript 对象的设计要点：
      - enumerable，可枚举
      - configurable，决定该属性能否被删除或者改变特征值
    - 访问器属性
-     - getter，在取属性值时被调用
-     - setter，在设置属性值时被调用
+     - get，在取属性值时被调用
+     - set，在设置属性值时被调用
      - enumerable，可枚举
      - configurable，决定该属性能否被删除或者改变特征值
 
-   如果一个描述符不具有 value、writable、get 和 set 中的任意一个键，那么它将被认为是一个数据描述符。如果一个描述符同时拥有 value 或 writable 和 get 或 set 键，则会产生一个异常。
+   如果一个描述符不具有 value、writable、get 和 set 中的任意一个键，那么它将被认为是一个数据描述符。
+   如果一个描述符同时拥有 value 或 writable 和 get 或 set 键，则会产生一个异常。
 
 3. 对象是一个**属性集合**，属性是一个**key-value 的索引结构**
 4. 运行时对象具有动态修改属性的能力
 
-JavaScript 的对象系统设计跟目前主流如 Java 基于类的面向对象差异非常大：具有高度动态性的属性集合。
+JavaScript 的对象系统设计跟目前主流如 Java 基于类的面向对象差异非常大：**具有高度动态性的属性集合**。
 
 JavaScript 提供了完全运行时能力，这使得它可以模仿具有多种编程范式支持：同时支持面向对象类和原型的编程范式、函数式编程（JavaScript 中函数是一种特殊对象）。那么 JavaScript 是如何基于这样的动态对象模型设计自己的原型系统，以及你熟悉的函数、类等基础设施。
 
@@ -66,18 +68,33 @@ JavaScript 提供了完全运行时能力，这使得它可以模仿具有多种
   
   “基于原型”的编程看起来更为提倡程序员**先去关注一系列对象实例的行为**，而后才去关心如何将这些对象，**划分到最近的使用方式相似的原型对象，而不是将它们先分成类**。
 
-总之**一个是先有类再有对象，一个是基于“最近对象（原型）”创建对象**，很多基于原型的系统提倡运行时原型的修改，而基于类的面向对象系统大多数在编译期确定类无法运行时修改。无论是基于原型还是基于类都能够满足基本的复用和抽象需求。
+“类”在 JavaScript 中仅仅只是一个对象的“类型”标签，语言使用者唯一可以访问该属性的方式是 `Object.prototype.toString`，可通过 `Symbol.toStringTag` 自定义 Object.prototype.toString 的行为：
+
+```js
+let o = { [Symbol.toStringTag]: "MyObject" }
+console.log(Object.prototype.toString.call(o)); // '[object MyObject]'
+```
 
 基于原型的面向对象系统通过“复制”的方式来创建新对象。原型系统的“复制操作”有两种实现思路：
 
-- 一个是并不真的去复制一个原型对象，而是使得新对象持有一个原型的引用；
+- 一个是并不真的去复制一个原型对象，而是使得新对象持有一个原型的引用（JavaScript 选择）；
 - 另一个是切实地复制对象，从此两个对象再无关联。
 
 ### JavaScript 的原型机制
 
-- 所有对象都有私有属性 `[[prototype]]`（目前大多数浏览器厂商非标准实现 `__proto__` 属性），保持对原型的引用；
+原型系统机制：
+
+- 所有对象都有私有属性 `[[prototype]]`（目前大多数浏览器厂商非标准实现 `__proto__` 属性）保持对原型的引用；
 - 读一个属性，如果对象本身没有，则会继续访问对象的原型，直到原型为空或者找到为止（**原型链**）。
-- **运行时原型属性可动态修改**
+
+很多基于原型的系统提倡运行时原型的修改，而基于类的面向对象系统大多数在编译期确定类无法运行时修改。原型修改方法：
+
+- `Object.prototype.__proto__`，直接暴力访问属性去访问的对象的内部 `[[Prototype]]`，但这个属性是非 web 标准。
+- new + 构造器：指定原型创建对象
+- ES5 提供的原型操作标准方法
+  - Object.create 创建一个对象，并将原型指针指向指定对象
+  - Object.getPrototypeOf 获得一个对象的原型；
+  - Object.setPrototypeOf 设置一个对象的原型。
 
 基于原型范式的对象编程
 
@@ -93,7 +110,6 @@ var cat = {
 }
 
 // 关注对象行为，创建制定原型新对象
-// 使用 ES6 提供的原型标准操作方法
 // 非 ES 标准： var tiger = { say(){} }; tiger.__proto__ = cat 
 var tiger = Object.create(cat,  {
     say:{
@@ -117,14 +133,6 @@ anotherTiger.say();
 anotherTiger.jump();
 ```
 
-JavaScript 对象的原型在运行时可动态修改，最直接暴力的方法通过 `Object.prototype.__proto__` 访问属性去访问的对象的内部 `[[Prototype]]`，但这个属性是非 web 标准，虽然被大多数厂商实现，建议使用 ES5 提供的原型操作标准方法：
-
-- Object.create 创建一个对象，并将原型指针指向指定对象
-- Object.getPrototypeOf 获得一个对象的原型；
-- Object.setPrototypeOf 设置一个对象的原型。
-
-还有 new + 构造器的方法也是可以指定原型创建对象。
-
 ### new + 构造器模拟“类”行为
 
 早期 JavaScript 因为一些公司的政治原因，引入了 new、this 等语言特性，使之“看起来语法更像 Java”。
@@ -145,7 +153,7 @@ o1.p2();
 但上面的一切还是基于运行时原型系统，new 的行为：
 
 1. 以构造器函数的 prototype 属性值为原型创建新对象
-2. 将 this 执行该对象
+2. 将 this 指向该对象
 3. 将this、参数传给构造函数并执行
 4. 若构造函数返回对象则直接返回，否则使用新创建的对象返回
 
@@ -172,13 +180,43 @@ var o2 = new c2;
 o2.p2();
 ```
 
-### 继承
+### ES6 中的类 class
 
-> [JavaScript 多种继承方式对比](https://tsejx.github.io/javascript-guidebook/object-oriented-programming/inheritance/prototype-chain#%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%AE%9E%E4%BE%8B)。
+ES6 中加入了新特性 class、extends，new、this 跟 function 搭配的怪异行为终于可以不使用了，但是类的写法依旧是基于原型机制的语法糖，JavaScript 的原型体系同时作为一种编程范式和运行时机制存在。**推荐在任何场景，我都推荐使用 ES6 的语法来定义类，而令 function 回归原本的函数语义**。
 
-**JavaScript 实现继承的本质即通过借用构造函数来继独享属性，通过原型链继承共享属性**（PS：原型链的修改方式有三种参考上面）。
+注意对象创建的行为：**类的数据属性写在对象上，而访问器属性和方法则写在原型对象之上的**。
+
+```js
+class N {
+  name;
+  age;
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  showName() {
+    console.log(this.name);
+  }
+
+  get desp() {
+    return `My name is ${this.name}`;
+  }
+}
+```
+
+### 原型继承
+
+继承是面向对象编程的一个重要特性，在 JavaScript 实现继承的方式有
+
+- 拼接（复制）继承：`Object.assign`
+- 主要是基于原型链的继承（原型代理）：通过**借用构造函数**实现独享数据属性，通过**原型链**继承共享方法属性。
 
 以下是寄生组合式继承（PS：sb 名称）代码示例：
+
+> 推荐阅读
+> - [JavaScript 继承](https://tsejx.github.io/javascript-guidebook/object-oriented-programming/inheritance/prototype-chain#%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%AE%9E%E4%BE%8B)
+> - [JavaScript对象继承一瞥](https://yanhaijing.com/javascript/2014/11/09/object-inherit-of-js/)
 
 ```js
 function inheritPrototype(subType, superType){
@@ -198,7 +236,7 @@ SuperType.prototype.sayName = function(){
 
 // 借用构造函数传递增强子类实例属性（支持传参和避免篡改）
 function SubType(name, age){
-  SuperType.call(this, name);
+  SuperType.call(this, name); // 类似 class super
   this.age = age;
 }
 
@@ -229,52 +267,49 @@ B.prototype = Object.create(A)
 B.prototype.constructor = B
 
 B.prototype.xxx = function() {}
+
+let b = new B()
 ```
 
-注意不要 `B.prototype=A.prototype` 当对 B 的原型对象添加属性时，相当 A 的实例也能访问到。
+注意不要 `B.prototype=A.prototype` ，这种共享原型的方式会导致对 B 的原型扩展，A 的实例也能访问得到。
 
-### ES6 中的类 class
-
-ES6 中加入了新特性 class、extends，new、this 跟 function 搭配的怪异行为终于可以不使用了，但是类的写法依旧是基于原型机制的语法糖，JavaScript 的原型体系同时作为一种编程范式和运行时机制存在。**推荐在任何场景，我都推荐使用 ES6 的语法来定义类，而令 function 回归原本的函数语义**。
-
-注意对象创建的行为：**类的数据属性写在对象上，而访问器属性和方法则写在原型对象之上的**。
+ES6 继承示例：
 
 ```js
-class N {
-  name;
-  age;
+class A {}
+class B extends A {}
 
-  constructor(name) {
-    this.name = name;
-  }
-
-  showName() {
-    console.log(this.name);
-  }
-
-  get desp() {
-    return `My name is ${this.name}`;
-  }
-}
-
-class P extends N {
-  constructor(...res) {
-    super(...res);
-  }
-}
-
-const n = new N("lys");
-n.showName(); // lys
-n.desp; // My name is lys
-
-const p = new P("123");
-p.showName();
-p.desp;
+const b = new B();
 ```
 
-## 原型链
+Babel 的继承源码实现
 
+```js
+function _inherits (subClass, superClass) { 
+	subClass.prototype = Object.create(superClass && superClass.prototype, { 
+		constructor: { 
+			value: subClass, 
+			enumerable: false, 
+			writable: true, 
+			configurable: true 
+		} 
+	}); 
 
+  // 静态属性继承
+	if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; 
+}
+```
+
+画出上面原型链中各个对象 `__proto__` ，`constructor` 和 `prototype` 的关系：
+
+![图 13](./images/1643035299916.png)  
+
+**原型链中 Function 比较特殊的地方就是 `Function.__proto__` 指向自己的 `Function.prototype` 需要特殊记忆**。
 
 ## 函数对象
 
+JavaScript 用对象模拟函数的设计代替了一般编程语言中的函数，它们可以像其它语言的函数一样被调用、传参。
+
+任何宿主只要提供了“具有`[[call]]`私有字段的对象”，就可以被 JavaScript 函数调用语法支持；如果它能实现`[[construct]]`，它就是一个构造器对象，可以作为构造器被调用。
+
+用户使用 function 语法或者 Function 构造器创建的对象同时具有 `[[call]]` 和 `[[construct]]`；而 => 语法创建的函数仅仅是函数。

@@ -202,23 +202,36 @@ emit 把各个 chunk 输出到结果文
   - 类型
     - [ ] String 到 Number 的转换
     - [ ]  ==、=== 区别
+    - [ ] 类型转换
   - 对象
     - [x] 手写 new
     - [x] 手写 instanceof
       - 往左边对象原型链上查找是否存在右边构造器的 prototype
     - [x] [原型及原型链](./JavaScript/JavaScript%20对象.md)
-      - 原型链的 3 种修改方式
-    - [x] 继承
+      - 原型的 5 种修改方式
+      - 原型链中 Function 比较特殊的地方就是 `Function.__proto__` 指向自己的 `Function.prototype`
+    - [x] 继承:主要是基于原型链的继承（原型代理）：通过**借用构造函数**实现独享数据属性，通过**原型链**继承共享方法属性
+      - 原型继承  
+        function A() {}
+        function B() {}
+
+        // 关键
+        B.prototype = Object.create(A)
+        B.prototype.constructor = B
+
+        B.prototype.xxx = function() {}
+    - [ ] 对象深浅拷贝
+      - Object.assign
+  - [ ] 模块发展历程
+  - 函数
+    - [x] 手写 call、apply、bind
+    - [ ] 普通函数和箭头函数区别
   - [x] 数组方法
     - [x] 数组扁平化
     - [x] 数组去重
-  - [x] 节流、防抖
-    - 防抖：防止重复执行，事件触发 n 秒后再执行，如果期间再次触发则重新计算时间，最终只会执行一次
-    - 节流：减少函数的执行频率，每隔 n 秒执行一次
-  - [x] 手写 EventEmitter
-  - [ ] 设计模式
+  - 设计模式
     - [ ] 发布-订阅与观察者模式区别
-  - [x] 手写 call、apply、bind
+    - [x] 手写 EventEmitter
   - [ ] js 执行机制
     - [ ] 变量提升机制
       - [ ] var、let、const 区别及暂时性死区
@@ -226,12 +239,10 @@ emit 把各个 chunk 输出到结果文
     - [ ] 作用域和作用域链
     - [ ] 作用域链和闭包
     - [ ] this
-  - [ ] 普通函数和箭头函数区别
-  - [ ] 类型转换
-  - [ ] 手写对象深浅拷贝
-  - [ ] 模块发展历程
-  - [ ] 原型及原型链
-  - [ ] 继承
+  - api
+    - [ ] 节流、防抖
+      - 防抖：防止重复执行，事件触发 n 秒后再执行，如果期间再次触发则重新计算时间，最终只会执行一次
+      - 节流：减少函数的执行频率，每隔 n 秒执行一次
 - http
   - [x] http、https 区别
   - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
@@ -330,3 +341,29 @@ object.assgin
 先判断一方有子节点一方没有子节点的情况(如果新的children没有子节点，将旧的子节点移除)
 比较都有子节点的情况(核心diff)
 递归比较子节点
+
+
+- 项目
+  - tailwindcss 好处
+    - 命名
+    - 原子
+    - 按需构建
+      - purgcss
+      - uncss
+  - webpack
+    - webpack-bundle-analyzer
+    - 第三方库以模块按需引入
+    - image
+      - imagemin-webpack-plugin
+      - cdn
+      - 懒加载
+    - 分割
+      - split-chunk（cache）
+        - 基础库
+        - 公共代码
+      - 路由懒加载
+    - 压缩
+      - js -> terser
+      - css -> cssnano
+      - compress-webpack-plugin + gzip nginx
+      - tree-shaking
