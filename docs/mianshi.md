@@ -201,12 +201,12 @@ emit 把各个 chunk 输出到结果文
       - 位运算：异或
   - 类型
     - [ ] String 到 Number 的转换
-    - [ ]  ==、=== 区别
-    - [ ] 类型转换
+    - [x]  ==、=== 区别
+    - [x] 类型转换
   - 对象
     - [x] 手写 new
     - [x] 手写 instanceof
-      - 往左边对象原型链上查找是否存在右边构造器的 prototype
+      - instanceof本质上是判断右边的构造函数的prototype对象是否存在于左边的原型链上
     - [x] [原型及原型链](./JavaScript/JavaScript%20对象.md)
       - 原型的 5 种修改方式
       - 原型链中 Function 比较特殊的地方就是 `Function.__proto__` 指向自己的 `Function.prototype`
@@ -325,6 +325,8 @@ emit 把各个 chunk 输出到结果文
 - justify-items: stretch;
 - align-content: space-evenly;
 - prototype
+- toPrimitive
+- iterator
 
 对于多年工作经验的人来说，项目就比较重要了，所以要着重准备项目，理清项目中用到的技术、遇到的难点有哪些、又是怎么解决的、对项目做过哪些性能优化、做过的亮点有哪些 等等
 

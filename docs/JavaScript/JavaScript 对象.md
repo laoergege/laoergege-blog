@@ -313,3 +313,8 @@ JavaScript 用对象模拟函数的设计代替了一般编程语言中的函数
 任何宿主只要提供了“具有`[[call]]`私有字段的对象”，就可以被 JavaScript 函数调用语法支持；如果它能实现`[[construct]]`，它就是一个构造器对象，可以作为构造器被调用。
 
 用户使用 function 语法或者 Function 构造器创建的对象同时具有 `[[call]]` 和 `[[construct]]`；而 => 语法创建的函数仅仅是函数。
+
+## 参考
+
+- [《如何回答面试中的JavaScript原型链问题》](https://yanhaijing.com/javascript/2021/03/13/javascript-prototype-chain/)
+- 极客学习《重学前端》

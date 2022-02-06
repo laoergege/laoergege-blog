@@ -46,12 +46,15 @@ tags:
 ## 类型判断
 
 - typeof
-        - 无法判断除了 function 类型以外的其他具体引用类型
-        - `typeof null === 'object'`
-      - instanceof
-        - 可以判断具体引用类型，但是不能正确判断基础数据类型
-      - Object.prototype.toString.call
-        - 能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
+  - 无法判断除了 function 类型以外的其他具体引用类型
+  - `typeof null === 'object'`
+- instanceof
+  - 可以判断具体引用类型，但是不能正确判断基础数据类型
+  - instanceof本质上是判断右边的构造函数的prototype对象是否存在于左边的原型链上。根据原型链，`... instanceof Object` 都返回 true。
+- Object.prototype.toString.call
+  - 能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
+- 数组
+  - Array.isArray
 
 ## 弱类型：隐式类型转换
 
@@ -59,7 +62,8 @@ tags:
   - 显示转换，如 `String('123')`
   - 隐式转换，如 `+'123'`
     - 运算符会触发自动类型转换
-      - 类型转换规则
+      - 类型转换规则  
+        在 JS 中类型转换情况：toNumber 、 toString 、 toBoolean、toObject
         ![图 11](./images/1642863972248.png)  
         - StringToNumber
           - Number 是比 parseInt 和 parseFloat
@@ -71,14 +75,12 @@ tags:
             2. toString
             3. Symbol.toPrimitive(o [ , PreferredType ])
 
-
 类型不同的变量比较时==运算只有三条规则：
 
 - undefined 与 null 相等
 - 字符串和 bool 都转为数字再比较
 - 对象转换成 primitive 类型再比较
   另一个是对象如果转换成了 primitive 类型跟等号另一边类型恰好相同，则不需要转换成数字。
-
 
 ## Number
 
@@ -120,16 +122,9 @@ null：所有机器码均为0
 undefined：用 −2^30 整数来表示
 所以，typeof 在判断 null 的时候就出现问题了，由于 null 的所有机器码均为0，因此直接被当做了对象来看待。
 
-算术运算符隐士转换字符串
-
 
 Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON)
 
-JavaScript 中的“类”仅仅是运行时对象的一个私有属性，而 JavaScript 中是无法自定义类型的。
 
-- 算术
-- 比较
-- 逻辑
-- 位
 
-在 JavaScript 中，没有任何方法可以更改私有的 Class 属性，因此 Object.prototype.toString 是可以准确识别对象对应的基本类型的方法，它比 instanceof 更加准确。
+

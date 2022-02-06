@@ -41,10 +41,13 @@ tags:
 - Web API 参考资料
   - [MDN](https://developer.mozilla.org/)
 - Web API
-  - 页面 DOM（同源限制）
-    - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
-    - [DOM 事件模型](./DOM%20事件模型.md)
-  - 数据（同源限制）
+  - 页面
+    - DOM
+      - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
+      - [DOM 事件模型](./DOM%20事件模型.md)
+    - [WebComponent](./WebComponent.md)
+    - [Canvas](./Canvas.md)
+  - 存储
     - cookie
     - localStorage
     - sessionStorage
@@ -68,13 +71,13 @@ tags:
         - CORS
         - JSONP
         - (ProxyServer)
-  - [PWA](./PWA.md)
-  - [WebComponent](./WebComponent.md)
-  - [WebWork](./WebWork.md)
-  - [Canvas](./Canvas.md)
-  - WebAssembly
-    - [A cartoon intro to WebAssembly](https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/)
-    - [Debugging WebAssembly with modern tools](https://developer.chrome.com/blog/wasm-debugging-2020/)
+  - 硬件
+    - [WebWork](./WebWork.md)
+    - WebAssembly
+      - [A cartoon intro to WebAssembly](https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/)
+      - [Debugging WebAssembly with modern tools](https://developer.chrome.com/blog/wasm-debugging-2020/)
+  - 其他
+    - [PWA](./PWA.md)
   - ResourceHints
     - [prerender](https://web.dev/speculative-prerendering/)
   - SanitizerAPI

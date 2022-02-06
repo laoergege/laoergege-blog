@@ -12,7 +12,7 @@ tags:
     - 同源策略下的“妥协”
       - 页面中可以引入第三方资源
         - [XSS 攻击](#跨站脚本攻击xss)
-          - [XSS 攻击阻止](#如何阻止-xss-攻击)
+          - [XSS 攻击阻止方法](#如何阻止-xss-攻击)
             - [CSP 内容安全策略](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)
       - 跨域资源共享（CORS）
       - 跨文档通信机制（window.postMessage）
@@ -120,7 +120,8 @@ CSRF（Cross-site request forgery），称为“跨站请求伪造”，攻击�
 
 
 
-- DOM：页面
-- 持久层
-- 网络通信
+- 页面
+- 存储
+- 通信
 - 硬件
+- 其他

@@ -52,6 +52,7 @@ tags:
   - 极客《重新前端》
   - [JavaScript 开发者应懂的 33 个概念](https://github.com/stephentian/33-js-concepts)
   - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
+  - [现代 JavaScript 教程](https://zh.javascript.info/)
 - js 学习路线
   - 深入
     1. 变量提升机制（历史问题）
