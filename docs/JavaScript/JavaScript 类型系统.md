@@ -20,7 +20,7 @@ tags:
       - Null：表示空值
       - Boolean
       - Number
-        - IEEE 754 规定的双精度浮点数规则
+        - ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值
       - String
         - Unicode 字符集，UTF16 编码方式
         - JavaScript 中的字符串一旦构造出来就无法改变（原内存空间），变量重新赋值只是重新创建新的字符串
@@ -50,7 +50,7 @@ tags:
   - `typeof null === 'object'`
 - instanceof
   - 可以判断具体引用类型，但是不能正确判断基础数据类型
-  - instanceof本质上是判断右边的构造函数的prototype对象是否存在于左边的原型链上。根据原型链，`... instanceof Object` 都返回 true。
+  - instanceof本质上是判断右边的构造函数的prototype对象是否存在于左边的原型链上。但根据原型链，`... instanceof Object` 都返回 true。
 - Object.prototype.toString.call
   - 能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
 - 数组
@@ -60,20 +60,21 @@ tags:
 
 - 类型转换
   - 显示转换，如 `String('123')`
-  - 隐式转换，如 `+'123'`
-    - 运算符会触发自动类型转换
-      - 类型转换规则  
-        在 JS 中类型转换情况：toNumber 、 toString 、 toBoolean、toObject
-        ![图 11](./images/1642863972248.png)  
-        - StringToNumber
-          - Number 是比 parseInt 和 parseFloat
-        - NumberToString
-        - 对象跟基本类型之间的转换
-          - 装箱转换
-          - 拆箱转换
-            1. valueOf
-            2. toString
-            3. Symbol.toPrimitive(o [ , PreferredType ])
+  - 隐式转换，运算符会自动触发类型转换，如 `+'123'`
+    - 类型转换规则  
+      在 JS 中类型转换情况：toNumber 、 toString 、 toBoolean、toObject
+      ![图 11](./images/1642863972248.png)  
+      - StringToNumber
+        - Number
+        - parseInt
+        - parseFloat
+      - NumberToString
+      - 对象跟基本类型之间的转换
+        - 装箱转换
+        - 拆箱转换
+          1. valueOf
+          2. toString
+          3. Symbol.toPrimitive(o [ , PreferredType ])
 
 类型不同的变量比较时==运算只有三条规则：
 
@@ -82,19 +83,7 @@ tags:
 - 对象转换成 primitive 类型再比较
   另一个是对象如果转换成了 primitive 类型跟等号另一边类型恰好相同，则不需要转换成数字。
 
-## Number
-
-数字在计算机中是如何表示存储的
-- [什么是定点数？](https://zhuanlan.zhihu.com/p/338588296)
-- [什么是浮点数？](https://zhuanlan.zhihu.com/p/339949186)
-
-
-
-## 为什么在 JavaScript 中，0.1+0.2 !== 0.3 ?
-
-ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。
-
-### 如何判断 0.1 + 0.2 与 0.3 相等？
+## JavaScript 中非整数的 Number 如何比较： 0.1 + 0.2 !== 0.3
 
  ` console.log( Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON);`
 
@@ -108,23 +97,8 @@ ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数�
 判断属性是否存在 in
 
 
-- bigint
 
 
-js 在底层存储变量的时候，会在变量的机器码的低位1-3位存储其类型信息
-000：对象
-010：浮点数
-100：字符串
-110：布尔
-1：整数
-但对于 undefined 和 null 来说，这两个值的信息存储是有点特殊的：
-null：所有机器码均为0
-undefined：用 −2^30 整数来表示
-所以，typeof 在判断 null 的时候就出现问题了，由于 null 的所有机器码均为0，因此直接被当做了对象来看待。
-
-
-Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON)
-
-
-
-
+全部存储为整数（无类型），然后格式化显示
+math.js
+toPrecision()和toFixed()

@@ -82,10 +82,7 @@
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
-   8. 数学与**应用**
-      - 数学分析
-      - 概率论
-      - 线性代数
+8. 数学与应用
 
 ## 收集待看
 
