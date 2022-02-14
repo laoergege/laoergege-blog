@@ -20,7 +20,7 @@ tags:
       - Null：表示空值
       - Boolean
       - Number
-        - ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和小数
+        - ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数
       - String
         - Unicode 字符集，UTF16 编码方式
         - JavaScript 中的字符串一旦构造出来就无法改变（原内存空间），变量重新赋值只是重新创建新的字符串

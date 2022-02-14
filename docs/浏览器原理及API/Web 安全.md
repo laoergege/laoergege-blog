@@ -119,9 +119,20 @@ CSRF（Cross-site request forgery），称为“跨站请求伪造”，攻击�
 
 
 
+### 站点隔离
 
-- 页面
-- 存储
-- 通信
-- 硬件
-- 其他
+通常情况下，每个 tab 页即一个渲染进程，Chromium 提供了四种进程模式，不同的进程模式会对 tab 页做不同的处理。
+
+- Process-per-site-instance (default) 每一个站点实例使用一个进程
+- Process-per-site 每一个 site 使用一个进程
+- Process-per-tab 每个 tab 使用一个进程
+- Single process 所有 tab 共用一个进程
+
+> "同一站点(same-site)"，具体地讲，我们将“同一站点”定义为根域名（例如，geekbang.org）+ 协议（例如，https:// 或者http://）相同。
+
+**Process-per-site** 同一个站点下的页面都使用同一个进程，但同一站点下不同域的服务可能会发生冲突，所以隔离相同域名下毫无关联的页面，会更加安全。
+
+**Process-per-site-instance** 每个站点实例一个进程，意味着下几乎每个 tab 页即一个渲染进程。特殊情况，如果两个页面可以在脚本代码中获得彼此的引用，才使用同一进程，比如
+
+1. 用户通过 `<a target="_blank">` 这种方式点击打开的新页面
+2. JavaScript code 打开的新页面（比如 window.open)，通过 window.opener 访问另一个页面
