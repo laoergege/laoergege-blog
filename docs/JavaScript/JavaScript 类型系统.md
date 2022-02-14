@@ -20,12 +20,12 @@ tags:
       - Null：表示空值
       - Boolean
       - Number
-        - ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值
+        - ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和小数
       - String
         - Unicode 字符集，UTF16 编码方式
         - JavaScript 中的字符串一旦构造出来就无法改变（原内存空间），变量重新赋值只是重新创建新的字符串
       - Symbol
-        - 创建对象的唯一标识符
+        - 创建唯一标识符，作为对象属性名，防止冲突
         - 创建对象的“隐藏”属性
       - BigInt
     - 引用类型
@@ -101,4 +101,3 @@ tags:
 
 全部存储为整数（无类型），然后格式化显示
 math.js
-toPrecision()和toFixed()

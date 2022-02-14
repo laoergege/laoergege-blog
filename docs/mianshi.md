@@ -117,8 +117,6 @@ flex: 1; 是复合属性，说下其他属性？
   - 说说什么是 BFC，一般你都用来干什么，解决了什么问题？
   - 实现元素水平垂直居中？尽可能说多一些方法？
   - 左侧固定 + 右侧自适应布局？说说几种方案？
-- 数据结构与算法
-  - 排序算法
 - 设计模式
   - 什么是抽象工厂模式
   - 发布订阅模式和观察者模式有什么区别
@@ -126,8 +124,7 @@ flex: 1; 是复合属性，说下其他属性？
 - es
   - 箭头函数和普通函数的区别
   - for of 和 for in 的区别，怎么让 for of 可以遍历一个对象？
-  - es6 的 Map 和 WeakMap 的区别，WeakMap 解决了什么问题？
-  - promise 哪些方法是原型上的，哪些方法是实例上的
+
   - Symbol 有用过吗？
 - JS
   - 0.1 + 0.2 !== 0.3？为什么？
@@ -143,74 +140,54 @@ flex: 1; 是复合属性，说下其他属性？
     你刚刚提到的引用计数法有什么缺点吗？
     v8 里面的垃圾回收机制是什么？
     v8 是怎么解决循环引用的？
+
+  
+
+
+- js
+- html&css
+- web
+- 工程
+- 算法
 - http
-  - [http1.1 和 http2.0 有什么区别？](./HTTP/http%20版本对比.md)
-  - http2, TCP 丢包阻塞问题
-  - UDP 有哪些特性
-  - [https 为什么比 http 安全(https 原理)](./HTTP/https.md)
-- webpack
-  - Webpack 了解多少
-    1. webapck 的四个核心概念，并介绍一些其他的模块，例如 mode，依赖图的概念等等。
-    2. 介绍几个 webpack 的插件，如压缩 gzip、如何处理 dev 中的 console.log 的模块等等
-  - loader、plugin 区别
-    - loader 主要是对源文件进行转换处理
-    - plugin 可以用来监听 webpack 构建生命周期，做一些操作，去扩展 webpack 功能
-    - loader 本质是一个函数，plugin 本质是一个类，
-  - loader 执行顺序
-    - 从右往左
-  - Tree Shaking
-  - 代码分割
-  - 打包优化技巧
-  - webpack 有几种 hash，它们有什么区别？一般你在项目里面是用哪种 hash？
-    - hash，是整个项目的 hash 值，每次编译之后都会生成新的 hash
-    - chunkhash，根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值（来源于同一个 chunk，则 hash 值就一样）
-    - contenthash，根据文件内容生成 hash 值，文件内容相同 hash 值就相同
-  - 热模块更新
-  - 说了下 webpack 构建流程
-  - webpack 性能优化你是怎么做的？
-    - https://juejin.cn/post/6844904093463347208
-  - webpack5 介绍
-
-关键的 webpack 事件节点
-compile 开始编译
-make 从入口点分析模块及其依赖的模块，创建这些模块对象
-build-module 构建模块
-after-compile 完成构建
-seal 封装构建结果
-emit 把各个 chunk 输出到结果文
-
-从项目的结构、所用到的技术、难点、亮点都要知道，要能够自己描述出项目中用了哪些，自己完成了哪些。
 
 ## 题目
 
-- web
-  - cookie、localStorage、sessionStorage 区别以及使用场景
-  - 安全
-    - [x] XSS（跨站脚本攻击）
-      - 类型
-        - 存储型 XSS 攻击
-        - 反射型 XSS 攻击
-        - 基于 DOM 的 XSS 攻击
-      - 防范
-    - [x] CSRF（跨站请求伪造）
-  - [ ] 输入 URL 到页面展示发生了什么
 - js
-  - 变量
+  - 变量&类型
     - [x] 变量交换
       - 解构
       - 位运算：异或
-  - 类型
     - [ ] String 到 Number 的转换
     - [x]  ==、=== 区别
     - [x] 类型转换
+    - symbol 有什么用处
+      - 创建唯一标识符，作为对象属性名，防止冲突
+      - 创建对象的“隐藏”属性
+      - 系统 Symbol
+      - 全局注册 Symbol.for/keyFor
   - 对象
+    - [x] 手写 call、apply、bind
+      - ![图 21](images/1644765312671.png)  
+      - ![图 19](images/1644765252959.png)  
+      - ![图 20](images/1644765270881.png)  
     - [x] 手写 new
     - [x] 手写 instanceof
-      - instanceof本质上是判断右边的构造函数的prototype对象是否存在于左边的原型链上
+      - 用法：左边任意值，右边必须构造器
+      - 本质：判断左值的原型链上是否存在右边的构造函数的prototype对象
+      - ![图 16](images/1644658408741.png)  
     - [x] [原型及原型链](./JavaScript/JavaScript%20对象.md)
+      - 原型：所有对象都有私有属性 `[[prototype]]`（目前大多数浏览器厂商非标准实现 `__proto__` 属性）保持对原型的引用
+      - 原型链：当对象查找一个属性的时候，如果没有在自身找到，那么就会查找自身的原型，如果原型还没有找到，那么会继续查找原型的原型，直到为空为止，这条查找链路就是原型链
       - 原型的 5 种修改方式
+        - `__proto__`
+        - new + 构造器.prototype
+        - es5
+          - Object.create
+          - Object.getPrototypeOf
+          - Object.setPrototypeOf
       - 原型链中 Function 比较特殊的地方就是 `Function.__proto__` 指向自己的 `Function.prototype`
-    - [x] 继承:主要是基于原型链的继承（原型代理）：通过**借用构造函数**实现独享数据属性，通过**原型链**继承共享方法属性
+    - [x] 原型继承:主要是基于原型链的继承（原型代理）：通过**借用构造函数**实现独享数据属性，通过**原型链**继承共享方法属性
       - 原型继承  
         function A() {}
         function B() {}
@@ -223,26 +200,70 @@ emit 把各个 chunk 输出到结果文
     - [ ] 对象深浅拷贝
       - Object.assign
   - [ ] 模块发展历程
-  - 函数式
-    - [x] 手写 call、apply、bind
+  - 函数编程
     - [ ] 普通函数和箭头函数区别
-  - [x] 数组方法
+      - 箭头函数的 this 绑定外层上下文中的 this
+      - 箭头函数不能通过 new 关键字调用
+      - arguments
+    - [x] 柯里化
+      - 把多参数的函数转换成逐渐接受剩余参数的函数
+      - ![图 17](images/1644742760062.png)  
+  - [x] 数组
     - [x] 数组扁平化
-    - [x] 数组去重
+      - ![图 18](images/1644743709627.png)  
+    - [x] 数组去重 `[...new Set(nums)]`
   - 设计模式
     - [ ] 发布-订阅与观察者模式区别
     - [x] 手写 EventEmitter
   - [ ] js 执行机制
-    - [ ] var、let、const 区别及暂时性死区
+    - [x] 变量提升、var、let、const 区别及暂时性死区
     - [ ] 闭包
+      - 本质
+      - 缺点
+      - 场景
     - [ ] this
   - 异步编程
     - [ ] Promise
     - [ ] 异步代码执行顺序
+    - [ ] promise 哪些方法是原型上的，哪些方法是实例上的
   - 代码题
     - [ ] 节流、防抖
       - 防抖：防止重复执行，事件触发 n 秒后再执行，如果期间再次触发则重新计算时间，最终只会执行一次
       - 节流：减少函数的执行频率，每隔 n 秒执行一次
+- web
+  - cookie、localStorage、sessionStorage 区别以及使用场景
+  - 安全
+    - [x] XSS（跨站脚本攻击）
+      - 类型
+        - 存储型 XSS 攻击
+        - 反射型 XSS 攻击
+        - 基于 DOM 的 XSS 攻击
+      - 防范
+    - [x] CSRF（跨站请求伪造）
+  - [ ] 输入 URL 到页面展示发生了什么
+  - [ ] js脚本加载问题，async、defer问题
+- 工程
+  - [ ] webpack5 介绍
+  - [ ] webpack 性能优化你是怎么做的？
+    - https://juejin.cn/post/6844904093463347208
+  - 说了下 webpack 构建流程
+  - webpack 有几种 hash，它们有什么区别？一般你在项目里面是用哪种 hash？
+    - hash，是整个项目的 hash 值，每次编译之后都会生成新的 hash
+    - chunkhash，根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值（来源于同一个 chunk，则 hash 值就一样）
+    - contenthash，根据文件内容生成 hash 值，文件内容相同 hash 值就相同
+  - Webpack 了解多少
+    1. webapck 的四个核心概念，并介绍一些其他的模块，例如 mode，依赖图的概念等等。
+    2. 介绍几个 webpack 的插件，如压缩 gzip、如何处理 dev 中的 console.log 的模块等等
+  - loader、plugin 区别
+    - loader 主要是对源文件进行转换处理
+    - plugin 可以用来监听 webpack 构建生命周期，做一些操作，去扩展 webpack 功能
+    - loader 本质是一个函数，plugin 本质是一个类，
+  - loader 执行顺序
+    - 从右往左
+  - Tree Shaking
+  - 代码分割
+  - 打包优化技巧
+  - 热模块更新
 - http
   - [x] http、https 区别
   - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
@@ -257,6 +278,8 @@ emit 把各个 chunk 输出到结果文
     - 参数、编码、大小（要支持 IE，则最大长度为 2083byte，若只支持 Chrome，则最大长度 8182byte）、缓存
   - [ ] 说一下三次握手四次挥手
   - [ ] TCP, UDP 的区别
+  - [ ] http2, TCP 丢包阻塞问题
+  - [ ] UDP 有哪些特性
 - 框架 vue
   - 原理
     - [x] 什么是虚拟 DOM，以及为什么
@@ -302,9 +325,8 @@ emit 把各个 chunk 输出到结果文
           全局前置/钩子：beforeEach、beforeResolve、afterEach
           路由独享的守卫：beforeEnter
           组件内的守卫：beforeRouteEnter、beforeRouteUpdate、beforeRouteLeave
-- 前端工程
-  - webpack
-  - git
+- 系统
+  - [ ] 线程跟进程区别
 - 项目
   - 性能优化
     - 虚拟列表
@@ -327,6 +349,9 @@ emit 把各个 chunk 输出到结果文
 - prototype
 - toPrimitive
 - iterator
+- Suspense
+- Portals
+- flatten
 
 对于多年工作经验的人来说，项目就比较重要了，所以要着重准备项目，理清项目中用到的技术、遇到的难点有哪些、又是怎么解决的、对项目做过哪些性能优化、做过的亮点有哪些 等等
 
@@ -369,3 +394,7 @@ object.assgin
       - css -> cssnano
       - compress-webpack-plugin + gzip nginx
       - tree-shaking
+      - 
+
+
+从项目的结构、所用到的技术、难点、亮点都要知道，要能够自己描述出项目中用了哪些，自己完成了哪些。

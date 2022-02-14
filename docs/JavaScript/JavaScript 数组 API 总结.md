@@ -47,21 +47,21 @@
       - end 可选，不会被包含在结果集中
   - 遍历
     - forEach
-    - every
-    - some
-    - filter
-    - map
-    - **reduce(previousValue, currentValue, currentIndex, array)**
-    - **reduceRight**
-    - find
-    - findIndex
     - 查找
       - indexOf
       - lastIndexOf
       - includes
-    - 获取结果
+      - every
+      - some
+      - find
+      - findIndex
+    - 转换
       - entries
       - keys
       - values
+      - filter
+      - map
+      - **reduce(previousValue, currentValue, currentIndex, array)**
+      - **reduceRight**
 
 

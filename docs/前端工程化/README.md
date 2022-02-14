@@ -3,23 +3,52 @@
 > 前端工程化本质：将前端工作流程`标准化`、`规范化`、`工具化`、`自动化`。**通过规范和工具来提高前端应用质量及开发效率。**
 
 - 前端工作流
+  - git
+    - git flow 分支规范
+    - commit msg 提交信息
+    - merge request & code review
+  - 开发
+    - 代码风格
+      - 命名规范
+      - 代码格式 prettier
+      - 代码质量 eslint
+    - 项目组织管理
+      - multirepo
+      - monorepo
+    - 目录结构
+    - 环境
+      - 运行环境
+      - 包管理
+    - 调试
+      - 本地服务器
+      - 代理
+      - mock
+      - 热模块更新
+  - 构建
+  - 打包
+  - 测试
+    - unit（单元） jest
+    - e2e（端对端） jest + puppeteer
+  - CI
+  - CD
+    - 发版日志
+  - 监控
+  - 文档
+  - 架构化及方案沉淀
+    - table
+      - [tabulator](https://github.com/olifolkerd/tabulator)
+    - 组件库
+    - 微前端
+      - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
+
+
+- 前端工作流
   - 规范
-    - [开发工具](./前端开发工具合集.md)
     - 代码
       - 规范 [《前端代码规范实践总结》](./前端代码规范实践总结.md)
-        - 代码
-          - 命名规范
-          - 代码格式 prettier
-          - 代码质量 eslint
-        - 注释
-      - 管理（git）
-        - git flow 分支规范
-        - commit msg 提交信息
-        - merge request & code review
+
     - 项目
-      - 项目组织管理
-        - multirepo
-        - monorepo
+     
       - 项目架构
         - 组织结构
       - 结构组织
@@ -42,35 +71,9 @@
       - lint
       - 构建
 
-        - webpack
-        - vite
-        - rollup
-      - 测试
+        
 
-        - unit（单元） jest
-        - e2e（端对端） jest + puppeteer
-      - 文档
-    - CD
-      - 发版日志
-
-      - 部署
-  - 线上运维
-    - 前端监控
-      - 性能
-        - 性能优化
-          - 网络
-          - 页面
-            - 可见
-            - 可交互
-            - 文件大小
-              - tree-shaking
-      - 安全
-  - 架构化及方案沉淀
-    - table
-      - [tabulator](https://github.com/olifolkerd/tabulator)
-    - 组件库
-    - 微前端
-      - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
+    
 
 
 
@@ -172,8 +175,3 @@
 
 零配置打包工具
 - [microbundle](https://github.com/developit/microbundle)
-
-
-合并
-编译
-压缩

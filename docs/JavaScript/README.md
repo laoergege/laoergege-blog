@@ -32,6 +32,7 @@ tags:
       - [编译时](./JavaScript%20代码执行过程（编译时）.md)
       - [JavaScript 代码执行机制](./JavaScript%20代码执行机制.md)
   - 元编程
+    - 程序-元编程-可以生成代码-运行时动态修改程序（反射编程或反射）
       1. function
       2. eval
       3. with
@@ -46,6 +47,7 @@ tags:
   - [数组去重](https://github.com/laoergege/laoergege-blog/issues/63)
   - [手写节流、防抖](https://github.com/laoergege/laoergege-blog/issues/83)
   - [EventEmitter 实现](https://github.com/laoergege/laoergege-blog/issues/84)
+  - [手写题：实现柯里化](https://github.com/laoergege/laoergege-blog/issues/87)
 - 学习资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
   - [ES6 入门教程](https://es6.ruanyifeng.com/)
@@ -54,14 +56,16 @@ tags:
   - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
   - [现代 JavaScript 教程](https://zh.javascript.info/)
 - js 学习路线
+  - 语法结构
   - 深入
-    1. 变量提升机制（历史问题）
-    2. 类型系统
-    3. 静态作用域（链）
-    4. 对象模型
-    5. 原型（链）
-    6. 闭包
-    7. 元编程
+    - 执行机制
+      1. 变量提升机制（历史问题）
+      2. 类型系统
+      3. 静态作用域（链）
+      4. 对象模型
+      5. 原型（链）
+      6. 闭包
+      7. 元编程
   - 更深
     - ES 语言规范
     - 了解 V8 JS 编译原理
@@ -71,10 +75,3 @@ tags:
     - 语言设计及编译原理
 
 
-- var 声明永远作用于脚本、模块和函数体这个级别
-- function 声明作用于脚本、模块和函数体这个级别、初始赋原值
-  - 块级：仍会被提升，但不会初始赋值
-- 块级作用域
-  - class
-  - let
-  - const

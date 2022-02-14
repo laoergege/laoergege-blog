@@ -26,6 +26,7 @@
 - 生活
   - 烹饪
     - [ ] 学会 20 道家乡**菜**并发表下厨房
+      - [ ] 潮式春菜
 
 ## 技术栈结构
 
@@ -74,7 +75,7 @@
    3. 计算机网络
       - [HTTP](./HTTP/README.md)
    4. [数据结构与算法](./数据结构与算法/README.md)
-   5. 图形学
+   5. 计算机图形学
    6. 程序语言设计及实现
       - [计算机程序的构造和解释](https://github.com/DeathKing/Learning-SICP)
    7. 编译原理
@@ -108,10 +109,6 @@
   - 层次 [d3-hierarchy](https://github.com/d3/d3-hierarchy)
 - WebAssembly
   - https://github.com/WasmEdge/WasmEdge
-- 微前端
-  - https://github.com/bytedance/magic-portal
-  - https://github.com/bytedance/magic-microservices
-  - [让 iframe 焕发新生](https://zhuanlan.zhihu.com/p/442815952)
 - 框架
   - NodeJS
     - 架构

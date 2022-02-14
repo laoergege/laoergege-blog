@@ -50,15 +50,14 @@ tags:
           - switch
         - 循环
           - 递归
-          - while/do while
-          - for
-          - for in
-            - 对象属性枚举
-          - for of
-            - 迭代器模式
-              - 自定义迭代接口
-              - 生成器
-          - for await of
+          - 迭代
+            - while/do while
+            - for
+          - 属性枚举
+            - for in
+          - 迭代器
+            - for of
+            - for await of
         - try-catch-finally
           - 即使在 try 中出现了 return，finally 中的语句也一定要被先执行
           - finally 中的 return 会覆盖 try 中的 return
