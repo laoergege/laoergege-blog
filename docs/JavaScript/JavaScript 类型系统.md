@@ -34,7 +34,6 @@ tags:
         - Array
         - RegExp
         - Date
-        - Math
         - Function
           - 按值传递
             > 按值传递，即复制实参的值  

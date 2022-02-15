@@ -34,6 +34,7 @@
     - 发版日志
   - 监控
   - 文档
+    - vue：[vuese](https://github.com/vuese/vuese)
   - 架构化及方案沉淀
     - table
       - [tabulator](https://github.com/olifolkerd/tabulator)

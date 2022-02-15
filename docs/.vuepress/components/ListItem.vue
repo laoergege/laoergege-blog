@@ -5,8 +5,8 @@
         {{ title }}
       </h1>
       <div class="text-xs italic mb-2">更新时间：{{updateTime}}</div>
-      <p v-if="desc">
-        {{ desc }}
+      <p>
+        {{ desc || '暂无摘要'}}
       </p>
       <div class="justify-end card-actions">
         <router-link :to="{ name: routeKey }">
