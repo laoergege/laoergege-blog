@@ -25,7 +25,12 @@
       - mock
       - 热模块更新
   - 构建
-  - 打包
+    - 模块化
+    - 编译
+      - [gogocode](https://github.com/thx/gogocode)
+    - 打包/分包
+    - webpack
+    - vue：[vite](https://github.com/vitejs/vite)
   - 测试
     - unit（单元） jest
     - e2e（端对端） jest + puppeteer
@@ -159,10 +164,7 @@
 
       - Electron
 
-  - 调试
-
-    - mock
-    - hot replace
+ 
 
 - 自动化集成方式
 
