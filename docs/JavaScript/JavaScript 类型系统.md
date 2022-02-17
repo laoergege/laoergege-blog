@@ -28,19 +28,23 @@ tags:
         - 创建唯一标识符，作为对象属性名，防止冲突
         - 创建对象的“隐藏”属性
       - BigInt
-    - 引用类型
+    - 引用类型 
       - Object
-      - 内置对象
+      - 内置特殊对象类型
+        - Boolean
+        - Number
+        - String
         - Array
         - RegExp
+        - Error
         - Date
         - Function
           - 按值传递
             > 按值传递，即复制实参的值  
             > 引用传递，即复制实参的地址
-      - 数据结构
-        - Set、WeakSet
-        - Map、WeakMap
+        - 数据结构
+          - Set、WeakSet
+          - Map、WeakMap
 
 ## 类型判断
 

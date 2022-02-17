@@ -119,3 +119,4 @@ console.log(g.next().value) // 3
 
 父子协程之间调用栈切换
 
+宿主发起的任务称为宏观任务，把 JavaScript 引擎发起的任务称为微观任务。

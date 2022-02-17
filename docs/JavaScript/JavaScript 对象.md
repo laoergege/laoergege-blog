@@ -23,10 +23,10 @@ tags:
         - Object.create
         - Object.getPrototypeOf
         - Object.setPrototypeOf
-  - 原型体系下的面向对象编程支持
     - [new + 构造器模拟“类”行为](#new--构造器模拟类行为)
     - [ES6 中的类 class](#es6-中的类-class)
     - [原型继承](#原型继承)
+    - [ES6 继承](#es6-继承)
   - [函数对象](#函数对象)
 
 ## JavaScript 对象模型
@@ -185,7 +185,9 @@ o2.p2();
 
 ES6 中加入了新特性 class、extends，new、this 跟 function 搭配的怪异行为终于可以不使用了，但是类的写法依旧是基于原型机制的语法糖，JavaScript 的原型体系同时作为一种编程范式和运行时机制存在。**推荐在任何场景，我都推荐使用 ES6 的语法来定义类，而令 function 回归原本的函数语义**。
 
-注意对象创建的行为：**类的数据属性写在对象上，而访问器属性和方法则写在原型对象之上的**。
+注意对象创建的行为：
+- 类的数据属性写在对象上
+- 访问器属性和方法则写在原型对象上的（且不可枚举）
 
 ```js
 class N {
@@ -205,6 +207,15 @@ class N {
   }
 }
 ```
+
+- 类
+  - 构造器
+  - 实例属性
+  - 静态属性
+  - 私有属性
+  - 静态块：在类生成时运行一次，主要作用是对静态属性进行初始化
+
+更多 [Class 相关语法](https://es6.ruanyifeng.com/#docs/class)参考。
 
 ### 原型继承
 
@@ -274,14 +285,20 @@ let b = new B()
 
 注意不要 `B.prototype=A.prototype` ，这种共享原型的方式会导致对 B 的原型扩展，A 的实例也能访问得到。
 
-ES6 继承示例：
+### ES6 继承
 
 ```js
 class A {}
-class B extends A {}
+class B extends A {
+  constructor() {
+    super()
+  }
+}
 
 const b = new B();
 ```
+
+
 
 Babel 的继承源码实现
 

@@ -6,7 +6,8 @@
   - 版本管理（git）
     - git flow 分支规范
     - commit msg 提交信息
-    - merge request & code review
+    - 提案请求
+      - merge request & code review
   - 开发
     - 代码风格
       - 命名规范
@@ -25,12 +26,15 @@
       - mock
       - 热模块更新
   - 构建
-    - 模块化
-    - 编译
-      - [gogocode](https://github.com/thx/gogocode)
-    - 打包/分包
-    - webpack
-    - vue：[vite](https://github.com/vitejs/vite)
+    - 特性
+      - 模块化
+      - 编译
+        - [gogocode](https://github.com/thx/gogocode)
+      - 打包/分包
+    - 工具
+      - webpack
+      - vue：[vite](https://github.com/vitejs/vite)
+      - [parcel](https://parceljs.org/)
   - 测试
     - unit（单元） jest
     - e2e（端对端） jest + puppeteer
@@ -47,6 +51,7 @@
     - 组件库
     - 微前端
       - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
+    - WebComponent
 
 
 - 前端工作流
@@ -54,15 +59,7 @@
     - 代码
       - 规范 [《前端代码规范实践总结》](./前端代码规范实践总结.md)
 
-    - 项目
-     
-      - 项目架构
-        - 组织结构
-      - 结构组织
-        - 模块、分层
-        - 基础库
-          - 组件库
-          - http
+
       - 项目搭建
         - 脚手架工具
           - 创建项目模板(用于快速生成新项目的目录模板，并集成一系列体系化工具的安装，能够提升前端开发人员的效率，减少copy操作)，参考 vue-cli 交互及设计思路
@@ -70,7 +67,7 @@
     - 依赖管理工具
     - 构建工具
       - webpack
-      - [parcel](https://parceljs.org/)
+      - 
     - 框架
   - 测试
   - CI/CD
