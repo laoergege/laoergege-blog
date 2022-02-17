@@ -3,7 +3,7 @@
 > 前端工程化本质：将前端工作流程`标准化`、`规范化`、`工具化`、`自动化`。**通过规范和工具来提高前端应用质量及开发效率。**
 
 - 前端工作流
-  - git
+  - 版本管理（git）
     - git flow 分支规范
     - commit msg 提交信息
     - merge request & code review
@@ -35,6 +35,7 @@
     - unit（单元） jest
     - e2e（端对端） jest + puppeteer
   - CI
+    - 包大小限制：[size-limit](https://github.com/ai/size-limit)
   - CD
     - 发版日志
   - 监控
