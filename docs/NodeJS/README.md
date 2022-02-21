@@ -11,10 +11,6 @@ tags:
       - 基于 **V8 引擎** 的 JavaScript 运行环境
       - 使用 **事件驱动**，**非阻塞 I/O** 模型
     - js 是单线程、通过事件循环分发将异步任务分发到其他线程
-    - [事件循环机制](./Event Loop.md)
-      - timers（setTimeout、setIntervel）
-      - setImmediate
-      - nextTick
   - [安装及基本使用](./安装及基本使用.md)
   - [异步编程](../JavaScript/JavaScript 异步编程.md)
   - 模块机制
@@ -46,6 +42,7 @@ tags:
     - console 和 setTimeout 之类
     - ECMAScript 语言定义的全局对象，如 Date
 - 深入
+  - [Node.js 事件循环](./Node.js%20事件循环.md)
   - [Node.js 源码剖析](https://theanarkh.github.io/understand-nodejs/)
   - 第三方扩展
     - C++ addons NAPI
@@ -118,17 +115,6 @@ tags:
     - [Deno 运行时入门教程：Node.js 的替代品](https://www.ruanyifeng.com/blog/2020/01/deno-intro.html)
 - awasome
   - 线程池 [piscina](https://github.com/piscinajs/piscina)
-
-
-Farrow
-类型安全的服务端框架设计目标
-Prevent Hanging Request（阻止请求意外挂起）
-Refuse Wrong Response（拒绝错误响应内容）
-No need to Monkey-Patching（无需篡改对象属性）
-Embedded Runtime-Validation（内置运行时验证）
-
-
-
 
 
 

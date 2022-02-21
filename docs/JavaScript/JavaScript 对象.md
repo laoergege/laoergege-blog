@@ -25,6 +25,13 @@ tags:
         - Object.setPrototypeOf
     - [new + 构造器模拟“类”行为](#new--构造器模拟类行为)
     - [ES6 中的类 class](#es6-中的类-class)
+      - 类
+        - 构造器
+        - 实例属性
+        - 静态属性
+        - 私有属性
+        - 静态块：在类生成时运行一次，主要作用是对静态属性进行初始化
+        - 继承
     - [原型继承](#原型继承)
     - [ES6 继承](#es6-继承)
   - [函数对象](#函数对象)
@@ -214,6 +221,7 @@ class N {
   - 静态属性
   - 私有属性
   - 静态块：在类生成时运行一次，主要作用是对静态属性进行初始化
+  - 继承
 
 更多 [Class 相关语法](https://es6.ruanyifeng.com/#docs/class)参考。
 
@@ -298,16 +306,23 @@ class B extends A {
 const b = new B();
 ```
 
+- super 要点
+  - 子类必须在 `constructor()` 方法中调用 `super()`
+    - ES6 的继承机制：创建的空对象必须先继承父类的属性和方法，再将该对象作为子类的实例返回给子类的 this，即“继承在前，实例在后”
+    - ES5 的继承机制：直接一个子类的实例对象，然后应用父类构造器继承父类的属性和方法，即“实例在前，继承在后”
+  - super作为函数调用时，代表父类的构造函数
+  - super作为对象时，在普通方法中，指向父类的原型对象；在静态方法中，指向父类
+  - 子类普通方法中通过super调用父类的方法时，方法内部的this指向当前的子类实例
+  - **可继承原生构造函数**自定义子类
 
-
-Babel 的继承源码实现
+ES6 的继承本质也是基于原型，Babel 的继承源码实现：
 
 ```js
 function _inherits (subClass, superClass) { 
 	subClass.prototype = Object.create(superClass && superClass.prototype, { 
 		constructor: { 
 			value: subClass, 
-			enumerable: false, 
+			enumerable: false, // 原型不可枚举
 			writable: true, 
 			configurable: true 
 		} 

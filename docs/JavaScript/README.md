@@ -47,7 +47,7 @@ tags:
   - [数组去重](https://github.com/laoergege/laoergege-blog/issues/63)
   - [手写节流、防抖](https://github.com/laoergege/laoergege-blog/issues/83)
   - [EventEmitter 实现](https://github.com/laoergege/laoergege-blog/issues/84)
-  - [手写题：实现柯里化](https://github.com/laoergege/laoergege-blog/issues/87)
+  - [手写 实现柯里化](https://github.com/laoergege/laoergege-blog/issues/87)
 - 学习资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
   - [ES6 入门教程](https://es6.ruanyifeng.com/)
@@ -55,24 +55,9 @@ tags:
   - [JavaScript 开发者应懂的 33 个概念](https://github.com/stephentian/33-js-concepts)
   - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
   - [现代 JavaScript 教程](https://zh.javascript.info/)
-- js 学习路线
-  - 语法结构
-  - 深入
-    - 执行机制
-      1. 变量提升机制（历史问题）
-      2. 类型系统
-      3. 静态作用域（链）
-      4. 对象模型
-      5. 原型（链）
-      6. 闭包
-      7. 元编程
-  - 更深
-    - ES 语言规范
-    - 了解 V8 JS 编译原理
-    - 关注 JS 编译器比如 V8 团队，及周边发展
-  - 底层
-    - 研究 V8 源码
-    - 语言设计及编译原理
+- 语言规范及生态
+  - V8
+  - ECMASCript 规范
 
 
 ## TC39 提案流程
@@ -82,3 +67,15 @@ tags:
 3. 官方认可，草稿书写
 4. 候选，厂商跟进实现
 5. 正式成为 ECMAScript 标准并推出
+
+
+
+所谓暂时死区，就是不能在初始化之前，使用变量。
+
+- hash：每次 hash 值的变化，浏览器不发出请求，也就不会刷新页面，还会触发hashchange
+- history：pushState 和 replaceState，通过这两个 API 可以改变 url 地址且不会发送请求
+  - 但因为没有 # 号，所以当用户刷新页面之类的操作时，浏览器还是会给服务器发送请求
+    - 为了避免出现这种情况，所以这个实现需要服务器的支持，需要把所有路由都重定向到根页面。
+
+
+vue：state/component => render => vnode => diff&patch => dom
