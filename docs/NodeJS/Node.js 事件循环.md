@@ -16,15 +16,16 @@ tags:
    1. setTimeout VS setImmediate
 6. close callbacks
 
+- 纳米任务
+  - process.nextTick：在当前操作完成后处理
+- 微任务
+  - promise.then
+  - queueMicrotask
 - 宏任务
   - setTimeout、setInterval
   - IO
-  - setImmediate
+  - setImmediate： 在 IO poll 后执行
   - close
-- 微任务
-  - process.nextTick：在当前操作完成后处理
-  - Promise
-  - queueMicrotask
 
 ## Node.js 11.x 前后差异
 

@@ -59,17 +59,17 @@ tags:
     - sessionStorage
     - indexDB
   - 通信
-    - 页面之间
-      - 同源
+    - 不同上下文（窗口、iframe、worker）
+      - 页面：同源限制
         - window.opener + iframe.contentWindow（引用通信）
         - localStorage + storageEvent
+        - SharedWorker + 消息通道
+        - ServiceWorker
+      - 消息通道机制
         - window.postMessage
         - MessageChannel
-        - BroadcastChannel
-        - SharedWorker
-      - 非同源
-        - window.postMessage
-    - 与后端
+        - BroadcastChannel（同源限制）
+    - 后端
       - 同源
         - ajax
         - fetch
@@ -84,6 +84,7 @@ tags:
       - [Debugging WebAssembly with modern tools](https://developer.chrome.com/blog/wasm-debugging-2020/)
   - 其他
     - [PWA](./PWA.md)
+      - https://lavas-project.github.io/pwa-book/
   - ResourceHints
     - [prerender](https://web.dev/speculative-prerendering/)
   - SanitizerAPI

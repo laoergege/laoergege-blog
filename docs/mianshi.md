@@ -346,7 +346,9 @@ flex: 1; 是复合属性，说下其他属性？
           全局前置/钩子：beforeEach、beforeResolve、afterEach
           路由独享的守卫：beforeEnter
           组件内的守卫：beforeRouteEnter、beforeRouteUpdate、beforeRouteLeave
-- 系统
+- NodeJS
+  - [ ] 浏览器事件循环跟 NodeJS 有什么区别
+- 操作系统
   - [ ] 线程跟进程区别
   - 定义
     - 进程是资源分配和调度的基本单位
