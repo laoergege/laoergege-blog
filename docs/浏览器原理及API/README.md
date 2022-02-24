@@ -79,6 +79,8 @@ tags:
         - (ProxyServer)
   - 硬件
     - [WebWork](./WebWork.md)
+      - [task-worklet](https://github.com/developit/task-worklet)
+      - [workerize](https://github.com/developit/workerize)
     - WebAssembly
       - [A cartoon intro to WebAssembly](https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/)
       - [Debugging WebAssembly with modern tools](https://developer.chrome.com/blog/wasm-debugging-2020/)

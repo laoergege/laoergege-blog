@@ -21,7 +21,7 @@ tags:
 
 ## 网络协议栈
 
-TCP/IP 协议栈
+### TCP/IP 协议栈
 
 <img src="./images/2b8fee82b58cc8da88c74a33f2146703.png" alt="img" style="zoom: 50%;" />
 
@@ -35,8 +35,7 @@ TCP/IP 协议栈
    2. UDP
 4. 应用层（application layer）
 
-
-OSI 协议栈（Open System Interconnection Reference Model）
+### OSI 协议栈（Open System Interconnection Reference Model）
 
 仅仅只是提供标准**参考**的协议栈，毕竟 TCP/IP 等协议先已经在许多网络上实际运行，再推翻重来是不可能的。所以，OSI 分层模型在发布的时候就明确地表明是一个“参考”，不是强制标准。但日常交流的时候我们通常使用 OSI 模型，用四层、七层等术语。
 
