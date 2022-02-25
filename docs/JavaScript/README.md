@@ -22,7 +22,8 @@ tags:
     - async/await
   - 函数式编程
     - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
-    - 函数柯里化
+    - 柯里化（curry）
+    - 组合（compose）
     - [ts-belt](https://github.com/mobily/ts-belt)
   - 运行时
     - [内存管理机制](./JavaScript%20内存管理机制.md)
