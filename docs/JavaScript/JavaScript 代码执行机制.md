@@ -274,25 +274,6 @@ foo(undefined, "arg2");
 
 闭包的形成时是在编译期间，跟函数动态调用栈没什么关系。
 
-另外总结下变量查找过程：
-
-```
-flowchart LR
-  subgraph 当前执行上下文
-  direction LR
-  scope01(词法环境) --> 02(变量环境)
-  end
-  subgraph 闭包1
-  end
-  subgraph 闭包2
-  end
-  subgraph 依次类推...
-  end
-  subgraph 全局对象
-  end
-  当前执行上下文 --> 闭包1 --> 闭包2 --> 依次类推... --> 全局对象
-```
-
 ### 闭包实现原理
 
 ```javascript

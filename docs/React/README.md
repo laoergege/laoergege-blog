@@ -4,8 +4,9 @@
     - render props
     - hooks
   - 样式
-    - CSS in JS
+    - CSS-in-JS
       - [styled-jsx](https://github.com/vercel/styled-jsx)
+      - styled-component
   - 资料
     - [react-illustration-series](https://github.com/7kms/react-illustration-series)
     - [react 开发模式](https://www.patterns.dev/)

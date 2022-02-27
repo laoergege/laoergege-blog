@@ -1,44 +1,48 @@
 ---
+release: true
 title: 'JavaScript 正则表达式'
 tags:
   - javascript
   - regexp
+desc: 'JavaScript 正则表达式'
 ---
 # JavaScript 正则表达式
 
-## 目录
-
-- [JavaScript 正则表达式](#javascript-正则表达式)
-  - [目录](#目录)
-  - [正则是匹配模式，要么匹配字符，要么匹配位置](#正则是匹配模式要么匹配字符要么匹配位置)
-    - [字符类](#字符类)
-      - [修饰符 s 与字符类](#修饰符-s-与字符类)
-      - [Unicode：修饰符 “u” 和 class \p{...}](#unicode修饰符-u-和-class-p)
-    - [集合和范围 [...]](#集合和范围-)
-    - [量词](#量词)
-      - [贪婪匹配和惰性匹配](#贪婪匹配和惰性匹配)
-    - [选择符（|）](#选择符)
-    - [锚符 ^、$](#锚符-)
-      - [多行模式 m 与 ^、$](#多行模式-m-与-)
-      - [锚符 ^$ 对比 \n](#锚符--对比-n)
-    - [单词边界 \b 和 \B](#单词边界-b-和-b)
-    - [前瞻断言和后瞻断言](#前瞻断言和后瞻断言)
-  - [分组](#分组)
-    - [分组匹配](#分组匹配)
-    - [嵌套分组匹配](#嵌套分组匹配)
-    - [分组命名及引用](#分组命名及引用)
-    - [排除捕获分组](#排除捕获分组)
+- JavaScript 正则表达式
+  - [正则要么匹配字符，要么匹配位置](#正则要么匹配字符要么匹配位置)
+    - 字符
+      - 普通字符
+      - [字符类](#字符类)
+        - [Unicode：修饰符 “u” 和 class \p{...}](#unicode修饰符-u-和-class-p)
+      - [集合和范围](#集合和范围)
+      - [量词](#量词)
+        - [贪婪匹配和惰性匹配](#贪婪匹配和惰性匹配)
+    - 位置
+      - [锚符 ^、$](#锚符-)
+        - [多行模式 m](#多行模式m)
+        - [锚符 ^$ 对比 \n](#锚符--对比-n)
+      - [单词边界 \b 和 \B](#单词边界-b-和-b)
+      - [前瞻断言和后瞻断言](#前瞻断言和后瞻断言)
+        - 前 x(?=y)、x(?!y)
+        - 后 (?<=y)x、(?<!y)x
+  - 捕获组
+    - [括号+量词当作一整体进行匹配](#括号量词当作一整体进行匹配)
+    - [将匹配结果做为目标继续分组](#将匹配结果做为目标继续分组)
+      - [阻止分组]()
+    - 分组命名 `?<name>` 及引用：`\N` 和 `\k<name>`
+  - 选择符 `|`
   - [正则表达式回溯法原理](#正则表达式回溯法原理)
   - [练习题](#练习题)
       - [将每个单词的首字母转换为大写](#将每个单词的首字母转换为大写)
       - [字符串 trim 方法模拟](#字符串-trim-方法模拟)
       - [匹配成对标签](#匹配成对标签)
       - [获取 URL pathname](#获取-url-pathname)
-
-参考阅读
-
-- [JavaScript 正则表达式迷你书](https://link.zhihu.com/?target=https%3A//github.com/qdlaoyao/js-regex-mini-book)
-- [正则表达式](https://zh.javascript.info/regular-expressions)
+  - JS 正则、字符串相关方法
+    - match
+    - matchAll
+    - replace
+    - split
+    - search
 
 正则表达式是搜索和替换字符串的一种强大方式。
 
@@ -57,10 +61,10 @@ tags:
 - g 全局搜索所有匹配项
 - m 多行模式
 - u 开启完整的 unicode 支持
-- s . 符号表示任意字符
+- s 启用 “dotall” 模式，允许点 . 匹配换行符 \n
 - y 粘滞模式
 
-## 正则是匹配模式，要么匹配字符，要么匹配位置
+## 正则要么匹配字符，要么匹配位置
 
 匹配字符的模式有
 
@@ -74,10 +78,6 @@ tags:
 
 **匹配位置会消费位置字符，故对应位置的字符不会出现在结果中**。匹配位置的模式有锚符：
 
-- ^、$
-- \b、\B
-- x(?=y)、x(?!y)、(?<=y)x、(?<!y)x
-
 ### 字符类
 
 - \d 数字0到9
@@ -89,19 +89,15 @@ tags:
 - .  任意字符，除 \n
 - \p{...} 配合修饰符u，表示 unicode 字符
 
-#### 修饰符 s 与字符类
-
-默认情况下字符类 `.` 不匹配换行符`\n`，但修饰符 **s** 下的模式的字符类 `.` 能够匹配换行符`\n`，但是修饰符 s 在兼容性不是特别高，详见 [https://caniuse.com/#search=dotall](https://caniuse.com/#search=dotall)，我们可以通过 `[\s\S]` 模式表示任意字符，`\s` 和 `\S` 相冲，两者用集合的方式结合起来，就表示全部，类似的还有 `[\d\D]`、`[^]` 等
-
 #### Unicode：修饰符 “u” 和 class \p{...}
 
 TODO 未完成，先占个坑位
 
-### 集合和范围 [...]
+### 集合和范围
 
 - 集合，如 [eao] 意味着查找在 3 个字符 'a'、'e' 或者 `‘o’ 中的任意一个
-- 范围，如 [0-5] 表示从 0 到 5 的数字，[\d] 表示 0 到 9 数字
-- 排除范围 [^…]，如 [^]
+- 范围，如 [0-5] 表示从 0 到 5 的数字，[\d] 表示 0 到 9 数字；[0-9A-F]，搜索一个字符，满足数字 0 到 9 或字母 A 到 F
+- 排除范围 [^…]，如 [^0-9] 匹配任何除了数字之外的字符
 - [...] 除了在方括号中有特殊含义的字符外，其它所有特殊字符都是都不需要添加反斜杠的，如 [-().^+] 会查找 -().^+ 的其中任意一个字符
 
 ### 量词
@@ -126,13 +122,7 @@ TODO 未完成，先占个坑位
 
 > 参考 [贪婪量词和惰性量词](https://zh.javascript.info/regexp-greedy-and-lazy)
 
-### 选择符（|）
 
-选择符号`(|)`作用并非在字符级别生效，而是在**表达式级别**。
-
-- A|B|C 意思是命中 A、B 或 C 其一均可
-- gra|ey 匹配 “gra” or “ey”
-- gr(a|e)y 严格等同 gr[ae]y
 
 ### 锚符 ^、$
 
@@ -143,7 +133,7 @@ let str1 = "it's fleece was white as snow";
 alert( /snow$/.test(str1) ); // true
 ```
 
-#### 多行模式 m 与 ^、$
+#### 多行模式 m
 
 修饰符 m 开启的多行模式下，^、$ 不仅仅匹配文本的开始与结束，还**匹配每一行的开始与结束**
 
@@ -160,7 +150,6 @@ alert( /snow$/.test(str1) ); // true
 'aaaab\nccccc'.match(/b\n/mg) // ["b\n"]
 'aaaab\nccccc'.match(/b$/mg) // ["b"]
 ```
-
 
 ### 单词边界 \b 和 \B
 
@@ -179,14 +168,14 @@ alert( /snow$/.test(str1) ); // true
 ### 前瞻断言和后瞻断言
 
 前瞻断言
+
 语法为：`x(?=y)`，它表示 “匹配 x, 仅在后面是 y 的情况"”
 语法为：`x(?!y)`，意思是 “查找 x, 但是仅在不被 y 跟随的情况下匹配成功”
+
 后瞻断言
+
 后瞻肯定断言：`(?<=y)x`, 匹配 x, 仅在前面是 y 的情况。
 后瞻否定断言：`(?<!y)x`, 匹配 x, 仅在前面不是 y 的情况。
-
-> 断言括号不会成为捕获分组，即内容不会再去匹配第一个匹配的结果
-> 把位置理解空字符，是对位置非常有效的理解方式。
 
 ```javascript
 // 比如把 "12345678"，变成 "12,345,678"
@@ -198,9 +187,20 @@ alert( /snow$/.test(str1) ); // true
 "12345678".replace(/\B(?=(\d{3})+$)/g, ',') //"12,345,678"
 ```
 
-## 分组
+#### 捕获组
 
-括号将正则表达式的一部分组合在一起，因此量词可以整体应用
+断言括号不会成为捕获分组，即内容不会再去匹配第一个匹配的结果，如果我们想要捕捉括号内的只需再加括号。
+
+```js
+let str = "1 turkey costs 30€";
+let reg = /\d+(?=(€|kr))/; // €|kr 两边有额外的括号
+
+alert( str.match(reg) ); // 30, €
+```
+
+## 捕获组
+
+### 括号+量词当作一整体进行匹配
 
 ```javascript
 // 不带括号，模式 go+ 表示 g 字符，其后 o 重复一次或多次。例如 goooo 或 gooooooooo。
@@ -209,11 +209,9 @@ alert( /snow$/.test(str1) ); // true
 'Gogogo now!'.match(/(go)+/gi) // "Gogogo"
 ```
 
-除了组合功能外，还提供了**分组，便于我们引用它。引用某个分组结果**，会有两种情形：在 JavaScript 里引用它，在正则表达式里引用它。
+### 将匹配结果做为目标继续分组
 
-### 分组匹配
-
-如果正则**不带修饰符 g**，正则引擎将用分组顺序匹配前一个匹配的结果
+> match 如果正则**不带修饰符 g**，正则引擎将用分组顺序匹配前一个匹配的结果
 
 ```javascript
 let str = "I love JavaScript";
@@ -225,36 +223,30 @@ alert( result[1] );     // Script（第一个分组）
 alert( result.length ); // 2
 ```
 
-如果 regexp 带有 g 标记，则不包含分组匹配结果
-
-```javascript
-let str = "I love JavaScript";
-
-let result = str.match(/Java(Script)/g);
-
-alert( result[0] ); // JavaScript
-alert( result.length ); // 1
-```
-
-如果没有匹配项，则无论是否带有标记 g ，都将返回 null
-
-更多 match 用法参考 [String.prototype.match()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/match)
-
-[matchAll](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll) 是 match 的增强版本：match 在修饰符 g 不会包含分组匹配的结果，而 matchAll 则会返回一个包含每个分组匹配的结果数组(格式与不带 g 标记的 str.match 相同)的迭代对象
-
-![matchAll](./images/matchAll.png)
-
-### 嵌套分组匹配
-
-分组里嵌套分组
+嵌套组
 
 ```javascript
 'abcdefg'.match(/a(b(cd)e)/) // ["abcde", "bcde", "cd"]
 ```
 
-从上面结果看出，匹配的结果很有顺序，**因为正则引擎默认从左到右，以左括号开始为分组编号，并且以分组顺序匹配前一个匹配的结果**。
+#### 阻止分组
 
-### 分组命名及引用
+有时我们需要括号才能正确应用量词，但不会引用它，即，既不在 JavaScript API 里引用，也不在正则里反向引用可以通过在开头添加 ?: 来排除组。
+
+```javascript
+let str = "Gogogo John!";
+
+// ?: 从捕获组中排除 'go'
+let regexp = /(?:go)+ (\w+)/i;
+
+let result = str.match(regexp);
+
+alert( result[0] ); // Gogogo John（完全匹配）
+alert( result[1] ); // John
+alert( result.length ); // 2（数组中没有更多项）
+```
+
+### 分组命名 `?<name>` 及引用：`\N` 和 `\k<name>`
 
 默认情况下，正则引擎默认从左到右，以左括号开始为分组编号，可以通过在开始括号之后立即放置 `?<name>` 来为分组命名
 
@@ -291,25 +283,6 @@ regexp = /(?<quote>['"])(.*?)\k<quote>/g;
 alert( str.match(regexp) ); // "She's the one!"
 ```
 
-### 排除捕获分组
-
-有时我们需要括号才能正确应用量词，但不会引用它，即，既不在 JavaScript API 里引用，也不在正则里反向引用可以通过在开头添加 ?: 来排除组。
-
-```javascript
-let str = "Gogogo John!";
-
-// ?: 从捕获组中排除 'go'
-let regexp = /(?:go)+ (\w+)/i;
-
-let result = str.match(regexp);
-
-alert( result[0] ); // Gogogo John（完全匹配）
-alert( result[1] ); // John
-alert( result.length ); // 2（数组中没有更多项）
-```
-
-另外引用编号 `\10` 是表示第 10 个分组，为了区分为 `\1` 和 0 ，可以请使用 `(?:\1)0` 或者 `\1(?:0)`
-
 ## 正则表达式回溯法原理
 
 正则表达式回溯法，正则表达式匹配字符串的这种方式，有个学名，叫回溯法。回溯法也称试探法，它的基本思想是：从问题的某一种状态（初始状态）出发，搜索从这种状态出发所能达到的所有“状态”，当一条路走到“尽头”的时候（不能再前进），再后退一步或若干步，从另一种可能“状态”出发，继续搜索，直到所有的“路径”（状态）都试探过。这种不断“前进”、不断“回溯”寻找解的方法，就称作“回溯法”。
@@ -344,6 +317,14 @@ alert( result.length ); // 2（数组中没有更多项）
 
 `/"candy".match(^(?:can|candy)$/)`
 
+## 选择符 `|`
+
+选择符号`|`作用并非在字符级别生效，而是在**表达式级别**。
+
+- A|B|C 意思是命中 A、B 或 C 其一均可
+- gra|ey 匹配 “gra” or “ey”
+- gr(a|e)y 严格等同 gr[ae]y
+
 ## 练习题
 
 #### 将每个单词的首字母转换为大写
@@ -370,3 +351,32 @@ alert( result.length ); // 2（数组中没有更多项）
 ```javascript
 'https://github.com/laoergege/laoergege-blog'.replace(/^https?:\/\/[^\/]*/, '') // "laoergege/laoergege-blog"
 ```
+
+#### 获取 url 中 query 参数
+
+```js
+Array.from("https://juejin.cn?name=zhangsan&age=18&id=123#".matchAll(/(?<=\?)[^#]*/g))
+
+Array.from("https://juejin.cn?name=zhangsan&age=18&id=123#".matchAll(/\?([^#]*)/g)) 
+```
+
+## 参考阅读
+
+- [JavaScript 正则表达式迷你书](https://link.zhihu.com/?target=https%3A//github.com/qdlaoyao/js-regex-mini-book)
+- [正则表达式](https://zh.javascript.info/regular-expressions)
+
+## JS 正则、字符串相关方法
+
+- str.match(regexp)
+  - 不带 g，返回 `[match, p1, p2, ..., pn, offset, input, groups]`
+  - 带 g，不对匹配结果继续分组，返回 [match1, match2, ...]
+  - 如果没有匹配项则返回 null
+- str.matchAll(regexp)
+  - 返回一个可迭代的对象
+  - 必须带 g，转数组为 `[[match, p1, p2, ..., pn, offset, input, groups], ...]`
+- str.replace(str|regexp, str|func)
+  - func(match, p1, p2, ..., pn, offset, input, groups)
+- str.split(regexp|substr, limit)
+- str.search(regexp)
+- regexp.exec(str)
+- regexp.test(str)

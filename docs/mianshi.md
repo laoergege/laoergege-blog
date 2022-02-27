@@ -30,14 +30,9 @@
       
 
 
-通过 Lighthouse 进行测量，根据 Lighthouse 给出的建议 进行优化
 一个网站 SEO 怎么优化
 
-如果不用 Lighthouse，Lighthouse 那不就只是能在谷歌上测吗(大概是这么个问题)
 
-WebPageTest 不过我用的比较少，没深挖
-
-Lighthouse 也可以通过 npm 进行下载使用
 
 SSR 了解及原理
 
@@ -90,8 +85,6 @@ flex: 1; 是复合属性，说下其他属性？
   - 回文字符串(这个问题好常见)，判断一个字符串最多只删 1 个字符，是否能成为一个回文字符串，let str = "ABCDABA"
 - typescript
   - TypeScript 高级用法， Pick 和 Omit
-- 正则
-  - 用正则表达式获取 url 中 query 参数 let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
 - 浏览器
   - 重绘和重排？
   - 介绍一下同源策略？你知道那些跨域方法？cors 跨域的原理是什么有了解过吗？
@@ -163,7 +156,8 @@ flex: 1; 是复合属性，说下其他属性？
     - [x] 手写 call、apply、bind
       - ![图 21](images/1644765312671.png)  
       - ![图 19](images/1644765252959.png)  
-      - ![图 20](images/1644765270881.png)  
+      - ![图 20](images/1644765270881.png) 
+      - ![图 12](images/1645862236459.png)  
     - [x] 手写 new
       1. 以构造器函数的 prototype 属性值为原型创建新对象
       2. 将 this 指向该对象
@@ -173,7 +167,7 @@ flex: 1; 是复合属性，说下其他属性？
     - [x] 手写 instanceof
       - 用法：左边任意值，右边必须构造器
       - 本质：判断左值的原型链上是否存在右边的构造函数的prototype对象
-      - ![图 16](images/1644658408741.png)  
+      - ![图 15](./images/1645879375346.png)  
     - [x] [原型及原型链](./JavaScript/JavaScript%20对象.md)
       - 原型：所有对象都有私有属性 `[[prototype]]`（目前大多数浏览器厂商非标准实现 `__proto__` 属性）保持对原型的引用
       - 原型的 5 种修改方式
@@ -185,20 +179,20 @@ flex: 1; 是复合属性，说下其他属性？
           - Object.setPrototypeOf
       - 原型链：当对象查找一个属性的时候，如果没有在自身找到，那么就会查找自身的原型，如果原型还没有找到，那么会继续查找原型的原型，直到为空为止，这条查找链路就是原型链
         - 原型链中 Function 比较特殊的地方就是 `Function.__proto__` 指向自己的 `Function.prototype`
-    - [x] 原型继承
-      - 通过原型链实现继承，具体是修改对象的原型设置为另外一个对象
+    - [x] 继承
+      - 原型继承:通过原型链实现继承，具体是修改对象的原型设置为另外一个对象
       - 主要是基于原型链的继承（原型代理）：通过**借用构造函数**实现独享数据属性，通过**原型链**继承共享方法属性
       - 原型继承  
         ![图 27](images/1644989969777.png)  
       - ES5 与 ES6 继承区别
         - 同：都是基于原型机制
         - 异
-          - ES6 的继承机制：创建的空对象必须先继承父类的属性和方法，再将该对象作为子类的实例返回给子类的 this；
+          - ES6 的继承机制：先内部创建的空对象继承父类的属性和方法，再将该对象作为子类的实例返回给子类的 this；
           - ES5 的继承机制：直接一个子类的实例对象，然后应用父类构造器继承父类的属性和方法，即“实例在前，继承在后”。
     - 对象深浅拷贝
       - 浅拷贝：Object.assign
       - [x] 深拷贝
-        - ![图 23](images/1644845225335.png)  
+        - ![图 11](./images/1645858709976.png)  
   - [ ] 模块发展历程
   - 函数编程
     - [ ] 普通函数和箭头函数区别
@@ -207,10 +201,15 @@ flex: 1; 是复合属性，说下其他属性？
       - arguments
     - [x] 柯里化
       - 把一个多参数的函数转成可以逐渐接受剩余参数的函数
-      - ![图 17](images/1644742760062.png) 
+      - ![图 13](./images/1645862554717.png)  
     - [x] compose
       - ![图 9](./images/1645805632722.png)  
   - [x] 数组
+    - [x] 类数组转化数组
+      - Array.from
+      - Array.apply(null, like)
+      - Array.prototype.slice.apply(a)
+      - Array.prototype.concat.call([], like)
     - [x] 数组扁平化
       - ![图 18](images/1644743709627.png) 
       - ![图 10](images/1645809879837.png)  
@@ -231,14 +230,30 @@ flex: 1; 是复合属性，说下其他属性？
       - [x] promise 哪些方法是原型上的，哪些方法是实例上的
         - 3: then、catch、finally
         - 6: resolve、reject、all、allSettled、race、any
+        - 扩展思考:如何取消 promise:Promise.race()方法可以用来竞争 Promise 可以借助这个特性 自己包装一个 空的 Promise 与要发起的 Promise 来实现
       - [x] Promise.all原理：计数器模式
     - [ ] 异步代码执行顺序
     - [ ] async、await的实现原理
-  - 代码题
+  - 正则
+    - ![图 20](./images/1645981868160.png) 
+    - 用正则表达式获取 url 中 query 参数 let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
+      - Array.from("https://juejin.cn?name=zhangsan&age=18&id=123#".matchAll(/(?<=\?)[^#]*/g))
+      - Array.from("https://juejin.cn?name=zhangsan&age=18&id=123#".matchAll(/\?([^#]*)/g)) 
+  - 手写代码
     - [x] 节流、防抖
       - 防抖：防止重复执行，事件触发 n 秒后再执行，如果期间再次触发则重新计算时间，最终只会执行一次
       - 节流：减少函数的执行频率，每隔 n 秒执行一次
-      - ![图 2](images/1645025081301.png)  P
+      - ![图 2](images/1645025081301.png)
+    - [x] 写版本号排序的方法
+      - ![图 14](./images/1645878783031.png)  
+    - [ ] 手写 AJAX 实现
+      - ![图 16](images/1645882012153.png)  
+    - [x] 如何实现 chunk 函数，数组进行分组
+      - ![图 17](./images/1645946136216.png) 
+    - [x] 实现模板字符串解析功能
+      -  ![图 18](./images/1645947212525.png)  
+    - [x] flatTree
+      - ![图 19](./images/1645948182295.png)  
   - V8
     - [ ] 垃圾回收机制
 - web

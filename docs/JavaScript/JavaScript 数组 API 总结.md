@@ -14,6 +14,8 @@
     - Array.from
     - 使用**类数组借用数组方法转数组**特点
       - `Array.prototype.slice.call(likeArray)`
+      - `Array.prototype.concat.apply([], likeArray)`
+      - `Array.apply(null, likeArray)`
 - 数组类型判断
   - xxx instanceof Array
   - Object.prototype.toString.call(xxx)

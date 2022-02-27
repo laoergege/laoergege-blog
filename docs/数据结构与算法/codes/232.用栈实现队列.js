@@ -16,7 +16,8 @@ var MyQueue = function () {
  * @return {void}
  */
 MyQueue.prototype.push = function (x) {
-
+    this.tempQueue = this.queue.reverse()
+    this.queue = this.
 };
 
 /**

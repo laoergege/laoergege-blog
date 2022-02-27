@@ -21,6 +21,7 @@ tags:
       - Boolean
       - Number
         - ECMAScript 中的 Number 类型使用 IEEE754 标准来表示数字（整数和浮点数）
+        - 采用双精确度 64位：1 符号位 + 11 指数位 + 52 尾数
       - String
         - Unicode 字符集，UTF16 编码方式
         - JavaScript 中的字符串一旦构造出来就无法改变（原内存空间），变量重新赋值只是重新创建新的字符串
@@ -87,6 +88,10 @@ tags:
   另一个是对象如果转换成了 primitive 类型跟等号另一边类型恰好相同，则不需要转换成数字。
 
 ## JavaScript 中非整数的 Number 如何比较： 0.1 + 0.2 !== 0.3
+
+1. ECMAScript 中的 Number 类型使用 IEEE754 标准来表示数字（整数和浮点数）
+2. 采用双精确度 64位：1 符号位 + 11 指数位 + 52 尾数
+
 
  ` console.log( Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON);`
 

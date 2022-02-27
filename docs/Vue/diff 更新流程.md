@@ -197,8 +197,6 @@ function hasPropsChanged(
 
 ## vue diff 算法
 
-组件更新进入 patch 阶段就开始 diff 新旧 subTree。
-
 diff 算法主要是关于如何高效得 diff vnode tree 之间的差异，以较低的成本（**减少 DOM 操作、提高节点复用**）完成子节点的更新。
 
 理想情况（复用所有能复用的节点，实在遇到新增或删除时，才执行插入或删除）的算法的时间复杂度 O(n³) 无法接受。

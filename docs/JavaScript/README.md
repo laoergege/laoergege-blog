@@ -37,6 +37,7 @@ tags:
       1. function
       2. eval
       3. with
+      4. Proxy&Reflect
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
 - api
   - [手写 call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
@@ -77,6 +78,3 @@ tags:
 - history：pushState 和 replaceState，通过这两个 API 可以改变 url 地址且不会发送请求
   - 但因为没有 # 号，所以当用户刷新页面之类的操作时，浏览器还是会给服务器发送请求
     - 为了避免出现这种情况，所以这个实现需要服务器的支持，需要把所有路由都重定向到根页面。
-
-
-vue：state/component => render => vnode => diff&patch => dom
