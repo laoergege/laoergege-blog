@@ -46,7 +46,7 @@ vnode
 
 component
 - props
-- setup
+- setup(data)
 - render
 - slots
 
@@ -68,11 +68,6 @@ vnode
 - props
 - children
 
-component
-- props
-- slots
-- data
-- render
 
 
 - before-created

@@ -39,6 +39,7 @@
     - unit（单元） jest
     - e2e（端对端） jest + puppeteer
     - Vitest
+    - cypress
   - CI
     - 包大小限制：[size-limit](https://github.com/ai/size-limit)
   - CD

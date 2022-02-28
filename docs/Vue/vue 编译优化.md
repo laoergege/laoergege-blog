@@ -84,3 +84,5 @@ diff 少 props
 
 非编译优化 children， $table 可以跳过 slots 校验
 PatchFlags.DYNAMIC_SLOTS 优化判断
+
+第四个参数

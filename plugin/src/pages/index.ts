@@ -1,7 +1,7 @@
 import type { PluginFunction, Page } from "@vuepress/core";
 import { createPage } from "@vuepress/core";
 import minimatch from "minimatch";
-import { isExistPlugin } from "./utils";
+import { isExistPlugin } from "../utils";
 import hash from "hash-sum";
 
 interface Options {
@@ -35,6 +35,11 @@ export const pageTables: PluginFunction<Options> = function ({
       const { pages } = app;
       const _pages = [...pages]
         .sort((a, b) => {
+          const { git } = a.data as any
+          if() {
+
+          }
+
           let atime = (a.data as any).git.updatedTime;
           let btime = (b.data as any).git.updatedTime;
           return btime - atime;
