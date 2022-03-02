@@ -237,7 +237,7 @@ diff 算法主要是关于如何高效得 diff vnode tree 之间的差异，以�
   - **新：数组**
 
 其中最为复杂情况就是如果新旧 vnode 的 children 都是 vnode 数组，为了尽可能提高 diff 效率、节点复用，vue3 采用了去头尾的最长递增子序列算法。
-### 去头尾的最长递增子序列算法
+### vue 去头尾的最长递增子序列算法
 
 1. 先对齐的前置元素和后置元素
 2. 对齐后存在三种情况
@@ -247,8 +247,6 @@ diff 算法主要是关于如何高效得 diff vnode tree 之间的差异，以�
    ![图 8](./images/061fc7cc5bbfbda4db890940db416c0321e5aea40ae9a06d68c0bf54887dad08.png)  
    1. 双方都存在未知子序列
    ![图 7](./images/1fcbe5f39d6f1879588feba75d76f01ef5b64bedeaa807eac9ca97cea3909daa.png)  
-
-
 
 #### 最长递增子序列
 

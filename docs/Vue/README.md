@@ -57,6 +57,7 @@
 4. [vue 的响应式系统](./vue%20的响应式系统.md)
 5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
 6. 编译优化
+7. vue 指令原理
 
 ### API
 
@@ -70,14 +71,3 @@
   - [一切前端概念，都是纸老虎](https://mp.weixin.qq.com/s/oF-MJ39zh0-R65Q4vPX8Dw)
 - SFC
   - [Vue 3 的 SFC Style CSS Variable Injection 提案实现的背后](https://mp.weixin.qq.com/s/N1AoRSuK00V5QoZr4TWWvQ)
-
-
-SSR的缺点
-开发条件会受到限制，服务器端渲染只支持beforeCreate和created两个钩子
-当我们需要一些外部扩展库时需要特殊处理，服务端渲染应用程序也需要处于Node.js的运行环境
-更多的服务端负载
-
-
-Vue中组件生命周期调用顺序是什么样的？
-组件的调用顺序都是先父后子,渲染完成的顺序是先子后父。
-组件的销毁操作是先父后子，销毁完成的顺序是先子后父。

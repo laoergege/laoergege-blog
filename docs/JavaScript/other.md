@@ -43,12 +43,14 @@ vnode
 - type
 - props
 - children
+- dirs
+- transition
 
 component
 - props
+- slots
 - setup(data)
 - render
-- slots
 
 
 setupComponent

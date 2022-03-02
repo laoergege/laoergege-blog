@@ -1,5 +1,6 @@
 ---
 release: true
+top: 1
 tags: 
  - vue
 desc: 通过本文你将了解到 vue 是如何将响应式系统和 VirtualDOM 渲染机制结合起来，响应式更新视图。

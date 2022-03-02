@@ -13,6 +13,7 @@
       - 命名规范
       - 代码格式 prettier
       - 代码质量 eslint
+      - 类型检测 typescript
     - 项目组织管理
       - multirepo
       - monorepo
@@ -20,6 +21,7 @@
     - 环境
       - 运行环境
       - 包管理
+        - pnpm
     - 调试
       - 本地服务器
       - 代理
@@ -28,6 +30,7 @@
   - 构建
     - 特性
       - 模块化
+      - 热模块替换
       - 编译
         - [gogocode](https://github.com/thx/gogocode)
       - 打包/分包
@@ -41,6 +44,7 @@
     - Vitest
     - cypress
   - CI
+    - lint
     - 包大小限制：[size-limit](https://github.com/ai/size-limit)
   - CD
     - 发版日志
@@ -48,12 +52,18 @@
   - 文档
     - vue：[vuese](https://github.com/vuese/vuese)
   - 架构化及方案沉淀
-    - table
+    - 列表
       - [tabulator](https://github.com/olifolkerd/tabulator)
+    - 表单
+    - 图标
     - 组件库
+      - WebComponent
     - 微前端
       - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
-    - WebComponent
+    - SSR
+    - 跨平台
+      - Flutter
+      - Electron
 
 
 - 前端工作流
@@ -65,29 +75,14 @@
       - 项目搭建
         - 脚手架工具
           - 创建项目模板(用于快速生成新项目的目录模板，并集成一系列体系化工具的安装，能够提升前端开发人员的效率，减少copy操作)，参考 vue-cli 交互及设计思路
-  - 开发
-    - 依赖管理工具
-    - 构建工具
-      - webpack
-      - 
-    - 框架
-  - 测试
-  - CI/CD
-    - CI
-      - lint
-      - 构建
 
-        
 
     
 
 
 
 - 依赖管理
-      - 管理工具
-        - npm
-        - yarn
-        - pnpm
+     
       - 依赖算法
         - 嵌套依赖
         - 扁平依赖
@@ -140,29 +135,6 @@
         - https://mp.weixin.qq.com/s/E4SdYEkEzurfrnJrBu3bjA 并发下载
         - https://mp.weixin.qq.com/s/8RJSBwCDTvwX3Oql31ckkg 重试
         - https://mp.weixin.qq.com/s/lGqnGg-Zdnt-b7grdh9NnQ。压缩
-      - icon
-      - 表单
-      - [CSS 项目实践指南](../HTML&CSS/CSS 项目实践指南.md)
-      - h5
-        - 移动端适配
-        - 混合开发
-      - pc
-
-    - 服务端渲染（SSR）
-
-      - Nuxt.js
-
-    - 静态页面生成器(SSG)
-
-      - Vuepress
-
-    - 跨平台框架
-
-      - Flutter
-
-    - 桌面应用开发
-
-      - Electron
 
  
 
