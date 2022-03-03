@@ -4,12 +4,6 @@ import minimatch from "minimatch";
 import { isExistPlugin } from "../utils";
 import hash from "hash-sum";
 
-interface Options {
-  max: number; // 最近最新的数量，默认 10
-  exclude?: string; // glob
-  render?: (page: Page) => string;
-}
-
 type Tables = Page[][];
 
 const MAX = 8;
@@ -35,15 +29,16 @@ export const pageTables: PluginFunction<Options> = function ({
       const { pages } = app;
       const _pages = [...pages]
         .sort((a, b) => {
-          const { git } = a.data as any
-          if() {
-
-          }
-
           let atime = (a.data as any).git.updatedTime;
           let btime = (b.data as any).git.updatedTime;
           return btime - atime;
         })
+        // .sort((a, b) => {
+        //   const { git } = a.data as any
+        //   if() {
+
+        //   }
+        // })
         .filter((page) =>
           exclude ? !minimatch(page.filePath as string, exclude) : true
         );
@@ -51,11 +46,12 @@ export const pageTables: PluginFunction<Options> = function ({
       // 数据分页
       const tables: Tables = chunks(_pages, max);
       function chunks(nums: any[], len: number) {
-        let result = [];
-        let index = 0;
-        while (index < nums.length) {
-          result.push(nums.slice(index, (index += len)));
-        }
+        const result: any[][] = [];
+        nums.forEach((num, i) => {
+          let index = Math.floor(i / len);
+          result[index] ??= [];
+          result[index].push(num);
+        });
         return result;
       }
 

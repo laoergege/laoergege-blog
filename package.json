@@ -2,9 +2,10 @@
   "name": "laoergege-blog",
   "version": "1.0.0",
   "description": "Laoergege's Learning Track",
+  "packageManager": "pnpm@6.32.2",
   "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev docs && npm run dev -r",
+    "dev": "vuepress dev docs && pnpm run dev -r",
     "docs:build": "vuepress build docs",
     "publish": "git tag page -f && git push origin page -f"
   },

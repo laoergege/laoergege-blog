@@ -2,6 +2,7 @@
 release: true
 tags:
 	- javascript
+desc: JavaScript 知识体系总结
 ---
 
 # JavaScript
@@ -60,7 +61,6 @@ tags:
 - 语言规范及生态
   - V8
   - ECMASCript 规范
-
 
 ## TC39 提案流程
 
