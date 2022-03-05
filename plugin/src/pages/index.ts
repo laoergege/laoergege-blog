@@ -25,20 +25,23 @@ export const pageTables: PluginFunction<Options> = function ({
         throw "Need to install @vupress/plugin-git dependency first!";
       }
 
-      // page 按更新日期排序
+      // 排序
       const { pages } = app;
       const _pages = [...pages]
+        // 日期排序
         .sort((a, b) => {
           let atime = (a.data as any).git.updatedTime;
           let btime = (b.data as any).git.updatedTime;
           return btime - atime;
         })
-        // .sort((a, b) => {
-        //   const { git } = a.data as any
-        //   if() {
-
-        //   }
-        // })
+        // 置顶排序
+        .sort((a, b) => {
+          let { top: atop } = a.frontmatter as any;
+          let { top: btop } = b.frontmatter as any;
+          atop ??= Infinity;
+          btop ??= Infinity;
+          return atop - btop;
+        })
         .filter((page) =>
           exclude ? !minimatch(page.filePath as string, exclude) : true
         );

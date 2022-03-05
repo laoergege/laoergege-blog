@@ -1,6 +1,5 @@
 import path from "path";
 import type { ThemeConfig } from "@vuepress/core";
-import menu from "./menu";
 
 // const PUBLIC_PATH = "https://laoergege/";
 
@@ -24,18 +23,10 @@ export default {
 
   // 主题
   theme: path.resolve(__dirname, "theme"),
-  themeConfig: {
-    logo: "/avatar.png",
-    repo: "laoergege",
-    lastUpdated: true,
-    smoothScroll: true,
-    sidebar: false,
-    lastUpdatedText: "最近更新时间",
-    contributors: false,
-    editLink: false,
-    ...menu,
-  },
+  themeConfig: {},
 
+  // 打包
+  bundler: "@vuepress/bundler-webpack",
   bundlerConfig: {
     // chainWebpack() {
     //   return process.env.NODE_ENV === "development" ? {} : {

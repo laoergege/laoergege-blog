@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="min-h-screen flex justify-center" data-theme="cupcake">
-      <!-- <keep-alive>
+      <keep-alive>
         <Post  v-if="$route.path !== '/'" />
         <Home  v-else />
-      </keep-alive> -->
+      </keep-alive>
     </div>
     <footer class="p-4 footer bg-base-200 text-base-content footer-center">
       <div>
@@ -18,7 +18,6 @@
 <script>
 import Post from "./Post.vue";
 import Home from "./Main.vue";
-
 export default {
     components: {
         Post,

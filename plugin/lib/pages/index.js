@@ -135,11 +135,14 @@ var pageTables = function (_a) {
                         var btime = b.data.git.updatedTime;
                         return btime - atime;
                     })
-                        // .sort((a, b) => {
-                        //   const { git } = a.data as any
-                        //   if() {
-                        //   }
-                        // })
+                        // 置顶排序
+                        .sort(function (a, b) {
+                        var atop = a.frontmatter.top;
+                        var btop = b.frontmatter.top;
+                        atop !== null && atop !== void 0 ? atop : (atop = Infinity);
+                        btop !== null && btop !== void 0 ? btop : (btop = Infinity);
+                        return atop - btop;
+                    })
                         .filter(function (page) {
                         return exclude ? !(0, minimatch_1.default)(page.filePath, exclude) : true;
                     });
