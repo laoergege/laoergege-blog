@@ -5,7 +5,8 @@
   "packageManager": "pnpm@6.32.2",
   "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev docs && pnpm run dev -r",
+    "start": "pnpm run -w -r --stream dev",
+    "dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "publish": "git tag page -f && git push origin page -f"
   },

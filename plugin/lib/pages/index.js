@@ -67,7 +67,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.pageTables = void 0;
 var core_1 = require("@vuepress/core");
 var minimatch_1 = __importDefault(require("minimatch"));
-var utils_1 = require("./utils");
+var utils_1 = require("../utils");
 var hash_sum_1 = __importDefault(require("hash-sum"));
 var MAX = 8;
 var keys = [];
@@ -82,10 +82,12 @@ var pageTables = function (_a) {
             return __awaiter(this, void 0, void 0, function () {
                 function chunks(nums, len) {
                     var result = [];
-                    var index = 0;
-                    while (index < nums.length) {
-                        result.push(nums.slice(index, (index += len)));
-                    }
+                    nums.forEach(function (num, i) {
+                        var _a;
+                        var index = Math.floor(i / len);
+                        (_a = result[index]) !== null && _a !== void 0 ? _a : (result[index] = []);
+                        result[index].push(num);
+                    });
                     return result;
                 }
                 function genDataList(tables) {
@@ -133,6 +135,11 @@ var pageTables = function (_a) {
                         var btime = b.data.git.updatedTime;
                         return btime - atime;
                     })
+                        // .sort((a, b) => {
+                        //   const { git } = a.data as any
+                        //   if() {
+                        //   }
+                        // })
                         .filter(function (page) {
                         return exclude ? !(0, minimatch_1.default)(page.filePath, exclude) : true;
                     });
