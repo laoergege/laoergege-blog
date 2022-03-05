@@ -35,9 +35,8 @@ pnpm 特点：
     
     - 扁平化算法本身的**复杂性**很高，耗时较长
     
-    - 项目中仍然可以**非法访问**没有声明过依赖的包，因为 Node Module Resolution
+    - 幽灵依赖：项目中仍然可以**非法访问**没有声明过依赖的包，因为 Node Module Resolution
 
-具体内容例子可以参考推荐阅读。
 
 下边例子，我们用 pnpm 创建一个项目并且 `pnpm install qiankun` 来观察：
 
