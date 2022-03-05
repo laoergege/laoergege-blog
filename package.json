@@ -7,7 +7,8 @@
   "scripts": {
     "start": "pnpm run --parallel dev",
     "dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "docs:build": "pnpm run -r --workspace-root build",
+    "build": "vuepress build docs",
     "publish": "git tag page -f && git push origin page -f"
   },
   "repository": {
