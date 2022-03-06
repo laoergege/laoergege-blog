@@ -6,6 +6,10 @@
     - @rule
     - 选择器
     - 单位
+  - CSSOM
+    - Inline Styles via element.style
+    - styleSheets
+    - CSS Typed OM
   - 响应式
     - Media Queries
     - Flexbox
