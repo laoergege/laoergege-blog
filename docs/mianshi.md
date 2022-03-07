@@ -647,3 +647,5 @@ lint-staged 原理
       - http
       - cdn
       - service-worker
+  - 规范
+    - eslint
