@@ -10,8 +10,9 @@
         - 索引签名 & Record
   - 类型推断
   - tsconfig
+  - 类型增强
+    - declare
   - 类型声明文件(d.ts)
-    - 类型增强
   - 类型声明库 [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)
   - VSCode 集成
     - TypeScript Language Service

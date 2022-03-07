@@ -324,11 +324,16 @@ flex: 1; 是复合属性，说下其他属性？
   - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
   - [ ] http1.0/1.1/2.0/3.0
   - [x] 浏览器 http 缓存
+      1. 缓存查找：查找不到直接发送请求，http 缓存需要经过 service worker 缓存
+      2. 强制缓存：通过 Expires 和 Cache-Control: max-age 判断缓存是否可用是否到期，如果可用则直接使用，否则协商缓存
+      1. 服务端会返回 Last-modified、ETag信息，客户端则携带 If-Modified-Since 、If-None-Match 去请求后台，服务器根据条件请求字段判断资源是否更新
+         - 若资源更新，返回资源和 200 状态码
+         - 否则，返回 304，告诉浏览器直接从缓存获取资源
   - [x] Etag、last-modified 区别
     - Etag 优先级高
     - 为什么要 Etag
-    - ETag 是资源的一个唯一标识，文件内容的 hash 值。
-    - ETag 还有“强”“弱”之分。强 ETag 要求资源在字节级别必须完全相符，弱 ETag 在值前有个“W/”标记，只要求资源在语义上没有变化，但内部可能会有部分发生了改变
+      - ETag 是资源的一个唯一标识，文件内容的 hash 值。
+      - ETag 还有“强”“弱”之分。强 ETag 要求资源在字节级别必须完全相符，弱 ETag 在值前有个“W/”标记，只要求资源在语义上没有变化，但内部可能会有部分发生了改变
   - [x] get 和 post 区别
     - 参数、编码、大小（要支持 IE，则最大长度为 2083byte，若只支持 Chrome，则最大长度 8182byte）、缓存
   - [ ] 说一下三次握手四次挥手
@@ -336,6 +341,7 @@ flex: 1; 是复合属性，说下其他属性？
   - [ ] http2, TCP 丢包阻塞问题
   - [x] DNS 解析过程
   - [ ] CDN缓存
+  - vary：可作为缓存验证条件
 - 框架 vue
   - 原理
     - [ ] vue2 初始化过程
@@ -564,3 +570,80 @@ typeof
 
 
 创建项目模板(用于快速生成新项目的目录模板，并集成一系列体系化工具的安装，能够提升前端开发人员的效率，减少copy操作)，参考 vue-cli 交互及设计思路
+
+- 安全
+  - WAF
+  - CSRF
+  - XSS
+  - 反爬虫
+    - UA
+
+
+- 构建
+  - 提速
+    - cache
+      - hashSourcewebpack plugin
+      - webpack5 cache
+    - esbuild
+    - resolve
+      - include/exclude
+    - 多进程
+  - 体积
+    - gzip/brotli
+
+
+- 自动化测试
+  - CI
+    - when -> 选定分支
+  - 前端异常监听
+    - onerror
+    - 框架
+    - unhandlereject
+  - 上报
+    - 网络监控
+      - git
+      - sendBeacon
+
+- bff
+  - 聚合后端数据
+  - SSR
+
+
+
+lint-staged 原理
+- pre-commit
+
+
+- koa
+  - 洋葱
+  - koa-body
+  - koa-router
+    - 正则
+    - path-to-exgexp
+    - 前缀树
+      - find-my-way
+
+
+
+- 项目经验
+  - tailwindcss
+    - 优点
+      - 语义化
+      - 原子性
+      - JIT
+    - 缺点
+      - 模板样式复杂
+  - 虚拟列表
+  - 混合开发
+  - 大文件导出
+  - 跨域
+    - proxy
+    - [ ] cors 一个？
+    - 四层负载
+      - CNAME + document.domain
+    - jsonp
+  - 性能优化
+    - 缓存
+      - http
+      - cdn
+      - service-worker

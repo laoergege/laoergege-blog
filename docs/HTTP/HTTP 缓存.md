@@ -1,21 +1,31 @@
 ---
 release: true
+top: 3
 tags:
   - http
   - 缓存
+  - 浏览器
+desc: 总结 http 缓存、缓存相关控制设置及前端缓存最佳实践
 ---
 
 # http 缓存
 
 - http 缓存
   - [Cache-Control](#cache-control)
-  - [代理缓存](#代理缓存)
-    - [Vary](#vary)
-  - [浏览器缓存](#浏览器缓存)
+  - 缓存位置
+    - [代理端缓存](#代理缓存)
+    - [浏览器缓存](#浏览器缓存)
+      - 内存
+        - 图片
+        - preload
+      - service-work
+      - http-cache
+      - push-cache
   - [协商缓存](#协商缓存)
   - [缓存设置控制](#缓存设置控制)
-    - [服务端的缓存控制](#服务端的缓存控制)
-    - [客户端的缓存控制](#客户端的缓存控制)
+    - [响应缓存控制](#响应缓存控制)
+    - [请求缓存控制](#请求缓存控制)
+  - [Vary：缓存验证器](#Vary：缓存验证器)
   - [前端缓存最佳实践](#前端缓存最佳实践)
 
 ## Cache-Control
@@ -54,27 +64,13 @@ http 中控制缓存的主要字段有一下三个：
   - s-maxage，单独设置代理服务器缓存时间，与 max-age 区别开
   - no-transform，禁止代理服务对资源做转换
 
-### Vary
-
-> vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在响应头部，表示一个内容版本，可作为代理缓存的缓存决策依据。
-
-URL 原则上是一种网络上的资源概念，同个 URL 可以有多种资源版本形式。
-
-![图 10](./images/a88d34744c98992ce0bd38df170fbf74743743e010f0f7e558738bd9d1d72dfd.png)
-
-比如，你可以 `Accept: text/html`，也可以 `Accept: text/csv` 改为以不同的格式获取相同的资源，这些都是服务器[内容协商](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Content_negotiation)的结果。
-
-下图是代理缓存根据 vary 缓存依据流程：
-
-![图 9](./images/7d679f31875e7cfb7cc3f3f99efc6030698374dbedcc437da771db25f34c7551.png)
-
 ## 浏览器缓存
 
 ![图 18](./images/bdc51a403dd95bc66a025a17492f3dab8cd6640484c797b67e2d1e324e3b99b5.png)
 
 1. 缓存查找：查找不到直接发送请求，http 缓存需要经过 service worker 缓存
 2. 强制缓存：通过 Expires 和 Cache-Control 判断缓存是否可用是否到期，如果可用则直接使用，否则协商缓存
-3. [协商缓存](#协商缓存)：携带 If-Modified-Since 、If-None-Match 请求后台，服务器根据条件请求字段判断资源是否更新
+3. [协商缓存](#协商缓存)：服务端会返回 Last-modified、ETag信息，客户端则携带 If-Modified-Since 、If-None-Match 去请求后台，服务器根据条件请求字段判断资源是否更新
    - 若资源更新，返回资源和 200 状态码
    - 否则，返回 304，告诉浏览器直接从缓存获取资源
 
@@ -109,22 +105,37 @@ Last-modified 也同样类似。
 
 ## 缓存设置控制
 
-### 服务端的缓存控制
-
-服务端的缓存设置控制主要面向客户端，如浏览器缓存、缓存代理
+### 响应缓存控制
 
 ![](./images/server-cache-control.svg)  
 
-### 客户端的缓存控制
+### 请求缓存控制
 
-`Cache-Control` 是个通用字段，客户端也可以发送附带 `Cache-Control` 缓存指令的请求。客户端缓存设置控制面对的是代理和源服务器。
+`Cache-Control` 是个通用字段，客户端也可以发送附带 `Cache-Control` 缓存指令的请求（但不同浏览器对请求缓存控制不同支持，大多数支持 `Cache-Control: max-age=0` 或者 `Cache-Control: no-cache` 去做强制刷新请求）。
 
 ![图 1](./images/9b4fa558a294f0716e7dad1d5d8e20b9ffdd5056ac5ad2efa02d3c2ed9cc0756.png)
 
+- no-cache，不使用缓存，直接发送请求
 - max-stale，表明客户端愿意接收一个超过指定过期时间范围内的资源，比如 `max-stale: 5` 过期后 5 秒内都可以
 - min-fresh，相当于缩短过期时间，比如 `min-fresh：5`，只允许到期前 5 秒之前的时间内
 - only-if-cached，表示只接受代理缓存的数据，不接受源服务器的响应
 - no-transform，禁止代理服务对资源做转换
+
+## Vary：缓存验证器
+
+URL 原则上是一种网络上的资源概念，同个 URL 可以有多种资源版本形式。
+
+![图 10](./images/a88d34744c98992ce0bd38df170fbf74743743e010f0f7e558738bd9d1d72dfd.png)
+
+比如，你可以 `Accept: text/html`，也可以 `Accept: text/csv` 改为以不同的格式获取相同的资源，这些都是服务器[内容协商](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Content_negotiation)的结果。
+
+vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在响应头部，表示一个内容版本，可协作缓存决策依据。
+
+大多数浏览器都支持 vary 缓存验证，但要注意的是浏览器通常不会实现为同个 URL 存储多个变体的功能，只会为唯一 URL 做单一内容版本存储；而代理服务器通常可自定义实现对同个 URL 多个 vary 缓存。
+
+下图是代理缓存根据 vary 缓存依据流程：
+
+![图 9](./images/7d679f31875e7cfb7cc3f3f99efc6030698374dbedcc437da771db25f34c7551.png)
 
 ## 前端缓存最佳实践
 
@@ -132,5 +143,6 @@ http 缓存大多针对前端资源，看[《前端缓存最佳实践》](../前
 
 ## 学习参考
 
-- [HTTP 缓存](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching#Cache_validation)
+- [MDN HTTP 缓存](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching#Cache_validation)
 - [可能是最被误用的 HTTP 响应头之一 Cache-Control: must-revalidate](https://zhuanlan.zhihu.com/p/60357719)
+- [understanding-vary-header](https://www.smashingmagazine.com/2017/11/understanding-vary-header/)
