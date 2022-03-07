@@ -649,3 +649,5 @@ lint-staged 原理
       - service-worker
   - 规范
     - eslint
+  - 人事
+  - 小程序

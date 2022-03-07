@@ -60,7 +60,7 @@ export default async ({ app }: { app: App }) => {
         }
       });
 
-      return () =>
+      return () => 
         h(
           resolveComponent("ClientOnly"),
           {},
@@ -99,4 +99,4 @@ export default async ({ app }: { app: App }) => {
 
   // options come from vuepress plugin config
   const vpOptions = options;
-};
+};;

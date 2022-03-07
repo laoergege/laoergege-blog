@@ -20,6 +20,7 @@ export default {
   dest: path.resolve(__dirname, "../../dist"),
   templateDev: path.resolve(__dirname, "templates/index.dev.html"),
   templateSSR: path.resolve(__dirname, "templates/index.ssr.html"),
+  templateBuild: path.resolve(__dirname, "templates/index.ssr.html"),
 
   // 主题
   theme: path.resolve(__dirname, "theme"),

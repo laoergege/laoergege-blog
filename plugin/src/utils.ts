@@ -1,4 +1,5 @@
 import type { App } from "@vuepress/core";
+import path from "path";
 
 // 将 utf8 编码的文本转换为普通文本
 export function utf8ToText(str: string) {
@@ -16,4 +17,8 @@ export function isExistPlugin(pluginName: string, app: App) {
   const plugins = app.pluginApi.plugins;
 
   return plugins.some((p) => p.name === pluginName);
+}
+
+export function getOutput() {
+  return path.resolve(__dirname, "../lib");
 }

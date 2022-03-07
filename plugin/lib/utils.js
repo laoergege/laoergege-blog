@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isExistPlugin = exports.utf8ToText = void 0;
+exports.getOutput = exports.isExistPlugin = exports.utf8ToText = void 0;
+var path_1 = __importDefault(require("path"));
 // 将 utf8 编码的文本转换为普通文本
 function utf8ToText(str) {
     var decoder = new TextDecoder();
@@ -16,3 +20,7 @@ function isExistPlugin(pluginName, app) {
     return plugins.some(function (p) { return p.name === pluginName; });
 }
 exports.isExistPlugin = isExistPlugin;
+function getOutput() {
+    return path_1.default.resolve(__dirname, "../lib");
+}
+exports.getOutput = getOutput;

@@ -16,11 +16,11 @@
     "minimatch": "^3.0.4",
     "systemjs": "^6.11.0",
     "vssue": "^1.4.8",
-    "vue": "^3.2.21",
     "zx": "^4.2.0"
   },
   "devDependencies": {
     "@types/minimatch": "^3.0.5",
-    "@types/systemjs": "^6.1.1"
+    "@types/systemjs": "^6.1.1",
+    "vue": "^3.2.31"
   }
 }
