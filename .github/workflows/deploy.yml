@@ -17,7 +17,7 @@ jobs:
     - name: Install-node
       uses: actions/setup-node@v2
       with: 
-        node-version: '14' 
+        node-version: '16' 
     # 使用缓存，加速构建
     - name: Cache
       uses: actions/cache@v2
