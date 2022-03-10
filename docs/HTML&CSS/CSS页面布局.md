@@ -1,19 +1,35 @@
+---
+release: true
+tags:
+ - css
+ - 布局
+---
+
+# CSS 页面布局
 
 - CSS页面布局
   - BFC
-  - 盒子模型
-    - 怪异盒模型和标准盒模型
-      - IE模型元素宽度 width=content+padding
-      - 标准模型元素宽度 width=content
+  - 盒子模型：怪异盒模型和标准盒模型
+    - 盒子模型：content + padding + border + margin
+    - IE模型元素宽度 width=content+padding
+      - `box-sizing: content-box`
+    - 标准模型元素宽度 width=content
+      - `box-sizing: border-box`
+  - display
+    - flex
+      - [解决用flex布局时内容可能溢出的问题](https://stackoverflow.com/questions/43809612/prevent-a-child-element-from-overflowing-its-parent-in-flexbox)
+        - 本质：flex item 元素初始值 `min-width: auto`
+        - 解决：`min-width: 0` 、`overflow: hidden`
+    - grid
+      - [A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
+      - [网格布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout)
+  - position
   - 常见页面布局
     - 垂直水平居中
-  - flexbox
-    - [解决用flex布局时内容可能溢出的问题](https://stackoverflow.com/questions/43809612/prevent-a-child-element-from-overflowing-its-parent-in-flexbox)
-      - 本质：flex item 元素初始值 `min-width: auto`
-      - 解决：`min-width: 0` 、`overflow: hidden`
-  - grid
-    - [A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
-    - [网格布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout)
+      - flex + justify-content: center + align-items: center
+      - position: absolute + left: 50% + top: 50% + transform: translate(-50%, -50%)
+    - 左侧固定 + 右侧自适应布局
+    - 圣杯布局（三分栏布局）
 
 ## grid 属性
 

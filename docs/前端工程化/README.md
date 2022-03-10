@@ -48,7 +48,13 @@ desc: 系统化前端工程相关
           - .npmrc: `use-node-version`
         - 包管理：[corepack](https://github.com/nodejs/corepack)
         - 依赖锁定：lockfile
+        - pkg.peerDependencies
+          - 声明需要一个和宿主环境对等的包
+            - 如果用户显式依赖了核心库，则可以忽略各插件的 peerDependency 声明；
+            - 如果用户没有显式依赖核心库，则按照插件 peerDependencies 中声明的版本将库安装到项目根目录中；
+            - 当用户依赖的版本、各插件依赖的版本之间不相互兼容，会报错让用户自行修复；
   - 开发
+    - 框架化
     - 调试
       - 本地服务器
       - 代理
@@ -75,7 +81,9 @@ desc: 系统化前端工程相关
   - CI
     - lint
     - test
-    - 包大小限制：[size-limit](https://github.com/ai/size-limit)
+    - size
+      - [size-limit](https://github.com/ai/size-limit)
+      - [bundlesize](https://github.com/siddharthkp/bundlesize)
   - CD
     - 发版日志
   - 监控
@@ -97,6 +105,8 @@ desc: 系统化前端工程相关
     - 动画
       - [lottie](https://github.com/airbnb/lottie) 
       - [anime](https://github.com/juliangarnier/anime/)
+    - 移动端适配
+      - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport)
 
 
 

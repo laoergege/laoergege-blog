@@ -16,11 +16,12 @@ Thanks for the help of the following projects.
    1. [x] 列表页重复渲染(Hydration completed but contains mismatches)
 3. [x] 文章评论
 4. [x] 文章排版
+   1. @tailwindcss/typography
 5. [x] CDN 缓存
 6. [ ] service-work
 7. [ ] 内容搜索
 8. [ ] 图片优化
-9. [ ] code 块优化
+9.  [ ] code 块优化
 10. [ ] issue 同步
 11. [ ] tag 管理
 12. [ ] 可视化知识体系

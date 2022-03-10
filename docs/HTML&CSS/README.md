@@ -4,7 +4,7 @@
     - 继承
   - 语法
     - @rule
-    - 选择器
+    - 选择器及优先级
     - 单位
   - CSSOM
     - Inline Styles via element.style

@@ -3,9 +3,10 @@ release: true
 tags:
  - javascript
  - 语法
+desc: JavaScript 语法结构体系
 ---
 
-## JavaScript 语法结构
+# JavaScript 语法结构
 
 - JavaScript 文法
   - 词法
@@ -123,7 +124,7 @@ console.log(a); // [2]
 3. 以正则表达式开头的语句，正则的第一个**斜杠**被理解成了除号。
 4. 以 Template 开头的语句。
 
-## 控制型语句
+
 
 ## 表达式
 
