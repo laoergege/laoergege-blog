@@ -8,13 +8,13 @@ tags:
 # CSS 页面布局
 
 - CSS页面布局
-  - BFC
   - 盒子模型：怪异盒模型和标准盒模型
     - 盒子模型：content + padding + border + margin
     - IE模型元素宽度 width=content+padding
       - `box-sizing: content-box`
     - 标准模型元素宽度 width=content
       - `box-sizing: border-box`
+  - BFC
   - display
     - flex
       - [解决用flex布局时内容可能溢出的问题](https://stackoverflow.com/questions/43809612/prevent-a-child-element-from-overflowing-its-parent-in-flexbox)
