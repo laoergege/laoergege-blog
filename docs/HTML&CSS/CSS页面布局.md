@@ -3,9 +3,10 @@ release: true
 tags:
  - css
  - 布局
+desc: css 布局相关的知识体系
 ---
 
-# CSS 页面布局
+# CSS 布局
 
 - CSS页面布局
   - 盒子模型：怪异盒模型和标准盒模型
@@ -16,6 +17,8 @@ tags:
       - `box-sizing: border-box`
   - BFC
   - display
+    - inline
+    - block
     - flex
       - [解决用flex布局时内容可能溢出的问题](https://stackoverflow.com/questions/43809612/prevent-a-child-element-from-overflowing-its-parent-in-flexbox)
         - 本质：flex item 元素初始值 `min-width: auto`
@@ -24,6 +27,12 @@ tags:
       - [A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
       - [网格布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout)
   - position
+    - static
+    - relative
+    - absolute
+    - fixed
+    - sticky
+    - float
   - 常见页面布局
     - 垂直水平居中
       - flex + justify-content: center + align-items: center

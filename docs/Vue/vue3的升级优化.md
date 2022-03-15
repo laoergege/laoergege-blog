@@ -1,8 +1,8 @@
-- 项目源码管理
+- 项目源码
   - [RFC](https://github.com/vuejs/rfcs)
   - monorepo 方案
-    将项目分成多个可独立使用的包
   - 更好的 TypeScript 支持
+  - 将核心功能抽象成单独包，支持跨平台扩展
 - 性能优化
   - 源码体积优化
     - 移除一些冷门的 feature（比如 filter、inline-template 等）
@@ -20,20 +20,13 @@
     - 事件缓存
   - diff 算法优化
   - Slot 的编译优化
-  - 事件侦听函数的缓存优化
 - API
-  - Reactive API
   - Composition API
     - 逻辑组织（关注点聚焦）
     - 逻辑复用
       - 极致复用（回归 原生 JS 函数）
       - 函数可组合
-    - Composition API
-      - reactive api
-      - 生命周期函数
-      - 依赖注入
   - Fragment
-  - Protal
+  - Teleport
+  - Suspense
   - h
-- 扩展
-  - 支持自定义渲染器，让用户根据不同平台的渲染 API 定制渲染器

@@ -83,3 +83,46 @@ const App = (props, ctx) => {
 - 逻辑 封装业务错误
 
 try catch 分流
+
+
+```js
+import { inject, reactive } from 'vue'
+const STORE_KEY = '__store__'
+function useStore() {
+  return inject(STORE_KEY)
+}
+function createStore(options) {
+  return new Store(options)
+}
+class Store {
+  constructor(options) {
+    this.$options = options
+    this._state = reactive({
+      data: options.state
+    })
+    this._mutations = options.mutations
+  }
+  get state() {
+    return this._state.data
+  }
+  commit = (type, payload) => {
+    const entry = this._mutations[type]
+    entry && entry(this.state, payload)
+  }
+  install(app) {
+    app.provide(STORE_KEY, this)
+  }
+}
+export { createStore, useStore }
+```
+
+- 数据流方案
+  - problem
+    - 第三方库多余的 api，希望回归纯粹的 js
+  - need
+    - 更好的类型推导
+    - 支持 vue-devtool
+    - 扩展
+    - 轻量级
+  - api
+    - defineStore
