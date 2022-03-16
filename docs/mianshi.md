@@ -448,15 +448,15 @@ flex: 1; 是复合属性，说下其他属性？
     - [x] vue 和 react 对比
       - 同
         - 底层上都是使用 virtual dom 作为渲染机制
-        - 都是采用数据驱动的思想
+        - 都采用数据驱动的思想
       - 异
-        - 数据更新优化方式
+        - 更新优化方式
           - vue 通过响应式 + 编译优化，精确 vdom diff 范围
-          - 采用fiber架构，使用链表表示 DOM结构 可以在diff时随时中断和继续，利用requestIdleCallback在空闲时diff，防止数据量大diff时间长导致卡顿
-        - 编程上 react 偏向函数式、不可变。vue 则是响应式、可变
+          - react 采用fiber架构，使用链表表示 DOM结构 可以在diff时随时中断和继续，利用requestIdleCallback在空闲时diff，防止数据量大diff时间长导致卡顿，偏重运行时
+        - 编程上 react 偏向不可变、函数式编程。vue 则是响应式编程、可变数据
         - 模板书写上
           - react jsx 有完全 js 编程能力
-          - vue template 限制
+          - vue template 虽然缺失一定灵活，但起到限制规范
     - 作用于插槽
       - 伏组件可以拿到自组建传递的数据
   - SSR

@@ -18,7 +18,7 @@ desc: 系统化前端工程相关
 - 前端工作流
   - 版本管理（git）
     - git flow 分支管理
-    - commit msg 提交信息
+    - commit msg 提交规范
     - 提案请求
       - merge request & code review
   - 代码

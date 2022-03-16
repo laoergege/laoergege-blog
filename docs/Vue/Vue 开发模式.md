@@ -1,37 +1,25 @@
 ## Vue 应用的业务开发架构
 
 - 路由层
+  - router
+  - stack
 - 视图层
   - 容器组件
-  - 展示、交互组件
-- 服务层
+  - 展示组件
+    - 组件库
 - 数据层
+  - service
+  - model
 - 通信层
+  - httpClient
 
 业务数据
 1. 业务状态分散在组件，组件通信困难？
 2. Redux，将散落在组件里面的状态聚拢起来成唯一单例，形成状态 store => 组件的单向通信模式
 3. 面向对象编程（建立 业务模型） + 响应式编程 + 规范
 
-分层
-- U hook 工具代码
-- M 业务数据、业务逻辑 通过 hook 封装可复用
-- S 单例、运行时依赖注入、服务栈管理服务生命周期，Container 启动服务（封装 Vue-Router）
-- V 视图层只关注消费视图相关的数据以及交互逻辑 Vue
-- E 渲染引擎 dom
-
-
-routes
-
-model => service => container <=> viewModel => (data binding) <=> view
 
 ## Vue 组件开发范式
-
-- 容器-展示模式
-  - 两类组件通信
-    - 输入输出
-    - 嵌套场景，服务-依赖注入
-  - 模型 Model 表示域/业务模型的定义，ViewModel
 
 ```js
 setup() {
@@ -73,10 +61,6 @@ const App = (props, ctx) => {
 }
 ```
 
-> 但是以这样的组件为基本复用单位，在前端领域你会发现很难复用。有时视图模板符合了但逻辑状态稍微得修改，代码只会加入更多的 case by case；有时逻辑状态符合了但模板样式却不符合 UI 需求。
->
-> 最佳形式是**视图模板与逻辑状态可分开，与组件都是最小复用单位**。
-
 
 - 程序
 - 类型 JSON schmea
@@ -84,6 +68,16 @@ const App = (props, ctx) => {
 
 try catch 分流
 
+## 复用
+
+- 组件化
+  - 逻辑状态
+    - 渲染函数
+    - composition-api
+  - 模板
+    - 原子样式
+
+## 数据流
 
 ```js
 import { inject, reactive } from 'vue'
@@ -95,6 +89,7 @@ function createStore(options) {
   return new Store(options)
 }
 class Store {
+  @inject()
   constructor(options) {
     this.$options = options
     this._state = reactive({
