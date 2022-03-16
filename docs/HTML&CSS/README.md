@@ -84,6 +84,6 @@
 
 ## postcss 插件
 
-- css next
+- postcss-preset-env
 - csspre
 - [autoprefixer](https://github.com/postcss/autoprefixer#css-in-js) 处理兼容性前缀
