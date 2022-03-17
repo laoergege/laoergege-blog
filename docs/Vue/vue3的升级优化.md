@@ -6,7 +6,7 @@
 - 性能优化
   - 源码体积优化
     - 移除一些冷门的 feature（比如 filter、inline-template 等）
-    - _引入 tree-shaking 的技术，减少打包体积_
+    - 引入 tree-shaking 的技术，减少打包体积
   - 响应式优化
     - Object.defineProperty
       - 只能劫持的对象某一个属性的访问和修改，不能监听对象属性新增和删除

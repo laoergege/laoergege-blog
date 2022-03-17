@@ -1,22 +1,19 @@
 <template>
-  <div class="card my-6">
+  <div class="card">
     <div class="card-body">
-      <h1 class="card-title text-secondary-focus text-2xl">
-        {{ title }}
-      </h1>
-      <div class="text-xs italic mb-2">更新时间：{{updateTime}}</div>
-      <p>
-        {{ desc || '暂无摘要'}}
-      </p>
-      <div class="justify-end card-actions">
+      <h2 class="card-title text-secondary-focus text-2xl">
         <router-link :to="{ name: routeKey }">
-          <button class="btn btn-link hover:underline">阅读更多</button>
+           {{ title }}
         </router-link>
-      </div>
+      </h2>
+      <!-- <div class="text-xs italic mb-2">更新时间：{{updateTime}}</div> -->
+      <p>
+        {{ desc || '（暂无摘要）'}}
+      </p>
     </div>
-    <div class="divider">
+    <!-- <div class="divider">
       {{tags}}
-    </div> 
+    </div>  -->
   </div>
 </template>
 

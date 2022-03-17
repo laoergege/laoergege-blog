@@ -1,14 +1,16 @@
 ---
+release: true
 tags:
  - chrome
  - 浏览器原理
  - web
  - html
+desc: 浏览器原理及API知识体系总结
 ---
 # 浏览器原理及API
 
 本系列都是以 chrome/chromium 为主，参考学习资料：
-- 极客时间《浏览器原理及API》
+- 极客时间《浏览器工作原理与实践》
 - [Inside look at modern web browser 系列](https://developers.google.com/web/updates/2018/09/inside-browser-part1)
 - [Blink 文档链接](https://www.chromium.org/blink)
 

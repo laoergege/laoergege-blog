@@ -39,10 +39,9 @@ desc: vue 知识汇总
       - 高阶函数
       - 组合函数
   - 前端路由
-    - vue-router
-      - 路由懒加载、异步组件
-        - 路由懒加载的含义：把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件
-        - 实现：结合 Vue 的异步组件和 Webpack 的代码分割功能
+    - 路由导航
+    - 路由匹配
+    - 路由守卫
 - 生态
   - Vue2 => Vue3
     - [vue-compat](https://github.com/vuejs/core/tree/main/packages/vue-compat)
@@ -86,3 +85,8 @@ desc: vue 知识汇总
   - [Vue 3 的 SFC Style CSS Variable Injection 提案实现的背后](https://mp.weixin.qq.com/s/N1AoRSuK00V5QoZr4TWWvQ)
 
 
+- 流程自动化
+- 环境一致性
+- CI 缓存
+- CDN、缓存
+- 提示

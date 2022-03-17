@@ -93,6 +93,7 @@ desc: 系统化前端工程相关
     - 列表
       - [tabulator](https://github.com/olifolkerd/tabulator)
     - 表单
+      - [XRender](https://x-render.gitee.io/)
     - 图标
     - 组件库
       - WebComponent

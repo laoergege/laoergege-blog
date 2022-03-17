@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="min-h-screen flex justify-center" data-theme="cupcake">
+    <div class="min-h-screen flex justify-center px-4 flex-col items-center" data-theme="cupcake">
       <keep-alive>
         <Post  v-if="$route.path !== '/'" />
         <Home  v-else />

@@ -34,6 +34,7 @@ tags:
         - 继承
     - [原型继承](#原型继承)
     - [ES6 继承](#es6-继承)
+  - [原型链判断](#原型链判断)
   - [函数对象](#函数对象)
 
 ## JavaScript 对象模型
@@ -81,6 +82,16 @@ JavaScript 提供了完全运行时能力，这使得它可以模仿具有多种
 ```js
 let o = { [Symbol.toStringTag]: "MyObject" }
 console.log(Object.prototype.toString.call(o)); // '[object MyObject]'
+```
+
+```js
+class ValidatorClass {
+  get [Symbol.toStringTag]() {
+    return "Validator";
+  }
+}
+
+Object.prototype.toString.call(new ValidatorClass()); // "[object Validator]"
 ```
 
 基于原型的面向对象系统通过“复制”的方式来创建新对象。原型系统的“复制操作”有两种实现思路：
@@ -232,7 +243,7 @@ class N {
 - 拼接（复制）继承：`Object.assign`
 - 主要是基于原型链的继承（原型代理）：通过**借用构造函数**实现独享数据属性，通过**原型链**继承共享方法属性。
 
-以下是寄生组合式继承（PS：sb 名称）代码示例：
+以下是寄生组合式继承（PS：SB 名称）代码示例：
 
 > 推荐阅读
 > - [JavaScript 继承](https://tsejx.github.io/javascript-guidebook/object-oriented-programming/inheritance/prototype-chain#%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%AE%9E%E4%BE%8B)
@@ -333,13 +344,17 @@ function _inherits (subClass, superClass) {
 }
 ```
 
+## 其他
+
+### 原型链判断
+
 画出上面原型链中各个对象 `__proto__` ，`constructor` 和 `prototype` 的关系：
 
 ![图 13](./images/1643035299916.png)  
 
 **原型链中 Function 比较特殊的地方就是 `Function.__proto__` 指向自己的 `Function.prototype` 需要特殊记忆**。
 
-## 函数对象
+### 函数对象
 
 JavaScript 用对象模拟函数的设计代替了一般编程语言中的函数，它们可以像其它语言的函数一样被调用、传参。
 

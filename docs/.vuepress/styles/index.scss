@@ -40,31 +40,6 @@
   }
 }
 
-.line-numbers-mode{
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: baseline;
-
-  .line-numbers{
-    margin-right: -2em;
-    font-size: inherit;
-    z-index: 1;
-    text-align: center;
-    width: 2em;
-    background: white;
-    font-size: 12px;
-    @screen sm {
-      font-size: 14px;
-    }
-    @screen lg {
-      font-size: 16px;
-    }
-  }
-
-  .shiki{
-    padding-left: 2.5em;
-    flex: 1;
-    margin: 0;
-    width: 0;
-  }
+ul ul {
+  margin: 0;
 }

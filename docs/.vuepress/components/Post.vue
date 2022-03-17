@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <article class="container prose prose-md sm:prose lg:prose-lg text-base-content font-mono py-10" data-theme="cupcake">
-      <content :page-key="$route.matched[0].name"/>
-    </article>
+  <article class="prose sm:prose-sm lg:prose-lg pt-10" data-theme="cupcake">
+    <content :page-key="$route.matched[0].name"/>
     <vssue/>
-  </div>
+  </article>
 </template>
 
 <script>
@@ -14,3 +12,15 @@ export default {
     },
 }
 </script>
+
+<style>
+.line-numbers-mode{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: baseline;
+}
+
+.line-numbers-mode  .shiki{
+    flex: 1;
+  }
+</style>

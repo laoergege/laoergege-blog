@@ -10,6 +10,13 @@ export default {
   layouts: {
     Layout: path.resolve(__dirname, "components/Layout.vue"),
   },
+  extendsMarkdownOptions(option) {
+    option.code ??= {
+      lineNumbers: false,
+    };
+
+    option.code.lineNumbers = false;
+  },
   plugins: [
     // 官方插件
     ["@vuepress/medium-zoom"],
