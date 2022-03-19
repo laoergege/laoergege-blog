@@ -1,90 +1,77 @@
-# Pnpm
+---
+release: true
+tags:
+ - pnpm
+ - 包管理
+desc: pnpm 知识汇总
+---
 
-> 推荐阅读
->
-> [关于现代包管理器的深度思考——为什么现在我更推荐 pnpm 而不是 npm/yarn?](https://mp.weixin.qq.com/s/1Wm-iYFBgJXMg_7SgWktXA)
->
-> [pnpm](https://pnpm.io/zh/)
+# pnpm
 
-## pnpm 介绍
+- pnpm
+  - [依赖管理](#依赖管理)
+    - 对比 yarn/npm@3
+      - 安全性：本质上是**依赖提升**带来的问题
+        - 扁平化依赖结构带来的不稳定性
+        - 幽灵依赖
+    - pnpm 的依赖结构：`平铺结构 + 符号链接`  
+      ![图 2](./images/1647703499774.png)  
+      - 所有的包都平铺在 `.pnpm` 内，并通过**符号链接**依赖关系
+      - 所有的包通过硬链接到 store 内部真实文件位置
+    - [半严格模式](#半严格模式)
+  - 存储管理
+    - store
+    - 基于内容寻址
+    - hardlink
+  - monorepo
 
-pnpm 可以看作 npm 功能的增强版。
+## 依赖管理
 
-pnpm 特点：
-1. 安装快，磁盘空间利用效率高
-   - 不会重复安装同一个包
-   - 以单文件为版本管理单位
-   - 基于内容寻址
-2. 支持 monorepo
-3. 安全性高
-   - 校验包完整性
-   - 代码严格访问模式
-
-## pnpm 独创的依赖管理
-
-对比下 npm/yarn 、pnpm 依赖管理：
-
-- npm/yarn 
-  - npm 3 之前 `嵌套结构`
+- 对比 yarn/npm
+  - npm@3 之前： `嵌套结构`
     - 过度嵌套
-    - 重复安装、占用空间
-  - npm 3 之后及 yarn `扁平化结构`
+    - 依赖重复、占用空间
+  - yarn/npm@3 之后：`扁平化结构`
     - 依赖结构的**不确定性**，依据声明顺序
-    
-      lock 文件除了保证依赖版本一致性，维持依赖结构
-    
+      - lock 文件虽在一定程度维持依赖结构，但随着包升级还是可能带来结构破坏
     - 扁平化算法本身的**复杂性**很高，耗时较长
-    
-    - 幽灵依赖：项目中仍然可以**非法访问**没有声明过依赖的包，因为 Node Module Resolution
-
+    - 幽灵依赖：项目中仍然可以**非法访问**没有声明过依赖的包，因为 `Node Module Resolution` 机制
+- pnpm 的依赖结构：`平铺结构 + 软链接`
+  - 半严格模式
 
 下边例子，我们用 pnpm 创建一个项目并且 `pnpm install qiankun` 来观察：
 
-  - pnpm 创建了的是一个**非扁平非嵌套**的依赖结构
-    - node_modules 只存在 package 上声明的依赖，保证结构对应，清晰明了；
+1. 项目 node_modules 只存在 package 上声明的依赖，既消除项目“幽灵依赖”的问题，又使得 node_modules 结构清晰明了  
+  
+![](./images/image-20210324174810561.png)
 
-      **而且你的代码就只能加载到项目 node_modules 里的依赖，保证安全性、严谨性**
+2. qiankun 只是个**软链接**，解析模块时，Node 会解析符号链接，寻找符号链接原本的位置，即 `.pnpm/qiankun@2.4.0/node_modules/qiankun`
 
-      <img src="./images/image-20210324174810561.png" alt="image-20210324174810561" style="zoom:50%;" />
-
-      但点开 qiankun 并没有发 node_modules，那 qiankun 的依赖呢？
-
-      <img src="./images/image-20210324220122020.png" alt="image-20210324220122020" style="zoom:50%;" />
-
-    - qiankun 只是个**软链接**，映射到 .pnpm/qiankun@2.4.0
-
-      > `.pnpm/`会以平铺的形式储存着所有的包，每个包都可以在这种命名模式的文件夹中被找到：
-      >
-      > `.pnpm/<name>@<version>/node_modules/<name>`
-      >
-      > 与 npm3+ 以及 yarn 平铺方式不同的是
-      >
-      > `<name>@<version>` 的命名模式保证了包之间的相互隔离
+> `.pnpm/`会以平铺的形式储存着所有的包，每个包都可以在这种命名模式的文件夹中被找到：`.pnpm/<name>@<version>/node_modules/<name>`  
+> 
+> 与 npm3+ 以及 yarn 处理同包不同版本的是：`<name>@<version>` 的命名模式保证了包之间的相互隔离
       
-      <img src="./images/image-20210327112011578.png" alt="image-20210327112011578" style="zoom:50%;" />
+![](./images/image-20210327112011578.png)
       
-    - pnpm 会把 qiankun 及其依赖平级放在 node_modules 目录下
+3. pnpm 会将包本身和依赖同样平铺在同一个 node_module 下
 
-      这种设计巧妙得利用并兼容 Node Module Resolution 机制使用 qiankun 能够访问其依赖，而它的依赖也同样是**软链接**，映射到 .pnpm 下的包
+![](./images/image-20210327112333206.png)
 
-      <img src="./images/image-20210327112333206.png" alt="image-20210327112333206" style="zoom:50%;" />
+这样的好处：
 
-在最后 `node_modules/.pnpm/qiankun@2.4.0` 是**硬链接**到全局存储的文件中去，节省磁盘空间！
+- 兼容 Node Module Resolution 机制
+- 避免了循环符号链接造成[文件循环嵌套显示的问题](https://github.com/pnpm/pnpm/discussions/4207)
 
-可参考阅读：
-- [《符号链接的 node_modules 结构》](https://pnpm.io/zh/symlinked-node-modules-structure)
-- [扁平的 node_modules 不是唯一的方法](https://pnpm.io/zh/blog/2020/05/27/flat-node-modules-is-not-the-only-way)
+4. 除了 qiankun 是**硬链接**到全局真实存储的文件，其他依赖项都是继续**符号链接**到 .pnpm 下的包
 
-### pnpm 为什么使用硬链接？
-
-## Pnpm 半严格模式
+### 半严格模式
 
 如果仔细发现上面的案例，`node_modules/.pnpm` 路径下竟然会有 `node_modules` 文件，这样虽然我们自己的代码是被严格限制了，但第三方依赖包还是可以根据 Node Module Resolution 机制偷偷访问到其他包！
 
-<img src="./images/image-20210611145816518.png" alt="image-20210611145816518" style="zoom:50%;" />
+![](./images/image-20210611145816518.png)
 
-默认情况下，pnpm v5 创建一个“半严格” 的 node_modules。
-默认配置如下所示：
+默认情况下，pnpm v5 创建一个“半严格” 的 node_modules。默认配置如下所示：
+
 ```yaml
 ; 提升所有包到 node_modules/.pnpm/node_modules
 hoist-pattern[]=*
@@ -102,12 +89,20 @@ public-hoist-pattern[]=*eslint*
 
 ## Monorepo
 
-Monorepo 操作
+- Monorepo 操作
+  - 开发
+    - link 模式：自动关联本地包
+    - 非 link 模式
+  - 任务
+    - 过滤：filter
+    - 构建任务关系拓扑排序
+    - 增量构建
+  - 发版模式
+    - independent
+    - fixed
 
-- 依赖操作
-  - root 
-    - add 默认只能在 workspace 中，`-W` 可作用于 root workspace
-  - 所有子项/单个子项目 `--filter xxx`
-    - pnpm add qiankun --filter="{projects}" 对所有
-  - 默认提升全局 `hoist: true`
-- 任务操作
+## 参考阅读
+
+- [pnpm](https://pnpm.io/zh/)
+- [平铺的结构不是 node_modules 的唯一实现方式](https://pnpm.io/zh/blog/2020/05/27/flat-node-modules-is-not-the-only-way)
+- [关于现代包管理器的深度思考——为什么现在我更推荐 pnpm 而不是 npm/yarn?](https://mp.weixin.qq.com/s/1Wm-iYFBgJXMg_7SgWktXA)

@@ -6,16 +6,15 @@
   - [ ] **可视化**
   - [ ] 重学 http 及计算机网络
   - [ ] 重学 数据结构与算法
-    - leetcode 200 简单、中度
+    - [ ] leetcode 200 简单、中度
   - [ ] **编译原理**
 - 应用
   - [ ] **Node 学习与应用**
-    - SSR
+    - [ ] SSR、同构应用实践
 - 深入
   - [ ] JavaScript 进阶
   - [ ] 深入 Vue 框架源码
-    - 技术输出：vue 深入系文
-- 产出
+    - [ ] 技术输出：vue 深入系文
 - 个人
   - 金融
     - [ ] **炒股**（5w）
@@ -92,7 +91,6 @@
 - 语言设计及编译原理
   - [如何用JavaScript实现一门编程语言 - 保护堆栈](https://zhuanlan.zhihu.com/p/455124551)
 - 表单
-  - [x-render](https://github.com/alibaba/x-render)
   - [formilyjs](https://v2.formilyjs.org/)
 - 低代码
   - [amis](https://github.com/baidu/amis)

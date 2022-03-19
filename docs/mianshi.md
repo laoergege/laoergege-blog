@@ -422,6 +422,7 @@ flex: 1; 是复合属性，说下其他属性？
       - computed 计算属性，基于其他响应式依赖缓存计算结果，只有当依赖发生变化才会需要重新计算，computed 是延迟计算的，只有被访问时才真正执行计算。computed 常用于模板渲染中。
       - watch 侦听属性适用于观测某个值的变化去立刻执行一段复杂的业务逻辑
   - 其他
+    - [ ] reactive vs ref
     - [x] 简述 mvvm
       - Model 层代表数据模型，View 代表 UI 组件，ViewModel 是 View 和 Model 层的桥梁，数据会绑定到 viewModel 层并自动将数据渲染到页面中，视图变化的时候会通知 viewModel 层更新数据。
     - vue 性能优化
@@ -725,3 +726,10 @@ devtool coverage
 UDP 并不提供重发机制
 
 TCP（Transmission Control Protocol，传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。相对于 UDP，TCP 有下面两个特点:对于数据包丢失的情况，TCP 提供重传机制；TCP 引入了数据包排序机制，用来保证把乱序的数据包组合成一个完整的文件。
+
+
+文档
+- /vuepress-plugin-docgen
+- 注册
+- demo
+- table

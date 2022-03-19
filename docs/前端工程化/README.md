@@ -34,16 +34,16 @@ desc: 系统化前端工程相关
     - 环境
       - 运行环境
         - node
+        - chrome
       - 包管理
-        - pnpm
-          - 依赖
-          - store：存储所有的node_modules依赖
-            - hard link 文件：.pnpm/node_modules中存储项目的hard links
-            - symbolic link 目录：通过symbolic link链接到.pnpm/node_modules目录
-          - workspace
+        - [pnpm](./pnpm.md)
+        - 幽灵依赖 
+          - [dependency-check](https://github.com/dependency-check-team/dependency-check)
       - 环境锁定
         - node
-          - nvm
+          - 版本管理
+            - nvm
+            - pnpm env
           - package: `engines` + `.npmrc: engine-strict`
           - .npmrc: `use-node-version`
         - 包管理：[corepack](https://github.com/nodejs/corepack)
@@ -89,6 +89,7 @@ desc: 系统化前端工程相关
   - 监控
   - 文档
     - vue：[vuese](https://github.com/vuese/vuese)
+    - [storybook](https://github.com/storybookjs/storybook)
   - 架构化及方案沉淀
     - 列表
       - [tabulator](https://github.com/olifolkerd/tabulator)
