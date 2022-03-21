@@ -35,7 +35,7 @@ desc: vue 知识汇总
   - 复用
     - composition-api
     - 指令
-    - JSX 函数组件
+    - 渲染函数组件 & JSX
       - 高阶函数
       - 组合函数
   - 前端路由
@@ -61,6 +61,8 @@ desc: vue 知识汇总
   - web component
     - https://mp.weixin.qq.com/s/kqG7xUnpVRg0XU5HLxjARw
     - https://github.com/yyx990803/vue-lit
+  - 跨平台
+    - [ThreeJS：trois](https://github.com/troisjs/trois)
 
 ## Vue3 系文
 

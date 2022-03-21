@@ -1,3 +1,11 @@
+---
+release: true
+tags:
+ - js
+ - 数组
+desc: 数组方法总结
+---
+
 # 数组API总结
 
 - 数组构造
@@ -49,7 +57,7 @@
       - end 可选，不会被包含在结果集中
   - 遍历
     - forEach
-    - 查找
+    - 条件查找
       - indexOf
       - lastIndexOf
       - includes
