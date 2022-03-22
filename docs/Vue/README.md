@@ -35,7 +35,7 @@ desc: vue 知识汇总
   - 复用
     - composition-api
     - 指令
-    - 渲染函数组件 & JSX
+    - 函数组件 & JSX
       - 高阶函数
       - 组合函数
   - 前端路由

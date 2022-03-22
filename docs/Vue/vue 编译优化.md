@@ -85,4 +85,40 @@ diff 少 props
 非编译优化 children， $table 可以跳过 slots 校验
 PatchFlags.DYNAMIC_SLOTS 优化判断
 
-第四个参数
+
+
+# vue 编译优化
+
+- vue 编译优化
+  - 动静分离
+  - 静态提升
+  - 事件缓存
+
+```html
+<div>
+  <div>Hello World!</div>
+  <div :class="style">{{name}}</div>
+  <button @click="() => {alert('Hello World!')}">click me</button>
+</div>
+```
+
+```js
+import { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+
+// 静态提升
+const _hoisted_1 = /*#__PURE__*/_createElementVNode("div", null, "Hello World!", -1 /* HOISTED */)
+
+export function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createElementBlock("div", null, [
+    _hoisted_1,
+    _createElementVNode("div", {
+      class: _normalizeClass(_ctx.style)
+      // h 函数第四个参数 patchFlag，精准 diff
+    }, _toDisplayString(_ctx.name), 3 /* TEXT, CLASS */),
+    _createElementVNode("button", {
+      // 事件缓存
+      onClick: _cache[0] || (_cache[0] = () => {_ctx.alert('Hello World!')})
+    }, "click me")
+  ]))
+}
+```

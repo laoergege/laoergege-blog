@@ -102,8 +102,11 @@ desc: 系统化前端工程相关
       - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
     - SSR
     - 跨平台
+      - H5 
+      - 混合应用
+      - 小程序
+      - RN
       - Flutter
-      - Electron
     - 动画
       - [lottie](https://github.com/airbnb/lottie) 
       - [anime](https://github.com/juliangarnier/anime/)

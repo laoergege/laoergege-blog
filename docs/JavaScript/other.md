@@ -48,9 +48,10 @@ vnode
 
 component
 - props
-- slots
+- emits
 - setup(data)
 - render
+- slots
 
 
 setupComponent
@@ -126,11 +127,7 @@ JavaScript 性能提升：
 
 
 
-- H5 
-- 混合应用
-- 小程序
-- RN
-- Flutter
+
 
 
 - vue

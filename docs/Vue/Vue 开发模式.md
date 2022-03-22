@@ -19,53 +19,6 @@
 3. 面向对象编程（建立 业务模型） + 响应式编程 + 规范
 
 
-## Vue 组件开发范式
-
-```js
-setup() {
-   return Pipe(
-      [],
-      op1,
-      op2,
-      op3,
-      (data) => {
-        return []
-      }
-    )
- }
-```
-
-vue3 组件最佳范式
-
-```js
-// 对象式 setup 组件
-const App = {
-  name: 'xxx',
-  props: ['xxx'],
-  setup(props, ctx) {
-    
-    // 1.返回状态 + SFC/render
-    //return {}
-
-    // 2.返回渲染函数
-    return () => h('xxx')
-
-    // 探索模板字符串标签
-    // return () => vue`<div>{{xxx}}</div>`
-  },
-}
-
-// 函数式组件（vue2 本质渲染函数，vue3 后函数组件的函数签名跟状态组件 setup 保持一致）
-const App = (props, ctx) => {
-  return <div>{xxx}</div>
-}
-```
-
-
-- 程序
-- 类型 JSON schmea
-- 逻辑 封装业务错误
-
 try catch 分流
 
 ## 复用
@@ -121,3 +74,38 @@ export { createStore, useStore }
     - 轻量级
   - api
     - defineStore
+
+## Vue3 组件开发范式
+
+```js
+// 1.对象式 setup 组件
+const App = {
+  name: 'xxx',
+  props: ['xxx'],
+  setup(props, ctx) {
+    
+    // 1.返回状态
+    //return {}
+
+    // 2.返回渲染函数
+    return () => h('xxx')
+
+    // 探索模板字符串标签
+    // return () => vue`<div>{{xxx}}</div>`
+  },
+}
+
+// 2.函数式组件（本质渲染函数，vue3 后函数组件的函数签名跟状态组件 setup 保持一致）
+// const App = (props, ctx) => {
+//   return <div>{xxx}</div>
+// }
+
+// 3. setup 函数
+// const App = (props, ctx) => {
+//   return () => <div>{xxx}</div>
+// }
+// defineComponent(App) 
+
+// App.props = ['value']
+// App.emits = ['click']
+```
