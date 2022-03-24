@@ -91,7 +91,7 @@ desc: 系统化前端工程相关
     - vue：[vuese](https://github.com/vuese/vuese)
     - [storybook](https://github.com/storybookjs/storybook)
   - 架构化及方案沉淀
-    - 列表
+    - 表格
       - [tabulator](https://github.com/olifolkerd/tabulator)
     - 表单
       - [XRender](https://x-render.gitee.io/)

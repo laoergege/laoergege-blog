@@ -3,54 +3,39 @@ release: true
 tags:
  - web
  - 安全
+desc: 总结 Web 安全相关知识体系
 ---
 # Web 安全
 
 - Web 安全
-  - 页面安全（针对 Web API 操作限制）
+  - 页面安全
     - 核心：[同源策略](#同源策略)
     - 同源策略下的“妥协”
       - 页面中可以引入第三方资源
         - [XSS 攻击](#跨站脚本攻击xss)
-          - [XSS 攻击阻止方法](#如何阻止-xss-攻击)
-            - [CSP 内容安全策略](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)
+        - [防止 XSS 攻击](#防止-csrf-攻击)
       - 跨域资源共享（CORS）
       - 跨文档通信机制（window.postMessage）
     - [CSRF 攻击与 cookie 机制](#csrf-攻击与-cookie-机制)
       - [防止 CSRF 攻击](#防止-csrf-攻击)
-    - web 前端框架的安全防范
   - 网络安全
     - DNS 劫持
-    - HTTP/1 明文传输：[中间人攻击](#中间人攻击)
+    - http 劫持
+    - HTTP/1 明文传输：网络劫持，内容篡改
       - [HTTPS](../HTTP/https.md)
   - 浏览器系统安全
-    - 多进程架构
+    - 多进程架构 + 渲染进程沙箱机制：将操作系统和渲染进程进行隔
       ![图 12](./images/1642869618173.png)  
-    - 渲染进程沙箱隔离
-    - 站点隔离
+    - [站点隔离策略](#站点隔离策略)：每个站点实例独自一个进程，防止同个页面多个不同站点的 iframe 共享一个进程
+      - 同站策略：节省进程开销
 
 ## 同源策略
 
-网站**同源**需要满足以下三个方面：
+同源策略：如果两个 URL 的协议、域名和端口都相同，我们就称这两个 URL 同源。同源策略会隔离不同源的之间的资源访问，比如 DOM、数据存储 Cookie、LocalStorage 和 IndexDB，网络请求 ajax/fetch。
 
-- 协议相同
-- 域名相同
-- 端口相同
+同源策略是浏览器大局方面的安全策略，限制不同源的 web 页面之间的相互操作，以此来保证安全性，但是却极大地降低了便利性。在安全和便利性的权衡下，同源策略又做出了一些安全妥协：
 
-**同源策略**：浏览器默认相同源之间的页面是可以相互访问资源和操作 DOM 的。
-
-非同源，则以下行为会受到限制：
-
-- 数据：Cookie、LocalStorage 和 IndexDB 无法读取
-- DOM：DOM 无法获取
-- 资源请求：ajax、fetch 请求不能发送
-
-同源策略是浏览器大局方面的安全策略，限制不同源的 web 页面之间的相互操作，以此来保证安全性，但是却极大地降低了便利性。在安全和便利性的权衡下，同源策略又做出了一些安全妥协。
-
-1. 页面中可以嵌入第三方资源
-
-   容易被中间人劫持导致 XSS 攻击，为了解决 XSS 攻击，浏览器中引入了内容安全策略，称为 CSP。
-
+1. 页面中可以嵌入第三方资源（容易导致 XSS 攻击，为了解决 XSS 攻击，浏览器中引入了内容安全策略，称为 CSP）
 2. 跨域资源共享（CORS）
 3. 跨文档消息机制（window.postMessage）
 
@@ -65,74 +50,123 @@ XSS 全称是 Cross Site Scripting，为了与“CSS”区分开来，故简称 
 恶意脚本注入方式有：
 
 - 存储型 XSS 攻击
-
   1. 用户**通过输入**向服务器储存恶意脚本
   2. 服务器返回带有恶意脚本的页面
      ![图 1](./images/ae52cbb7f0f0ba754c37fb25c2c5c15767d1477f1d9652263f8ad442d2acb4d7.png)
-
 - 反射型 XSS 攻击
-
   1. 反射型 XSS 攻击是将恶意代码拼接在 URL 处，常见于网站搜索、跳转等，一个特点是需要黑客诱导用户点击 URL 实现代码注入
-  2. 服务端不做处理直接拼接在 HTML 处返回
+  2. 服务端不做处理直接拼接在 HTML 处返回  
+- 基于 DOM 的 XSS 攻击：主要利用 js 能够访问 DOM 的原理及前端页面不严谨的代码产生的安全漏洞，就会导致注入了恶意代码。比如使用 `.innerHTML`、`document.write()`、`document.outerHTML` 这些能够修改页面结构的 API 时要注意防范恶意代码，尽量使用 `.textContent`、`.setAttribute()` 等。
 
-  反射型 XSS 跟存储型 XSS 的区别是：**存储型 XSS 的恶意代码存在数据库里，反射型 XSS 的恶意代码存在 URL 里**。
+三种攻击方式区别：
+1. 反射型 XSS 跟存储型 XSS 的区别是：**存储型 XSS 的恶意代码存在数据库里，反射型 XSS 的恶意代码存在 URL 里**。
+2. DOM 型 XSS 跟前两种 XSS 的区别：**基于 DOM 的 XSS 攻击是不牵涉到页面 Web 服务器的**。DOM 型 XSS 攻击中，取出和执行恶意代码由浏览器端完成，属于前端 JavaScript 自身的安全漏洞，而其他两种 XSS 都属于服务端的安全漏洞。
 
-- 基于 DOM 的 XSS 攻击
-  
-  通过修改页面 DOM 节点形成的 XSS，称之为 DOM Based XSS。
+## 防止 XSS 攻击
 
-  1. 中间人劫持在页面传输过程中修改 HTML 页面的内容
-  2. 由于前端页面不严谨的代码产生的安全漏洞，导致注入了恶意代码。比如使用 `.innerHTML`、`document.write()`、`document.outerHTML` 这些能够修改页面结构的 API 时要注意防范恶意代码，尽量使用 `.textContent`、`.setAttribute()` 等。
+XSS 攻击有两大要素：
+1. 攻击者提交恶意代码。(输入来源)
+2. 浏览器执行恶意代码。（输出执行）
 
-DOM 型 XSS 跟前两种 XSS 的区别：**基于 DOM 的 XSS 攻击是不牵涉到页面 Web 服务器的**。DOM 型 XSS 攻击中，取出和执行恶意代码由浏览器端完成，属于前端 JavaScript 自身的安全漏洞，而其他两种 XSS 都属于服务端的安全漏洞。
+- 输入来源
+  - 客户端和服务器对用户**输入**内容进行过滤、限制其输入长度
+- 输出执行
+  - 拼接 HTML 字符串：对 HTML 进行转义编码（HTML 的编码是十分复杂的，在不同的上下文里要使用相应的转义规则）
+  - 防止 JavaScript 执行时，把**不可信的输入数据**当作**字符串代码**执行
+    - DOM 操作
+      - 在使用 `.innerHTML`、`.outerHTML`、`document.write()` 时要特别小心，不要把不可信的数据作为 HTML 插到页面上，而应尽量使用 `.textContent`、`.setAttribute()`、 `.style` 等
+      - `<a>` 标签的 href 属性
+    - eval
+    - function
+    - setTimeout、setInterval
+    - window.location
+    - 等
+- 其他
+  - 充分利用 [CSP 内容安全策略](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)
+  - cookie 使用 HttpOnly 属性
+  - 验证码：防止脚本冒充用户提交危险操作
 
-### 如何阻止 XSS 攻击
+### 推荐阅读
 
-1. 客户端和服务器对**输入**脚本进行过滤或转码、限制其输入长度
-2. 充分利用 CSP
-3. cookie 使用 HttpOnly 属性
-
-### CSP 策略
-
-CSP 的核心思想是让服务器决定浏览器能够加载哪些资源，让服务器决定浏览器是否能够执行内联 JavaScript 代码。
-
-[MDN 内容安全策略( CSP )](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)。
+- [前端安全系列（一）：如何防止XSS攻击？](https://tech.meituan.com/2018/09/27/fe-security.html)
+- [AwesomeXSS](https://github.com/s0md3v/AwesomeXSS)
 
 ## CSRF 攻击（跨站请求伪造）
 
-CSRF（Cross-site request forgery），称为“跨站请求伪造”，攻击者诱导受害者进入**第三方网站**，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。
+CSRF（Cross-site request forgery），称为“跨站请求伪造”，攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。
 
-和 XSS 不同的是，CSRF 攻击不需要将恶意代码注入用户的页面，仅仅是利用**服务器的漏洞**和**用户的登录状态**来实施攻击。
+CSRF的特点
+
+- CSRF（通常）发生在**第三方域名**，因为外域通常更容易被攻击者掌控。但如果被攻击网站管控用户内容不严格的话，也有可能被发布恶意超链接等，这样防护起来就更困难了，因为 referer 是来自于本身。
+- 和 XSS 不同的是，CSRF 攻击不需要将恶意代码注入用户的页面，仅仅是利用**服务器的漏洞**和**用户的登录状态**来实施攻击。
 
 
+1. GET类型的CSRF，如页面自动发起 Get 请求
 
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>黑客的站点：CSRF攻击演示</h1>
+    <img src="https://time.geekbang.org/sendcoin?user=hacker&number=100">
+  </body>
+</html>
+```
+
+2. POST类型的CSRF，如页面表单自动发起 POST 请求
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>黑客的站点：CSRF攻击演示</h1>
+  <form id='hacker-form' action="https://time.geekbang.org/sendcoin" method=POST>
+    <input type="hidden" name="user" value="hacker" />
+    <input type="hidden" name="number" value="100" />
+  </form>
+  <script> document.getElementById('hacker-form').submit(); </script>
+</body>
+</html>
+```
+
+3. 链接类型的CSRF
+
+比起其他两种用户打开页面就中招的情况，这种引诱需要用户点击链接才会触发。
+
+```html
+<div>
+  <img width=150 src=http://images.xuejuzi.cn/1612/1_161230185104_1.jpg> </img> </div> <div>
+  <a href="https://time.geekbang.org/sendcoin?user=hacker&number=100" taget="_blank">
+    点击下载美女照片
+  </a>
+</div>
+```
 
 ### 防止 CSRF 攻击
 
-- 登陆机制
-   - cookie：Cookie 通常是浏览器和服务器之间维护登录状态的一种方式，浏览器处理 cookie 的机制是当某个域的请求，自动会把这个域的 cookie 带上，而大多数 CSRF 攻击正是利用这一点
-      - token 机制（有 XSS 风险） 
-        - httpOnly + SameSite
-1. 重要接口加验证参数
-2. 验证请求的来源站点（通过 HTTP 请求头中的 Referer 和 Origin 属性）
-3. CSRF Token
+- CSRF（通常）发生在第三方域名，对第三方域限制
+  - 验证请求的来源站点（通过 HTTP 请求头中的 Referer 和 Origin 属性）
+  - 充分利用好 Cookie 的 SameSite 属性
+    - Cookie 正是浏览器和服务器之间维护登录状态的一个关键数据，通常 CSRF 攻击都是从第三方站点发起的，要防止 CSRF 攻击，我们最好能实现从第三方站点发送请求时禁止 Cookie 的发送
+- CSRF 攻击不是将恶意代码注入用户的页面，不能获取页面数据信息
+  - 重要接口加验证参数
+    - CSRF Token
+    - 图片、短信验证
 
+#### 参考
 
+[前端安全系列之二：如何防止CSRF攻击？](https://juejin.cn/post/6844903689702866952)
 
-### 站点隔离
+## 站点隔离策略
+
+> 同一站点：相同协议、相同根域名
 
 通常情况下，每个 tab 页即一个渲染进程，Chromium 提供了四种进程模式，不同的进程模式会对 tab 页做不同的处理。
 
-- Process-per-site-instance (default) 每一个站点实例使用一个进程
-- Process-per-site 每一个 site 使用一个进程
-- Process-per-tab 每个 tab 使用一个进程
-- Single process 所有 tab 共用一个进程
-
-> "同一站点(same-site)"，具体地讲，我们将“同一站点”定义为根域名（例如，geekbang.org）+ 协议（例如，https:// 或者http://）相同。
-
-**Process-per-site** 同一个站点下的页面都使用同一个进程，但同一站点下不同域的服务可能会发生冲突，所以隔离相同域名下毫无关联的页面，会更加安全。
-
-**Process-per-site-instance** 每个站点实例一个进程，意味着下几乎每个 tab 页即一个渲染进程。特殊情况，如果两个页面可以在脚本代码中获得彼此的引用，才使用同一进程，比如
-
-1. 用户通过 `<a target="_blank">` 这种方式点击打开的新页面
-2. JavaScript code 打开的新页面（比如 window.open)，通过 window.opener 访问另一个页面
+- Process-per-site-instance (default) 每个站点实例一个进程
+  - 同站策略：每个站点实例一个进程，意味着下几乎每个 tab 页即至少一个渲染进程。特殊情况，如果**两个同站页面并且有关联连接，才使用同一进程**
+    - `window.open`、`<a target="_blank">` 打开的新页面，通过 `window.opener` 访问另一个页面
+    - 同站点的 iframe
+- Process-per-site 同个站点使用同个进程
+- Process-per-tab 每个标签页一个进程
+- Single process 所有的共用一个进程

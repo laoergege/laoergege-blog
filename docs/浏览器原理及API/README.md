@@ -55,12 +55,13 @@ desc: 浏览器原理及API知识体系总结
       - [DOM 事件模型](./DOM%20事件模型.md)
     - [WebComponent](./WebComponent.md)
     - [Canvas](./Canvas.md)
-  - 存储
+    - 页面通信
+  - 数据存储
     - cookie
     - localStorage
     - sessionStorage
     - indexDB
-  - 通信
+  - 网络
     - 不同上下文（窗口、iframe、worker）
       - 页面：同源限制
         - window.opener + iframe.contentWindow（引用通信）

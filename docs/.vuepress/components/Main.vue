@@ -3,7 +3,7 @@
     <div class="flex justify-center items-center my-8 sm:my-16">
       <div class="flex-flex-shrink-0">
         <div class="w-16 h-16 mask mask-squircle">
-          <img src="/avatar.png" />
+          <img src="/avatar.webp" />
         </div>
       </div>
       <div class="text-sm ml-4">
