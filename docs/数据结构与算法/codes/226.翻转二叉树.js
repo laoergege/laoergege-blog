@@ -22,22 +22,12 @@ var invertTree = function (root) {
         return null
     }
 
-    reserve(root)
+    [root.right, root.left] = [root.left, root.right]
 
     invertTree(root.left)
     invertTree(root.right)
 
     return root
 };
-
-function reserve(node) {
-    if (!node) {
-        return null
-    }
-
-    let tmp = node.left
-    node.left = node.right
-    node.right = tmp
-}
 // @lc code=end
 

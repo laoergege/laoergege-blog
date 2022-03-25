@@ -22,20 +22,11 @@ var levelOrderBottom = function (root) {
         return []
     }
 
-    const queue = [[root]]
+    let queue = [root]
     const result = []
-
     while (queue.length) {
-        const nodes = queue.pop()
-
-        result.push(nodes.map(node => node.val))
-
-        const tmp = []
-        nodes.forEach(node => {
-            node.left && tmp.push(node.left)
-            node.right && tmp.push(node.right)
-        })
-        tmp.length && queue.push(tmp)
+        result.push(queue.map(node => node.val))
+        queue = queue.flatMap(node => [node.left, node.right]).filter(node => node)
     }
 
     result.reverse()

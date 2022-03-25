@@ -21,11 +21,27 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function (root, min, max) {
-    if (!root) return true;
-    if (min && root.val <= min.val) return false;
-    if (max && root.val >= max.val) return false;
-    return isValidBST(root.left, min, root) && isValidBST(root.right, root, max);
+var isValidBST = function (root) {
+    const arr = dfs(root, [])
+    let quick = 1
+    let slow = 0
+    while (quick < arr.length) {
+        if (arr[quick++] <= arr[slow++]) {
+            return false
+        }
+    }
+
+    return true
 };
+
+function dfs(root, res) {
+    if (root) {
+        dfs(root.left, res)
+        res.push(root.val)
+        dfs(root.right, res)
+    }
+
+    return res
+}
 // @lc code=end
 

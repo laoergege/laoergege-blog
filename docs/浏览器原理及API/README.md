@@ -53,33 +53,31 @@ desc: 浏览器原理及API知识体系总结
     - DOM
       - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
       - [DOM 事件模型](./DOM%20事件模型.md)
-    - [WebComponent](./WebComponent.md)
+      - [WebComponent](./WebComponent.md)
     - [Canvas](./Canvas.md)
-    - 页面通信
+    - 不同上下文（窗口、iframe、worker）通信
+      - 同源
+        - 引用通信：window.opener + iframe.contentWindow
+        - localStorage + storageEvent
+        - SharedWorker + 消息通道
+        - ServiceWorker
+      - 消息通道机制
+        - postMessage
+        - MessageChannel
+        - BroadcastChannel（同源限制）
   - 数据存储
     - cookie
     - localStorage
     - sessionStorage
     - indexDB
   - 网络
-    - 不同上下文（窗口、iframe、worker）
-      - 页面：同源限制
-        - window.opener + iframe.contentWindow（引用通信）
-        - localStorage + storageEvent
-        - SharedWorker + 消息通道
-        - ServiceWorker
-      - 消息通道机制
-        - window.postMessage
-        - MessageChannel
-        - BroadcastChannel（同源限制）
-    - 后端
-      - 同源
-        - ajax
-        - fetch
-      - 非同源
-        - CORS
-        - JSONP
-        - (ProxyServer)
+    - 同源
+      - ajax
+      - fetch
+    - 非同源
+      - CORS
+      - JSONP
+      - Proxy Server
   - 硬件
     - [WebWork](./WebWork.md)
       - [task-worklet](https://github.com/developit/task-worklet)
@@ -117,6 +115,4 @@ MVVM
 
 DOM 操作会引发浏览器重排、重绘、合成操作
 对 DOM 操作不当的话甚至还会触发强制同步布局和布局抖动的问题
-
-虚拟 DOM？
 

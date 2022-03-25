@@ -34,11 +34,11 @@ tags:
 
 ## 请求方法
 
-- GET
-- POST
+- GET：获取资源
+- POST：提交资源
 - PUT：修改资源
 - DELETE：删除资源
-- HEAD：HEAD 则是跟 GET 类似，只返回响应头（想象一个业务情景：欲判断某个资源是否存在，我们通常使用GET，但这里用HEAD则意义更加明确。）
+- HEAD：获取资源的元信息，HEAD 则是跟 GET 类似，但只返回响应头（想象一个业务情景：欲判断某个资源是否存在，我们通常使用GET，但这里用HEAD则意义更加明确。）
 - CONNECT：多用于 HTTPS 和 WebSocket
 - OPTIONS
 - TRACE
