@@ -61,14 +61,17 @@ desc: 系统化前端工程相关
       - mock
       - 环境区分
     - 构建
-      - 特性
+      - dev
         - 模块化
         - 热模块替换
         - 编译
           - [gogocode](https://github.com/thx/gogocode)
+          - [parcel-css](https://github.com/parcel-bundler/parcel-css)
         - 增量
           - husky + Lint-stage
+      - prod
         - 打包/分包
+        - 压缩
     - 工具
       - webpack
       - [vite](https://github.com/vitejs/vite)

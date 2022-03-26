@@ -12,8 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@octokit/core": "^3.6.0",
     "dayjs": "^1.10.7",
     "minimatch": "^3.0.4",
+    "rxdb": "^11.6.0",
+    "rxjs": "^7.4.0",
     "systemjs": "^6.11.0",
     "vssue": "^1.4.8",
     "zx": "^4.2.0"

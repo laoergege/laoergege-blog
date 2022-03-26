@@ -2,9 +2,12 @@
 release: true
 tags:
  - http
+desc: 一些 http 基础
 ---
 
 # 前端必知的 http 基础
+
+## http 特点
 
 - http 特点
   - 请求-应答模式
@@ -32,6 +35,15 @@ tags:
 响应体
 ```
 
+## URI
+
+URI 的完整格式
+
+![图 5](./images/1648200031067.png)  
+
+- URI 的查询参数：由多个“key=value”组成的字符串，这些 KV 值用字符“&”连接
+- URI 的编码：把非 ASCII 码或特殊字符转换成十六进制字节值，然后前面再加上一个“%”。例如，空格被转义成“%20”。
+
 ## 请求方法
 
 - GET：获取资源
@@ -39,8 +51,8 @@ tags:
 - PUT：修改资源
 - DELETE：删除资源
 - HEAD：获取资源的元信息，HEAD 则是跟 GET 类似，但只返回响应头（想象一个业务情景：欲判断某个资源是否存在，我们通常使用GET，但这里用HEAD则意义更加明确。）
-- CONNECT：多用于 HTTPS 和 WebSocket
-- OPTIONS
+- CONNECT：要求服务器为客户端和另一台远程服务器建立一条特殊的链接，这时Web服务器充当代理的角色，多用于 HTTPS 和 WebSocket
+- OPTIONS：要求服务器列出可对资源实行的操作方法，在响应头Allow字段里返回
 - TRACE
 
 ## 状态码
