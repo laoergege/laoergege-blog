@@ -3,6 +3,9 @@ release: true
 tags:
  - http
  - https
+ - tls
+ - ssl
+desc: 对 https 原理的一个大致了解。
 ---
 
 # https
@@ -30,7 +33,7 @@ SSL/TLS 采用**多种先进的加密技术保证通信安全**，这些算法�
 
 ECDHE-RSA-AES256-GCM-SHA384：
 
-“握手时使用 ECDHE 算法进行密钥交换，用 RSA 签名和身份认证，握手后的通信使用 AES 对称算法，密钥长度 256 位，分组模式是 GCM，摘要算法 SHA384 用于消息认证和产生随机数。”
+“握手时使用 ECDHE 算法进行密钥交换，证书的签名验证算法用 RSA，握手后的通信使用 AES 对称算法，密钥长度 256 位，分组模式是 GCM，摘要算法 SHA384 用于消息认证和产生随机数。”
 
 > OpenSSL 是著名的开源密码学工具包，是 SSL/TLS 的具体实现，许多应用软件都会使用它作为底层库来实现 TLS 功能，包括常用的 Web 服务器 Apache、Nginx 等
 
@@ -99,11 +102,13 @@ ECDHE-RSA-AES256-GCM-SHA384：
 
 ### 证书信任链
 
-首先操作系统和浏览器都内置了各大 CA 的根证书。
+证书除了由根证书 CA 机构签证，还有中间机构进行签证分发。
 
-服务器返回的是证书链（不包括根证书，根证书预置在浏览器中），然后浏览器就可以使用信任的根证书（根公钥）解析证书链的根证书得到一级证书的公钥+摘要验签，然后拿一级证书的公钥解密一级证书拿到二级证书的公钥和摘要验签，再然后拿二级证书的公钥解密二级证书得到服务器的公钥和摘要验签，验证过程就结束了。
+![图 6](./images/1648394387393.png)  
 
-![图 14](images/66efa0cd68af302cb17bad31795b0d1920557fefeefdd62ba64b976a1ae490f6.png)  
+首先操作系统和浏览器都内置了各大 CA 的根证书。浏览器会对服务器返回的是证书链（不包括根证书，根证书预置在浏览器中）查找到根证书，然后逐级使用对应的公钥进行摘要验签。
+
+![图 7](./images/1648394415188.png)  
 
 ## 总结
 
@@ -111,9 +116,11 @@ http 安全特性：
 
 - 保密性：靠混合加密解决，非对称加密实现对称加密秘钥传递，对称加密实现内容加密。
 - 完整性：靠摘要算法解决。
-- 身份认证：靠数字证书解决，数字证书因为CA机构的信任变成一个完整信任链条，从而实现通过数字证书证明了对方真实身份
+- 身份认证：靠数字证书解决，数字证书因为CA机构的信任变成一个完整信任链条，从而实现通过数字证书证明了对方真实身份。
+- 不可否认：靠数字签名解决，数字签名是由非对称加密保证，因为私钥加密的内容只能由公钥解密验证。
 
 ## 参考
 
 - [彻底搞懂HTTPS的加密原理](https://zhuanlan.zhihu.com/p/43789231)
 - 透视 http 协议
+- [SSL Certificate framework 101: How does the browser actually verify the validity of a given server certificate?](https://security.stackexchange.com/questions/56389/ssl-certificate-framework-101-how-does-the-browser-actually-verify-the-validity)
