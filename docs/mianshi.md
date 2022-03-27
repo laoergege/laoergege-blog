@@ -179,6 +179,10 @@
       - CommonJS 同步模块加载，用于服务端
       - UMD 通用模块标准
     - ES Modules：ECMASCript 标准
+  - [ ] common.js 和 es6 中模块引入的区别？
+    - CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。
+    - CommonJs 是单个值导出，ES6 Module可以导出多个
+    - CommonJs 的 this 是当前模块，ES6 Module的 this 是 undefined
   - 函数编程
     - [ ] 普通函数和箭头函数区别
       - 箭头函数的 this 绑定外层上下文中的 this
@@ -370,8 +374,10 @@
     - 明文传输，数据完全肉眼可见，能够方便地研究分析，但也容易被窃听；
     - 不安全的：无法验证通信双方的身份，也不能判断报文是否被篡改；
   - [x] http、https 区别
+    - 端口：http 80 https 443
+    - https 比 http 多了安全传输层，http 是明文传输、https 是加密传输
   - [ ] https，解释一下加密过程，为什么说 HTTPS 是安全的
-  - [ ] http1.0/1.1/2.0/3.0
+  -  http1.0/1.1/2.0/3.0
   - [x] 浏览器 http 缓存
     1. 缓存查找：查找不到直接发送请求，http 缓存需要经过 service worker 缓存
        1. 缓存位置
