@@ -66,7 +66,7 @@ export default {
         repo: "laoergege-blog",
         clientId: "b3d7df2f67f7f9ac06a7",
         clientSecret: "a3356093fe41a32ca9015d03ad465da80a2e1dbf",
-        labels: ["post"],
+        labels: ["note"],
         prefix: [""],
       },
     ],

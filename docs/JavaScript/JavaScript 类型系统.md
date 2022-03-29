@@ -3,6 +3,7 @@ release: true
 tags:
  - javascript
  - 类型系统
+desc: JavaScript 类型系统知识体系
 ---
 # JavaScript 类型系统
 
@@ -47,8 +48,7 @@ tags:
         - Date
         - Function
           - 按值传递
-            > 按值传递，即复制实参的值  
-            > 引用传递，即复制实参的地址
+            > 按值传递，即复制实参的值；引用传递，即复制实参的地址
         - 数据结构
           - Set、WeakSet
           - Map、WeakMap
@@ -79,8 +79,10 @@ tags:
         - parseInt
         - parseFloat
       - NumberToString
+        - String
       - 对象跟基本类型之间的转换
         - 装箱转换
+          - 包装类
         - 拆箱转换
           1. valueOf
           2. toString

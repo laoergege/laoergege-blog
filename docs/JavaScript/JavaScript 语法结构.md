@@ -63,6 +63,7 @@ desc: JavaScript 语法结构体系
           - 即使在 try 中出现了 return，finally 中的语句也一定要被先执行
           - finally 中的 return 会覆盖 try 中的 return
       - [表达式](#表达式)及运算符
+        - 比较远算富
 
 ## 自动插入分号规则
 
@@ -171,7 +172,8 @@ console.log(a); // [2]
          - `>>>` 无符号向右移位
       5. 关系表达式 RelationalExpression
          - in
-      6. 相等表达式 EqualityExpression
+      6. 比较表达式
+         1. 相等表达式 EqualityExpression
       7. 位运算表达式
          - 按位与表达式 BitwiseANDExpression
          - 按位异或表达式 BitwiseANDExpression
