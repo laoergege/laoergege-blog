@@ -19,14 +19,14 @@
 // 快指针走两步，慢指针走一步，快指针到底，慢指针刚好在中间
 var middleNode = function (head) {
     let slow = head
-    let quick = head.next
+    let quick = head?.next
 
     while (quick) {
         slow = slow.next
 
         try {
             quick = quick.next.next
-        } catch (error) {
+        } catch {
             return slow
         }
     }

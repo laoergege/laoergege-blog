@@ -22,35 +22,24 @@ var reverseKGroup = function (head, k) {
         return head
     }
 
-    let temp = [head]
-    let cur = head
-    let i = 0
-    while (cur) {
-        cur = cur.next
-        i++
-        if (i % k === 0) {
-            temp.push(cur)
-        }
+    let arr = []
+    let i = k
+    while (head && i > 0) {
+        arr.push(head)
+        head = head.next
+        i--
     }
+    if (arr.length < k) {
+        return arr[0]
+    }
+
+    arr.reverse()
+    for (let index = 0; index < arr.length - 1; index++) {
+        arr[index].next = arr[index + 1]
+    }
+    arr[arr.length - 1].next = reverseKGroup(head, k)
+
+    return arr[0]
 };
-
-function reverse(head, k) {
-    let pre = null
-    let cur = head
-    let next = head.next
-    let i = 0
-    while (cur && i < k) {
-        cur.next = pre
-
-        pre = cur
-        cur = next
-        next = cur.next
-        i++
-    }
-
-    head.next = reverseKGroup(next, k)
-
-    return cur
-}
 // @lc code=end
 

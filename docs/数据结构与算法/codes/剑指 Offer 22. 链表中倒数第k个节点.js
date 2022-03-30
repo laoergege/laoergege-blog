@@ -28,13 +28,12 @@ var getKthFromEnd = function (head, k) {
     // 2. 快慢双指针
     let slow = head
     let quick = head
+    let i = k - 1
 
     while (quick.next) {
         quick = quick.next
-        if (k === 1) {
+        if (--i < 0) {
             slow = slow.next
-        } else {
-            k--
         }
     }
     return slow

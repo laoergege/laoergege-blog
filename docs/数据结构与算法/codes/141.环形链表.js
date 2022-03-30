@@ -19,18 +19,18 @@
  */
 var hasCycle = function (head) {
     let slow = head
-    let quick = head && head.next
+    let quick = head?.next
 
     while (slow) {
+        if (slow === quick) {
+            return true
+        }
+
         slow = slow.next
         try {
             quick = quick.next.next
         } catch (error) {
             return false
-        }
-
-        if (slow === quick) {
-            return true
         }
     }
 

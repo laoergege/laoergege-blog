@@ -17,24 +17,21 @@
  * @return {boolean}
  */
 var isPalindrome = function (head) {
-    let quick = head
     let slow = head
+    let quick = head?.next
 
-    while (quick.next) {
-        try {
-            quick = quick.next.next
-            slow = slow.next
-        } catch (error) {
-            break
-        }
+    while (quick && quick.next) {
+        slow = slow.next
+        quick = quick.next.next
     };
 
     slow = slow.next
+    let end = reverse(slow)
 
-    while (head && slow) {
-        if (head.val === slow.val) {
+    while (head && end) {
+        if (head.val === end.val) {
             head = head.next
-            slow = slow.next
+            end = end.next
         } else {
             return false
         }
@@ -42,5 +39,16 @@ var isPalindrome = function (head) {
 
     return true
 };
+
+function reverse(head) {
+    let pre = null
+    let cur = head
+
+    while (cur) {
+        [cur.next, pre, cur] = [pre, cur, cur.next]
+    }
+
+    return pre
+}
 // @lc code=end
 
