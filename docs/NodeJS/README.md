@@ -74,8 +74,9 @@ tags:
     - 压测 http 服务（ab）
         - QPS
         - 吞吐率
-  - 内存泄漏&性能优化
-    - 性能监测
+  - 性能优化
+    - 性能监控
+      - [easy-monitor](https://github.com/hyj1991/easy-monitor)
     - 性能优化
       - CPU（计算性能优化、JS Profile）
         1. 减少不必要的计算

@@ -77,10 +77,12 @@ desc: 系统化前端工程相关
       - [vite](https://github.com/vitejs/vite)
       - [parcel](https://parceljs.org/)
   - 测试
-    - unit（单元） jest
-    - e2e（端对端） jest + puppeteer
-    - Vitest
-    - cypress
+    - unit
+      - jest
+      - [vue: vitest](https://cn.vitest.dev/)
+    - e2e
+      - puppeteer
+      - cypress
   - CI
     - lint
     - test
