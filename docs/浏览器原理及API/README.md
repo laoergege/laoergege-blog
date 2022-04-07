@@ -70,13 +70,40 @@ desc: 浏览器原理及API知识体系总结
     - localStorage
     - sessionStorage
     - indexDB
-  - 网络
+  - 资源请求
     - 同源
       - ajax
       - fetch
     - 非同源
-      - CORS
-      - JSONP
+      - CORS（[跨域资源共享](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS#http_%E5%93%8D%E5%BA%94%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5)）
+        - 简单请求：拦截响应
+          - 方法：GET、HEAD、POST
+          - 头部字段不超
+            - `accept`
+            - `accept-language`
+            - `content-language`
+            - Content-Type：`text/plain`、`multipart/form-data`、`application/x-www-form-urlencoded`
+          - 非自定义头部
+        - 非简单请求：拦截请求
+          - 非简单请求在发送正式的request之前，会先发送**预请求**
+          - Access-Control-Request-Method
+          - Access-Control-Request-Headers
+        - 响应头
+          - Access-Control-Allow-Origin
+            - 限定一个域名或者通配符 *
+          - Access-Control-Allow-Methods
+          - Access-Control-Allow-Headers
+          - Access-Control-Expose-Headers
+          - Access-Control-Max-Age：缓存预请求
+        - 无论是哪一种，请求都会携带 origin，后端都需要返回 Access-Control-Allow-Origin
+        - 发送身份凭证信息或者响应设置 cookie，那必须满足三个条件：
+          - 后端 Response header 有 Access-Control-Allow-Credentials: true
+          - 后端 Response header 的 Access-Control-Allow-Origin 不能是*，要明确指定
+          - 前端
+            - 前端请求加上 withCredentials: 'include'
+            - 页面元素 `<img crossorigin="use-credentials" src="…" />`
+        - [playground](https://jakearchibald.com/2021/cors/playground/)
+      - JSONP：利用了 script 标签的 src 属性来实现跨域数据交互的，因为浏览器解析HTML代码时，原生具有src属性的标签，浏览器都赋予其HTTP请求的能力，而且不受跨域限制，使用src发送HTTP请求，服务器直接返回一段JS代码的函数调用，将服务器数据放在函数实参中，前端提前写好响应的函数准备回调，接收数据，实现跨域数据交互
       - Proxy Server
   - 硬件
     - [WebWork](./WebWork.md)
@@ -100,10 +127,7 @@ desc: 浏览器原理及API知识体系总结
 - 下载
   - [文件下载，搞懂这9种场景就够了](https://mp.weixin.qq.com/s/PysSe6MykjYzVrWQCKJXvg)
   - [动态表格大文件下载可以这样优化！](https://mp.weixin.qq.com/s/14bJxJ9U9mG76tw-Z93UqQ)
-- 登陆鉴权
-  - session-cookie
-  - token
-    - JWT
+- [登陆鉴权](./%E7%99%BB%E9%99%86%E9%89%B4%E6%9D%83.md)
 
 
 MVC，其核心思想就是将数据和视图分离

@@ -8,17 +8,17 @@ desc: css 布局相关的知识体系
 
 # CSS 布局
 
-- CSS页面布局
-  - 盒子模型：怪异盒模型和标准盒模型
-    - 盒子模型：content + padding + border + margin
-    - IE模型元素宽度 width=content+padding
-      - `box-sizing: content-box`
-    - 标准模型元素宽度 width=content
-      - `box-sizing: border-box`
-  - BFC
-  - display
-    - inline
-    - block
+- CSS 布局
+  - 盒子模型：页面是由一个个相互作用、嵌套的盒子组成
+    - 怪异盒模型和标准盒模型
+      - 盒子模型：content + padding + border + margin
+      - IE模型元素宽度 width=content+padding
+        - `box-sizing: content-box`
+      - 标准模型元素宽度 width=content
+        - `box-sizing: border-box`
+  - display：控制盒子内容布局，以及外部与其它元素的关系和相互作用
+    - IFC：inline
+    - BFC：block
     - flex
       - [解决用flex布局时内容可能溢出的问题](https://stackoverflow.com/questions/43809612/prevent-a-child-element-from-overflowing-its-parent-in-flexbox)
         - 本质：flex item 元素初始值 `min-width: auto`
@@ -26,7 +26,7 @@ desc: css 布局相关的知识体系
     - grid
       - [A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
       - [网格布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout)
-  - position
+  - position：控制盒子位置，脱离父盒的布局
     - static
     - relative
     - absolute
@@ -34,11 +34,13 @@ desc: css 布局相关的知识体系
     - sticky
     - float
   - 常见页面布局
+    - 等列布局
     - 垂直水平居中
       - flex + justify-content: center + align-items: center
       - position: absolute + left: 50% + top: 50% + transform: translate(-50%, -50%)
     - 左侧固定 + 右侧自适应布局
     - 圣杯布局（三分栏布局）
+    - 多列布局
 
 ## grid 属性
 
@@ -92,3 +94,9 @@ desc: css 布局相关的知识体系
     - align-self
     - justify-self
     - place-self
+
+
+
+- 逻辑层：组件 =》 应用逻辑拆分
+- 视图层：框架 =》 视图逻辑抽象
+- 底层渲染层：dom api、css

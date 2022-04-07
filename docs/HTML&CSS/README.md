@@ -16,16 +16,16 @@
       ```
     - 单位
   - CSSOM
-    - Inline Styles via element.style
+    - element.style
     - styleSheets
     - CSS Typed OM
   - 响应式
     - Media Queries
     - 容器查询 `@container`
     - Viewport
+  - [页面布局](./CSS页面布局.md)
   - 页面
     - 颜色形状
-    - [页面布局](./CSS页面布局.md)
     - 文本排版
       - [Typography for Developers](https://css-tricks.com/typography-for-developers/)
       - [Typography in CSS](https://cssreference.io/typography/)

@@ -125,6 +125,8 @@ JavaScript 性能提升：
   - HTML + CSS
   - contenteditable
 
+进程：线程（cpu）+ 内存 + IO(文件/网络)
+
 
 
 

@@ -108,27 +108,6 @@ Cookie 机制的工作流程：
 
 服务器可以在响应头里添加一个甚至多个 Set-Cookie，存储多个“key=value”。但浏览器这边发送时不需要用多个 Cookie 字段，只要在一行里用“;”隔开就行。
 
-### Cookie 属性
-
-- 时效
-  - Expires 绝对过期时间
-  - MaxAge 相对过期时间，单位是秒，浏览器用收到报文的时间点再加上 Max-Age，就可以得到失效的绝对时间；优先级比 Expires 高；MaxAge = 0 会话结束过期
-- 作用范围
-  - Domain
-  - Path
-- 安全
-  - HttpOnly
-  - Secure，仅能用 HTTPS 协议加密传输
-  - SameSite
-
-> - set-cookie 是作用全浏览器
-> - document.cookie 只对当前文档
-
-### 应用
-
-- cookie、session 的身份识别、会话机制
-- 广告跟踪？
-
 ## 代理相关
 
 - Via

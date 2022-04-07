@@ -1,39 +1,4 @@
-- 面试
-  - 简历
-  - 自我介绍
-    - 面试官好，我叫\*\*，今天来应聘贵公司的前端工程师岗位。我从事前端开发两年多，有 X 年多的 Vue 开发经验，一年 React 开发经验，在上家公司主要从事 H5 页面，后台管理系统，混合 App 等项目开发。平常喜欢逛一些技术社区丰富自己的技术，像思否，掘金之类，并且自己也独立开发了个人博客网站，记录自己的工作总结和学习心得。 我的性格比较温和，跟同事朋友相处时比较外向，在工作中代码开发时我喜欢全心全意的投入，对于工作我总抱着认真负责的态度。面试官，以上是我的介绍，谢谢。
-  - 规划发展
-    - 最大的优点和缺点
-  - 提问环节
-    - 假如入职以后，工作职责是什么？
-- 目标公司
-  - 小鹏
-  - 广州金山
-  - 字节
-  - 腾讯系
-  - 阿里系
-  - 美团
-  - 京东
-  - 顺丰
-  - 平安
 
-
-登录鉴权
-
-
-那对称加密和非对称加密怎么之间选择？
-
-说下 cdn 缓存？
-
-你所知道的白屏原因
-
-怎么优化？
-
-三列布局
-
-
-
-## 题目整理
 
 - 前端工程
 
@@ -53,8 +18,6 @@
   - 什么是抽象工厂模式
   - 发布订阅模式和观察者模式有什么区别
   - 你项目里面都用了哪些设计模式
-
-
 - JS
 
   - 垃圾回收机制
@@ -66,6 +29,24 @@
 
 ## 题目
 
+- 面试
+  - 简历
+  - 自我介绍
+    - 面试官好，我叫\*\*，今天来应聘贵公司的前端工程师岗位。我从事前端开发两年多，有 X 年多的 Vue 开发经验，一年 React 开发经验，在上家公司主要从事 H5 页面，后台管理系统，混合 App 等项目开发。平常喜欢逛一些技术社区丰富自己的技术，像思否，掘金之类，并且自己也独立开发了个人博客网站，记录自己的工作总结和学习心得。 我的性格比较温和，跟同事朋友相处时比较外向，在工作中代码开发时我喜欢全心全意的投入，对于工作我总抱着认真负责的态度。面试官，以上是我的介绍，谢谢。
+  - 规划发展
+    - 最大的优点和缺点
+  - 提问环节
+    - 假如入职以后，工作职责是什么？
+- 目标公司
+  - 小鹏
+  - 广州金山
+  - 字节
+  - 腾讯系
+  - 阿里系
+  - 美团
+  - 京东
+  - 顺丰
+  - 平安
 - html&css
   - flex: 1 代表什么意思
     - flex-grow: 1
@@ -79,8 +60,9 @@
       4.标签、伪元素选择器，如 div::first-line，权值为 0001
       5.通配符、子类选择器、兄弟选择器，如*, >, +，权值为 0000
       6.继承的样式没有权值
-  - BFC
   - [ ] 盒子模型
+  - [ ] BFC
+    - 应用: 1.分属于不同的BFC时,可以防止margin重叠 2.清除内部浮动 3.自适应多栏布局
 - js
   - 语法
     - [x] for of 和 for in 的区别以及原理
@@ -186,10 +168,10 @@
           - 继承机制
             - ES6 的继承机制：先内部创建的空对象继承父类的属性和方法，再将该对象作为子类的实例返回给子类的 this；
             - ES5 的继承机制：直接一个子类的实例对象，然后应用父类构造器继承父类的属性和方法，即“实例在前，继承在后”。
-    - 对象深浅拷贝
+    - [x] 对象深浅拷贝
       - 浅拷贝：Object.assign
       - [x] 深拷贝
-        - ![图 2](/images/1646836941175.png)  
+        - ![图 2](./images/1646836941175.png)  
   - [x] 模块发展历程
     - 原始阶段：
       - 文件划分模块
@@ -293,10 +275,31 @@
     - 为什么要用 setTimeout 模拟 setInterval ？
       - setInterval 每隔指定时间就会往队列里插入任务前会队列中是否存在上次任务，如果当前任务执行过长，会导致后边的间隔任务被跳过；
       - 可能多个定时器会连续执行
-  - cookie、localStorage、sessionStorage 区别以及使用场景
-  - 跨域
-    - CORS,cors 跨域的原理
-    - JSONP
+  - [x] 跨域
+    - [x] CORS 跨域的原理
+      - jsonp只可以使用 GET 方式提交、调试麻烦、安全性差 xss注入
+      - 分为简单请求和非简单请求
+      - 简单请求为
+        - 法：GET、HEAD、POST
+        - 头部字段不超
+          - `accept`
+          - `accept-language`
+          - `content-language`
+          - Content-Type：`text/plain`、`multipart/form-data`、`application/x-www-form-urlencoded`
+      - 非简单请求有预请求
+        - Access-Control-Request-Method
+        - Access-Control-Request-Headers
+      - 无论是哪一种，请求都会携带 origin，后端都需要返回 Access-Control-Allow-Origin
+      - Access-Control-Allow-Methods
+      - Access-Control-Allow-Headers
+      - Access-Control-Expose-Headers
+      - Access-Control-Max-Age
+      - 发送身份凭证信息或者响应设置 cookie，那必须满足三个条件：
+        - 后端 Response header 有 Access-Control-Allow-Credentials: true
+        - 后端 Response header 的 Access-Control-Allow-Origin 不能是*，要明确指定
+        - 前端请求加上 withCredentials: 'include'
+    - [x] JSONP
+      - 利用了 script 标签的 src 属性来实现跨域数据交互的，因为浏览器解析HTML代码时，原生具有src属性的标签，浏览器都赋予其HTTP请求的能力，而且不受跨域限制，使用src发送HTTP请求，服务器直接返回一段JS代码的函数调用，将服务器数据放在函数实参中，前端提前写好响应的函数准备回调，接收数据，实现跨域数据交互
     - Proxy Server
   - [x] 安全
     - 同源策略:如果两个 URL 的协议、域名和端口都相同，我们就称这两个 URL 同源
@@ -338,6 +341,7 @@
           - 重要接口加验证参数
             - CSRF Token
             - 图片、短信验证
+    - http 劫持
   - [x] 导航流程：输入 URL 到页面展示发生了什么
     - 输入处理，构成完整的 URL
     - 请求排队（可选）
@@ -362,29 +366,48 @@
     - async 加载完立刻执行
     - defer 在DOM 解析完毕，DOMContentLoaded 事件之前保持其相对顺序执行
   - [ ] 讲讲 fetch 和 xhr 的区别
+  - [ ] cookie 和 session 的区别
+  - [ ] cookie、localStorage、sessionStorage 区别以及使用场景
+  - [ ] 你所知道的白屏原因，怎么优化？
 - 工程
   - webpack
+    - [x] webpack 有用过哪些loader
+      - js
+        - babel-loader
+        - vue-loader
+      - css
+        - style-loader
+        - css-loader
+        - sass-loader
+        - postcss-loader
+      - file
+        - file-loader
+        - url-loader
     - [ ] webpack5 介绍
       - 持久化缓存
-  - [ ] webpack 性能优化你是怎么做的？
-    - https://juejin.cn/post/6844904093463347208
-  - 说了下 webpack 构建流程
-  - webpack 有几种 hash，它们有什么区别？一般你在项目里面是用哪种 hash？
-    - hash，是整个项目的 hash 值，每次编译之后都会生成新的 hash
-    - chunkhash，根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值（来源于同一个 chunk，则 hash 值就一样）
-    - contenthash，根据文件内容生成 hash 值，文件内容相同 hash 值就相同
-  - Webpack 了解多少
-    1. webapck 的四个核心概念，并介绍一些其他的模块，例如 mode，依赖图的概念等等。
-    2. 介绍几个 webpack 的插件，如压缩 gzip、如何处理 dev 中的 console.log 的模块等等
-  - loader、plugin 区别
-    - loader 主要是对源文件进行转换处理
-    - plugin 可以用来监听 webpack 构建生命周期，做一些操作，去扩展 webpack 功能
-    - loader 本质是一个函数，plugin 本质是一个类，
-  - loader 执行顺序
-    - 从右往左
-  - 性能优化
-  - 树摇
-    - 它与 CommonJS 规范最大的区别在 ES6 中的 import 和 export 都是静态的。静态意味着一个模块要暴露或引入的所有方法在编译阶段就全部确定了，之后不能再改变。
+    - [ ] webpack 性能优化你是怎么做的？
+      - https://juejin.cn/post/6844904093463347208
+    - [ ] 说了下 webpack 构建流程
+    - webpack 有几种 hash，它们有什么区别？一般你在项目里面是用哪种 hash？
+      - hash，是整个项目的 hash 值，每次编译之后都会生成新的 hash
+      - chunkhash，根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值（来源于同一个 chunk，则 hash 值就一样）
+      - contenthash，根据文件内容生成 hash 值，文件内容相同 hash 值就相同
+    - Webpack 了解多少
+      1. webapck 的四个核心概念，并介绍一些其他的模块，例如 mode，依赖图的概念等等。
+      2. 介绍几个 webpack 的插件，如压缩 gzip、如何处理 dev 中的 console.log 的模块等等
+    - loader、plugin 区别
+      - loader 主要是对源文件进行转换处理
+      - plugin 可以用来监听 webpack 构建生命周期，做一些操作，去扩展 webpack 功能
+      - loader 本质是一个函数，plugin 本质是一个类，
+    - extenral 通过extenrals 选项，可以将依赖从输出的bundle中移除，并保持资源引入 
+    - loader 执行顺序
+      - 从右往左
+    - [ ] webpack 构建阶段优化
+    - [ ] webpack 产物阶段优化
+      - 提取公共代码、代码分割、代码压缩、按需加载、预加载
+    - [ ] 热更新原理
+    - 树摇
+      - 它与 CommonJS 规范最大的区别在 ES6 中的 import 和 export 都是静态的。静态意味着一个模块要暴露或引入的所有方法在编译阶段就全部确定了，之后不能再改变。
   - CI/CD
     - Docker
       - [x] Docker 容器化带来的好处
@@ -423,6 +446,23 @@
       - 具体：用公钥解密出 hash 跟证书内容进行摘要对比
   - [ ] TSL 握手过程
   - [ ] http1.0/1.1/2.0/3.0
+    - http2
+      - http 头部压缩
+      - 二进制分帧传输
+      - 支持多路复用
+      - 支持帧控制
+      - 服务推送
+  - [x] 头部压缩的原理是什么
+    - “HPACK”
+    - 浏览器和服务器会维护一个相同的静态表和一个动态表，以及内置一个静态霍夫曼编码表
+      1. 静态表存储的是常见的一些头部，和一些很常见的头部键值对
+         ![图 27](./images/1649176543339.png)  
+      2. 动态表初始为空，添加在静态表后面，结构相同
+      3. 请求、响应头部中对于静态表里未出现过的字段或者对应值则经过哈夫曼压缩编码发送之后，客户端和服务器更新自己的动态表；对应已有的则只需发送索引值
+         ![图 26](./images/1649175617174.png)  
+  - [x] options方法的作用
+    - 要求服务器列出可对资源实行的操作方法，在响应头Allow字段里返回,比如有的资源只支持get，有的只支持post/delete。
+    - cors
   - [x] 浏览器 http 缓存
     1. 缓存查找：查找不到直接发送请求，http 缓存需要经过 service worker 缓存
        1. 缓存位置
@@ -597,17 +637,19 @@
   - vue-router
     - [x] hash 模式和 history 模式实现原理分别是什么
       - hash
-        - 通过改变 URL 中#后面的值
+        - 使用URL中#后面的内容作为路由地址
         - URL hash 发生改变不会重新刷新页面，而且会浏览器的访问历史中增加一个记录
-        - 通过 hashchange 事件监听 hash 路由变化
+        - 可以通过 hashchange 事件监听路由变化，根据当前路由地址找到对应组件重新渲染，但。。。
         - 特点：兼容性好但是不美观
       - history
-        - 利用 HTML5 History Interface 中新增的 pushState() 和 replaceState() 方法对浏览器历史记录栈进行修改。
-        - 同样当前 URL 改变了，但浏览器不会刷新页面
-        - 通过 PopStateEvent 事件监听路由变化
+        - 使用 URL 路径部分作为路由地址
+        - 利用 HTML5 History Interface 中新增的 pushState() 和 replaceState() 方法对浏览器历史记录栈进行修改，但不会刷新页面
+        - 通过 PopStateEvent 事件监听路由变化，根据当前路由地址找到对应组件重新渲染
         - 特点：虽然美观，但是刷新会出现 404 需要后端进行配置
-      - history.pushState()或者 history.replaceState()不会触发 popstate 事件
-        - popstate 事件会在点击后退、前进按钮(或调用 history.back()、history.forward()、history.go()方法)时触发
+        - history.pushState()或者 history.replaceState()不会触发 popstate 事件；popstate 事件会在点击后退、前进按钮(或调用 history.back()、history.forward()、history.go()方法)时触发
+        - vue-router 
+          - popstate监听路由变化
+          - 使用 history pushState 模拟 hash 模式
     - [x] 路由懒加载
       - Vue 的异步组件和 Webpack 对动态 import 做代码分割功能
     - [x] Vue-router 导航守卫有哪些
@@ -619,21 +661,12 @@
 - NodeJS
   - [ ] 浏览器事件循环跟 NodeJS 有什么区别
 - 操作系统
-
-  - [ ] 线程跟进程区别
-  - [ ]
-  - 定义
-
+  - [x] 线程跟进程区别
     - 进程是资源分配和调度的基本单位
     - 线程是 CPU 运算调度的最小单位
-
-    关系及特点
-
-    - 线程是依附于进程的，一个进程能有多个线程，但任意一线程执行出错，都会导致整个进程的崩溃
-    - 线程之间共享进程中的数据
+    - 一个进程能有多个线程，但任意一线程执行出错，都会导致整个进程的崩溃
+    - 线程之间共享本进程中的内存空间，进程之间的资源则相互隔离
     - 进程关闭，操作系统会回收进程所占用的内存
-    - 进程之间的内容相互隔离
-
 - 算法
   - [ ] 散列表
     - [ ] 散列冲突
@@ -670,7 +703,10 @@
     - 对二叉查找树进行中序遍历，就可以输出一个从小到大的有序数据队列
     - 遍历(广、深)、层序遍历、深度(广)
     - 反转
+- typescript
+  - [ ] interface和type的区别
 - 项目复盘
+  - [ ] 工作中遇到的具有挑战的事情
   - cli 的原理和研发过程遇到的问题
   - 表单及列表
     - 虚拟列表
@@ -685,6 +721,9 @@
     - 场景：老项目技术栈升级兼容维护难、多种技术栈混合场景
   - monorepo
     - pnpm
+- [ ] 职业规划 希望在未来的两到三年时间，拓充技术能力的同时，在业务能力上有所沉淀成为业务，形成一定的见解，同时谋求从大头兵向小组长的一个转变
+- hr
+  - 
 - TypeScript 类型推导
   typeof
   联合类型
@@ -714,7 +753,7 @@
 
 着重准备 项目中遇到的难点有哪些、又是怎么解决的、对项目做过哪些性能优化、做过的亮点有哪些、把一个项目的关键模块回顾并吃透，特别有用，而且还占很大一个比重，而且还能由你自由发挥引导，这不重点准备还准备啥呢？
 
-- 项目
+- 项目（认真复盘）
   - tailwindcss 好处
     - 命名
     - 原子
@@ -783,15 +822,6 @@ lint-staged 原理
 
 - pre-commit
 
-- koa
-
-  - 洋葱
-  - koa-body
-  - koa-router
-    - 正则
-    - path-to-exgexp
-    - 前缀树
-      - find-my-way
 
 - 项目经验
   - tailwindcss
@@ -825,10 +855,6 @@ lint-staged 原理
   - 人事
   - 小程序
 
-包
-
-- main
-- module
 
 - HTTPS 强化通信链路安全
 - HTTP/2 优化传输效率
@@ -901,3 +927,50 @@ TCP（Transmission Control Protocol，传输控制协议）是一种面向连接
 工程化的角度思考本地开发的提效，如何去进行 webpack 构建的优化，最近社区 esbuild 很火，尝试去接入一下。vite 和 snowpack 的思路很赞，能不能在新项目中运用起来等等……
 平常如果经常有多项目开发的需求，整理出差异和统一的部分，建立团队内部的脚手架避免重复劳动。
 尝试搭建CI / CD 平台，尝试搭建npm 私服维护自己公司内部的通用包。
+
+
+- babel的preset和pollyfill可以互相替代吗，为什么可以/不可以
+- babel7相较于之前做了哪些优化
+- DOM 的事件机制，怎么阻止事件捕获
+- 常用的 ES6 语法有哪些，var 怎么实现let
+- React中的 useCallback 和 useMemo 有什么区别，什么情况下需要用 useCallback
+- setState 是同步还是异步的
+- Set 的用法，用 Set 实现数组去重
+- 移动端适配方案, rem 和 em 的区别
+- 编程题：用 setTimeout 实现 setInterval
+- Vue 的双向绑定机制
+- React Fiber 机制
+- React Hooks 的原理
+- 编程题：输入两个数组 [1,2,3,2,1], [3,2,1,4,7]  返回公共的并且长度最长子数组的长度
+- 大文件的分片上传和断点续传怎么做的
+- 抖音APP 与 H5 如何通信
+- 如何针对性能指标做优化，有没有了解过业界的性能指标统计方式
+- less-loader 的 less 转成 css 的底层原理
+- webpack 常用插件
+- webpack 如何做代码拆分
+- webpack 动态导入原理
+- esm 和 commonjs 的区别
+- TS 的 type 和 interface 的区别
+- TS 怎么做枚举
+- TS 泛型
+- canvas 绘制流程，canvas 里的图片跨域怎么处理
+- 了解哪些设计模式，实现其中一个设计模式
+- canvas 绘制流程，遇到了哪些问题
+- 移动端布局方案
+- H5 开发时遇到了哪些问题，怎么定位的
+- 哈希表原理，哈希碰撞时怎么处理
+- requestAnimationFram 与 requestIdleCallback 的区别
+- npm管理痛点，如何解决
+- gitflow流程、分支管理
+- 编程题：设计一个flat函数将如下数组arr=[1,2,['3',4,'5',[6,[7,8],9]]]输出为1,2,'3',4,'5',6,7,8,9。至少写出两种方法,要求不能改变数组中的原始数据类型
+- 对称加密和非对称加密的使用场景
+- script 标签里分别设置 defer 和 async， 它们的执行顺序是怎么样的
+- 解释下浏览器的同源策略
+- React diff 节点移动的具体过程
+- 重排与重绘，怎么减少重排
+
+实现上不需要额外的资源来记录状态信息，减轻服务器的负担，能够把更多的 CPU 和内存用来对外提供服务。
+而且，“无状态”也表示服务器都是相同的，没有“状态”的差异，可以轻松实现集群化，让负载均衡把请求转发到任意一台服务器，扩展性能
+
+
+项目重构前是什么状态 部门内第一个是使用组合式模式开发落地的项目，由于前期不熟悉缺乏经验。导致项目数据流动混乱、功能杂糅、请求相互依赖，不但没有突出组合式逻辑清晰代码复用的优点，反而导致代码可维护性差，白屏时间长。通过梳理逻辑功能，重新组织页面、组件，按照单一原则抽离hook，解耦无关逻辑。梳理数据流动，无关请求并行触发。提升代码可维护性，加快首屏渲染。
