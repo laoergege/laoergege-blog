@@ -38,11 +38,11 @@ tags:
 
 在 HTTP/1.1 之前，客户端与服务器端的的**每次请求都需要创建 TCP 连接，服务器响应后断开 TCP 连接**，再请求再创建断开。因为客户端不会与服务器保持长时间的连接状态，所以就被称为“短连接”（short-lived connections）。
 
-![图 1](images/750369eee85b600041095ba4e0c153ee9f146e2118e99caaa5bad96bc5702cb1.png)  
+![图 1](./images/750369eee85b600041095ba4e0c153ee9f146e2118e99caaa5bad96bc5702cb1.png)  
 
 TCP 的连接和关闭非常耗时间，**长连接即在一个请求结束后保持 TCP 连接不关闭**，其他多个请求可以复用到同一 TCP 连接。
 
-![图 5](images/a0bcce54c1f34281df9e345b474b0dfd0bfb939318933a4529dca34e12ac4b6c.png)  
+![图 5](./images/a0bcce54c1f34281df9e345b474b0dfd0bfb939318933a4529dca34e12ac4b6c.png)  
 
 ## 管道(pipelining)
 
