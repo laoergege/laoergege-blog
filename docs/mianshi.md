@@ -5,8 +5,6 @@
   - tree-shaking 原理？
     - 利用 ES Module 做静态分析
     - 利用 ES Module 做静态分析，通过分析 ast 语法树，对每个模块维护了一个作用域，收集模块内部使用的变量，然后分析作用域，将 import 进来未被使用的模块删除，最后递归处理文件。
-- js 手写题
-  - 回文字符串(这个问题好常见)，判断一个字符串最多只删 1 个字符，是否能成为一个回文字符串，let str = "ABCDABA"
 - typescript
   - TypeScript 高级用法， Pick 和 Omit
 - css
@@ -47,6 +45,7 @@
   - 京东
   - 顺丰
   - 平安
+  - 荔枝
 - html&css
   - flex: 1 代表什么意思
     - flex-grow: 1
@@ -372,23 +371,26 @@
 - 工程
   - webpack
     - [x] webpack 有用过哪些loader
-      - js
-        - babel-loader
-        - vue-loader
-      - css
-        - style-loader
-        - css-loader
-        - sass-loader
-        - postcss-loader
-      - file
-        - file-loader
-        - url-loader
+      - loader
+        - js
+          - babel-loader
+          - vue-loader
+        - css
+          - style-loader
+          - css-loader
+          - sass-loader
+          - postcss-loader
+        - file
+          - file-loader
+          - url-loader
+      - plugin
+        - SplitChunksPlugin
     - [ ] webpack5 介绍
       - 持久化缓存
     - [ ] webpack 性能优化你是怎么做的？
       - https://juejin.cn/post/6844904093463347208
     - [ ] 说了下 webpack 构建流程
-    - webpack 有几种 hash，它们有什么区别？一般你在项目里面是用哪种 hash？
+    - [ ] webpack 有几种 hash，它们有什么区别？一般你在项目里面是用哪种 hash？
       - hash，是整个项目的 hash 值，每次编译之后都会生成新的 hash
       - chunkhash，根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值（来源于同一个 chunk，则 hash 值就一样）
       - contenthash，根据文件内容生成 hash 值，文件内容相同 hash 值就相同
@@ -406,7 +408,7 @@
     - [ ] webpack 产物阶段优化
       - 提取公共代码、代码分割、代码压缩、按需加载、预加载
     - [ ] 热更新原理
-    - 树摇
+    - [ ] 树摇原理
       - 它与 CommonJS 规范最大的区别在 ES6 中的 import 和 export 都是静态的。静态意味着一个模块要暴露或引入的所有方法在编译阶段就全部确定了，之后不能再改变。
   - CI/CD
     - Docker
@@ -553,7 +555,7 @@
     - [x] 什么是虚拟 DOM，以及为什么
       - 本质描述真实 DOM 的 javascript 对象
       - 抽象视图，跨平台化
-      - 避免直接手动操作 DOM，可以以批处理的方式保证了性能下限以及规避一定 XSS 风险
+      - 避免直接手动操作 DOM，对 DOM 进行读写分离以及以批处理的方式保证了性能下限，同时可以规避一定 XSS 风险
     - [x] diff 算法，index key 问题
       - key：建立索引，快速找到复用节点
       - 具体

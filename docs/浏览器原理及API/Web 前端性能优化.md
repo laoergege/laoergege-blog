@@ -174,6 +174,7 @@ JavaScript、CSS 这类关键资源的加载会阻塞到页面渲染，而且还
     - link in body
 
 
+- 资源预获取/预加载（prefetch/preload）
 - JS 资源优化，async 或 defer 标记外链脚本
   - 加载顺序控制
     - defer 

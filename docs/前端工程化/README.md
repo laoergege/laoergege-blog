@@ -5,7 +5,7 @@ tags:
 desc: 系统化前端工程相关
 ---
 
-# 前端工程化
+# 前端工程及架构化
 
 > 前端工程化本质：将前端工作流程`标准化`、`规范化`、`工具化`、`自动化`。**通过规范和工具来提高前端应用质量及开发效率。**
 
@@ -21,6 +21,7 @@ desc: 系统化前端工程相关
     - commit msg 提交规范
     - 提案请求
       - merge request & code review
+      - rfc 机制
   - 代码
     - 代码风格
       - 命名规范
@@ -56,22 +57,35 @@ desc: 系统化前端工程相关
   - 开发
     - 框架化
     - 调试
-      - 本地服务器
-      - 代理
-      - mock
       - 环境区分
+      - 本地服务器及服务代理
+      - API 管理及数据模拟
+      - 浏览器及 DevTools
     - 构建
-      - dev
+      - 开发模式
         - 模块化
         - 热模块替换
-        - 编译
-          - [gogocode](https://github.com/thx/gogocode)
-          - [parcel-css](https://github.com/parcel-bundler/parcel-css)
-        - 增量
+        - 构建缓存
+        - 增量（按需）构建
           - husky + Lint-stage
-      - prod
+      - 生产模式
         - 打包/分包
-        - 压缩
+        - 输出
+          - SourceMap
+          - HashedURLs
+          - 模块格式及加载机制（运行时）
+        - 转换
+          - 压缩
+          - 树摇
+          - 符号
+          - 转译
+            - js
+              - [gogocode](https://github.com/thx/gogocode)
+              - [parcel-css](https://github.com/parcel-bundler/parcel-css)
+            - css
+              - less
+              - scss
+              - postcss
     - 工具
       - webpack
       - [vite](https://github.com/vitejs/vite)
@@ -89,6 +103,7 @@ desc: 系统化前端工程相关
     - size
       - [size-limit](https://github.com/ai/size-limit)
       - [bundlesize](https://github.com/siddharthkp/bundlesize)
+    - build
   - CD
     - 发版日志
   - 监控
@@ -119,7 +134,7 @@ desc: 系统化前端工程相关
       - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport)
     - 低代码
       - [lowcode-engine](https://github.com/alibaba/lowcode-engine)
-    - 缓存、数据库
+    - 前端数据库
       - [Dexie.js](https://github.com/dexie/Dexie.js)
       - [rxdb](https://rxdb.info/)
  

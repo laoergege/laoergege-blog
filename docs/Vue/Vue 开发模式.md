@@ -1,99 +1,103 @@
-## Vue 应用的业务开发架构
+# Vue 应用的业务开发架构
 
-- 路由层
-  - router
-  - stack
-- 视图层
-  - 容器组件
-  - 展示组件
-    - 组件库
-- 数据层
-  - service
-  - model
-- 通信层
-  - httpClient
+- 数据层：Service + Store/Model + IOC + Context
+  - Servcie = Store + API
+- 逻辑层：组件化 => 应用状态逻辑拆分
+- _路由层_
+- 视图层：vdom => 视图逻辑抽象、view = f(state)
+- 底层渲染层：dom api + css
 
-业务数据
-1. 业务状态分散在组件，组件通信困难？
-2. Redux，将散落在组件里面的状态聚拢起来成唯一单例，形成状态 store => 组件的单向通信模式
-3. 面向对象编程（建立 业务模型） + 响应式编程 + 规范
+## 业务体系下的组件化
 
+- 如何组件化？
+  - 组件 = 状态逻辑 + 渲染
+  - 状态处置
+    - 外置
+      - props
+      - context
+    - 内置
+  - 组件分类
+    - 有状态：容器组件
+    - 无状态：展示组件
+    - 半状态：交互组件
+      - 内部状态获取
+        - event emit
+        - context
+  - 状态逻辑解耦思考
+    1. 业务状态逻辑分散在各个组件，但组件树结构导致通信困难？
+    2. Redux，将散落在组件里面的状态聚拢起来成单例模式，形成状态 action => store => component 的单向通模型
+       - 范式啰嗦
+       - 缺失模块化
+    3. 状态逻辑：面向对象 + 面向组合
+  - 状态共享：消除状态多级分割带来的痛心困难，以平铺一级的单例模式进行状态共享
+  - 状态上下文：利用多级结构形成上下文控制
+  - 状态依赖：响应式、数据流、组合计算
+  - 组件状态逻辑复用：hooks + 组合
 
-try catch 分流
+## 数据流设计
 
-## 复用
-
-- 组件化
-  - 逻辑状态
-    - 渲染函数
-    - composition-api
-  - 模板
-    - 原子样式
-
-## 数据流
+- Pina
+ - TypeScript 支持
+ - 插件机制
+ - 热模块更换
+   - 在不重新加载页面的情况下修改您的商店
+   - 在开发时保持现有状态任何
+ - 开发工具支持
+   - 动作、响应追踪
+   - 商店出现在使用它们的组件中
+   - 时间旅行和更容易的调试
+ - 服务器端渲染支持
+ - api
+   - defineStore
 
 ```js
-import { inject, reactive } from 'vue'
-const STORE_KEY = '__store__'
-function useStore() {
-  return inject(STORE_KEY)
+import { inject, provide, reactive } from "vue";
+const STORE_KEY = "xxx";
+export function useUserService() {
+  return inject(STORE_KEY);
 }
-function createStore(options) {
-  return new Store(options)
+export function createUserService(options) {
+  return provide(STORE_KEY, Service, options);
 }
-class Store {
-  @inject()
-  constructor(options) {
-    this.$options = options
-    this._state = reactive({
-      data: options.state
-    })
-    this._mutations = options.mutations
-  }
-  get state() {
-    return this._state.data
-  }
-  commit = (type, payload) => {
-    const entry = this._mutations[type]
-    entry && entry(this.state, payload)
-  }
-  install(app) {
-    app.provide(STORE_KEY, this)
-  }
-}
-export { createStore, useStore }
-```
 
-- 数据流方案
-  - problem
-    - 第三方库多余的 api，希望回归纯粹的 js
-  - need
-    - 更好的类型推导
-    - 支持 vue-devtool
-    - 扩展
-    - 轻量级
-  - api
-    - defineStore
+@Injectable()
+class UserService {
+  #name;
+
+  constructor() {
+    super();
+  }
+  get fullName() {
+    return;
+  }
+}
+
+class User {}
+
+@Use(User)
+class Student {}
+
+export { createStore, useStore };
+```
 
 ## Vue3 组件开发范式
 
 ```js
 // 1.对象式 setup 组件
 const App = {
-  name: 'xxx',
-  props: ['xxx'],
+  name: "xxx",
+  props: ["xxx"],
   setup(props, ctx) {
-    
     // 1.返回状态
     //return {}
 
     // 2.返回渲染函数
-    return () => h('xxx')
+    return () => h("xxx");
 
     // 探索模板字符串标签
     // return () => vue`<div>{{xxx}}</div>`
   },
-}
+};
 
 // 2.函数式组件（本质渲染函数，vue3 后函数组件的函数签名跟状态组件 setup 保持一致）
 // const App = (props, ctx) => {
@@ -104,8 +108,13 @@ const App = {
 // const App = (props, ctx) => {
 //   return () => <div>{xxx}</div>
 // }
-// defineComponent(App) 
+// defineComponent(App)
 
 // App.props = ['value']
 // App.emits = ['click']
 ```
+
+
+  
+try catch 分流
+
