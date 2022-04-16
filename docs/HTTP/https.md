@@ -124,3 +124,8 @@ http 安全特性：
 - [彻底搞懂HTTPS的加密原理](https://zhuanlan.zhihu.com/p/43789231)
 - 透视 http 协议
 - [SSL Certificate framework 101: How does the browser actually verify the validity of a given server certificate?](https://security.stackexchange.com/questions/56389/ssl-certificate-framework-101-how-does-the-browser-actually-verify-the-validity)
+
+
+
+1. 客户端发送 client hello（加密套件列表 + client-random）
+2. server hello

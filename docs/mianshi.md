@@ -59,9 +59,32 @@
       4.标签、伪元素选择器，如 div::first-line，权值为 0001
       5.通配符、子类选择器、兄弟选择器，如*, >, +，权值为 0000
       6.继承的样式没有权值
-  - [ ] 盒子模型
-  - [ ] BFC
-    - 应用: 1.分属于不同的BFC时,可以防止margin重叠 2.清除内部浮动 3.自适应多栏布局
+  - [x] 盒子模型
+    - 盒子模型：content + padding + border + margin
+    - 怪异模型和标准模型
+      - 标准模型元素宽度 width = content
+        - `box-sizing: border-box`
+      - 怪异模型元素宽度 width = content + padding + border
+        - `box-sizing: content-box`
+  - [x] BFC
+    - FC
+      - Formatting context(格式化上下文) 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块独立渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。
+    - BFC 即 Block Formatting Contexts (块级格式化上下文)，就是普通流的布局方案。
+    - 创建 BFC 条件
+      - 浮动元素
+      - 绝对定位元素，且 position 不是 static 也不是 relative
+      - display 为 inline-blocks,table,table-cell,table-caption,flex,inline-flex 的元素;
+      - overflow 不为 visible 的元素
+      - [等](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
+    - BFC的原理（渲染规则即正常流/文档流）
+      - 正常流的排版：依次排列，排不下了换行
+      - 同一个 BFC 下的块级元素垂直方向会边距重叠
+      - BFC 的区域不会与浮动元素的布局重叠
+      - BFC 可以包含浮动的元素（清除浮动）
+    - 应用
+      - 防止边距重叠
+      - 包含浮动元素，防止高度坍塌
+      - 多列布局
 - js
   - 语法
     - [x] for of 和 for in 的区别以及原理

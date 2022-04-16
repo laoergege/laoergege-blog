@@ -1,12 +1,11 @@
 - CSS
-  - 特性
-    - 重叠
-    - 继承
+  - 特性：[重叠、继承](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance#%E7%90%86%E8%A7%A3%E7%BB%A7%E6%89%BF)
   - 语法
-    - @rule
-    - 选择器及优先级
+    - @rules
+    - CSS 选择器及优先级
+      ![图 2](./images/1649916559745.png)  
       ```txt
-      第一优先级：!important 会覆盖页面内任何位置的元素样式
+      1. !important 会覆盖页面内任何位置的元素样式
       1.内联样式，如 style="color: green"，权值为 1000
       2.ID 选择器，如#app，权值为 0100
       3.类、伪类、属性选择器，如.foo, :first-child, div[class="foo"]，权值为 0010
@@ -14,27 +13,28 @@
       5.通配符、子类选择器、兄弟选择器，如*, >, +，权值为 0000
       6.继承的样式没有权值
       ```
-    - 单位
+    - 单位、值、function
+    - 自定义变量
   - CSSOM
     - element.style
     - styleSheets
     - CSS Typed OM
+  - [页面布局](./CSS页面布局.md)
+  - 文本排版
+    - [基础：CSS 样式文本](https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text)
+    - [Typography for Developers](https://css-tricks.com/typography-for-developers/)
+    - [Typography in CSS](https://cssreference.io/typography/)
+    - [CSS Typography: The Basics](https://www.webfx.com/blog/web-design/css-typography-01/)
+    - 工具
+      - [opentype.js](https://github.com/opentypejs/opentype.js)
+      - [awesome web typography](https://github.com/deanhume/typography)
+      - [Typography.js](http://kyleamathews.github.io/typography.js/)
   - 响应式
     - Media Queries
     - 容器查询 `@container`
     - Viewport
-  - [页面布局](./CSS页面布局.md)
   - 页面
     - 颜色形状
-    - 文本排版
-      - [Typography for Developers](https://css-tricks.com/typography-for-developers/)
-      - [Typography in CSS](https://cssreference.io/typography/)
-      - [CSS Typography: The Basics](https://www.webfx.com/blog/web-design/css-typography-01/)
-      - 工具
-        - [opentype.js](https://github.com/opentypejs/opentype.js)
-        - [awesome web typography](https://github.com/deanhume/typography)
-        - [Typography.js](http://kyleamathews.github.io/typography.js/)
-    - 层叠上下文和层叠顺序
     - 变形
       - [zoom和transform:scale的区别](https://www.zhangxinxu.com/wordpress/2015/11/zoom-transform-scale-diff/)
   - 多媒体

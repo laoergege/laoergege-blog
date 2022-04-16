@@ -34,3 +34,6 @@ CSRF
 
 没有SameSite属性的 cookie 将被视为SameSite=Lax。
 具有SameSite=None的 cookie 还必须指定Secure ，即这些 cookie 需要一个安全的上下文环境。
+
+lax
+- 导航
