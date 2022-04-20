@@ -34,9 +34,9 @@ Vue 的响应式原理的实现本质就是数据劫持 + 观察者模式，Subj
 
 Vue2 和 Vue3 的响应式实现并其实没多大区别，大致都是需要以下重要三步：
 
-1. 数据劫持（defineProperty => proxy 劫持数据操作事件）
-2. 依赖收集（监听属性数据的 getter 事件，收集相关依赖的副作用）
-3. 变更通知（监听属性数据的 setter 事件，通知调用副作用执行）
+1. 数据劫持
+2. 依赖收集
+3. 变更通知
 
 ### Vue3 响应式原理 mini 版本实现
 
@@ -198,11 +198,10 @@ Vue Reactive API 大致分为两类：
 
 - Reactive（响应式数据）
   - [reactive](#reactive)
-    - shallowReactive 浅响应式对象
-  - readonly：只读响应，不会被依赖收集
-    - shallowReadonly
-  - refs
-    - ref
+    - shallowReactive 浅响应
+  - readonly：只读，不响应
+    - shallowReadonly：浅只读
+  - ref
   - computed
   - deferredComputed
 - [ReactiveEffect（响应式副作用）](#reactiveeffect)
@@ -291,7 +290,7 @@ export const enum ReactiveFlags {
 
 ![](./images/flag.png)
 
-### get 依赖收集
+#### get 依赖收集
 
 get 代理操作主要做了 3 件事：
 
@@ -359,12 +358,12 @@ console.log(_test.length);
 
 ### ReactiveEffect
 
-将副作用封装成响应式副作用，能够自动收集响应式依赖并且在其发生变化时重新执行某些操作。
+将副作用封装成响应式副作用，能够在响应式数据发生变化时重新执行。
 
 ```ts
 export class ReactiveEffect<T = any> {
   active = true;
-  deps: Dep[] = []; // 存储相关响应式依赖
+  deps: Dep[] = []; // 存储相关响应式数据依赖
 
   // can be attached after creation
   computed?: boolean;
@@ -438,9 +437,9 @@ export function effect<T = any>(
 }
 ```
 
-### ReactiveEffect.run 副作用执行
+#### ReactiveEffect.run 副作用执行
 
-在上面 mini 响应式实现中，每次副作用重新执行前都要 `clearup()` 清除副作用的所有依赖，然后再在执行过程中重新收集依赖。
+在上面 mini 响应式实现中，每次副作用重新执行前都要 `clearup()` 清除副作用的所有依赖，然后再在执行过程中重新收集依赖，因为在动态执行过程中，旧依赖可能不再是依赖。
 
 这个过程牵涉到大量对 Set 集合的添加和删除操作。在许多场景下，依赖关系是很少改变的，因此这里存在一定的优化空间。
 
@@ -448,7 +447,7 @@ Vue3.2 采用大概思路就是标记清除：
 
 1. 执行前先对所有依赖进行“已收集”标记
 2. 执行过程对依赖重新标记为“新收集”
-3. 删除掉所有不是最新收集的依赖
+3. 删除掉所有不是最新的已收集依赖
 
 ```js
 export const createDep = (effects) => {
@@ -583,11 +582,11 @@ const wasTracked = (dep) => (dep.w & trackOpBit) > 0;
 
 通过与运算就可以知道该依赖是否在当前层收集过。
 
-### ReactiveEffect.allowRecurse
+#### ReactiveEffect.allowRecurse
 
 ReactiveEffect.allowRecurse 是否允许副作用递归（重复）执行，默认 allowRecurse 是 undefined 为不允许，[场景应用了解](./vue%20的响应式渲染机制.md#Effect.allowRecurse)。
 
-### ReactiveEffect.scheduler 副作用调度器
+#### ReactiveEffect.scheduler 副作用调度器
 
 默认情况下，副作用是同步触发执行，当设置调度器时则由其调度执行，了解 [vue 的渲染调度机制：异步更新](./vue%20的响应式渲染机制.md)。
 

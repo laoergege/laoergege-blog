@@ -9,7 +9,7 @@ desc: css 布局相关的知识体系
 # CSS 布局
 
 - CSS 布局
-  - 盒子模型：页面是由一个个相互作用、嵌套的盒子组成
+  - [盒子模型](https://developer.mozilla.org/zh-CN/docs/learn/css/building_blocks/the_box_model#%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%86%85%E8%81%94%E7%9B%92%E5%AD%90)：页面是由一个个相互作用、嵌套的盒子组成
     - 盒子模型：box = content + padding + border + margin
       ![图 1](images/1649915882380.png)  
     - 怪异模型和标准盒模型
@@ -81,9 +81,70 @@ desc: css 布局相关的知识体系
       - calc
     - 圣杯布局（三分栏布局）
 
-## 正常流中盒子的生成及
+## BFC 理解
 
-![图 1](./images/1650040865274.png)  
+对于 BFC 的理解首先了解什么是 FC。
+
+> Formatting context(格式化上下文) 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块独立渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用
+
+最重要一点是**格式化上下文具备独立渲染区域，里面的子元素不会影响到外面元素**。
+
+我们最常见的格式上下文有
+- BFC（Block formatting contexts）：块级格式上下文
+- IFC（Inline formatting contexts）：内联格式上下文
+- GFC（GrideLayout formatting contexts）：网格布局格式化上下文
+- FFC（Flex formatting contexts）:自适应格式上下文
+
+其中 BFC 和 IFC 的布局方案就是我们平时所说的默认布局：文档流或正常流，因为**元素由文档流中出现的位置顺序排序出现**。感性总结下正常流的布局方案（依次排列，排不下换行）：
+
+1. 遇到块级元素则垂直排列
+2. 行内元素则水平排列，直到当行被占满然后换行
+
+接下来更深入、更贴近规范进行理解。
+
+页面是由很多个盒子组成的，元素产生的盒子的类型由元素的 display 的 [`<display-outside>`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/display-outside) 外部显示类型控制，决定盒子在流布局如何进行：
+
+- 块级盒子，参与 BFC（盒子垂直排列）
+- 行内盒子，参与 IFC（盒子水平排列）
+
+1. 开始页面由根元素 `<html>` 开始创建一个 BFC 环境。一般来说，一个盒子要么建立一个新的独立格式化上下文，要么继续参与其包含块的格式化上下文：
+
+> display 的 [`<display-inside>`](https://developer.mozilla.org/en-US/docs/Web/CSS/display-inside) 内部显示类型则控制元素内容的格式上下文，比如 `display: grid` 将为其子元素建立网格布局格式上下文
+
+2. 当遇到块级盒：排入包含块块级格式化上下文
+2. 
+3. 块容器盒子（block container box）要么只包含其它块级盒子，要么只包含行内盒子并同时创建一个行内格式化上下文（inline formatting context）。
+
+
+在下面例子中，float 块脱离了文档流，但始终在根元素的 BFC 环境中。
+
+![图 3](./images/1650189112844.png)  
+
+块级元素
+块级盒子
+块级容器
+块盒
+
+行内元素
+行内级盒子
+行内盒子（内容 IFC）
+
+浮动盒子在原流的块位置向左或向右移动，只影响行盒宽度，不影响块盒
+
+### BFC 特征
+
+1. 块级盒子垂直排列
+2. 同一个 BFC 的两个相邻盒子垂直方向会发边距重叠
+3. 独立的布局环境，里面的子元素不会影响到外面元素
+
+
+比较严谨的说法：
+
+1. BFC 对块盒子进行垂直排列
+2. 当遇到块级盒：排入块级格式化上下文。
+3. 当遇到行内级盒或者文字：那么创建一个行盒，先将行盒排版（行盒是块级），行盒会创建一个行内级格式化上下文，对行内级盒进行水平排列。如果排不下则重复 2、3。
+
+![图 2](./images/1650097798177.png)  
 
 
 ## grid 属性
@@ -138,6 +199,8 @@ desc: css 布局相关的知识体系
     - align-self
     - justify-self
     - place-self
+
+
 
 
 

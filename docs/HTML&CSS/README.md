@@ -29,10 +29,17 @@
       - [opentype.js](https://github.com/opentypejs/opentype.js)
       - [awesome web typography](https://github.com/deanhume/typography)
       - [Typography.js](http://kyleamathews.github.io/typography.js/)
-  - 响应式
-    - Media Queries
-    - 容器查询 `@container`
-    - Viewport
+  - 响应式设计
+    - API
+      - 媒体查询
+      - 容器查询
+      - Viewport 尺寸单位（vw、vh）
+    - 实践
+      - Viewport 断点
+      - 移动优先
+      - [组件驱动式Web设计](https://zhuanlan.zhihu.com/p/497961289)
+        ![图 4](images/1650293009360.png)  
+
   - 页面
     - 颜色形状
     - 变形
