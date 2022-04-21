@@ -30,7 +30,7 @@ desc: JavaScript 语法结构体系
       - 脚本
       - [模块](./JavaScript%20模块.md)
     - 指令序言（JavaScript 的指令序言是只有一个字符串直接量的表达式语句，它只能出现在脚本、模块和函数体的最前面）
-      - `"use strict"`
+      - `use strict`
     - 语句
       - 变量声明
         - var
@@ -47,7 +47,7 @@ desc: JavaScript 语法结构体系
         - 异步生成器函数
       - 控制流
         - 分支
-          - if
+          - if/else
           - switch
         - 循环
           - 递归
