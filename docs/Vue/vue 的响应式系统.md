@@ -8,12 +8,14 @@ desc: 除了组件化，Vue.js 另一个核心设计思想就是响应式。
 
 # Vue 的响应式系统
 
+> 示例源码主要为 vue3.2
+
+除了组件化，Vue.js 另一个核心设计思想就是响应式。
+
 - Vue 的响应式系统
   - [响应式原理](#响应式原理)
   - [Reative API 分析](#vue-reactive-api-源码分析)
   - [响应式渲染机制](./vue%20的响应式渲染机制.md)
-
-除了组件化，Vue.js 另一个核心设计思想就是响应式。
 
 ## 响应式原理
 
@@ -201,7 +203,7 @@ Vue Reactive API 大致分为两类：
     - shallowReactive 浅响应
   - readonly：只读，不响应
     - shallowReadonly：浅只读
-  - ref
+  - [ref](#ref)
   - computed
   - deferredComputed
 - [ReactiveEffect（响应式副作用）](#reactiveeffect)
@@ -603,6 +605,43 @@ export function triggerEffects(
     } else {
       effect.run();
     }
+    //...
+  }
+}
+```
+
+### ref
+
+vue 提供了 reactive、ref 创建响应式数据，那么 reactive 和 ref 有什么区别？
+
+1. 无论是 Object.defineProperty、proxy 实现的响应式功能有个缺点就是必须是对象类型，不支持基础类型
+2. ref 主要是为实现对基础类型规范支持，将基础类型包装成带 value 的对象然后进行响应式
+3. 实现原理细节上
+   - reactive 是通过 proxy 实现
+   - ref 依然是靠 object.defineProperty 的 get 与 set 完成的，如果 ref 接收不是一个基础类型则转换成 reactive 支持，如果直接通过 reactive 支持，则需要多创建一个 Map 对象，参考上面 [reactive 实现的缓存结构](#缓存结构)。
+
+```ts
+const convert = <T extends unknown>(val: T): T =>
+  isObject(val) ? reactive(val) : val
+
+class RefImpl<T> {
+  private _value: T
+  private _rawValue: T
+
+  public dep?: Dep = undefined
+  public readonly __v_isRef = true
+
+  constructor(value: T, public readonly _shallow = false) {
+    this._rawValue = _shallow ? value : toRaw(value)
+    // value 值为对象类型，则转换成 reactive 支持
+    this._value = _shallow ? value : convert(value)
+  }
+
+  get value() {
+    //...
+  }
+
+  set value(newVal) {
     //...
   }
 }

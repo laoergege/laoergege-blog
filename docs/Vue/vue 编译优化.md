@@ -89,9 +89,10 @@ PatchFlags.DYNAMIC_SLOTS 优化判断
 
 # vue 编译优化
 
-- vue 编译优化
-  - 动静分离
+- vue 运行时优化
   - 静态提升
+  - Patch 标记
+  - 动静分离
   - 事件缓存
 
 ```html

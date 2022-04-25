@@ -66,18 +66,16 @@ desc: vue 知识汇总
 
 ## Vue3 系文
 
-- 核心原理
-  1. [vue3 的升级优化](./vue3的升级优化.md)
-  2. [vue 组件渲染机制](./vue%20组件渲染机制.md)
-  3. [diff 更新流程](./diff%20更新流程.md)
-  4. [vue 的响应式系统](./vue%20的响应式系统.md)
-  5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
-  6. 编译优化
-  7. vue 指令原理
-- API
-  1. slots
-  2. transition
-  3. keep-live
+1. [vue3 的升级优化](./vue3的升级优化.md)
+2. [vue 组件渲染机制](./vue%20组件渲染机制.md)
+3. [diff 更新流程](./diff%20更新流程.md)
+4. [vue 的响应式系统](./vue%20的响应式系统.md)
+5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
+6. 模板编译优化
+7. vue 指令原理
+8. vue 异步组件原理及 Suspense
+9. Teleport 实现原理
+10. Fragment
 
 ## 推荐好文
 

@@ -13,7 +13,8 @@ desc: 总结 http 缓存、缓存相关控制设置及前端缓存最佳实践
 - http 缓存
   - [Cache-Control](#cache-control)
   - 缓存位置
-    - [代理端缓存](#代理缓存)
+    - [代理缓存](#代理缓存)
+      - CDN
     - [浏览器缓存](#浏览器缓存)
       - 内存
         - 图片
@@ -23,8 +24,8 @@ desc: 总结 http 缓存、缓存相关控制设置及前端缓存最佳实践
       - push-cache
   - [协商缓存](#协商缓存)
   - [缓存设置控制](#缓存设置控制)
-    - [响应缓存控制](#响应缓存控制)
-    - [请求缓存控制](#请求缓存控制)
+    - [通过 response 进行缓存控制](#通过-response-进行缓存控制)
+    - [通过 request 进行缓存控制](#通过-request-进行缓存控制)
   - [Vary：缓存验证器](#Vary：缓存验证器)
   - [前端缓存最佳实践](#前端缓存最佳实践)
 
@@ -66,22 +67,26 @@ http 中控制缓存的主要字段有一下三个：
 
 ## 浏览器缓存
 
+浏览器 http 缓存策略分为两种：强缓存、协商缓存
+
 ![图 18](./images/bdc51a403dd95bc66a025a17492f3dab8cd6640484c797b67e2d1e324e3b99b5.png)
 
-1. 缓存查找：查找不到直接发送请求，http 缓存需要经过 service worker 缓存
+1. 缓存查找：查找不到直接发送请求
 2. 强制缓存：通过 Expires 和 Cache-Control 判断缓存是否可用是否到期，如果可用则直接使用，否则协商缓存
-3. [协商缓存](#协商缓存)：服务端会返回 Last-modified、ETag信息，客户端则携带 If-Modified-Since 、If-None-Match 去请求后台，服务器根据条件请求字段判断资源是否更新
+3. [协商缓存](#协商缓存)：服务端返回资源时会带有 Last-modified、ETag信息，当协商缓存时，客户端直接发起请求并且携带 If-Modified-Since 、If-None-Match 去请求后台，服务器根据条件请求字段判断资源是否更新
    - 若资源更新，返回资源和 200 状态码
    - 否则，返回 304，告诉浏览器直接从缓存获取资源
 
 ### 用户行为
 
+> 以下 chrome 实现效果
+
 💡 浏览器某些用户行为会在请求头带上“私货”以控制缓存：
 
 1. 地址栏访问，链接跳转是正常用户行为，将会触发浏览器缓存机制
 2. 前进后退也会触发浏览器缓存机制，但某些情况浏览器会直接缓存内存到时直接读取即可（[Back/forward cache](https://web.dev/bfcache/) ）
-3. 刷新行为会自动请求带上 `Cache-Control:max-age=0`，导致浏览器缓存失效
-4. 强刷或者禁止缓存会带上 `Cache-Control: no-cache` ，不携带 If 条件验证，强制请求，不做协商。
+3. 刷新行为会对 html 文件自动请求带上 `Cache-Control:max-age=0`
+4. 强刷或者禁止缓存所有请求会带上 `Cache-Control: no-cache` ，并且不携带 If 条件验证，强制请求，不做协商。
 
 ## 协商缓存
 
@@ -103,15 +108,15 @@ ETag 工作原理：
 
 Last-modified 也同样类似。
 
-## 缓存设置控制
+## 缓存控制
 
-### 响应缓存控制
+### 通过 response 进行缓存控制
 
 ![](./images/server-cache-control.svg)  
 
-### 请求缓存控制
+### 通过 request 进行缓存控制
 
-`Cache-Control` 是个通用字段，客户端也可以发送附带 `Cache-Control` 缓存指令的请求（但不同浏览器对请求缓存控制不同支持，大多数支持 `Cache-Control: max-age=0` 或者 `Cache-Control: no-cache` 去做强制刷新请求）。
+`Cache-Control` 是个通用字段，客户端也可以发送附带 `Cache-Control` 缓存指令的请求（但浏览器对请求缓存控制的支持有限，比如仅支持 `Cache-Control: max-age=0` 或者 `Cache-Control: no-cache` 去做刷新）。
 
 ![图 1](./images/9b4fa558a294f0716e7dad1d5d8e20b9ffdd5056ac5ad2efa02d3c2ed9cc0756.png)
 

@@ -11,53 +11,46 @@ desc: web 前端能优化知识体系
 
 Web 前端性能优化，其实本质就是要让页面更快地显示和响应。性能优化的手段有很多种，关键是
 
-1. 制定[性能指标](#性能指标)
-2. 性能测试、监控工具
-   - 监控
-     - 目标：性能监控、异常监控
-     - 数据采集
-       - 前端性能指标如何采集
-       - 前端异常分类及如何采集
-     - 数据上报
-3. 系统化的**性能优化**指导
+- 制定[性能指标](#性能指标)
+- 性能测试、监控工具
+   - 测试工具
+   - [前端监控与数据上报](#前端监控与数据上报)
+- 系统化的**性能优化**指导
   
 ## 性能指标
 
-- 性能指标
-  - 加载速度
+- 性能指标分类
+  - 页面加载速度
     - Time to First Byte (TTFB)：后端响应速度
-    - First Contentful Paint 首次内容绘制 (FCP)：可视区域内可见的最大图像或文本块完成渲染的时间
-    - Largest Contentful Paint 最大内容绘制 (LCP)：视窗内最大的元素绘制的时间
-  - 响应速度
-    - First Input Delay 首次输入延迟 (FID)：标识用户第一次与页面交互到浏览器真正能够开始处理事件处理程序以响应该交互的时间
-    - Time to Interactive 可交互时间 (TTI)：表示网页首次完全达到可交互状态的时间点
-    - Total Blocking Time 总阻塞时间 (TBT)：FCP 和 TTI 之间发生的每个长任务的阻塞时间总和，用于量化在页面交互性变为可靠前，不可交互程度的严重性
+    - [First Contentful Paint 首次内容绘制 (FCP)](https://web.dev/fcp/)：文本、图像首次渲染出现的时间
+      - 图像：图片、背景图、`<svg>` 元素或非白色的 `<canvas>` 元素
+    - [Largest Contentful Paint 最大内容绘制 (LCP)](https://web.dev/lcp/)：视窗内最大的元素绘制的时间
+      - 最大的元素：文本块、图像（图片、背景图）
+      - LCP 与 FCP 区别
+        ![图 12](./images/1650618189088.png)  
+    - 首屏时间（FSP）
+  - 加载响应速度
+    - [First Input Delay 首次输入延迟 (FID)](https://web.dev/fid/)：标识用户第一次与页面交互到浏览器真正能够开始处理事件处理程序以响应该交互的时间（不包括处理时间） 
+      - 如果交互没有事件侦听器怎么办？测量接收到输入事件的时间点与主线程下一次空闲的时间点之间的差值
+      - FID 只关注不连续操作对应的输入事件，如点击、轻触和按键
+    - [Time to Interactive 可交互时间 (TTI)](https://web.dev/tti/)：表示网页首次完全达到可交互状态的时间点
+      - TTI 在主线程至少有五秒钟没有长任务时，是最后一个长任务结束时间点
+      ![](./images/WZM0n4aXah67lEyZugOT.svg)
+    - [Total Blocking Time 总阻塞时间 (TBT)](https://web.dev/tbt/)：FCP 和 TTI 之间发生的每个长任务的阻塞时间总和，用于量化在页面交互性变为可靠前，不可交互程度的严重性
+      ![图 16](./images/xKxwKagiz8RliuOI2Xtc.svg)  
+  - 交互响应速度
   - 视觉稳定性
-    - Cumulative Layout Shift 累积布局偏移 (CLS)
-  - 动画流畅度
-- 以用户为核心的性能指标：Core Web Vitals
-  - LCP
+    - [Cumulative Layout Shift 累积布局偏移 (CLS)](https://web.dev/cls/)
+  - 画面流畅度
+    - 帧率（FPS）
+  - 能耗
+  - 内存占用
+- 以用户为核心的核心 Web 指标：Core Web Vitals
+  ![](./images/ZZU8Z7TMKXmzZT2mCjJU.svg)
+  ![](./images/iHYrrXKe4QRcb2uu8eV8.svg)
+  ![](./images/dgpDFckbHwwOKdIGDa3N.svg)
 
 
-
-
-
-
-
-
-DCL：空白到出现内容所花费的时间
-
-
-首屏时间：页面可视区域内容以完全呈现时间，FSP
-- 加载
-- 渲染
-  - 白屏时间：页面空白时间，FP&FCP
-    - FP（First Paint）：首次绘制的时间点，可以视为白屏时间
-    - FCP（First Contentful Paint）：首次内容绘制，页面首次出现文本或图像（背景、图片、svg 元素或非白色的 canvas 元素）内容
-- 交互
-  - 可交互时间：用户首次可交互时间，FCI
-  - 可持续交互时间：用户首次可完全可持续交互时间，TTI
-  - FPS
 
 
 
@@ -72,62 +65,87 @@ DCL：空白到出现内容所花费的时间
 ![图 23](./images/1646409597237.png)  
 ## 性能测试工具
 
-- 线下实验测试
 - 线上真实测试
+  - [WebPageTest](https://www.webpagetest.org/)
+  - [PageSpeed Insights](https://pagespeed.web.dev/?utm_source=psi&utm_medium=redirect)：关注性能 + 用户数据测试
+- 线下实验测试
+  - [Lighthouse](https://web.dev/learn/#lighthouse)
 
 - Performance API
 - web-vitals
 - [Chrome 开发者工具](https://developer.chrome.com/docs/devtools/)
-- Lighthouse
-- [PageSpeed Insights](https://pagespeed.web.dev/?utm_source=psi&utm_medium=redirect)：关注性能 + 用户数据测试
+
+## 前端监控与数据上报
+
+- 前端埋点方式
+  - 代码埋点：前端开发人员在代码中自定义监听和收集
+  - 可视化埋点
+  - 无痕埋点（全埋点）：通过技术手段无差别地记录用户在前端页面上的行为，然后在后端数据清洗
+- 数据采集
+  - 前端性能指标如何采集
+  - 前端异常分类及如何采集
+- 数据上报
+  - sendBeacon
+    - 不受跨域限制
+    - 不阻塞页面
+  - requestIdleCallback
+  - img
 
 ## 性能优化指南
 
-- 资源加载（了解 浏览器 http 请求流程）
-  - Queuing：浏览器资源调度
-    - 资源优先级
-    - 域名请求数限制（http/1.1 浏览器为每个域名最多维护 6 个连接导致的）
-      - 链接并发
-      - 域名分片
-      - 资源合并打包
-        - 雪碧图
-      - http/2.0（多路复用）
-  - TTFB：服务端响应速度的重要指标
-    - 请求过大
-      - 发送请求头时带上了多余的用户信息
-        - http/2.0（头部压缩）
-    - 服务器响应
-  - Content Download
-    - 响应数据过大
-      - 前端资源
-        - 去掉注释、混淆、压缩
-        - 按需引入
-        - tree-shaking 去掉不必要的代码
-        - 分包、懒加载
-  - 网络因素
-    - 宽带速度
-    - TCP：丢包
-    - （缩短）请求链路
-        - CDN
-        - http 缓存
-- 加载
-  - 白屏（当浏览器发起页面请求后到提交数据阶段，这时页面展示出来的还是之前页面的内容。渲染进程“确认提交”之后会创建一个空白页面，我们通常把这段时间称为**解析白屏**，这也就是 Web 应用与原生应用体验最大的区别之一，这对用户体验影响很大。）：加载关键渲染资源（Html、JavaScript、CSS 等）阻塞到关键渲染路径（Critical Rendering Path）
-    - 减少关键资源个数
-      - 合并请求，通过内联 JavaScript、CSS 来移除这两种类型的文件下载
-      - async 或者 defer
-    - 减少关键资源大小
-      - 压缩 HTML、JS、CSS 压缩
-      - 删除注释
-      - JS
-        - tree-shaking
-        - 拆分文件
-          - 懒加载
+- 加载性能
+  - 关注指标
+    - 页面加载时间
+      - 白屏（FP&FCP）：浏览器发起页面请求后到提交数据阶段，这时页面展示出来的还是之前页面的内容。当渲染进程“确认提交”之后会创建一个空白页面，我们通常把这段时间称为**解析白屏**（这也就是 Web 应用与原生应用体验最大的区别之一，这对用户体验影响很大）。
+        - 原因：加载关键渲染资源（Html、JavaScript、CSS 等）阻塞到关键渲染路径（Critical Rendering Path）
+      - 首屏
+    - 首屏可交互时间
+  - 优化策略：
+    - 网络请求
+      - Queuing：浏览器资源调度
+        - 资源优先级
+        - 并发连接
+          - 域名分片：域名请求数限制（http/1.1 浏览器为每个域名最多维护 6 个连接导致的）
+          - http/2.0（多路复用）
+      - TTFB：服务端响应速度的重要指标
+        - 请求过大
+          - 发送请求头时带上了多余的用户信息
+            - http/2.0（头部压缩）
+        - 服务器响应
+      - Content Download
+        - 响应数据过大
+          - 前端资源
+            - 去掉注释、混淆、压缩
+            - 按需引入
+            - tree-shaking 去掉不必要的代码
+            - 分包、懒加载
+      - 网络因素
+        - 宽带速度
+        - TCP：丢包
+        - （缩短）请求链路
+            - CDN
+            - http 缓存
+    - [渲染阻塞](#渲染阻塞)
+      - 减少关键资源个数
+        - 合并请求，通过内联 JavaScript、CSS 来移除这两种类型的文件下载
+          - 雪碧图
+        - async 或者 defer
+      - 减少关键资源大小
+        - 压缩 HTML、JS、CSS 压缩
+        - 删除注释
+        - JS
+          - tree-shaking
+          - 拆分文件
+            - 懒加载
+            - 异步加载
+            - 按需加载，第三方组件库依赖过大,会给首屏加载带来很大的压力，一般解决方式是按需求引入组件。
+        - CSS
           - 异步加载
-          - 按需加载，第三方组件库依赖过大,会给首屏加载带来很大的压力，一般解决方式是按需求引入组件。
-      - CSS
-        - 异步加载
-          - loadCSS
-- 渲染
+            - loadCSS
+- 渲染性能
+  - 关注指标
+    - 帧率
+    - 交互响应速度
   - 绘制一帧生命周期  
     ![](./images/main-thread.svg)
   - 生成一帧的方式，有重排、重绘和合成三种方式
@@ -237,11 +255,6 @@ Load，说明浏览器已经加载了所有的资源（图像、样式表等）
 
 
 
-时间换空间
-- 缓存
-- 空间换时间
-- 压缩
-
 
 图片
 - webp
@@ -263,8 +276,6 @@ RTT 就是这里的往返时延。它是网络中一个重要的性能指标，�
 
 
 
-使用 Chrome DevTools 快速确定绘制瓶颈
-
 
 除 transform 或 opacity 属性之外，更改任何属性始终都会触发绘制。
 坚持使用 transform 和 opacity 属性更改来实现动画。
@@ -278,13 +289,17 @@ RTT 就是这里的往返时延。它是网络中一个重要的性能指标，�
 计算元素的计算样式的最糟糕的开销情况是元素数量乘以选择器数量
 
 
-Monitor and analyze the app
 
-
-优化加载顺序
 
 
 减少打包时间：缩减范围、缓存副本、定向搜索、提前构建、并行构建、可视结构
 减少打包体积：分割代码、摇树优化、动态垫片、按需加载、作用提升、压缩资源
 
 提交数据之后渲染进程会创建一个空白页面，我们通常把这段时间称为解析白屏，并等待 CSS 文件和 JavaScript 文件的加载完成，生成 CSSOM 和 DOM，然后合成布局树，最后还要经过一系列的步骤准备首次渲染。
+
+
+RAIL
+
+
+1、影响白屏时间的因素：网络，服务端性能，前端页面结构设计。
+2、影响首屏时间的因素：白屏时间，资源下载执行时间。
