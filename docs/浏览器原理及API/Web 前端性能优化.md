@@ -9,8 +9,6 @@ desc: web 前端能优化知识体系
 
 # Web 前端性能优化
 
-Web 前端性能优化，其实本质就是要让页面更快地显示和响应。性能优化的手段有很多种，关键是
-
 - 制定[性能指标](#性能指标)
 - 性能测试、监控工具
    - 测试工具
@@ -38,7 +36,7 @@ Web 前端性能优化，其实本质就是要让页面更快地显示和响应�
       ![](./images/WZM0n4aXah67lEyZugOT.svg)
     - [Total Blocking Time 总阻塞时间 (TBT)](https://web.dev/tbt/)：FCP 和 TTI 之间发生的每个长任务的阻塞时间总和，用于量化在页面交互性变为可靠前，不可交互程度的严重性
       ![图 16](./images/xKxwKagiz8RliuOI2Xtc.svg)  
-  - 交互响应速度
+  - 运行时响应速度
   - 视觉稳定性
     - [Cumulative Layout Shift 累积布局偏移 (CLS)](https://web.dev/cls/)
   - 画面流畅度
@@ -62,18 +60,24 @@ Web 前端性能优化，其实本质就是要让页面更快地显示和响应�
 
 
 
-![图 23](./images/1646409597237.png)  
+  
+
 ## 性能测试工具
 
-- 线上真实测试
-  - [WebPageTest](https://www.webpagetest.org/)
-  - [PageSpeed Insights](https://pagespeed.web.dev/?utm_source=psi&utm_medium=redirect)：关注性能 + 用户数据测试
 - 线下实验测试
+  - [WebPageTest](https://www.webpagetest.org/)
   - [Lighthouse](https://web.dev/learn/#lighthouse)
+  - [Chrome DevTools](https://developer.chrome.com/docs/devtools/) + [Web 指标 Chrome 扩展程序](https://github.com/GoogleChrome/web-vitals-extension)
+- 真实用户监控 
+  - web-vitals
+
+## Performance API
+
+Web 标准提供性能相关的 API 及继承关系如下图：
+
+![图 23](./images/1646409597237.png)
 
 - Performance API
-- web-vitals
-- [Chrome 开发者工具](https://developer.chrome.com/docs/devtools/)
 
 ## 前端监控与数据上报
 
@@ -85,11 +89,14 @@ Web 前端性能优化，其实本质就是要让页面更快地显示和响应�
   - 前端性能指标如何采集
   - 前端异常分类及如何采集
 - 数据上报
+  - 使用非阻塞 API，避免阻塞主线程
   - sendBeacon
     - 不受跨域限制
     - 不阻塞页面
   - requestIdleCallback
   - img
+- 数据清洗、持久、聚合报告
+- 报警通知
 
 ## 性能优化指南
 
@@ -170,13 +177,12 @@ Web 前端性能优化，其实本质就是要让页面更快地显示和响应�
     - 避免频繁的垃圾回收
       - 避免内存泄漏
     
-### 关键资源加载优化
+
+## 渲染阻塞
 
 > 阻塞网页首次渲染的资源称为关键资源
 
 JavaScript、CSS 这类关键资源的加载会阻塞到页面渲染，而且还涉及到一个很关键的用户体验指标“**首屏渲染**”。
-
-## 渲染阻塞
 
 - html
   - 流式解析：HTML 解析器并不是等整个文档加载完成之后再解析的，而是网络进程加载了多少数据，HTML 解析器便解析多少数据
@@ -303,3 +309,13 @@ RAIL
 
 1、影响白屏时间的因素：网络，服务端性能，前端页面结构设计。
 2、影响首屏时间的因素：白屏时间，资源下载执行时间。
+
+- hints
+  - DNS 预解析（dns-prefetch）
+  - 预连接（preconnect）
+  - prerender
+  - prefetch
+  - preload
+- 页面可见性
+- 分片
+- 

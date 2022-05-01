@@ -4,31 +4,30 @@
 
 - Rust
   - 设计理念
-    - 安全、性能、并发
-  - 编程基础
+    - 内存安全、性能、并发安全
+    - 划分 Safe rust 和 Unsafe Rust（方便与其他语言沟通）
+    - 多范式编程
+  - 语法特性
+    - 内存安全：所有权及借用
+  - 词法结构
+    - 关键字
+    - 标识符
+    - 注释
+      - 代码注释
+      - 文档注释
+    - 空白
+    - 词条 token
+    - 路径 `::`
+  - 语法结构
     - 数据
-      - 变量
-        - 变量声明：let、const、static
-        - **默认是不可变的**，如果要修改变量的值，需要显式地使用 `mut` 关键字
-        - 支持 非 Ascii
+      - 变量声明
       - 值和类型
-        - 数据结构
-          - struct 定义结构体
-          - enum 定义标签联合体
       - 指针和引用
     - 控制流
-      - 基于表达式：除了声明语句外，其他大部分都是表达式？
     - 函数
-      - 函数是一等公民
-      - 函数参数的类型和返回值的类型都必须显式定义
-      - 返回值
-        - 如果没有返回值可以省略，返回 unit
-        - 提前返回，需要用 return 关键字，否则最后一个表达式就是其返回值
-        - 如果最后一个表达式后添加了; 分号，隐含其返回值为 unit
     - 错误处理
-    - 注释
+  - 类型系统 
   - 变量的所有权和生命周期
-  - 类型系统
   - 高级
     - 面向对象编程
     - 范型编程
@@ -40,11 +39,10 @@
     - WSAI
   - 工具
     - rustup：工具链管理工具
-    - rustc：rust 代码编译工具
-    - cargo：项目依赖管理工具
+      - rust-toolchain.toml
+    - rustc：rust 编译器
+    - cargo：包管理工具
+      - Cargo.toml
   - 资料
     - [Microsoft Rust 教程](https://docs.microsoft.com/zh-cn/learn/paths/rust-first-steps/)
     - [rust-training](https://github.com/tyrchen/rust-training)
-  - 问题
-    - [ ] 并发跟异步编程要如何区分？
-    - [ ] rust 项目引入第三方包 API 提示？

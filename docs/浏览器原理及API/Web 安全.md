@@ -20,8 +20,8 @@ desc: 总结 Web 安全相关知识体系
       - [防止 CSRF 攻击](#防止-csrf-攻击)
   - 网络安全
     - DNS 劫持
-    - http 劫持：HTTP 明文传输，内容篡改
-      - [HTTPS](../HTTP/https.md)
+    - TCP，洪攻击
+    - [HTTPS](../HTTP/https.md)：解决 HTTP 劫持（明文传输，内容篡改）
       - 点击嵌套劫持
       - 广告
   - 浏览器系统安全
