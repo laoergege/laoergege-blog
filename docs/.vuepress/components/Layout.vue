@@ -16,13 +16,12 @@
 </template>
 
 <script>
-import Post from "./Post.vue";
-import Home from "./Main.vue";
+import { defineAsyncComponent } from "vue";
 
 export default {
     components: {
-        Post,
-        Home
+        Post: defineAsyncComponent(() => import("./Post.vue")),
+        Home: defineAsyncComponent(() => import("./Main.vue"))
     }
 }
 </script>

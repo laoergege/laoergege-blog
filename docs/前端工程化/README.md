@@ -45,6 +45,7 @@ desc: 系统化前端工程相关
           - 版本管理
             - nvm
             - pnpm env
+            - [Volta](https://docs.volta.sh/guide/)
           - package: `engines` + `.npmrc: engine-strict`
           - .npmrc: `use-node-version`
         - 包管理：[corepack](https://github.com/nodejs/corepack)
@@ -104,8 +105,10 @@ desc: 系统化前端工程相关
     - size
       - [size-limit](https://github.com/ai/size-limit)
       - [bundlesize](https://github.com/siddharthkp/bundlesize)
-    - build
+    - 审计
+      - [lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci)
   - CD
+    - build
     - 发版日志
   - 监控
   - 文档

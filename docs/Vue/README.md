@@ -73,7 +73,7 @@ desc: vue 知识汇总
 5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
 6. 模板编译优化
 7. vue 指令原理
-8. vue 异步组件原理及 Suspense
+8. vue 异步组件及 Suspense
 9. Teleport 实现原理
 10. Fragment
 

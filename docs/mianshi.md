@@ -63,24 +63,21 @@
       - 怪异模型元素宽度 width = content + padding + border
         - `box-sizing: content-box`
   - [x] 说说什么是 BFC，一般你都用来干什么，解决了什么问题？
-    - FC
-      - Formatting context(格式化上下文) 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块独立渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。
-    - BFC 即 Block Formatting Contexts (块级格式化上下文)，就是普通流的布局方案。
-    - 创建 BFC 条件
-      - 浮动元素
-      - 绝对定位元素，且 position 不是 static 也不是 relative
-      - display 为 inline-blocks,table,table-cell,table-caption,flex,inline-flex 的元素;
-      - overflow 不为 visible 的元素
-      - [等](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
-    - BFC的原理（渲染规则即正常流/文档流）
+    - BFC 块级格式化上下文，即一个独立的布局环境，规定了内部的块级盒子如何布局，并且与外部毫无关系。
+    - 特征
       - 正常流的排版：依次排列，排不下了换行
       - 同一个 BFC 下的块级元素垂直方向会边距重叠
-      - BFC 的区域不会与浮动元素的布局重叠
-      - BFC 可以包含浮动的元素（清除浮动）
+      - 同一 BFC 下拥有独自 BFC 的子元素不会与浮动子元素重叠
+      - 在计算 BFC 的高度时，浮动元素也参与计算
+    - 创建 BFC 条件
+      - 浮动元素
+      - 绝对定位元素
+      - display 为 inline-blocks、flow-root, 或者 Table cells，Flex items，Grid items 等的元素;
+      - overflow 不为 visible 的元素
     - 应用
       - 防止边距重叠
-      - 包含浮动元素，防止高度坍塌
       - 多列布局
+      - 包含浮动元素，防止高度坍塌
 - js
   - 语法
     - [x] for of 和 for in 的区别以及原理
@@ -298,7 +295,7 @@
       - 
     - [ ] 分层
       - will-change,3D 属性 transform 之类
-  - [ ] 事件循环
+  - [ ] 事件循环机制
     - 为什么要用 setTimeout 模拟 setInterval ？
       - setInterval 每隔指定时间就会往队列里插入任务前会队列中是否存在上次任务，如果当前任务执行过长，会导致后边的间隔任务被跳过；
       - 可能多个定时器会连续执行
@@ -371,10 +368,7 @@
     - http 劫持
   - [x] 导航流程：输入 URL 到页面展示发生了什么
     - 解析 URL
-    - 请求排队（可选）
-      - 资源优先级
-      - 域名请求数限制
-    - 内部重定向
+    - 重定向
     - 缓存查找
     - DNS 域名解析
     - 根据 ip 建立 TCP 连接
@@ -893,11 +887,6 @@ Result（结果）：项目最终结果如何？有哪些成就？有哪些不�
 
 创建项目模板(用于快速生成新项目的目录模板，并集成一系列体系化工具的安装，能够提升前端开发人员的效率，减少 copy 操作)，参考 vue-cli 交互及设计思路
 
-- 安全
-
-  - WAF
-  - 反爬虫
-    - UA
 
 - 构建
 
@@ -1087,3 +1076,14 @@ devtool coverage
   - 防火墙
   - 负载均衡，当有多台服务器时，使用代理服务器转发请求
   - 缓存服务端的资源
+
+
+原子css 提高css利用率及缩减大小
+
+- 缩小
+  - https://github.com/terser/terser
+- 压缩
+  - 
+tree-shaking：删除未使用代码
+
+webpack-bundle-analyzer

@@ -16,6 +16,7 @@
     - 单位、值、function
     - 自定义变量
   - CSSOM
+    - [An Introduction and Guide to the CSS Object Model (CSSOM)](https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#top-of-site)
     - element.style
     - styleSheets
     - CSS Typed OM
@@ -54,7 +55,9 @@
     - 过度
   - CSS 项目实战
     - UI 设计规范
-    - [Normalize CSS](https://github.com/necolas/normalize.css/blob/master/normalize.css)、CSS Reset
+    - CSS 重置
+      - [reseter](https://github.com/resetercss/reseter.css)
+      - [normalize.css](https://github.com/necolas/normalize.css)
     - 工程化工具
       - scss
       - postcss

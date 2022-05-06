@@ -2,7 +2,8 @@
 
 - 专业学习
   - Rust
-    - [ ] Webassembly 学习与应用
+    - [ ] 入门学习（2022.5 - 2022.12）
+    - [ ] 应用：Webassembly
   - 可视化
   - 计算机网络及 http
     - [ ] http 学习：《透视 HTTP 协议》
