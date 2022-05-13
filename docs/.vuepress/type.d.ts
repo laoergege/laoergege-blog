@@ -1,0 +1,3 @@
+interface PageFMter {
+  issue: number;
+}

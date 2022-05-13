@@ -25,10 +25,9 @@ desc: 总结 Web 安全相关知识体系
       - 点击嵌套劫持
       - 广告
   - 浏览器系统安全
-    - 多进程架构 + 渲染进程沙箱机制：将操作系统和渲染进程进行隔
+    - 多进程架构 + 渲染进程沙箱机制（将操作系统和渲染进程进行隔离，通过 IPC 来通信的）
       ![图 12](./images/1642869618173.png)  
-    - [站点隔离策略](#站点隔离策略)：每个站点实例独自一个进程，防止同个页面多个不同站点的 iframe 共享一个进程
-      - 同站策略：节省进程开销
+    - [站点隔离策略](#站点隔离策略)：将不同站点隔离在不同沙箱（进程）内
 
 ## 同源策略
 
@@ -155,20 +154,32 @@ CSRF的特点
     - CSRF Token
     - 图片、短信验证
 
-#### 参考
-
-[前端安全系列之二：如何防止CSRF攻击？](https://juejin.cn/post/6844903689702866952)
-
 ## 站点隔离策略
 
-> 同一站点：相同协议、相同根域名
+同站和同源要求不一样，同源要求协议、主机名、端口一致：
 
-通常情况下，每个 tab 页即一个渲染进程，Chromium 提供了四种进程模式，不同的进程模式会对 tab 页做不同的处理。
+![图 14](./images/1652278383554.png)  
 
-- Process-per-site-instance (default) 每个站点实例一个进程
-  - 同站策略：每个站点实例一个进程，意味着下几乎每个 tab 页即至少一个渲染进程。特殊情况，如果**两个同站页面并且有关联连接，才使用同一进程**
+而同站条件：协议 、eTLD（有效顶级域） + 1 域相同：
+
+![图 13](./images/1652278261312.png)  
+
+> eTLD 列表的维护网站是 [publicsuffix.org/list](https://publicsuffix.org/list/)。
+
+站点隔离即不同站点隔离在不同沙箱，Chromium 提供了四种进程模式：
+
+- Process-per-site-instance (default) 每个站点实例即一个进程
+  - 每个站点实例即一个进程，意味着每个 tab 页即至少一个渲染进程。特殊情况，如果**两个同站页面并且有关联连接，才使用同一进程**
     - `window.open`、`<a target="_blank">` 打开的新页面，通过 `window.opener` 访问另一个页面
     - 同站点的 iframe
 - Process-per-site 同个站点使用同个进程
 - Process-per-tab 每个标签页一个进程
 - Single process 所有的共用一个进程
+
+Process-per-site-instance 是最重要的，因为这个是 Chrome 默认使用的模式，也就是几乎所有的用户都在用的模式。当你打开一个 tab 访问 a.baidu.com ，然后再打开一个 tab 访问 b.baidu.com，这两个 tab 会使用两个进程，而对于Process-per-site，当你打开 a.baidu.com 页面，在打开 b.baidu.com 的页面，这两个页面的tab使用的是共一个进程，因为这两个页面的site相同，而如此一来，如果其中一个tab崩溃了，而另一个tab也会崩溃。
+
+## 参考
+
+- [《浏览器工作原理与实践》 - 35 | 安全沙箱：页面和系统之间的隔离墙](https://time.geekbang.org/column/article/155183)
+- [前端安全系列之二：如何防止CSRF攻击？](https://juejin.cn/post/6844903689702866952)
+- [理解“同站”和“同源”](https://web.dev/same-site-same-origin/#%22schemeful-same-site%22)

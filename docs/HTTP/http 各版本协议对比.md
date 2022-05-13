@@ -19,7 +19,7 @@ tags:
   - 支持响应数据分块传输
   - 增加了 cache-control
   - 增加了 cookie 机制
-  - [默认支持 keep-alive 长连接](#keep-alive-长连接)
+  - [默认开启 keep-alive 长连接](#keep-alive-长连接)
   - [引入管道机制](#管道pipelining)
 - HTTP/2：改进性能，解决了 [HTTP 队头阻塞问题](#http-队头阻塞)
   - [头部压缩](#头部压缩)

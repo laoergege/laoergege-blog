@@ -16,12 +16,6 @@ desc: 总结 http 缓存、缓存相关控制设置及前端缓存最佳实践
     - [代理缓存](#代理缓存)
       - CDN
     - [浏览器缓存](#浏览器缓存)
-      - 内存
-        - 图片
-        - preload
-      - service-work
-      - http-cache
-      - push-cache
   - [协商缓存](#协商缓存)
   - [缓存设置控制](#缓存设置控制)
     - [通过 response 进行缓存控制](#通过-response-进行缓存控制)
@@ -67,7 +61,20 @@ http 中控制缓存的主要字段有一下三个：
 
 ## 浏览器缓存
 
-浏览器 http 缓存策略分为两种：强缓存、协商缓存
+浏览器对资源的缓存位置分为：
+- 内存
+  - 预加载器
+  - preload 指令
+- service-work
+- http-cache
+- push-cache
+
+> ⚠️ 内存缓存的行为，各个浏览器并没有统一规范，而且内存缓存并不关注 HTTP 语义，浏览器导航中会重用资源，即是资源带有 `max-age=0` 或 `no-cache Cache-Control`。  
+> 唯一可能例外的是 `no-store` 内存缓存在某些情况下确实会遵守该指令。
+
+> HTTP Cache 几乎遵从 HTTP 规范，但有一个例外，即是资源带有，HTML 中 prefetch 指令获取的资源会缓存在 HTTP Cache 中一定时间（5分钟）
+
+浏览器 http-cache 策略分为两种：强缓存、协商缓存
 
 ![图 18](./images/bdc51a403dd95bc66a025a17492f3dab8cd6640484c797b67e2d1e324e3b99b5.png)
 
@@ -151,3 +158,4 @@ http 缓存大多针对前端资源，看[《前端缓存最佳实践》](../前
 - [MDN HTTP 缓存](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching#Cache_validation)
 - [可能是最被误用的 HTTP 响应头之一 Cache-Control: must-revalidate](https://zhuanlan.zhihu.com/p/60357719)
 - [understanding-vary-header](https://www.smashingmagazine.com/2017/11/understanding-vary-header/)
+- [A Tale of Four Caches](https://calendar.perfplanet.com/2016/a-tale-of-four-caches/)

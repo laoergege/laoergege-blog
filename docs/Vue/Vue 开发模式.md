@@ -2,10 +2,26 @@
 
 - 数据层：Service + Store/Model + IOC + Context
   - Servcie = Store + API
-- 逻辑层：组件化 => 应用状态逻辑拆分
 - _路由层_
-- 视图层：vdom => 视图逻辑抽象、view = f(state)
-- 底层渲染层：dom api + css
+- 逻辑层：组件化 => 应用状态逻辑拆分
+- 视图层
+  - 视图逻辑抽象 => Virtual-DOM
+  - UI = f(state)
+- 底层渲染层：dom + css
+
+## 状态
+
+> 理解「状态」是什么，理解「状态」的类型
+
+- 状态分类
+  - UI 状态
+  - 数据服务
+    - [react-query](https://github.com/tannerlinsley/react-query)
+  - 应用会话
+  - 流程状态
+    - 状态机
+  - 事件流
+    - rxjs
 
 ## 业务体系下的组件化
 
@@ -118,6 +134,6 @@ const App = {
   
 try catch 分流
 
-数据
+数据  =》 service
 状态（对象在不同时间段所处的样子）
 事件流

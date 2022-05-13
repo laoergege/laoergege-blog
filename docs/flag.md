@@ -4,6 +4,7 @@
   - Rust
     - [ ] 入门学习（2022.5 - 2022.12）
     - [ ] 应用：Webassembly
+    - [ ] https://github.com/HerringtonDarkholme/vue-compiler
   - 可视化
   - 计算机网络及 http
     - [ ] http 学习：《透视 HTTP 协议》

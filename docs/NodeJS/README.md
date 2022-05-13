@@ -76,6 +76,7 @@ tags:
         - 吞吐率
   - 性能优化
     - 性能监控
+      - [clinicjs](https://clinicjs.org/)
       - [easy-monitor](https://github.com/hyj1991/easy-monitor)
     - 性能优化
       - CPU（计算性能优化、JS Profile）

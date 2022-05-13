@@ -17,31 +17,15 @@ desc: css 布局相关的知识体系
         - `box-sizing: border-box`
       - 怪异模型元素宽度 width = content + padding + border
         - `box-sizing: content-box`
-  - FC：Formatting context(格式化上下文) 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块独立渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用，并且与外部毫无关系
-  - BFC 即 Block Formatting Contexts (块级格式化上下文)，就是默认的正常流布局方案
-  - 正常流：依次排列，排不下了换行
-    - 元素按照其在 HTML 中的先后位置依次排列
-    - 块级元素垂直排列、行内元素水平排列
-    - 除非另外指定，否则所有元素默认都是普通流定位，也可以说，普通流中元素的位置由该元素在 HTML 文档中的位置决定
-  - BFC
-    - 创建 BFC 条件
-      - 浮动元素
-      - 绝对定位元素
-      - display 为 inline-blocks、flow-root, 或者 Table cells，Flex items，Grid items 等的元素;
-      - overflow 不为 visible 的元素
-      - [等](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
-    - BFC 特性
-      - 块级盒子垂直排放
-      - 同一个 BFC 下的块级元素垂直方向会边距重叠
-      - 同一 BFC 下拥有独自 BFC 的子元素不会与浮动子元素重叠
-        > 需要注意的是并不是所有创建 BFC 的元素都不会与浮动元素重叠，比如绝对定位元素，必须不是脱离原文档流 [out-of-flow](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flow_Layout/In_Flow_and_Out_of_Flow)。  
-        > [The border box of a table, a block-level replaced element, or an element in the normal flow that establishes a new block formatting context (such as an element with 'overflow' other than 'visible') must not overlap the margin box of any floats in the same block formatting context as the element itself.](https://www.w3.org/TR/CSS2/visuren.html#floats)
-      - [在计算 BFC 的高度时，浮动元素也参与计算](https://www.w3.org/TR/CSS22/visudet.html#root-height)
-    - 应用
-      - 防止边距折叠
-      - 包含浮动子元素，防止高度坍塌
-      - 实现多列布局
-  - [display](https://developer.mozilla.org/zh-CN/docs/Web/CSS/display)：控制盒子内容布局，以及在正常流的布局表现
+  - FC：Formatting context(格式化上下文) 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块独立渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用，并且不受外部影响
+  - 普通流：依次排列，排满换行
+    - 元素由文档流中的依次顺序排列
+    - 普通流包括 BFC、IFC、相对定位规则
+    - [不同元素会产生相应的盒子](https://www.w3.org/TR/CSS2/visuren.html#box-gen)
+    - 任何一个处在 Normal Flow 中的元素，不是在 BFC 中，就是在 IFC 中，取决于元素本身是 block box 还是 inline box
+    - 在块格式化上下文中，盒子在垂直方向依次排列；而在行内格式化上下文中，盒子则水平排列
+  - [BFC：块级格式化上下文](#bfc)
+  - [display](https://developer.mozilla.org/zh-CN/docs/Web/CSS/display)：控制盒子内容布局，以及在正常流的外部表现
     - `display:  [ <display-outside> | <display-inside> ]`
       - display-outside：指定元素在正常流的布局表现
         - block 块级元素
@@ -50,21 +34,20 @@ desc: css 布局相关的知识体系
         - 正常流
         - table
         - inline-block
-        - flex
-          - [解决用flex布局时内容可能溢出的问题](https://stackoverflow.com/questions/43809612/prevent-a-child-element-from-overflowing-its-parent-in-flexbox)
-            - 本质：flex item 元素初始值 `min-width: auto`
-            - 解决：`min-width: 0` 、`overflow: hidden`
+        - [flex](#flex)
+          - [Flexbox](https://web.dev/learn/css/flexbox/)
+          - [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
         - grid
+          - [Grid](https://web.dev/learn/css/grid/)
           - [A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
           - [网格布局](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout)
   - float
   - position：控制盒子位置，脱离父盒的内部布局
-    - static：元素按照正常流布局
+    - static
     - relative
     - absolute
     - fixed
     - sticky
-    - float
   - column-width
   - 层叠上下文和层叠顺序
 - 布局模式
@@ -79,21 +62,71 @@ desc: css 布局相关的知识体系
       - float
     - 圣杯布局（三分栏布局）
 
-## grid 属性
+## BFC
 
-- container 布局网格线、行列、区
-  - grid-template-[columns|rows]
+BFC，即块级格式化上下文，除了根元素，创建 BFC 条件：
+
+- 浮动元素
+- 绝对定位元素
+- display 为 inline-blocks、flow-root, 或者 Table cells，Flex items，Grid items 等的元素;
+- overflow 不为 visible 的元素
+- [等](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
+
+### BFC 布局特性
+
+1. BFC 中块级盒子垂直排放
+2. 同一个 BFC 下的块级盒子垂直方向会边距重叠
+3. BFC 中的盒子左外边(margin 的左边)触及 BFC 容器的包含块左边界，右外边界触及 BFC 容器的包含块右边界。即使有 float 元素存在也不会影响这个特性，除非块级元素建立了新的 BFC。
+4. 同一 BFC 下一个 BFC [块容器](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Visual_formatting_model)不会与浮动盒子重叠
+  > 需要注意的是并不是所有创建 BFC 的元素都不会与浮动元素重叠，比如绝对定位元素，必须不是脱离原 BFC。  
+  > [The border box of a table, a block-level replaced element, or an element in the normal flow that establishes a new block formatting context (such as an element with 'overflow' other than 'visible') must not overlap the margin box of any floats in the same block formatting context as the element itself.](https://www.w3.org/TR/CSS2/visuren.html#floats)
+5. [在计算 BFC 的高度时，浮动元素也参与计算](https://www.w3.org/TR/CSS22/visudet.html#root-height)
+
+BFC 应用
+- 防止边距折叠（2）
+- 包含浮动子元素，防止高度坍塌（5）
+- 实现多列布局（4）
+
+## Flex
+
+- 容器
+  - flex-direction
+  - flex-wrap
+  - *flex-flow*: flex-direction flex-wrap
+  - justify-content
+  - align-content
+  - *place-content*: justify-content align-content
+  - align-items: 弹性行内对齐项目
+  - gap, row-gap, column-gap
+- 项目
+  - flex
+  - flex-grow
+  - flex-shrink
+  - `flex-basis`
+    - `0`：item会折叠到最小的宽度
+    - auto: 子项的基本尺寸根据其自身的尺寸决定
+          - [flex:0 flex:1 flex:none flex:auto应该在什么场景下使用？](https://www.zhangxinxu.com/wordpress/2020/10/css-flex-0-1-none/?shrink=1)
+          - [解决用flex布局时内容可能溢出的问题](https://stackoverflow.com/questions/43809612/prevent-a-child-element-from-overflowing-its-parent-in-flexbox)
+            - 本质：flex item 元素初始值 `min-width: auto`
+            - 解决：`min-width: 0` 、`overflow: hidden`
+  - order 对子项目排序
+  - align-self: 弹性行内对齐项目
+
+## Grid
+
+- 容器：定义布局网格的线、行列、区
+  - grid-template-[rows|columns]
     - fr 弹性单位
       - [An Introduction to the `fr` CSS unit](https://css-tricks.com/introduction-fr-css-unit/)
-    - 关键词
+    - box 尺寸关键词
       - min-content
       - max-content
       - auto
       - fit-content
     - 函数
-      - repeat()
+      - repeat(num, )
       - minmax()
-  - grid-template
+  - *grid-template*
     - none
     - `<grid-template-rows>  / <grid-template-columns>`
   - grid-auto-[columns|rows] 自动扩充

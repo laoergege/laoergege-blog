@@ -16,14 +16,15 @@ desc: 系统化前端工程相关
 ## 知识体系
 
 - 前端工作流
-  - 版本管理（git）
-    - git flow 分支管理
-    - commit msg 提交规范
-    - 提案请求
-      - merge request & code review
-      - rfc 机制
   - 代码
-    - 代码风格
+    - 版本管理（git）
+      - git flow 分支管理
+      - commit msg 提交规范
+      - 提案请求
+        - merge request & code review
+        - rfc 机制
+    - 规范
+      - [前后端接口规范 - RESTful 版](https://mp.weixin.qq.com/s/DCQGjHizp88FDX7Vgcqggw)
       - 命名规范
       - 代码格式 prettier
       - 代码质量 eslint
@@ -62,32 +63,36 @@ desc: 系统化前端工程相关
       - 本地服务器及服务代理
       - API 管理及数据模拟
       - 浏览器及 DevTools
-    - 构建
-      - 开发模式
-        - 模块化
-        - 热模块替换
-        - 构建缓存
-        - 增量/按需/懒构建
-          - husky + Lint-stage
-      - 生产模式
-        - 打包/拆包
-        - 输出
-          - SourceMap
-          - HashedURLs
-          - TreeShaking
-          - 模块格式及加载机制（运行时）
-        - 转换
-          - 压缩
-          - 树摇
-          - 符号
-          - 转译
-            - js
-              - [gogocode](https://github.com/thx/gogocode)
-              - [parcel-css](https://github.com/parcel-bundler/parcel-css)
-            - css
-              - less
-              - scss
-              - postcss
+  - 构建
+    - 缓存
+      - 构建缓存
+      - 增量构建
+        - husky + Lint-stage
+      - 产物缓存，动态链接 DLL
+    - 开发模式
+      - 模块化
+      - 热模块替换
+    - 生产模式
+      - 打包/拆包
+      - 输出
+        - SourceMap
+        - HashedURLs
+        - TreeShaking
+        - 模块格式及加载机制（运行时）
+      - 转换
+        - 缩小
+          - JS
+            - [Terser](https://github.com/terser-js/terser)
+        - 树摇
+        - 符号
+        - 转译
+          - js
+            - [gogocode](https://github.com/thx/gogocode)
+            - [parcel-css](https://github.com/parcel-bundler/parcel-css)
+          - css
+            - less
+            - scss
+            - postcss
     - 工具
       - webpack
       - [vite](https://github.com/vitejs/vite)
@@ -100,13 +105,10 @@ desc: 系统化前端工程相关
       - puppeteer
       - cypress
   - CI
+    - ci-cache
     - lint
     - test
-    - size
-      - [size-limit](https://github.com/ai/size-limit)
-      - [bundlesize](https://github.com/siddharthkp/bundlesize)
-    - 审计
-      - [lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci)
+    - [性能测试](../浏览器原理及API/Web%20前端性能优化.md)
   - CD
     - build
     - 发版日志
@@ -143,4 +145,3 @@ desc: 系统化前端工程相关
     - 前端数据库
       - [Dexie.js](https://github.com/dexie/Dexie.js)
       - [rxdb](https://rxdb.info/)
- 

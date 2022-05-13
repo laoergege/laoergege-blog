@@ -11,7 +11,7 @@ desc: 浏览器原理及API知识体系总结
 
 本系列都是以 chrome/chromium 为主，参考学习资料：
 - 极客时间《浏览器工作原理与实践》
-- [Inside look at modern web browser 系列](https://developers.google.com/web/updates/2018/09/inside-browser-part1)
+- [深入了解现代网络浏览器 系列](https://developer.chrome.com/blog/inside-browser-part1/)
 - [Blink 文档链接](https://www.chromium.org/blink)
 
 ## 浏览器原理
