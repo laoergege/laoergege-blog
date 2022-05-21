@@ -117,31 +117,36 @@ desc: 系统化前端工程相关
     - vue：[vuese](https://github.com/vuese/vuese)
     - [storybook](https://github.com/storybookjs/storybook)
   - 架构化及方案沉淀
-    - 工具
-      - [vue: VueUse](https://vueuse.org/)
-    - 表格
-      - [tabulator](https://github.com/olifolkerd/tabulator)
-    - 表单
-      - [XRender](https://x-render.gitee.io/)
-    - 图标
-    - 组件库
-      - WebComponent
-    - 微前端
-      - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
-    - SSR
-    - 跨平台
-      - H5 
-      - 混合应用
-      - 小程序
-      - RN
-      - Flutter
-    - 动画
-      - [lottie](https://github.com/airbnb/lottie) 
-      - [anime](https://github.com/juliangarnier/anime/)
-    - 移动端适配
-      - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport)
-    - 低代码
-      - [lowcode-engine](https://github.com/alibaba/lowcode-engine)
-    - 前端数据库
-      - [Dexie.js](https://github.com/dexie/Dexie.js)
-      - [rxdb](https://rxdb.info/)
+    - 方案
+      - 工具
+        - [vue: VueUse](https://vueuse.org/)
+      - 表格
+        - [tabulator](https://github.com/olifolkerd/tabulator)
+      - 表单
+        - [XRender](https://x-render.gitee.io/)
+      - 图标
+      - 跨平台
+        - H5 
+        - 混合应用
+        - 小程序
+        - RN
+        - Flutter
+      - 动画
+        - [lottie](https://github.com/airbnb/lottie) 
+        - [anime](https://github.com/juliangarnier/anime/)
+      - 移动端适配
+        - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport)
+      - 低代码
+        - [lowcode-engine](https://github.com/alibaba/lowcode-engine)
+      - 前端数据库
+        - [Dexie.js](https://github.com/dexie/Dexie.js)
+        - [rxdb](https://rxdb.info/)
+    - 工程架构
+      - Monorepo
+      - 微前端
+        - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
+      - 组件库
+        - WebComponent
+    - 应用架构
+      - 低代码
+      - SSR

@@ -2,11 +2,10 @@
 
 - 数据层：Service + Store/Model + IOC + Context
   - Servcie = Store + API
-- _路由层_
-- 逻辑层：组件化 => 应用状态逻辑拆分
+- 逻辑层：组件化 => 应用逻辑拆分、复用
 - 视图层
   - 视图逻辑抽象 => Virtual-DOM
-  - UI = f(state)
+  - `UI is a calculation` => `UI = f(state)` => `不应该参杂副作用 useEffect` 、`组合模式、参考函数式编程`
 - 底层渲染层：dom + css
 
 ## 状态
@@ -15,7 +14,7 @@
 
 - 状态分类
   - UI 状态
-  - 数据服务
+  - 资源状态
     - [react-query](https://github.com/tannerlinsley/react-query)
   - 应用会话
   - 流程状态
@@ -25,6 +24,8 @@
 
 ## 业务体系下的组件化
 
+- 业务本质就是状态之间的转移
+- 最佳范式：以面向对象进行业务逻辑状态建模，以 UI = f(state) 偏函数式进行状态逻辑组合、UI 计算
 - 如何组件化？
   - 组件 = 状态逻辑 + 渲染
   - 状态处置
