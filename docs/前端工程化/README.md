@@ -104,13 +104,12 @@ desc: 系统化前端工程相关
     - e2e
       - puppeteer
       - cypress
-  - CI
-    - ci-cache
+  - CI/CD
     - lint
     - test
-    - [性能测试](../浏览器原理及API/Web%20前端性能优化.md)
-  - CD
     - build
+      - ci-cache
+    - [性能测试](../浏览器原理及API/Web%20前端性能优化.md)
     - 发版日志
   - 监控
   - 文档
@@ -141,7 +140,7 @@ desc: 系统化前端工程相关
       - 前端数据库
         - [Dexie.js](https://github.com/dexie/Dexie.js)
         - [rxdb](https://rxdb.info/)
-    - 工程架构
+    - 架构
       - Monorepo
       - 微前端
         - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)

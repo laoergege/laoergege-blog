@@ -42,7 +42,7 @@ desc: JavaScript 语法结构体系
         - 普通函数/成员函数
         - 箭头函数
         - 生成器函数（generator）
-          - 协程 + 生成器模式
+          - 协程 + 迭代器模式
         - 异步函数（async）
         - 异步生成器函数
       - 控制流
@@ -51,15 +51,15 @@ desc: JavaScript 语法结构体系
           - switch
         - 循环
           - 递归
-          - 迭代
-            - while/do while
+          - 遍历
+            - while/do while/for
             - for
           - 属性枚举
             - for in
-          - 迭代器
+          - 迭代器模式
             - for of
             - for await of
-        - try-catch-finally
+        - 错误跳转 try-catch-finally
           - 即使在 try 中出现了 return，finally 中的语句也一定要被先执行
           - finally 中的 return 会覆盖 try 中的 return
       - [表达式](#表达式)及运算符

@@ -12,15 +12,12 @@ desc: JavaScript 知识体系总结
   - [JavaScript 模块](./JavaScript%20模块.md)
   - [JavaScript 类型系统](./JavaScript%20类型系统.md)
   - [JavaScript 对象](./JavaScript%20对象.md)
+    - 可迭代对象
   - 数据结构
     - [数组](./JavaScript%20数组%20API%20总结.md)
     - Set
     - Map
   - [JavaScript 异步编程](./JavaScript%20异步编程.md)
-    - 事件驱动与回调函数
-    - Promise
-    - Generator & co
-    - async/await
   - 函数式编程
     - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
     - 柯里化（curry）

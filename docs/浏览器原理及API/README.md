@@ -70,10 +70,11 @@ desc: 浏览器原理及API知识体系总结
     - localStorage
     - sessionStorage
     - indexDB
-  - 资源请求
+  - 网络通信
     - 同源
-      - ajax
-      - fetch
+      - Ajax
+      - Fetch
+      - WebSocket
     - 非同源
       - CORS（[跨域资源共享](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS#http_%E5%93%8D%E5%BA%94%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5)）
         - 简单请求：拦截响应

@@ -205,15 +205,11 @@ JavaScript 代码被执行分为两个过程：编译时和运行时，本文是
 2. 解决启动问题：生成字节码的时间很短、缓存字节码提高了代码的启动速度；
 3. 代码架构清晰：采用字节码，可以简化程序的复杂度，使得 V8 移植到不同的 CPU 架构平台更加容易。
 
-## 疑问解答
+## 参考
 
-
-
-参考及推荐阅读：
-
-- 李兵老师的《浏览器工作原理与实践》
-- 李兵老师的《图解 Google V8》
+- 《浏览器工作原理与实践》
+- 《图解 Google V8》
 - [什么是解释型语言？ - 李广胜的回答 - 知乎]( https://www.zhihu.com/question/268303059/answer/336730398)
 -  [虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩](https://www.cnblogs.com/bozhang/articles/3115089.html)
 - [V8 Ignition：JS 引擎与字节码的不解之缘](https://zhuanlan.zhihu.com/p/26669846)
-
+- [YY's Studio.【虚拟机简史】基于栈虚拟机vs基于寄存器虚拟机](https://yanyezhang.github.io/2018/08/15/%E3%80%90Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AE%80%E5%8F%B2%E3%80%91%E5%9F%BA%E4%BA%8E%E6%A0%88%E8%99%9A%E6%8B%9F%E6%9C%BAvs%E5%9F%BA%E4%BA%8E%E5%AF%84%E5%AD%98%E5%99%A8%E8%99%9A%E6%8B%9F%E6%9C%BA/)
