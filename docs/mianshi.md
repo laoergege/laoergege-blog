@@ -86,7 +86,6 @@
       - Symbel.iterator 返回一个带有 next 方法的对象，next 返回{done,value}
       - Object.keys/values/entries
   - 变量&类型
-    - [ ] var、const、let 对比
     - [x] 变量交换
       - 解构
       - 位运算：异或
@@ -259,7 +258,11 @@
       - [x] Promise.all 原理：计数器模式
         - ![图 21](./images/1646032737911.png)
     - [ ] 异步代码执行顺序
+      - promise.then
     - [ ] async、await 的实现原理
+    - [x] 为什么微任务
+      - 微任务优先级比红任务高
+      - 执行下一个红任务前必须清空所有微任务
   - [x] 正则
     - ![图 20](./images/1645981868160.png)
     - 用正则表达式获取 url 中 query 参数 let str = "https://juejin.cn?name=zhangsan&age=18&id=123";
@@ -298,13 +301,17 @@
 - web
   - [ ] 渲染流程
     - [ ] 重绘和重排？
-      - 
     - [ ] 分层
       - will-change,3D 属性 transform 之类
-  - [ ] 事件循环机制
-    - 为什么要用 setTimeout 模拟 setInterval ？
+  - 事件循环机制
+    - [ ] 说下事件循环机制
+    - [ ] 为什么要用 setTimeout 模拟 setInterval ？
       - setInterval 每隔指定时间就会往队列里插入任务前会队列中是否存在上次任务，如果当前任务执行过长，会导致后边的间隔任务被跳过；
       - 可能多个定时器会连续执行
+    - [ ] requestAnimationFrame vs requestIdleCallback
+      - requestAnimationFrame
+         - 由系统 VSync 信号触发调度，在每一帧渲染之前执行
+         - 如果页面未激活的话，requestAnimationFrame 也会停止渲染，这样既可以保证页面的流畅性，又能节省主线程执行函数的开销
   - [x] 跨域
     - [x] CORS 跨域的原理
       - jsonp只可以使用 GET 方式提交、调试麻烦、安全性差 xss注入
@@ -750,7 +757,20 @@
       - 导航解析流程
       - ![图 22](images/1646151119601.png)
 - NodeJS
-  - [ ] 浏览器事件循环跟 NodeJS 有什么区别
+  - [x] 浏览器事件循环跟 NodeJS 有什么区别
+    - 定义
+      - 在浏览器中有 HTML 规范来定义事件循环的处理模型
+      - Node.js 中事件循环的定义与实现均来自于 Libuv。
+    - 执行顺序
+      - node的宏任务分为六个固定优先级阶段；而浏览器则动态优先级
+        - timer
+        - pending callback
+        - idle
+        - poll
+        - check
+        - close
+      - node11 之前，node 先清空某个优先级的红任务队列任务再清空所有微任务然后接着下一优先级的红任务队列，以此类推
+      - node 11 之后，跟浏览器保持一样，都是执行完宏任务队列里的一个红任务就清空所有微任务
 - 操作系统
   - [x] 线程跟进程区别
     - 进程是资源分配和调度的基本单位

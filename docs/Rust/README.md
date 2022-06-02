@@ -11,6 +11,8 @@
     - 内存安全：所有权、借用及生命周期
     - 面向表达式
       - 一切皆是表达式，即一切皆类型（表达式会产生值，值即类型，rust 就是通过一切类型检查保证内存安全、并发安全）
+        - 控制流语句
+        - 函数
       - 编译期计算
   - 词法结构
     - 关键字
@@ -114,9 +116,11 @@
   - 概念
     - crate：一个项目也被称为一个 crate，crate 可以是可执行项目，也可以是一个库
     - workspace：多项目组织
-  - Cargo.toml
-  - cargo new --bin/lib
-  - cargo build [--release]
+  - 配置：Cargo.toml
+  - 命令
+    - cargo new --bin/lib
+    - cargo build [--release]
+    - cargo test
 
 ### cargo workspace
 
@@ -129,3 +133,5 @@ members = [
     ...
 ]
 ```
+
+## 内存安全：所有权、借用及生命周期

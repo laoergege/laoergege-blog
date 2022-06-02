@@ -2,40 +2,41 @@
 
 - TypeScript
   - 类型系统（兼容扩展 JavaScript 类型系统）
-    - 数据类型
-      - 原始类型
-      - 复合类型
-        - 元组类型（Tuple）
-      - 特殊类型
-        - any、unkown
-          - 与 any 不同的是，unknown 在类型上更安全
-          - 可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any
-          - 使用 unknown，TypeScript 会强制类型检测，你必须使用*类型缩小*、*类型断言*
-        - void 表示没有返回值的函数
-        - never 表示永远不会发生值的类型
-      - 字面量类型
-        - 模板字面量
-      - 函数类型
-      - 接口
-        - 属性修饰符
-          - 可选属性
-          - 只读属性(onlyread)
-          - 索引签名
-          - 索引签名 & Record
-    - 类型断言
-      - `<type>`
-      - `as`
-      - `as const` 推断为常量类型
-      - 非空断言操作符 `!`
+    - 类型声明
+      - 数据类型
+        - 原始类型
+        - 复合类型
+          - 元组类型（Tuple）
+        - 特殊类型
+          - any、unkown
+            - 与 any 不同的是，unknown 在类型上更安全
+            - 可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any
+            - 使用 unknown，TypeScript 会强制类型检测，你必须使用*类型缩小*、*类型断言*
+          - void 表示没有返回值的函数
+          - never 表示永远不会发生值的类型
+        - 字面量类型
+          - 模板字面量
+        - 函数类型
+        - 接口
+          - 属性修饰符
+            - 可选属性
+            - 只读属性(onlyread)
+            - 索引签名
+            - 索引签名 & Record
+      - 类型断言
+        - `<type>`
+        - `as`
+        - `as const` 推断为常量类型
+        - 非空断言操作符 `!`
     - 类型推导
       - 基于表达式、上下文推断类型的能力称之为“类型推断”
       - 类型拓展
       - 类型收窄
         - 类型守卫
-    - 类型声明文件(d.ts)
-      - 类型增强
-    - 类型声明库 [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)
-    - 类型操作
+    - 类型增强
+      - 类型声明文件(d.ts)
+      - 类型声明库 [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)
+    - 类型编程
   - 编译器
     - tsc
       - `--init`

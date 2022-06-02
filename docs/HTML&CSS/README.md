@@ -77,14 +77,6 @@
       
       - CSS in JS
       - ShadowDOM
-    - 原子化 CSS (Atomic CSS)
-      - TailwindCSS
-        - [如何评价CSS框架TailwindCSS？ - 山月的回答 - 知乎](https://www.zhihu.com/question/337939566/answer/1752928891)
-      - https://github.com/antfu/unocss
-    - CSS 项目实践
-      - variable 主题控制
-      - css utils：原子化 CSS + 工具语法扩展
-      - css component：BEM + utils
   - 其他
     - clip-path
 - HTML

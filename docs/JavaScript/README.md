@@ -2,7 +2,7 @@
 release: true
 tags:
 	- javascript
-desc: JavaScript 知识体系总结
+desc: JavaScript 知识体系
 ---
 
 # JavaScript
@@ -13,6 +13,7 @@ desc: JavaScript 知识体系总结
   - [JavaScript 类型系统](./JavaScript%20类型系统.md)
   - [JavaScript 对象](./JavaScript%20对象.md)
     - 可迭代对象
+    - 生成器
   - 数据结构
     - [数组](./JavaScript%20数组%20API%20总结.md)
     - Set
