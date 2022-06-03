@@ -79,7 +79,7 @@ JS 任务主要是单线程同步执行，对于异步任务的实现主要是�
 
 ### Async/Await 实现原理
 
-Async/Await 其实只是语法糖，通过编译器编译成 Generator 函数和内置一个Promise 自动执行器。
+Async/Await 其实只是语法糖，通过编译器编译成 Generator 函数和通过 Promise 实现一个自动执行器。
 
 ```js
 function _async(gen) {
@@ -94,7 +94,7 @@ function _async(gen) {
           Promise.resolve(value).then(co, (err) => co(null, err))
         }
       } catch (error) {
-        reject(err)
+        reject(error)
       }
     };
     co();
@@ -102,19 +102,36 @@ function _async(gen) {
 }
 
 function* g() {
-  let res = yield Promise.resolve().then(() => 1);
-  res += yield Promise.resolve().then(() => { throw 2 } );
+  let res = yield Promise.resolve(1);
+  const fn = () => 2
+  // const fn = () => { throw 2 }
+  res += yield Promise.resolve(fn());
   // try {
-  //       res += yield Promise.resolve().then(() => { throw 2 } );
+  //       res += yield Promise.resolve(fn());
   // } catch (error) {
   //       console.log(error)
   // }
-  return yield res;
+  return res;
 }
 
 _async(g).then((res) => {
-  console.log(res);
+  console.log(res); // 3
 });
+```
+
+把生成器 g 跟 async 函数版本对比一下，不就是：
+
+- function* 换成 async
+- yield 换成 await
+- value 用 Promise.resolve(value) 包装
+
+```js
+async g() {
+  let res = await 1;
+  const fn = () => { throw 2 }
+  res += await fn();
+  return res;
+}
 ```
 
 ## 参考

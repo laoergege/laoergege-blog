@@ -49,7 +49,7 @@ desc: JavaScript 知识体系
   - [手写节流、防抖](https://github.com/laoergege/laoergege-blog/issues/83)
   - [EventEmitter 实现](https://github.com/laoergege/laoergege-blog/issues/84)
   - [手写 实现柯里化](https://github.com/laoergege/laoergege-blog/issues/87)
-- 学习资料
+- 资料
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
   - [ES6 入门教程](https://es6.ruanyifeng.com/)
   - 极客《重新前端》

@@ -459,5 +459,6 @@ CDN
     - 响应式图片
       - `@media`
       - `image-set`
-      - 懒加载
+      - imagesrcset & imagesizes
+      - 延迟加载屏幕外图像
 - 代码优化

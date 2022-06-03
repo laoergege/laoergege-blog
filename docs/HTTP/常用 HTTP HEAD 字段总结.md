@@ -135,7 +135,7 @@ Cookie 机制的工作流程：
 
 `PROXY [TCP4|TCP6] 请求方地址、应答方地址、请求方端口号、应答方端口号`
 
-```txt
+```
 PROXY TCP4 1.1.1.1 2.2.2.2 55555 80\r\n
 GET / HTTP/1.1\r\n
 Host: www.xxx.com\r\n

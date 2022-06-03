@@ -6,17 +6,14 @@ tags:
 ## NodeJS
 
 - NodeJS
-  - [Node.js 异步事件驱动架构](./Node.js 异步事件驱动架构.md)
-    - 特点
-      - 基于 **V8 引擎** 的 JavaScript 运行环境
-      - 使用 **事件驱动**，**非阻塞 I/O** 模型
-    - js 是单线程、通过事件循环分发将异步任务分发到其他线程
-  - [安装及基本使用](./安装及基本使用.md)
-  - [异步编程](../JavaScript/JavaScript 异步编程.md)
+  - 架构  ![图 3](./images/93e7ee9714431158f6fb8e209627b8bbbdbd8adafc6af389d511ca786f34c1ff.png) 
+  - 事件驱动、非阻塞模型
+  - [异步编程](../JavaScript/JavaScript%20异步编程.md)
   - 模块机制
     - CommonJS 模块规范
     - 模块解析以及加载机制
   - [npm 包管理](./npm.md)
+  - [Node.js 事件循环](./Node.js%20事件循环.md)
   - 调试及性能分析
     - [调试指南](https://nodejs.org/zh-cn/docs/guides/debugging-getting-started/)
     - [Node Profile](https://nodejs.org/zh-cn/docs/guides/simple-profiling/)
@@ -42,7 +39,6 @@ tags:
     - console 和 setTimeout 之类
     - ECMAScript 语言定义的全局对象，如 Date
 - 深入
-  - [Node.js 事件循环](./Node.js%20事件循环.md)
   - [Node.js 源码剖析](https://theanarkh.github.io/understand-nodejs/)
   - 第三方扩展
     - C++ addons NAPI

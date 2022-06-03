@@ -48,13 +48,8 @@
       - flex-shrink: 1
       - flex-basis: 0% ：项目在主轴空间的大小
   - [x] 选择器优先级
-      第一优先级：!important 会覆盖页面内任何位置的元素样式
-      1.内联样式，如 style="color: green"，权值为 1000
-      2.ID 选择器，如#app，权值为 0100
-      3.类、伪类、属性选择器，如.foo, :first-child, div[class="foo"]，权值为 0010
-      4.标签、伪元素选择器，如 div::first-line，权值为 0001
-      5.通配符、子类选择器、兄弟选择器，如*, >, +，权值为 0000
-      6.继承的样式没有权值
+        第一优先级：!important 会覆盖页面内任何位置的元素样式 1.内联样式，如 style="color: green"，权值为 1000
+        2.ID 选择器，如#app，权值为 0100 3.类、伪类、属性选择器，如.foo, :first-child, div[class="foo"]，权值为 0010 4.标签、伪元素选择器，如 div::first-line，权值为 0001 5.通配符、子类选择器、兄弟选择器，如\*, >, +，权值为 0000 6.继承的样式没有权值
   - [x] 盒子模型
     - 盒子模型：content + padding + border + margin
     - 怪异模型和标准模型
@@ -65,7 +60,7 @@
   - [x] 说说什么是 BFC，一般你都用来干什么，解决了什么问题？
     - BFC 块级格式化上下文，即一个独立的布局环境，规定了内部的块级盒子如何布局，不受外部影响。
     - 特征
-      - BFC中块级盒子垂直排放
+      - BFC 中块级盒子垂直排放
       - 同一个 BFC 下的块级盒子垂直方向会边距重叠
       - 同一 BFC 下一个 BFC 块容器不会与浮动盒子重叠
       - 在计算 BFC 的高度时，浮动元素也参与计算
@@ -95,7 +90,7 @@
         - `typeof null === 'object'`
       - instanceof
         - 可以判断具体引用类型，但是不能正确判断基础数据类型
-        - instanceof本质上是判断右边的构造函数的prototype对象是否存在于左边的原型链上。但根据原型链，`... instanceof Object` 都返回 true。
+        - instanceof 本质上是判断右边的构造函数的 prototype 对象是否存在于左边的原型链上。但根据原型链，`... instanceof Object` 都返回 true。
       - Object.prototype.toString.call
         - 能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
         - Symbol.toTagString()
@@ -109,7 +104,7 @@
       - 隐式转换，运算符会自动触发类型转换，如 `+'123'`
         - 类型转换规则  
           在 JS 中类型转换情况：toNumber 、 toString 、 toBoolean、toObject
-          ![图 11](./images/1642863972248.png)  
+          ![图 11](./images/1642863972248.png)
           - StringToNumber
             - Number
             - parseInt
@@ -133,11 +128,11 @@
       - 0.1 和 0.2 转换成二进制的时候尾数会发生无限循环，会被截断造成精度丢失
       - 精度丢失可能出现在进制转换和对阶运算中
       - 怎么解决浮点数运算缺失
-          - bigInt
-          - 第三方库：math.js
-          - 整型存储，再格式化显示
-          - 转换成字符串运算
-          - 使用 Number.EPSILON 误差范围：`Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON`
+        - bigInt
+        - 第三方库：math.js
+        - 整型存储，再格式化显示
+        - 转换成字符串运算
+        - 使用 Number.EPSILON 误差范围：`Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON`
   - 对象
     - [x] 手写 call、apply、bind
       - 都可以改变函数 this 指针
@@ -187,7 +182,7 @@
     - [x] 对象深浅拷贝
       - 浅拷贝：Object.assign
       - [x] 深拷贝
-        - ![图 2](./images/1646836941175.png)  
+        - ![图 2](./images/1646836941175.png)
   - [x] 模块发展历程
     - 原始阶段：
       - 文件划分模块
@@ -200,8 +195,8 @@
     - ES Modules：ECMASCript 标准
   - [ ] common.js 和 es6 中模块引入的区别？
     - CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。
-    - CommonJs 是单个值导出，ES6 Module可以导出多个
-    - CommonJs 的 this 是当前模块，ES6 Module的 this 是 undefined
+    - CommonJs 是单个值导出，ES6 Module 可以导出多个
+    - CommonJs 的 this 是当前模块，ES6 Module 的 this 是 undefined
   - 函数编程
     - [ ] 普通函数和箭头函数区别
       - 箭头函数的 this 绑定外层上下文中的 this
@@ -228,7 +223,7 @@
     - [ ] 你项目里面都用了哪些设计模式
     - [ ] 发布-订阅与观察者模式区别
     - [x] 手写 EventEmitter
-      - ![图 1](./images/1646814006448.png)  
+      - ![图 1](./images/1646814006448.png)
   - js 执行机制
     - [x] 变量提升、var、let、const 区别及暂时性死区
     - [x] 闭包
@@ -259,7 +254,8 @@
         - ![图 21](./images/1646032737911.png)
     - [ ] 异步代码执行顺序
       - promise.then
-    - [ ] async、await 的实现原理
+    - [x] async、await 的实现原理
+      - ![图 1](./images/1654184267629.png)  
     - [x] 为什么微任务
       - 微任务优先级比红任务高
       - 执行下一个红任务前必须清空所有微任务
@@ -284,37 +280,64 @@
     - [x] flatTree
       - ![图 19](./images/1645948182295.png)
     - 生成一个长度为 n 的不重复随机数组
-      - Math.random() * testArray.length
+      - Math.random() \* testArray.length
       - 缓存
   - V8
     - [x] 垃圾回收机制
-      - V8内存主要分为堆栈
+      - V8 内存主要分为堆栈
       - 栈内存回收主要移动 ESP 栈顶指针
       - 堆内存主要采用标记清除的方式
       - 具体做法是分新生代和老生代
       - 新生代采用 Scavenge 算法，分为 From、to 两个区域
     - 垃圾回收机制
-    你刚刚提到的标记清除法有什么缺点？怎么解决？
-    你刚刚提到的引用计数法有什么缺点吗？
-    v8 里面的垃圾回收机制是什么？
-    v8 是怎么解决循环引用的？
+      你刚刚提到的标记清除法有什么缺点？怎么解决？
+      你刚刚提到的引用计数法有什么缺点吗？
+      v8 里面的垃圾回收机制是什么？
+      v8 是怎么解决循环引用的？
 - web
   - [ ] 渲染流程
     - [ ] 重绘和重排？
     - [ ] 分层
       - will-change,3D 属性 transform 之类
   - 事件循环机制
-    - [ ] 说下事件循环机制
+    - [x] 说下事件循环机制
+      - 事件循环就是有一个执行线程不断从任务队列取任务执行
+      - 在浏览器中的任务队列又分为 macro-task（宏任务）与 micro-task（微任务）
+      - 宏任务
+        - 脚本 script
+        - 用户输入事件处理
+        - MessageChannel、postMessage
+        - requestAnimationFrame
+          - 由系统 VSync 信号触发调度，在每一帧渲染之前执行
+          - 如果页面未激活的话，requestAnimationFrame 也会停止渲染，这样既可以保证页面的流畅性，又能节省主线程执行函数的开销
+        - UI 渲染任务
+        - 计时器 setTimeout、setInterval
+          - 计时器的回调不一定在指定时间后能执行。而是在指定时间后，将回调函数放入事件循环的队列中，如果当前任务执行时间过久，会影响定时器任务的执行
+          - setTimeout
+            - 在 Chrome 中，定时器被嵌套调用 5 次以上，那么系统会设置最短时间间隔为 4 毫秒
+            - 未激活的页面，setTimeout 执行最小间隔是 1000 毫秒
+            - 延时执行时间有最大值 大约 24.8 天
+        - 网络请求 ajax、fetch
+        - requestIdleCallback
+      - 微任务
+        - promise.then、promise.reject
+        - MutationObserver
+        - queueMicrotask
+      - 浏览器中事件循环大致顺序是
+        - 主线程从宏任务队列取一任务执行执行完后
+        - 再循环执行完微任务队列里的所有任务
+        - UI 渲染判断
+        - 重回到 1
     - [ ] 为什么要用 setTimeout 模拟 setInterval ？
       - setInterval 每隔指定时间就会往队列里插入任务前会队列中是否存在上次任务，如果当前任务执行过长，会导致后边的间隔任务被跳过；
       - 可能多个定时器会连续执行
     - [ ] requestAnimationFrame vs requestIdleCallback
       - requestAnimationFrame
-         - 由系统 VSync 信号触发调度，在每一帧渲染之前执行
-         - 如果页面未激活的话，requestAnimationFrame 也会停止渲染，这样既可以保证页面的流畅性，又能节省主线程执行函数的开销
+        - 由系统 VSync 信号触发调度，在每一帧渲染之前执行
+        - 如果页面未激活的话，requestAnimationFrame 也会停止渲染，这样既可以保证页面的流畅性，又能节省主线程执行函数的开销
   - [x] 跨域
     - [x] CORS 跨域的原理
-      - jsonp只可以使用 GET 方式提交、调试麻烦、安全性差 xss注入
+      - jsonp 只可以使用 GET 方式提交、调试麻烦、安全性差 xss 注入
       - 分为简单请求和非简单请求
       - 简单请求为
         - 法：GET、HEAD、POST
@@ -333,10 +356,10 @@
       - Access-Control-Max-Age
       - 发送身份凭证信息或者响应设置 cookie，那必须满足三个条件：
         - 后端 Response header 有 Access-Control-Allow-Credentials: true
-        - 后端 Response header 的 Access-Control-Allow-Origin 不能是*，要明确指定
+        - 后端 Response header 的 Access-Control-Allow-Origin 不能是\*，要明确指定
         - 前端请求加上 withCredentials: 'include'
     - [x] JSONP
-      - 利用了 script 标签的 src 属性来实现跨域数据交互的，因为浏览器解析HTML代码时，原生具有src属性的标签，浏览器都赋予其HTTP请求的能力，而且不受跨域限制，使用src发送HTTP请求，服务器直接返回一段JS代码的函数调用，将服务器数据放在函数实参中，前端提前写好响应的函数准备回调，接收数据，实现跨域数据交互
+      - 利用了 script 标签的 src 属性来实现跨域数据交互的，因为浏览器解析 HTML 代码时，原生具有 src 属性的标签，浏览器都赋予其 HTTP 请求的能力，而且不受跨域限制，使用 src 发送 HTTP 请求，服务器直接返回一段 JS 代码的函数调用，将服务器数据放在函数实参中，前端提前写好响应的函数准备回调，接收数据，实现跨域数据交互
     - Proxy Server
   - [x] 安全
     - 同源：协议、域名和端口都相同
@@ -397,19 +420,19 @@
       - 事件委托的原理：不给每个子节点单独设置事件监听器，而是设置在其父节点上，然后利用冒泡原理设置每个子节点。
         - 减少内存消耗和 dom 操作
         - 不必为新增子元素绑定事件监听
-  - [x] async 或 defer 
+  - [x] async 或 defer
     - 都是异步加载 js
     - async 加载完立刻执行
-    - defer 在DOM 解析完毕，DOMContentLoaded 事件之前保持其相对顺序执行
+    - defer 在 DOM 解析完毕，DOMContentLoaded 事件之前保持其相对顺序执行
   - [ ] 讲讲 fetch 和 xhr 的区别
   - [x] cookie 和 session 的区别
-    - Session 是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。
+    - Session 是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；Cookie 是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现 Session 的一种方式。
   - [ ] cookie、localStorage、sessionStorage 区别以及使用场景
   - [ ] 你所知道的白屏原因，怎么优化？
   - [ ] 常见性能指标
 - 工程
   - webpack
-    - [x] webpack 有用过哪些loader
+    - [x] webpack 有用过哪些 loader
       - loader
         - js
           - babel-loader
@@ -440,7 +463,7 @@
       - loader 主要是对源文件进行转换处理
       - plugin 可以用来监听 webpack 构建生命周期，做一些操作，去扩展 webpack 功能
       - loader 本质是一个函数，plugin 本质是一个类，
-    - extenral 通过extenrals 选项，可以将依赖从输出的bundle中移除，并保持资源引入 
+    - extenral 通过 extenrals 选项，可以将依赖从输出的 bundle 中移除，并保持资源引入
     - loader 执行顺序
       - 从右往左
     - [ ] webpack 构建阶段优化
@@ -490,7 +513,7 @@
       - 具体：用公钥解密出 hash 跟证书内容进行摘要对比
   - [ ] http1.0/1.1/2.0/3.0
     - http 0.9
-      - 只传输 ASCII 编码的超文本内容 HTML，并且只有一个请求行只支持GET请求
+      - 只传输 ASCII 编码的超文本内容 HTML，并且只有一个请求行只支持 GET 请求
     - http 1
       - 增加了响应状态码；
       - 引入了 HTTP Header（头部）的概念，让 HTTP 处理请求和响应更加灵活；
@@ -502,7 +525,7 @@
       - 增加了 cookie 机制
       - 支持长连接 keep-alive
       - 引入管道机制
-    - http2：改进性能，解决了http-队头阻塞
+    - http2：改进性能，解决了 http-队头阻塞
       - http 头部压缩
       - 二进制分帧传输
       - 支持多路复用
@@ -511,24 +534,24 @@
     - HTTP/3：主要解决 TCP 队头阻塞、TCP 及 TSL 握手消耗
       - 基于 UDP
   - [x] http/1 队头阻塞
-     - http 队头阻塞，设计之初是一个简单纯文本传输协议，基本上是一个字符流，消息必须作为一个连续的数据流完整地发送，并且连接不能用于其他任何事情，只能传输该消息直到它完成，这造就了 http 是一个请求-应答模式
-     - 管道机制：管道也可以并行发送请求，但是返回响应的顺序则必须是发送时候的顺序
-     - 并行连接
-       - 在 HTTP/1.x 中，如果客户端要想发起多个并行请求以提升性能，则必须使用多个 TCP 连接
-       - 浏览器TCP限制：域名分片 
+    - http 队头阻塞，设计之初是一个简单纯文本传输协议，基本上是一个字符流，消息必须作为一个连续的数据流完整地发送，并且连接不能用于其他任何事情，只能传输该消息直到它完成，这造就了 http 是一个请求-应答模式
+    - 管道机制：管道也可以并行发送请求，但是返回响应的顺序则必须是发送时候的顺序
+    - 并行连接
+      - 在 HTTP/1.x 中，如果客户端要想发起多个并行请求以提升性能，则必须使用多个 TCP 连接
+      - 浏览器 TCP 限制：域名分片
     - http2.0 是怎么解决的？
-     - 多路复用：在一条tcp连接上，可以并行发送请求、接受消息，而无需相互等待
-     - 具体：将 HTTP 消息分割成多个的**数据帧**并且带有唯一**流ID**，然后交错发送，最后再在另一端将同一流ID的帧重新组装起来
+    - 多路复用：在一条 tcp 连接上，可以并行发送请求、接受消息，而无需相互等待
+    - 具体：将 HTTP 消息分割成多个的**数据帧**并且带有唯一**流 ID**，然后交错发送，最后再在另一端将同一流 ID 的帧重新组装起来
   - [x] 头部压缩的原理是什么
     - “HPACK”
     - 浏览器和服务器会维护一个相同的静态表和一个动态表，以及内置一个静态霍夫曼编码表
       1. 静态表存储的是常见的一些头部，和一些很常见的头部键值对
-         ![图 27](./images/1649176543339.png)  
+         ![图 27](./images/1649176543339.png)
       2. 动态表初始为空，添加在静态表后面，结构相同
       3. 请求、响应头部中对于静态表里未出现过的字段或者对应值则经过哈夫曼压缩编码发送之后，客户端和服务器更新自己的动态表；对应已有的则只需发送索引值
-         ![图 26](./images/1649175617174.png)  
-  - [x] options方法的作用
-    - 要求服务器列出可对资源实行的操作方法，在响应头Allow字段里返回,比如有的资源只支持get，有的只支持post/delete。
+         ![图 26](./images/1649175617174.png)
+  - [x] options 方法的作用
+    - 要求服务器列出可对资源实行的操作方法，在响应头 Allow 字段里返回,比如有的资源只支持 get，有的只支持 post/delete。
     - cors
   - [x] 浏览器 http 缓存
     - HTTP 缓存又分为强缓存和协商缓存
@@ -548,9 +571,9 @@
     - PATCH：差量修改数据
     - PUT：全量修改数据
     - DELETE：删除资源
-    - HEAD：获取资源的元信息，HEAD 则是跟 GET 类似，但只返回响应头（想象一个业务情景：欲判断某个资源是否存在，我们通常使用GET，但这里用HEAD则意义更加明确。）
-    - CONNECT：要求服务器为客户端和另一台远程服务器建立一条特殊的链接，这时Web服务器充当代理的角色，多用于 HTTPS 和 WebSocket
-    - OPTIONS：要求服务器列出可对资源实行的操作方法，在响应头Allow字段里返回，常用于跨域资源共享
+    - HEAD：获取资源的元信息，HEAD 则是跟 GET 类似，但只返回响应头（想象一个业务情景：欲判断某个资源是否存在，我们通常使用 GET，但这里用 HEAD 则意义更加明确。）
+    - CONNECT：要求服务器为客户端和另一台远程服务器建立一条特殊的链接，这时 Web 服务器充当代理的角色，多用于 HTTPS 和 WebSocket
+    - OPTIONS：要求服务器列出可对资源实行的操作方法，在响应头 Allow 字段里返回，常用于跨域资源共享
   - [x] get 和 post 区别
     - 参数
     - 编码
@@ -567,26 +590,26 @@
       - 服务端发送 FIN
       - 客户端 ACK
   - [x] 为什么需要三次握手，两次不行吗？
-      - 如果只握手前两次，服务端不确定客户端是否准备好了
-      - 这是由于 TCP 可靠性基于请求-应答模式，无论哪一方收到数据后，都需要给发送方一个 ACK（Acknowledgement）响应。如果一个请求没有响应，发送方可能会认为自己需要重发这个请求
+    - 如果只握手前两次，服务端不确定客户端是否准备好了
+    - 这是由于 TCP 可靠性基于请求-应答模式，无论哪一方收到数据后，都需要给发送方一个 ACK（Acknowledgement）响应。如果一个请求没有响应，发送方可能会认为自己需要重发这个请求
   - [x] 为什么四次挥手
-    - 因为TCP是全双工通信的。当主动方发送断开连接的请求（即FIN报文）给被动方时，仅仅代表主动方不会再发送数据报文了，但主动方仍可以接收数据报文。当被动方也发送FIN报文时才意味着连接可以断开。无论是哪方收到消息后，都需要给发送方一个 ACK（Acknowledgement）响应。如果一个请求没有响应，发送方可能会认为自己需要重发这个请求。所以总共四次挥手。
+    - 因为 TCP 是全双工通信的。当主动方发送断开连接的请求（即 FIN 报文）给被动方时，仅仅代表主动方不会再发送数据报文了，但主动方仍可以接收数据报文。当被动方也发送 FIN 报文时才意味着连接可以断开。无论是哪方收到消息后，都需要给发送方一个 ACK（Acknowledgement）响应。如果一个请求没有响应，发送方可能会认为自己需要重发这个请求。所以总共四次挥手。
   - [x] TCP, UDP 的区别
     - TCP 是一种面向连接、可靠的、基于字节流的传输数据的协议，适用于要求可靠传输的应用，例如文件传输
-    - 而 UDP则是面向数据报文的协议，不需要连接，但在网络环境差的时候可能会丢包比较严重，
+    - 而 UDP 则是面向数据报文的协议，不需要连接，但在网络环境差的时候可能会丢包比较严重，
       - 但是因为 UDP 不需要连接，资源消耗低，灵活性高，适用于实时应用，比如音频、视频传输这种
-      - 而且 UDP 协议结构简单，适合扩展，比如http3 的 QUIC
+      - 而且 UDP 协议结构简单，适合扩展，比如 http3 的 QUIC
   - [x] DNS 解析过程
     - DNS 域名解析过程是递归查询 + 迭代查询
       1. 主机先向其本地域名服务器发起递归查询
       2. 本地域名服务器采用迭代的查询方式，它先向根域名服务器查询
-      3. 根域名服务器告诉本地域名服务器，下一次应该查询的顶级域名服务器的IP地址。
+      3. 根域名服务器告诉本地域名服务器，下一次应该查询的顶级域名服务器的 IP 地址。
       4. 本地域名服务器向顶级域名服务器发起查询。
-      5. 顶级域名服务器告诉本地域名服务器，下一次应查询的权限域名服务器IP地址
+      5. 顶级域名服务器告诉本地域名服务器，下一次应查询的权限域名服务器 IP 地址
       6. 本地域名服务器向权限域名服务器发起查询。
-      7. 权限域名服务器告诉本地域名服务器所查询的IP地址。
+      7. 权限域名服务器告诉本地域名服务器所查询的 IP 地址。
       8. 本地域名服务器把查询结果告诉主机
-  - [ ] CDN 介绍、回源是什么、CDN原理
+  - [ ] CDN 介绍、回源是什么、CDN 原理
   - vary：可作为缓存验证条件
   - [x] 状态码
     - 1xx：提示信息，表示目前是协议处理的中间状态，还需要后续的操作
@@ -632,7 +655,7 @@
     - [ ] vue 响应式原理
       - 响应式数据，实现上：数据劫持+观察者模式
         - 数据劫持
-          - vue2 defineProperty 
+          - vue2 defineProperty
           - vue3 proxy
       - [ ] 手写响应式数据实现
     - [x] 数据绑定原理
@@ -651,7 +674,7 @@
       - 使用场景：数据更新后，调用 nextTick 可以确保回调任务在 DOM 更新后执行
       - 实现原理：使用队列缓存当前事件循环中 nextTick 的回调任务，以微任务优先的方式在下次循环中执行队列任务
       - vue2 会根据环境、采用不同的降级方案使用系统异步 API，而 vue3 直接使用 Promise
-        -  Promise.then、MutationObserver 和 setImmediate、messagechannel，如果执行环境不支持，则会采用 setTimeout(fn, 0) 
+        - Promise.then、MutationObserver 和 setImmediate、messagechannel，如果执行环境不支持，则会采用 setTimeout(fn, 0)
   - API
     - [ ] computed 实现原理
     - [x] computed、watch 对比区别
@@ -661,14 +684,14 @@
       - 无论是 Object.defineProperty、proxy 实现的响应式功能有个缺点就是必须是对象类型，不支持基础类型
       - ref 主要是为实现对基础类型规范支持，将基础类型包装成带 value 的对象然后进行响应式
       - 实现原理细节上
-         - reactive 是通过 proxy 实现
-         - ref 依然是靠 object.defineProperty 的 get 与 set 完成的，如果 ref 接收不是一个基础类型则转换成 reactive 支持，如果直接通过 reactive 支持，则需要多创建一个 Map 对象
+        - reactive 是通过 proxy 实现
+        - ref 依然是靠 object.defineProperty 的 get 与 set 完成的，如果 ref 接收不是一个基础类型则转换成 reactive 支持，如果直接通过 reactive 支持，则需要多创建一个 Map 对象
   - 其他
     - [ ] vue3 项目实践过程问题
       - setup 臃肿，以前对象配置写法逻辑按功能分类，现在 setup 写法，按逻辑组织
       - ref .value 问题，最好变量命名 xxxRef 后缀
     - [x] vue 的 data 为什么要用函数返回一个对象？
-      - 多个组件实例会共享data数据
+      - 多个组件实例会共享 data 数据
     - [x] 简述 mvvm
       - Model 层代表数据模型，View 代表 UI 组件，ViewModel 是 View 和 Model 层的桥梁，数据会绑定到 viewModel 层并自动将数据渲染到页面中，视图变化的时候会通知 viewModel 层更新数据。
     - vue 性能优化
@@ -715,7 +738,7 @@
       - 异
         - 更新优化方式
           - vue 通过数据劫持 + 编译优化 + 运行时优化，精确 vdom diff 范围
-          - react 采用fiber架构，使用链表表示 DOM结构 可以在diff时随时中断和继续，利用requestIdleCallback在空闲时diff，防止数据量大diff时间长导致卡顿，偏重运行时
+          - react 采用 fiber 架构，使用链表表示 DOM 结构 可以在 diff 时随时中断和继续，利用 requestIdleCallback 在空闲时 diff，防止数据量大 diff 时间长导致卡顿，偏重运行时
         - 编程上 react 偏向不可变、函数式编程。vue 则是响应式编程、可变数据
         - 模板书写上
           - react jsx 有完全 js 编程能力
@@ -735,7 +758,7 @@
   - vue-router
     - [x] hash 模式和 history 模式实现原理分别是什么
       - hash
-        - 使用URL中#后面的内容作为路由地址
+        - 使用 URL 中#后面的内容作为路由地址
         - URL hash 发生改变不会重新刷新页面，而且会浏览器的访问历史中增加一个记录
         - 可以通过 hashchange 事件监听路由变化，根据当前路由地址找到对应组件重新渲染，但。。。
         - 特点：兼容性好但是不美观
@@ -745,8 +768,8 @@
         - 通过 PopStateEvent 事件监听路由变化，根据当前路由地址找到对应组件重新渲染
         - 特点：虽然美观，但是刷新会出现 404 需要后端进行配置
         - history.pushState()或者 history.replaceState()不会触发 popstate 事件；popstate 事件会在点击后退、前进按钮(或调用 history.back()、history.forward()、history.go()方法)时触发
-        - vue-router 
-          - popstate监听路由变化
+        - vue-router
+          - popstate 监听路由变化
           - 使用 history pushState 模拟 hash 模式
     - [x] 路由懒加载
       - Vue 的异步组件和 Webpack 对动态 import 做代码分割功能
@@ -761,8 +784,10 @@
     - 定义
       - 在浏览器中有 HTML 规范来定义事件循环的处理模型
       - Node.js 中事件循环的定义与实现均来自于 Libuv。
+    - 事件类型
+      - node 没有 HTML 渲染、鼠标键盘等事件，但有文件 IO 等系统事件，而浏览器反向
     - 执行顺序
-      - node的宏任务分为六个固定优先级阶段；而浏览器则动态优先级
+      - node 的宏任务分为六个固定优先级阶段；而浏览器则动态优先级
         - timer
         - pending callback
         - idle
@@ -785,31 +810,31 @@
       - 链表法
   - [ ] 数组
     - [x] 排序算法
-      - 冒泡：两两比较 ![图 18](./images/1648879880972.png)  
-      - 选择：每次从剩余未排序中选择最小 ![图 19](./images/1648880788932.png)  
-      - 插入：从后往前插 ![图 20](./images/1648881239761.png)  
-      - 快排：找个中间点，分两边，反复递归 ![图 23](./images/1648915797464.png)  
-      - 归并：递归分两遍，再合并 ![图 22](./images/1648906128442.png)  
+      - 冒泡：两两比较 ![图 18](./images/1648879880972.png)
+      - 选择：每次从剩余未排序中选择最小 ![图 19](./images/1648880788932.png)
+      - 插入：从后往前插 ![图 20](./images/1648881239761.png)
+      - 快排：找个中间点，分两边，反复递归 ![图 23](./images/1648915797464.png)
+      - 归并：递归分两遍，再合并 ![图 22](./images/1648906128442.png)
     - [ ] 二分查找
   - 双指针/滑动窗口
-    - [x] 三数之和 ![图 31](./images/1649522423434.png)  
-    - [x] 无重复字符的最长子串 ![图 32](./images/1649572968076.png)  
+    - [x] 三数之和 ![图 31](./images/1649522423434.png)
+    - [x] 无重复字符的最长子串 ![图 32](./images/1649572968076.png)
   - [x] 链表
     - 插入 b.next = a.next a.next = b
     - 删除 a.next = a.next.next
     - 链表操作
-        - 注意空指针
-        - 带头链表：简化操作，针对链表的插入、删除操作，需要对插入第一个结点和删除最后一个结点的情况进行特殊处理
-    - 反转 ![图 9](./images/1648569881674.png)  
-    - 部分交换 ![图 10](./images/1648571312582.png)  
+      - 注意空指针
+      - 带头链表：简化操作，针对链表的插入、删除操作，需要对插入第一个结点和删除最后一个结点的情况进行特殊处理
+    - 反转 ![图 9](./images/1648569881674.png)
+    - 部分交换 ![图 10](./images/1648571312582.png)
     - 有无环
-      - ![图 8](./images/1648562285833.png)  
+      - ![图 8](./images/1648562285833.png)
       - 快慢指针
       - 散列表
-    - 倒数第n节点 ![图 12](./images/1648572414848.png)  
+    - 倒数第 n 节点 ![图 12](./images/1648572414848.png)
     - LRU ![图 8](./images/1645794229880.png)
-    - 中间节点 ![图 13](./images/1648573349993.png)  
-    - 回文链表 ![图 11](./images/1648571590471.png)  
+    - 中间节点 ![图 13](./images/1648573349993.png)
+    - 回文链表 ![图 11](./images/1648571590471.png)
     - 合并链表
   - [x] 栈、队列
     - 括号是否合法
@@ -822,16 +847,16 @@
     - 反转
   - [x] 堆
     - 堆实现
-    - Top K、前 K：703.数据流中的第 K 大元素 
+    - Top K、前 K：703.数据流中的第 K 大元素
       - 优先队列：二叉堆
       - 快排
 - typescript
-  - [ ] interface和type的区别
+  - [ ] interface 和 type 的区别
   - [ ] TypeScript 高级用法， Pick 和 Omit
   - [x] any、unkown 区别
     - 与 any 不同的是，unknown 在类型上更安全
       - 可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any
-      - 使用 unknown，TypeScript 会强制类型检测，你必须使用*类型缩小*、*类型断言*
+      - 使用 unknown，TypeScript 会强制类型检测，你必须使用*类型缩小*、_类型断言_
 - [ ] 职业规划 希望在未来的两到三年时间，拓充技术能力的同时，在业务能力上有所沉淀成为业务，形成一定的见解，同时谋求从大头兵向小组长的一个转变
 - hr
   - [ ] 空窗期
@@ -868,7 +893,7 @@
   - tailwindcss 方案
   - 使用 pnpm workspaces 对项目 monorepo 管理
     - [x] 为什么用 pnpm
-      - 节省空间，兼容性好，相比较yarn、npm安全性高
+      - 节省空间，兼容性好，相比较 yarn、npm 安全性高
       - 比如项目中可同时存在 vue2、vue3，不会产生冲突
       - pnpm workspaces 相关命令比 learn + yarn workspaces 简洁
     - [x] pnpm 对比 npm、yarn
@@ -908,9 +933,8 @@
 - Portals
 - flatten
 
-
-
 - 项目（认真复盘）
+
   - tailwindcss 好处
     - 命名
     - 原子
@@ -935,23 +959,17 @@
       - compress-webpack-plugin + gzip nginx
       - tree-shaking
 
-
 - 项目
   - 背景
   - 技术
   - 难点及解决、收益：问题 → 方案 → 收益的模式来描述
-  
 
-方法上可以使用万能的STAR原则
+方法上可以使用万能的 STAR 原则
 
 Situation（背景）：做这个项目的背景是什么，比如这是个人项目还是团队项目，为什么需要做这个 项目，你的角色是什么，等等。
 Target（目标）：该项目要达成的目标是什么？为了完成这个目标有哪些困难？
 Action（行动）：针对所要完成目标，你做了哪些工作？如何克服了其中一些困难？
 Result（结果）：项目最终结果如何？有哪些成就？有哪些不足之处可以改进？
-
-
-
-
 
 - 构建
 
@@ -982,15 +1000,15 @@ lint-staged 原理
 
 - pre-commit
 
-
 - 项目经验
+
   - tailwindcss
     - 优点
       - utility class 的集合
       - 语义化，减少命名烦恼
       - 样式原子性：可组合可复用,样式利用率极高
       - JIT
-      - 原子css 提高css利用率及缩减大小
+      - 原子 css 提高 css 利用率及缩减大小
     - 缺点
       - 模板样式复杂
         - 样式更 windcss 做为属性，而不是拥挤在 class 中，class 保持 BEM 的命名方式
@@ -1016,18 +1034,15 @@ lint-staged 原理
   - 人事
   - 小程序
 
-
 - HTTPS 强化通信链路安全
 - HTTP/2 优化传输效率
 - Nginx/OpenResty 提升网站服务能力
 - WAF 抵御网站入侵攻击
 - CDN 作用网络加速，缩短访问链路，就近访问原则
 
-
 整理 Vue 与 React 框架的所有横向对比，包括渲染原理、虚拟 dom、diff、patch、fiber、批量更新，手写响应式，框架用到的模式、设计思想，性能优化，相关生态技术等等
 
 webpack 原理、热更新原理、动态加载原理、常见 plugins、loader、常见优化，怎么打包、怎么分 chunk，怎么写一个 plugins，生命周期，微内核源码等内容，以及 rollup、gulp 的使用、应用场景。
-
 
 层创建标准
 什么情况下能使元素获得自己的层？虽然 Chrome 的启发式方法(heuristic)随着时间在不断发展进步，但是从目前来说，满足以下任意情况便会创建层：
@@ -1041,36 +1056,21 @@ webpack 原理、热更新原理、动态加载原理、常见 plugins、loader�
 元素有一个包含复合层的后代节点(换句话说，就是一个元素拥有一个子元素，该子元素在自己的层里)
 元素有一个 z-index 较低且包含一个复合层的兄弟元素(换句话说就是该元素在复合层上面渲染)
 
-
-
 PurgeCSS
 cssnano
 
 devtool coverage
 
-
-
-
 文档
+
 - /vuepress-plugin-docgen
 - 注册
 - demo
 - table
 
-
-
-
-
 如，Webpack 是一个模块化打包工具，但它通过“万物皆模块”这种设计思想，巧妙地实现了整个前端项目的模块化，统一标准模块化处理。在 Webpack 的理念中，前端项目中的任何资源都可以作为一个模块，任何模块都可以经过 Loader 机制的处理，最终再被打包到一起
 
-
- - http
-        - https://mp.weixin.qq.com/s/By-iXlONjSZLKFG2Xd7rpg 重复
-        - https://mp.weixin.qq.com/s/NfyxtWUzjHh6ucXvBF9B4Q 缓存
-        - https://mp.weixin.qq.com/s/E4SdYEkEzurfrnJrBu3bjA 并发下载
-        - https://mp.weixin.qq.com/s/8RJSBwCDTvwX3Oql31ckkg 重试
-        - https://mp.weixin.qq.com/s/lGqnGg-Zdnt-b7grdh9NnQ 压缩
-
+- http - https://mp.weixin.qq.com/s/By-iXlONjSZLKFG2Xd7rpg 重复 - https://mp.weixin.qq.com/s/NfyxtWUzjHh6ucXvBF9B4Q 缓存 - https://mp.weixin.qq.com/s/E4SdYEkEzurfrnJrBu3bjA 并发下载 - https://mp.weixin.qq.com/s/8RJSBwCDTvwX3Oql31ckkg 重试 - https://mp.weixin.qq.com/s/lGqnGg-Zdnt-b7grdh9NnQ 压缩
 
 平时常用的框架进阶一步去使用，比如它的一些高级用法是否有所掌握，有没有试着去了解它的原理实现。
 日常的业务开发中不局限于完成功能，是否有去思考项目结构如何设计，如何封装基础工具，基础组件如何设计、开发、共享。
@@ -1079,14 +1079,13 @@ devtool coverage
 接入 eslint、prettier 等代码检验、风格统一的插件。
 工程化的角度思考本地开发的提效，如何去进行 webpack 构建的优化，最近社区 esbuild 很火，尝试去接入一下。vite 和 snowpack 的思路很赞，能不能在新项目中运用起来等等……
 平常如果经常有多项目开发的需求，整理出差异和统一的部分，建立团队内部的脚手架避免重复劳动。
-尝试搭建CI / CD 平台，尝试搭建npm 私服维护自己公司内部的通用包。
+尝试搭建 CI / CD 平台，尝试搭建 npm 私服维护自己公司内部的通用包。
 
-
-- babel的preset和pollyfill可以互相替代吗，为什么可以/不可以
-- babel7相较于之前做了哪些优化
+- babel 的 preset 和 pollyfill 可以互相替代吗，为什么可以/不可以
+- babel7 相较于之前做了哪些优化
 - DOM 的事件机制，怎么阻止事件捕获
-- 常用的 ES6 语法有哪些，var 怎么实现let
-- React中的 useCallback 和 useMemo 有什么区别，什么情况下需要用 useCallback
+- 常用的 ES6 语法有哪些，var 怎么实现 let
+- React 中的 useCallback 和 useMemo 有什么区别，什么情况下需要用 useCallback
 - setState 是同步还是异步的
 - Set 的用法，用 Set 实现数组去重
 - 移动端适配方案, rem 和 em 的区别
@@ -1094,9 +1093,9 @@ devtool coverage
 - Vue 的双向绑定机制
 - React Fiber 机制
 - React Hooks 的原理
-- 编程题：输入两个数组 [1,2,3,2,1], [3,2,1,4,7]  返回公共的并且长度最长子数组的长度
+- 编程题：输入两个数组 [1,2,3,2,1], [3,2,1,4,7] 返回公共的并且长度最长子数组的长度
 - 大文件的分片上传和断点续传怎么做的
-- 抖音APP 与 H5 如何通信
+- 抖音 APP 与 H5 如何通信
 - 如何针对性能指标做优化，有没有了解过业界的性能指标统计方式
 - less-loader 的 less 转成 css 的底层原理
 - webpack 常用插件
@@ -1112,40 +1111,34 @@ devtool coverage
 - 移动端布局方案
 - H5 开发时遇到了哪些问题，怎么定位的
 - requestAnimationFram 与 requestIdleCallback 的区别
-- npm管理痛点，如何解决
-- gitflow流程、分支管理
-- 编程题：设计一个flat函数将如下数组arr=[1,2,['3',4,'5',[6,[7,8],9]]]输出为1,2,'3',4,'5',6,7,8,9。至少写出两种方法,要求不能改变数组中的原始数据类型
+- npm 管理痛点，如何解决
+- gitflow 流程、分支管理
+- 编程题：设计一个 flat 函数将如下数组 arr=[1,2,['3',4,'5',[6,[7,8],9]]]输出为 1,2,'3',4,'5',6,7,8,9。至少写出两种方法,要求不能改变数组中的原始数据类型
 - 对称加密和非对称加密的使用场景
 - script 标签里分别设置 defer 和 async， 它们的执行顺序是怎么样的
 - 解释下浏览器的同源策略
 - React diff 节点移动的具体过程
 - 重排与重绘，怎么减少重排
 
-
-
-
-项目重构前是什么状态 部门内第一个是使用组合式模式开发落地的项目，由于前期不熟悉缺乏经验。导致项目数据流动混乱、功能杂糅、请求相互依赖，不但没有突出组合式逻辑清晰代码复用的优点，反而导致代码可维护性差，白屏时间长。通过梳理逻辑功能，重新组织页面、组件，按照单一原则抽离hook，解耦无关逻辑。梳理数据流动，无关请求并行触发。提升代码可维护性，加快首屏渲染。
-
+项目重构前是什么状态 部门内第一个是使用组合式模式开发落地的项目，由于前期不熟悉缺乏经验。导致项目数据流动混乱、功能杂糅、请求相互依赖，不但没有突出组合式逻辑清晰代码复用的优点，反而导致代码可维护性差，白屏时间长。通过梳理逻辑功能，重新组织页面、组件，按照单一原则抽离 hook，解耦无关逻辑。梳理数据流动，无关请求并行触发。提升代码可维护性，加快首屏渲染。
 
 - react
+
   - render => (vdom) => reconcile => (fiber) => commit => (dom)
   - hooks
     - hooks 的实现原理其实不复杂，就是在某个上下文中存放一个链表，然后 hooks api 从链表不同的元素上访问对应的数据来完成各自的逻辑。这个上下文可以是 vdom、fiber 甚至是全局变量。
 
-
 - 网络安全
+
   - SYN 泛洪攻击：攻击者不回应 ACK 包（第三次握手不进行）
 
-
 - 代理层
+
   - 防火墙
   - 负载均衡
   - 资源缓存
-
-
 
 - ES6
   - 迭代器
   - 解构赋值
   - 集合
-

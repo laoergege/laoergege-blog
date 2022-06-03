@@ -39,6 +39,8 @@ export default {
           "python",
           "jsx",
           "vue",
+          "shell",
+          "toml",
         ],
         theme: "github-light",
       },

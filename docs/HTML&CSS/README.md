@@ -4,7 +4,7 @@
     - @rules
     - CSS 选择器及优先级
       ![图 2](./images/1649916559745.png)  
-      ```txt
+      ```
       1. !important 会覆盖页面内任何位置的元素样式
       1.内联样式，如 style="color: green"，权值为 1000
       2.ID 选择器，如#app，权值为 0100
