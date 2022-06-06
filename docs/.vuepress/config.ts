@@ -1,4 +1,5 @@
 import path from "path";
+import theme from "./theme";
 import { webpackBundler } from "@vuepress/bundler-webpack";
 // import { viteBundler } from "@vuepress/bundler-vite";
 
@@ -22,8 +23,7 @@ export default {
   templateBuild: path.resolve(__dirname, "templates/index.ssr.html"),
 
   // 主题
-  theme: path.resolve(__dirname, "theme"),
-  themeConfig: {},
+  theme,
 
   // 打包
   bundler: webpackBundler({

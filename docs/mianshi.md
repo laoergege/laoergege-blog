@@ -106,7 +106,7 @@
       - 隐式转换，运算符会自动触发类型转换，如 `+'123'`
         - 类型转换规则  
           在 JS 中类型转换情况：toNumber 、 toString 、 toBoolean、toObject
-          ![图 11](./images/1642863972248.png)
+          ![图 11](./JavaScript/images/1642863972248.png)
           - StringToNumber
             - Number
             - parseInt
@@ -258,6 +258,7 @@
       - ![图 21](./images/1646032737911.png)
     - [ ] 异步代码执行顺序
       - promise.then
+      - await
     - [x] async、await 的实现原理
       - ![图 1](./images/1654184267629.png)  
     - [x] 为什么微任务
@@ -556,10 +557,10 @@
     - “HPACK”
     - 浏览器和服务器会维护一个相同的静态表和一个动态表，以及内置一个静态霍夫曼编码表
       1. 静态表存储的是常见的一些头部，和一些很常见的头部键值对
-         ![图 27](./images/1649176543339.png)
+         ![图 27](./HTTP/images/1649176543339.png)
       2. 动态表初始为空，添加在静态表后面，结构相同
       3. 请求、响应头部中对于静态表里未出现过的字段或者对应值则经过哈夫曼压缩编码发送之后，客户端和服务器更新自己的动态表；对应已有的则只需发送索引值
-         ![图 26](./images/1649175617174.png)
+         ![图 26](./HTTP/images/1649175617174.png)
   - [x] options 方法的作用
     - 要求服务器列出可对资源实行的操作方法，在响应头 Allow 字段里返回,比如有的资源只支持 get，有的只支持 post/delete。
     - cors
@@ -706,7 +707,7 @@
       - ref .value 问题，最好变量命名 xxxRef 后缀
     - [x] vue 的 data 为什么要用函数返回一个对象？
       - 多个组件实例会共享 data 数据
-    - [x] MVC 与 MVVM的区别
+    - [x] MVC 与 MVVM 的区别
       - Model 层代表数据模型，View 代表 UI 组件，ViewModel 是 View 和 Model 层的桥梁，数据会绑定到 viewModel 层并自动将数据渲染到页面中，视图变化的时候会通知 viewModel 层更新数据。
     - vue 性能优化
       - 不需要响应式的数据不要放到 data 中，或者可以用 Object.freeze() 冻结数据
@@ -1071,8 +1072,8 @@ webpack 原理、热更新原理、动态加载原理、常见 plugins、loader�
 什么情况下能使元素获得自己的层？虽然 Chrome 的启发式方法(heuristic)随着时间在不断发展进步，但是从目前来说，满足以下任意情况便会创建层：
 
 3D 或透视变换(perspective transform) CSS 属性
-使用加速视频解码的 <video> 元素
-拥有 3D (WebGL) 上下文或加速的 2D 上下文的 <canvas> 元素
+使用加速视频解码的 `<video>` 元素
+拥有 3D (WebGL) 上下文或加速的 2D 上下文的 `<canvas>` 元素
 混合插件(如 Flash)
 对自己的 opacity 做 CSS 动画或使用一个动画变换的元素
 拥有加速 CSS 过滤器的元素

@@ -1,21 +1,21 @@
-//:docs:dev: cache hit, replaying output [2mbfacc0880acaab39[0m
+//:docs:dev: cache hit, replaying output [2md7278fb55a386299[0m
 [35m//:docs:dev: [0m
 [35m//:docs:dev: [0m> laoergege-blog@1.0.0 docs:dev /Users/lianyuansheng/GitHub/laoergege-blog
 [35m//:docs:dev: [0m> vuepress dev docs
 [35m//:docs:dev: [0m
-[35m//:docs:dev: [0mnode:internal/errors:464
-[35m//:docs:dev: [0m    ErrorCaptureStackTrace(err);
-[35m//:docs:dev: [0m    ^
-[35m//:docs:dev: [0m
-[35m//:docs:dev: [0mError [ERR_MODULE_NOT_FOUND]: Cannot find package 'docs' imported from /Users/lianyuansheng/GitHub/laoergege-blog/index.mjs
-[35m//:docs:dev: [0m    at new NodeError (node:internal/errors:371:5)
-[35m//:docs:dev: [0m    at packageResolve (node:internal/modules/esm/resolve:930:9)
-[35m//:docs:dev: [0m    at moduleResolve (node:internal/modules/esm/resolve:976:18)
-[35m//:docs:dev: [0m    at defaultResolve (node:internal/modules/esm/resolve:1078:11)
-[35m//:docs:dev: [0m    at ESMLoader.resolve (node:internal/modules/esm/loader:530:30)
-[35m//:docs:dev: [0m    at ESMLoader.getModuleJob (node:internal/modules/esm/loader:251:18)
-[35m//:docs:dev: [0m    at ModuleWrap.<anonymous> (node:internal/modules/esm/module_job:79:40)
-[35m//:docs:dev: [0m    at link (node:internal/modules/esm/module_job:78:36) {
-[35m//:docs:dev: [0m  code: 'ERR_MODULE_NOT_FOUND'
-[35m//:docs:dev: [0m}
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0mwarning an anonymous plugin or theme was detected and ignored
+[35m//:docs:dev: [0minfo Initializing VuePress and preparing data...
+[35m//:docs:dev: [0merror error in hook onInitialized from pages-plugin
+[35m//:docs:dev: [0mundefined
 [35m//:docs:dev: [0m ELIFECYCLE  Command failed with exit code 1.

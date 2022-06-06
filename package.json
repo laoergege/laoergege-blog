@@ -42,7 +42,8 @@
     "chalk": "^4.1.2",
     "consola": "^2.15.3",
     "daisyui": "2.8.0",
-    "laoergege-blog": "link:"
+    "laoergege-blog": "link:",
+    "vue": "^3.2.36"
   },
   "devDependencies": {
     "@types/node": "*",

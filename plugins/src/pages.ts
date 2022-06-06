@@ -23,11 +23,10 @@ export const PagesPlugin: PagesPlugin = function ({
   render,
 }) {
   return {
-    name: "pages-plugin",
+    name: "vuepress-plugin-pages",
     define: {
       __TABLE_KEYS__: keys,
     },
-    extendsPage() {},
     async onInitialized(app) {
       // @vuepress/plugin-git 依赖提示
       if (!isExistPlugin("@vuepress/plugin-git", app)) {

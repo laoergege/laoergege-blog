@@ -1,6 +1,6 @@
 ---
 release: true
-top: 3
+top: 2
 tags:
  - javascript
  - 异步
@@ -10,17 +10,21 @@ tags:
 # JavaScript 异步编程
 
 - JavaScript 异步编程
-  - [异步编程](#何为异步编程)
+  - [何为异步编程](#何为异步编程)
   - JavaScript 的执行环境：事件循环与消息队列
   - JavaScript 异步编程范式
-    - 异步回调
+    - 回调
     - 发布订阅模式
     - Promise
-    - 函数响应式编程
     - Generator & co
     - Async/Await
+    - 函数响应式编程
 
 ## 何为异步编程
+
+不太喜欢网上有人把异步调用模型当作异步编程来说明：当某一代码执行异步过程调用发出后，这段代码不会立刻得到返回结果。而是在异步调用发出之后，一般通过回调函数处理这个调用之后拿到结果。异步调用发出后，不会影响阻塞后面的代码执行。
+
+这种异步调用模型算是异步编程的一种实现形式，但我更偏向广义去了解解释何为异步编程...
 
 同步/异步是一种术语在不同场景下有不同层面的意思。个人觉得比较广义的说法，同步/异步关注的是事物之间的行为模式、协作关系：一个事物的发生必须等待另一事物的结果，这就是同步，反之亦是异步，说明事物之间没有因果顺序关系，是独立性的。
 
@@ -53,7 +57,7 @@ tags:
 
 > 协作式的核心是“主动”协调：我不放弃执行权，任何人不能强制我休眠；我做完了自己的工作，那就一定要主动放弃执行权，方便其它人使用CPU工作。
 
-总结来说，异步编程是一种并发编程模型，**任务只有具备异步特性才能并发执行**，但保证单个事务的连续性（代码是可异步执行，但业务逻辑必须是同步关系）是编程中**异步处理**的关键解决之道。
+总结来说，异步编程是一种并发编程模型，**任务只有具备异步特性才能被并发执行**，但保证单个事务的连续性（代码是可异步执行，但业务逻辑必须是同步关系）是编程中**异步处理**的关键解决之道。
 
 接下来，我们来看看 JavaScript 异步编程中的异步运行时和编程范式。
 
@@ -72,24 +76,28 @@ JS 任务主要是单线程同步执行，对于异步任务的实现主要是�
       - 回调地狱
       - 分流结果处理：每种任务的处理结果存在两种可能性（成功或失败），那么需要在每种任务执行结束后分别处理这两种可能性
   - 发布订阅模式：发布订阅模式解决了回调地狱的问题，但逻辑碎片化的问题没有解决
+    - [手写 EventEmitter 实现](https://github.com/laoergege/laoergege-blog/issues/84)
   - [Promise](#promise)
   - Generator & co
-  - Async/Await
+  - [Async/Await](#asyncawait-实现原理)
   - 函数响应式编程：是一种发布订阅模式和迭代模式的结合，
 
 ### Promise
 
-Promise 通过链式调用的写法解决了回调地狱的问题，并且保证了相关逻辑线型内聚，更符合人的线性思维模式，提高了一定的可读性。
+Promise 通过链式调用的写法解决了回调地狱的问题，并且保证了相关逻辑线型内聚写在一起，更符合人的思维模式，提高了一定的可读性。
 
-Promise 是一种数据结构，本质可以看作是状态机和观察者模式结合。
+Promise 代表着一种未来的承诺，本质是一种数据结构，可以看作是状态机和观察者模式结合。
+
+> [Promises/A+ 链接地址](https://promisesaplus.com/)
 
 - Promise 实例
-  - state  ![图 2](images/1654329152719.png)  
+  - state  ![图 2](./images/1654329152719.png)  
     - pending
     - fulfilled
     - rejected
   - value
-  - reason
+  - "reason", is a value that indicates why a promise was `rejected`.
+  - "exception", is a value that is thrown using the `throw` statement.
   - then：接受两个参数，一个是成功时回调，另一个是失败时的回调，两者都是可选的
     - 链式调用
     - 延迟绑定
@@ -101,15 +109,21 @@ Promise 是一种数据结构，本质可以看作是状态机和观察者模式
 - Promise 静态方法
   - resolve
   - reject
-  - all：返回所有状态成功的 Promise，否则返回失败的 Promise
+  - all：返回所有状态成功的 Promises，否则返回失败的 Promises
   - allSettled：所有的 Promise 状态完成就返回，不管其是否处理成功
-  - any：接收一个Promise对象的集合，返回状态优先成功的 Promise，否则返回全部失败结果
-  - race：接收一个Promise对象的集合，返回状态优先完成的 Promise
+  - any：接收一个 Promise 对象的集合，返回状态优先成功的 Promise，否则返回全部失败结果
+  - race：接收一个Promise 对象的集合，返回状态优先完成的 Promise
 
+通过手写实现 Promise、异步顺序考点去更好了解 Promise 机制吧 😘
+
+> [100 行代码实现 Promises/A+ 规范](https://zhuanlan.zhihu.com/p/83965949)
+
+> [异步顺序考点](https://github.com/laoergege/laoergege-blog/issues/81)
+
+### Async/Await 实现原理
 
 协程本质上和单线程+状态机是等价的，只是用协程的话，协程负责来保存状态，开发起来方便些。
 
-### Async/Await 实现原理
 
 Async/Await 其实只是语法糖，通过编译器编译成 Generator 函数和通过 Promise 实现一个自动执行器。
 
