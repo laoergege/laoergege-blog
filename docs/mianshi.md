@@ -81,6 +81,7 @@
       - Symbel.iterator 返回一个带有 next 方法的对象，next 返回{done,value}
       - Object.keys/values/entries
   - 变量&类型
+    - [ ] 迭代器有了解吗，哪些是可迭代的
     - [x] 变量交换
       - 解构
       - 位运算：异或
@@ -94,6 +95,7 @@
       - Object.prototype.toString.call
         - 能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
         - Symbol.toTagString()
+    - [ ] 手写类型判断工具函数
     - [x] ==、=== 区别
       - 严格相等运算符 === 在进行比较时不会做任何的类型转换。
       - undefined 与 null 相等
@@ -166,6 +168,8 @@
         - [x] 原型链判断
           - 原型链中 Function 比较特殊的地方就是 `Function.__proto__` 指向自己的 `Function.prototype`
     - [x] 继承
+      - [ ] 继承和原型链的各种问题
+      - [ ] js中继承有哪几种，现在最常用的继承是什么，Babel转换 Class是转换成什么继承的方法。
       - 原型继承:通过原型链实现继承，具体是修改对象的原型设置为另外一个对象
       - 主要是基于原型链的继承（原型代理）：通过**借用构造函数**实现独享数据属性，通过**原型链**继承共享方法属性
       - 原型继承  
@@ -246,12 +250,12 @@
       - 箭头函数（执行上下文没有 this，依靠作用域链继承外层作用域的 this）
   - 异步编程
     - [x] 手写 Promise
-      - [x] promise 哪些方法是原型上的，哪些方法是实例上的
-        - 3: then、catch、finally
-        - 6: resolve、reject、all、allSettled、race、any
-        - 扩展思考:如何取消 promise:Promise.race()方法可以用来竞争 Promise 可以借助这个特性 自己包装一个 空的 Promise 与要发起的 Promise 来实现
-      - [x] Promise.all 原理：计数器模式
-        - ![图 21](./images/1646032737911.png)
+    - [x] promise 哪些方法是原型上的，哪些方法是实例上的
+      - 实例: then、catch、finally
+      - 原型: resolve、reject、all、allSettled、race、any
+      - 扩展思考:如何取消 promise:Promise.race()方法可以用来竞争 Promise 可以借助这个特性 自己包装一个 空的 Promise 与要发起的 Promise 来实现
+    - [x] Promise.all 原理：计数器模式
+      - ![图 21](./images/1646032737911.png)
     - [ ] 异步代码执行顺序
       - promise.then
     - [x] async、await 的实现原理
@@ -430,6 +434,7 @@
   - [ ] cookie、localStorage、sessionStorage 区别以及使用场景
   - [ ] 你所知道的白屏原因，怎么优化？
   - [ ] 常见性能指标
+  - [ ] 前端监控
 - 工程
   - webpack
     - [x] webpack 有用过哪些 loader
@@ -459,10 +464,11 @@
     - Webpack 了解多少
       1. webapck 的四个核心概念，并介绍一些其他的模块，例如 mode，依赖图的概念等等。
       2. 介绍几个 webpack 的插件，如压缩 gzip、如何处理 dev 中的 console.log 的模块等等
-    - loader、plugin 区别
+    - [ ] loader、plugin 区别
       - loader 主要是对源文件进行转换处理
       - plugin 可以用来监听 webpack 构建生命周期，做一些操作，去扩展 webpack 功能
       - loader 本质是一个函数，plugin 本质是一个类，
+    - [ ] 怎么实现loader，plugin
     - extenral 通过 extenrals 选项，可以将依赖从输出的 bundle 中移除，并保持资源引入
     - loader 执行顺序
       - 从右往左
@@ -472,6 +478,8 @@
     - [ ] 热更新原理
     - [ ] 树摇原理
       - 它与 CommonJS 规范最大的区别在 ES6 中的 import 和 export 都是静态的。静态意味着一个模块要暴露或引入的所有方法在编译阶段就全部确定了，之后不能再改变。
+    - [ ] webpack 构建优化
+    - [ ] Webpack 构建流程
   - CI/CD
     - Docker
       - [x] Docker 容器化带来的好处
@@ -480,7 +488,9 @@
         - 跨平台性与镜像
   - babel
     - js 编译器
-    - 解析成 ast、转化、生成
+    - preset-env + corejs
+    - [ ] Babel 的处理流程
+      - 解析成 ast、转化、生成
   - [ ] tree-shaking 原理？
     - 通过 ES Module 做静态分析，删除未使用的代码
     - 利用 ES Module 做静态分析，通过分析 ast 语法树，对每个模块维护了一个作用域，收集模块内部使用的变量，然后分析作用域，将 import 进来未被使用的模块删除，最后递归处理文件。
@@ -635,6 +645,7 @@
       - 504：网关超时
 - 框架 vue
   - 原理
+    - [ ] Compisition API 实现原理
     - [x] 什么是虚拟 DOM，以及为什么
       - 本质描述真实 DOM 的 javascript 对象
       - 抽象视图，跨平台化
@@ -676,6 +687,7 @@
       - vue2 会根据环境、采用不同的降级方案使用系统异步 API，而 vue3 直接使用 Promise
         - Promise.then、MutationObserver 和 setImmediate、messagechannel，如果执行环境不支持，则会采用 setTimeout(fn, 0)
   - API
+    - [ ] keep-alive 原理
     - [ ] computed 实现原理
     - [x] computed、watch 对比区别
       - computed 计算属性，主要是基于其他响应式依赖**缓存计算结果**，只有当依赖发生变化才会需要重新计算；computed 是延迟计算的，只有被访问时才真正执行计算。computed 常用于模板渲染中。
@@ -687,12 +699,14 @@
         - reactive 是通过 proxy 实现
         - ref 依然是靠 object.defineProperty 的 get 与 set 完成的，如果 ref 接收不是一个基础类型则转换成 reactive 支持，如果直接通过 reactive 支持，则需要多创建一个 Map 对象
   - 其他
+    - [ ] 组件设计原则
+    - [ ] Vue2、Vue3有什么区别
     - [ ] vue3 项目实践过程问题
       - setup 臃肿，以前对象配置写法逻辑按功能分类，现在 setup 写法，按逻辑组织
       - ref .value 问题，最好变量命名 xxxRef 后缀
     - [x] vue 的 data 为什么要用函数返回一个对象？
       - 多个组件实例会共享 data 数据
-    - [x] 简述 mvvm
+    - [x] MVC 与 MVVM的区别
       - Model 层代表数据模型，View 代表 UI 组件，ViewModel 是 View 和 Model 层的桥梁，数据会绑定到 viewModel 层并自动将数据渲染到页面中，视图变化的时候会通知 viewModel 层更新数据。
     - vue 性能优化
       - 不需要响应式的数据不要放到 data 中，或者可以用 Object.freeze() 冻结数据
@@ -746,6 +760,7 @@
     - 作用于插槽
       - 伏组件可以拿到自组建传递的数据
   - SSR
+    - [ ] SSR 原理
     - SSR 也就是服务端渲染，在服务端完成 vue 渲染，直接对客户端输出 html
     - SSR 有着更好的 SEO、并且首屏加载速度更快
     - 缺点：开发条件会受到限制，写代码时注意 API 运行环境：比如服务器端渲染只支持 beforeCreate 和 created 两个钩子
@@ -755,6 +770,9 @@
     - state、getter、mutations、action、module
       - mutations 是唯一更改 store 中状态的方法且必须是同步
       - action 可执行异步逻辑，提交 mutations
+  - Vite
+    - [ ] 原理
+    - [ ] webpack 和 Vite 和 Rollup 有啥区别
   - vue-router
     - [x] hash 模式和 history 模式实现原理分别是什么
       - hash
@@ -871,6 +889,11 @@
 - 微前端？
   - 场景：老项目技术栈升级兼容维护难、多种技术栈混合场景
 - [ ] 工作中遇到的具有挑战的事情
+- [ ] 自己做过的项目中有那些是你值得说的
+- [ ] 开发流程一般都是怎么做的
+- 项目
+  - 人事业务系统、人事H5
+  - 转介绍、校友录、服务号
 - 技术复盘
   - 创建项目模板(用于快速生成新项目的目录模板，并集成一系列体系化工具的安装，能够提升前端开发人员的效率，减少 copy 操作)，参考 vue-cli 交互及设计思路
   - 日常的业务开发中不局限于完成功能，是否有去思考项目结构如何设计，如何封装基础工具，基础组件如何设计、开发、共享
@@ -1142,3 +1165,20 @@ devtool coverage
   - 迭代器
   - 解构赋值
   - 集合
+
+
+工作经历
+    2015年7月~2016年1月，实习于东方海外（OOCL），参与AngularJS、Node.js开发。
+    2016年3月~2018年4月，就职于科大讯飞教育业务部门，承担多个系统前后端开发工作，包括服务端（Java SSM、ASP.Net MVC、Node.js & MySQL、Oracle、MongoDB）, 客户端C++, C# (WinForm/WPF/CEF), NW.js, 以及前端AngularJS、Vue的开发。期间负责的其中两个系统服务端的性能优化工作，关键业务性能提升近十倍。
+    2018年4月后，入职软视软件（ZOOM），参与会议室相关的业务开发：
+        2018年，解决了某重量级Node.js系统的多个可用性及性能问题：CPU占用率过高，进程Crash，内存泄漏，缓存，限流，负载均衡等等。并用Typescript和RxJS对其中一个实时通信组件重写；
+        2018年11月左右，开始参与后端业务拆分和微服务化转型，主导云原生DevOps方案落地，包括构建Kubernetes集群，Prometheus监控告警平台，SpringCloud项目的CI/CD流水线，Docker基础镜像以及容器编排等，同时构建并标准化了新的前后端分离Vue项目的CI/CD流程。
+        2019年5月开始，负责其中一个子业务进行SpringCloud微服务化重构，包括前端和后台开发，新旧系统间数据同步和迁移，基础公共组件的开发等等。
+关于我
+    2016年本科毕业于南京大学软件工程专业，长期参与一线开发工作，喜欢尝试新技术，读源码思考原理。JS/TS的前后端开发比较熟练，对Node.js有一些理解；在云原生技术栈方面，对Golang、Kubernetes、Service Mesh等技术略知一二，在DevOps领域有一些实践和理解；Java技术栈工作使用较多，相对熟练。业余时间喜欢捯饬单片机和单板计算机，学习探索物联网领域。
+发布有技术类微信公众号 "Anti丨Entropy"，我所理解的生命的意义即 —— 制造反熵（Anti-Entropy
+
+
++ 私有化定制化交付
+    + 多分支开发
+    + 基于功能清单配置

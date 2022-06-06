@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Laoergege's Learning Track",
   "packageManager": "pnpm@6.32.2",
-  "main": "index.js",
+  "bin": {
+    "vuepress": "index.mjs"
+  },
   "scripts": {
-    "start": "pnpm run --parallel dev",
-    "dev": "vuepress dev docs",
+    "dev": "turbo run docs:dev",
+    "docs:dev": "vuepress dev docs",
     "docs:build": "pnpm run -r --workspace-root build",
     "build": "vuepress build docs",
     "publish": "git tag page -f && git push origin page -f",
@@ -34,18 +36,20 @@
   "homepage": "https://github.com/laoergege/laoergege-blog#readme",
   "dependencies": {
     "@laoergege/vuepress-plugin-blog-utils": "workspace:^1.0.0",
+    "@laoergege/vuepress-plugin-vssue-next-compat": "workspace:^1.0.0",
     "@tailwindcss/typography": "0.5.2",
     "@vssue/api-github-v3": "^1.4.7",
-    "@vuepress/theme-default": "^2.0.0-beta.46",
     "chalk": "^4.1.2",
     "consola": "^2.15.3",
     "daisyui": "2.8.0",
-    "hash-sum": "^2.0.0"
+    "laoergege-blog": "link:"
   },
   "devDependencies": {
-    "@vuepress/bundler-webpack": "^2.0.0-beta.45",
-    "@vuepress/cli": "^2.0.0-beta.45",
-    "@vuepress/client": "^2.0.0-beta.45",
+    "@types/node": "*",
+    "@vuepress/bundler-vite": "2.0.0-beta.46",
+    "@vuepress/bundler-webpack": "^2.0.0-beta.46",
+    "@vuepress/cli": "^2.0.0-beta.46",
+    "@vuepress/client": "^2.0.0-beta.46",
     "@vuepress/core": "^2.0.0-beta.46",
     "@vuepress/plugin-active-header-links": "^2.0.0-beta.46",
     "@vuepress/plugin-back-to-top": "^2.0.0-beta.46",
@@ -66,6 +70,7 @@
     "sass": "^1.52.1",
     "sass-loader": "^12.6.0",
     "tailwindcss": "^3.0.24",
+    "turbo": "^1.2.15",
     "typescript": "^4.7.2",
     "webpack": "^5.72.1",
     "zx": "^4.3.0"

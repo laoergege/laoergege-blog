@@ -1,0 +1,19 @@
+{
+  "name": "@laoergege/vuepress-plugin-vssue-next-compat",
+  "version": "1.0.0",
+  "description": "the compat version of vuepress-plugin-vssue for vuepress-next",
+  "main": "lib/index.js",
+  "types": "types",
+  "scripts": {
+    "dev": "tsc -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "systemjs": "^6.11.0",
+    "vssue": "^1.4.8"
+  },
+  "devDependencies": {
+    "@types/systemjs": "^6.1.1"
+  }
+}

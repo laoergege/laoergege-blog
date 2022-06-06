@@ -1,11 +1,20 @@
 # Vue 应用的业务开发架构
 
-- 数据层：Service + Store/Model + IOC + Context
+## 分层架构
+- MVC
+  - Model = 数据 + 业务逻辑
+  - 通过 Control 解耦 Model 与 View 
+
+- 数据层：
+  - Service + Store/Model + IOC + Context
   - Servcie = Store + API
 - 逻辑层：组件化 => 应用逻辑拆分、复用
 - 视图层
-  - 视图逻辑抽象 => Virtual-DOM
-  - `UI is a calculation` => `UI = f(state)` => `不应该参杂副作用 useEffect` 、`组合模式、参考函数式编程`
+  - 视图逻辑抽象 => VirtualDOM
+  - UI is a calculation
+  - UI = f(state)
+  - 不应该参杂副作用 useEffect
+  - 组合模式、参考函数式编程
 - 底层渲染层：dom + css
 
 ## 状态

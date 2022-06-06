@@ -1,7 +1,6 @@
 import path from "path";
-import type { ThemeConfig } from "@vuepress/core";
-
-// const PUBLIC_PATH = "https://laoergege/";
+import { webpackBundler } from "@vuepress/bundler-webpack";
+// import { viteBundler } from "@vuepress/bundler-vite";
 
 export default {
   // 站点信息配置
@@ -27,19 +26,12 @@ export default {
   themeConfig: {},
 
   // 打包
-  bundler: "@vuepress/bundler-webpack",
-  bundlerConfig: {
-    // chainWebpack() {
-    //   return process.env.NODE_ENV === "development" ? {} : {
-    //     output: {
-    //       publicPath:
-    //     }
-    //   }
-    // },
+  bundler: webpackBundler({
     postcss: {
       postcssOptions: {
         plugins: [require("autoprefixer"), require("tailwindcss")],
       },
     },
-  },
-} as ThemeConfig;
+  }),
+  // bundler: viteBundler(),
+};

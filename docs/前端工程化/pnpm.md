@@ -4,7 +4,7 @@ top: 4
 tags:
   - pnpm
   - 包管理
-desc: pnpm 知识汇总
+desc: 探究 pnpm 依赖管理原理与 monorepo 的方案
 ---
 
 # pnpm
@@ -88,21 +88,22 @@ public-hoist-pattern[]=*eslint*
 
 - Monorepo 设计需求要点
   - 项目管理
+    - 项目创建
     - 项目间引用约束
-  - 包管理
+  - 依赖管理
     - 工程依赖
-    - 项目依赖（可切换）
+    - 项目依赖关联（可切换）
       - 本地 link 模式
       - 线上版本模式
-  - 任务编排
-    - 拓扑排序：根据项目依赖关系，构建一个有向无环图（DAG）进行拓扑排序并执行过程
-    - 过滤
-    - 并行
-    - 增量
-    - 分布式
-  - 构建
-    - 构建缓存
-    - 产物缓存，动态链接 DLL
+  - 任务管理
+    - 编排
+      - 拓扑排序：根据项目依赖关系，构建一个有向无环图（DAG）进行拓扑排序并执行过程
+      - 过滤
+      - 并行
+      - 增量
+    - 构建
+      - 构建缓存
+      - 分布式缓存
   - 发包
     - 版本管理 version
       - 版本更新
@@ -117,8 +118,15 @@ public-hoist-pattern[]=*eslint*
   - Turborepo
   - Nx
 - 流行组合方案
-  - pnpm + rush
-  - pnpm（依赖管理） + Turborepo（构建管理） + changeset（发包管理）
+  - pnpm（依赖管理 + 任务管理） + changeset
+  - pnpm（依赖管理）+ rush（任务管理 + 任务管理）
+  - pnpm（依赖管理）+ Turborepo（任务管理） + changeset（发包管理）
+
+### pnpm + turborepo + changeset
+
+- 项目创建
+- 依赖关联
+  - pnpm：默认情况下，如果可用的 packages 与已声明的可用范围相匹配，pnpm 将从工作区链接这些 packages
 
 ## 参考阅读
 

@@ -1,9 +1,10 @@
 import path from "path";
 import {
-  vssuePlugin,
-  docRelease,
-  pageTables,
+  ReleasePlugin,
+  PagesPlugin,
 } from "@laoergege/vuepress-plugin-blog-utils";
+import { VssuePlugin } from "@laoergege/vuepress-plugin-vssue-next-compat";
+import { ThemeObject } from "@vuepress/core";
 
 export default {
   name: "my-theme",
@@ -61,7 +62,7 @@ export default {
       },
     ],
     [
-      vssuePlugin,
+      VssuePlugin,
       {
         platform: "github",
         owner: "laoergege",
@@ -72,12 +73,12 @@ export default {
         prefix: [""],
       },
     ],
-    docRelease,
+    ReleasePlugin,
     [
-      pageTables,
+      PagesPlugin,
       {
         exclude: "**/README.md",
-        render(page) {
+        render(page: any) {
           return `<ListItem title="${page.title}" routeKey="${
             page.key
           }" tags='${page.frontmatter.tags.toString()}' desc="${
@@ -87,4 +88,4 @@ export default {
       },
     ],
   ],
-};
+} as ThemeObject;
