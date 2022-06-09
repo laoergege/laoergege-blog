@@ -42,15 +42,17 @@ desc: 系统化前端工程相关
         - 幽灵依赖 
           - [dependency-check](https://github.com/dependency-check-team/dependency-check)
       - 环境锁定
-        - node
-          - 版本管理
-            - nvm
-            - pnpm env
-            - [Volta](https://docs.volta.sh/guide/)
+        - node 版本
+          - nvm
+          - pnpm env
+          - [Volta](https://docs.volta.sh/guide/)
           - package: `engines` + `.npmrc: engine-strict`
           - .npmrc: `use-node-version`
-        - 包管理：[corepack](https://github.com/nodejs/corepack)
-        - 依赖锁定：lockfile
+        - 包管理
+          - [corepack](https://github.com/nodejs/corepack)
+          - [Volta](https://docs.volta.sh/guide/)
+        - 依赖锁定
+          - lockfile
         - pkg.peerDependencies
           - 声明需要一个和宿主环境对等的包
             - 如果用户显式依赖了核心库，则可以忽略各插件的 peerDependency 声明；
@@ -64,11 +66,10 @@ desc: 系统化前端工程相关
       - API 管理及数据模拟
       - 浏览器及 DevTools
   - 构建
-    - 缓存
-      - 构建缓存
+    - 优化
       - 增量构建
         - husky + Lint-stage
-      - 产物缓存，动态链接 DLL
+      - 依赖缓存
     - 开发模式
       - 模块化
       - 热模块替换

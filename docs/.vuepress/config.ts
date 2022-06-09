@@ -26,12 +26,6 @@ export default {
   theme,
 
   // 打包
-  bundler: webpackBundler({
-    postcss: {
-      postcssOptions: {
-        plugins: [require("autoprefixer"), require("tailwindcss")],
-      },
-    },
-  }),
+  bundler: webpackBundler(),
   // bundler: viteBundler(),
 };

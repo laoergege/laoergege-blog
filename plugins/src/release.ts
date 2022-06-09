@@ -4,11 +4,13 @@ import minimatch from "minimatch";
 export interface Options {
   glob?: string | string[]; // default README.md
 }
-export interface PagesPlugin {
-  (option: Options): PluginObject;
+export interface ReleasePlugin {
+  (option?: Options): PluginObject;
 }
 
-export const ReleasePlugin: PagesPlugin = function ({ glob = "**/README.md" }) {
+export const ReleasePlugin: ReleasePlugin = (options) => {
+  const { glob = "**/README.md" } = options ?? {};
+
   const match = (file: string) => {
     if (!glob) {
       return false;
@@ -26,7 +28,7 @@ export const ReleasePlugin: PagesPlugin = function ({ glob = "**/README.md" }) {
   };
 
   return {
-    name: "release-plugin",
+    name: "vuepress-plugin-release",
     onInitialized: (app: App) => {
       const result = [];
       for (const page of app.pages) {

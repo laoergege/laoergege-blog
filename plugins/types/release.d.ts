@@ -2,7 +2,7 @@ import type { PluginObject } from "@vuepress/core";
 export interface Options {
     glob?: string | string[];
 }
-export interface PagesPlugin {
-    (option: Options): PluginObject;
+export interface ReleasePlugin {
+    (option?: Options): PluginObject;
 }
-export declare const ReleasePlugin: PagesPlugin;
+export declare const ReleasePlugin: ReleasePlugin;

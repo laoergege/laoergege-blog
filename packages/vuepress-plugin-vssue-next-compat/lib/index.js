@@ -7,7 +7,7 @@ exports.VssuePlugin = void 0;
 var path_1 = __importDefault(require("path"));
 var VssuePlugin = function (options) {
     var _a;
-    var platform = ((_a = options.platform) !== null && _a !== void 0 ? _a : (options.platform = "github"));
+    var platform = (_a = options === null || options === void 0 ? void 0 : options.platform) !== null && _a !== void 0 ? _a : "github";
     var platformAPI = {
         github: "@vssue/api-github-v3",
         "github-v4": "@vssue/api-github-v4",
@@ -26,8 +26,8 @@ var VssuePlugin = function (options) {
         throw new Error("[@vssue/vuepress-plugin-vssue] ".concat(apiPkg, " is not installed. Run 'npm install ").concat(apiPkg, "' or 'yarn add ").concat(apiPkg, "' to install it."));
     }
     return {
-        name: "vssue-next-compat-plugin",
-        clientConfigFile: path_1.default.resolve(__dirname, "clientConfigFile.ts"),
+        name: "vuepress-plugin-vssue-next-compat",
+        clientConfigFile: path_1.default.resolve(__dirname, "clientConfigFile.js"),
         define: {
             __VSSUE_OPTIONS__: options,
         },

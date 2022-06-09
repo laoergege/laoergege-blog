@@ -1,9 +1,5 @@
-@laoergege/vuepress-plugin-blog-utils:dev: cache hit, replaying output [2m630f946a293ea303[0m
-[32m@laoergege/vuepress-plugin-blog-utils:dev: [0m
-[32m@laoergege/vuepress-plugin-blog-utils:dev: [0m> @laoergege/vuepress-plugin-blog-utils@1.0.0 dev /Users/lianyuansheng/GitHub/laoergege-blog/plugins
-[32m@laoergege/vuepress-plugin-blog-utils:dev: [0m> tsc -w && echo 123
-[32m@laoergege/vuepress-plugin-blog-utils:dev: [0m
-[32m@laoergege/vuepress-plugin-blog-utils:dev: [0mc23:09:34 - Starting compilation in watch mode...
-[32m@laoergege/vuepress-plugin-blog-utils:dev: [0m
-[32m@laoergege/vuepress-plugin-blog-utils:dev: [0m
-[32m@laoergege/vuepress-plugin-blog-utils:dev: [0m23:09:38 - Found 0 errors. Watching for file changes.
+@laoergege/vuepress-plugin-blog-utils:dev: cache hit, replaying output [2m6c68f97f253d7e81[0m
+[33m@laoergege/vuepress-plugin-blog-utils:dev: [0m
+[33m@laoergege/vuepress-plugin-blog-utils:dev: [0m> @laoergege/vuepress-plugin-blog-utils@1.0.0 dev /Users/lianyuansheng/GitHub/laoergege-blog/plugins
+[33m@laoergege/vuepress-plugin-blog-utils:dev: [0m> tsc
+[33m@laoergege/vuepress-plugin-blog-utils:dev: [0m

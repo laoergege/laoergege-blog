@@ -254,13 +254,19 @@
       - 实例: then、catch、finally
       - 原型: resolve、reject、all、allSettled、race、any
       - 扩展思考:如何取消 promise:Promise.race()方法可以用来竞争 Promise 可以借助这个特性 自己包装一个 空的 Promise 与要发起的 Promise 来实现
-    - [x] Promise.all 原理：计数器模式
-      - ![图 21](./images/1646032737911.png)
-    - [ ] 异步代码执行顺序
+    - [x] Promise.all 原理：计数器模式  ![图 21](./images/1646032737911.png)
+    - [x] 实现并发限制  ![图 2](./images/1654685954833.png)  
+    - [ ] p-reduce
+    - [ ] p-waterfall
+    - [ ] p-series
+    - [x] 异步代码执行顺序
+      - 事件循环模型
+      - await => Promise.resolve
       - promise.then
-      - await
     - [x] async、await 的实现原理
-      - ![图 1](./images/1654184267629.png)  
+      - Async/Await 其实只是语法糖，本质上类似 Generator & co 的方案，总的来说：通过编译器编译成生成器函数和实现一个通过 promise.then 不断调 generator.next 方法的自动执行器。
+      - value 用 Promise.resolve(value) 包装
+      - ![图 1](images/1654624039804.png)  
     - [x] 为什么微任务
       - 微任务优先级比红任务高
       - 执行下一个红任务前必须清空所有微任务
@@ -762,9 +768,12 @@
       - 伏组件可以拿到自组建传递的数据
   - SSR
     - [ ] SSR 原理
+    - [ ] SSR介绍：什么是 SSR、为什么 SSR、SSR 缺点
+      - 优点
+        - 有利于SEO
+        - 首屏加载速度更快
     - SSR 也就是服务端渲染，在服务端完成 vue 渲染，直接对客户端输出 html
-    - SSR 有着更好的 SEO、并且首屏加载速度更快
-    - 缺点：开发条件会受到限制，写代码时注意 API 运行环境：比如服务器端渲染只支持 beforeCreate 和 created 两个钩子
+      - 缺点：开发条件会受到限制，写代码时注意 API 运行环境：比如服务器端渲染只支持 beforeCreate 和 created 两个钩子
       - 服务器有更大的负载、运维需求
   - vuex
     - vuex 是专门为 vue 提供的全局状态管理系统
@@ -885,16 +894,18 @@
   断言
   泛型
 
-## 项目复盘
+## 其他
 
-- 微前端？
-  - 场景：老项目技术栈升级兼容维护难、多种技术栈混合场景
 - [ ] 工作中遇到的具有挑战的事情
 - [ ] 自己做过的项目中有那些是你值得说的
 - [ ] 开发流程一般都是怎么做的
+
+## 项目复盘
+
 - 项目
-  - 人事业务系统、人事H5
+  - 人事系统、人事H5、活动H5
   - 转介绍、校友录、服务号
+  - 食堂、订阅系统
 - 技术复盘
   - 创建项目模板(用于快速生成新项目的目录模板，并集成一系列体系化工具的安装，能够提升前端开发人员的效率，减少 copy 操作)，参考 vue-cli 交互及设计思路
   - 日常的业务开发中不局限于完成功能，是否有去思考项目结构如何设计，如何封装基础工具，基础组件如何设计、开发、共享
@@ -903,6 +914,13 @@
     - gitlab + docker 自动部署方案
       - docker 环境隔离
     - jtest
+    - 接入 eslint、prettier 等代码检验、风格统一的插件
+    - 本地开发的提效，如何去进行 webpack 构建的优化，最近社区 esbuild 很火，尝试去接入一下。vite 和 snowpack 的思路很赞，能不能在新项目中运用起来等等……
+    - 平常如果经常有多项目开发的需求，整理出差异和统一的部分，建立团队内部的脚手架避免重复劳动。
+    - 尝试搭建 CI / CD 平台，尝试搭建 npm 私服维护自己公司内部的通用包
+    - 平时常用的框架进阶一步去使用，比如它的一些高级用法是否有所掌握，有没有试着去了解它的原理实现
+    - 日常的业务开发中不局限于完成功能，是否有去思考项目结构如何设计，如何封装基础工具，基础组件如何设计、开发、共享
+    - vuepress-plugin-docgen
   - 项目性能优化
     - 虚拟列表
     - WebWorker excel 文件下载
@@ -915,8 +933,9 @@
       - JSBridge
       - 双向通讯
   - tailwindcss 方案
-  - 使用 pnpm workspaces 对项目 monorepo 管理
+  - 引进 pnpm，使用 pnpm workspaces 对项目进行 monorepo 管理
     - [x] 为什么用 pnpm
+      - npm 管理痛点，如何解决
       - 节省空间，兼容性好，相比较 yarn、npm 安全性高
       - 比如项目中可同时存在 vue2、vue3，不会产生冲突
       - pnpm workspaces 相关命令比 learn + yarn workspaces 简洁
@@ -1085,25 +1104,14 @@ cssnano
 
 devtool coverage
 
-文档
 
-- /vuepress-plugin-docgen
-- 注册
-- demo
-- table
 
-如，Webpack 是一个模块化打包工具，但它通过“万物皆模块”这种设计思想，巧妙地实现了整个前端项目的模块化，统一标准模块化处理。在 Webpack 的理念中，前端项目中的任何资源都可以作为一个模块，任何模块都可以经过 Loader 机制的处理，最终再被打包到一起
+
 
 - http - https://mp.weixin.qq.com/s/By-iXlONjSZLKFG2Xd7rpg 重复 - https://mp.weixin.qq.com/s/NfyxtWUzjHh6ucXvBF9B4Q 缓存 - https://mp.weixin.qq.com/s/E4SdYEkEzurfrnJrBu3bjA 并发下载 - https://mp.weixin.qq.com/s/8RJSBwCDTvwX3Oql31ckkg 重试 - https://mp.weixin.qq.com/s/lGqnGg-Zdnt-b7grdh9NnQ 压缩
 
-平时常用的框架进阶一步去使用，比如它的一些高级用法是否有所掌握，有没有试着去了解它的原理实现。
-日常的业务开发中不局限于完成功能，是否有去思考项目结构如何设计，如何封装基础工具，基础组件如何设计、开发、共享。
 
-在日常的业务开发中有没有去思考团队提效的方式，比如：
-接入 eslint、prettier 等代码检验、风格统一的插件。
-工程化的角度思考本地开发的提效，如何去进行 webpack 构建的优化，最近社区 esbuild 很火，尝试去接入一下。vite 和 snowpack 的思路很赞，能不能在新项目中运用起来等等……
-平常如果经常有多项目开发的需求，整理出差异和统一的部分，建立团队内部的脚手架避免重复劳动。
-尝试搭建 CI / CD 平台，尝试搭建 npm 私服维护自己公司内部的通用包。
+
 
 - babel 的 preset 和 pollyfill 可以互相替代吗，为什么可以/不可以
 - babel7 相较于之前做了哪些优化
@@ -1135,7 +1143,6 @@ devtool coverage
 - 移动端布局方案
 - H5 开发时遇到了哪些问题，怎么定位的
 - requestAnimationFram 与 requestIdleCallback 的区别
-- npm 管理痛点，如何解决
 - gitflow 流程、分支管理
 - 编程题：设计一个 flat 函数将如下数组 arr=[1,2,['3',4,'5',[6,[7,8],9]]]输出为 1,2,'3',4,'5',6,7,8,9。至少写出两种方法,要求不能改变数组中的原始数据类型
 - 对称加密和非对称加密的使用场景
@@ -1144,7 +1151,7 @@ devtool coverage
 - React diff 节点移动的具体过程
 - 重排与重绘，怎么减少重排
 
-项目重构前是什么状态 部门内第一个是使用组合式模式开发落地的项目，由于前期不熟悉缺乏经验。导致项目数据流动混乱、功能杂糅、请求相互依赖，不但没有突出组合式逻辑清晰代码复用的优点，反而导致代码可维护性差，白屏时间长。通过梳理逻辑功能，重新组织页面、组件，按照单一原则抽离 hook，解耦无关逻辑。梳理数据流动，无关请求并行触发。提升代码可维护性，加快首屏渲染。
+
 
 - react
 
@@ -1183,3 +1190,9 @@ devtool coverage
 + 私有化定制化交付
     + 多分支开发
     + 基于功能清单配置
+
+
+commit 规范 & changelog 生成
+首先，使用 husky 插件， 在 pre-commit 阶段添加钩子，限制该项目提交的 git commit 信息。
+
+之后，我们再利用 conventional-changelog[2] 插件， 把历史 commit 信息进行筛选提炼，自动化生成统一规划的 CHANGELOG 文件。

@@ -2,8 +2,19 @@
   "$schema": "https://turborepo.org/schema.json",
   "baseBranch": "origin/main",
   "pipeline": {
-    "//#docs:dev": {
-      "dependsOn": ["^dev"]
+    "build": {
+      "inputs": ["src/**/*.ts"],
+      "outputs": ["lib/**/*"]
+    },
+    "//#dev": {
+      "cache": false,
+      "dependsOn": [
+        "@laoergege/vuepress-plugin-blog-utils#build",
+        "@laoergege/vuepress-plugin-vssue-next-compat#build"
+      ]
+    },
+    "//#build": {
+      "dependsOn": ["^build"]
     }
   }
 }

@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "types",
   "scripts": {
-    "dev": "tsc -w && echo 123",
+    "dev": "tsc -w",
     "build": "tsc"
   },
   "keywords": [],

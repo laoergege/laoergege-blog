@@ -4,6 +4,6 @@ export interface Options {
     [index: string]: any;
 }
 export interface VssueNextCompatPlugin {
-    (option: Options): PluginObject;
+    (option?: Options): PluginObject;
 }
 export declare const VssuePlugin: VssueNextCompatPlugin;

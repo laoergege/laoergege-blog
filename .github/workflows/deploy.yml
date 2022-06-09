@@ -34,7 +34,7 @@ jobs:
       run: pnpm install
     # 博客构建
     - name: Build
-      run: pnpm build
+      run: pnpm run docs:build
     # 博客部署
     - name: Deploy
       if: success()

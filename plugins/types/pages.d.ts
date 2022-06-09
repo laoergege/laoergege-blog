@@ -1,6 +1,6 @@
 import type { PluginObject, Page } from "@vuepress/core";
 export interface Options {
-    max: number;
+    max?: number;
     exclude?: string;
     render?: (page: Page) => string;
 }

@@ -16,8 +16,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReleasePlugin = void 0;
 var minimatch_1 = __importDefault(require("minimatch"));
-var ReleasePlugin = function (_a) {
-    var _b = _a.glob, glob = _b === void 0 ? "**/README.md" : _b;
+var ReleasePlugin = function (options) {
+    var _a = (options !== null && options !== void 0 ? options : {}).glob, glob = _a === void 0 ? "**/README.md" : _a;
     var match = function (file) {
         if (!glob) {
             return false;
@@ -33,7 +33,7 @@ var ReleasePlugin = function (_a) {
         }
     };
     return {
-        name: "release-plugin",
+        name: "vuepress-plugin-release",
         onInitialized: function (app) {
             var e_1, _a;
             var result = [];

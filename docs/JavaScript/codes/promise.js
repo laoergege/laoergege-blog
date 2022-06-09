@@ -1,177 +1,219 @@
-// 参考 https://juejin.cn/post/6945319439772434469#heading-26
-
-// 先定义三个常量表示状态
-const PENDING = 'pending';
-const FULFILLED = 'fulfilled';
-const REJECTED = 'rejected';
+const PENDING = "pending";
+const FULFILLED = "fulfilled";
+const REJECTED = "rejected";
 
 class Bromise {
-
-    onResolvedCallbacks = []
-    onRejectedCallbacks = []
-
-    value = undefined
-    status = PENDING // fulfilled、rejected
-    reason = undefined
+    state = PENDING;
+    value = null;
+    reason = "";
+    cbs = [];
 
     constructor(executor) {
         try {
-            executor(this.resolve, this.reject)
-        } catch (error) {
-            this.reject(error)
+            executor(this.resolve, this.reject);
+        } catch (err) {
+            this.reject(err);
         }
     }
 
     resolve = (value) => {
-        // 延迟绑定
-        if (this.status === 'pending') {
-            this.value = value
-            this.status = FULFILLED
-            for (let onResolve of this.onResolvedCallbacks) {
-                onResolve(value)
-            }
+        if (this.state === PENDING) {
+            this.state = FULFILLED;
+            this.value = value;
+            // 异步
+            setTimeout(() => {
+                for (let cb of this.cbs) {
+                    this.handleCb(cb);
+                }
+            });
+        }
+    };
+
+    reject = (value) => {
+        if (this.state === PENDING) {
+            this.state = REJECTED;
+            this.reason = value;
+            // 异步
+            setTimeout(() => {
+                for (let cb of this.cbs) {
+                    this.handleCb(cb);
+                }
+            });
+        }
+    };
+
+    // 返回值穿透
+    resolvePromise(result, resolve, reject) {
+        if (result instanceof Bromise) {
+            return result.then(resolve, reject);
+        } else {
+            return resolve(result);
         }
     }
 
-    reject = (error) => {
-        if (this.status === 'pending') {
-            this.status = REJECTED
-            this.reason = error
-            for (let onReject of this.onRejectedCallbacks) {
-                onReject(error)
-            }
+    handleCb({ onResolve, onReject, resolve, reject }) {
+        try {
+            let handle = this.state === FULFILLED ? onResolve : onReject;
+            // 值的穿透
+            handle = typeof handle === 'function' ? handle : (value) => value;
+
+            const result = handle(this.value);
+            this.resolvePromise(result, resolve, reject);
+        } catch (err) {
+            reject(err);
         }
     }
 
-    then = (onResolve, onReject) => {
-        // 值穿透
-        const _onResolve = typeof onResolve === 'function' ? onResolve : val => val
-        const _onReject = typeof onReject === 'function' ? onReject : reason => { throw reason };
-
-        // 链式调用
+    then(onResolve, onReject) {
         return new Bromise((resolve, reject) => {
-            const _onResolveTask = (val) => {
-                setTimeout(() => {
-                    try {
-                        const value = _onResolve(val)
-
-                        // 返回值穿透
-                        value instanceof Bromise ? value.then(resolve, reject) : resolve(value)
-                    } catch (error) {
-                        // 错误冒泡
-                        reject(error)
-                    }
-                });
-            }
-
-            const _onRejectTask = (val) => {
-                setTimeout(() => {
-                    try {
-                        const value = _onReject(val)
-
-                        // 返回值穿透
-                        value instanceof Bromise ? value.then(resolve, reject) : resolve(value)
-                    } catch (error) {
-                        // 错误冒泡
-                        reject(error)
-                    }
-                });
-            }
-
-            if (this.status === 'pending') {
-                this.onResolvedCallbacks.push(_onResolveTask)
-                this.onRejectedCallbacks.push(_onRejectTask)
-            } else if (this.status === 'fulfilled') {
-                _onResolveTask(this.value)
+            let cb = {
+                onResolve,
+                onReject,
+                resolve,
+                reject,
+            };
+            // 延迟绑定
+            if (this.state === PENDING) {
+                this.cbs.push(cb);
             } else {
-                _onRejectTask(this.reason)
+                // 异步
+                setTimeout(() => {
+                    this.handleCb(cb);
+                });
             }
-        })
+        });
     }
 
     catch(onReject) {
-        return this.then(null, onReject).finally((val) => Bromise.resolve(val))
+        return this.then(null, onReject);
     }
 
-    finally(callback) {
+    finally(cb) {
         return this.then(
-            callback,
-            callback
-        )
+            () => cb(),
+            () => cb()
+        );
     }
 
-    static resolve(val) {
-        return new Bromise((resolve) => resolve(val))
+    static resolve(value) {
+        if (value instanceof Bromise) return value;
+        return new Bromise((resolve) => resolve(value));
     }
 
-    static reject(val) {
-        return new Bromise((resolve, reject) => reject(val))
+    static reject(reason) {
+        return new Bromise((resolve, reject) => reject(reason));
     }
 
-    static all(arr) {
+    static all(promises) {
         return new Bromise((resolve, reject) => {
-            let p = Bromise.resolve([])
-
-            for (let e of arr) {
-                p = p.then((res) => {
-                    return e.then((val) => {
-                        res.push(val)
-                        return res
-                    }, reject)
-                })
-            }
-
-            p.then((res) => {
-                resolve(res)
-            })
-        })
+            const result = [];
+            const count = 0;
+            promises.forEach((p, idx) => {
+                p.then(
+                    (value) => {
+                        result[idx] = value;
+                        if (++count === promises.length) {
+                            resolve(result);
+                        }
+                    },
+                    (err) => reject(err)
+                );
+            });
+        });
     }
 
-    static allSettled(arr) {
-        let p = Bromise.resolve([])
-
-        for (let e of arr) {
-            p = p.finally((res) => {
-                return e.finally((val) => {
-                    res.push({ reason: val, status: e.status })
-                    return res
-                })
-            })
-        }
-
-        return p
-    }
-
-    static race(arr) {
-        return new Bromise((resolve, reject) => {
-            for (const p of arr) {
-                p.then(resolve, reject)
-            }
-        })
-    }
-
-    static any(arr) {
-        return new Bromise((resolve, reject) => {
-            for (const p of arr) {
-                p.then(resolve, () => {
-                    if (arr.every(p => p.status === 'rejected')) {
-                        reject()
+    allSettled(promises) {
+        return new Bromise((resolve) => {
+            const result = [];
+            const count = 0;
+            promises.forEach((p, idx) => {
+                p.then(
+                    (value) => {
+                        result[idx] = {
+                            statue: FULFILLED,
+                            value,
+                        };
+                        if (++count === promises.length) {
+                            resolve(result);
+                        }
+                    },
+                    (err) => {
+                        result[idx] = {
+                            statue: REJECTED,
+                            reason: err,
+                        };
+                        if (++count === promises.length) {
+                            resolve(result);
+                        }
                     }
-                })
-            }
-        })
+                );
+            });
+        });
+    }
+
+    race(promises) {
+        return new Bromise((resolve, reject) => {
+            promises.forEach((p) => {
+                p.then(
+                    (val) => resolve(val),
+                    (err) => reject(err)
+                );
+            });
+        });
+    }
+
+    any(promises) {
+        return new Bromise((resolve, reject) => {
+            const count = 0;
+            promises.forEach((p) => {
+                p.then(
+                    (val) => resolve(val),
+                    () => {
+                        if (++count === promises.length) {
+                            reject("All promises were rejected");
+                        }
+                    }
+                );
+            });
+        });
     }
 }
+
+Bromise.resolve()
+    .then(() => {
+        console.log(0);
+        return Bromise.resolve(4);
+    })
+    .then((res) => {
+        console.log(res);
+    });
+
+Bromise.resolve()
+    .then(() => {
+        console.log(1);
+    })
+    .then(() => {
+        console.log(2);
+    })
+    .then(() => {
+        console.log(3);
+    })
+    .then(() => {
+        console.log(5);
+    })
+    .then(() => {
+        console.log(6);
+    });
 
 function executor(resolve, reject) {
-    resolve(100)
+    resolve(100);
 }
 
-let demo = new Bromise(executor)
+let demo = new Bromise(executor);
 
 function onResolve(value) {
-    console.log(value)
-    return value
+    console.log(value);
+    return value;
 }
 
 // 链式调用
@@ -212,14 +254,13 @@ function onResolve(value) {
 //         console.log(e * 6)
 //     })
 
-
 // all
 function sleep(time) {
     return new Bromise((resolve) => {
         setTimeout(() => {
-            resolve()
-        }, time)
-    })
+            resolve();
+        }, time);
+    });
 }
 // Bromise.all([
 //     sleep(500).then(e => { console.log(500); return 500 }),
@@ -229,7 +270,6 @@ function sleep(time) {
 // ]).then((res) => {
 //     console.log(res)
 // })
-
 
 // allSettled
 // Bromise.allSettled([
@@ -241,7 +281,6 @@ function sleep(time) {
 //     console.log(res)
 // })
 
-
 // race
 // Bromise.race([
 //     sleep(500).then(e => 500),
@@ -251,7 +290,6 @@ function sleep(time) {
 // ]).finally((res) => {
 //     console.log(res)
 // })
-
 
 // any
 // Bromise.any([
@@ -263,13 +301,11 @@ function sleep(time) {
 //     console.log(res)
 // })
 
-
 // 使用Promise实现每隔1秒输出1,2,3
 // let arr = [1, 2, 3]
 // arr.reduce((p, i) => {
 //     return sleep(1000).then(e => console.log(i))
 // }, Promise.resolve())
-
 
 // 使用Promise实现红绿灯交替重复亮
 // 红灯3秒亮一次，黄灯2秒亮一次，绿灯1秒亮一次；如何让三个灯不断交替重复亮灯？（用Promise实现）三个亮灯函数已经存在：
@@ -297,7 +333,6 @@ function sleep(time) {
 //     run()
 // }
 // run()
-
 
 // 实现mergePromise函数
 // 实现mergePromise函数，把传进去的数组按顺序先后执行，并且把返回的数据先后放到数组data中。
@@ -329,7 +364,6 @@ function sleep(time) {
 // ]).then((res) => {
 //     console.log(res)
 // })
-
 
 // 限制异步操作的并发个数并尽可能快的完成全部
 // 递归 + 计数

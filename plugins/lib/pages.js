@@ -74,83 +74,78 @@ var keys = [];
 var PagesPlugin = function (_a) {
     var _b = _a.max, max = _b === void 0 ? MAX : _b, exclude = _a.exclude, render = _a.render;
     return {
-        name: "pages-plugin",
+        name: "vuepress-plugin-pages",
         define: {
             __TABLE_KEYS__: keys,
         },
-        extendsPage: function () { },
         onInitialized: function (app) {
             return __awaiter(this, void 0, void 0, function () {
-                function chunks(nums, len) {
-                    var result = [];
-                    nums.forEach(function (num, i) {
-                        var _a;
-                        var index = Math.floor(i / len);
-                        (_a = result[index]) !== null && _a !== void 0 ? _a : (result[index] = []);
-                        result[index].push(num);
-                    });
-                    return result;
-                }
-                function genDataList(tables) {
-                    return __awaiter(this, void 0, void 0, function () {
-                        var i, table, homepage, path, page;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    i = 0;
-                                    _a.label = 1;
-                                case 1:
-                                    if (!(i < tables.length)) return [3 /*break*/, 4];
-                                    table = tables[i];
-                                    homepage = table
-                                        .map(function (p) { return (render ? render(p) : "- [".concat(p.title, "](").concat(p.path, ")")); })
-                                        .join("\n");
-                                    path = "/list".concat(i + 1, ".html");
-                                    return [4 /*yield*/, (0, core_1.createPage)(app, {
-                                            path: path,
-                                            content: "".concat(homepage),
-                                        })];
-                                case 2:
-                                    page = _a.sent();
-                                    // route key
-                                    keys.push("v-".concat((0, hash_sum_1.default)(path)));
-                                    app.pages.push(page);
-                                    _a.label = 3;
-                                case 3:
-                                    i++;
-                                    return [3 /*break*/, 1];
-                                case 4: return [2 /*return*/];
-                            }
-                        });
-                    });
-                }
-                var pages, _pages, tables;
+                var pages, _pages, chunks, tables, i, table, homepage, path, page, err_1;
                 return __generator(this, function (_a) {
-                    // @vuepress/plugin-git 依赖提示
-                    if (!(0, utils_1.isExistPlugin)("@vuepress/plugin-git", app)) {
-                        throw "Need to install @vupress/plugin-git dependency first!";
+                    switch (_a.label) {
+                        case 0:
+                            _a.trys.push([0, 5, , 6]);
+                            // @vuepress/plugin-git 依赖提示
+                            if (!(0, utils_1.isExistPlugin)("@vuepress/plugin-git", app)) {
+                                throw "Need to install @vupress/plugin-git dependency first!";
+                            }
+                            pages = app.pages;
+                            _pages = __spreadArray([], __read(pages), false).sort(function (a, b) {
+                                var atime = a.data.git.updatedTime;
+                                var btime = b.data.git.updatedTime;
+                                return btime - atime;
+                            })
+                                // 置顶排序
+                                .sort(function (a, b) {
+                                var atop = a.frontmatter.top;
+                                var btop = b.frontmatter.top;
+                                atop !== null && atop !== void 0 ? atop : (atop = Infinity);
+                                btop !== null && btop !== void 0 ? btop : (btop = Infinity);
+                                return atop - btop;
+                            })
+                                .filter(function (page) {
+                                return exclude ? !(0, minimatch_1.default)(page.filePath, exclude) : true;
+                            });
+                            chunks = function (nums, len) {
+                                var result = [];
+                                nums.forEach(function (num, i) {
+                                    var _a;
+                                    var index = Math.floor(i / len);
+                                    (_a = result[index]) !== null && _a !== void 0 ? _a : (result[index] = []);
+                                    result[index].push(num);
+                                });
+                                return result;
+                            };
+                            tables = chunks(_pages, max);
+                            i = 0;
+                            _a.label = 1;
+                        case 1:
+                            if (!(i < tables.length)) return [3 /*break*/, 4];
+                            table = tables[i];
+                            homepage = table
+                                .map(function (p) { return (render ? render(p) : "- [".concat(p.title, "](").concat(p.path, ")")); })
+                                .join("\n");
+                            path = "/list".concat(i + 1, ".html");
+                            return [4 /*yield*/, (0, core_1.createPage)(app, {
+                                    path: path,
+                                    content: "".concat(homepage),
+                                })];
+                        case 2:
+                            page = _a.sent();
+                            // route key
+                            keys.push("v-".concat((0, hash_sum_1.default)(path)));
+                            app.pages.push(page);
+                            _a.label = 3;
+                        case 3:
+                            i++;
+                            return [3 /*break*/, 1];
+                        case 4: return [3 /*break*/, 6];
+                        case 5:
+                            err_1 = _a.sent();
+                            console.log(err_1);
+                            return [3 /*break*/, 6];
+                        case 6: return [2 /*return*/];
                     }
-                    pages = app.pages;
-                    _pages = __spreadArray([], __read(pages), false).sort(function (a, b) {
-                        var atime = a.data.git.updatedTime;
-                        var btime = b.data.git.updatedTime;
-                        return btime - atime;
-                    })
-                        // 置顶排序
-                        .sort(function (a, b) {
-                        var atop = a.frontmatter.top;
-                        var btop = b.frontmatter.top;
-                        atop !== null && atop !== void 0 ? atop : (atop = Infinity);
-                        btop !== null && btop !== void 0 ? btop : (btop = Infinity);
-                        return atop - btop;
-                    })
-                        .filter(function (page) {
-                        return exclude ? !(0, minimatch_1.default)(page.filePath, exclude) : true;
-                    });
-                    tables = chunks(_pages, max);
-                    // md 模板生成
-                    genDataList(tables);
-                    return [2 /*return*/];
                 });
             });
         },

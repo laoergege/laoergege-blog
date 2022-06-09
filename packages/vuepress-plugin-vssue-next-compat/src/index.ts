@@ -7,11 +7,11 @@ export interface Options {
 }
 
 export interface VssueNextCompatPlugin {
-  (option: Options): PluginObject;
+  (option?: Options): PluginObject;
 }
 
 export const VssuePlugin: VssueNextCompatPlugin = (options): PluginObject => {
-  const platform = (options.platform ??= "github");
+  const platform = options?.platform ?? "github";
 
   const platformAPI = {
     github: "@vssue/api-github-v3",
@@ -40,8 +40,8 @@ export const VssuePlugin: VssueNextCompatPlugin = (options): PluginObject => {
   }
 
   return {
-    name: "vssue-next-compat-plugin",
-    clientConfigFile: path.resolve(__dirname, "clientConfigFile.ts"),
+    name: "vuepress-plugin-vssue-next-compat",
+    clientConfigFile: path.resolve(__dirname, "clientConfigFile.js"),
     define: {
       __VSSUE_OPTIONS__: options,
     },
