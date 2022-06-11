@@ -2,86 +2,101 @@ const PENDING = "pending";
 const FULFILLED = "fulfilled";
 const REJECTED = "rejected";
 
-class Bromise {
-    state = PENDING;
-    value = null;
+class XPromise {
+    status = PENDING;
+    result = null;
     reason = "";
-    cbs = [];
+    cbs = []
 
     constructor(executor) {
         try {
-            executor(this.resolve, this.reject);
-        } catch (err) {
-            this.reject(err);
+            executor(this.resolve, this.reject)
+        } catch (error) {
+            this.reject(error)
         }
     }
 
     resolve = (value) => {
-        if (this.state === PENDING) {
-            this.state = FULFILLED;
-            this.value = value;
-            // 异步
+        if (this.status === PENDING) {
+            this.status = FULFILLED
+            this.result = value
             setTimeout(() => {
-                for (let cb of this.cbs) {
-                    this.handleCb(cb);
+                for (const cb of this.cbs) {
+                    this.handleCb(cb)
                 }
-            });
-        }
-    };
-
-    reject = (value) => {
-        if (this.state === PENDING) {
-            this.state = REJECTED;
-            this.reason = value;
-            // 异步
-            setTimeout(() => {
-                for (let cb of this.cbs) {
-                    this.handleCb(cb);
-                }
-            });
-        }
-    };
-
-    // 返回值穿透
-    resolvePromise(result, resolve, reject) {
-        if (result instanceof Bromise) {
-            return result.then(resolve, reject);
-        } else {
-            return resolve(result);
+            })
         }
     }
 
-    handleCb({ onResolve, onReject, resolve, reject }) {
+    reject = (reason) => {
+        if (this.status === PENDING) {
+            this.status = REJECTED
+            this.reason = reason
+            setTimeout(() => {
+                for (const cb of this.cbs) {
+                    this.handleCb(cb)
+                }
+            })
+        }
+    }
+
+    handleCb = (cb) => {
+        const { onResolve, onReject, resolve, reject } = cb
+        const handler = this.status === FULFILLED ? onResolve : onReject
+
         try {
-            let handle = this.state === FULFILLED ? onResolve : onReject;
-            // 值的穿透
-            handle = typeof handle === 'function' ? handle : (value) => value;
-
-            const result = handle(this.value);
-            this.resolvePromise(result, resolve, reject);
-        } catch (err) {
-            reject(err);
+            const value = handler(this.result)
+            this.resolvePromise(value, resolve, reject)
+        } catch (error) {
+            reject(error)
         }
     }
 
-    then(onResolve, onReject) {
-        return new Bromise((resolve, reject) => {
-            let cb = {
-                onResolve,
-                onReject,
+    /**
+     * 只实现标准情况，具体情况请参考
+     * https://promisesaplus.com/#the-promise-resolution-procedure
+     */
+    resolvePromise = (value, resolve, reject) => {
+        if (this === value) {
+            return reject(new TypeError('Chaining cycle detected for promise!'))
+        } else if (value instanceof XPromise) {
+            // 返回值穿透
+            value.then(resolve, reject)
+
+            // theable 对象
+        } else if (value !== null && typeof value === 'object' || typeof value === 'function') {
+            const then = value.then
+            try {
+                if (typeof then === 'function') {
+                    new Promise(then.bind(value)).then(resolve, reject)
+                }
+            } catch (error) {
+                reject(error)
+            }
+        } else {
+            resolve(value)
+        }
+    }
+
+    then = (onResolve, onReject) => {
+        // 链式调用
+        return new Promise((resolve, reject) => {
+            const cb = {
+                onResolve: typeof onResolve === 'function' ? onResolve : (value => value), // 值穿透
+                onReject: typeof onReject === 'function' ? onReject : (reason => reason),
                 resolve,
-                reject,
-            };
-            // 延迟绑定
-            if (this.state === PENDING) {
-                this.cbs.push(cb);
+                reject
+            }
+
+            if (this.status === PENDING) {
+                // 延迟绑定
+                this.cbs.push(cb)
             } else {
-                // 异步
                 setTimeout(() => {
-                    this.handleCb(cb);
+                    this.handleCb(cb)
                 });
             }
-        });
+        })
     }
 
     catch(onReject) {
@@ -94,6 +109,17 @@ class Bromise {
             () => cb()
         );
     }
+}
+
+class Bromise {
+
+
+
+
+
+
+
+
 
     static resolve(value) {
         if (value instanceof Bromise) return value;
