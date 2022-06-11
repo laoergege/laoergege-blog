@@ -46,43 +46,94 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var client_1 = require("@vuepress/client");
-var vssue_1 = __importDefault(require("vssue"));
 require("systemjs/dist/system.js");
 // @ts-ignore
 require("vssue/dist/vssue.min.css");
 var vue_1 = require("vue");
-// @ts-ignore
-var api_1 = __importDefault(require("@vssue/api"));
 exports.default = (0, client_1.defineClientConfig)({
     enhance: function (_a) {
         var _this = this;
         var app = _a.app;
-        debugger;
         // @ts-ignore
         if (__VUEPRESS_SSR__)
             return;
+        var options = __VSSUE_OPTIONS__;
         app.component("vssue", (0, vue_1.defineAsyncComponent)(function () { return __awaiter(_this, void 0, void 0, function () {
-            var options, Vue2;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        options = __VSSUE_OPTIONS__;
-                        return [4 /*yield*/, System.import("//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js")];
+            var _a, vue2Code, vssueCode, ctx, _ctx, fn;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, Promise.all([
+                            fetch("//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js").then(function (res) {
+                                return res.text();
+                            }),
+                            fetch("//unpkg.com/vssue/dist/vssue.".concat(options.platform, ".min.js")).then(function (res) { return res.text(); }),
+                        ])];
                     case 1:
-                        Vue2 = (_a.sent()).default;
-                        Vue2.use(vssue_1.default, options);
+                        _a = __read.apply(void 0, [_b.sent(), 2]), vue2Code = _a[0], vssueCode = _a[1];
+                        ctx = Object.create(null);
+                        ctx.window = ctx;
+                        _ctx = new Proxy(ctx, {
+                            get: function (target, key, receiver) {
+                                if (key !== "window" && key in window) {
+                                    // @ts-ignore
+                                    var value = window[key];
+                                    return typeof value === "function" ? value.bind(window) : value;
+                                }
+                                return Reflect.get(target, key, receiver);
+                            },
+                            has: function (_target, key) {
+                                if (key !== "window" && key in window) {
+                                    return false;
+                                }
+                                return true;
+                            },
+                        });
+                        ctx.window = _ctx;
+                        fn = new Function("\n          with(this) {\n            ".concat(vue2Code, ";\n            \n            ").concat(vssueCode, "\n          }\n        "));
+                        fn.apply(_ctx);
                         return [2 /*return*/, {
+                                props: {
+                                    title: {
+                                        type: String,
+                                        required: false,
+                                        default: undefined,
+                                    },
+                                    issueId: {
+                                        type: [Number, String],
+                                        required: false,
+                                        default: undefined,
+                                    },
+                                    options: {
+                                        type: Object,
+                                        required: false,
+                                        default: undefined,
+                                    },
+                                },
                                 setup: function (props) {
                                     var el = (0, vue_1.ref)(null);
-                                    (0, vue_1.watchEffect)(function () {
+                                    var vssue = null;
+                                    (0, vue_1.onMounted)(function () {
+                                        var title = props.title, issueId = props.issueId, _options = props.options;
                                         if (el.value) {
-                                            var title_1 = props.title, issueId_1 = props.issueId, options_1 = props.options;
-                                            var vssue = new Vue2({
+                                            vssue = new ctx.Vue({
                                                 el: el.value,
                                                 render: function (h) {
                                                     return h("vssue", {
@@ -90,37 +141,26 @@ exports.default = (0, client_1.defineClientConfig)({
                                                             part: "vssue",
                                                         },
                                                         props: {
-                                                            title: title_1,
-                                                            issueId: issueId_1,
-                                                            options: __assign({ api: api_1.default }, options_1),
+                                                            title: title,
+                                                            issueId: issueId,
+                                                            options: __assign(__assign({}, options), _options),
                                                         },
                                                     });
                                                 },
                                             });
+                                            // stop();
                                         }
                                     });
-                                    // onMounted(() => {
-                                    //   const { title, issueId, options } = props;
-                                    //   const vssue = new Vue2({
-                                    //     el: el.value,
-                                    //     render(h: any) {
-                                    //       return h("vssue", {
-                                    //         attrs: {
-                                    //           part: "vssue",
-                                    //         },
-                                    //         props: {
-                                    //           title,
-                                    //           issueId,
-                                    //           options,
-                                    //         },
-                                    //       });
-                                    //     },
-                                    //   });
-                                    // });
+                                    var title = (0, vue_1.toRefs)(props).title;
+                                    (0, vue_1.watch)(props, function () {
+                                        vssue && vssue.$forceUpdate();
+                                    });
                                     return function () {
-                                        return (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, (0, vue_1.h)("div", {
-                                            ref: el,
-                                        }));
+                                        return (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, function () {
+                                            return (0, vue_1.h)("div", {
+                                                ref: el,
+                                            });
+                                        });
                                     };
                                 },
                             }];

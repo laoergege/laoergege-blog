@@ -1,7 +1,7 @@
 import path from "path";
 import theme from "./theme";
 import { webpackBundler } from "@vuepress/bundler-webpack";
-// import { viteBundler } from "@vuepress/bundler-vite";
+import { viteBundler } from "@vuepress/bundler-vite";
 
 export default {
   // 站点信息配置

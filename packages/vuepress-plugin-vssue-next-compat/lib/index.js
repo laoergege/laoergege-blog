@@ -31,9 +31,6 @@ var VssuePlugin = function (options) {
         define: {
             __VSSUE_OPTIONS__: options,
         },
-        alias: {
-            "@vssue/api$": require.resolve(apiPkg),
-        },
     };
 };
 exports.VssuePlugin = VssuePlugin;

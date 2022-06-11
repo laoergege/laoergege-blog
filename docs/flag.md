@@ -2,25 +2,36 @@
 >   
 > 总结：学习 => 应用 => 深入 => 创新
 
+
 - 专业
-  - Vue
-    - [ ] 深入 Vue 框架源码
-    - [ ] 技术输出：vue 深入系文
-  - Node 学习与应用
-    - [ ] SSR、同构应用实践
-  - [ ] JavaScript 、Web 进阶
-    - [ ] 《浏览器原理及实践》
-  - Rust
-    - [ ] 入门学习（2022.5 - 2022.12）
-    - [ ] 应用：Webassembly
-    - [ ] https://github.com/HerringtonDarkholme/vue-compiler
-  - 可视化
-  - 数据结构与算法
-    - [ ] 熟练 leetcode 200道 简单、中度
-  - 计算机网络及 HTTP
-    - [ ] 《透视 HTTP 协议》
-  - 编译原理
-    - [ ] 《编译原理实战课》
+  - Web
+    - 前端框架
+      - Vue
+        - [ ] 深入 Vue 框架源码
+        - [ ] 技术输出：vue 深入系文
+    - Node 学习与应用
+      - [ ] SSR、同构应用实践
+    - JavaScript 、Web 进阶
+      - [ ] 《浏览器原理及实践》
+    - 可视化
+  - 软件工程
+  - 编程语言
+    - 程序语言设计及实现
+    - Rust
+      - [ ] 入门学习（2022.5 - 2022.12）
+      - [ ] 应用：Webassembly
+      - [ ] https://github.com/HerringtonDarkholme/vue-compiler
+  - 计算机基础
+    - 数据结构与算法
+      - [ ] 熟练 leetcode 200道 简单、中度
+    - 操作系统
+      - [ ] 《趣谈Linux操作系统》
+    - 编译原理
+      - [ ] 《编译原理实战课》
+    - 计算机网络
+      - [ ] 《透视 HTTP 协议》
+    - 计算机图形学
+    - 计算机组成
 - 个人
   - 金融
     - [ ] **炒股**（5w）
@@ -176,6 +187,3 @@
 
   <img src="./images/image-20210401230801709.png" alt="image-20210401230801709" style="zoom:50%;" />
 
-- 语言
-- 工程
-- 系统

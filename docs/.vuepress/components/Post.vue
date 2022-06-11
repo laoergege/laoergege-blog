@@ -7,9 +7,14 @@
 
 <script>
 import { usePageData } from "@vuepress/client"
+import { toRefs } from "vue";
 export default {
     setup() {
-        const { title } = usePageData().value
+        const { title } = toRefs(usePageData().value)
+
+        setTimeout(() => {
+          title.value = 123
+        }, 2000);
 
         return {
           title

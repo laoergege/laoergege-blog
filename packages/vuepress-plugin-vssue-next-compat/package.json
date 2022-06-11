@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "systemjs": "^6.11.0",
-    "vssue": "^1.4.8"
+    "vssue": "^1.4.8",
+    "vue": "^3.2.36"
   },
   "devDependencies": {
     "@types/systemjs": "^6.1.1"

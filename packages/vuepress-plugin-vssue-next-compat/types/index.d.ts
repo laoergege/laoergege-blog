@@ -1,9 +1,10 @@
 import type { PluginObject } from "@vuepress/core";
-export interface Options {
+import type { VssueAPI } from "vssue";
+export interface VssueNextCompatPluginOptions extends VssueAPI.Options {
     platform: string;
     [index: string]: any;
 }
 export interface VssueNextCompatPlugin {
-    (option?: Options): PluginObject;
+    (option?: VssueNextCompatPluginOptions): PluginObject;
 }
 export declare const VssuePlugin: VssueNextCompatPlugin;

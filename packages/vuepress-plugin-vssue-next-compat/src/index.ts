@@ -1,13 +1,14 @@
 import type { PluginObject } from "@vuepress/core";
 import path from "path";
+import type { VssueAPI } from "vssue";
 
-export interface Options {
+export interface VssueNextCompatPluginOptions extends VssueAPI.Options {
   platform: string;
   [index: string]: any;
 }
 
 export interface VssueNextCompatPlugin {
-  (option?: Options): PluginObject;
+  (option?: VssueNextCompatPluginOptions): PluginObject;
 }
 
 export const VssuePlugin: VssueNextCompatPlugin = (options): PluginObject => {
@@ -44,9 +45,6 @@ export const VssuePlugin: VssueNextCompatPlugin = (options): PluginObject => {
     clientConfigFile: path.resolve(__dirname, "clientConfigFile.js"),
     define: {
       __VSSUE_OPTIONS__: options,
-    },
-    alias: {
-      "@vssue/api$": require.resolve(apiPkg),
     },
   };
 };

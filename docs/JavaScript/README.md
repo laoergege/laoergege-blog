@@ -31,12 +31,7 @@ desc: JavaScript 知识体系
     - 运行原理
       - [编译时](./JavaScript%20代码执行过程（编译时）.md)
       - [JavaScript 代码执行机制](./JavaScript%20代码执行机制.md)
-  - 元编程
-    - 程序-元编程-可以生成代码-运行时动态修改程序（反射编程或反射）
-      1. function
-      2. eval
-      3. with
-      4. Proxy&Reflect
+  - [JavaScript 元编程](./JavaScript%20%E5%85%83%E7%BC%96%E7%A8%8B.md)
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
 - api
   - [手写 call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
