@@ -100,14 +100,22 @@ class XPromise {
     }
 
     catch(onReject) {
+        // 链式调用
         return this.then(null, onReject);
     }
 
     finally(cb) {
-        return this.then(
-            () => cb(),
-            () => cb()
-        );
+        // 链式调用
+        return new Promise((resolve, reject) => {
+            try {
+                // 不接收任何参数，不应用其结果
+                cb()
+                // 值穿透
+                this.then(resolve, reject)
+            } catch (error) {
+                reject(error)
+            }
+        })
     }
 }
 

@@ -221,7 +221,6 @@
     - [ ] 发布订阅模式和观察者模式有什么区别
       - 发布-订阅模式在观察者模式的基础上，在目标和观察者之间增加了一个调度中心。
     - [ ] 你项目里面都用了哪些设计模式
-    - [ ] 发布-订阅与观察者模式区别
     - [x] 手写 EventEmitter
       - ![图 1](./images/1646814006448.png)
   - js 执行机制
@@ -245,11 +244,27 @@
       - 构造函数（this 指向新创建的对象）
       - 箭头函数（执行上下文没有 this，依靠作用域链继承外层作用域的 this）
   - 异步编程
-    - [x] 手写 Promise
+    - [x] 手写 Promise  ![图 3](images/1654970934245.png)  
     - [x] promise 哪些方法是原型上的，哪些方法是实例上的
-      - 实例: then、catch、finally
-      - 原型: resolve、reject、all、allSettled、race、any
-      - 扩展思考:如何取消 promise:Promise.race()方法可以用来竞争 Promise 可以借助这个特性 自己包装一个 空的 Promise 与要发起的 Promise 来实现
+      - 实例
+        - then、catch、finally
+          - 链式调用
+          - 延迟绑定
+          - 值穿透、错误冒泡：当我们不在 then 中放入参数，或者参数不为 function，例：promise.then().then()，那么其后面的 then 依旧可以得到之前 then 返回的值
+          - 返回值穿透
+          - onResolved 和 onRejected 这两项函数需要异步调用
+      - 原型
+        - **resolve**
+          - 参数为 Promise 对象，直接返回
+          - 参数为 Thenable 对象
+          - 其他数据类型，作为新 Promise 的 result
+        - reject
+        - all：所有 Promises 状态成功就返回，否则返回失败的 Promises
+        - allSettled：所有的 Promise 状态完成就返回，不管其是否处理成功
+        - any：优先返回状态成功的 Promise，否则返回全部失败结果
+        - race：优先返回优先完成的 Promise
+    - [ ] 请求取消
+      - promise:Promise.race()方法可以用来竞争 Promise 可以借助这个特性 自己包装一个 空的 Promise 与要发起的 Promise 来实现
     - [x] Promise.all 原理：计数器模式  ![图 21](./images/1646032737911.png)
     - [x] 实现并发限制  ![图 2](./images/1654685954833.png)  
     - [ ] p-reduce
@@ -308,7 +323,7 @@
       - will-change,3D 属性 transform 之类
   - 事件循环机制
     - [x] 说下事件循环机制
-      - 事件循环就是有一个执行线程不断从任务队列取任务执行
+      - 事件循环是一个单线程协调各类事件任务的模型，可以简单理解有一个执行线程循环不断从任务队列取任务执行
       - 在浏览器中的任务队列又分为 macro-task（宏任务）与 micro-task（微任务）
       - 宏任务
         - 脚本 script
@@ -334,14 +349,19 @@
         - 主线程从宏任务队列取一任务执行执行完后
         - 再循环执行完微任务队列里的所有任务
         - UI 渲染判断
-        - 重回到 1
-    - [ ] 为什么要用 setTimeout 模拟 setInterval ？
-      - setInterval 每隔指定时间就会往队列里插入任务前会队列中是否存在上次任务，如果当前任务执行过长，会导致后边的间隔任务被跳过；
-      - 可能多个定时器会连续执行
-    - [ ] requestAnimationFrame vs requestIdleCallback
+        - 重复原来操作
+    - [x] 为什么要用 setTimeout 模拟 setInterval ？
+      - 计时器在指定时间后，将回调函数放入事件循环的队列中
+      - 每个 setTimeout 产生的任务会直接 push 到任务队列中；而 setInterval 在每次把任务 push 到任务队列前，都要进行一下判断(看上次的任务是否仍在队列中，如果有则不添加，没有则添加)
+      - 而且还有可能回调函数连续执行
+      - ![图 5](images/1655027439210.png)  
+    - [x] requestAnimationFrame vs requestIdleCallback
       - requestAnimationFrame
-        - 由系统 VSync 信号触发调度，在每一帧渲染之前执行
+        - 由系统 VSync 信号触发，在每一帧渲染之前执行
         - 如果页面未激活的话，requestAnimationFrame 也会停止渲染，这样既可以保证页面的流畅性，又能节省主线程执行函数的开销
+      - requestIdleCallback
+        - 浏览器空闲时期被调用
+        - 可以设置超时强制
   - [x] 跨域
     - [x] CORS 跨域的原理
       - jsonp 只可以使用 GET 方式提交、调试麻烦、安全性差 xss 注入

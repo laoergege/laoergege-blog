@@ -75,7 +75,7 @@ exports.default = (0, client_1.defineClientConfig)({
         // @ts-ignore
         if (__VUEPRESS_SSR__)
             return;
-        var options = __VSSUE_OPTIONS__;
+        var vssueOptions = __VSSUE_OPTIONS__;
         app.component("vssue", (0, vue_1.defineAsyncComponent)(function () { return __awaiter(_this, void 0, void 0, function () {
             var _a, vue2Code, vssueCode, ctx, _ctx, fn;
             return __generator(this, function (_b) {
@@ -84,12 +84,11 @@ exports.default = (0, client_1.defineClientConfig)({
                             fetch("//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js").then(function (res) {
                                 return res.text();
                             }),
-                            fetch("//unpkg.com/vssue/dist/vssue.".concat(options.platform, ".min.js")).then(function (res) { return res.text(); }),
+                            fetch("//unpkg.com/vssue/dist/vssue.".concat(vssueOptions.platform, ".min.js")).then(function (res) { return res.text(); }),
                         ])];
                     case 1:
                         _a = __read.apply(void 0, [_b.sent(), 2]), vue2Code = _a[0], vssueCode = _a[1];
                         ctx = Object.create(null);
-                        ctx.window = ctx;
                         _ctx = new Proxy(ctx, {
                             get: function (target, key, receiver) {
                                 if (key !== "window" && key in window) {
@@ -128,10 +127,13 @@ exports.default = (0, client_1.defineClientConfig)({
                                     },
                                 },
                                 setup: function (props) {
-                                    var el = (0, vue_1.ref)(null);
                                     var vssue = null;
-                                    (0, vue_1.onMounted)(function () {
-                                        var title = props.title, issueId = props.issueId, _options = props.options;
+                                    var _a = (0, vue_1.toRefs)(props), title = _a.title, issueId = _a.issueId, options = _a.options;
+                                    var optionComputed = (0, vue_1.computed)(function () {
+                                        return __assign(__assign({}, vssueOptions), options);
+                                    });
+                                    var el = (0, vue_1.ref)(null);
+                                    var stop = (0, vue_1.watchEffect)(function () {
                                         if (el.value) {
                                             vssue = new ctx.Vue({
                                                 el: el.value,
@@ -141,18 +143,17 @@ exports.default = (0, client_1.defineClientConfig)({
                                                             part: "vssue",
                                                         },
                                                         props: {
-                                                            title: title,
-                                                            issueId: issueId,
-                                                            options: __assign(__assign({}, options), _options),
+                                                            title: title.value,
+                                                            issueId: issueId.value,
+                                                            options: optionComputed.value,
                                                         },
                                                     });
                                                 },
                                             });
-                                            // stop();
+                                            stop();
                                         }
                                     });
-                                    var title = (0, vue_1.toRefs)(props).title;
-                                    (0, vue_1.watch)(props, function () {
+                                    (0, vue_1.watch)([title, issueId, optionComputed], function () {
                                         vssue && vssue.$forceUpdate();
                                     });
                                     return function () {

@@ -12,10 +12,6 @@ export default {
     setup() {
         const { title } = toRefs(usePageData().value)
 
-        setTimeout(() => {
-          title.value = 123
-        }, 2000);
-
         return {
           title
         }

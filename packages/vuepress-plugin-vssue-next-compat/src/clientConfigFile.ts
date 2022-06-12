@@ -11,7 +11,7 @@ import {
   watchEffect,
   toRefs,
   watch,
-  onMounted,
+  computed,
 } from "vue";
 
 declare const __VSSUE_OPTIONS__: VssueNextCompatPluginOptions;
@@ -21,7 +21,7 @@ export default defineClientConfig({
     // @ts-ignore
     if (__VUEPRESS_SSR__) return;
 
-    const options = __VSSUE_OPTIONS__;
+    const vssueOptions = __VSSUE_OPTIONS__;
 
     app.component(
       "vssue",
@@ -32,10 +32,11 @@ export default defineClientConfig({
           fetch("//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js").then((res) =>
             res.text()
           ),
-          fetch(`//unpkg.com/vssue/dist/vssue.${options.platform}.min.js`).then(
-            (res) => res.text()
-          ),
+          fetch(
+            `//unpkg.com/vssue/dist/vssue.${vssueOptions.platform}.min.js`
+          ).then((res) => res.text()),
         ]);
+        // sandbox
         const ctx = Object.create(null);
         const _ctx = new Proxy(ctx, {
           get(target, key, receiver) {
@@ -83,10 +84,19 @@ export default defineClientConfig({
             },
           },
           setup(props) {
-            const el = ref(null);
             let vssue: any = null;
-            onMounted(() => {
-              const { title, issueId, options: _options } = props;
+            const { title, issueId, options } = toRefs(props);
+            const optionComputed = computed<VssueNextCompatPluginOptions>(
+              () => {
+                return {
+                  ...vssueOptions,
+                  ...options,
+                };
+              }
+            );
+
+            const el = ref(null);
+            const stop = watchEffect(() => {
               if (el.value) {
                 vssue = new ctx.Vue({
                   el: el.value,
@@ -96,21 +106,17 @@ export default defineClientConfig({
                         part: "vssue",
                       },
                       props: {
-                        title,
-                        issueId,
-                        options: {
-                          ...options,
-                          ..._options,
-                        },
+                        title: title.value,
+                        issueId: issueId.value,
+                        options: optionComputed.value,
                       },
                     });
                   },
                 });
-                // stop();
+                stop();
               }
             });
-            const { title } = toRefs(props);
-            watch(props, () => {
+            watch([title, issueId, optionComputed], () => {
               vssue && vssue.$forceUpdate();
             });
 
