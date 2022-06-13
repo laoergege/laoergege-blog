@@ -1,6 +1,5 @@
 import { defineClientConfig } from "@vuepress/client";
 import type { VssueNextCompatPluginOptions } from "./index";
-import "systemjs/dist/system.js";
 // @ts-ignore
 import "vssue/dist/vssue.min.css";
 import {
@@ -12,58 +11,76 @@ import {
   toRefs,
   watch,
   computed,
+  defineComponent,
 } from "vue";
 
 declare const __VSSUE_OPTIONS__: VssueNextCompatPluginOptions;
 
 export default defineClientConfig({
   enhance({ app }) {
-    // @ts-ignore
+    app.component(
+      "Vssue",
+      defineComponent((props, { attrs }) => {
+        return h(resolveComponent("ClientOnly"), {}, () =>
+          h("vssue-compoennt", {
+            ...props,
+            ...attrs,
+          })
+        );
+      })
+    );
+
+    //@ts-ignore
     if (__VUEPRESS_SSR__) return;
 
     const vssueOptions = __VSSUE_OPTIONS__;
+    const loadRuntime = async () => {
+      // load vue2.x runtime
+      // @ts-ignore
+      const [vue2Code, vssueCode] = await Promise.all([
+        fetch("//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js").then((res) =>
+          res.text()
+        ),
+        fetch(
+          `//unpkg.com/vssue/dist/vssue.${vssueOptions.platform}.min.js`
+        ).then((res) => res.text()),
+      ]);
+      // sandbox
+      const ctx = Object.create(null);
+      const _ctx = new Proxy(ctx, {
+        get(target, key, receiver) {
+          if (key !== "window" && key in window) {
+            // @ts-ignore
+            const value: unknown = window[key];
+            return typeof value === "function" ? value.bind(window) : value;
+          }
+          return Reflect.get(target, key, receiver);
+        },
+        has(_target: Object, key: string) {
+          if (key !== "window" && key in window) {
+            return false;
+          }
 
-    app.component(
-      "vssue",
-      defineAsyncComponent(async () => {
-        // load vue2.x runtime
-        // @ts-ignore
-        const [vue2Code, vssueCode] = await Promise.all([
-          fetch("//unpkg.com/vue@2.6.14/dist/vue.runtime.min.js").then((res) =>
-            res.text()
-          ),
-          fetch(
-            `//unpkg.com/vssue/dist/vssue.${vssueOptions.platform}.min.js`
-          ).then((res) => res.text()),
-        ]);
-        // sandbox
-        const ctx = Object.create(null);
-        const _ctx = new Proxy(ctx, {
-          get(target, key, receiver) {
-            if (key !== "window" && key in window) {
-              // @ts-ignore
-              const value: unknown = window[key];
-              return typeof value === "function" ? value.bind(window) : value;
-            }
-            return Reflect.get(target, key, receiver);
-          },
-          has(_target: Object, key: string) {
-            if (key !== "window" && key in window) {
-              return false;
-            }
-
-            return true;
-          },
-        });
-        ctx.window = _ctx;
-        const fn = new Function(`
+          return true;
+        },
+      });
+      ctx.window = _ctx;
+      const fn = new Function(`
           with(this) {
             ${vue2Code};
             
             ${vssueCode}
           }
         `);
-        fn.apply(_ctx);
+      fn.apply(_ctx);
+
+      return ctx;
+    };
+
+    app.component(
+      "VssueCompoennt",
+      defineAsyncComponent(async () => {
+        const ctx = await loadRuntime();
 
         return {
           props: {
@@ -102,9 +119,6 @@ export default defineClientConfig({
                   el: el.value,
                   render(h: any) {
                     return h("vssue", {
-                      attrs: {
-                        part: "vssue",
-                      },
                       props: {
                         title: title.value,
                         issueId: issueId.value,
@@ -121,11 +135,9 @@ export default defineClientConfig({
             });
 
             return () =>
-              h(resolveComponent("ClientOnly"), {}, () =>
-                h("div", {
-                  ref: el,
-                })
-              );
+              h("div", {
+                ref: el,
+              });
           },
         };
       })

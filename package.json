@@ -3,14 +3,12 @@
   "version": "1.0.0",
   "description": "Laoergege's Learning Track",
   "packageManager": "pnpm@6.32.2",
-  "bin": {
-    "vuepress": "index.mjs"
-  },
   "scripts": {
-    "start": "turbo run dev",
-    "dev": "vuepress dev docs",
+    "docs:dev": "turbo run dev",
+    "dev": "pnpm run vuepress -- dev docs",
     "docs:build": "turbo run build",
-    "build": "vuepress build docs",
+    "build": "pnpm run vuepress -- build docs",
+    "vuepress": "node index.mjs",
     "publish": "git tag page -f && git push origin page -f",
     "open": "open-cli 'https://daisyui.com/' && open-cli 'https://tailwindcss.com/docs/installation'"
   },
@@ -42,7 +40,6 @@
     "chalk": "^4.1.2",
     "consola": "^2.15.3",
     "daisyui": "2.8.0",
-    "laoergege-blog": "link:",
     "vue": "^3.2.36"
   },
   "devDependencies": {

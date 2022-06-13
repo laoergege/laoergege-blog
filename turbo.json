@@ -2,10 +2,6 @@
   "$schema": "https://turborepo.org/schema.json",
   "baseBranch": "origin/main",
   "pipeline": {
-    "build": {
-      "inputs": ["src/**/*.ts"],
-      "outputs": ["lib/**/*"]
-    },
     "//#dev": {
       "cache": false,
       "dependsOn": [
@@ -13,7 +9,9 @@
         "@laoergege/vuepress-plugin-vssue-next-compat#build"
       ]
     },
-    "//#build": {
+    "build": {
+      "inputs": ["src/**/*.ts"],
+      "outputs": ["lib/**/*"],
       "dependsOn": ["^build"]
     }
   }

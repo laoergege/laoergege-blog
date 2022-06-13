@@ -11,11 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "systemjs": "^6.11.0",
-    "vssue": "^1.4.8",
-    "vue": "^3.2.36"
+    "vssue": "^1.4.8"
   },
   "devDependencies": {
-    "@types/systemjs": "^6.1.1"
+    "@vuepress/client": "^2.0.0-beta.46",
+    "vue": "^3.2.36"
+  },
+  "peerDependencies": {
+    "@vuepress/client": "^2.0.0-beta.46",
+    "vue": "^3.2.36"
   }
 }

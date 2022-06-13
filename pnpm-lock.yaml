@@ -31,7 +31,6 @@ importers:
       daisyui: 2.8.0
       dayjs: ^1.11.2
       isomorphic-git: ^1.17.3
-      laoergege-blog: 'link:'
       open-cli: ^7.0.1
       postcss: ^8.4.14
       postcss-preset-env: ^7.7.0
@@ -51,7 +50,6 @@ importers:
       chalk: 4.1.2
       consola: 2.15.3
       daisyui: 2.8.0_a191cbaa25c4a0a9f05cc78eac153be7
-      laoergege-blog: 'link:'
       vue: 3.2.36
     devDependencies:
       '@types/node': 17.0.40
@@ -87,16 +85,14 @@ importers:
 
   packages/vuepress-plugin-vssue-next-compat:
     specifiers:
-      '@types/systemjs': ^6.1.1
-      systemjs: ^6.11.0
+      '@vuepress/client': ^2.0.0-beta.46
       vssue: ^1.4.8
       vue: ^3.2.36
     dependencies:
-      systemjs: 6.12.1
       vssue: 1.4.8
-      vue: 3.2.36
     devDependencies:
-      '@types/systemjs': 6.1.1
+      '@vuepress/client': 2.0.0-beta.46
+      vue: 3.2.36
 
   plugins:
     specifiers:

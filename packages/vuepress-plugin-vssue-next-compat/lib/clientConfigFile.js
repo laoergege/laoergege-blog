@@ -64,7 +64,6 @@ var __read = (this && this.__read) || function (o, n) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var client_1 = require("@vuepress/client");
-require("systemjs/dist/system.js");
 // @ts-ignore
 require("vssue/dist/vssue.min.css");
 var vue_1 = require("vue");
@@ -72,11 +71,17 @@ exports.default = (0, client_1.defineClientConfig)({
     enhance: function (_a) {
         var _this = this;
         var app = _a.app;
-        // @ts-ignore
+        app.component("Vssue", (0, vue_1.defineComponent)(function (props, _a) {
+            var attrs = _a.attrs;
+            return (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, function () {
+                return (0, vue_1.h)("vssue-compoennt", __assign(__assign({}, props), attrs));
+            });
+        }));
+        //@ts-ignore
         if (__VUEPRESS_SSR__)
             return;
         var vssueOptions = __VSSUE_OPTIONS__;
-        app.component("vssue", (0, vue_1.defineAsyncComponent)(function () { return __awaiter(_this, void 0, void 0, function () {
+        var loadRuntime = function () { return __awaiter(_this, void 0, void 0, function () {
             var _a, vue2Code, vssueCode, ctx, _ctx, fn;
             return __generator(this, function (_b) {
                 switch (_b.label) {
@@ -108,6 +113,17 @@ exports.default = (0, client_1.defineClientConfig)({
                         ctx.window = _ctx;
                         fn = new Function("\n          with(this) {\n            ".concat(vue2Code, ";\n            \n            ").concat(vssueCode, "\n          }\n        "));
                         fn.apply(_ctx);
+                        return [2 /*return*/, ctx];
+                }
+            });
+        }); };
+        app.component("VssueCompoennt", (0, vue_1.defineAsyncComponent)(function () { return __awaiter(_this, void 0, void 0, function () {
+            var ctx;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, loadRuntime()];
+                    case 1:
+                        ctx = _a.sent();
                         return [2 /*return*/, {
                                 props: {
                                     title: {
@@ -139,9 +155,6 @@ exports.default = (0, client_1.defineClientConfig)({
                                                 el: el.value,
                                                 render: function (h) {
                                                     return h("vssue", {
-                                                        attrs: {
-                                                            part: "vssue",
-                                                        },
                                                         props: {
                                                             title: title.value,
                                                             issueId: issueId.value,
@@ -157,10 +170,8 @@ exports.default = (0, client_1.defineClientConfig)({
                                         vssue && vssue.$forceUpdate();
                                     });
                                     return function () {
-                                        return (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, function () {
-                                            return (0, vue_1.h)("div", {
-                                                ref: el,
-                                            });
+                                        return (0, vue_1.h)("div", {
+                                            ref: el,
                                         });
                                     };
                                 },

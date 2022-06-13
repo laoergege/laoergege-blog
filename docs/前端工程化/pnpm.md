@@ -129,6 +129,12 @@ public-hoist-pattern[]=*eslint*
 - 项目创建
 - 依赖关联
   - pnpm：默认情况下，如果可用的 packages 与已声明的可用范围相匹配，pnpm 将从工作区链接这些 packages
+- 任务管理
+  - 拓扑排序
+    - `turbo:depends`
+      - 依赖上游包的任务
+      - 依赖自身包的任务
+      - 手动指定依赖任务
 
 ## 参考阅读
 

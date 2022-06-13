@@ -216,3 +216,13 @@ CSS 项目实践
 ## NPM 发包流程
 
 1. 打包、支持 UMD、ESModules 格式
+2. package 配置
+   ```js
+   {
+    "name": "my-library",
+    "version": "1.0.0",
+    "main": "dist/main.js",
+    "module": "dist/module.js",
+    "types": "dist/types.d.ts"
+  }
+   ```
