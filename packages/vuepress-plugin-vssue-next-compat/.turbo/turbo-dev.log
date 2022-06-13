@@ -1,7 +1,9 @@
-@laoergege/vuepress-plugin-vssue-next-compat:dev: cache hit, replaying output [2m61034bb18495f6ae[0m
-[32m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m
-[32m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m> @laoergege/vuepress-plugin-vssue-next-compat@1.0.0 dev /Users/lianyuansheng/GitHub/laoergege-blog/packages/vuepress-plugin-vssue-next-compat
-[32m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m> tsc -w
-[32m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m
-[32m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0mc23:32:34 - Starting compilation in watch mode...
-[32m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m
+@laoergege/vuepress-plugin-vssue-next-compat:dev: cache hit, replaying output [2md5de63de7740cd4f[0m
+[35m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m
+[35m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m> @laoergege/vuepress-plugin-vssue-next-compat@1.0.0 dev /Users/lianyuansheng/GitHub/laoergege-blog/packages/vuepress-plugin-vssue-next-compat
+[35m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m> tsc -w
+[35m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m
+[35m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0mc21:16:38 - Starting compilation in watch mode...
+[35m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m
+[35m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m
+[35m@laoergege/vuepress-plugin-vssue-next-compat:dev: [0m21:16:41 - Found 0 errors. Watching for file changes.

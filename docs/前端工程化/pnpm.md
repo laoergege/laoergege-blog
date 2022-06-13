@@ -10,7 +10,7 @@ desc: 探究 pnpm 依赖管理原理与 monorepo 的方案
 # pnpm
 
 - pnpm
-  - [依赖管理](#依赖管理)
+  - [依赖安装机制](#依赖安装机制)
   - 存储管理
     - store
     - 基于内容寻址
@@ -18,6 +18,8 @@ desc: 探究 pnpm 依赖管理原理与 monorepo 的方案
   - [Monorepo](#monorepo)
 
 ## 依赖管理
+
+### 依赖安装机制
 
 - 对比 yarn/npm
   - npm@3 之前： `嵌套结构`
@@ -61,7 +63,7 @@ desc: 探究 pnpm 依赖管理原理与 monorepo 的方案
 
 4. 除了 qiankun 是**硬链接**到全局真实存储的文件，其他依赖项都是继续**符号链接**到 .pnpm 下的包
 
-### 半严格模式
+#### 半严格模式
 
 如果仔细发现上面的案例，`node_modules/.pnpm` 路径下竟然会有 `node_modules` 文件，这样虽然我们自己的代码是被严格限制了，但第三方依赖包还是可以根据 Node Module Resolution 机制偷偷访问到其他包！
 
@@ -97,7 +99,7 @@ public-hoist-pattern[]=*eslint*
       - 线上版本模式
   - 任务管理
     - 编排
-      - 拓扑排序：根据项目依赖关系，构建一个有向无环图（DAG）进行拓扑排序并执行过程
+      - 拓扑：根据项目依赖关系，构建一个有向无环图（DAG）进行拓扑排序并执行过程
       - 过滤
       - 并行
     - 优化
@@ -108,20 +110,15 @@ public-hoist-pattern[]=*eslint*
   - 监听模式
   - 发包
     - 版本管理 version
-      - 版本更新
-      - 发版模式
+      - 版本更新 semver
+      - 发版模式（monorepo 模式特有）
         - independent
         - fixed
     - 发版日志 changelog
     - 包的发布 publish
-- Monorepo 工具
-  - Pnpm Workspaces
-  - [Rush](https://github.com/microsoft/rushstack)
-  - Turborepo
-  - Nx
 - 流行组合方案
   - pnpm（依赖管理 + 任务管理） + changeset
-  - pnpm（依赖管理）+ rush（任务管理 + 任务管理）
+  - pnpm（依赖管理）+ [rush](https://github.com/microsoft/rushstack)（任务管理 + 任务管理）
   - pnpm（依赖管理）+ Turborepo（任务管理） + changeset（发包管理）
 
 ### pnpm + turborepo + changeset
@@ -130,11 +127,38 @@ public-hoist-pattern[]=*eslint*
 - 依赖关联
   - pnpm：默认情况下，如果可用的 packages 与已声明的可用范围相匹配，pnpm 将从工作区链接这些 packages
 - 任务管理
-  - 拓扑排序
+  - 拓扑
     - `turbo:depends`
       - 依赖上游包的任务
       - 依赖自身包的任务
       - 手动指定依赖任务
+
+#### pnpm-workspace
+
+#### turborepo 任务编排之 pipeline
+
+`turbo run <task>`
+
+```yaml
+packages:
+  - 'plugins'
+  - 'packages/*'
+  - '.'
+```
+
+```json
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "baseBranch": "origin/main",
+  "pipeline": {
+    "build": {
+      "inputs": ["src/**/*.ts"],
+      "outputs": ["lib/**/*"],
+      "dependsOn": ["^build"]
+    }
+  }
+}
+```
 
 ## 参考阅读
 
