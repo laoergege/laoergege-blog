@@ -1,6 +1,6 @@
 {
   "name": "@laoergege/vuepress-plugin-vssue-next-compat",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "the compat version of vuepress-plugin-vssue for vuepress-next",
   "repository": {
     "url": "https://github.com/laoergege/laoergege-blog",
@@ -22,7 +22,7 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "publish": "pnpm publish"
+    "publish": "pnpm publish --no-git-checks"
   },
   "license": "ISC",
   "dependencies": {

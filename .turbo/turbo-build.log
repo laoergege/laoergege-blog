@@ -1,1 +1,10 @@
 laoergege-blog:build: cache hit, replaying output [2m896ed06c65286671[0m
+[33mlaoergege-blog:build: [0m
+[33mlaoergege-blog:build: [0m> laoergege-blog@1.0.1 build /Users/lianyuansheng/GitHub/laoergege-blog
+[33mlaoergege-blog:build: [0m> pnpm run vuepress -- build docs
+[33mlaoergege-blog:build: [0m
+[33mlaoergege-blog:build: [0m
+[33mlaoergege-blog:build: [0m> laoergege-blog@1.0.1 vuepress /Users/lianyuansheng/GitHub/laoergege-blog
+[33mlaoergege-blog:build: [0m> node index.mjs "build" "docs"
+[33mlaoergege-blog:build: [0m
+[33mlaoergege-blog:build: [0minfo Initializing VuePress and preparing data...
