@@ -1,0 +1,9 @@
+@laoergege/vuepress-plugin-vssue-next-compat:publish: cache hit, replaying output [2m6296161dceca85d7[0m
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m> @laoergege/vuepress-plugin-vssue-next-compat@2.0.0 publish /Users/lianyuansheng/GitHub/laoergege-blog/packages/vuepress-plugin-vssue-next-compat
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m> pnpm publish
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m ERR_PNPM_GIT_NOT_UNCLEAN  Unclean working tree. Commit or stash changes first.
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mIf you want to disable Git checks on publish, set the "git-checks" setting to "false", or run again with "--no-git-checks".
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m ELIFECYCLE  Command failed with exit code 1.
