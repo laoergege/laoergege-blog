@@ -1,56 +1,56 @@
 @laoergege/vuepress-plugin-vssue-next-compat:publish: cache hit, replaying output [2mc76acfa3b712f26b[0m
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m> @laoergege/vuepress-plugin-vssue-next-compat@1.0.1 publish /Users/lianyuansheng/GitHub/laoergege-blog/packages/vuepress-plugin-vssue-next-compat
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m> @laoergege/vuepress-plugin-vssue-next-compat@1.0.2 publish /Users/lianyuansheng/GitHub/laoergege-blog/packages/vuepress-plugin-vssue-next-compat
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m> pnpm publish --no-git-checks --force
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m WARN  using --force I sure hope you know what you are doing
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm WARN using --force Recommended protections disabled.
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 📦  @laoergege/vuepress-plugin-vssue-next-compat@1.0.1
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 📦  @laoergege/vuepress-plugin-vssue-next-compat@1.0.2
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice === Tarball Contents === 
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 143B  CHANGELOG.md               
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 468B  README.md                  
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 189B  CHANGELOG.md               
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 1.0kB README.md                  
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 5.0kB lib/clientConfigFile.js    
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 1.4kB lib/index.js               
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 1.4kB package.json               
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 2.0kB package.json               
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 125B  types/clientConfigFile.d.ts
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 373B  types/index.d.ts           
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice === Tarball Details === 
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice name:          @laoergege/vuepress-plugin-vssue-next-compat          
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice version:       1.0.1                                                 
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice filename:      @laoergege/vuepress-plugin-vssue-next-compat-1.0.1.tgz
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice package size:  2.9 kB                                                
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice unpacked size: 9.0 kB                                                
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice shasum:        c2e1cec0eba6026fd7629b6cc3f7b92200d37710              
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice integrity:     sha512-ZL/OFE7BjgrTp[...]QvNdLyclrHX3Q==              
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice version:       1.0.2                                                 
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice filename:      @laoergege/vuepress-plugin-vssue-next-compat-1.0.2.tgz
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice package size:  3.2 kB                                                
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice unpacked size: 10.2 kB                                               
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice shasum:        b0208de6c55f5ef95e64f51838b453a6a1d2e002              
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice integrity:     sha512-K/xaWusuZPbZO[...]i64YruPYdEsxA==              
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice total files:   7                                                     
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice Publishing to https://npm.pkg.github.com/
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m+ @laoergege/vuepress-plugin-vssue-next-compat@1.0.1
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m+ @laoergege/vuepress-plugin-vssue-next-compat@1.0.2
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m> @laoergege/vuepress-plugin-vssue-next-compat@1.0.1 publish /Users/lianyuansheng/GitHub/laoergege-blog/packages/vuepress-plugin-vssue-next-compat
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m> @laoergege/vuepress-plugin-vssue-next-compat@1.0.2 publish /Users/lianyuansheng/GitHub/laoergege-blog/packages/vuepress-plugin-vssue-next-compat
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m> pnpm publish --no-git-checks --force
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m WARN  using --force I sure hope you know what you are doing
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm WARN using --force Recommended protections disabled.
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 📦  @laoergege/vuepress-plugin-vssue-next-compat@1.0.1
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 📦  @laoergege/vuepress-plugin-vssue-next-compat@1.0.2
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice === Tarball Contents === 
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 143B  CHANGELOG.md               
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 468B  README.md                  
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 189B  CHANGELOG.md               
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 1.0kB README.md                  
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 5.0kB lib/clientConfigFile.js    
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 1.4kB lib/index.js               
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 1.4kB package.json               
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 2.0kB package.json               
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 125B  types/clientConfigFile.d.ts
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 373B  types/index.d.ts           
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice === Tarball Details === 
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice name:          @laoergege/vuepress-plugin-vssue-next-compat          
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice version:       1.0.1                                                 
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice filename:      @laoergege/vuepress-plugin-vssue-next-compat-1.0.1.tgz
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice package size:  2.9 kB                                                
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice unpacked size: 9.0 kB                                                
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice shasum:        c2e1cec0eba6026fd7629b6cc3f7b92200d37710              
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice integrity:     sha512-ZL/OFE7BjgrTp[...]QvNdLyclrHX3Q==              
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice version:       1.0.2                                                 
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice filename:      @laoergege/vuepress-plugin-vssue-next-compat-1.0.2.tgz
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice package size:  3.2 kB                                                
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice unpacked size: 10.2 kB                                               
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice shasum:        b0208de6c55f5ef95e64f51838b453a6a1d2e002              
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice integrity:     sha512-K/xaWusuZPbZO[...]i64YruPYdEsxA==              
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice total files:   7                                                     
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice 
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm notice Publishing to https://npm.pkg.github.com/
@@ -58,6 +58,6 @@
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm ERR! 400 Bad Request - PUT https://npm.pkg.github.com/@laoergege%2fvuepress-plugin-vssue-next-compat - failed to stream package from json: unhandled input: Cannot publish over existing version.
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm ERR! A complete log of this run can be found in:
-[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm ERR!     /Users/lianyuansheng/.npm/_logs/2022-06-14T07_22_54_397Z-debug-0.log
+[35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0mnpm ERR!     /Users/lianyuansheng/.npm/_logs/2022-06-14T07_39_54_938Z-debug-0.log
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m ELIFECYCLE  Command failed with exit code 1.
 [35m@laoergege/vuepress-plugin-vssue-next-compat:publish: [0m ELIFECYCLE  Command failed with exit code 1.
