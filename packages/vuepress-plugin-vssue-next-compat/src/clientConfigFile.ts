@@ -21,15 +21,18 @@ export default defineClientConfig({
     app.component(
       "Vssue",
       defineComponent((props, { attrs }) => {
-        return h(resolveComponent("ClientOnly"), {}, () =>
-          h("vssue-compoennt", {
-            ...props,
-            ...attrs,
-          })
-        );
+        return () =>
+          h(resolveComponent("ClientOnly"), {}, () => {
+            return h(resolveComponent("VssueComponent"), {
+              ...props,
+              ...attrs,
+            });
+          });
       })
     );
 
+    //@ts-ignore
+    console.log(__VUEPRESS_SSR__);
     //@ts-ignore
     if (__VUEPRESS_SSR__) return;
 
@@ -78,7 +81,7 @@ export default defineClientConfig({
     };
 
     app.component(
-      "VssueCompoennt",
+      "VssueComponent",
       defineAsyncComponent(async () => {
         const ctx = await loadRuntime();
 

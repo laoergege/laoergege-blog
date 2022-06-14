@@ -198,6 +198,8 @@ PNPM 发包时
 - [Monorepo 的过去、现在、和未来](https://mp.weixin.qq.com/s/U8_30S9B0S_SU3jdgUxFGQ)
 
 
+- 打包
+  - lib：支持 UMD、ESModules 格式
 - 项目说明
 - 开发文件声明
 - 环境

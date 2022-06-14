@@ -16,8 +16,12 @@ const vue_1 = require("vue");
 exports.default = (0, client_1.defineClientConfig)({
     enhance({ app }) {
         app.component("Vssue", (0, vue_1.defineComponent)((props, { attrs }) => {
-            return (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, () => (0, vue_1.h)("vssue-compoennt", Object.assign(Object.assign({}, props), attrs)));
+            return () => (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, () => {
+                return (0, vue_1.h)((0, vue_1.resolveComponent)("VssueComponent"), Object.assign(Object.assign({}, props), attrs));
+            });
         }));
+        //@ts-ignore
+        console.log(__VUEPRESS_SSR__);
         //@ts-ignore
         if (__VUEPRESS_SSR__)
             return;
@@ -58,7 +62,7 @@ exports.default = (0, client_1.defineClientConfig)({
             fn.apply(_ctx);
             return ctx;
         });
-        app.component("VssueCompoennt", (0, vue_1.defineAsyncComponent)(() => __awaiter(this, void 0, void 0, function* () {
+        app.component("VssueComponent", (0, vue_1.defineAsyncComponent)(() => __awaiter(this, void 0, void 0, function* () {
             const ctx = yield loadRuntime();
             return {
                 props: {
