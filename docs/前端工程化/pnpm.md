@@ -1,6 +1,6 @@
 ---
 release: true
-top: 4
+top: 3
 tags:
   - pnpm
   - 包管理
@@ -10,12 +10,14 @@ desc: 探究 pnpm 依赖管理原理与 monorepo 的方案
 # pnpm
 
 - pnpm
-  - [依赖安装机制](#依赖安装机制)
+  - 依赖管理
+    - [依赖安装机制](#依赖安装机制)
   - 存储管理
     - store
     - 基于内容寻址
     - hardlink
   - [Monorepo](#monorepo)
+  - 发包
 
 ## 依赖管理
 
@@ -121,7 +123,7 @@ public-hoist-pattern[]=*eslint*
   - pnpm（依赖管理）+ [rush](https://github.com/microsoft/rushstack)（任务管理 + 任务管理）
   - pnpm（依赖管理）+ Turborepo（任务管理） + changeset（发包管理）
 
-### pnpm + turborepo + changeset
+## pnpm + turborepo + changeset
 
 - 项目创建
 - 依赖关联
@@ -133,9 +135,9 @@ public-hoist-pattern[]=*eslint*
       - 依赖自身包的任务
       - 手动指定依赖任务
 
-#### pnpm-workspace
+### pnpm-workspace
 
-#### turborepo 任务编排之 pipeline
+### turborepo 任务编排之 pipeline
 
 `turbo run <task>`
 
@@ -160,9 +162,43 @@ packages:
 }
 ```
 
+### changeset
+
+- changeset init：初始化
+- changeset
+- changeset version
+- changeset publish
+
+## 发包
+
+PNPM 发包时
+
+1. 打包、支持 UMD、ESModules 格式
+2. package 配置
+   ```js
+   {
+    "name": "my-library",
+    "version": "1.0.0",
+    "main": "dist/main.js",
+    "module": "dist/module.js",
+    "types": "dist/types.d.ts"
+
+    
+  }
+   ```
+3. 注册源及身份认证
+   1. .npmrc 文件发布包
+   2. publishConfig
+
 ## 参考阅读
 
 - [pnpm](https://pnpm.io/zh/)
 - [平铺的结构不是 node_modules 的唯一实现方式](https://pnpm.io/zh/blog/2020/05/27/flat-node-modules-is-not-the-only-way)
 - [关于现代包管理器的深度思考——为什么现在我更推荐 pnpm 而不是 npm/yarn?](https://mp.weixin.qq.com/s/1Wm-iYFBgJXMg_7SgWktXA)
 - [Monorepo 的过去、现在、和未来](https://mp.weixin.qq.com/s/U8_30S9B0S_SU3jdgUxFGQ)
+
+
+- 项目说明
+- 开发文件声明
+- 环境
+- 注册源及身份证

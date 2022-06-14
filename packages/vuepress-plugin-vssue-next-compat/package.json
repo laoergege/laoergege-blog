@@ -2,13 +2,28 @@
   "name": "@laoergege/vuepress-plugin-vssue-next-compat",
   "version": "2.0.0",
   "description": "the compat version of vuepress-plugin-vssue for vuepress-next",
+  "repository": {
+    "url": "https://github.com/laoergege/laoergege-blog",
+    "type": "git",
+    "directory": "packages/vuepress-plugin-vssue-next-compat"
+  },
+  "author": {
+    "name": "laoergege",
+    "email": "826037047@qq.com",
+    "url": "https://github.com/laoergege"
+  },
+  "files": [
+    "lib/*",
+    "types/*",
+    "CHANGELOG.md"
+  ],
   "main": "lib/index.js",
   "types": "types",
   "scripts": {
     "dev": "tsc -w",
-    "build": "tsc"
+    "build": "tsc",
+    "publish": "pnpm publish"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "vssue": "^1.4.8"

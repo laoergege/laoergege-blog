@@ -1,6 +1,6 @@
 {
   "name": "laoergege-blog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Laoergege's Learning Track",
   "packageManager": "pnpm@6.32.2",
   "scripts": {
@@ -9,7 +9,8 @@
     "docs:build": "turbo run build",
     "build": "pnpm run vuepress -- build docs",
     "vuepress": "node index.mjs",
-    "publish": "git tag page -f && git push origin page -f",
+    "release": "git tag page -f && git push origin page -f",
+    "publish": "turbo run publish",
     "open": "open-cli 'https://daisyui.com/' && open-cli 'https://tailwindcss.com/docs/installation'"
   },
   "repository": {
@@ -34,7 +35,7 @@
   "homepage": "https://github.com/laoergege/laoergege-blog#readme",
   "dependencies": {
     "@laoergege/vuepress-plugin-blog-utils": "workspace:^1.0.0",
-    "@laoergege/vuepress-plugin-vssue-next-compat": "workspace:^1.0.0",
+    "@laoergege/vuepress-plugin-vssue-next-compat": "workspace:^2.0.0",
     "@tailwindcss/typography": "0.5.2",
     "@vssue/api-github-v3": "^1.4.7",
     "chalk": "^4.1.2",
@@ -43,6 +44,7 @@
     "vue": "^3.2.36"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.23.0",
     "@types/node": "*",
     "@vuepress/bundler-vite": "2.0.0-beta.46",
     "@vuepress/bundler-webpack": "^2.0.0-beta.46",

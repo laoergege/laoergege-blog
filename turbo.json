@@ -13,6 +13,11 @@
       "inputs": ["src/**/*.ts"],
       "outputs": ["lib/**/*"],
       "dependsOn": ["^build"]
+    },
+    "publish": {
+      "inputs": ["src/**/*.ts"],
+      "outputs": ["lib/**/*"],
+      "dependsOn": ["build"]
     }
   }
 }
