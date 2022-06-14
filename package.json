@@ -10,7 +10,7 @@
     "build": "pnpm run vuepress -- build docs",
     "vuepress": "node index.mjs",
     "release": "git tag page -f && git push origin page -f",
-    "package:publish": "turbo run publish",
+    "package:publish": "turbo run publish --filter=!laoergege-blog",
     "open": "open-cli 'https://daisyui.com/' && open-cli 'https://tailwindcss.com/docs/installation'"
   },
   "repository": {

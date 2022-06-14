@@ -15,14 +15,15 @@
   "files": [
     "lib/*",
     "types/*",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "README.md"
   ],
   "main": "lib/index.js",
   "types": "types",
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "publish": "pnpm publish --no-git-checks"
+    "publish": "pnpm publish --no-git-checks --force"
   },
   "license": "ISC",
   "dependencies": {

@@ -1,4 +1,4 @@
-laoergege-blog:build: cache hit, replaying output [2m896ed06c65286671[0m
+laoergege-blog:build: cache hit, replaying output [2m22668b532ae58a14[0m
 [33mlaoergege-blog:build: [0m
 [33mlaoergege-blog:build: [0m> laoergege-blog@1.0.1 build /Users/lianyuansheng/GitHub/laoergege-blog
 [33mlaoergege-blog:build: [0m> pnpm run vuepress -- build docs
@@ -8,3 +8,15 @@ laoergege-blog:build: cache hit, replaying output [2m896ed06c65286671[0m
 [33mlaoergege-blog:build: [0m> node index.mjs "build" "docs"
 [33mlaoergege-blog:build: [0m
 [33mlaoergege-blog:build: [0minfo Initializing VuePress and preparing data...
+[33mlaoergege-blog:build: [0merror error in hook extendsPage from @vuepress/plugin-git
+[33mlaoergege-blog:build: [0mError: Command was killed with SIGINT (User interruption with CTRL-C): git --no-pager log --diff-filter=A --format=%at 浏览器原理及API/PWA.md
+[33mlaoergege-blog:build: [0m    at makeError (/Users/lianyuansheng/GitHub/laoergege-blog/node_modules/.pnpm/execa@5.1.1/node_modules/execa/lib/error.js:60:11)
+[33mlaoergege-blog:build: [0m    at handlePromise (/Users/lianyuansheng/GitHub/laoergege-blog/node_modules/.pnpm/execa@5.1.1/node_modules/execa/index.js:118:26)
+[33mlaoergege-blog:build: [0m    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[33mlaoergege-blog:build: [0m    at async getCreatedTime (/Users/lianyuansheng/GitHub/laoergege-blog/node_modules/.pnpm/@vuepress+plugin-git@2.0.0-beta.46/node_modules/@vuepress/plugin-git/lib/node/utils/getCreatedTime.js:9:24)
+[33mlaoergege-blog:build: [0m    at async Object.extendsPage [as hook] (/Users/lianyuansheng/GitHub/laoergege-blog/node_modules/.pnpm/@vuepress+plugin-git@2.0.0-beta.46/node_modules/@vuepress/plugin-git/lib/node/gitPlugin.js:21:45)
+[33mlaoergege-blog:build: [0m    at async Object.process (/Users/lianyuansheng/GitHub/laoergege-blog/node_modules/.pnpm/@vuepress+core@2.0.0-beta.46/node_modules/@vuepress/core/lib/pluginApi/createHookQueue.js:26:37)
+[33mlaoergege-blog:build: [0m    at async createPage (/Users/lianyuansheng/GitHub/laoergege-blog/node_modules/.pnpm/@vuepress+core@2.0.0-beta.46/node_modules/@vuepress/core/lib/page/createPage.js:131:5)
+[33mlaoergege-blog:build: [0m    at async Promise.all (index 153)
+[33mlaoergege-blog:build: [0m    at async resolveAppPages (/Users/lianyuansheng/GitHub/laoergege-blog/node_modules/.pnpm/@vuepress+core@2.0.0-beta.46/node_modules/@vuepress/core/lib/app/resolveAppPages.js:18:19)
+[33mlaoergege-blog:build: [0m    at async appInit (/Users/lianyuansheng/GitHub/laoergege-blog/node_modules/.pnpm/@vuepress+core@2.0.0-beta.46/node_modules/@vuepress/core/lib/app/appInit.js:22:17)
