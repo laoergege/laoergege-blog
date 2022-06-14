@@ -1,5 +1,11 @@
 # @laoergege/vuepress-plugin-vssue-next-compat
 
+## 1.0.3
+
+### Patch Changes
+
+- fix a bug
+
 ## 1.0.2
 
 ### Patch Changes

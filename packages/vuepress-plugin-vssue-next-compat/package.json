@@ -1,6 +1,6 @@
 {
   "name": "@laoergege/vuepress-plugin-vssue-next-compat",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "the compat version of vuepress-plugin-vssue for vuepress-next",
   "repository": {
     "url": "https://github.com/laoergege/laoergege-blog",

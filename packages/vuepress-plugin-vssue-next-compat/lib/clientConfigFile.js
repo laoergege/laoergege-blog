@@ -16,12 +16,8 @@ const vue_1 = require("vue");
 exports.default = (0, client_1.defineClientConfig)({
     enhance({ app }) {
         app.component("Vssue", (0, vue_1.defineComponent)((props, { attrs }) => {
-            return () => (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, () => {
-                return (0, vue_1.h)((0, vue_1.resolveComponent)("VssueComponent"), Object.assign(Object.assign({}, props), attrs));
-            });
+            return (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, () => (0, vue_1.h)("vssue-component", Object.assign(Object.assign({}, props), attrs)));
         }));
-        //@ts-ignore
-        console.log(__VUEPRESS_SSR__);
         //@ts-ignore
         if (__VUEPRESS_SSR__)
             return;
