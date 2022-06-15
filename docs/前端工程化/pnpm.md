@@ -18,6 +18,7 @@ desc: 探究 pnpm 依赖管理原理与 monorepo 的方案
     - hardlink
   - [Monorepo](#monorepo)
   - 发包
+    - [发布工作流](#发布工作流)
 
 ## 依赖管理
 
@@ -96,7 +97,7 @@ public-hoist-pattern[]=*eslint*
     - 项目间引用约束
   - 依赖管理
     - 工程依赖
-    - 项目依赖关联（可切换）
+    - 项目依赖关联（可方便切换本地、线上版本方便测试、开发？）
       - 本地 link 模式
       - 线上版本模式
   - 任务管理
@@ -112,7 +113,7 @@ public-hoist-pattern[]=*eslint*
   - 监听模式
   - 发包
     - 版本管理 version
-      - 版本更新 semver
+      - 版本语义 semver
       - 发版模式（monorepo 模式特有）
         - independent
         - fixed
@@ -171,24 +172,99 @@ packages:
 
 ## 发包
 
-PNPM 发包时
+pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围相匹配，pnpm 将从 workspace 链接这些 packages，并在 package.json 以 `workspace:` 协议声明；而当发包的时候将动态标准化依赖为 `workspace:` 协议：
 
-1. 打包、支持 UMD、ESModules 格式
-2. package 配置
-   ```js
-   {
-    "name": "my-library",
-    "version": "1.0.0",
-    "main": "dist/main.js",
-    "module": "dist/module.js",
-    "types": "dist/types.d.ts"
+```json
+{
+    "dependencies": {
+        "foo": "workspace:*",
+        "bar": "workspace:~",
+        "qar": "workspace:^",
+        "zoo": "workspace:^1.5.0"
+    }
+}
+```
 
-    
-  }
-   ```
-3. 注册源及身份认证
-   1. .npmrc 文件发布包
-   2. publishConfig
+将会被转化为：
+
+```json
+{
+    "dependencies": {
+        "foo": "1.5.0",
+        "bar": "~1.5.0",
+        "qar": "^1.5.0",
+        "zoo": "^1.5.0"
+    }
+}
+```
+
+### 发布工作流
+
+> 以下基于 [github package npm 注册源](https://docs.github.com/cn/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)为例
+
+1. Changelog 生成
+2. 版本修改
+3. 打包、支持 UMD、ESModules 格式
+4. 确认 package 相关信息（[package.json 常见字段](#packagejson-常见字段)）
+5. 注册源及身份认证
+   - 注册源配置
+     - .npmrc：`@laoergege:registry=https://npm.pkg.github.com/`
+     - package.json#publishConfig：
+        ```json
+        "publishConfig": {
+          "registry":"https://npm.pkg.github.com"
+        }
+        ```
+   - 身份认证
+     - 个人访问令牌
+       - .npmrc：`//npm.pkg.github.com/:_authToken=TOKEN`
+     - 命令行
+        ```shell
+        $ npm login --scope=@OWNER --registry=https://npm.pkg.github.com
+
+        > Username: USERNAME
+        > Password: TOKEN
+        > Email: PUBLIC-EMAIL-ADDRESS
+        ```
+6. `pnpm publish`
+
+## 附录
+
+### package.json 常见字段
+
+> package.json 文档链接 
+> - [npm](https://docs.npmjs.com/cli/v8/configuring-npm/package-json)
+> - [pnpm](https://pnpm.io/zh/package_json)
+
+- package.json
+  - 项目描述
+    - name
+    - version
+    - description
+    - keywords
+    - homepage
+    - license
+    - people fields: author, contributors
+    - files
+    - repository
+  - 开发声明
+    - type
+    - main
+    - module
+    - types
+    - bin
+    - scripts
+    - 依赖
+      - dependencies
+      - devDependencies
+      - peerDependencies
+    - overrides：用于开发覆盖包做测试
+    - workspaces
+  - 发包配置
+    - publishConfig
+    - private
+  - 环境声明
+    - engines
 
 ## 参考阅读
 
@@ -196,11 +272,3 @@ PNPM 发包时
 - [平铺的结构不是 node_modules 的唯一实现方式](https://pnpm.io/zh/blog/2020/05/27/flat-node-modules-is-not-the-only-way)
 - [关于现代包管理器的深度思考——为什么现在我更推荐 pnpm 而不是 npm/yarn?](https://mp.weixin.qq.com/s/1Wm-iYFBgJXMg_7SgWktXA)
 - [Monorepo 的过去、现在、和未来](https://mp.weixin.qq.com/s/U8_30S9B0S_SU3jdgUxFGQ)
-
-
-- 打包
-  - lib：支持 UMD、ESModules 格式
-- 项目说明
-- 开发文件声明
-- 环境
-- 发包：注册源及身份证

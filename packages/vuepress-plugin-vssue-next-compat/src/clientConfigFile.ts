@@ -32,8 +32,6 @@ export default defineClientConfig({
     );
 
     //@ts-ignore
-    console.log(__VUEPRESS_SSR__);
-    //@ts-ignore
     if (__VUEPRESS_SSR__) return;
 
     const vssueOptions = __VSSUE_OPTIONS__;

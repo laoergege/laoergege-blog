@@ -28,3 +28,9 @@ Thanks for the help of the following projects.
 13. [ ] 博客订阅
 
 ## Vuepress Plugins
+
+### vuepress-plugin-vssue-next-compat
+
+The compat version of vuepress-plugin-vssue for vuepress-next. 
+
+[Get it](https://github.com/laoergege/laoergege-blog/packages/1480309).
