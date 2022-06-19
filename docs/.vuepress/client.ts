@@ -3,7 +3,7 @@ import "./styles/index.scss";
 
 //@ts-ignore
 // if (!__VUEPRESS_SSR__) {
-//   if ("serviceWorker" in navigator) {
+//   if ("serviceWorker" in navigator && !!!navigator.serviceWorker.controller) {
 //     navigator.serviceWorker.register("/sw.js").then(function () {
 //       console.log("Service Worker Registered");
 //     });

@@ -8,3 +8,6 @@
 函数组合
 - pipe
 - compose 从右往左
+
+- Thunk
+- Curry

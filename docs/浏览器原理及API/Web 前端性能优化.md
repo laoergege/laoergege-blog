@@ -1,6 +1,5 @@
 ---
 release: true
-top: 3
 tags:
   - 性能优化
   - web
@@ -24,8 +23,8 @@ desc: web 前端能优化知识体系
       - [bundlesize](https://github.com/siddharthkp/bundlesize)
   - 调试工具
     - [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
-- [前端监控](#前端监控)
-- [优化策略](#性能优化策略)
+- [前端性能监控](#前端监控)
+- [性能优化策略](#性能优化策略)
 
 ## Web 性能指标
 
@@ -115,7 +114,7 @@ Web 标准提供性能相关的 API 及继承关系如下图：
 
 ## 性能优化策略
 
-通常一个页面有三个阶段：加载阶段、交互阶段和关闭阶段，Web 性能优化主要有两个方向：优化页面加载、优化加载后交互。
+通常一个页面有三个阶段：加载阶段、交互阶段和关闭阶段，Web 性能优化主要有两个方向：页面加载、页面交互。
 
 - 页面加载
   - 指标
@@ -187,8 +186,7 @@ Web 标准提供性能相关的 API 及继承关系如下图：
   - 指标
     - 帧率
     - 交互响应速度
-  - 绘制一帧生命周期  
-    ![](./images/main-thread.svg)
+  - 绘制一帧生命周期  ![](./images/main-thread.svg)
   - 生成一帧的方式，有重排、重绘和合成三种方式
     - 重排
     - 重绘
@@ -462,3 +460,4 @@ CDN
       - imagesrcset & imagesizes
       - 延迟加载屏幕外图像
 - 代码优化
+

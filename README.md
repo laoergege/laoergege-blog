@@ -11,10 +11,9 @@ Thanks for the help of the following projects.
 
 ## Progress
 
-1. [x] github action 自动化部署 github page
-2. [x] 首页列表自动化
-   1. [x] 列表页重复渲染(Hydration completed but contains mismatches)
-3. [x] 文章评论
+1. [x] 通过  GithubActions 自动化部署到 GithubPage
+2. [x] 首页列表自动化生成
+3. [x] 评论功能
 4. [x] 文章排版
    1. @tailwindcss/typography
 5. [x] CDN 缓存
@@ -25,9 +24,11 @@ Thanks for the help of the following projects.
 10. [ ] issue 同步
 11. [ ] tag 管理
 12. [ ] 可视化知识体系
-13. [ ] 博客订阅
+13. [ ] 订阅功能
 
 ## Vuepress Plugins
+
+I write some vuepress's plugins for building a blog...
 
 ### vuepress-plugin-vssue-next-compat
 

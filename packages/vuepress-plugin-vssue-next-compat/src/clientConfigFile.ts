@@ -10,7 +10,6 @@ import {
   watchEffect,
   toRefs,
   watch,
-  computed,
   defineComponent,
 } from "vue";
 
@@ -104,14 +103,6 @@ export default defineClientConfig({
           setup(props) {
             let vssue: any = null;
             const { title, issueId, options } = toRefs(props);
-            const optionComputed = computed<VssueNextCompatPluginOptions>(
-              () => {
-                return {
-                  ...vssueOptions,
-                  ...options,
-                };
-              }
-            );
 
             const el = ref(null);
             const stop = watchEffect(() => {
@@ -119,11 +110,15 @@ export default defineClientConfig({
                 vssue = new ctx.Vue({
                   el: el.value,
                   render(h: any) {
+                    const { title, issueId, options } = props;
                     return h("vssue", {
                       props: {
-                        title: title.value,
-                        issueId: issueId.value,
-                        options: optionComputed.value,
+                        title,
+                        issueId,
+                        options: {
+                          ...vssueOptions,
+                          ...options,
+                        },
                       },
                     });
                   },
@@ -131,7 +126,7 @@ export default defineClientConfig({
                 stop();
               }
             });
-            watch([title, issueId, optionComputed], () => {
+            watch([title, issueId, options], () => {
               vssue && vssue.$forceUpdate();
             });
 

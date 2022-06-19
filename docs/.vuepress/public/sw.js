@@ -1,6 +1,7 @@
 self.addEventListener('fetch', function (event) {
-    console.log(event)
-
-    const request = { ...event.request }
-
+    const { request } = event;
+    if (request.url.includes('github.com')) {
+        console.log(request)
+        event.waitUntil(Promise.reject(123))
+    }
 })

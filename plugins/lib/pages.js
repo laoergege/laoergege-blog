@@ -80,11 +80,10 @@ var PagesPlugin = function (_a) {
         },
         onInitialized: function (app) {
             return __awaiter(this, void 0, void 0, function () {
-                var pages, _pages, chunks, tables, i, table, homepage, path, page, err_1;
+                var pages, _pages, chunks, tables, i, table, homepage, path, page;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            _a.trys.push([0, 5, , 6]);
                             // @vuepress/plugin-git 依赖提示
                             if (!(0, utils_1.isExistPlugin)("@vuepress/plugin-git", app)) {
                                 throw "Need to install @vupress/plugin-git dependency first!";
@@ -139,12 +138,7 @@ var PagesPlugin = function (_a) {
                         case 3:
                             i++;
                             return [3 /*break*/, 1];
-                        case 4: return [3 /*break*/, 6];
-                        case 5:
-                            err_1 = _a.sent();
-                            console.log(err_1);
-                            return [3 /*break*/, 6];
-                        case 6: return [2 /*return*/];
+                        case 4: return [2 /*return*/];
                     }
                 });
             });

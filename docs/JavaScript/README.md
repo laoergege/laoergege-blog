@@ -12,18 +12,13 @@ desc: JavaScript 知识体系
   - [JavaScript 模块](./JavaScript%20模块.md)
   - [JavaScript 类型系统](./JavaScript%20类型系统.md)
   - [JavaScript 对象](./JavaScript%20对象.md)
-    - 可迭代对象
+    - 迭代器对象
     - 生成器
   - 数据结构
     - [数组](./JavaScript%20数组%20API%20总结.md)
     - Set
     - Map
   - [JavaScript 异步编程](./JavaScript%20异步编程.md)
-  - 函数式编程
-    - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
-    - 柯里化（curry）
-    - 组合（compose）
-    - [ts-belt](https://github.com/mobily/ts-belt)
   - 运行时
     - [内存管理机制](./JavaScript%20内存管理机制.md)
       - 堆栈内存
@@ -33,6 +28,11 @@ desc: JavaScript 知识体系
       - [JavaScript 代码执行机制](./JavaScript%20代码执行机制.md)
   - [JavaScript 元编程](./JavaScript%20%E5%85%83%E7%BC%96%E7%A8%8B.md)
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
+  - 函数式编程
+    - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
+    - 柯里化（curry）
+    - 组合（compose）
+    - [ts-belt](https://github.com/mobily/ts-belt)
 - api
   - [手写 call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
   - [手写 instanceof](https://github.com/laoergege/laoergege-blog/issues/74)

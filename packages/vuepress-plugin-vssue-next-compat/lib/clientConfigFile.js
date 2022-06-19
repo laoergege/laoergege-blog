@@ -16,7 +16,9 @@ const vue_1 = require("vue");
 exports.default = (0, client_1.defineClientConfig)({
     enhance({ app }) {
         app.component("Vssue", (0, vue_1.defineComponent)((props, { attrs }) => {
-            return (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, () => (0, vue_1.h)("vssue-component", Object.assign(Object.assign({}, props), attrs)));
+            return () => (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, () => {
+                return (0, vue_1.h)((0, vue_1.resolveComponent)("VssueComponent"), Object.assign(Object.assign({}, props), attrs));
+            });
         }));
         //@ts-ignore
         if (__VUEPRESS_SSR__)
@@ -81,20 +83,18 @@ exports.default = (0, client_1.defineClientConfig)({
                 setup(props) {
                     let vssue = null;
                     const { title, issueId, options } = (0, vue_1.toRefs)(props);
-                    const optionComputed = (0, vue_1.computed)(() => {
-                        return Object.assign(Object.assign({}, vssueOptions), options);
-                    });
                     const el = (0, vue_1.ref)(null);
                     const stop = (0, vue_1.watchEffect)(() => {
                         if (el.value) {
                             vssue = new ctx.Vue({
                                 el: el.value,
                                 render(h) {
+                                    const { title, issueId, options } = props;
                                     return h("vssue", {
                                         props: {
-                                            title: title.value,
-                                            issueId: issueId.value,
-                                            options: optionComputed.value,
+                                            title,
+                                            issueId,
+                                            options: Object.assign(Object.assign({}, vssueOptions), options),
                                         },
                                     });
                                 },
@@ -102,7 +102,7 @@ exports.default = (0, client_1.defineClientConfig)({
                             stop();
                         }
                     });
-                    (0, vue_1.watch)([title, issueId, optionComputed], () => {
+                    (0, vue_1.watch)([title, issueId, options], () => {
                         vssue && vssue.$forceUpdate();
                     });
                     return () => (0, vue_1.h)("div", {
