@@ -58,7 +58,7 @@ In your md file or vue file.
 
 A hook which you can modify the oauth url is runing before vssue redirect to the oauth url.
 
-> I found that the github oauth callback url is cannot contain chinese path !  So I add a new api. 
+> I found that the redirect url （the oauth callback url） is cannot contain chinese path ! So I add a new api which you can modify the redirect_uri query param.
 
 ```html
 <template>

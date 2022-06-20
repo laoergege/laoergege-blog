@@ -124,7 +124,7 @@ exports.default = (0, client_1.defineClientConfig)({
                         default: undefined,
                     },
                 },
-                setup(props, { attrs }) {
+                setup(props) {
                     let vssue = null;
                     const { title, issueId, options } = (0, vue_1.toRefs)(props);
                     const el = (0, vue_1.ref)(null);
@@ -134,11 +134,13 @@ exports.default = (0, client_1.defineClientConfig)({
                                 el: el.value,
                                 render(h) {
                                     const { title, issueId, options } = props;
-                                    return h("vssue", Object.assign({ props: {
+                                    return h("vssue", {
+                                        props: {
                                             title,
                                             issueId,
                                             options: Object.assign(Object.assign({}, vssueOptions), options),
-                                        } }, attrs));
+                                        },
+                                    });
                                 },
                             });
                             stop();
