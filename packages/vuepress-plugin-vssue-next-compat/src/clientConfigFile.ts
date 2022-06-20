@@ -15,11 +15,32 @@ import {
 
 declare const __VSSUE_OPTIONS__: VssueNextCompatPluginOptions;
 
+export interface OnBeforeOauthHook {
+  /**
+   * @url {string} then oauth url
+   */
+  (url: string): void;
+}
+
+export interface VssueProps {
+  onBeforeOauth?: OnBeforeOauthHook;
+}
+
 export default defineClientConfig({
   enhance({ app }) {
+    let onBeforeOauth: OnBeforeOauthHook;
+    const onBeforeOauthHook: OnBeforeOauthHook = (url) => {
+      if (onBeforeOauth) {
+        return onBeforeOauth(url);
+      }
+      return url;
+    };
+
     app.component(
       "Vssue",
-      defineComponent((props, { attrs }) => {
+      defineComponent<VssueProps>((props, { attrs }) => {
+        // @ts-ignore
+        onBeforeOauth = props.onBeforeOauth || attrs.onBeforeOauth;
         return () =>
           h(resolveComponent("ClientOnly"), {}, () => {
             return h(resolveComponent("VssueComponent"), {
@@ -45,26 +66,60 @@ export default defineClientConfig({
           `//unpkg.com/vssue/dist/vssue.${vssueOptions.platform}.min.js`
         ).then((res) => res.text()),
       ]);
+      // proxy window.location
+      const _location = new Proxy(Object.create(null), {
+        get(target, key) {
+          const value = Reflect.get(window.location, key, window.location);
+          return typeof value === "function"
+            ? value.bind(window.location)
+            : value;
+        },
+        has(target, prop) {
+          if (prop in window.location) {
+            return true;
+          }
+
+          return false;
+        },
+        set(target, key, value) {
+          // trigger hook
+          if (key === "href") {
+            value = onBeforeOauthHook(value);
+          }
+
+          Reflect.set(window.location, key, value);
+          return true;
+        },
+      });
       // sandbox
       const ctx = Object.create(null);
       const _ctx = new Proxy(ctx, {
         get(target, key, receiver) {
-          if (key !== "window" && key in window) {
+          const value = Reflect.get(target, key, receiver);
+          if (!value && key in window) {
             // @ts-ignore
-            const value: unknown = window[key];
-            return typeof value === "function" ? value.bind(window) : value;
+            const value: any = Reflect.get(window, key, window);
+            return typeof value !== "function"
+              ? value
+              : new Proxy(value, {
+                  apply(target, thisArg, argArray) {
+                    return Reflect.apply(target, window, argArray);
+                  },
+                  construct(target, argArray, newTarget) {
+                    return Reflect.construct(target, argArray, target);
+                  },
+                });
           }
-          return Reflect.get(target, key, receiver);
+          return value;
         },
-        has(_target: Object, key: string) {
-          if (key !== "window" && key in window) {
-            return false;
-          }
-
+        has(target, key) {
+          if (key in target) return true;
+          if (key in window) return false;
           return true;
         },
       });
       ctx.window = _ctx;
+      ctx.location = _location;
       const fn = new Function(`
           with(this) {
             ${vue2Code};
@@ -100,7 +155,7 @@ export default defineClientConfig({
               default: undefined,
             },
           },
-          setup(props) {
+          setup(props, { attrs }) {
             let vssue: any = null;
             const { title, issueId, options } = toRefs(props);
 
@@ -120,6 +175,7 @@ export default defineClientConfig({
                           ...options,
                         },
                       },
+                      ...attrs,
                     });
                   },
                 });

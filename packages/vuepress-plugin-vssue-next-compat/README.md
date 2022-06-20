@@ -1,10 +1,10 @@
 # @laoergege/vuepress-plugin-vssue-next-compat
 
-the compat version of vuepress-plugin-vssue for vuepress-next.
+The compat version of vuepress-plugin-vssue for vuepress-next.
 
-## why
+## Why
 
-[vssue](https://vssue.js.org/) is currently developed based on vue2, so it is not compatible with vuepress-next.
+[Vssue](https://vssue.js.org/) is currently developed based on vue2, so it is not compatible with vuepress-next.
 
 ## Usage
 
@@ -27,7 +27,6 @@ import { VssuePlugin } from "@laoergege/vuepress-plugin-vssue-next-compat";
 
 // ...
 plugins:[
-    // [more options reference](https://vssue.js.org/options/)
     VssuePlugin({
       platform: "github",
       owner: "laoergege",
@@ -41,6 +40,8 @@ plugins:[
 // ...
 ```
 
+[more vssue options reference](https://vssue.js.org/options/)
+
 In your md file or vue file.
 
 ```md
@@ -52,6 +53,38 @@ In your md file or vue file.
 ```
 
 [Vssue Component Props Reference](https://vssue.js.org/options/#vssue-options)
+
+### onBeforeOauth
+
+A hook which you can modify the oauth url is runing before vssue redirect to the oauth url.
+
+> I found that the github oauth callback url is cannot contain chinese path !  So I add a new api. 
+
+```html
+<template>
+  <vssue :title="title"  :onBeforeOauth="onBeforeOauth"/>
+</template>
+
+<script>
+import { usePageData } from "@vuepress/client"
+import { toRefs } from "vue";
+export default {
+    setup() {
+        const { title } = toRefs(usePageData().value)
+
+        return {
+          title,
+          onBeforeOauth(url) {
+           sessionStorage.setItem('redirect_uri', location.pathname)
+           // remove the Chinese path
+           // change the redirect_uri query            
+           return url.replace(/redirect_uri=([^&]*)/, `redirect_uri=${location.origin}`)
+          }
+        }
+    }
+}
+</script>
+```
 
 ## Changelog
 
