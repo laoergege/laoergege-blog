@@ -8,6 +8,9 @@
 <script>
 import { usePageData } from "@vuepress/client";
 import { toRefs, onActivated, ref } from "vue";
+
+import "../styles/vssue.styl";
+
 export default {
   setup() {
     const titleRef = ref(usePageData().value.title)

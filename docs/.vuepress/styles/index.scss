@@ -21,22 +21,16 @@
   // nprogress
   --nprogress-color: theme("colors.accent-focus");
   --nprogress-z-index: 1031;
-
-  // vssue
-  --vssue-theme-color: theme("colors.primary");
 }
 
 .vssue {
-  font-family: theme("fontFamily.mono");
-  // color: theme("colors.primary");
+  .vssue-comment-footer{
+    display: flex;
+    justify-content: space-between;
 
-  :not(.vssue-comment-content) a {
-    color: theme("colors.accent");
-  }
-
-  .vssue-button:not(:disabled).vssue-button-primary {
-    color: theme("colors.accent-focus");
-    border-color: theme("colors.accent");
+    .vssue-comment-operations {
+      display: flex;
+    }
   }
 }
 
