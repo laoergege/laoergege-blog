@@ -38,7 +38,11 @@ jobs:
     # 博客部署
     - name: Deploy
       if: success()
-      uses: peaceiris/actions-gh-pages@v3
+      uses: crazy-max/ghaction-github-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
+        repo: laoergege/laoergege.github.io
+        build_dir: dist
+        jekyll: false
+        target_branch: main
+      env:
+        GH_PAT: ${{ secrets.PUBLISH }}
