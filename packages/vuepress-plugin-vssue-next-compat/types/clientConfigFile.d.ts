@@ -1,4 +1,3 @@
-import "vssue/dist/vssue.min.css";
 export interface OnBeforeOauthHook {
     /**
      * @url {string} then oauth url

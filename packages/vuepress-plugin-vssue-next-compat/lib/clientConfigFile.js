@@ -10,9 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@vuepress/client");
-// @ts-ignore
-// import "./vssue.styl";
-require("vssue/dist/vssue.min.css");
 const vue_1 = require("vue");
 exports.default = (0, client_1.defineClientConfig)({
     enhance({ app }) {

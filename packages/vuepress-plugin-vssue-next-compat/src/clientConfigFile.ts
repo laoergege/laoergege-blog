@@ -1,8 +1,5 @@
 import { defineClientConfig } from "@vuepress/client";
 import type { VssueNextCompatPluginOptions } from "./index";
-// @ts-ignore
-// import "./vssue.styl";
-import "vssue/dist/vssue.min.css";
 
 import {
   h,

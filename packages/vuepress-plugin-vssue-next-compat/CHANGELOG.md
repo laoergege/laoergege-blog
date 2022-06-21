@@ -1,5 +1,11 @@
 # @laoergege/vuepress-plugin-vssue-next-compat
 
+## 1.0.5
+
+### Patch Changes
+
+- remove default vssue css file
+
 ## 1.0.4
 
 ### Patch Changes

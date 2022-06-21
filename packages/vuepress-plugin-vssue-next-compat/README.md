@@ -20,9 +20,34 @@ Install from the command line:
 npm install @laoergege/vuepress-plugin-vssue-next-compat@1.0.0
 ```
 
-.vuepress/config.js
+Import vssue css:
+
+In Browser
+
+```html
+<head>
+  <!-- style sheet of Vssue -->
+  <link rel="stylesheet" href="https://unpkg.com/vssue/dist/vssue.min.css">
+</head>
+```
+
+or in APP
+
+```shell
+npm install vssue
+```
 
 ```js
+// .vuepress/clinet.js
+import 'vssue/dist/vssue.css'
+```
+
+With this way, you can build your theme. [see more](https://vssue.js.org/guide/styles.html#use-source-code-of-vssue-styles)
+
+config plugin:
+
+```js
+// .vuepress/config.js
 import { VssuePlugin } from "@laoergege/vuepress-plugin-vssue-next-compat";
 
 // ...
