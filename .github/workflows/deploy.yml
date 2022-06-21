@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
     # 安装 node 环境
@@ -38,7 +38,7 @@ jobs:
     # 博客部署
     - name: Deploy
       if: success()
-      uses: crazy-max/ghaction-github-pages@v2
+      uses: crazy-max/ghaction-github-pages@v3
       with:
         repo: laoergege/laoergege.github.io
         build_dir: dist
