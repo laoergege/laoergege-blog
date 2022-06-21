@@ -2,7 +2,6 @@
 >   
 > 总结：学习 => 应用 => 深入 => 创新
 
-
 - 专业
   - Web
     - 前端框架
@@ -14,6 +13,8 @@
     - JavaScript 、Web 进阶
       - [ ] 《浏览器原理及实践》
       - [ ] 《JavaScript 核心原理精讲》
+    - Typescript
+      - type-challenges 
     - 可视化
   - 软件工程
   - 编程语言

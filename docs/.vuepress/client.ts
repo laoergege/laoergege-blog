@@ -1,5 +1,21 @@
 import { defineClientConfig } from "@vuepress/client";
 import "./styles/index.scss";
+import { useRouter, useRoute } from "vue-router";
+
+export default defineClientConfig({
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+
+    const redirect_uri = sessionStorage.getItem("redirect_uri");
+    if (redirect_uri) {
+      router.push({
+        path: redirect_uri,
+        query: route.query,
+      });
+    }
+  },
+});
 
 //@ts-ignore
 // if (!__VUEPRESS_SSR__) {
@@ -9,5 +25,3 @@ import "./styles/index.scss";
 //     });
 //   }
 // }
-
-export default defineClientConfig({});

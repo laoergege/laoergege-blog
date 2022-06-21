@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@vuepress/client");
 // @ts-ignore
+// import "./vssue.styl";
 require("vssue/dist/vssue.min.css");
 const vue_1 = require("vue");
 exports.default = (0, client_1.defineClientConfig)({
@@ -124,7 +125,7 @@ exports.default = (0, client_1.defineClientConfig)({
                         default: undefined,
                     },
                 },
-                setup(props) {
+                setup(props, { attrs }) {
                     let vssue = null;
                     const { title, issueId, options } = (0, vue_1.toRefs)(props);
                     const el = (0, vue_1.ref)(null);
@@ -134,13 +135,11 @@ exports.default = (0, client_1.defineClientConfig)({
                                 el: el.value,
                                 render(h) {
                                     const { title, issueId, options } = props;
-                                    return h("vssue", {
-                                        props: {
+                                    return h("vssue", Object.assign({ props: {
                                             title,
                                             issueId,
                                             options: Object.assign(Object.assign({}, vssueOptions), options),
-                                        },
-                                    });
+                                        } }, attrs));
                                 },
                             });
                             stop();

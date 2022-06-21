@@ -2,33 +2,34 @@
 
 Thanks for the help of the following projects.
 
-- vue-next
+- vue
 - vuepress-next
 - github action
 - github page
 - [daisyui](https://github.com/saadeghi/daisyui)
 - [tailwindcss](https://tailwindcss.com/)
+- vssue
 
 ## Progress
 
 1. [x] 通过  GithubActions 自动化部署到 GithubPage
 2. [x] 首页列表自动化生成
-3. [x] 评论功能
-4. [x] 文章排版
-   1. @tailwindcss/typography
+3. [x] 评论功能：@laoergege/vuepress-plugin-vssue-next-compat
+4. [x] 文章排版: @tailwindcss/typography
 5. [x] CDN 缓存
-6. [ ] service-work
-7. [ ] 内容搜索
-8. [ ] 图片优化
-9.  [ ] code 块优化
-10. [ ] issue 同步
-11. [ ] tag 管理
-12. [ ] 可视化知识体系
-13. [ ] 订阅功能
+6. [ ] 暗黑模式适配
+7. [ ] service-work
+8. [ ] 内容搜索
+9. [ ] 图片优化
+10. [ ] code 块优化
+11. [ ] issue 同步
+12. [ ] tag 管理
+13. [ ] 可视化知识体系
+14. [ ] 订阅功能
 
 ## Vuepress Plugins
 
-I write some vuepress's plugins for building a blog...
+I writed some vuepress's plugins for building my blog...
 
 ### vuepress-plugin-vssue-next-compat
 

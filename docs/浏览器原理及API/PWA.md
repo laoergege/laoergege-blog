@@ -22,10 +22,12 @@ PWA, 渐进式 Web 应用，提供一套渐进式的技术方案集合，逐渐�
 - 生命周期
   - 注册
     - 下载、执行
-    - 安装：Service Worker 执行后立即触发
+  - 安装：Service Worker 执行后立即触发
   - 激活
   - 更新
   - 等待
+
+- 开发避免 Service Worker 缓存
 
 ## 参考学习
 
