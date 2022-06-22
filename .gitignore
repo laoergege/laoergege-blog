@@ -6,3 +6,5 @@ docs/.vuepress/.cache/
 dist
 
 scripts/github-token.txt
+
+docs/mianshi.md

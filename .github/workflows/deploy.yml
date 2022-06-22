@@ -45,4 +45,4 @@ jobs:
         jekyll: false
         target_branch: main
       env:
-        GH_PAT: ${{ secrets.PUBLISH }}
+        GH_PAT: ${{ secrets.RELEASE }}
