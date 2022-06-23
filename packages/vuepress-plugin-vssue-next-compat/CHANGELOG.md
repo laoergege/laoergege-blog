@@ -1,5 +1,11 @@
 # @laoergege/vuepress-plugin-vssue-next-compat
 
+## 1.0.6
+
+### Patch Changes
+
+- chore(vssue): 调整 ts 编译方式
+
 ## 1.0.5
 
 ### Patch Changes
