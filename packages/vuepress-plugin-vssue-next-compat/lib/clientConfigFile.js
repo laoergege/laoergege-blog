@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,10 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const client_1 = require("@vuepress/client");
-const vue_1 = require("vue");
-exports.default = (0, client_1.defineClientConfig)({
+import { defineClientConfig } from "@vuepress/client";
+import { h, resolveComponent, ref, defineAsyncComponent, watchEffect, toRefs, watch, defineComponent, } from "vue";
+export default defineClientConfig({
     enhance({ app }) {
         let onBeforeOauth;
         const onBeforeOauthHook = (url) => {
@@ -20,11 +18,11 @@ exports.default = (0, client_1.defineClientConfig)({
             }
             return url;
         };
-        app.component("Vssue", (0, vue_1.defineComponent)((props, { attrs }) => {
+        app.component("Vssue", defineComponent((props, { attrs }) => {
             // @ts-ignore
             onBeforeOauth = props.onBeforeOauth || attrs.onBeforeOauth;
-            return () => (0, vue_1.h)((0, vue_1.resolveComponent)("ClientOnly"), {}, () => {
-                return (0, vue_1.h)((0, vue_1.resolveComponent)("VssueComponent"), Object.assign(Object.assign({}, props), attrs));
+            return () => h(resolveComponent("ClientOnly"), {}, () => {
+                return h(resolveComponent("VssueComponent"), Object.assign(Object.assign({}, props), attrs));
             });
         }));
         //@ts-ignore
@@ -102,7 +100,7 @@ exports.default = (0, client_1.defineClientConfig)({
             fn.apply(_ctx);
             return ctx;
         });
-        app.component("VssueComponent", (0, vue_1.defineAsyncComponent)(() => __awaiter(this, void 0, void 0, function* () {
+        app.component("VssueComponent", defineAsyncComponent(() => __awaiter(this, void 0, void 0, function* () {
             const ctx = yield loadRuntime();
             return {
                 props: {
@@ -124,9 +122,9 @@ exports.default = (0, client_1.defineClientConfig)({
                 },
                 setup(props, { attrs }) {
                     let vssue = null;
-                    const { title, issueId, options } = (0, vue_1.toRefs)(props);
-                    const el = (0, vue_1.ref)(null);
-                    const stop = (0, vue_1.watchEffect)(() => {
+                    const { title, issueId, options } = toRefs(props);
+                    const el = ref(null);
+                    const stop = watchEffect(() => {
                         if (el.value) {
                             vssue = new ctx.Vue({
                                 el: el.value,
@@ -142,10 +140,10 @@ exports.default = (0, client_1.defineClientConfig)({
                             stop();
                         }
                     });
-                    (0, vue_1.watch)([title, issueId, options], () => {
+                    watch([title, issueId, options], () => {
                         vssue && vssue.$forceUpdate();
                     });
-                    return () => (0, vue_1.h)("div", {
+                    return () => h("div", {
                         ref: el,
                     });
                 },

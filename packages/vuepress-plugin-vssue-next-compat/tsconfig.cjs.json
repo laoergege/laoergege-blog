@@ -1,0 +1,14 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "composite": true,
+        "declaration": true,
+        "declarationDir": "types",
+        "outDir": "lib",
+        "rootDir": "src/node",
+        "tsBuildInfoFile": "tsconfig.cjs.tsbuildinfo",
+    },
+    "include": [
+        "src/node"
+    ]
+}

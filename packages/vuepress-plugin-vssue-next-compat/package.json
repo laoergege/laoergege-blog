@@ -22,9 +22,8 @@
   "main": "lib/index.js",
   "types": "types",
   "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc",
-    "publish": "pnpm publish --no-git-checks --force"
+    "dev": "tsc -b -w",
+    "build": "tsc -b"
   },
   "license": "ISC",
   "devDependencies": {

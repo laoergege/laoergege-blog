@@ -1,12 +1,12 @@
 {
     "extends": "../../tsconfig.json",
-    "include": [
-        "./src"
+    "references": [
+        {
+            "path": "./tsconfig.esm.json"
+        },
+        {
+            "path": "./tsconfig.cjs.json"
+        }
     ],
-    "compilerOptions": {
-        "declaration": true,
-        "declarationDir": "./types",
-        "outDir": "./lib",
-        "target": "ES2016"
-    }
+    "files": []
 }

@@ -8,16 +8,10 @@ The compat version of vuepress-plugin-vssue for vuepress-next.
 
 ## Usage
 
-Config your .npmrc
-
-```
-@laoergege:registry=https://npm.pkg.github.com
-```
-
 Install from the command line:
 
 ```
-npm install @laoergege/vuepress-plugin-vssue-next-compat@1.0.0
+npm install @laoergege/vuepress-plugin-vssue-next-compat
 ```
 
 Import vssue css:
@@ -44,7 +38,7 @@ import 'vssue/dist/vssue.css'
 
 With this way, you can build your theme. [see more](https://vssue.js.org/guide/styles.html#use-source-code-of-vssue-styles)
 
-config plugin:
+Config plugin:
 
 ```js
 // .vuepress/config.js

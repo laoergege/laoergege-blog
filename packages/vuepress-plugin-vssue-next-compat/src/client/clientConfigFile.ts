@@ -1,5 +1,5 @@
 import { defineClientConfig } from "@vuepress/client";
-import type { VssueNextCompatPluginOptions } from "./index";
+import type { VssueNextCompatPluginOptions } from "../node/index";
 
 import {
   h,
