@@ -2,8 +2,11 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.markdownlint": true
     },
-    "markdownlint.config": {
-        "MD025": false,
-        "MD036": false
-    }
+    "github-actions.workflows.pinned.workflows": [
+        ".github/workflows/deploy.yml",
+        ".github/workflows/publish-pkgs.yml",
+        ".github/install-runtime.yml"
+    ],
+    "github-actions.workflows.pinned.refresh.enabled": true,
+    "github-actions.workflows.pinned.refresh.interval": 65,
 }

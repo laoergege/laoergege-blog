@@ -1,0 +1,18 @@
+name: Install Runtime
+runs:
+ using: 'composite'
+ steps:
+  - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+  - uses: actions/setup-node@v3
+      with: 
+        node-version: 16 
+  - uses: actions/cache@v2
+      with: 
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+  - run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
+  - run: pnpm install

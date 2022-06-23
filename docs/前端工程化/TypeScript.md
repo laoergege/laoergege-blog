@@ -61,3 +61,10 @@
     - 声明文件生成
   - 学习资料
     - [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
+
+
+## references
+
+references 行为
+1. `tsc --build` 自动、顺序、增量构建 reference project
+2. 编译时不会加入 reference project，只会加载其声明文件

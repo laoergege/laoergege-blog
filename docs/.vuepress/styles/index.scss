@@ -19,19 +19,8 @@
   }
 
   // nprogress
-  --nprogress-color: theme("colors.accent-focus");
+  --nprogress-color: theme("colors.primary-focus");
   --nprogress-z-index: 1031;
-}
-
-.vssue {
-  .vssue-comment-footer{
-    display: flex;
-    justify-content: space-between;
-
-    .vssue-comment-operations {
-      display: flex;
-    }
-  }
 }
 
 ul ul {

@@ -5,7 +5,7 @@ $vssue-theme-color = #EEAF3A
 $vssue-text-color = #291334
 
 // 浅色文字颜色 （用于备注等文字）
-$vssue-text-light-color = #EF9FB7
+//$vssue-text-light-color = #E7E2DF
 
 // 边框颜色
 $vssue-border-color = #E7E2DF
@@ -26,3 +26,20 @@ $vssue-font-size = 14px
 //$vssue-direction = --vssue-direction
 
 @import '~vssue/src/styles/index'
+
+.vssue {
+  .vssue-comment-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .vssue-comment-reaction {
+      display: inline-flex!important;
+      align-items: center;
+    }
+
+    .vssue-comment-operations {
+      display: flex;
+    }
+  }
+}

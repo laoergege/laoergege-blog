@@ -1,5 +1,5 @@
-@laoergege/vuepress-plugin-vssue-next-compat:build: cache hit, replaying output [2md06899bfec512627[0m
+@laoergege/vuepress-plugin-vssue-next-compat:build: cache hit, replaying output [2m9272eefc45452aa7[0m
 [32m@laoergege/vuepress-plugin-vssue-next-compat:build: [0m
-[32m@laoergege/vuepress-plugin-vssue-next-compat:build: [0m> @laoergege/vuepress-plugin-vssue-next-compat@1.0.5 build /Users/lianyuansheng/GitHub/laoergege-blog/packages/vuepress-plugin-vssue-next-compat
-[32m@laoergege/vuepress-plugin-vssue-next-compat:build: [0m> tsc
+[32m@laoergege/vuepress-plugin-vssue-next-compat:build: [0m> @laoergege/vuepress-plugin-vssue-next-compat@1.0.6 build /Users/lianyuansheng/GitHub/laoergege-blog/packages/vuepress-plugin-vssue-next-compat
+[32m@laoergege/vuepress-plugin-vssue-next-compat:build: [0m> tsc -b
 [32m@laoergege/vuepress-plugin-vssue-next-compat:build: [0m

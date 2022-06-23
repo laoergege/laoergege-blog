@@ -1,5 +1,12 @@
 ## 知识体系
 
+
+- workflow
+  - 工作流是以 git 仓库为单位
+- job
+  - 独立进程
+- action
+
 - workflow
   - 由 name、on、jobs 三个基本顶级字段组成
   - 配置

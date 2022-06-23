@@ -91,34 +91,35 @@ public-hoist-pattern[]=*eslint*
 
 ## Monorepo
 
-- Monorepo 设计需求要点
-  - 项目管理
-    - 项目创建
-    - 项目间引用约束
-  - 依赖管理
-    - 工程依赖
-    - 项目依赖关联（可方便切换本地、线上版本方便测试、开发？）
-      - 本地 link 模式
-      - 线上版本模式
-  - 任务管理
-    - 编排
-      - 拓扑：根据项目依赖关系，构建一个有向无环图（DAG）进行拓扑排序并执行过程
-      - 过滤
-      - 并行
-    - 优化
-      - 增量
-      - 缓存
-        - 本地缓存
-        - 分布式缓存
-  - 监听模式
-  - 发包
-    - 版本管理 version
-      - 版本语义 semver
-      - 发版模式（monorepo 模式特有）
-        - independent
-        - fixed
-    - 发版日志 changelog
-    - 包的发布 publish
+Monorepo 的设计及需求要点总结：
+
+- 项目管理
+  - 项目创建
+  - 项目间引用约束
+- 依赖管理
+  - 工程依赖
+  - 项目依赖关联（可方便切换本地、线上版本方便测试、开发？）
+    - 本地 link 模式
+    - 线上版本模式
+- 任务管理
+  - 编排
+    - 拓扑：根据项目依赖关系，构建一个有向无环图（DAG）进行拓扑排序并执行过程
+    - 过滤
+    - 并行
+  - 优化
+    - 增量
+    - 缓存
+      - 本地缓存
+      - 分布式缓存
+- 监听模式
+- 发包
+  - 版本管理 version
+    - 版本语义 semver
+    - 发版模式（monorepo 模式特有）
+      - independent
+      - fixed
+  - 发版日志 changelog
+  - 包的发布 publish
 - 流行组合方案
   - pnpm（依赖管理 + 任务管理） + changeset
   - pnpm（依赖管理）+ [rush](https://github.com/microsoft/rushstack)（任务管理 + 任务管理）
@@ -144,9 +145,9 @@ public-hoist-pattern[]=*eslint*
 
 ```yaml
 packages:
-  - 'plugins'
-  - 'packages/*'
-  - '.'
+  - "plugins"
+  - "packages/*"
+  - "."
 ```
 
 ```json
@@ -176,12 +177,12 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
 
 ```json
 {
-    "dependencies": {
-        "foo": "workspace:*",
-        "bar": "workspace:~",
-        "qar": "workspace:^",
-        "zoo": "workspace:^1.5.0"
-    }
+  "dependencies": {
+    "foo": "workspace:*",
+    "bar": "workspace:~",
+    "qar": "workspace:^",
+    "zoo": "workspace:^1.5.0"
+  }
 }
 ```
 
@@ -189,12 +190,12 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
 
 ```json
 {
-    "dependencies": {
-        "foo": "1.5.0",
-        "bar": "~1.5.0",
-        "qar": "^1.5.0",
-        "zoo": "^1.5.0"
-    }
+  "dependencies": {
+    "foo": "1.5.0",
+    "bar": "~1.5.0",
+    "qar": "^1.5.0",
+    "zoo": "^1.5.0"
+  }
 }
 ```
 
@@ -202,37 +203,42 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
 
 > 以下基于 [github package npm 注册源](https://docs.github.com/cn/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)为例
 
-1. Changelog 生成
-2. 版本修改
-3. 打包、支持 UMD、ESModules 格式
-4. 确认 package 相关信息（[package.json 常见字段](#packagejson-常见字段)）
-5. 注册源及身份认证
+1. 打包、支持 UMD、ESModules 格式
+2. 确认 package 相关信息（[package.json 常见字段](#packagejson-常见字段)）
+3. Versions
+4. Changelog
+5. register & oauth
+
    - 注册源配置
      - .npmrc：`@laoergege:registry=https://npm.pkg.github.com/`
      - package.json#publishConfig：
-        ```json
-        "publishConfig": {
-          "registry":"https://npm.pkg.github.com"
-        }
-        ```
+       ```json
+       "publishConfig": {
+         "registry":"https://npm.pkg.github.com"
+       }
+       ```
    - 身份认证
+
      - 个人访问令牌
        - .npmrc：`//npm.pkg.github.com/:_authToken=TOKEN`
      - 命令行
-        ```shell
-        $ npm login --scope=@OWNER --registry=https://npm.pkg.github.com
 
-        > Username: USERNAME
-        > Password: TOKEN
-        > Email: PUBLIC-EMAIL-ADDRESS
-        ```
+       ```shell
+       $ npm login --scope=@OWNER --registry=https://npm.pkg.github.com
+
+       > Username: USERNAME
+       > Password: TOKEN
+       > Email: PUBLIC-EMAIL-ADDRESS
+       ```
+
 6. `pnpm publish`
 
 ## 附录
 
 ### package.json 常见字段
 
-> package.json 文档链接 
+> package.json 文档链接
+>
 > - [npm](https://docs.npmjs.com/cli/v8/configuring-npm/package-json)
 > - [pnpm](https://pnpm.io/zh/package_json)
 
