@@ -1,5 +1,11 @@
 # @laoergege/vuepress-plugin-vssue-next-compat
 
+## 1.0.7
+
+### Patch Changes
+
+- chore: 兼容 vite
+
 ## 1.0.6
 
 ### Patch Changes

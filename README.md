@@ -18,7 +18,7 @@ Thanks for the help of the following projects.
 4. [x] 评论功能：@laoergege/vuepress-plugin-vssue-next-compat
 5. [x] 文章排版：@tailwindcss/typography
 6. [x] CDN 缓存
-7. [x] 自定义插件发包
+7. [x] 编写插件多源发包脚本
 8. [ ] 暗黑模式适配
 9. [ ] ServiceWork 缓存
 10. [ ] 内容搜索
@@ -38,3 +38,5 @@ I writed some vuepress's plugins for building my blog...
 The compat version of vuepress-plugin-vssue for vuepress-next. 
 
 [Get it](https://github.com/laoergege/laoergege-blog/packages/1480309).
+
+### vuepress-plugin-vssue-pages

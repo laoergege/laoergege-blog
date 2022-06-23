@@ -1,6 +1,6 @@
 {
   "name": "@laoergege/vuepress-plugin-vssue-next-compat",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "the compat version of vuepress-plugin-vssue for vuepress-next",
   "repository": {
     "url": "https://github.com/laoergege/laoergege-blog",
@@ -34,5 +34,8 @@
   "peerDependencies": {
     "@vuepress/client": "^2.0.0-beta.46",
     "vue": "^3.2.36"
+  },
+  "dependencies": {
+    "upath": "^2.0.1"
   }
 }

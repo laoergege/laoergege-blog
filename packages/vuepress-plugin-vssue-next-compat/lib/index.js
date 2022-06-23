@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VssuePlugin = void 0;
-var path = require("path");
+var upath_1 = __importDefault(require("upath"));
 var VssuePlugin = function (options) {
     var _a;
     var platform = (_a = options === null || options === void 0 ? void 0 : options.platform) !== null && _a !== void 0 ? _a : "github";
@@ -24,7 +27,7 @@ var VssuePlugin = function (options) {
     }
     return {
         name: "vuepress-plugin-vssue-next-compat",
-        clientConfigFile: path.resolve(__dirname, "clientConfigFile.js"),
+        clientConfigFile: upath_1.default.resolve(__dirname, "clientConfigFile.js"),
         define: {
             __VSSUE_OPTIONS__: options,
         },
