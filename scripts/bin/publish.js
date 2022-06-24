@@ -33,6 +33,7 @@ const config = (scope, register, token) => {
     console.log(!!token)
     if (token) {
         $.env[`${register.replace('https', '')}:_authToke`] = token
+        console.log(`${register.replace('https', '')}:_authToke`, token)
     }
 }
 
