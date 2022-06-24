@@ -1,0 +1,1 @@
+console.log(Object.keys(process.env).filter(key => key.includes('npm_config')))

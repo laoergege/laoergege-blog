@@ -11,7 +11,8 @@
     "vuepress": "node index.mjs",
     "release": "git tag page -f && git push origin page -f",
     "package:publish": "turbo run build --filter='./packages/*' && pnpm -r --filter ./packages/* exec publish",
-    "open": "open-cli 'https://daisyui.com/' && open-cli 'https://tailwindcss.com/docs/installation'"
+    "open": "open-cli 'https://daisyui.com/' && open-cli 'https://tailwindcss.com/docs/installation'",
+    "demo": "pnpm exec node demo.js"
   },
   "repository": {
     "type": "git",
