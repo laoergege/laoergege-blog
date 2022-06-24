@@ -11,7 +11,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/install-runtime.yml
+      - uses: ./.github/actions/install-runtime
       - run: npm run package:publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
