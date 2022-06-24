@@ -43,7 +43,7 @@
       - `--watch`
     - tsconfig.json
   - 工程实践
-    - [Project References](#project-references)
+    - [Monorepo & Project References](#monorepo--project-references)
     - VSCode 集成
       - 内置 TypeScript Language Service
       - VS Code 中指定项目 ts 版本
@@ -63,33 +63,43 @@
   - 学习资料
     - [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
 
-## Project References
+## Monorepo & Project References
 
 > 官方文档 [Project References](https://www.typescriptlang.org/docs/handbook/project-references.html)
 
 Project References 可以把一个 typescirpt 大项目拆分，分开构建。引入 references 后：
 
-1. 可通过 `tsc --build` 自动、顺序、增量构建 reference project
+1. 可通过 `tsc --build` 自动、顺序、增量构建 reference project 及目标项目
 2. 编译时不会加入 reference project 的代码，只会加载其声明文件
 
-reference project 配置
+在 monorepo 项目结构中根项目 tsconfig.json 中通过 `references` 引入其他项目，即可在根工作路径下享受 `tsc -b` 一个命令启动相关项目编译，无需编写多个 `tsc -p` 命令编排。
+
+root tsconfig.json
 
 ```json
 {
-  "references": [
-    { 
-      "path": "../src",
-      "prepend": true
-    }
-  ]
+    "references": [
+        {
+            "path": "./tsconfig.esm.json"
+            "prepend": true
+        },
+        {
+            "path": "./tsconfig.cjs.json"
+        }
+    ],
+    "files": []
 }
 ```
+
+> ⚠️ 必须添加 `"files": []` 不然会造成重复编译
+
+reference project tsconfig.json
 
 ```json
 {
   "compilerOptions": {
         "composite": true,
-        "declaration": true,
+        // "declaration": true,
         "declarationDir": "types",
         "outDir": "lib",
         "rootDir": "src/node",
@@ -99,3 +109,14 @@ reference project 配置
     ]
 }
 ```
+
+1. composite，必须开启
+2. declaration 自动默认为 true。
+3. 必须 include 或者 files 指定包含编译文件。如果违反了这一约束，tsc 将告诉你哪些文件没有被指定。
+
+如果没有明确指定 rootDir，则默认为包含 tsconfig.json 文件的目录。
+
+
+
+
+可以笔者这个[项目](https://github.com/laoergege/laoergege-blog/tree/master/packages/vuepress-plugin-vssue-next-compat)配置。

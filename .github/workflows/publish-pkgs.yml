@@ -12,13 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: ./.github/actions/install-runtime
-      - run: pnpm run package:build
-      - run: pnpm -r publish
+      - run: npm run package:publish
         env:
-          npm_config_scope: "@laoergege"
-          npm_config__auth: ${{ secrets.NPM_TOKEN }}
-      - run: pnpm publish
-        env:
-          npm_config_scope: "@laoergege"
-          npm_config_register: https://npm.pkg.github.com/
-          npm_config__auth: ${{ secrets.PKG_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PKG_TOKEN: ${{ secrets.PKG_TOKEN }}

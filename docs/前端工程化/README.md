@@ -25,6 +25,7 @@ desc: 系统化前端工程相关
       - multirepo
       - monorepo
     - 目录结构设计
+    - 项目模板及代码段
     - 环境
       - 运行环境
         - node
@@ -100,10 +101,11 @@ desc: 系统化前端工程相关
   - CI/CD
     - lint
     - test
+      - [性能预测](../浏览器原理及API/Web%20前端性能优化.md)
     - build
       - ci-cache
-    - [性能测试](../浏览器原理及API/Web%20前端性能优化.md)
-    - 发版日志
+    - publish
+      - [NPM 发包](./pnpm.md#publish-工作流)
   - 监控
   - 文档
     - vue：[vuese](https://github.com/vuese/vuese)
