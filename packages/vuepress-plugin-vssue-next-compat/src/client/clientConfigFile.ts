@@ -25,6 +25,7 @@ export interface VssueProps {
   onBeforeOauth?: OnBeforeOauthHook;
 }
 
+
 export default defineClientConfig({
   enhance({ app }) {
     let onBeforeOauth: OnBeforeOauthHook;
