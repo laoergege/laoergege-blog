@@ -2,8 +2,8 @@ name: Publish Packages
 
 on:
   push:
-    paths:
-      - "packages/**"
+    # paths:
+    #   - "packages/**"
     branches:
       - "master"
 
@@ -11,7 +11,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/install-runtime
+      - run: pwd
+      - run: ls
+      - run: tree
+      - uses: .github/actions/install-runtime/action.yml
       - run: pnpm run package:publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
