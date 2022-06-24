@@ -14,7 +14,7 @@ jobs:
       - run: pwd
       - run: ls
       - run: tree
-      - uses: .github/actions/install-runtime/action.yml
+      - uses: ./.github/actions/install-runtime/action.yml
       - run: pnpm run package:publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
