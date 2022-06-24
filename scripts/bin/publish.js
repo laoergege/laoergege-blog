@@ -2,6 +2,8 @@
 
 import 'zx/globals'
 
+console.log($.env)
+
 const CONFIG = {
     scope: '@laoergege',
     registers: ['npm', 'github'],
