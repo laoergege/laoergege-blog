@@ -26,8 +26,8 @@ const checkVersion = () => { }
 const config = (scope, register, token) => { 
     $.env[`npm_config_${scope}:registry`] = register
     if (token) {
-        $.env[`${register.replace('https:', '')}:_authToke`] = token
-        console.log(`${register.replace('https:', '')}:_authToke`, token)
+        $.env[`${register.replace('https:', '')}:_authToken`] = token
+        console.log(`${register.replace('https:', '')}:_authToken`, token)
     }
 }
 
