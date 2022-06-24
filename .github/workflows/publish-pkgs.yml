@@ -11,10 +11,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - run: pwd
-      - run: ls
-      - run: tree
-      - uses: laoergege/laoergege-blog/.github/actions/install-runtime/action.yml
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/install-runtime
       - run: pnpm run package:publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
