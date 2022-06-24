@@ -129,7 +129,7 @@ desc: 系统化前端工程相关
       - 表格
         - [tabulator](https://github.com/olifolkerd/tabulator)
       - 表单
-        - [XRender](https://x-render.gitee.io/)
+        - [表单配置化](#表单配置化)
       - 图标
       - 跨平台
         - H5 
@@ -226,3 +226,17 @@ CSS 项目实践
   }
 }
 ```
+
+## 表单配置化
+
+- 技术
+  - 表单协议：JSON Schema
+    - 逻辑联动
+      - 逻辑指令
+    - 数据校验
+  - 渲染器
+- 案例
+  - formliy
+  - [XRender](https://x-render.gitee.io/)
+  - [ajv](https://github.com/ajv-validator/ajv)
+  - Angular 表单

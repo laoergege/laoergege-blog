@@ -5,6 +5,7 @@ runs:
   - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+        repository: ${{ github.repository }}
   - uses: actions/setup-node@v3
       with: 
         node-version: 16 
