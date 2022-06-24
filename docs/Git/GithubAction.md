@@ -6,6 +6,10 @@
 - job
   - 独立进程
 - action
+- env
+  - 工作流程 env
+  - `jobs.<job_id>.env`
+  - `jobs.<job_id>.steps[*].env`
 
 - workflow
   - 由 name、on、jobs 三个基本顶级字段组成

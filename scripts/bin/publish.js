@@ -2,6 +2,7 @@
 
 import 'zx/globals'
 
+console.log($.env['NPM_TOKEN'], $.env['PKG_TOKEN'])
 console.log($.env)
 
 const CONFIG = {
@@ -33,6 +34,7 @@ const config = (scope, register, token) => {
 }
 
 const publish = () => {
+    console.log($.env['//npm.pkg.github.com/:_authToke'])
     return $`pnpm publish --force --no-git-checks`
 }
 
