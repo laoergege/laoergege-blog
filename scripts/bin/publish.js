@@ -2,9 +2,6 @@
 
 import 'zx/globals'
 
-console.log($.env['NPM_TOKEN'], $.env['PKG_TOKEN'])
-console.log($.env)
-
 const CONFIG = {
     scope: '@laoergege',
     registers: ['npm', 'github'],
@@ -20,8 +17,6 @@ const CONFIG = {
     }
 }
 
-console.log(CONFIG)
-
 const getPublishTool = () => { }
 
 const getPackageInfo = () => { }
@@ -30,15 +25,12 @@ const checkVersion = () => { }
 
 const config = (scope, register, token) => { 
     $.env[`npm_config_${scope}:registry`] = register
-    console.log(!!token)
     if (token) {
-        $.env[`${register.replace('https', '')}:_authToke`] = token
-        console.log(`${register.replace('https:', '')}:_authToke`, token)
+        $.env[`${register.replace('https:', '')}:_authToke`] = token
     }
 }
 
 const publish = () => {
-    console.log($.env['//npm.pkg.github.com/:_authToke'])
     return $`pnpm publish --force --no-git-checks`
 }
 
