@@ -20,6 +20,8 @@ const CONFIG = {
     }
 }
 
+console.log(CONFIG)
+
 const getPublishTool = () => { }
 
 const getPackageInfo = () => { }
