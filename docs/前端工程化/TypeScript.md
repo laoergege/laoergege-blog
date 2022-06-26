@@ -110,9 +110,9 @@ reference project tsconfig.json
 }
 ```
 
-1. composite，必须开启
+1. **composite，必须开启**
 2. declaration 自动默认为 true。
-3. 必须 include 或者 files 指定包含编译文件。如果违反了这一约束，tsc 将告诉你哪些文件没有被指定。
+3. **必须 include 或者 files 指定包含编译文件**。如果违反了这一约束，tsc 将告诉你哪些文件没有被指定。
 
 如果没有明确指定 rootDir，则默认为包含 tsconfig.json 文件的目录。
 

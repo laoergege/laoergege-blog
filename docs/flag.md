@@ -1,24 +1,37 @@
-> 学习什么都要带着一个目的，毕竟学到的知识点始终是作为一种工具，开始不要过多在于理论细节，因为在应用过程，就会不断反复磨合，加深理解。最后我们不仅达到应用效果，更重要的是创造力。
->   
-> 总结：学习 => 应用 => 深入 => 创新
+> “技术栈”非常形象地表达了学习一门手艺所需要的是哪些知识，以及应该按照什么顺序来学。  
+> 
+> 对于一个成熟的领域，一般都有比较完整的技术栈的资料，我们需要花些时间分析资料，系统性地了解这一领域知识的宏观架构、它的过往历史、它的优缺点，然后结合现有资料和我们自身的特点来建立我们自己的技术栈。 
+>  
+> 先系统性地了解这一领域知识的宏观架构，建立知识体系树，通过不断深入学习，扩展分支边界
+> 
+> 学习什么都要带着一个目的，毕竟学到的知识点始终是作为一种工具，开始不要过多在于理论细节，因为在应用过程，就会不断反复磨合，加深理解。最后我们不仅达到应用效果，更重要的是创造力
+> 
+> 总结：了解 => 学习 => 应用 => 深入 => 探索、创新
 
-- 专业
+- 技术栈（Web）
   - Web
     - 前端框架
       - Vue
         - [ ] 深入 Vue 框架源码
         - [ ] 技术输出：vue 深入系文
-    - Node 学习与应用
-      - [ ] SSR、同构应用实践
+    - HTML&CSS
     - JavaScript 、Web 进阶
-      - [ ] 《浏览器原理及实践》
-      - [ ] 《JavaScript 核心原理精讲》
-    - Typescript
-      - type-challenges 
+      - [ ] 《JavaScript 核心原理精讲》 
     - 可视化
+    - HTTP
+      - [ ] 《透视 HTTP 协议》
+    - 浏览器
+      - [ ] 《浏览器原理及实践》
+    - WebService
+    - SSR、同构应用实践
   - 软件工程
-  - 编程语言
-    - 程序语言设计及实现
+    - [前端工程化](./前端工程化/README.md)
+    - Docker
+  - 系统架构、设计模式
+  - 程序语言设计及实现
+    - JavaScript
+    - Typescript
+    - NodeJS
     - Rust
       - [ ] 入门学习（2022.5 - 2022.12）
       - [ ] 应用：Webassembly
@@ -31,9 +44,9 @@
     - 编译原理
       - [ ] 《编译原理实战课》
     - 计算机网络
-      - [ ] 《透视 HTTP 协议》
     - 计算机图形学
     - 计算机组成
+  - 数学与应用
 - 个人
   - 金融
     - [ ] **炒股**（5w）
@@ -46,14 +59,11 @@
 
 ## 技术栈结构
 
-1. 软件工程
-   - 流程图
-   - UML
-     - [什么是统一建模语言（UML）？](https://www.visual-paradigm.com/cn/guide/uml-unified-modeling-language/what-is-uml/)
-2. 工程化（工具链 + 方案化 + 定制化 = 统一标准工程化）
-   - [前端工程化](./前端工程化/README.md)
+
+1. 工程化（工具链 + 方案化 + 定制化 = 统一标准工程化）
+   - 
    - web 前端性能优化
-3. 工具链
+2. 工具链
    - typescript
      - https://github.com/type-challenges/type-challenges
      - [api-extractor](https://api-extractor.com/)
@@ -61,7 +71,7 @@
      - 测试
        - 端到端测试
          - https://playwright.dev/
-4. 框架技术
+3. 框架技术
    - [Vue](./Vue/README.md)
      - vue3 conf https://node.fequan.com/videodetail/1621773573110
    - React
@@ -75,16 +85,16 @@
      - canvas
        - https://joshondesign.com/p/books/canvasdeepdive/toc.html
    - NodeJS
-5. [软件设计、软件工程](./编程语言/软件设计与工程.md)
+4. [软件设计、软件工程](./编程语言/软件设计与工程.md)
    - JavaScript 设计模式与开发实践
    - 依赖注入
      - https://github.com/mgechev/injection-js
-6. 编程语言
+5. 编程语言
    - [HTML&CSS](./HTML&CSS/README.md)
      - https://web.dev/learn/css/box-model/
    - [JavaScript](./JavaScript/README.md)
    - Flutter
-7. 计算机基础
+6. 计算机基础
    1. 计算机组成原理
    2. 操作系统
       - [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
@@ -99,7 +109,7 @@
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
-8. 数学与应用
+7. 数学与应用
 
 ## 收集待看
 
