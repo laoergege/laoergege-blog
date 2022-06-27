@@ -1,6 +1,6 @@
 # @laoergege/vuepress-plugin-vssue-next-compat
 
-The compat version of vuepress-plugin-vssue for vuepress-next.
+A compat version for vuepress-next of vuepress-plugin-vssue.
 
 ## Why
 

@@ -9,7 +9,7 @@ export interface ReleasePlugin {
 }
 
 export const ReleasePlugin: ReleasePlugin = (options) => {
-  const { glob = "**/README.md" } = options ?? {};
+  const { glob } = options ?? {};
 
   const match = (file: string) => {
     if (!glob) {

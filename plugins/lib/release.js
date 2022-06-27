@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReleasePlugin = void 0;
 var minimatch_1 = __importDefault(require("minimatch"));
 var ReleasePlugin = function (options) {
-    var _a = (options !== null && options !== void 0 ? options : {}).glob, glob = _a === void 0 ? "**/README.md" : _a;
+    var glob = (options !== null && options !== void 0 ? options : {}).glob;
     var match = function (file) {
         if (!glob) {
             return false;

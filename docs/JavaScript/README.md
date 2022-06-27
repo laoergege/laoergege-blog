@@ -19,10 +19,8 @@ desc: JavaScript 知识体系
     - Set
     - Map
   - [JavaScript 异步编程](./JavaScript%20异步编程.md)
-  - 运行时
-    - [内存管理机制](./JavaScript%20内存管理机制.md)
-      - 堆栈内存
-      - 标记-清除
+  - 运行机制
+    - [JavaScript 内存管理机制](./JavaScript%20内存管理机制.md)
     - 运行原理
       - [编译时](./JavaScript%20代码执行过程（编译时）.md)
       - [JavaScript 代码执行机制](./JavaScript%20代码执行机制.md)

@@ -45,9 +45,9 @@ export const PagesPlugin: PagesPlugin = ({ max = MAX, exclude, render }) => {
           btop ??= Infinity;
           return atop - btop;
         })
-        .filter((page) =>
-          exclude ? !minimatch(page.filePath as string, exclude) : true
-        );
+        .filter((page) => {
+          return exclude ? !minimatch(page.filePath as string, exclude) : true;
+        });
 
       // 数据分页
       const chunks = (nums: any[], len: number) => {

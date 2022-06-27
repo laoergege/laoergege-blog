@@ -1,7 +1,7 @@
 import path from "path";
 import theme from "./theme";
 import { webpackBundler } from "@vuepress/bundler-webpack";
-// import { viteBundler } from "@vuepress/bundler-vite";
+import { AppConfig, createPage, App, PageOptions } from "@vuepress/core";
 
 export default {
   // 站点信息配置
@@ -15,7 +15,6 @@ export default {
       { rel: "shortcut icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   ],
-  // pagePatterns: ["../packages/vuepress-plugin-vssue-next-compat/README.md"],
 
   // 构建配置
   dest: path.resolve(__dirname, "../../dist"),
@@ -29,4 +28,6 @@ export default {
   // 打包
   bundler: webpackBundler(),
   // bundler: viteBundler(),
-};
+
+  plugins: [],
+} as Partial<AppConfig>;

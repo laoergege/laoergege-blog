@@ -13,6 +13,12 @@ import { registerComponentsPlugin } from "@vuepress/plugin-register-components";
 import { pwaPlugin } from "@vuepress/plugin-pwa";
 import { externalLinkIconPlugin } from "@vuepress/plugin-external-link-icon";
 import { shikiPlugin } from "@vuepress/plugin-shiki";
+import { createPage, App, PageOptions } from "@vuepress/core";
+
+export const addPage = async (app: App, option: PageOptions) => {
+  const page = await createPage(app, option);
+  app.pages.push(page);
+};
 
 export default {
   name: "my-theme",
@@ -70,13 +76,33 @@ export default {
       prefix: [""],
     }),
     ReleasePlugin(),
+    {
+      name: "laoergege-blog",
+      async onInitialized(app) {
+        await addPage(app, {
+          frontmatter: {
+            title: "Release vuepress-plugin-vssue-next-compat 🎉",
+            release: true,
+            top: 2,
+            description:
+              "A compat version for vuepress-next of vuepress-plugin-vssue.",
+          },
+          filePath: path.resolve(
+            "packages/vuepress-plugin-vssue-next-compat/README.md"
+          ),
+          path: "/packages/vuepress-plugin-vssue-next-compat",
+        });
+      },
+    },
     PagesPlugin({
-      exclude: "**/README.md",
+      exclude: "docs/**/README.md",
       render(page: any) {
-        return `<ListItem title="${page.title}" routeKey="${
+        return `<ListItem title="${
+          page.title || page.frontmatter.title
+        }" routeKey="${
           page.key
-        }" tags='${page.frontmatter.tags.toString()}' desc="${
-          page.frontmatter.desc || ""
+        }" tags='${page.frontmatter.tags?.toString()}' desc="${
+          page.frontmatter.desc || page.frontmatter.description || ""
         }" updateDate="${page.frontmatter.updatedTime}"/>`;
       },
     }),
