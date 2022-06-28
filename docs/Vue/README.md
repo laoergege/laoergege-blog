@@ -2,26 +2,27 @@
 release: true
 tags:
  - vue
-desc: vue 知识汇总
+description: Vue 技术栈
 ---
 
 # Vue
 
-- 原理
-  - 响应式系统
-  - 渲染器
-    - 渲染函数及 vnode
-    - 组件化及组件树
+- Vue Core
+  - 组件系统
+    - jsx
+    - template 模板编译器
+      - 模板编译
+      - 编译优化
+  - Virtual Dom + Renderer（渲染器）
     - 组件渲染机制
+      - render
       - diff
-        - props、children
-        - patch
-      - 响应式渲染
-      - 异步更新
-  - 模板编译器
-    - 模板编译
-    - 编译优化
-- 扩展
+      - patch
+    - 响应式（更新）渲染
+    - 异步更新调度
+    - 指令
+  - 响应式系统
+- 生态
   - 数据流
     - 父子组件
       - props、event
@@ -43,6 +44,9 @@ desc: vue 知识汇总
     - 路由匹配
     - 路由守卫
 - 生态
+  - 多页应用：[petite-vue](https://github.com/vuejs/petite-vue)
+  - 单页应用
+    - vue-router
   - Vue2 => Vue3
     - [vue-compat](https://github.com/vuejs/core/tree/main/packages/vue-compat)
     - gogocode
@@ -66,17 +70,19 @@ desc: vue 知识汇总
 
 ## Vue3 系文
 
-1. [vue3 的升级优化](./vue3的升级优化.md)
-2. [vue 组件渲染机制](./vue%20组件渲染机制.md)
-3. [diff 更新流程](./diff%20更新流程.md)
-4. [vue 的响应式系统](./vue%20的响应式系统.md)
-5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
-6. 模板编译优化
-7. vue 指令原理
-8. vue 异步组件及 Suspense
-9. Teleport 实现原理
-10. Fragment
-11. Vue & WebComponent
+- Vue 核心原理
+  1. [vue3 的升级优化](./vue3的升级优化.md)
+  2. [vue 组件渲染机制](./vue%20组件渲染机制.md)
+  3. [diff 更新流程](./diff%20更新流程.md)
+  4. [vue 的响应式系统](./vue%20的响应式系统.md)
+  5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
+  6. 模板编译优化
+  7. vue 指令原理
+- Vue API 剖析
+  1. vue 异步组件及 Suspense
+  2. Teleport 实现原理
+  3. Fragment
+  4. Vue & WebComponent
 
 ## 推荐好文
 
@@ -86,8 +92,3 @@ desc: vue 知识汇总
   - [Vue 3 的 SFC Style CSS Variable Injection 提案实现的背后](https://mp.weixin.qq.com/s/N1AoRSuK00V5QoZr4TWWvQ)
 
 
-- 流程自动化
-- 环境一致性
-- CI 缓存
-- CDN、缓存
-- 提示

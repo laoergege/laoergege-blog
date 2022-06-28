@@ -10,7 +10,7 @@ desc: 除了组件化，Vue.js 另一个核心设计思想就是响应式。
 
 > 示例源码主要为 vue3.2
 
-除了组件化，Vue.js 另一个核心设计思想就是响应式。
+响应式系统是 Vue 最底层的核心机制，而且在 Vue3.x 中已经抽取成的 Reative API 可单独使用。
 
 - Vue 的响应式系统
   - [响应式原理](#响应式原理)
@@ -40,6 +40,8 @@ Vue2 和 Vue3 的响应式实现并其实没多大区别，大致都是需要以
 2. 依赖收集
 3. 变更通知
 
+只是数据劫持的方式从 `Object.defineProperty` 改为 `Proxy`。
+
 ### Vue3 响应式原理 mini 版本实现
 
 ```js
@@ -66,6 +68,8 @@ function reactive(target) {
 Proxy 代理的是一个对象，对象属性能够任意访问，我们需要跟踪数据被访问的地方，并将这些“观察者”收集起来。
 
 reactive 包装下我们已经可以对数据进行访问、修改劫持。
+
+#### Effect 包装
 
 那么数据被访问时，我们要收集的是什么、怎么收集？
 
@@ -109,7 +113,7 @@ const B = effect(() => {
 });
 ```
 
-嵌套场景主要是 vue 组件嵌套，vue 组件的渲染也是副作用（[vue 组件响应式更新渲染机制](./vue%20组件响应式更新渲染机制.md)）。
+嵌套场景主要是 vue 组件嵌套，vue 组件的渲染也是一种副作用（[vue 组件响应式更新渲染机制](./vue%20组件响应式更新渲染机制.md)）。
 
 #### `cleanup(activeEffect)`，解决动态依赖场景。
 
@@ -198,15 +202,13 @@ function trigger(target, key) {
 
 Vue Reactive API 大致分为两类：
 
-- Reactive（响应式数据）
+- 响应式数据
   - [reactive](#reactive)
-    - shallowReactive 浅响应
   - readonly：只读，不响应
-    - shallowReadonly：浅只读
-  - [ref](#ref)
+  - [ref：Ref 与 Reactive 有何区别，为什么要有 Ref？](#refref-与-reactive-有何区别为什么要有-ref)
   - computed
   - deferredComputed
-- [ReactiveEffect（响应式副作用）](#reactiveeffect)
+- 响应式副作用（[ReactiveEffect](#reactiveeffect)）
   - effect，将副作用封装成响应式副作用
   - effectScope
   - _runtiom-dom_
@@ -610,15 +612,15 @@ export function triggerEffects(
 }
 ```
 
-### ref
+### ref：Ref 与 Reactive 有何区别，为什么要有 Ref？
 
 vue 提供了 reactive、ref 创建响应式数据，那么 reactive 和 ref 有什么区别？
 
 1. 无论是 Object.defineProperty、proxy 实现的响应式功能有个缺点就是必须是对象类型，不支持基础类型
-2. ref 主要是为实现对基础类型规范支持，将基础类型包装成带 value 的对象然后进行响应式
+2. ref 主要是为实现对基础类型响应式化规范支持，将基础类型包装成带 value 的对象进行响应化
 3. 实现原理细节上
    - reactive 是通过 proxy 实现
-   - ref 依然是靠 object.defineProperty 的 get 与 set 完成的，如果 ref 接收不是一个基础类型则转换成 reactive 支持，如果直接通过 reactive 支持，则需要多创建一个 Map 对象，参考上面 [reactive 实现的缓存结构](#缓存结构)。
+   - ref 依然是靠 object.defineProperty 的 get 与 set 完成的，但如果 ref 接收不是一个基础类型则转换成 reactive（Why？如果直接通过 reactive 支持，则需要多创建一个 Map 对象，参考上面 [reactive 实现的缓存结构](#缓存结构)）
 
 ```ts
 const convert = <T extends unknown>(val: T): T =>

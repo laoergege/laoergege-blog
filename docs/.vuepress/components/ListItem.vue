@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card shadow-sm">
     <div class="card-body">
       <h2 class="card-title text-secondary-focus text-2xl">
         <router-link :to="{ name: routeKey }">

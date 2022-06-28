@@ -737,18 +737,8 @@
     - [x] computed、watch 对比区别
       - computed 计算属性，主要是基于其他响应式依赖**缓存计算结果**，只有当依赖发生变化才会需要重新计算；computed 是延迟计算的，只有被访问时才真正执行计算。computed 常用于模板渲染中。
       - watch 侦听属性适用于观测某个值的变化去立刻执行一段复杂的业务逻辑
-    - [x] reactive vs ref，为什么 ref
-      - 无论是 Object.defineProperty、proxy 实现的响应式功能有个缺点就是必须是对象类型，不支持基础类型
-      - ref 主要是为实现对基础类型规范支持，将基础类型包装成带 value 的对象然后进行响应式
-      - 实现原理细节上
-        - reactive 是通过 proxy 实现
-        - ref 依然是靠 object.defineProperty 的 get 与 set 完成的，如果 ref 接收不是一个基础类型则转换成 reactive 支持，如果直接通过 reactive 支持，则需要多创建一个 Map 对象
   - 其他
     - [ ] 组件设计原则
-    - [ ] Vue2、Vue3有什么区别
-    - [ ] vue3 项目实践过程问题
-      - setup 臃肿，以前对象配置写法逻辑按功能分类，现在 setup 写法，按逻辑组织
-      - ref .value 问题，最好变量命名 xxxRef 后缀
     - [x] vue 的 data 为什么要用函数返回一个对象？
       - 多个组件实例会共享 data 数据
     - [x] MVC 与 MVVM 的区别
@@ -794,8 +784,7 @@
         - 出于性能原因的考量，Vue 是对数组元素进行了监听，而没有对数组本身的变化进行监听。
     - [x] Vue 事件绑定原理
       - 原生事件绑定是通过 addEventListener 绑定给真实元素的，组件事件绑定是基于自己实现的一个发布订阅模式的事件中心。
-    - [x] vue2 与 vue3 对比
-    - [x] vue 和 react 对比
+    - [x] Vue 和 React 对比
       - 同
         - 底层上都是使用 virtual dom 作为渲染机制
         - 都采用数据驱动的思想
@@ -807,8 +796,18 @@
         - 模板书写上
           - react jsx 有完全 js 编程能力
           - vue template 虽然缺失一定灵活，但起到限制规范
-    - 作用于插槽
-      - 伏组件可以拿到自组建传递的数据
+  - Vue3
+    - [ ] Vue2、Vue3有什么区别
+    - [ ] vue3 项目实践过程问题及心得
+      - 以前对象配置写法逻辑按功能分类，如果 setup 臃肿，现在 setup 写法，按逻辑组织封装成 hook 组合使用
+      - ref .value 问题，最好变量命名 xxxRef 后缀
+      - 封装成响应式流
+    - [x] reactive vs ref，为什么 ref
+      - 无论是 Object.defineProperty、proxy 实现的响应式功能有个缺点就是必须是对象类型，不支持基础类型
+      - ref 主要是为实现对基础类型规范支持，将基础类型包装成带 value 的对象然后进行响应式
+      - 实现原理细节上
+        - reactive 是通过 proxy 实现
+        - ref 依然是靠 object.defineProperty 的 get 与 set 完成的，如果 ref 接收不是一个基础类型则转换成 reactive 支持，如果直接通过 reactive 支持，则需要多创建一个 Map 对象
   - SSR
     - [ ] SSR 原理
     - [ ] SSR介绍：什么是 SSR、为什么 SSR、SSR 缺点
@@ -1138,7 +1137,7 @@ lint-staged 原理
 - WAF 抵御网站入侵攻击
 - CDN 作用网络加速，缩短访问链路，就近访问原则
 
-整理 Vue 与 React 框架的所有横向对比，包括渲染原理、虚拟 dom、diff、patch、fiber、批量更新，手写响应式，框架用到的模式、设计思想，性能优化，相关生态技术等等
+
 
 webpack 原理、热更新原理、动态加载原理、常见 plugins、loader、常见优化，怎么打包、怎么分 chunk，怎么写一个 plugins，生命周期，微内核源码等内容，以及 rollup、gulp 的使用、应用场景。
 
@@ -1269,3 +1268,35 @@ commit 规范 & changelog 生成
 要根据开发者工具，比如看 network 是否是由于资源体积太大导致请求慢，还是后端处理慢，还是资源太多了加载慢.
 
 如果这些都不是，可能是因为 渲染慢，再去分析 performce 面板，看一下是 js 执行慢，还是啥原因。
+
+
+整理 Vue 与 React 框架的所有横向对比，包括渲染原理、虚拟 dom、diff、patch、fiber、批量更新，手写响应式，框架用到的模式、设计思想，性能优化，相关生态技术等等
+建议从多个角度去聊，比如框架特性、生态、开发体验、社区评价、性能、源码等多个角度聊
+
+- 渲染机制
+- 响应式原理
+  - react：setState
+    - 会自顶向下重新渲染组件，自顶向下的含义是，该组件以及它的子组件全部需要渲染
+    - 手动优化
+  - vue：劫持可变数据
+    - vue使用Object.defineProperty（vue@3迁移到了Proxy）对数据的设置（setter）和获取（getter）做了劫持，也就是说，vue能准确知道视图模版中哪一块用到了这个数据，并且在这个数据修改时，告诉这个视图，你需要重新渲染了。
+
+
+所以当一个数据改变，react的组件渲染是很消耗性能的——父组件的状态更新了，所有的子组件得跟着一起渲染，它不能像vue一样，精确到当前组件的粒度。
+
+
+每次的视图更新流程是这样的：
+
+组件渲染生成一棵新的虚拟dom树；
+新旧虚拟dom树对比，找出变动的部分；（也就是常说的diff算法）
+为真正改变的部分创建真实dom，把他们挂载到文档，实现页面重渲染；
+
+render =》 diff =》 patch
+
+由于react和vue的响应式实现原理不同，数据更新时，第一步中react组件会渲染出一棵更大的虚拟dom树？
+
+react fiber：
+在数据更新时，react生成了一棵更大的虚拟dom树
+
+
+diff 算法 = 深度优先 + 前序遍历
