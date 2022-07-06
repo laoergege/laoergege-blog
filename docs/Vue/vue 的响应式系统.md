@@ -1,9 +1,9 @@
 ---
 release: true
-top: 2
+top: 1
 tags:
   - vue
-desc: 除了组件化，Vue.js 另一个核心设计思想就是响应式。
+description: 响应式系统是 Vue 最底层的核心机制，本文将分析 Vue 响应式的实现原理及核心 Reative API 源码分析。
 ---
 
 # Vue 的响应式系统
@@ -198,19 +198,22 @@ function trigger(target, key) {
 
 ## Vue Reactive API 源码分析
 
-> Vue Reactive API 基本实现原理大概类似上面，下面仅对部分源码细节分析
+> Vue Reactive API 基本实现原理大概类似上面，下面仅对部分 API 源码细节分析
 
 Vue Reactive API 大致分为两类：
 
 - 响应式数据
   - [reactive](#reactive)
-  - readonly：只读，不响应
+    - [ReactiveFlags key](#内部-reactiveflags-key)
   - [ref：Ref 与 Reactive 有何区别，为什么要有 Ref？](#refref-与-reactive-有何区别为什么要有-ref)
   - computed
   - deferredComputed
-- 响应式副作用（[ReactiveEffect](#reactiveeffect)）
+- 响应式副作用
   - effect，将副作用封装成响应式副作用
+    - [ReactiveEffect](#reactiveeffect)
   - effectScope
+    - getCurrentScope
+    - onScopeDispose
   - _runtiom-dom_
     - watchEffect
     - watch
@@ -279,13 +282,14 @@ function targetTypeMap(rawType: string) {
 
 #### 内部 ReactiveFlags key
 
-ReactiveFlags 作为响应式对象的内部特殊 key。
+Vue 内部会针对有 ReactiveFlags 的对象做一些特殊处理。
 
 ```ts
 export const enum ReactiveFlags {
   SKIP = "__v_skip", // 跳过响应化
   IS_REACTIVE = "__v_isReactive", // 响应式标记
   IS_READONLY = "__v_isReadonly", // 响应式只读标记
+  IS_SHALLOW = '__v_isShallow', // 浅响应，即只对对象第一层属性响应式
   RAW = "__v_raw", // 原始数据
 }
 ```
@@ -339,10 +343,45 @@ function createGetter(isReadonly = false, shallow = false) {
 
 #### 数组代理
 
-![](./images/array-proxy.png)
+得益于 Proxy，Vue3 对数组已不需要重写数组部分 API，但某些数组方法与代理对象之间会存在需要重写。
 
-1. 保证 includes、indexOf、lastIndexOf 方法传参是 raw。
-2. 防止 push、pop 等数组操作会导致数组长度变化，并返回 length 导致再次触发 get。
+```ts
+function createArrayInstrumentations() {
+  const instrumentations: Record<string, Function> = {}
+  // instrument identity-sensitive Array methods to account for possible reactive
+  // values
+  ;(['includes', 'indexOf', 'lastIndexOf'] as const).forEach(key => {
+    instrumentations[key] = function (this: unknown[], ...args: unknown[]) {
+      const arr = toRaw(this) as any
+      for (let i = 0, l = this.length; i < l; i++) {
+        track(arr, TrackOpTypes.GET, i + '')
+      }
+      // we run the method using the original args first (which may be reactive)
+      const res = arr[key](...args)
+      if (res === -1 || res === false) {
+        // if that didn't work, run it again using raw values.
+        return arr[key](...args.map(toRaw))
+      } else {
+        return res
+      }
+    }
+  })
+  // instrument length-altering mutation methods to avoid length being tracked
+  // which leads to infinite loops in some cases (#2137)
+  ;(['push', 'pop', 'shift', 'unshift', 'splice'] as const).forEach(key => {
+    instrumentations[key] = function (this: unknown[], ...args: unknown[]) {
+      pauseTracking()
+      const res = (toRaw(this) as any)[key].apply(this, args)
+      resetTracking()
+      return res
+    }
+  })
+  return instrumentations
+}
+```
+
+1. 保证 includes、indexOf、lastIndexOf 参数可接受响应式数据
+2. push、pop 等数组操作会返回 length，防止再次触发 get。
 
 ```js
 const test = [1, 2, 3];
@@ -360,9 +399,42 @@ _test.push(4); // 返回 _test.length 会再触发 get
 console.log(_test.length);
 ```
 
-### ReactiveEffect
+### effect
 
-将副作用封装成响应式副作用，能够在响应式数据发生变化时重新执行。
+effect 将副作用封装成响应式副作用，能够在响应式数据发生变化时重新执行。effect 是一个偏低层 API，是同步调度。在 Vue 开发中，用得更多的是 `watchEffect` 和 `watch`。
+
+```js
+export interface ReactiveEffectOptions extends DebuggerOptions {
+  lazy?: boolean // 延迟执行
+  scheduler?: EffectScheduler // 副作用执行调度器
+  scope?: EffectScope // 副作用作用域
+  allowRecurse?: boolean
+  onStop?: () => void
+}
+
+// 将副作用封装成响应式副作用
+export function effect<T = any>(
+  fn: () => T,
+  options?: ReactiveEffectOptions
+): ReactiveEffectRunner {
+  if ((fn as ReactiveEffectRunner).effect) {
+    fn = (fn as ReactiveEffectRunner).effect.fn
+  }
+  // 生成副作用对象
+  const _effect = new ReactiveEffect(fn)
+  if (options) {
+    extend(_effect, options)
+    if (options.scope) recordEffectScope(_effect, options.scope)
+  }
+  // 延迟执行控制
+  if (!options || !options.lazy) {
+    _effect.run()
+  }
+  const runner = _effect.run.bind(_effect) as ReactiveEffectRunner
+  runner.effect = _effect
+  return runner
+}
+```
 
 ```ts
 export class ReactiveEffect<T = any> {
@@ -405,39 +477,6 @@ export class ReactiveEffect<T = any> {
   stop() {
     // 停止副作用
   }
-}
-```
-
-```js
-export interface ReactiveEffectOptions extends DebuggerOptions {
-  lazy?: boolean // 延迟执行
-  scheduler?: EffectScheduler // 副作用执行调度器
-  scope?: EffectScope // 副作用作用域
-  allowRecurse?: boolean
-  onStop?: () => void
-}
-
-// 将副作用封装成响应式副作用
-export function effect<T = any>(
-  fn: () => T,
-  options?: ReactiveEffectOptions
-): ReactiveEffectRunner {
-  if ((fn as ReactiveEffectRunner).effect) {
-    fn = (fn as ReactiveEffectRunner).effect.fn
-  }
-  // 将副作用 fn 封装成响应式副作用
-  const _effect = new ReactiveEffect(fn)
-  if (options) {
-    extend(_effect, options)
-    if (options.scope) recordEffectScope(_effect, options.scope)
-  }
-  // 延迟执行控制
-  if (!options || !options.lazy) {
-    _effect.run()
-  }
-  const runner = _effect.run.bind(_effect) as ReactiveEffectRunner
-  runner.effect = _effect
-  return runner
 }
 ```
 
@@ -614,13 +653,13 @@ export function triggerEffects(
 
 ### ref：Ref 与 Reactive 有何区别，为什么要有 Ref？
 
-vue 提供了 reactive、ref 创建响应式数据，那么 reactive 和 ref 有什么区别？
+Vue 提供了 reactive、ref 创建响应式数据，那么 reactive 和 ref 有什么区别？
 
-1. 无论是 Object.defineProperty、proxy 实现的响应式功能有个缺点就是必须是对象类型，不支持基础类型
-2. ref 主要是为实现对基础类型响应式化规范支持，将基础类型包装成带 value 的对象进行响应化
+1. Vue 数据劫持的实现上无论是 Object.defineProperty、proxy 都有个缺点就是必须是对象类型，不支持基础类型
+2. （个人觉得）ref 主要是规范化对原始类型的响应式化，即将原始类型包装成带 value 属性的对象再进行响应化
 3. 实现原理细节上
    - reactive 是通过 proxy 实现
-   - ref 依然是靠 object.defineProperty 的 get 与 set 完成的，但如果 ref 接收不是一个基础类型则转换成 reactive（Why？如果直接通过 reactive 支持，则需要多创建一个 Map 对象，参考上面 [reactive 实现的缓存结构](#缓存结构)）
+   - ref 的实现上使用 object.defineProperty 的 get 与 set 完成的，但对于非原始类型的参数则转换成 reactive 去响应化（Why？个人猜测，如果一个原始类型直接通过 reactive 支持，需要创建一个 Map 对象，参考上面 [reactive 实现的缓存结构](#缓存结构)，有点浪费）
 
 ```ts
 const convert = <T extends unknown>(val: T): T =>

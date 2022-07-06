@@ -32,17 +32,20 @@ MVC 是一种软件架构模式，通常用于开发用户界面，主要是在�
   - Model = 数据 + 业务逻辑
   - 通过 Control 解耦 Model 与 View 
 
-- 数据层：
-  - Service + Store/Model + IOC + Context
-  - Servcie = Store + API
-- 逻辑层：组件化 => 应用逻辑拆分、复用
+
 - 视图层
   - 视图逻辑抽象 => VirtualDOM
   - UI is a calculation
   - UI = f(state)
   - 不应该参杂副作用 useEffect
   - 组合模式、参考函数式编程
-- 底层渲染层：dom + css
+  - 底层渲染层：dom + css
+- 逻辑层：组件化 => 应用逻辑拆分、复用
+  - 视图逻辑
+  - 业务逻辑
+- 数据层：
+  - Service + Store/Model + IOC + Context
+  - Servcie = Store + API
 
 组件以视图为中心、视图驱动，视图模型 = 组件 + 视图逻辑，State 是围绕 View 的消费和交互需求而产生的，View 是组件真正核心的部分
 
@@ -95,17 +98,19 @@ MVC 是一种软件架构模式，通常用于开发用户界面，主要是在�
 
 - Pina
  - TypeScript 支持
- - 插件机制
- - 热模块更换
-   - 在不重新加载页面的情况下修改您的商店
-   - 在开发时保持现有状态任何
- - 开发工具支持
+ - DevTools 支持
    - 动作、响应追踪
    - 商店出现在使用它们的组件中
    - 时间旅行和更容易的调试
- - 服务器端渲染支持
+ - 热模块更换
+ - SSR 支持
+ - 插件扩展
+ - 轻量、tree-shaking
  - api
-   - defineStore
+   - defineStore 定义数据模型
+- featrue
+  - class 范式
+  - DI
 
 ```js
 import { inject, provide, reactive } from "vue";

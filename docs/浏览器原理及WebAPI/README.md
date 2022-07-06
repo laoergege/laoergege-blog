@@ -63,10 +63,10 @@ desc: 浏览器原理及API知识体系总结
         - postMessage
         - MessageChannel
         - BroadcastChannel（同源限制）
-  - 数据存储
-    - cookie
-    - localStorage
-    - sessionStorage
+  - 缓存
+    - http-cache & cookie
+    - service-worker & cache
+    - localStorage、sessionStorage
     - indexDB
   - 网络通信
     - 同源

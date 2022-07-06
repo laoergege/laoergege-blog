@@ -22,7 +22,7 @@ description: Vue 技术栈
     - 异步更新调度
     - 指令
   - 响应式系统
-- 生态
+- 指南
   - 数据流
     - 父子组件
       - props、event
@@ -76,8 +76,9 @@ description: Vue 技术栈
   3. [diff 更新流程](./diff%20更新流程.md)
   4. [vue 的响应式系统](./vue%20的响应式系统.md)
   5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
-  6. 模板编译优化
-  7. vue 指令原理
+  6. [Vue 组件生命周期](./Vue%20%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
+  7. 模板编译优化
+  8. vue 指令原理
 - Vue API 剖析
   1. vue 异步组件及 Suspense
   2. Teleport 实现原理
@@ -90,5 +91,3 @@ description: Vue 技术栈
   - [一切前端概念，都是纸老虎](https://mp.weixin.qq.com/s/oF-MJ39zh0-R65Q4vPX8Dw)
 - SFC
   - [Vue 3 的 SFC Style CSS Variable Injection 提案实现的背后](https://mp.weixin.qq.com/s/N1AoRSuK00V5QoZr4TWWvQ)
-
-

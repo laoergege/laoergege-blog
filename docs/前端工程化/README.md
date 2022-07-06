@@ -1,5 +1,4 @@
 ---
-release: true
 tags:
  - 工程
 desc: 系统化前端工程相关
@@ -58,6 +57,7 @@ desc: 系统化前端工程相关
       - 本地服务器及服务代理
       - API 管理及数据模拟
       - 浏览器及 DevTools
+  - Linter
   - 构建
     - 优化
       - 增量构建
@@ -240,3 +240,8 @@ CSS 项目实践
   - [XRender](https://x-render.gitee.io/)
   - [ajv](https://github.com/ajv-validator/ajv)
   - Angular 表单
+
+## NodeJS ESM
+
+- `.js` + `"type": "module"`
+- `.mjs`
