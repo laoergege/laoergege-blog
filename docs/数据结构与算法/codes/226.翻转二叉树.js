@@ -22,10 +22,7 @@ var invertTree = function (root) {
         return null
     }
 
-    [root.right, root.left] = [root.left, root.right]
-
-    invertTree(root.left)
-    invertTree(root.right)
+    [root.right, root.left] = [invertTree(root.left), invertTree(root.right)]
 
     return root
 };

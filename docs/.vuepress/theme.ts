@@ -55,6 +55,7 @@ export default {
         "vue",
         "shell",
         "toml",
+        "py",
       ],
       theme: "github-light",
     }),

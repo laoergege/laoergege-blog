@@ -21,27 +21,34 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function (root) {
-    const arr = dfs(root, [])
-    let quick = 1
-    let slow = 0
-    while (quick < arr.length) {
-        if (arr[quick++] <= arr[slow++]) {
-            return false
-        }
-    }
+var isValidBST = function (root, max = Infinity, min = -Infinity) {
+    // 中序遍历
+    // const arr = dfs(root, [])
+    // let quick = 1
+    // let slow = 0
+    // while (quick < arr.length) {
+    //     if (arr[quick++] <= arr[slow++]) {
+    //         return false
+    //     }
+    // }
 
-    return true
+    // return true
+
+    // 递归
+    if (!root) return true
+
+    return (root.val < max && root.val > min) &&
+        isValidBST(root.left, root.val, min) &&
+        isValidBST(root.right, max, root.val)
 };
+// function dfs(root, res) {
+//     if (root) {
+//         dfs(root.left, res)
+//         res.push(root.val)
+//         dfs(root.right, res)
+//     }
 
-function dfs(root, res) {
-    if (root) {
-        dfs(root.left, res)
-        res.push(root.val)
-        dfs(root.right, res)
-    }
-
-    return res
-}
+//     return res
+// }
 // @lc code=end
 

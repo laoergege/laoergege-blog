@@ -1,32 +1,25 @@
 # Vue 组件生命周期
 
-Vue.js 3.x 
-
-针对 Vue.js 2.x 的生命周期钩子函数做了全面替换，映射关系如下：
-
-```js
-beforeCreate -> setup
-
-created -> setup
-
-beforeMount -> onBeforeMount 
-
-mounted -> onMounted 
-
-beforeUpdate -> onBeforeUpdate 
-
-updated -> onUpdated 
-
-beforeDestroy-> onBeforeUnmount 
-
-destroyed -> onUnmounted 
-
-activated -> onActivated 
-
-deactivated -> onDeactivated 
-
-errorCaptured -> onErrorCaptured
+Vue.js 3.x 主打组合API后，对应 Vue.js 2.x 的生命周期钩子函数做了全面替换映射，如下：
 
 ```
+beforeCreate -> setup
+created -> setup
+beforeMount -> onBeforeMount 
+mounted -> onMounted 
+beforeUpdate -> onBeforeUpdate 
+updated -> onUpdated 
+beforeDestroy-> onBeforeUnmount 
+destroyed -> onUnmounted 
+activated -> onActivated 
+deactivated -> onDeactivated 
+errorCaptured -> onErrorCaptured
+```
 
-Vue.js 3.x
+Vue.js 3.x 新增
+
+```
+onRenderTracked
+onRenderTriggered
+onServerPrefetch
+```

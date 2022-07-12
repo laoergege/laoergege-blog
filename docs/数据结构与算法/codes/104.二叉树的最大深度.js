@@ -18,31 +18,14 @@
  * @return {number}
  */
 var maxDepth = function (root, depth = 0) {
-    // if (!root) {
-    //     return depth
-    // }
-
-    // return Math.max(
-    //     maxDepth(root.left, depth + 1),
-    //     maxDepth(root.right, depth + 1),
-    // )
-
     if (!root) {
-        return depth
+        return 0
     }
 
-    // let depth = 1
-    let queue = [root]
-    while (queue.length) {
-        depth++
-        queue = queue.reduce((q, node) => {
-            node.left && q.push(node.left)
-            node.right && q.push(node.right)
-            return q
-        }, [])
-    }
-
-    return depth
+    return Math.max(
+        maxDepth(root.left),
+        maxDepth(root.right),
+    ) + 1
 };
 // @lc code=end
 

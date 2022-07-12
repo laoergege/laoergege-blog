@@ -18,27 +18,11 @@
  * @return {number}
  */
 var minDepth = function (root) {
-    if (!root) {
-        return 0
-    }
+    if (!root) return 0
+    if (!root.left) return minDepth(root.right) + 1
+    if (!root.right) return minDepth(root.left) + 1
 
-    let _minDepth = 0
-    let queue = [root]
-    while (queue.length) {
-        _minDepth++
-        let _queue = []
-        for (const node of queue) {
-            if (!node.left && !node.right) {
-                return _minDepth
-            }
-
-            node.left && _queue.push(node.left)
-            node.right && _queue.push(node.right)
-        }
-        queue = _queue
-    }
-
-    return _minDepth
+    return Math.min(minDepth(root.left), minDepth(root.right)) + 1
 };
 // @lc code=end
 
