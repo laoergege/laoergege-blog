@@ -105,9 +105,13 @@ export interface VNode<
 1. 数据变动（或者初始数据）
 2. 调度 Render 输出新 vdom
 3. Diff vdom 
+4. 将 Patch 
 
 
 
+如何 数据驱动
+react setState 
+vue 响应式数据：通过响应式代理，将组建渲染作为依赖收集起来，状态变化的时候就可以触发它们的 render
 
 
 先关注绿色方块，渲染核心主要为：

@@ -482,7 +482,7 @@
   - [ ] 请你介绍下前端性能优化？
 - 工程
   - webpack
-    - [x] webpack 有用过哪些 loader
+    - [x] webpack 有用过哪些 loader、plugin 都有什么作用
       - loader
         - js
           - babel-loader
@@ -502,16 +502,17 @@
     - [ ] webpack 性能优化你是怎么做的？
       - https://juejin.cn/post/6844904093463347208
     - [ ] 说了下 webpack 构建流程
-    - [ ] webpack 有几种 hash，它们有什么区别？一般你在项目里面是用哪种 hash？
-      - hash，是整个项目的 hash 值，每次编译之后都会生成新的 hash
+    - [x] webpack 有几种 hash，它们有什么区别？一般你在项目里面是用哪种 hash？
+      - hash，反映的是项目的构建版本，每次编译之后都会生成新的 hash
       - chunkhash，根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值（来源于同一个 chunk，则 hash 值就一样）
-      - contenthash，根据文件内容生成 hash 值，文件内容相同 hash 值就相同
+      - **contenthash**，根据文件内容生成 hash 值，文件内容相同 hash 值就相同
     - Webpack 了解多少
       1. webapck 的四个核心概念，并介绍一些其他的模块，例如 mode，依赖图的概念等等。
       2. 介绍几个 webpack 的插件，如压缩 gzip、如何处理 dev 中的 console.log 的模块等等
     - [ ] loader、plugin 区别
       - loader 主要是对源文件进行转换处理
-      - plugin 可以用来监听 webpack 构建生命周期，做一些操作，去扩展 webpack 功能
+      - plugin 可以用来监听 webpack 构建生命周期，做一些操作，去扩展 webpa
+      - ck 功能
       - loader 本质是一个函数，plugin 本质是一个类，
     - [ ] 怎么实现loader，plugin
     - extenral 通过 extenrals 选项，可以将依赖从输出的 bundle 中移除，并保持资源引入
@@ -525,6 +526,9 @@
       - 它与 CommonJS 规范最大的区别在 ES6 中的 import 和 export 都是静态的。静态意味着一个模块要暴露或引入的所有方法在编译阶段就全部确定了，之后不能再改变。
     - [ ] webpack 构建优化
     - [ ] Webpack 构建流程
+    - [ ] devtool 配置差异
+    - [ ] 热更新（HRM）原理
+    - [ ] Webpack 核心库 Tapabel 介绍
   - CI/CD
     - Docker
       - [x] Docker 容器化带来的好处

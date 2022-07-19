@@ -1,9 +1,17 @@
-- mountComponent 组件挂载
-  - createComponentInstance 创建组件实例
-  - setupComponent 设置组件 props, children
-    - setupStatefulComponent 调用 setup 设置组件状态
-      - handleSetupResult 处理 setup 返回结果
-  - setupRenderEffect 设置渲染副作用
+- VueCore 
+  - mountComponent 组件挂载
+    - createComponentInstance 创建组件实例
+    - setupComponent 设置组件 children
+      - initProps 初始化 props
+      - setupStatefulComponent 调用 setup 设置组件状态
+        - handleSetupResult 处理 setup 返回结果
+    - setupRenderEffect 设置渲染副作用
+  - updateComponent
+    - shouldUpdateComponent 判断子组件是否需要更新
+  - setupRenderEffect
+    - componentUpdateFn 组件更新方法
+      - updateComponentPreRender 调用组件 render 前的任务操作
+        - updateProps
 
 
 1. vue2 vue3 生命周期
@@ -28,9 +36,9 @@
    4. v-memo
    5. v-pre
 
-fiber 的 diff 过程
 
-state => render => diff => patch
+
+
 
 ```js
 function workLoop() {
@@ -101,5 +109,69 @@ function updateFunctionComponent(wip) {
 
   const children = type(props);
   reconcileChildren(wip, children);
+}
+```
+
+props 分流 attrs props， why？
+事件派发如何处理？
+shouldUpdateComponent
+needCastKeys 是什么
+
+
+
+
+```ts
+function setFullProps(
+  instance: ComponentInternalInstance,
+  rawProps: Data | null,
+  props: Data,
+  attrs: Data
+) {
+  const [options, needCastKeys] = instance.propsOptions
+  let hasAttrsChanged = false
+  let rawCastValues: Data | undefined
+  if (rawProps) {
+    for (let key in rawProps) {
+      // key, ref are reserved and never passed down
+      if (isReservedProp(key)) {
+        continue
+      }
+
+      const value = rawProps[key]
+      // prop option names are camelized during normalization, so to support
+      // kebab -> camel conversion here we need to camelize the key.
+      let camelKey
+      if (options && hasOwn(options, (camelKey = camelize(key)))) {
+        if (!needCastKeys || !needCastKeys.includes(camelKey)) {
+          props[camelKey] = value
+        } else {
+          ;(rawCastValues || (rawCastValues = {}))[camelKey] = value
+        }
+      } else if (!isEmitListener(instance.emitsOptions, key)) {
+        if (!(key in attrs) || value !== attrs[key]) {
+          attrs[key] = value
+          hasAttrsChanged = true
+        }
+      }
+    }
+  }
+
+  if (needCastKeys) {
+    const rawCurrentProps = toRaw(props)
+    const castValues = rawCastValues || EMPTY_OBJ
+    for (let i = 0; i < needCastKeys.length; i++) {
+      const key = needCastKeys[i]
+      props[key] = resolvePropValue(
+        options!,
+        rawCurrentProps,
+        key,
+        castValues[key],
+        instance,
+        !hasOwn(castValues, key)
+      )
+    }
+  }
+
+  return hasAttrsChanged
 }
 ```

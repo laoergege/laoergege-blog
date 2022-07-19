@@ -59,38 +59,9 @@ desc: 系统化前端工程相关
       - 浏览器及 DevTools
   - Linter
   - 构建
-    - 优化
-      - 增量构建
-        - husky + Lint-stage
-      - 依赖缓存
-    - 开发模式
-      - 模块化
-      - 热模块替换
-    - 生产模式
-      - 打包/拆包
-      - 输出
-        - SourceMap
-        - HashedURLs
-        - TreeShaking
-        - 模块格式及加载机制（运行时）
-      - 转换
-        - 缩小
-          - JS
-            - [Terser](https://github.com/terser-js/terser)
-        - 树摇
-        - 符号
-        - 转译
-          - js
-            - [gogocode](https://github.com/thx/gogocode)
-            - [parcel-css](https://github.com/parcel-bundler/parcel-css)
-          - css
-            - less
-            - scss
-            - postcss
-    - *工具*
-      - webpack
-      - [vite](https://github.com/vitejs/vite)
-      - [parcel](https://parceljs.org/)
+    - webpack
+    - [vite](https://github.com/vitejs/vite)
+    - [parcel](https://parceljs.org/)
   - 测试
     - unit
       - jest
@@ -245,3 +216,109 @@ CSS 项目实践
 
 - `.js` + `"type": "module"`
 - `.mjs`
+
+## 构建工具的设计及考量
+
+- 考量
+  - 设计
+  - 功能
+  - 性能
+- 功能考量
+  - 性能优化
+    - 增量模式
+      - husky + Lint-stage
+    - 构建缓存
+    - 并行模式
+  - 开发模式
+    - 模块化
+      - 模块依赖机制
+      - 一切皆模块：非 JavaScript 类型资源支持导入
+    - 热模块替换
+    - SourceMap
+    - DevServer
+  - 生产模式
+    - 代码分割（Code Splitting）
+      - 提取公共模块
+      - 按需加载/懒加载
+    - 资源哈希（Hashing）
+      - Hash vs ChunkHash vs ContentHash
+    - 输出格式
+      - ESM
+      - CommonJS
+      - SystemJS
+      - Lib
+    - 转换
+      - 缩小、压缩
+        - 混淆：符号压缩
+          - JS
+            - [Terser](https://github.com/terser-js/terser)
+        - 对无用代码的删除（DCE/TreeShaking：指的是基于module的跨模块死代码删除技术）
+          - tree shaking负责移除未引用的top-level 语句，而DCE删除无用的语句
+          - 原理
+            - 依赖 ESModules 静态结构做分析
+            - 副作用评估
+            - 静态属性分析
+            - 范围提升和编译时间 
+              - 代码评估轻松地发现没有被调用的模块并删除它们
+          - JS
+            - [Terser](https://github.com/terser-js/terser)
+      - 符号：做环境变量替代
+        - cross-env 
+      - 转译
+        - js
+        - jsx
+        - css
+          - less
+          - scss
+          - postcss
+          - [parcel-css](https://github.com/parcel-bundler/parcel-css)
+
+packages 声明副作用
+
+```json
+
+{
+    "name": "my-package",
+    "sideEffects": false
+}
+
+```
+
+内联注释
+
+```js
+const x = */@__PURE__*/eliminated_if_not_called()
+```
+
+
+
+
+- 使用 ESM
+- 确保您确切知道哪些依赖项（如果有）尚未声明sideEffects或将它们设置为true
+- 在使用带有副作用的包时，使用内联注释来声明纯粹的方法调用
+- 如果您要输出 CommonJS 模块，请确保在转换导入和导出语句之前优化您的包
+  - 避免过早的转译：这些编译器会在代码优化之前到达您的代码。而且无论是默认还是错误配置，这些编译器通常会输出 CommonJS 模块，而不是 ESM。如前一节所述，CommonJS 模块是动态的，因此无法正确评估死代码消除
+
+
+
+- ESM 导出
+- `"type": "module"`
+- `"module": "./path/entry.js"`
+
+```json
+{
+    // ...
+    "main": "./index-cjs.js",
+    "module": "./index-esm.js",
+    "exports": {
+        "require": "./index-cjs.js",
+        "import": "./index-esm.js"
+    }
+    // ...
+}
+```
+
+### TreeShaking 原理设计
+
+
+Vite，一个基于浏览器原生 ES imports 的开发服务器。利用浏览器去解析 imports，在服务器端按需编译返回。

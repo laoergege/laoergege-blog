@@ -72,8 +72,9 @@ description: Vue 技术栈
   4. [vue 的响应式系统](./vue%20的响应式系统.md)
   5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
   6. [Vue 组件生命周期](./Vue%20%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
-  7. 模板编译优化
-  8. vue 指令原理
+  7. [Props & Slots]()
+  8. 模板编译优化
+  9. vue 指令原理
 - Vue API 剖析
   1. vue 异步组件及 Suspense
   2. Teleport 实现原理

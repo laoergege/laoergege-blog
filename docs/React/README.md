@@ -1,4 +1,6 @@
 - React
+  - 设计思想
+    - 代数效应
   - 逻辑服用
     - HOC
     - render props
@@ -11,3 +13,6 @@
     - [react-illustration-series](https://github.com/7kms/react-illustration-series)
     - [react 开发模式](https://www.patterns.dev/)
 
+## Re-Render
+
+useSyncExternalStore
