@@ -720,13 +720,11 @@
       - [ ] 手写响应式数据实现
     - [x] 数据绑定原理
       - 渲染视图时访问到响应式数据，会被数据劫持将视图渲染做为依赖收集，当数据发生变化就会触发视图渲染
-    - [x] vue 双向绑定原理（v-model）
-      - v-model 只是语法糖，通过vue的编译器默认情况会转成 value 属性数据绑定 + input 事件监听，事件回调函数中会做相应变量更新操作
-      - 数据到视图的绑定：通过数据劫持将视图渲染当作依赖收集，当数据发生变化就会触发视图渲染
-      - 视图变化到数据更新是通过事件监听的方式来实现
-        - 如果是元生元素则使用原生事件绑定
-        - 如果是组件则使用内部实现的事件订阅
-    - [x] 单向数据流
+    - [ ] vue 双向绑定原理（v-model）
+      - v-model 只是个语法糖，通过vue的编译器默认情况会转成 value 数据属性绑定 + input 事件监听，在事件回调函数中会做变量更新操作
+      - v-model 通常在表单项上使用v-model，还可以在自定义组件上使用
+      - v-model 如果用在表单元素，编译器根据表单元素的不同会展开不同的DOM属性和事件对，比如text类型的input和textarea会展开为value和input事件；checkbox和radio类型的input会展开为checked和change事件；select用value作为属性，用change作为事件。
+    - [x] 单向数据流原则理解
       - 数据到视图单向绑定
       - 组件树自顶向下单向更新，父组件更新后通过 props 向子组件传递数据，子组件不能更新 props
       - 如果发生逆向数据流修改，会使当前渲染的视图与状态映射不一致，导致重复渲染。
@@ -743,10 +741,36 @@
       - 为了过滤列表中的项目，先用计算属性
       - 为了避免渲染本应该被隐藏的列表，把 v-if 放到外层容器元素或者外面包一层template即可
     - [x] vue 组件通信
-      - 父子组件 props、emit
-      - 直接引用组件实例 parent、children、ref
-      - 跨层级关系 provide/inject
-      - 像 eventBus、vuex 之类的全局单例 + 事件订阅的模式
+      - 父子组件通过 props、emit；或者直接引用组件实例 parent、children、ref
+      - 深层级或远距离组件的通信，则依赖于 "状态提升" + props 层层传递的方式或者 provide/inject 的方式
+      - 也可以使用 eventBus、vuex 之类的全局单例 + 事件订阅的模式
+    - [x] vue2、3 新旧生命周期、生命调用顺序
+      - 生命周期
+        - 创建
+          - setup(vue3)
+          - beforeCreate
+          - created
+        - 挂载
+          - beforeMount
+          - mounted
+        - 更新
+          - beforeUpdate
+          - updated
+        - 销毁 
+          - beforeDestory/beforeUnmount(vue3)
+          - destroyed/unmounted(vue3)
+        - 其他
+          - activated
+          - deactivated
+          - errorCaptured
+          - vue3
+            - renderTracked
+            - renderTriggered
+            - serverPrefetch
+      - 生命周期调用顺序
+      - 异步请求在哪一步发起
+        - 一般 created 或者 mounted
+        - 但 ssr 场景不支持 beforeMount 、mounted 钩子函数，可用放在 created 中有助于一致性；而在 vue3 SSR 数据获取统一成 serverPrefetch
     - [ ] keep-alive 原理
     - [ ] computed 实现原理
     - [x] computed、watch 对比区别
@@ -772,34 +796,6 @@
       - 防抖、节流运用
       - 虚拟列表/虚拟表格
       - 防止内部泄漏，组件销毁后把全局变量和事件销毁
-    - [x] vue2、3 新旧生命周期、生命调用顺序
-      - 生命周期
-        - setup(vue3)
-        - 创建
-          - beforeCreate
-          - created
-        - 挂载
-          - beforeMount
-          - mounted
-        - 更新
-          - beforeUpdate
-          - updated
-        - 销毁 
-          - beforeDestory/beforeUnmount(vue3)
-          - destroyed/unmounted(vue3)
-        - activated
-        - deactivated
-        - errorCaptured
-        - vue3
-          - renderTracked
-          - renderTriggered
-          - serverPrefetch
-      - 生命周期调用顺序
-      - 异步请求在哪一步发起
-        - created 或者 mounted
-        - 能更快获取到服务端数据，减少页面 loading 时间；
-        - ssr 不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于一致性；
-          - 而在 vue3 SSR 数据获取统一成 serverPrefetch
     - 内置指令
       - v-if 优先级高于 v-for
     - [x] Vue 如何检测数组变化
@@ -943,6 +939,8 @@
     - 翻转二叉树  ![图 3](./images/1657350223433.png)  
     - 验证搜索二叉树  ![图 4](./images/1657351202291.png) 
     - 二叉树的最大深度/最小深度
+      - ![图 1](./images/1658327216405.png) 
+      - ![图 2](./images/1658327491563.png)  
   - [x] 堆
     - 堆实现
     - Top K、前 K：703.数据流中的第 K 大元素
@@ -951,6 +949,7 @@
   - [ ] 递归、分治、贪心、回溯、动规
     - 递归
       - 子集
+    - 分治
     - 回溯
       - 排列
       - 组合
@@ -1310,9 +1309,10 @@ commit 规范 & changelog 生成
 整理 Vue 与 React 框架的所有横向对比，包括渲染原理、虚拟 dom、diff、patch、fiber、批量更新，手写响应式，框架用到的模式、设计思想，性能优化，相关生态技术等等
 建议从多个角度去聊，比如框架特性、生态、开发体验、社区评价、性能、源码等多个角度聊
 
-- Vue 与 React 框架的所有横向对比
+- Vue 与 React 框架的对比
   - 有react fiber，为什么不需要 vue fiber呢；
 - 渲染机制
+- 设计思想
 - 响应式原理
   - react
     - 不可变、setState

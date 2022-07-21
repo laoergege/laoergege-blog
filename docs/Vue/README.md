@@ -7,16 +7,17 @@ description: Vue 技术栈
 
 # Vue
 
-- Vue Core
+- Vue
   - 组件系统
-    - jsx
-    - template 模板编译器
+    - jsx + template 模板编译器
       - 模板编译
       - 编译优化
   - VirtualDom + Renderer（渲染器）
     - 组件渲染机制
     - 响应式渲染 + 异步更新调度
   - 响应式系统
+- Vue 组件的模式及原则
+  - 单向数据原则
 - 指南
   - 数据流
     - 父子组件
@@ -71,15 +72,15 @@ description: Vue 技术栈
   3. [diff 更新流程](./diff%20更新流程.md)
   4. [vue 的响应式系统](./vue%20的响应式系统.md)
   5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
-  6. [Vue 组件生命周期](./Vue%20%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
   7. [Props & Slots]()
   8. 模板编译优化
   9. vue 指令原理
 - Vue API 剖析
-  1. vue 异步组件及 Suspense
-  2. Teleport 实现原理
-  3. Fragment
-  4. Vue & WebComponent
+  1. [Vue 组件生命周期](./Vue%20%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
+  2. vue 异步组件及 Suspense
+  3. Teleport 实现原理
+  4. Fragment
+  5. Vue & WebComponent
 
 ## 推荐好文
 

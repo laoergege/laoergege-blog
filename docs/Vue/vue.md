@@ -1,4 +1,4 @@
-- VueCore 
+- VueCore 源码方法调用路径
   - mountComponent 组件挂载
     - createComponentInstance 创建组件实例
     - setupComponent 设置组件 children
@@ -6,9 +6,9 @@
       - setupStatefulComponent 调用 setup 设置组件状态
         - handleSetupResult 处理 setup 返回结果
     - setupRenderEffect 设置渲染副作用
-  - updateComponent
+  - updateComponent 更新组件
     - shouldUpdateComponent 判断子组件是否需要更新
-  - setupRenderEffect
+  - setupRenderEffect 设置组件渲染副作用
     - componentUpdateFn 组件更新方法
       - updateComponentPreRender 调用组件 render 前的任务操作
         - updateProps

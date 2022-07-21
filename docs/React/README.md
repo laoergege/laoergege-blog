@@ -13,6 +13,6 @@
     - [react-illustration-series](https://github.com/7kms/react-illustration-series)
     - [react 开发模式](https://www.patterns.dev/)
 
-## Re-Render
+## Re-Render(重复渲染)
 
-useSyncExternalStore
+ React 是允许我们在 render 函数中调用 setState 的，只是限制了只能触发当前组件自己的 state 更新。
