@@ -1,6 +1,6 @@
 <template>
   <article
-    class="w-full prose prose-sm sm:prose-base lg:prose-lg pt-10"
+    class="article w-full prose prose-sm sm:prose-base lg:prose-lg pt-10"
     data-theme="cupcake"
   >
     <content :page-key="$route.matched[0].name" />
@@ -49,5 +49,13 @@ export default {
 
 .line-numbers-mode .shiki {
   flex: 1;
+}
+
+pre.shiki {
+  @apply drop-shadow-lg
+}
+
+.article img{
+  @apply drop-shadow-lg
 }
 </style>
