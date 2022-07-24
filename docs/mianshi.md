@@ -954,18 +954,12 @@
       - 排列
       - 组合
 - typescript
+  - [ ] never 与 void 区别
   - [ ] interface 和 type 的区别
   - [ ] TypeScript 高级用法， Pick 和 Omit
   - [x] any、unkown 区别
-    - 与 any 不同的是，unknown 在类型上更安全
-      - 可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any
-      - 使用 unknown，TypeScript 会强制类型检测，你必须使用*类型缩小*、_类型断言_
-
-- TypeScript 类型推导
-  typeof
-  联合类型
-  断言
-  泛型
+    - any 表示任意类型，可以将其他类型赋值给 any 或者将 any 赋值给其他类型，相当于 typescript 逃生门，会跳过类型检查
+    - unkown 表示未知类型，可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any，并且使用 unknown，TypeScript 会强制类型检测，你必须使用**类型缩小、类型断言**手段去确定类型
 
 ## 其他
 

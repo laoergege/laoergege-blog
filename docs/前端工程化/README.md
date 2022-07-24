@@ -20,9 +20,9 @@ desc: 系统化前端工程相关
       - 代码格式 prettier
       - 代码质量 eslint
       - 类型检测 typescript
-    - 项目组织管理
-      - multirepo
-      - monorepo
+    - 项目依赖管理
+      - Multirepo
+      - Monorepo
     - 目录结构设计
     - 项目模板及代码段
     - 环境
@@ -57,7 +57,7 @@ desc: 系统化前端工程相关
       - 本地服务器及服务代理
       - API 管理及数据模拟
       - 浏览器及 DevTools
-  - Linter
+  - Lint
   - 构建
     - webpack
     - [vite](https://github.com/vitejs/vite)
@@ -86,47 +86,53 @@ desc: 系统化前端工程相关
      - 原子组件
      - 原子样式
   - 以微前端为代表的、前端应用聚合为单体应用的工程方案
-- 公共化/方案沉淀
-    - 方案
-      - CSS
-        - [Atomic CSS](#atomic-css原子css)
-          - TailwindCSS
-            - [如何评价CSS框架TailwindCSS？ - 山月的回答 - 知乎](https://www.zhihu.com/question/337939566/answer/1752928891)
-          - https://github.com/antfu/unocss
-          - WindiCSS
-          - UnoCSS
-      - 工具
-        - [vue: VueUse](https://vueuse.org/)
-      - 表格
-        - [tabulator](https://github.com/olifolkerd/tabulator)
-      - 表单
-        - [表单配置化](#表单配置化)
-      - 图标
-      - 跨平台
-        - H5 
-        - 混合应用
-        - 小程序
-        - RN
-        - Flutter
-      - 动画
-        - [lottie](https://github.com/airbnb/lottie) 
-        - [anime](https://github.com/juliangarnier/anime/)
-      - 移动端适配
-        - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport)
-      - 低代码
-        - [lowcode-engine](https://github.com/alibaba/lowcode-engine)
-      - 前端数据库
-        - [Dexie.js](https://github.com/dexie/Dexie.js)
-        - [rxdb](https://rxdb.info/)
-    - 架构
+  - 前端项目开发架构
+    - 中后台项目架构
+    - H5 项目架构
+    - 同构应用架构
+  - 跨端方案
+  - BFF
+    - SSR
+    - Serverless
+- 公共化方案沉淀
+  - 方案
+    - CSS
+      - [Atomic CSS](#atomic-css原子css)
+        - TailwindCSS
+          - [如何评价CSS框架TailwindCSS？ - 山月的回答 - 知乎](https://www.zhihu.com/question/337939566/answer/1752928891)
+        - https://github.com/antfu/unocss
+        - WindiCSS
+        - UnoCSS
+    - 工具
+      - [vue: VueUse](https://vueuse.org/)
+    - 表格
+      - [tabulator](https://github.com/olifolkerd/tabulator)
+    - 表单
+      - [表单配置化](#表单配置化)
+    - 图标
+    - 跨平台
+      - H5 
+      - 混合应用
+      - 小程序
+      - RN
+      - Flutter
+    - 动画
+      - [lottie](https://github.com/airbnb/lottie) 
+      - [anime](https://github.com/juliangarnier/anime/)
+    - 移动端适配
+      - [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport)
+    - 低代码
+      - [lowcode-engine](https://github.com/alibaba/lowcode-engine)
+    - 前端数据库
+      - [Dexie.js](https://github.com/dexie/Dexie.js)
+      - [rxdb](https://rxdb.info/)
+  - 架构
       - Monorepo
       - 微前端
         - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
       - 组件库
         - WebComponent
-    - 应用架构
-      - 低代码
-      - SSR
+
 
 ## 系文
 
@@ -217,7 +223,7 @@ CSS 项目实践
 - `.js` + `"type": "module"`
 - `.mjs`
 
-## 构建工具的设计及考量
+## 现代化前端构建工具的设计及考量
 
 - 考量
   - 设计
@@ -322,3 +328,22 @@ const x = */@__PURE__*/eliminated_if_not_called()
 
 
 Vite，一个基于浏览器原生 ES imports 的开发服务器。利用浏览器去解析 imports，在服务器端按需编译返回。
+
+## 前端项目开发架构
+
+1. 框架化
+   1. 组件化
+   2. MDV
+   3. 数据状态管理方案
+2. 构建层
+   1. 构建工具
+   2. babel
+3. 依赖
+4. 命令工具及脚手架
+
+## 其他
+
+- 前端工程化管理工具
+- 现代化前端开发和架构生态
+- 核心框架原理与代码设计模式
+- 前端全链路——Node.js 全栈开发

@@ -49,13 +49,14 @@ tags:
               - 基于序号：快慢指针
           - [二分查找（分治）](./二分查找.md)
       - 非线性表：递归
-        - 深度优先搜索
-          - 树
-            - 前序遍历
-            - 中序遍历
-            - 后序遍历
-        - 广度优先搜素
-        - 启发式搜索
+    - 搜索算法
+      - 深度优先搜索
+        - 树
+          - 前序遍历
+          - 中序遍历
+          - 后序遍历
+      - 广度优先搜素
+      - 启发式搜索
     - 算法思想：[递归、分治、贪心、回溯、动态规划、枚举](./%E9%80%92%E5%BD%92%E3%80%81%E5%88%86%E6%B2%BB%E3%80%81%E8%B4%AA%E5%BF%83%E3%80%81%E5%9B%9E%E6%BA%AF%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92.md)
     - 字符串匹配
     - 缓存算法
@@ -66,6 +67,8 @@ tags:
       - 布隆过滤器
   - 经典工程问题
     - 超大量数据排序：分治 + 多路归并排序
+    - 最值问题
+      - 枚举搜索
     - 分治算法如何降低时间复杂度、理解及应用
     - 字符串
     - 区间
@@ -76,7 +79,6 @@ tags:
     - 枚举类
       - 多少
       - 最优解
-
 
 1. 算法题技巧较多，难以整活儿，这也是为什么我说一开始刷算法题不要死磕，因为技巧储备还不够
 
@@ -124,3 +126,73 @@ b[0] > a[1] 没有重叠
 1. 按区间的开始进行递增排序，保证合并区间的开始为最小
 2. 区间重叠判断，否放入结果集
 3. 是则区间合并，选择最大的结束点为合并区间的结点
+
+
+#### 广度优先
+
+```python
+# Python
+
+def BFS(graph, start, end):
+    # 队列   
+    queue = [] 
+    queue.append([start]) 
+
+    while queue: 
+        node = queue.pop() 
+        process(node) 
+
+        # 将 children 排进下一队列中
+        nodes = generate_related_nodes(node) 
+        queue.push(nodes)
+
+        # other processing work 	...
+```
+
+
+#### 深度优先
+
+一般用深度优先遍历：
+
+- 代码好写，使用递归的方法，直接借助系统栈完成**状态的转移**；
+- 广度优先遍历得自己编写结点类和借助队列。
+
+```python
+#Python
+
+# 缓存计算，防止重复计算
+visited = set() 
+
+def dfs(node, visited):
+    if node in visited: # terminator
+        # already visited 
+        return 	visited.add(node) 
+
+    # process current node here. 
+    ...
+
+    for next_node in node.children(): 
+        if next_node not in visited: 
+            dfs(next_node, visited)
+```
+
+非递归写法，模拟栈调用
+
+```python
+#Pythondef DFS(self, tree): 
+    if tree.root is None: 
+        return [] 
+
+    visited, stack = [], [tree.root]
+
+    while stack: 
+        node = stack.pop() 
+        visited.add(node)
+
+        process (node) 
+        nodes = generate_related_nodes(node) 
+        stack.push(nodes) 
+
+    # other processing work 
+    ...
+```
