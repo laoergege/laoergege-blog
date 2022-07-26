@@ -1,26 +1,79 @@
-- 面向对象设计原则
-  - SOLID 原则
-    - SOLID 原则是为构建模块化、封装、可扩展和可组合的组件而设计的
-    - 原则
-      - S：单一职责原则：类的职责应该单一，不要承担过多的职责
-      - O：开闭原则原则：对修改封闭转向对外开放扩展
-        - 实现开放：关键是抽象化
-          - 接口
-          - 抽象类/基类
-            - 里氏代换原则是对“开-闭”原则的补充。基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范
-      - L：里氏替换原则：任何基类出现的地方其子类都可以替换，意味着子类可以扩展父类的功能，但不能改变父类原有的功能
-        - [里氏替换原则的实现方法](#里氏替换原则的实现方法)
-        - [SOLID Principles in JavaScript: What Does the "L" Stand For?](https://hackernoon.com/solid-principles-in-javascript-what-does-the-l-stand-for)
-      - I：接口隔离原则：接口设计应偏向原子性
-      - D：依赖反转原则：依赖关系应该是抽象的，而不是具体的
-        - 高级模块不应该依赖于低级模块。两者都应该依赖于抽象
-        - 抽象不应该依赖于细节。细节应该依赖于抽象
-        - 场景：在模块化开发上，实现模块间的松耦合，更利于多模块并行开发
-  - 面向抽象，面向组合
+## SOLID
 
-## 里氏替换原则的实现方法
+- SOLID：面向对象设计原则
+  - SOLID 原则是为构建模块化、封装、可扩展和可组合的组件而设计的
+  - 原则
+    - S：单一职责原则：类的职责应该单一，不要承担过多的职责
+    - O：开放封闭原则：对修改封闭转向对外开放扩展（[例子](#开闭原则原则例子)）
+      - 实现开放：关键是抽象化
+        - 接口
+        - 抽象类/基类
+          - 里氏代换原则是对“开-闭”原则的补充。基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范
+    - L：里氏替换原则：任何基类出现的地方其子类都可以替换，意味着子类可以扩展父类的功能，但尽量不要重写父类的方法
+      - [SOLID Principles in JavaScript: What Does the "L" Stand For?](https://hackernoon.com/solid-principles-in-javascript-what-does-the-l-stand-for)
+    - I：接口隔离原则：接口设计应偏向原子性
+    - D：依赖倒置原则：依赖关系应该是抽象的，而不是具体的
+      - 高级模块不应该依赖于低级模块。两者都应该依赖于抽象
+      - 抽象不应该依赖于细节。细节应该依赖于抽象
+      - 场景：在模块化开发上，实现模块间的松耦合，更利于多模块并行开发
+- 面向抽象，面向组合
 
-里氏替换原则通俗来讲就是：子类可以扩展父类的功能，但不能改变父类原有的功能。也就是说：子类继承父类时，除添加新的方法完成新增功能外，尽量不要重写父类的方法。
+### 开闭原则原则例子
+
+```ts
+enum LoginType {
+  WeChat,
+  TaoBao,
+  TikTok,
+  // ...
+}
+// 每当新增一个 LoginType，就要对 handler 进行修改
+class Login {
+  public static handler(type: LoginType) {
+    if (type === LoginType.WeChat) { }
+    else if (type === LoginType.TikTok) { }
+    else if (type === LoginType.TaoBao) { }
+    else {
+      throw new Error("Invalid Login Type!")
+    }
+  }
+}
+```
+
+通过抽象接口，分离具体实现：
+
+```ts
+abstract class LoginHandler {
+  abstract handler(): void
+}
+
+class WeChatLoginHandler implements LoginHandler {
+  handler() { }
+}
+
+class TaoBaoLoginHandler implements LoginHandler {
+  handler() { }
+}
+
+class TikTokLoginHandler implements LoginHandler {
+  handler() { }
+}
+
+class Login {
+  public static handlerMap: Record<LoginType, LoginHandler> = {
+    [LoginType.TaoBao]: new TaoBaoLoginHandler(),
+    [LoginType.TikTok]: new TikTokLoginHandler(),
+    [LoginType.WeChat]: new WeChatLoginHandler(),
+
+  }
+  public static handler(type: LoginType) {
+    Login.handlerMap[type].handler() // 多态：动态调用
+  }
+}
+```
+
+### 里氏替换原则的实现方法
+
 
 根据上述理解，对里氏替换原则的定义可以总结如下：
 子类可以实现父类的抽象方法，但不能覆盖父类的非抽象方法

@@ -8,23 +8,34 @@
         - 数组
         - 元组类型（Tuple）
         - 对象
-          - Class
-            - 属性修饰符：`public / private / protected / readonly / override`
-            - static
-            - abstract
-        - 联合类型及枚举
-      - 字面量类型
-        - 对象字面量
+        - Class
+          - 访问修饰符：`public / private / protected / readonly / override`
+          - override：确保派生类尝试覆盖的方法一定在基类中存在定义
+          - 抽象类 abstract 
+        - [枚举](#枚举)
+          - 特征
+            - 枚举和对象的重要差异在于，对象是单向映射的，枚举是双向映射的，即你可以从枚举成员映射到枚举值，也可以从枚举值映射到枚举成员
+            - 字符串枚举成员只会进行单次映射
+          - 字面量类型与联合类型 vs 枚举
+          - 枚举 vs 常量枚举
+            - 枚举是可双向映射使用，常量枚举只能单向映射使用
+            - 枚举会被编译时会编译成一个对象，可以被当作对象使用
+            - const枚举会在ts编译期间被删除，对应使用的位置直接内联替换成值
+        - 联合类型
+      - 字面量类型：无论是原始类型还是对象类型的字面量类型，它们的本质都是类型而不是值，它们在编译时同样会被擦除
+        - 对象字面量：对象字面量类型就是一个结构化对象类型，并且这个对象的值全都为字面量值
         - 模板字面量
         - 字符串字面量
         - 数字字面量
         - 布尔字面量
       - 函数类型
-        - 函数类型声明
-        - 重载：按照重载的声明顺序往下查找的
-        - void 类型能更好地说明一个函数没有进行返回操作
+        - [函数类型声明](#函数类型声明)
+        - 函数重载：将入参类型和返回值类型的可能情况进行关联，获得了更精确的类型标注能力
+          - 按照重载的声明顺序往下查找的
+          - 实现签名必须兼容重载签名
+        - void 类型表示一个函数没有进行返回操作
       - 接口：声明函数结构，也可以声明类的结构
-      - 内置类型
+      - 内置特殊类型
         - any、unkown 区别
           - any 表示任意类型，可以将其他类型赋值给 any 或者将 any 赋值给其他类型，相当于 typescript 逃生门，会跳过类型检查
           - unkown 表示未知类型，可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any，并且使用 unknown，TypeScript 会强制类型检测，你必须使用**类型缩小、类型断言**手段去确定类型
@@ -36,11 +47,10 @@
       - `as const` 推断为常量类型
       - 非空断言 `!`
       - 可选链 `?`
-    - 类型推导
-      - 基于表达式、上下文推断类型的能力称之为“类型推断”
-      - 类型拓展
-      - 类型收窄
-        - 类型守卫与类型控制流分析
+    - [类型推导](#类型推导)
+      - 类型守卫与类型控制流分析
+        - 类型收窄
+        - 类型拓展
     - 类型编程
       - 类型工具
       - 泛形
@@ -78,6 +88,55 @@
   - 学习资料
     - [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
 
+## 枚举
+
+```ts
+// 如果你没有声明枚举的值，它会默认使用数字枚举，并且从 0 开始，以 1 递增
+enum Items {
+  Foo, // 0
+  Bar, // 1
+  Baz, // 2
+}
+
+// 编译结果
+"use strict";
+var Items;
+(function (Items) {
+    Items[Items["Foo"] = 0] = "Foo";
+    Items["Bar"] = "BarValue";
+    Items["Baz"] = "BazValue";
+})(Items || (Items = {}));
+
+enum Items {
+  Foo, // 0 
+  Bar = 599, // 下一项从当前数值开始递增
+  Baz, // 600
+  Tea = 'fefe', // 遇到非数字项，下一项得初始化
+  Taa = 44, // 必须初始化
+  Tee, // 45
+}
+
+// 编译结果
+var Items;
+(function (Items) {
+    Items[Items["Foo"] = 0] = "Foo";
+    Items[Items["Bar"] = 599] = "Bar";
+    Items[Items["Baz"] = 600] = "Baz";
+    Items["Tea"] = "fefe"; // 字符串枚举成员仍然只会进行单次映射
+    Items[Items["Taa"] = 44] = "Taa";
+    Items[Items["Tee"] = 45] = "Tee";
+})(Items || (Items = {}));
+
+// 常量枚举
+const enum Items {
+  Foo,
+  Bar,
+  Baz
+}
+// 只能通过枚举成员访问枚举值（而不能通过值访问成员）
+const fooValue = Items.Foo; // 编译时是直接内联替换为枚举的值
+```
+
 ## 函数类型声明
 
 ```ts
@@ -99,12 +158,30 @@ const foo: FuncFoo = (name) => {
   return name.length;
 };
 
+// JS 函数类型本质上也是一个结构固定的类型
 interface FuncFooStruct {
   (name: string): number;
 }
-```
 
-```ts
+// 可选参数
+function foo(name: string, age?: number): number {}
+
+// 剩余参数
+function foo1(arg1: string, ...rest: [number, boolean]) { }
+
+// 函数重载
+function func(foo: number, bar: true): string;
+function func(foo: number, bar?: false): number;
+// 实现签名必须兼容重载签名
+function func(foo: number, bar?: boolean): string | number {
+  if (bar) {
+    return String(foo);
+  } else {
+    return foo * 599;
+  }
+}
+
+// 构造器函数
 interface FooStruct {
   new (): Foo;
 }
@@ -133,16 +210,14 @@ interface FooStruct {
    实际上类型断言的工作原理也和类型层级有关，在判断断言是否成立，即差异是否能接受时，实际上判断的即是这两个类型是否能够找到一个公共的父类型。
 
    ```ts
-   let t: number = 123;
-   let a: any = t;
-   // (t as string) = '123'
+   (t as string) = '123' // Type 'number' is not assignable to type 'string'.
 
-   // 先向上断言，再向下断言
+   // 利用类型层级，先向上断言，再向下断言
    (t as unknown as string) = "123";
    ```
 
    当然 TypeScript 也有不允许隐式向上转换的情况：
-   将子类字面量对象分配给父类字面量类型
+   不允许对象字面量类型进行**结构化类型的比较**
    ```ts
    type UserWithEmail = { name: string; email: string };
    type UserWithoutEmail = { name: string };
@@ -150,6 +225,8 @@ interface FooStruct {
    type A = UserWithEmail extends UserWithoutEmail ? true : false // true
    // 但是下面情况却不被允许 
    let userB: UserWithoutEmail = { name: "foo", email: "foo@gmail.com" };
+
+   let userB2: UserWithoutEmail = { name: "foo", email: "foo@gmail.com" } as UserWithEmail;
    ```
 
 2. 父类型不可以赋值给子类型，即向下转换（downcast），但在 Typescirpt 还是存在一些特例情况：
@@ -163,6 +240,19 @@ interface FooStruct {
    ```
 
    实践的时候更多推荐使用 unknown，毕竟可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any
+
+## 类型推导
+
+### let、const 的类型推导
+
+- 使用 let 声明的变量是可以再次赋值的，在 TypeScript 中要求赋值类型始终与原类型一致（如果声明了的话）。因此对于 let 声明，只需要推导至这个值从属的类型即可。
+- 而 const 声明的原始类型变量将不再可变，因此类型可以直接一步到位收窄到最精确的字面量类型，但对象类型变量仍可变（但同样会要求其属性值类型保持一致）。
+
+![图 6](./images/1658850634710.png)  
+
+![图 7](./images/1658850653587.png)  
+
+![图 8](./images/1658850677415.png)  
 
 ## typescirpt 场景技巧
 
