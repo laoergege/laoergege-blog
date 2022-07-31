@@ -697,7 +697,7 @@
     - [ ] Compisition API 实现原理
     - [x] 什么是虚拟 DOM，以及为什么
       - 本质描述真实 DOM 的 javascript 对象
-      - 抽象视图，跨平台化
+      - 抽象视图，跨平台化；把视图当作 javascript 对象，能够进行**编程化**
       - 避免直接手动操作 DOM，对 DOM 进行读写分离以及以批处理的方式保证了性能下限，同时可以规避一定 XSS 风险
     - [x] diff 算法，index key 问题
       - key：内部建立节点索引，快速找到复用节点
@@ -959,7 +959,19 @@
 - typescript
   - [ ] never 与 void 区别
   - [ ] interface 和 type 的区别
+    - type 无法声明合并，interface 可以扩展
+    - type 可以别名任何类型数据，但更推荐使用 interface 用来声明对象结构类型
   - [ ] TypeScript 高级用法， Pick 和 Omit
+  - [x] abstract vs Interface
+    - 都是描述类的结构，Interface 还能描述函数结构
+    - Interface 编译后就不存在，而 abstract 则会存在
+  - [ ] F
+    - public：此类成员在类、类的实例、子类中都能被访问。
+    - private：此类成员仅能在类的内部被访问
+    - 此类成员仅能在类与子类中被访问，你可以将类和类的实例当成两种概念，即一旦实例化完毕（出厂零件），那就和类（工厂）没关系了，即不允许再访问受保护的成员。
+  - [x] null vs undefined vs void
+    - 在 JavaScript 中，null 与 undefined 分别表示“这里有值，但是个空值”和“这里没有值”，而在 TypeScript 中，null 与 undefined 类型都是有具体意义的类型
+    - void：表示一个空类型，常用于表示一个没有返回操作或者没有显式返回一个值的函数的返回值
   - [x] 枚举和常量枚举区别
     - 枚举是可双向映射（只有数字key）使用，常量枚举只能单向映射使用
     - 枚举会被编译时会编译成一个对象，可以被当作对象使用
@@ -967,6 +979,10 @@
   - [x] any、unkown 区别
     - any 表示任意类型，可以将其他类型赋值给 any 或者将 any 赋值给其他类型，相当于 typescript 逃生门，会跳过类型检查
     - unkown 表示未知类型，可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any，并且使用 unknown，TypeScript 会强制类型检测，你必须使用**类型缩小、类型断言**手段去确定类型
+- React
+  - [ ] React Hooks 的原理
+    - hooks 的实现原理其实不复杂，就是在某个上下文中存放一个链表，然后 hooks api 从链表不同的元素上访问对应的数据来完成各自的逻辑。这个上下文可以是 vdom、fiber 甚至是全局变量。
+  - [ ] Fiber 机制
 
 ## 其他
 
@@ -1067,7 +1083,6 @@
 - Portals
 - flatten
 
-- 项目（认真复盘）
 
   - tailwindcss 好处
     - 命名
@@ -1215,9 +1230,6 @@ devtool coverage
 - setState 是同步还是异步的
 - Set 的用法，用 Set 实现数组去重
 - 移动端适配方案, rem 和 em 的区别
-- Vue 的双向绑定机制
-- React Fiber 机制
-- React Hooks 的原理
 - 编程题：输入两个数组 [1,2,3,2,1], [3,2,1,4,7] 返回公共的并且长度最长子数组的长度
 - 大文件的分片上传和断点续传怎么做的
 - 抖音 APP 与 H5 如何通信
@@ -1244,11 +1256,6 @@ devtool coverage
 
 
 
-- react
-
-  - render => (vdom) => reconcile => (fiber) => commit => (dom)
-  - hooks
-    - hooks 的实现原理其实不复杂，就是在某个上下文中存放一个链表，然后 hooks api 从链表不同的元素上访问对应的数据来完成各自的逻辑。这个上下文可以是 vdom、fiber 甚至是全局变量。
 
 - 网络安全
 
@@ -1305,6 +1312,8 @@ commit 规范 & changelog 生成
 要根据开发者工具，比如看 network 是否是由于资源体积太大导致请求慢，还是后端处理慢，还是资源太多了加载慢.
 
 如果这些都不是，可能是因为 渲染慢，再去分析 performce 面板，看一下是 js 执行慢，还是啥原因。
+
+
 
 
 整理 Vue 与 React 框架的所有横向对比，包括渲染原理、虚拟 dom、diff、patch、fiber、批量更新，手写响应式，框架用到的模式、设计思想，性能优化，相关生态技术等等

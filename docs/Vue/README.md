@@ -8,18 +8,17 @@ description: Vue 技术栈
 # Vue
 
 - Vue
-  - 组件系统
-    - jsx + template 模板编译器
-      - 模板编译
-      - 编译优化
-  - VirtualDom + Renderer（渲染器）
+  - 模板编译器
+    - 模板编译
+    - 编译优化
+  - vDOM + Renderer（渲染器）
+    - 组件系统 
     - 组件渲染机制
     - 响应式渲染 + 异步更新调度
   - 响应式系统
-- Vue 组件的模式及原则
-  - 单向数据原则
-- 指南
+- Vue 组件开发指南
   - 数据流
+    - 单向数据原则
     - 父子组件
       - props、event
       - 实例引用 `$parent`、`$children`

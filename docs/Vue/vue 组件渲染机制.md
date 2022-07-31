@@ -5,7 +5,7 @@ tags:
   - vue
   - vnode
   - VirtualDOM
-desc: vue 组件是怎么渲染成视图的？
+desc: 探究下 vue 组件是怎么渲染成视图的？
 ---
 
 # Vue 组件渲染机制
@@ -96,30 +96,16 @@ export interface VNode<
 3. render 视图渲染，输出 vdom
 4. slots 对外部提供自定义渲染接口
 
-### 基于 VirtualDOM 的组件渲染机制
-
-![图 5](./images/1657525936169.png)  
+### 基于 VirtualDOM 的组件渲染机制  
 
 无论是 Vue 或者 React，基于 VirtualDOM 的数据驱动框架原理基本有以下几个重要步骤：
 
+![图 5](./images/1657525936169.png)
+
 1. 数据变动（或者初始数据）
-2. 调度 Render 输出新 vdom
-3. Diff vdom 
-4. 将 Patch 
-
-
-
-如何 数据驱动
-react setState 
-vue 响应式数据：通过响应式代理，将组建渲染作为依赖收集起来，状态变化的时候就可以触发它们的 render
-
-
-先关注绿色方块，渲染核心主要为：
-
-1. 创建 vnode
-2. 渲染 vnode（patch vnode）
-
-**patch vnode 操作本质上是对新旧 vnode 做对比，然后执行系统平台对应的渲染命令**。
+2. Render：调度 Render 输出新 vdom
+3. Diff： 
+4. Patch：执行系统平台对应的渲染命令
 
 ```js
 import { createVNode, patch, h } from "vue";

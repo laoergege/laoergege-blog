@@ -51,11 +51,7 @@ export default {
   flex: 1;
 }
 
-pre.shiki {
-  @apply drop-shadow-lg
-}
-
-.article img{
-  @apply drop-shadow-lg
+pre.shiki,.article img{
+  @apply drop-shadow-2xl rounded-xl
 }
 </style>
