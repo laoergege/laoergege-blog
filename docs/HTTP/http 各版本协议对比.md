@@ -1,14 +1,14 @@
 ---
 release: true
-top: 3
 tags:
  - http
+desc: 了解 HTTP 各版本的关键设计变化以及每个变化背后的动机
 ---
 
-# http 各版本协议对比
+# HTTP 各版本协议对比
 
 - HTTP/0.9
-  - 只传输 ASCII 编码的超文本内容 HTML，并且只有一个请求行只支持GET请求
+  - 只传输 ASCII 编码的超文本内容 HTML，并且只有一个请求行且只支持GET请求
 - HTTP/1.0
   - 增加了 HEAD、POST 等新方法；
   - 增加了响应状态码；

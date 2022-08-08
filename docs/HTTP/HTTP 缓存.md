@@ -1,6 +1,5 @@
 ---
 release: true
-top: 3
 tags:
   - http
   - 缓存
@@ -8,20 +7,20 @@ tags:
 desc: 总结 http 缓存、缓存相关控制设置及前端缓存最佳实践
 ---
 
-# http 缓存
+# HTTP 缓存
 
-- http 缓存
+- HTTP 缓存
   - [Cache-Control](#cache-control)
   - 缓存位置
     - [代理缓存](#代理缓存)
-      - CDN
+      - [Vary：缓存验证器](#Vary：缓存验证器)
     - [浏览器缓存](#浏览器缓存)
   - [协商缓存](#协商缓存)
   - [缓存设置控制](#缓存设置控制)
     - [通过 response 进行缓存控制](#通过-response-进行缓存控制)
     - [通过 request 进行缓存控制](#通过-request-进行缓存控制)
-  - [Vary：缓存验证器](#Vary：缓存验证器)
-  - [前端缓存最佳实践](#前端缓存最佳实践)
+  - [前端缓存最佳实践](../前端工程化/前端缓存最佳实践.md)
+  - SWR：stale-while-revalidate
 
 ## Cache-Control
 
@@ -32,7 +31,7 @@ http 中控制缓存的主要字段有一下三个：
    > HTTP 1.0 的字段，表示缓存到期时间，是一个绝对的时间 (当前时间+缓存时间)
 3. Pragma: no-cache(相当于 Cache-Control: no-cache，主要是为了兼容 HTTP/1.0)
 
-> 重点学习 `Cache-Control`
+重点学习 `Cache-Control`
 
 - Cache-Control
   - no-store，不允许存储缓存资源
@@ -52,12 +51,11 @@ http 中控制缓存的主要字段有一下三个：
 
 缓存代理身份特殊，即是客户端也是服务端，所以还需要有一些新的“Cache-Control”属性来对它做细致的控制。
 
-- Cache-Control
-  - private，表示缓存只能在客户端保存，不能放在代理上与别人共享
-  - public，缓存完全开放，谁都可以存，谁都可以用
-  - proxy-revalidate，缓存失效时代理服务器验证即可
-  - s-maxage，单独设置代理服务器缓存时间，与 max-age 区别开
-  - no-transform，禁止代理服务对资源做转换
+- private，表示缓存只能在客户端保存，不能放在代理上与别人共享
+- public，缓存完全开放，谁都可以存，谁都可以用
+- proxy-revalidate，缓存失效时代理服务器验证即可
+- s-maxage，单独设置代理服务器缓存时间，与 max-age 区别开
+- no-transform，禁止代理服务对资源做转换
 
 ## 浏览器缓存
 
@@ -69,7 +67,7 @@ http 中控制缓存的主要字段有一下三个：
 - http-cache
 - push-cache
 
-> ⚠️ 内存缓存的行为，各个浏览器并没有统一规范，而且内存缓存并不关注 HTTP 语义，浏览器导航中会重用资源，即是资源带有 `max-age=0` 或 `no-cache Cache-Control`。  
+> ⚠️ 内存缓存的行为，各个浏览器并没有统一规范，而且内存缓存并不关注 HTTP 语义，浏览器导航中会重用资源，即是资源带有 `max-age=0` 或 `no-cache`。  
 > 唯一可能例外的是 `no-store` 内存缓存在某些情况下确实会遵守该指令。
 
 > HTTP Cache 几乎遵从 HTTP 规范，但有一个例外，即是资源带有，HTML 中 prefetch 指令获取的资源会缓存在 HTTP Cache 中一定时间（5分钟）
@@ -149,9 +147,11 @@ vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在
 
 ![图 9](./images/7d679f31875e7cfb7cc3f3f99efc6030698374dbedcc437da771db25f34c7551.png)
 
-## 前端缓存最佳实践
+## SWR：stale-while-revalidate
 
-http 缓存大多针对前端资源，看[《前端缓存最佳实践》](../前端工程化/前端缓存最佳实践.md)。
+`stale-while-revalidate` 是一种缓存策略：优先使用缓存，然后再更新缓存。这与以往常见的缓存策略：“缓存 -> 过期 -> 更新 -> 使用” 有所不同，SWR：“缓存 -> 过期 -> 使用 -> 更新”。
+
+
 
 ## 学习参考
 
@@ -159,3 +159,23 @@ http 缓存大多针对前端资源，看[《前端缓存最佳实践》](../前
 - [可能是最被误用的 HTTP 响应头之一 Cache-Control: must-revalidate](https://zhuanlan.zhihu.com/p/60357719)
 - [understanding-vary-header](https://www.smashingmagazine.com/2017/11/understanding-vary-header/)
 - [A Tale of Four Caches](https://calendar.perfplanet.com/2016/a-tale-of-four-caches/)
+- [Cache-Control 的 stale-while-revalidate 指令](https://zhuanlan.zhihu.com/p/64694485)
+
+
+- API
+- core
+  - 缓存请求、缓存策略
+    - swr
+  - 请求管道
+    - 去除重复请求
+    - retry
+      - 聚焦时重新验证
+      - 网络恢复时重新验证
+      - 智能错误重试
+      - 轮询
+    - 中断
+  - Optimistic UI
+- adapter
+- net、cache
+
+

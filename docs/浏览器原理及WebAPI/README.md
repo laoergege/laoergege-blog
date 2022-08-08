@@ -126,16 +126,8 @@ desc: 浏览器原理及API知识体系总结
 - 下载
   - [文件下载，搞懂这9种场景就够了](https://mp.weixin.qq.com/s/PysSe6MykjYzVrWQCKJXvg)
   - [动态表格大文件下载可以这样优化！](https://mp.weixin.qq.com/s/14bJxJ9U9mG76tw-Z93UqQ)
-- [登陆鉴权](./%E7%99%BB%E9%99%86%E9%89%B4%E6%9D%83.md)
 
 
-MVC，其核心思想就是将数据和视图分离
-通过通信方式和控制器的不同实现，又分为
-MVP
-MVVM
 
-![基于 React 和 Redux 构建 MVC 模型](./images/57897eba6bdf54af31cda81e4d711d4d3a621ceac859a695227275d476ec3576.png) 
 
-DOM 操作会引发浏览器重排、重绘、合成操作
-对 DOM 操作不当的话甚至还会触发强制同步布局和布局抖动的问题
 

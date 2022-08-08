@@ -63,12 +63,10 @@ desc: 系统化前端工程相关
     - [vite](https://github.com/vitejs/vite)
     - [parcel](https://parceljs.org/)
   - 测试
-    - unit
-      - jest
-      - [vue: vitest](https://cn.vitest.dev/)
-    - e2e
-      - puppeteer
-      - cypress
+    - jest
+    - [vue: vitest](https://cn.vitest.dev/)
+    - [cypress](https://docs.cypress.io/)
+    - [playwright](https://playwright.dev/)
   - CI/CD
     - lint
     - test
@@ -82,6 +80,7 @@ desc: 系统化前端工程相关
     - vue：[vuese](https://github.com/vuese/vuese)
     - [storybook](https://github.com/storybookjs/storybook)
 - 架构化
+  - [登陆：认证、授权](./%E8%AE%A4%E8%AF%81%E3%80%81%E9%89%B4%E6%9D%83.md)
   - 以组件化架构为代表的 UI 搭建技术
      - 原子组件
      - 原子样式

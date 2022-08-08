@@ -10,11 +10,15 @@
 
 1. 学习一件新事物的较好方式是和你已掌握的做对比，通过二者之间通用的概念帮你快速熟悉新的事物
 
+- Tasks
+  - 学习
+    - 技术学习：[技术栈](#技术栈)
+  - [ ] 找工作
+
+## 技术栈
+
 - 技术栈
-  - 软件工程（流程化、工具自动化、框架化）
-    - [前端工程化](./前端工程化/README.md)
-    - Docker
-  - Web 技术
+  - 技术领域：Web 开发
     - HTTP
       - [ ] 《透视 HTTP 协议》
     - 浏览器原理及WebAPI
@@ -23,40 +27,38 @@
       - Vue
         - [ ] 深入 Vue 框架源码及生态
         - [ ] 技术输出：vue 深入系文
-  - 系统架构、设计模式
-  - 程序语言设计与实现原理
-    - [JavaScript](./JavaScript/README.md)
-      - [ ] 《JavaScript 核心原理精讲》 
-    - Typescript
-    - NodeJS
-    - Rust
-      - [ ] 入门学习（2022.5 - 2022.12）
-      - [ ] 应用：Webassembly
-      - [ ] https://github.com/HerringtonDarkholme/vue-compiler
-  - 计算机基础
-    - [数据结构与算法](./数据结构与算法/README.md)
-      - [ ] 熟练 leetcode 200道 简单、中度
-    - 操作系统
-      - [ ] 《趣谈Linux操作系统》
-    - 编译原理
-      - [ ] 《编译原理实战课》
-    - 计算机网络
-    - 计算机图形学
-    - 计算机组成
-  - 数学与应用
+    - [前端工程化](./前端工程化/README.md)
+    - Docker
+  - 底层基础
+    - 软件工程化（流程化、工具自动化、框架化）
+    - 设计模式与架构
+    - 程序语言设计与实现原理
+      - [JavaScript](./JavaScript/README.md)
+        - [ ] 《JavaScript 核心原理精讲》 
+      - Typescript
+      - NodeJS
+      - Rust
+        - [ ] 入门学习（2022.5 - 2022.12）
+        - [ ] 应用：Webassembly
+        - [ ] https://github.com/HerringtonDarkholme/vue-compiler
+    - 计算机基础
+      - [数据结构与算法](./数据结构与算法/README.md)
+        - [ ] 熟练 leetcode 200道 简单、中度
+      - 操作系统
+        - [ ] 《趣谈Linux操作系统》
+      - 编译原理
+        - [ ] 《编译原理实战课》
+      - 计算机网络
+      - 计算机图形学
+      - 计算机组成
+    - 数学与应用
 
 ## 技术栈结构
 
 
-1. 工具链
-   - typescript
-     - https://github.com/type-challenges/type-challenges
-     - [api-extractor](https://api-extractor.com/)
-     - https://github.com/dsherret/ts-morph
-     - 测试
-       - 端到端测试
-         - https://playwright.dev/
-2. 框架技术
+
+    
+1. 框架技术
    - [Vue](./Vue/README.md)
      - vue3 conf https://node.fequan.com/videodetail/1621773573110
    - React
@@ -69,15 +71,15 @@
      - https://github.com/Troland/how-javascript-works
      - canvas
        - https://joshondesign.com/p/books/canvasdeepdive/toc.html
-3. [软件设计、软件工程](./编程语言/软件设计与工程.md)
+2. [软件设计、软件工程](./编程语言/软件设计与工程.md)
    - JavaScript 设计模式与开发实践
    - 依赖注入
      - https://github.com/mgechev/injection-js
-4. 编程语言
+3. 编程语言
    - [HTML&CSS](./HTML&CSS/README.md)
      - https://web.dev/learn/css/box-model/
    - Flutter
-5. 计算机基础
+4. 计算机基础
    1. 计算机组成原理
    2. 操作系统
       - [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
@@ -91,7 +93,7 @@
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
-6. 数学与应用
+5. 数学与应用
 
 ## 收集待看
 

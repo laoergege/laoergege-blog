@@ -18,7 +18,7 @@ desc: web 前端能优化知识体系
     - [lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci)
     - [Web Vitals Chrome 扩展程序](https://github.com/GoogleChrome/web-vitals-extension)
     - [PageSpeed Insights](https://pagespeed.web.dev/)：集成 Lighthouse 性能审计 + [Chrome 用户体验报告](https://developers.google.com/web/tools/chrome-user-experience-report/)
-    - size
+    - 体积大小
       - [size-limit](https://github.com/ai/size-limit)
       - [bundlesize](https://github.com/siddharthkp/bundlesize)
   - 调试工具
