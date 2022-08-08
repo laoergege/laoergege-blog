@@ -1,6 +1,5 @@
 ---
 release: true
-top: 3
 tags:
   - pnpm
   - 包管理
@@ -8,8 +7,6 @@ description: 记录 pnpm 的核心原理，如依赖机制等、工程上 Monore
 ---
 
 # pnpm
-
-> pnpm 的两大核心卖点：很好的解决了 npm 的依赖安装速度、安全问题以及
 
 - pnpm
   - 依赖管理
@@ -24,28 +21,28 @@ description: 记录 pnpm 的核心原理，如依赖机制等、工程上 Monore
     - [Publish 工作流](#发布工作流)
   - npm scripts
 
-## 依赖管理
+## 依赖安装机制
 
-### 依赖安装机制
+pnpm 对比 yarn/npm
 
-- 对比 yarn/npm
+- yarn/npm
   - npm@3 之前： `嵌套结构`
     - 过度嵌套
     - 依赖重复、占用空间
   - yarn/npm@3 之后：`扁平化结构`
-    > 本质上是**依赖提升**带来的问题
-    - 依赖结构的**不确定性**，依据声明顺序
-      - lock 文件虽在一定程度维持依赖结构，但随着包升级还是可能带来结构破坏
-    - 扁平化算法本身的**复杂性**很高，耗时较长
-    - 幽灵依赖：项目中仍然可以**非法访问**没有声明过依赖的包，因为 `Node Module Resolution` 机制
-    - [npm 分身](https://rushjs.io/zh-cn/pages/advanced/npm_doppelgangers/)：依赖重复安装、打包，破坏单例安装
+    - 本质上是**依赖提升**带来的问题
+      - 依赖结构的**不确定性**，依据声明顺序
+        - lock 文件虽在一定程度维持依赖结构，但随着包升级还是可能带来结构破坏
+      - 扁平化算法本身的**复杂性**很高，耗时较长
+      - 幽灵依赖：项目中仍然可以**非法访问**没有声明过依赖的包，因为 `Node Module Resolution` 机制
+      - [npm 分身](https://rushjs.io/zh-cn/pages/advanced/npm_doppelgangers/)：依赖**重复安装**、打包，破坏单例安装
 - pnpm
   - 依赖结构：`平铺结构 + 符号链接` ![图 2](./images/1647703499774.png)
-    - 所有的包都平铺在 `.pnpm` 内，并通过**符号链接**依赖关系
+    - 所有的包都平铺在 `.pnpm` 内，并基于符号链接的 node_modules 结构，通过符号链接来连接依赖关系
     - 所有的包通过硬链接到 store 内部真实文件位置
   - [半严格模式](#半严格模式)
 
-下边例子，我们用 pnpm 创建一个项目并且 `pnpm install qiankun` 来观察：
+下面通过 pnpm 创建一个项目并且 `pnpm install qiankun` 的例子来理解 pnpm 的依赖安装结构：
 
 1. 项目 node_modules 只存在 package 上声明的依赖，既消除项目“幽灵依赖”的问题，又使得 node_modules 结构清晰明了
 
@@ -70,7 +67,7 @@ description: 记录 pnpm 的核心原理，如依赖机制等、工程上 Monore
 
 4. 除了 qiankun 是**硬链接**到全局真实存储的文件，其他依赖项都是继续**符号链接**到 .pnpm 下的包
 
-#### 半严格模式
+### 半严格模式
 
 如果仔细发现上面的案例，`node_modules/.pnpm` 路径下竟然会有 `node_modules` 文件，这样虽然我们自己的代码是被严格限制了，但第三方依赖包还是可以根据 Node Module Resolution 机制偷偷访问到其他包！
 
@@ -87,6 +84,9 @@ public-hoist-pattern[]=*types*
 
 ; 提升所有ESLint相关的包至根
 public-hoist-pattern[]=*eslint*
+
+; 将所有内容提升到node_modules的根目录
+shamefully-hoist=true
 ```
 
 可通过 `hoist=false` 来禁止包提升，更多配置详情参考[《pnpm 的 node_modules 配置选项》](https://pnpm.io/zh/blog/2020/10/17/node-modules-configuration-options-with-pnpm)。

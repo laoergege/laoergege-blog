@@ -7,5 +7,5 @@
             "path": "./tsconfig.cjs.json"
         }
     ],
-    "files": []
+    "files": [],
 }

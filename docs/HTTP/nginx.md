@@ -33,7 +33,7 @@ http {
 
 ### 反向代理
 
-```conf
+```
 server {  
   listen       8080;        
   server_name  localhost;

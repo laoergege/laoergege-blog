@@ -1,6 +1,7 @@
 import type { PluginObject } from "@vuepress/core";
-import type { VssueAPI } from "vssue";
-import path from "upath";
+// @ts-ignore
+import type { VssueAPI } from "vssue/types/api";
+import * as path from "upath";
 
 export interface VssueNextCompatPluginOptions extends VssueAPI.Options {
   platform: string;

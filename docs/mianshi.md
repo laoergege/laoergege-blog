@@ -13,6 +13,13 @@
 - [ ] 文远知行
 - [ ] 比亚迪
 
+## 技术栈
+
+- webpack
+- typescript
+- vue
+- js、html、css
+
 ## 题目
   
 - html&css
@@ -75,9 +82,9 @@
       - for of 遍历可迭代对象
       - Symbel.iterator 返回一个带有 next 方法的对象，next 返回{done,value}
       - Object.keys/values/entries
-  - 变量&类型
     - [ ] 迭代器有了解吗，哪些是可迭代的
-    - [x] 变量交换
+  - 变量&类型
+    - [x] 变量交换，不要使用中间变量
       - 解构
       - 位运算：异或
     - [x] 类型判断
@@ -453,7 +460,7 @@
     - http 劫持
   - [x] 导航流程：输入 URL 到页面展示发生了什么
     - 解析 URL
-    - 重定向
+    - 重定向判断
     - 缓存查找
     - DNS 域名解析
     - 根据 ip 建立 TCP 连接

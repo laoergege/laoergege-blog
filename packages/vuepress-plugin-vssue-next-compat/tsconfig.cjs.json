@@ -5,9 +5,10 @@
         "declarationDir": "types",
         "outDir": "lib",
         "rootDir": "src/node",
-        "target": "ES5",
+        "target": "ES6",
         "module": "CommonJS",
         "tsBuildInfoFile": "tsconfig.cjs.tsbuildinfo",
+        "skipLibCheck": true /* Skip type checking all .d.ts files. */
     },
     "include": [
         "src/node"
