@@ -11,6 +11,8 @@ description: 记录 pnpm 的核心原理，如依赖机制等、工程上 Monore
 - pnpm
   - 依赖管理
     - [依赖安装机制](#依赖安装机制)
+      - [半严格模式](#半严格模式)
+    - auto-install-peers=true
   - 存储机制
     - store
     - 基于内容寻址

@@ -25,14 +25,14 @@
             - 抽象类 abstract vs Interface
               - 都是描述类的结构，Interface 还能描述函数结构
               - Interface 编译后就不存在，而 abstract 则会存在
-          - extends 继承
           - 实践推荐
             - 使用 interface、class 去表示描述具体对象
             - 对于“模糊”对象，不要使用 Object 以及类似的装箱类型、{}，使用 object 去表示对象类型。更推荐进一步区分，也就是使用 `Record<string, unknown>` 表示对象，`unknown[]`表示数组，`(...args: unknown[]) => unknown` 表示函数
         - [枚举](#枚举)
           - 特征
             - 枚举和对象的重要差异在于，对象是单向映射的，枚举是双向映射的，即你可以从枚举成员映射到枚举值，也可以从枚举值映射到枚举成员
-            - 字符串枚举成员只会进行单次映射
+            - 字符串枚举只会进行单次映射
+            - 数字枚举在不指定初始值的情况下，枚举值会从0开始递增
           - 枚举 vs 常量枚举
             - 枚举是可双向映射使用，常量枚举只能单向映射使用
             - 枚举会被编译时会编译成一个对象，可以被当作对象使用
@@ -43,50 +43,73 @@
               - 字符串枚举两者皆可
       - 字面量类型：无论是原始类型还是对象类型的字面量类型，它们的本质都是类型而不是值，它们在编译时同样会被擦除
         - 对象字面量：对象字面量类型就是一个结构化对象类型，并且这个对象的值全都为字面量值
-        - 模板字面量
         - 字符串字面量
         - 数字字面量
         - 布尔字面量
-      - 函数类型
-        - [函数类型声明](#函数类型声明)
-        - 函数重载：将入参类型和返回值类型的可能情况进行关联，获得了更精确的类型标注能力
-          - 按照重载的声明顺序往下查找的
-          - 实现签名必须兼容重载签名
+      - [函数类型](#函数类型声明)
       - 内置特殊类型
         - any、unkown 区别
           - any 表示任意类型，可以将其他类型赋值给 any 或者将 any 赋值给其他类型，相当于 typescript 逃生门，会跳过类型检查
           - unkown 表示未知类型，可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any，并且使用 unknown，TypeScript 会强制类型检测，你必须使用**类型缩小、类型断言**手段去确定类型
         - never、void 区别
-          - never 表示永远不会发生值的类型，比如函数抛出异常、死循环、
+          - never 表示永远不存在的类型，比如函数总抛出异常没有返回值、死循环、两个不存在交集的类型强行进行交集运算
           - never 类型的变量能够赋值给另一个 never 类型变量
     - [类型推导](./TypeScript%20类型推导.md)
-      - let、const 的类型推导
-      - 类型流程分析与类型守卫
-        - 类型收窄
-        - 类型拓展
-      - 类型兼容判断
-        - 结构化类型
-        - 类型层级
-        - 联合类型
     - [类型编程及类型工具](./Typescript%20%E7%B1%BB%E5%9E%8B%E7%BC%96%E7%A8%8B.md)
   - 编译器
     - tsc
       - `--init`
       - `--watch`
     - tsconfig.json
-      - `strictNullChecks`：没有开启情况下，null 与 undefined 会被视作其他类型的子类型，**实践推荐开启**，因为在 TypeScript 中，void、undefined、null 都是切实存在、有实际意义的类型
       - [`rootDir` + `outDir`：控制输出的目录结构生成](https://www.typescriptlang.org/zh/tsconfig#rootDir)
-      - `noImplicitAny: true`：防止隐式地推导类型为 any
-  - 工程化
-    - typescript 项目工程搭建
-      - typescript vscode
-      - tsconfig 配置
-      - typescript + eslint + babel
+      - JS
+        - `"checkJs": true`：开启对所有 JS 类型检查
+      - 模块
+        - baseUrl：定义文件进行解析的根路径
+        - allowUmdGlobalAccess：允许对 AMD 模块直接全局访问，不必导入
+      - 类型检查
+        - `strictNullChecks`：没有开启情况下，null 与 undefined 会被视作其他类型的子类型，**实践推荐开启**，因为在 TypeScript 中，void、undefined、null 都是切实存在、有实际意义的类型
+        - `noImplicitAny: true`：防止隐式地推导类型为 any
+        - `skipLibCheck: true`：跳过声明文件的类型检查
+          - 减少类型检查时间
+          - 防止声明依赖之间的错误导致编译不通过
+        - `useUnknownInCatchVariables: true`：catch 的 error 类型会被更改为 unknown 
+        - `alwaysStrict: true`：确保您的文件在 ECMAScript 严格模式下解析，并为每个源文件发出“use strict”
+        - types 与 typeRoots
+        - moduleResolution
+        - moduleSuffixes
+        - paths
+          - paths 的解析是基于 baseUrl 作为相对路径的
+      - 构建
+        - incremental
+        - target 与 lib、noLib
+        - files、include 与 exclude
+        - rootDir、rootDirs 与 outDir
+          - rootDir、rootDirs：虚拟目录
+          - 如果你显式指定 rootDir ，需要确保其包含了所有 “被包括” 的文件
+        - outDir 与 outFile
+        - noEmit 与 noEmitOnError
+        - module
+        - 声明文件
+          - declaration
+          - declarationDir
+          - declarationMap
+          - emitDeclarationOnly：只构建出的声明文件
+      - 工程
+        - extends
+      - 功能
+        - experimentalDecorators 与 emitDecoratorMetadata
+        - jsx
+    - 注释指令
+      - `@ts-ignore`：禁用掉对下一行代码的类型检查
+      - `@ts-expect-error`：类似`@ts-ignore`，但必须下一行代码真的存在错误时才能被使用
+      - `@ts-nocheck`：作用于整个文件，不再接受类型检查
+      - `@ts-check`：为 JavaScript 文件启动类型检查
+        - 配置文件 `"checkJs": true`：开启对所有 JS 类型检查
+  - 工程实践
+    - [Typescript 项目工程搭建](./Typescript%20%E9%A1%B9%E7%9B%AE%E5%B7%A5%E7%A8%8B%E6%90%AD%E5%BB%BA.md)
     - 类型增强
       - 声明文件(d.ts)及声明合并
-    - [Monorepo & Project References](#monorepo--project-references)
-    - 文档生成
-      - [api-extractor](https://api-extractor.com/)
     - [Monorepo & Project References](#monorepo--project-references)
     - VSCode 集成
       - 内置 TypeScript Language Service
@@ -263,13 +286,3 @@ reference project tsconfig.json
 
 - [TypeScript 全面进阶指南](https://juejin.cn/book/7086408430491172901)
 - [The Type Hierarchy Tree](https://www.zhenghao.io/posts/type-hierarchy-tree#the-bottom-of-the-tree)
-
-never what how
-
-TypeScript 创建 never 了一个空类型（又名不可居住的类型）：一种我们在运行时无法获得实际值的类型，我们也不能对该类型做任何事情，例如访问其实例上的属性。典型的用例 never 是当我们想从一个永远不会返回的函数中输入一个返回值。
-
-一个函数可能不会返回有几个原因：它可能会在所有代码路径上抛出异常，它可能会永远循环，因为它有我们想要连续运行的代码，直到整个系统关闭，比如事件循环。所有这些场景都是有效的。
-
-any 类型的万能性也导致我们经常滥用它，比如类型不兼容了就 any 一下，类型不想写了也 any 一下，不确定可能会是啥类型还是 any 一下
-
-产生 never 类型的另一种方法是使两种不兼容的类型相交 - 例如{x: number} & {x: string}.

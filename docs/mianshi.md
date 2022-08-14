@@ -718,7 +718,7 @@
       - 500：服务端错误
       - 503：服务端暂时性错误或者繁忙，稍后再试
       - 504：网关超时
-- 框架 vue
+- Vue
   - 原理
     - [ ] Compisition API 实现原理
     - [x] 什么是虚拟 DOM，以及为什么
@@ -983,22 +983,35 @@
       - 排列
       - 组合
 - typescript
-  - [ ] 什么是抗变、双变、协变和逆变？
+  - [x] 枚举和 object 的区别
+    - 枚举和对象的重要差异在于，对象是单向映射的，枚举是双向映射的，即你可以从枚举成员映射到枚举值，也可以从枚举值映射到枚举成员
+    - 枚举编译后也是 obejct 对象
+  - [x] 什么是范型
+    - 泛型是指在定义函数、接口或类的时候，不预先指定具体的类型，使用时再去指定类型的一种特性。简单的说，“泛型就是把类型当成参数”。
+  - [x] 什么是双变、协变和逆变？
+    - 逆变：可以接受父类但不接受子类
+    - 协变：可以接受子类但不接受夫类
+    - 双变：同时接受`subtype`和`supertype`
   - [ ] const和readonly的区别
-  - [ ] never 与 void 区别
+  - [x] never 与 void 区别
+    - never 表示永远不存在的类型，比如函数总抛出异常没有返回值、死循环、两个不存在交集的类型强行进行交集运算
+      - never 类型的变量能够赋值给另一个 never 类型变量
+    - void：表示一个空值类型，常用于表示一个没有返回操作或者没有显式返回一个值的函数的返回值
+      - 如果一个变量为void类型，只能赋予undefined或者null。
   - [x] interface 和 type 的区别
-    - type 可以定义、别名任何类型数据，而 interface 主要用来声明对象结构类型
-    - interface 可以声明合并，type 无法
-    - type、interface 可以相互继承，interface来说，继承是通过 extends 实现的，而 type 的话是通过 & 来实现的，也可以叫做 交叉类型
+    - type 可以表示任何类型数据，而 interface 主要用来声明对象结构类型
+    - 同名的 interface 可以声明合并，type 则无法
+    - 同样在对象扩展情况下，interface 使用 extends 关键字，而 type 使用交叉类型（&）。
+    - type 能够进行复杂类型编程
   - [ ] TypeScript 高级用法， Pick 和 Omit
   - [x] abstract vs Interface
     - 都是描述类的结构，Interface 还能描述函数结构
     - Interface 编译后就不存在，而 abstract 则会存在
-  - [ ] ts中的访问修饰符
-    - public：此类成员在类、类的实例、子类中都能被访问。
-    - protected，能在类的内部访问和子类中访问
-    - private：此类成员仅能在类的内部被访问
-    - 此类成员仅能在类与子类中被访问，你可以将类和类的实例当成两种概念，即一旦实例化完毕（出厂零件），那就和类（工厂）没关系了，即不允许再访问受保护的成员。
+  - [x] ts中的访问修饰符
+    - public：任何地方能被访问。
+    - protected，该类和子类中访问
+    - private：该类的内部被访问
+    - readonly：属性设置为只读，不能修改
   - [x] null vs undefined vs void
     - 在 JavaScript 中，null 与 undefined 分别表示“这里有值，但是个空值”和“这里没有值”，而在 TypeScript 中，null 与 undefined 类型都是有具体意义的类型
     - void：表示一个空类型，常用于表示一个没有返回操作或者没有显式返回一个值的函数的返回值
@@ -1008,11 +1021,18 @@
     - const枚举会在ts编译期间被删除，对应使用的位置直接内联替换成值
   - [x] any、unkown 区别
     - any 表示任意类型，可以将其他类型赋值给 any 或者将 any 赋值给其他类型，相当于 typescript 逃生门，会跳过类型检查
-    - unkown 表示未知类型，可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any，并且使用 unknown，TypeScript 会强制类型检测，你必须使用**类型缩小、类型断言**手段去确定类型
+    - unknown类型和any类型类似。与any类型不同的是，但 unknown 类型的值只能赋值给 unknown 或 any，并且使用 unknown 类型的变量，TypeScript 会强制类型检测，你必须使用**类型缩小、类型断言**手段去确定类型
 - React
   - [ ] React Hooks 的原理
     - hooks 的实现原理其实不复杂，就是在某个上下文中存放一个链表，然后 hooks api 从链表不同的元素上访问对应的数据来完成各自的逻辑。这个上下文可以是 vdom、fiber 甚至是全局变量。
   - [ ] Fiber 机制
+- 其他
+  - 微前端
+    - [x] 什么是微前端、了解
+      - 微前端：把前端应用、组件或者逻辑当作服务，可组合共享，合并成整体服务使用
+      - 好处：与技术栈无关、独立开发、独立部署
+      - 微前端 = 加载器 + 运行时容器（js、css隔离方案、容器通信机制）
+
 
 ## 其他
 

@@ -7,13 +7,18 @@
     - 应用
       - 类型工具
       - 泛型函数
-      - 泛型对象
+      - 泛型类、接口
   - 类型操作
     - 联合类型 `|`
-    - 交叉类型 `&`：类型合并
+    - 交叉类型 `&`
       - 对于对象类型的交叉类型，其内部的同名属性类型同样会按照交叉类型进行合并
-    - 索引类型 `keyof`：返回属性联合类型，可用 `keyof any` 去表示一个通用的联合类型
-    - 索引签名
+    - 索引类型 `keyof`：返回一个对象属性联合类型，可用 `keyof any` 去表示一个通用的联合类型
+    - 索引签名：约束对象索引类型
+      ```ts
+      type Obj = {
+        [index:string]:string
+      }
+      ```
       - 索引签名类型也可以和具体的键值对类型声明并存，但这时这些具体的键值类型也需要符合索引签名类型的声明
     - 索引类型访问 `type[expression]`：通过索引类型映射到值类型
     - 映射类型：映射类型(`in`)建立在索引签名的语法之上，基于键名映射到键值类型
@@ -32,18 +37,18 @@
       type FuncType = typeof func
       ```
     - [条件类型](#条件类型)
-      - [infer：提取泛型的类型信息](#infer提取泛型的类型信息)
+      - [infer：模式匹配，提取泛型的类型信息](#infer提取泛型的类型信息)
       - [分布式条件](#分布式条件类型)
-    - 递归
+    - [模板字符串类型](#模板字符串类型)
   - [内置类型工具](#内置类型工具)
 
 ## 泛型
 
-- 泛型：类型函数，参数为类型，返回值也未类型
-  - 类型工具：带有泛型的类型别名相当于带参的函数
+- 泛型：
+  - 类型工具：带有泛型的类型别名相当于带参的函数，返回值也为类型
   - 泛型函数
     - 泛型会在函数调用时自动地得填充为对应的参数类型
-  - 对象类型中的泛型：泛型类和泛型接口
+  - 泛型类和泛型接口（对象结构类型）
 
 ```ts
 // 默认值
@@ -169,6 +174,58 @@ type Res3 = Naked<number | boolean>;
   type Res4 = Wrapped<number | boolean>;
   ```
 
+## 模板字符串类型
+
+模板字符串类型，即可结合其他类型构成一个字符串模板类型。
+
+```ts
+type World = 'World';
+
+// "Hello World"
+type Greeting = `Hello ${World}`;
+
+// 结合原始类型
+type Greeting = `Hello ${number}`;
+let g: Greeting = 'Hello World' // 报错
+g = 'Hello 123' // 正确
+
+// 目前有效的类型只有 string | number | boolean | null | undefined | bigint
+type Greet<T extends string | number | boolean | null | undefined | bigint> = `Hello ${T}`;
+```
+
+模板字符串类型的主要目通过类型逻辑，增强字符串字面量类型。
+
+```ts
+type Version = `${number}.${number}.${number}`;
+
+const v1: Version = '1.1.0';
+
+// X 类型 "1.0" 不能赋值给类型 `${number}.${number}.${number}`
+const v2: Version = '1.0';
+```
+
+模板字符串类型 + 联合类型 = 产生自动分发联合特性，组合生成更多字符串字面类型。
+
+```ts
+type Brand = 'iphone' | 'xiaomi' | 'honor';
+type Memory = '16G' | '64G';
+type ItemType = 'official' | 'second-hand';
+
+type SKU = `${Brand}-${Memory}-${ItemType}`;
+```
+
+![图 1](./images/1660117559844.png)  
+
+模板字符串类型与模式匹配：
+
+```ts
+type ReverseName<Str extends string> =
+  Str extends `${infer First} ${infer Last}` ? `${Capitalize<Last>} ${First}` : Str;
+
+type ReversedTomHardy = ReverseName<'Tom hardy'>; // "Hardy Tom"
+type ReversedLinbudu = ReverseName<'Budu Lin'>; // "Lin Budu"
+```
+
 ## 内置类型工具
 
 - 属性修饰工具类型
@@ -224,8 +281,14 @@ type Res3 = Naked<number | boolean>;
     ```
 - 模式匹配工具类型：
   - 函数类型签名的模式匹配
-    - Parameters `type Parameters<T extends FunctionType> = T extends (...args: infer P) => any ? P : never;`
-    - ReturnType `type ReturnType<T extends FunctionType> = T extends (...args: any) => infer R ? R : any;`
+    - Parameters 
+      ```ts
+        type Parameters<T extends FunctionType> = T extends (...args: infer P) => any ? P : never;
+      ```
+    - ReturnType 
+      ```ts
+        type ReturnType<T extends FunctionType> = T extends (...args: any) => infer R ? R : any;
+      ```
   - class 模式匹配：对 Class 的模式匹配思路类似于函数，即基于放置位置的匹配。放在参数部分，那就是构造函数的参数类型，放在返回值部分，就是 Class 的实例类型了
     - ConstructorParameters
       ```ts
@@ -243,4 +306,8 @@ type Res3 = Naked<number | boolean>;
         ? R
         : any;
       ```
-- 模板字符串工具类型
+- 模板字符串工具类型（由 TypeScript 内部进行实现，无法通过类型编程自实现）
+  - Uppercase
+  - Lowercase
+  - Capitalize
+  - Uncapitalize

@@ -40,6 +40,8 @@ var isValidBST = function (root, max = Infinity, min = -Infinity) {
     // return (root.val < max && root.val > min) &&
     //     isValidBST(root.left, root.val, min) &&
     //     isValidBST(root.right, max, root.val)
+
+
 };
 // function dfs(root, res) {
 //     if (root) {
@@ -50,5 +52,9 @@ var isValidBST = function (root, max = Infinity, min = -Infinity) {
 
 //     return res
 // }
+
+function dfs2() {
+    
+}
 // @lc code=end
 
