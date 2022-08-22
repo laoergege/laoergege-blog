@@ -1,21 +1,20 @@
 ---
 release: true
 tags:
- - typescript
-description: TypeScript 类型推导、类型系统及类型兼容。
+  - typescript
+description: 了解 TypeScript 的类型推导以及其背后离不开的类型系统及类型兼容原理。
 ---
 
 # TypeScript 类型推导及类型系统
 
-TypeScript 中除了手动声明类型，还会自动类型推导，即基于开发者代码进行类型推导分析：
+TypeScript 中除了手动声明类型，还会自动类型推导，即基于开发者代码进行类型推导分析。类型推导：
 
-- 类型推导
-  - 变量声明推导
-  - 类型流程分析与类型守卫
-  - 上下文类型约束
-  - 类型兼容判断
+- [变量声明推导](#letconst-的变量声明推导)
+- [类型流程分析与类型守卫](#类型流程分析与类型守卫)
+- 上下文类型约束
+- 类型兼容判断
 
-类型推导过程中，免不了对类型兼容判断，即将一个值是否可以赋值给另一个变量类型，这其中判断离不开 TypeScript 的类型系统的设计原理：
+类型推导过程中，免不了对类型兼容判断，即将一个值是否可以赋值给另一个变量类型，这其中判断离不开 TypeScript 的类型系统设计原理：
 
 - 类型兼容
   - [结构化类型系统]()
@@ -23,16 +22,13 @@ TypeScript 中除了手动声明类型，还会自动类型推导，即基于开
   - 函数的协变与逆变
   - 联合类型
 
-在 TypeScript 类型分析不正确或不符合预期时，将其断言为此处的正确类型
+类型断言：在 TypeScript 类型分析不正确或不符合预期时，将其断言为此处的正确类型。
 
-- 类型断言
-  - `variable as type`、`<type>variable`
-  - `as const`：推断为常量类型
-  - 非空断言 `!`
+- `variable as type`、`<type>variable`
+- `as const`：推断为常量类型
+- 非空断言 `!`
 
-## 类型推导
-
-### let、const 的变量声明推导
+## let、const 的变量声明推导
 
 - 使用 let 声明的变量是可以再次赋值的，在 TypeScript 中要求赋值类型始终与原类型一致（如果声明了的话）。因此对于 let 声明，只需要推导至这个值从属的类型即可。
 - 而 const 声明的原始类型变量将不再可变，因此类型可以直接一步到位收窄到最精确的字面量类型，但对象类型变量仍可变（但同样会要求其属性值类型保持一致）。
@@ -43,7 +39,7 @@ TypeScript 中除了手动声明类型，还会自动类型推导，即基于开
 
 ![图 8](./images/1658850677415.png)
 
-### 类型流程分析与类型守卫
+## 类型流程分析与类型守卫
 
 类型的控制流分析：typescript 会分析代码控制流程结构，借助类型守卫不断尝试**收窄类型**。定义类型守卫的方式有：
 
@@ -97,8 +93,8 @@ function handle(input: Foo | Bar) {
   }
 
   // 无法对复合类型构成的联合类型的同名属性做类型守卫
-  if(typeof input.shared === 'string') {
-    input.fooOnly // 报错
+  if (typeof input.shared === "string") {
+    input.fooOnly; // 报错
   }
 
   // 同名但不同类型的属性要精确到字面量进行区分
@@ -133,7 +129,7 @@ function handle(input: Foo | Bar) {
 }
 ```
 
-#### 类型守卫函数
+### 类型守卫函数
 
 通常我们会把某些分支判断逻辑封装到一个函数里去，称为守卫函数。但在 TypeScript 类型控制流分析做不到跨函数上下文来进行类型的信息收集（但别的类型语言中可能是支持的）。
 
@@ -183,8 +179,6 @@ function isString(input: unknown): input is string {
 - 类型层级
 - 函数的协变与逆变
 - 联合类型：比较一个联合类型是否可被视为另一个联合类型的子集，即这个联合类型中所有成员在另一个联合类型中都能找到
-
-这些都是 TypeScript 类型系统设计。
 
 ### 结构化类型
 
@@ -275,7 +269,7 @@ addCNY(CNYCount, USDCount);
 
 类型层级实际上反映的是 TypeScript 类型系统中所有类型的兼容关系。
 
-类型层级模型
+类型层级模型：
 
 ![图 1](./images/1659187701509.png)
 
@@ -283,6 +277,8 @@ addCNY(CNYCount, USDCount);
 2. Object：包含了下层所有的类型（TypeScript 继承 JavaScript 设计：Object 是原型链顶端）
 3. 字面量类型 < 对应的原始类型 < 对应的装箱类型 < Object
 4. never 表示一个“虚无”的类型，一个根本不存在的类型，处于最底层，是任何类型的子类型
+   1. never 表示永远不存在的类型，比如函数总抛出异常或者死循环、两个不存在交集的类型强行进行交集运算，这些都不会产生值产生类型
+   2. never 类型仅能被赋值给另外一个 never 类型
 5. 表示一个对象类型有三种：Object vs {} vs object，而且这三种关系比较特别
    - object：object 的引入就是为了解决对 Object 类型的错误使用，它代表所有非原始类型的类型，即数组、对象与函数类型这些对象类型
      ```ts
@@ -296,13 +292,13 @@ addCNY(CNYCount, USDCount);
      type Result20 = Object extends object ? 1 : 2; // 1
      ```
    - `{}`：类似 Object，但又可以看作是一个对象字面量
-      ```ts
-      type Result16 = {} extends object ? 1 : 2; // 1
-      type Result18 = object extends {} ? 1 : 2; // 1
-      type Result19 = Object extends {} ? 1 : 2; // 1
-      type Result21 = {} extends Object ? 1 : 2; // 1
-      ```
-      这里的 `{} extends` 和 `extends {}` 实际上是两种完全不同的比较方式。`{} extends object` 和 `{} extends Object` 意味着， `{}` 是 object 和 Object 的字面量类型，是从类型信息的层面出发的，即字面量类型在基础类型之上提供了更详细的类型信息。`object extends {}` 和 `Object extends {}` 则是从结构化类型系统的比较出发的，即 `{}` 作为一个一无所有的空对象，几乎可以被视作是所有类型的基类，万物的起源
+     ```ts
+     type Result16 = {} extends object ? 1 : 2; // 1
+     type Result18 = object extends {} ? 1 : 2; // 1
+     type Result19 = Object extends {} ? 1 : 2; // 1
+     type Result21 = {} extends Object ? 1 : 2; // 1
+     ```
+     这里的 `{} extends` 和 `extends {}` 实际上是两种完全不同的比较方式。`{} extends object` 和 `{} extends Object` 意味着， `{}` 是 object 和 Object 的字面量类型，是从类型信息的层面出发的，即字面量类型在基础类型之上提供了更详细的类型信息。`object extends {}` 和 `Object extends {}` 则是从结构化类型系统的比较出发的，即 `{}` 作为一个一无所有的空对象，几乎可以被视作是所有类型的基类，万物的起源
 
 类型层级下的心智模型：
 
@@ -364,27 +360,27 @@ addCNY(CNYCount, USDCount);
 
 ```ts
 class Animal {
-    doAnimalThing(): void {
-        console.log("I am a Animal!")
-    }
+  doAnimalThing(): void {
+    console.log("I am a Animal!");
+  }
 }
 
 class Dog extends Animal {
-    doDogThing(): void {
-        console.log("I am a Dog!")
-    }
+  doDogThing(): void {
+    console.log("I am a Dog!");
+  }
 }
 
 class Corgi extends Dog {
-    doCorgiThing(): void {
-        console.log("I am a Corgi!")
-    }
+  doCorgiThing(): void {
+    console.log("I am a Corgi!");
+  }
 }
 
-const t: (d: Dog) => Dog = (a: Animal) => (new Corgi)
+const t: (d: Dog) => Dog = (a: Animal) => new Corgi();
 ```
 
-![图 2](./images/1659758577343.png)  
+![图 2](./images/1659758577343.png)
 
 实践推荐：使用 TypeScript 的 strictFunctionTypes 选项。并且它只对函数属性的正确类型检查。
 
@@ -402,20 +398,20 @@ interface T2 {
 
 ```ts
 interface T {
-  func(d: Dog): Dog
+  func(d: Dog): Dog;
 }
 
 interface TT {
-  func:(d: Dog) => Dog
+  func: (d: Dog) => Dog;
 }
 
 const tt: T = {
-  func: (a: Corgi) => (new Corgi) // 双变
-}
+  func: (a: Corgi) => new Corgi(), // 双变
+};
 
 const ttt: TT = {
-  func: (a: Corgi) => (new Corgi) // 报错，只接受参数逆变
-}
+  func: (a: Corgi) => new Corgi(), // 报错，只接受参数逆变
+};
 ```
 
 ## 学习参考

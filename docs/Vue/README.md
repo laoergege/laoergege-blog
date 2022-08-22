@@ -7,31 +7,29 @@ description: Vue 技术栈
 
 # Vue
 
-- Vue
-  - 模板编译器
-    - 模板编译
-    - 编译优化
+- Vue 核心
+  - 响应式系统
   - vDOM + Renderer（渲染器）
     - 组件系统 
     - 组件渲染机制
     - 响应式渲染 + 异步更新调度
-  - 响应式系统
-- Vue 组件开发指南
-  - 数据流
-    - 单向数据原则
+  - 模板编译器
+    - 模板编译
+    - 编译优化
+- Vue 开发指南
+  - 组件通信
     - 父子组件
-      - props、event
-      - 实例引用 `$parent`、`$children`
-    - 模块领域
-      - provide/inject
-    - 全局单例模式  
-      - 事件订阅 eventBus
-      - 组合、响应
-      - 单向数据流框架 vuex（规范统一用法、支持同步异步、结合框架更新机制）
-  - 复用
-    - composition-api
+      - props、emit
+      - 直接引用 `ref`、`children`、`parent`
+    - 非父子组件：
+      - 模块领域：provide/inject
+      - 全局单例模式  
+        - EventBus
+        - Vuex
+  - 逻辑复用
+    - 组合函数：composition-api
     - 指令
-    - 函数组件 & JSX
+    - 组件复用
       - 高阶函数
       - 组合函数
   - 前端路由
@@ -65,25 +63,32 @@ description: Vue 技术栈
 
 ## Vue3 系文
 
-- Vue 核心原理
-  1. [vue3 的升级优化](./vue3的升级优化.md)
-  2. [Vue 组件渲染机制](./vue%20组件渲染机制.md)
-  3. [diff 更新流程](./diff%20更新流程.md)
-  4. [vue 的响应式系统](./vue%20的响应式系统.md)
-  5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
-  7. [Props & Slots]()
-  8. 模板编译优化
-  9. vue 指令原理
-- Vue API 剖析
-  1. [Vue 组件生命周期](./Vue%20%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
-  2. vue 异步组件及 Suspense
-  3. Teleport 实现原理
-  4. Fragment
-  5. Vue & WebComponent
+1. [vue3 的升级优化](./vue3的升级优化.md)
+2. [vue 组件渲染机制](./vue%20组件渲染机制.md)
+3. [diff 更新流程](./diff%20更新流程.md)
+4. [vue 的响应式系统](./vue%20的响应式系统.md)
+5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
+6. [vue props&slots](./vue%20props%26slots.md)
+7. 模板编译优化
+8. vue 指令原理
+9. [Vue 组件生命周期](./Vue%20%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
+10. vue 异步组件及 Suspense
+11. Teleport 实现原理
+12. Fragment
+13. Vue & WebComponent
 
-## 推荐好文
 
-- 数据流
-  - [一切前端概念，都是纸老虎](https://mp.weixin.qq.com/s/oF-MJ39zh0-R65Q4vPX8Dw)
-- SFC
-  - [Vue 3 的 SFC Style CSS Variable Injection 提案实现的背后](https://mp.weixin.qq.com/s/N1AoRSuK00V5QoZr4TWWvQ)
+
+- vue jsx
+  - 场景
+    - 一个文件写多个组件
+    - 一个文件写多个组件
+  - template ts 支持？
+  - JSX 中的子节点，编译后也就是 createVNode 的最后一个参数（对象类型）。在 template 对应则是插槽的概念，插槽是一种内容分发（content distribution）的 API，洋文叫 Slot，
+  - 但是在模板中，传递属性的时候，template 里面是不能写 VNode 的，因此 Vue 里出现了插槽这个概念，插槽只在组件的 children 里面才有。
+  - Vue 对插槽的要求最好是一个 function
+    - 子节点会被编译成，{ default: () => [123] }。
+
+
+数据流
+    - 单向数据流原则

@@ -1,10 +1,10 @@
 - React
   - 设计思想
     - 代数效应
-  - 逻辑服用
+  - 逻辑复用
     - HOC
     - render props
-    - hooks
+    - hooks + 组合模式
   - 样式
     - CSS-in-JS
       - [styled-jsx](https://github.com/vercel/styled-jsx)

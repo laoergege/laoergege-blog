@@ -6,7 +6,9 @@ tags:
 desc: 记录 TCP 及连接相关内容。
 ---
 
-# TCP 连接
+# TCP
+
+TCP（Transport Control Protocol）是一个传输层协议，提供 Host-To-Host 数据的可靠传输，支持全双工，是一个连接导向的协议。
 
 ## TCP 包数据结构
 

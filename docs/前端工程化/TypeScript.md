@@ -6,7 +6,9 @@
       - 原始类型
         - null vs undefined vs void
           - 在 JavaScript 中，null 与 undefined 分别表示“这里有值，但是个空值”和“这里没有值”，而在 TypeScript 中，null 与 undefined 类型都是有具体意义的类型
-          - void：表示一个空值类型，常用于表示一个没有返回操作或者没有显式返回一个值的函数的返回值
+          - void：表示一个空值类型，常用于表示一个函数没有返回操作或者没有显式返回一个值的函数的返回值
+            - void 类型无法赋值给其他类型
+            - 如果一个变量为 void 类型，只能赋予 undefined 或者 null
       - 复合类型
         - 数组
           - 只读数组
@@ -49,11 +51,14 @@
       - [函数类型](#函数类型声明)
       - 内置特殊类型
         - any、unkown 区别
-          - any 表示任意类型，可以将其他类型赋值给 any 或者将 any 赋值给其他类型，相当于 typescript 逃生门，会跳过类型检查
+          - any 表示任意类型，可以将其他类型赋值给 any 或者将 any 赋值给其他类型（除 never），相当于 typescript 逃生门，会跳过类型检查
           - unkown 表示未知类型，可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any，并且使用 unknown，TypeScript 会强制类型检测，你必须使用**类型缩小、类型断言**手段去确定类型
         - never、void 区别
-          - never 表示永远不存在的类型，比如函数总抛出异常没有返回值、死循环、两个不存在交集的类型强行进行交集运算
-          - never 类型的变量能够赋值给另一个 never 类型变量
+          - never 表示永远不存在的类型，比如函数总抛出异常或者死循环、两个不存在交集的类型强行进行交集运算，这些都不会产生值产生类型
+            - never 类型仅能被赋值给另外一个 never 类型
+          - void：表示一个空值类型，常用于表示一个函数没有返回操作或者没有显式返回一个值的函数的返回值
+            - void 类型无法赋值给其他类型
+            - 如果一个变量为 void 类型，只能赋予 undefined 或者 null
     - [类型推导](./TypeScript%20类型推导.md)
     - [类型编程及类型工具](./Typescript%20%E7%B1%BB%E5%9E%8B%E7%BC%96%E7%A8%8B.md)
   - 编译器
@@ -108,8 +113,7 @@
         - 配置文件 `"checkJs": true`：开启对所有 JS 类型检查
   - 工程实践
     - [Typescript 项目工程搭建](./Typescript%20%E9%A1%B9%E7%9B%AE%E5%B7%A5%E7%A8%8B%E6%90%AD%E5%BB%BA.md)
-    - 类型增强
-      - 声明文件(d.ts)及声明合并
+    - 类型增强：声明文件(d.ts)及声明合并
     - [Monorepo & Project References](#monorepo--project-references)
     - VSCode 集成
       - 内置 TypeScript Language Service

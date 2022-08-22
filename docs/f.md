@@ -63,11 +63,8 @@
      - vue3 conf https://node.fequan.com/videodetail/1621773573110
    - React
      - [react-router-5-course](https://github.com/ReactTraining/react-router-5-course)
-   - 微前端
-   - 容器技术
-     - Docker
+
    - Web
-     - [浏览器工作原理及 API](./浏览器原理及API/README.md)
      - https://github.com/Troland/how-javascript-works
      - canvas
        - https://joshondesign.com/p/books/canvasdeepdive/toc.html
