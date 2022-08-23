@@ -7,6 +7,8 @@ description: Vue 技术栈
 
 # Vue
 
+> Vue3 为主
+
 - Vue 核心
   - 响应式系统
   - vDOM + Renderer（渲染器）
@@ -29,17 +31,13 @@ description: Vue 技术栈
   - 逻辑复用
     - 组合函数：composition-api
     - 指令
-    - 组件复用
-      - 高阶函数
-      - 组合函数
-  - 前端路由
+    - 函数组件
+  - 前端路由 VueRouter
     - 路由导航
     - 路由匹配
     - 路由守卫
 - 生态
   - 多页应用：[petite-vue](https://github.com/vuejs/petite-vue)
-  - 单页应用
-    - vue-router
   - Vue2 => Vue3
     - [vue-compat](https://github.com/vuejs/core/tree/main/packages/vue-compat)
     - gogocode

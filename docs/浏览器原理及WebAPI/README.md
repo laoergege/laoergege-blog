@@ -31,22 +31,12 @@ desc: 浏览器原理及API知识体系总结
 
 - 同源策略
   - js设置document.domain实现跨域
-  - 跨域资源共享(CORS)
-- 内容安全策略（CSP）
 
-## Web 性能优化
-
-- [Web 前端性能优化](./Web%20前端性能优化.md)
-- 性能测试监控工具
-  - Chrome DevTools
-  - Lighthouse
-  - [PagesTest](https://webpagetest.org/)
 
 ## Web API
 
-- Web API 参考资料
-  - [MDN](https://developer.mozilla.org/)
-- Web API
+- [Web 前端性能优化](./Web%20前端性能优化.md)
+- WeAPI
   - 页面
     - DOM
       - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
@@ -64,12 +54,12 @@ desc: 浏览器原理及API知识体系总结
         - MessageChannel
         - BroadcastChannel（同源限制）
   - 缓存
-    - [HttpCache：浏览器缓存](../HTTP/http%20%E7%BC%93%E5%AD%98.md#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93)
+    - [浏览器缓存：http-cache](../HTTP/http%20%E7%BC%93%E5%AD%98.md#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93)
     - cookie
     - cache-api
     - localStorage、sessionStorage
     - indexDB
-  - 网络通信
+  - 网络
     - 同源
       - Ajax
       - Fetch
@@ -104,23 +94,20 @@ desc: 浏览器原理及API知识体系总结
             - 页面元素 `<img crossorigin="use-credentials" src="…" />`
         - [playground](https://jakearchibald.com/2021/cors/playground/)
       - JSONP：利用了 script 标签的 src 属性来实现跨域数据交互的，因为浏览器解析HTML代码时，原生具有src属性的标签，浏览器都赋予其HTTP请求的能力，而且不受跨域限制，使用src发送HTTP请求，服务器直接返回一段JS代码的函数调用，将服务器数据放在函数实参中，前端提前写好响应的函数准备回调，接收数据，实现跨域数据交互
-      - Proxy Server
-  - 硬件
-    - [WebWork](./WebWork.md)
-      - [task-worklet](https://github.com/developit/task-worklet)
-      - [workerize](https://github.com/developit/workerize)
-    - WebAssembly
-      - [A cartoon intro to WebAssembly](https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/)
-      - [Debugging WebAssembly with modern tools](https://developer.chrome.com/blog/wasm-debugging-2020/)
+      - Proxy Server：服务器代理
+      - WebSocket
+  - [WebWorker：多线程](./WebWork.md)
+    - [task-worklet](https://github.com/developit/task-worklet)
+    - [workerize](https://github.com/developit/workerize)
+  - [PWA](./PWA.md)
   - 其他
-    - [PWA](./PWA.md)
-      - https://lavas-project.github.io/pwa-book/
-  - ResourceHints
-    - [prerender](https://web.dev/speculative-prerendering/)
-  - SanitizerAPI
-    - [Safe DOM manipulation with the Sanitizer API](https://web.dev/sanitizer/)
-  - WebRTC
-    - [做一个视频通话给自己用吧](https://juejin.cn/post/7047309196445876231#heading-18)
+    - ResourceHints
+      - [prerender](https://web.dev/speculative-prerendering/)
+    - SanitizerAPI
+      - [Safe DOM manipulation with the Sanitizer API](https://web.dev/sanitizer/)
+    - WebRTC
+    - TaskSchedulingAPI
+    - WebAssembly
 
 ## 场景分类
 

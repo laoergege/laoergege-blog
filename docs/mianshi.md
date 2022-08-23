@@ -231,6 +231,8 @@
     - [x] 手写 EventEmitter
       - ![图 1](./images/1646814006448.png)
   - js 执行机制
+    - [x] js如何保证在一定时间后执行某段代码?
+      - web worker
     - [x] 变量提升、var、let、const 区别及暂时性死区
     - [x] 闭包
       - 在 JavaScript 中，闭包就是绑定了执行环境的函数。根据词法作用域原则，内层函数中访问到其外层函数的作用域。但是 JavaScript 中函数是一等公民，函数也可以作为变量赋值，意味着函数可以脱离当前作用域在其他作用域被调用。这时就需要将内部函数引用到的外部作用域变量保留下来，跟该函数关联起来，以便引擎执行该函数代码能够继续查找到原词法位置中外部的变量。
@@ -595,7 +597,7 @@
     - http2：改进性能，解决了 http-队头阻塞
       - http 头部压缩
       - 二进制分帧传输
-      - 支持多路复用
+      - 支持多路复用：请求、返回会被拆分成切片，然后同一个连接混合传输
       - 支持帧控制
       - 服务推送
     - HTTP/3：主要解决 TCP 队头阻塞、TCP 及 TSL 握手消耗
@@ -695,6 +697,13 @@
   - [x] CDN 介绍，回源是什么？CDN 的原理是什么？ 
     - CDN，内容分发网络（Content Dilivery Network，CDN）是一个专门用来分发静态内容的分布式应用。通过部署各地网络节点，让不同地域的用户可以就近获取内容，从而达到加速访问的效果。
     - CDN 回源就是 CDN 节点到源站请求资源，重新设置缓存。通常服务提供方在使用 CDN 的时候，会在自己的某个域名发布静态资源，然后将这个域名交给 CDN。
+    - CDN 的原理
+      - CDN 核心技术 = 智能 DNS + 缓存系统
+      1. CDN 厂商会提供 CDN 域名给你，你可以将自己的业务域名 CNAME 到厂商的 CDN 域名
+      2. CDN 域名的解析（NS）会最终由厂商的CDN 智能域名系统处理
+      3. CDN 智能域名系统返回最近节点的 IP 地址
+      4. 用户端根据 IP 地址发起节点请求资源
+      5. 若节点有缓存则直接返回，否则回源请求并重新缓存返回给客户端
   - [x] 网络协议栈
     - TCP/IP 协议栈
       - 应用
@@ -758,10 +767,6 @@
       - [ ] 手写响应式数据实现
     - [x] 数据绑定原理
       - 渲染视图时访问到响应式数据，会被数据劫持将视图渲染做为依赖收集，当数据发生变化就会触发视图渲染
-    - [ ] vue 双向绑定原理（v-model）
-      - v-model 只是个语法糖，通过vue的编译器默认情况会转成 value 数据属性绑定 + input 事件监听，在事件回调函数中会做变量更新操作
-      - v-model 通常在表单项上使用v-model，还可以在自定义组件上使用
-      - v-model 如果用在表单元素，编译器根据表单元素的不同会展开不同的DOM属性和事件对，比如text类型的input和textarea会展开为value和input事件；checkbox和radio类型的input会展开为checked和change事件；select用value作为属性，用change作为事件。
     - [x] 单向数据流原则理解
       - 数据到视图单向绑定
       - 组件树自顶向下单向更新，父组件更新后通过 props 向子组件传递数据，子组件不能更新 props
@@ -809,6 +814,12 @@
       - 异步请求在哪一步发起
         - 一般 created 或者 mounted
         - 但 ssr 场景不支持 beforeMount 、mounted 钩子函数，可用放在 created 中有助于一致性；而在 vue3 SSR 数据获取统一成 serverPrefetch
+    - [x] vue 双向绑定原理（v-model）
+      - v-model 只是个语法糖，通过vue的编译器默认情况会转成 value 数据属性绑定 + input 事件监听，在事件回调函数中会做变量更新操作
+      - v-model 通常在表单项上使用v-model，还可以在自定义组件上使用
+      - v-model 如果用在表单元素，编译器根据表单元素的不同会展开不同的DOM属性和事件对，比如text类型的input和textarea会展开为value和input事件；checkbox和radio类型的input会展开为checked和change事件；select用value作为属性，用change作为事件。
+    - [ ] 自定义组件使用v-model如果想要改变事件名或者属性名应该怎么做
+      - vue2: model { prop, event }
     - [ ] keep-alive 原理
     - [ ] computed 实现原理
     - [x] computed、watch 对比区别

@@ -38,7 +38,7 @@
       - Typescript
       - NodeJS
       - Rust
-        - [ ] 入门学习（2022.5 - 2022.12）
+        - [ ] 基础入门（2022.5 - 2022.12）
         - [ ] 应用：Webassembly
         - [ ] https://github.com/HerringtonDarkholme/vue-compiler
     - 计算机基础

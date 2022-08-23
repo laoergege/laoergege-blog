@@ -19,8 +19,6 @@ desc: 总结 Web 安全相关知识体系
     - [CSRF 攻击与 cookie 机制](#csrf-攻击与-cookie-机制)
       - [防止 CSRF 攻击](#防止-csrf-攻击)
   - 网络安全
-    - DNS 劫持
-    - TCP，洪攻击
     - [HTTPS](../HTTP/https.md)：解决 HTTP 劫持（明文传输，内容篡改）
       - 点击嵌套劫持
       - 广告
@@ -180,6 +178,6 @@ Process-per-site-instance 是最重要的，因为这个是 Chrome 默认使用�
 
 ## 参考
 
-- [《浏览器工作原理与实践》 - 35 | 安全沙箱：页面和系统之间的隔离墙](https://time.geekbang.org/column/article/155183)
+- 极客《浏览器工作原理与实践》
 - [前端安全系列之二：如何防止CSRF攻击？](https://juejin.cn/post/6844903689702866952)
 - [理解“同站”和“同源”](https://web.dev/same-site-same-origin/#%22schemeful-same-site%22)

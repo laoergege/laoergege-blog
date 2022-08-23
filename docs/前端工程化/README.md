@@ -52,7 +52,7 @@ desc: 前端工程化
             - 如果用户没有显式依赖核心库，则按照插件 peerDependencies 中声明的版本将库安装到项目根目录中；
             - 当用户依赖的版本、各插件依赖的版本之间不相互兼容，会报错让用户自行修复；
   - 开发
-    - 框架化
+    - 框架
     - 调试
       - 环境区分
       - 本地服务器及服务代理
@@ -64,10 +64,12 @@ desc: 前端工程化
     - [vite](https://github.com/vitejs/vite)
     - [parcel](https://parceljs.org/)
   - 测试
-    - jest
-    - [vue: vitest](https://cn.vitest.dev/)
-    - [cypress](https://docs.cypress.io/)
-    - [playwright](https://playwright.dev/)
+    - 单元测试
+      - jest
+      - [vue: vitest](https://cn.vitest.dev/)
+    - e2e 测试
+      - [cypress](https://docs.cypress.io/)
+      - [playwright](https://playwright.dev/)
   - CI/CD
     - lint
     - test

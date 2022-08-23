@@ -10,7 +10,20 @@
  * @return {number}
  */
 var lengthOfLIS = function (nums) {
-     return dfs(nums, 0, -Infinity, 0)
+    let temp = [[1]]
+    for (let i = 1; i < nums.length; i++) {
+        let arr = temp[i] ??= []
+        arr[i] = 1
+        for (let j = 0; j < i; j++) {
+            const t = temp[i - 1][j]
+            if (nums[j] < nums[i]) {
+                arr[i] = arr[i] > t ? arr[i] : t + 1
+            }
+
+            arr[j] = t
+        }
+    }
+    return Math.max(...temp[temp.length - 1])
 };
 
 // 回溯
@@ -33,4 +46,4 @@ var lengthOfLIS = function (nums) {
 // }
 // @lc code=end
 
-// console.log(lengthOfLIS([7, 7, 7, 7, 7, 7, 7]))
+// console.log(lengthOfLIS([1, 3, 6, 7, 9, 4, 10, 5, 6]))
