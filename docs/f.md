@@ -1,19 +1,10 @@
-> “技术栈”非常形象地表达了学习一门手艺所需要的是哪些知识，以及应该按照什么顺序来学。  
-> 
-> 对于一个成熟的领域，一般都有比较完整的技术栈的资料，我们需要花些时间分析资料，系统性地了解这一领域知识的宏观架构、它的过往历史、它的优缺点，然后结合现有资料和我们自身的特点来建立我们自己的技术栈。 
->  
-> 先系统性地了解这一领域知识的宏观架构，建立知识体系树，通过不断深入学习，扩展分支边界
-> 
-> 学习即应用：学习什么都要带着一个目的，毕竟学到的知识点始终是作为一种工具，开始不要过多在于理论细节，因为在应用过程，就会不断反复磨合，加深理解。最后我们不仅达到应用效果，更重要的是创造力
-> 
-> 总结：了解（有什么） => 学习（怎么用） => 应用（怎么做） => 深入（分支） => 探索、创新
+1. [ ] Job
 
-1. 学习一件新事物的较好方式是和你已掌握的做对比，通过二者之间通用的概念帮你快速熟悉新的事物
+## 语录
 
-- Tasks
-  - 学习
-    - 技术学习：[技术栈](#技术栈)
-  - [ ] 找工作
+- 学习
+  - 体系了解（有什么） => 学习（怎么用） => 应用（怎么做） => 深入（分支） => 探索、创新
+  - 学习一件新事物的较好方式是和你已掌握的做对比，通过二者之间通用的概念帮你快速熟悉新的事物
 
 ## 技术栈
 
@@ -28,7 +19,7 @@
         - [ ] 深入 Vue 框架源码及生态
         - [ ] 技术输出：vue 深入系文
     - [前端工程化](./前端工程化/README.md)
-    - Docker
+    - 容器技术
   - 底层基础
     - 软件工程化（流程化、工具自动化、框架化）
     - 设计模式与架构
@@ -38,9 +29,8 @@
       - Typescript
       - NodeJS
       - Rust
-        - [ ] 基础入门（2022.5 - 2022.12）
+        - [ ] 基础入门（2022.5 - 2022.12.31）
         - [ ] 应用：Webassembly
-        - [ ] https://github.com/HerringtonDarkholme/vue-compiler
     - 计算机基础
       - [数据结构与算法](./数据结构与算法/README.md)
         - [ ] 熟练 leetcode 200道 简单、中度
@@ -58,25 +48,13 @@
 
 
     
-1. 框架技术
-   - [Vue](./Vue/README.md)
-     - vue3 conf https://node.fequan.com/videodetail/1621773573110
-   - React
-     - [react-router-5-course](https://github.com/ReactTraining/react-router-5-course)
 
-   - Web
      - https://github.com/Troland/how-javascript-works
      - canvas
        - https://joshondesign.com/p/books/canvasdeepdive/toc.html
-2. [软件设计、软件工程](./编程语言/软件设计与工程.md)
-   - JavaScript 设计模式与开发实践
-   - 依赖注入
-     - https://github.com/mgechev/injection-js
-3. 编程语言
-   - [HTML&CSS](./HTML&CSS/README.md)
-     - https://web.dev/learn/css/box-model/
-   - Flutter
-4. 计算机基础
+
+
+1. 计算机基础
    1. 计算机组成原理
    2. 操作系统
       - [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
@@ -90,7 +68,7 @@
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
-5. 数学与应用
+2. 数学与应用
 
 ## 收集待看
 

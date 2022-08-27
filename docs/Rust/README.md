@@ -1,6 +1,10 @@
-> 学习一门语言，先从使用优先，再到原理深入。  
-> 使用优先，按功能划分语言知识体系；  
-> 原理深入，主要以语言特性做入口，结合编译原理和运行时技术去深入探究。
+---
+release: true
+tags:
+ - rust
+---
+
+# Rust
 
 - Rust
   - 设计理念
@@ -31,10 +35,20 @@
     - 函数 `fn`
     - 模块系统：箱、模块、路径
       - 箱 crate：一个项目也被称为一个 crate，crate 可以是可执行项目，也可以是一个库
+      - 模块 `mod`：模块是一个箱内的代码组织单位，在 Rust 中声明模块的方式有两种：内联或在其他文件中声明
+      - `pub`：导出
+      - `use`：导入
     - 数据结构
       - 数组
       - 矢量 `Vec`
       - 哈希 `HashMap`
+    - 测试
+      - 单元测试
+        - `#[test]`
+        - `#[should_panic]` 预期的失败
+        - `#[ignore]` 忽略测试
+      - 文档测试 `///`
+      - 集成测试
   - 进阶
     - 内存安全：所有权、借用及生命周期
     - 类型系统 
@@ -82,10 +96,13 @@
   - 生态
     - WSAI
   - 资料
-    - [Microsoft Rust 教程](https://docs.microsoft.com/zh-cn/learn/paths/rust-first-steps/)
-    - [rust-training](https://github.com/tyrchen/rust-training)
-    - [rust-learning](https://github.com/ctjhoa/rust-learning)
-    - [awesome-rust](https://github.com/rust-unofficial/awesome-rust)
+    - [x] [Microsoft Rust 教程](https://docs.microsoft.com/zh-cn/learn/paths/rust-first-steps/)
+    - [ ] [Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/title-page.html)
+    - [ ] [Rust语言圣经(Rust Course)](https://course.rs/about-book.html)
+    - [ ] [rust-training](https://github.com/tyrchen/rust-training)
+    - [ ] [rust-learning](https://github.com/ctjhoa/rust-learning)
+    - [ ] [awesome-rust](https://github.com/rust-unofficial/awesome-rust)
+    - [ ] [ Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html)
 
 ## rust 程序骨架
 

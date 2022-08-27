@@ -105,7 +105,7 @@ desc: 浏览器原理及API知识体系总结
       - [prerender](https://web.dev/speculative-prerendering/)
     - SanitizerAPI
       - [Safe DOM manipulation with the Sanitizer API](https://web.dev/sanitizer/)
-    - WebRTC
+    - [WebRTC](https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API)
     - TaskSchedulingAPI
     - WebAssembly
 

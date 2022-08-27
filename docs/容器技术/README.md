@@ -1,4 +1,10 @@
-- Docker
+- 容器
+  - 核心
+    - 技术原理：namespace、cgroup、chroot
+    - [术语介绍](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction#)
+    - 容器技术 = 容器引擎 + 容器镜像 + 容器运行时
+    - 标准：OCI（容器镜像）
+  - podman
   - 简介  
     Docker 是一种虚拟化技术，基于 Linux 的容器机制（Linux Containers，简称 LXC），你可以把它近似地理解成是一个“轻量级的虚拟机”，只消耗较少的资源就能实现对**进程的隔离保护**。  
 

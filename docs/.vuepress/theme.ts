@@ -56,6 +56,7 @@ export default {
         "shell",
         "toml",
         "py",
+        "rust",
       ],
       theme: "github-light",
     }),
