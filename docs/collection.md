@@ -32,10 +32,7 @@
 - 框架技术
   - vue
     https://juejin.cn/post/6965057432544346143#heading-13
-  - 容器技术
-    - docker
-    - k8s
-      - https://developers.redhat.com/topics/kubernetes
+
 - 设计
   - [大型 web 前端架构设计-面向抽象编程入门](https://mp.weixin.qq.com/s/hqcWFluZ6Jaf6WukxjT1-w)
   - [设计一个插件架构，我是如何思考的](https://mp.weixin.qq.com/s/dgz1cuNWBKw7vjUTeWhYNQ)

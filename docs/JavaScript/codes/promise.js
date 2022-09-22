@@ -2,7 +2,7 @@ const PENDING = "pending";
 const FULFILLED = "fulfilled";
 const REJECTED = "rejected";
 
-class XPromise {
+class Bromise {
     status = PENDING;
     result = null;
     reason = "";
@@ -58,7 +58,7 @@ class XPromise {
      */
     resolvePromise = (value, resolve, reject) => {
         if (this === value) {
-            return reject(new TypeError('Chaining cycle detected for promise!'))
+            reject(new TypeError('Chaining cycle detected for promise!'))
         } else if (value instanceof XPromise) {
             // 返回值穿透
             value.then(resolve, reject)
@@ -74,6 +74,7 @@ class XPromise {
                 reject(error)
             }
         } else {
+            // 将 value 作为当前 promise 结果
             resolve(value)
         }
     }
@@ -117,6 +118,16 @@ class XPromise {
             }
         })
     }
+
+    static resolve(value) {
+        if (value instanceof Bromise) return value;
+        if ('then' in value) return
+        return new Bromise((resolve) => resolve(value));
+    }
+
+    static reject(reason) {
+        return new Bromise((resolve, reject) => reject(reason));
+    }
 }
 
 class Bromise {
@@ -129,14 +140,7 @@ class Bromise {
 
 
 
-    static resolve(value) {
-        if (value instanceof Bromise) return value;
-        return new Bromise((resolve) => resolve(value));
-    }
 
-    static reject(reason) {
-        return new Bromise((resolve, reject) => reject(reason));
-    }
 
     static all(promises) {
         return new Bromise((resolve, reject) => {

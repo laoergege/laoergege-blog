@@ -2,9 +2,22 @@
 
 ## 语录
 
+- 处世
+  - 人生最重要的不是胡一把好牌，而是打好一把烂牌
+  - 弱小和无知不是生存的障碍，傲慢才是
+- 处事
+  - 计划任何事目标要以成品为向导
 - 学习
-  - 体系了解（有什么） => 学习（怎么用） => 应用（怎么做） => 深入（分支） => 探索、创新
+  - 学习模式
+    - 体系了解（有什么）
+    - 学习（怎么用）
+    - 应用（怎么做）
+    - 深入（分支）
+    - 探索、创新
   - 学习一件新事物的较好方式是和你已掌握的做对比，通过二者之间通用的概念帮你快速熟悉新的事物
+- 规划
+  - 降低期望，接受普通自己
+  - 专注、从小积累做起
 
 ## 技术栈
 
@@ -22,7 +35,7 @@
     - 容器技术
   - 底层基础
     - 软件工程化（流程化、工具自动化、框架化）
-    - 设计模式与架构
+    - 软件设计：软件架构与设计模式
     - 程序语言设计与实现原理
       - [JavaScript](./JavaScript/README.md)
         - [ ] 《JavaScript 核心原理精讲》 
@@ -49,9 +62,7 @@
 
     
 
-     - https://github.com/Troland/how-javascript-works
-     - canvas
-       - https://joshondesign.com/p/books/canvasdeepdive/toc.html
+   
 
 
 1. 计算机基础
@@ -68,7 +79,6 @@
         - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
         - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
         - https://github.com/estree/estree
-2. 数学与应用
 
 ## 收集待看
 
@@ -87,33 +97,15 @@
 - SSR
   - [能让你纵享丝滑的 SSR 技术，转转这样实践](https://mp.weixin.qq.com/s/JO5SWE9wd93ICM5ccZ71FQ)
   - [Nuxt 实现的 SSR 页面性能优化的进一步探索与实践](https://mp.weixin.qq.com/s?__biz=MzU0OTExNzYwNg==&mid=2247484670&idx=1&sn=b56e53dd80b27fa73db05aa0f87fe864&st=44750C9EB200D36504EB6D425B420DBB6B15C56ACA80A204C54C8323EDC1801EA5A5F3B820B554A82F62E4033B31A51709D75E975D62F9DF6D44CAE16D1789B8AD72E2CD5F9B783F67AD99F4F2798CF2C68E30FA529A9493650C4F2DBC668A6BDF60C19EBD53E8095436171B77B43F8379F0786B6B7CC24FF5D8D3F7E9234CB1AAF8E432ACBF7660C8D5A46943940625F334223CFD292F52C622C9D71CA23109&vid=1688853671357556&cst=84C66BDBB38DB9209F2CBE20568358526FE0CB352D65E68D84CDC8560959A5D0CF245948AFF68C1B51377FEEFF49EFA4&deviceid=28ea5b9c-c888-47c9-a3cf-e19b1d9eaf5c&version=3.0.40.6184&platform=mac&scene=21#wechat_redirect)
-- 可视化
-  - [如何 1 人 5 天开发完 3D 数据可视化大屏 【一】](https://mp.weixin.qq.com/s?__biz=MzA4MzMwMzQ5Nw==&mid=2650620371&idx=1&sn=ba4e5946d7ed5497a6f839cc833f177f&chksm=87f16cf5b086e5e3512659e44cc6587463974bfa43d658ec7317299d27810a83858c7f0934df&scene=21#wechat_redirect)
-  - [3D 可视化入门：渲染管线原理与实践](https://mp.weixin.qq.com/s?__biz=Mzg3OTYwMjcxMA==&mid=2247485777&idx=1&sn=a8f78f645b88602a1ed6d5222cc89d26&scene=21#wechat_redirect)
-  - 层次 [d3-hierarchy](https://github.com/d3/d3-hierarchy)
-- WebAssembly
-  - https://github.com/WasmEdge/WasmEdge
-- 框架
-  - NodeJS
-    - 架构
-      - https://developers.redhat.com/blog/2021/03/08/introduction-to-the-node-js-reference-architecture-part-1-overview#
-  - 浏览器
+
+
   - React
-    - [手写系列-实现一个铂金段位的 React](https://mp.weixin.qq.com/s/C4pjEzYPZocRnJOaF1q0Jg)
+
     - [React 技术揭秘](https://react.iamkasong.com)
     - [react-illustration-series](https://github.com/7kms/react-illustration-series)
-    - 状态管理
-      - https://github.com/umijs/hox
-    - [你可能不知道的流式 React Hooks（关于组织代码的最佳实践）](https://zhuanlan.zhihu.com/p/413141904)
-  - Flutter
-    - [企业微信超大型工程-跨全平台 UI 框架最佳实践](https://mp.weixin.qq.com/s/JdQmgQ57nWQM99JW_ueFVg)
-- 设计模式、架构
-  - [复杂系统架构设计应对之道](https://mp.weixin.qq.com/s/u5hW529GczJNZU0RdVPgeg)
-- 计算基础
+  
 
-  - 计算机网络
-    - 趣谈网络协议
-    - [Web 协议详解与抓包实战](https://www.youtube.com/playlist?list=PLoZQ0sz6CBHGLlYNKB-yzDRasrAYytelS)
+
 
 - 浏览器渲染原理
 
@@ -128,31 +120,9 @@
     - https://github.com/GoogleChromeLabs/preload-webpack-plugin
     - https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf
   - https://www.youtube.com/watch?v=kNzoswFIU9M&list=PLNYkxOF6rcICgS7eFJrGDhMBwWtdTgzpx
-  - 编译
 
-    - https://www.youtube.com/watch?v=5nmpokoRaZI
-    - https://www.youtube.com/watch?v=KM9coMpy5sQ&t=499s
-    - https://www.youtube.com/watch?v=p-iiEDtpy6I
-    - https://zhuanlan.zhihu.com/p/28590489
-
-  - http://nodejs.cn/learn/introduction-to-nodejs
-  - cli
-    - https://github.com/iwfan/chore-cli
-    - https://github.com/google/zx/blob/main/index.mjs
-    - https://github.com/Tencent/feflow
-
-- 重学 typescript
-
-  - https://www.typescriptlang.org/docs/handbook/intro.html
 
 - 计算机导论
 
   - https://www.coursera.org/learn/jisuanji-biancheng/home/week/1
   - https://www.bilibili.com/video/av21376839/
-
-
-
-- 性能测试工具
-
-  <img src="./images/image-20210401230801709.png" alt="image-20210401230801709" style="zoom:50%;" />
-

@@ -53,12 +53,12 @@ desc: 浏览器原理及API知识体系总结
         - postMessage
         - MessageChannel
         - BroadcastChannel（同源限制）
-  - 缓存
+  - [存储&缓存（同源限制）](./Web%20%E5%AD%98%E5%82%A8.md)
     - [浏览器缓存：http-cache](../HTTP/http%20%E7%BC%93%E5%AD%98.md#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93)
-    - cookie
-    - cache-api
-    - localStorage、sessionStorage
-    - indexDB
+    - Cookie
+    - LocalStorage、SessionStorage
+    - IndexDB
+    - CacheStorage&CacheAPI
   - 网络
     - 同源
       - Ajax

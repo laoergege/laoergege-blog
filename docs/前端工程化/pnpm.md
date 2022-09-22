@@ -6,9 +6,9 @@ tags:
 description: 记录 pnpm 的核心原理，如依赖机制等、工程上 Monorepo 的搭配方案、一些 npm/pnpm 用法...
 ---
 
-# pnpm
+# Pnpm
 
-- pnpm
+- Pnpm
   - 依赖管理
     - [依赖安装机制](#依赖安装机制)
       - [半严格模式](#半严格模式)
@@ -19,8 +19,6 @@ description: 记录 pnpm 的核心原理，如依赖机制等、工程上 Monore
     - hardlink
   - [Monorepo](#monorepo)
     - [pnpm + turborepo + changeset](#pnpm--turborepo--changeset)
-  - NPM 发包
-    - [Publish 工作流](#发布工作流)
   - npm scripts
 
 ## 依赖安装机制
@@ -177,107 +175,6 @@ packages:
 - changeset
 - changeset version
 - changeset publish
-
-## 发包
-
-pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围相匹配，pnpm 将从 workspace 链接这些 packages，并在 package.json 以 `workspace:` 协议声明；而当发包的时候将动态标准化依赖为 `workspace:` 协议：
-
-```json
-{
-  "dependencies": {
-    "foo": "workspace:*",
-    "bar": "workspace:~",
-    "qar": "workspace:^",
-    "zoo": "workspace:^1.5.0"
-  }
-}
-```
-
-将会被转化为：
-
-```json
-{
-  "dependencies": {
-    "foo": "1.5.0",
-    "bar": "~1.5.0",
-    "qar": "^1.5.0",
-    "zoo": "^1.5.0"
-  }
-}
-```
-
-### Publish 工作流
-
-> 以下基于 [github package npm 注册源](https://docs.github.com/cn/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)为例
-
-1. 确认 package 相关信息（[package.json 常见字段](#packagejson-常见字段)）
-2. Pack
-3. Versions
-4. Changelog
-5. Register & Oauth
-
-   - 注册源配置
-     - .npmrc：`@laoergege:registry=https://npm.pkg.github.com/`
-     - package.json#publishConfig：
-       ```json
-       "publishConfig": {
-         "registry":"https://npm.pkg.github.com"
-       }
-       ```
-   - 身份认证
-
-     - 个人访问令牌
-       - .npmrc：`//npm.pkg.github.com/:_authToken=TOKEN`
-     - 命令行
-
-       ```shell
-       $ npm login --scope=@OWNER --registry=https://npm.pkg.github.com
-
-       > Username: USERNAME
-       > Password: TOKEN
-       > Email: PUBLIC-EMAIL-ADDRESS
-       ```
-
-6. `pnpm publish`
-
-## 附录
-
-### package.json 常见字段
-
-> package.json 文档链接
->
-> - [npm](https://docs.npmjs.com/cli/v8/configuring-npm/package-json)
-> - [pnpm](https://pnpm.io/zh/package_json)
-
-- package.json
-  - 项目描述
-    - name
-    - version
-    - description
-    - keywords
-    - homepage
-    - license
-    - people fields: author, contributors
-    - files
-    - repository
-  - 开发声明
-    - type
-    - main
-    - module
-    - types
-    - bin
-    - scripts
-    - 依赖
-      - dependencies
-      - devDependencies
-      - peerDependencies
-    - overrides：用于开发覆盖包做测试
-    - workspaces
-  - 发包配置
-    - publishConfig
-    - private
-  - 环境声明
-    - engines
 
 ## 学习参考
 
