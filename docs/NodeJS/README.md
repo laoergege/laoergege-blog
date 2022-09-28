@@ -14,13 +14,10 @@ tags:
     - 模块解析以及加载机制
   - [npm 包管理](./npm.md)
   - [Node.js 事件循环](./Node.js%20事件循环.md)
-  - 调试及性能分析
+  - 调试
     - [调试指南](https://nodejs.org/zh-cn/docs/guides/debugging-getting-started/)
-    - [Node Profile](https://nodejs.org/zh-cn/docs/guides/simple-profiling/)
     - [Debugging Node.js with Chrome DevTools](https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27)
     - [node-clinic](https://github.com/clinicjs/node-clinic)
-    - 日志
-      - console.log
   - 内置模块
     - Buffer
       - 内存分配策略
@@ -45,7 +42,7 @@ tags:
     - DLL
       - [node-ffi](https://github.com/node-ffi/node-ffi)
     - WebAssembly
-- 实践
+- 实战
   - 开发环境
     - [nodemon](https://github.com/remy/nodemon)
   - 项目架构
@@ -55,7 +52,9 @@ tags:
   - 数据类型验证
     - JSON Schema
     - typescript 运行验证
-  - http 服务
+  - [BFF: API Gateway](./BFF:%20API%20Gateway.md)
+  - [Node CLI](./Node%20CLI.md)
+  - Node 服务
     - 路由层
     - 模板渲染
       - 模板引擎
@@ -95,18 +94,10 @@ tags:
   - file
     - watcher
       - https://github.com/paulmillr/chokidar
-  - 控制台
-    - 日志 
-      - [consola](https://github.com/unjs/consola)
-    - 美化
-      - [chalk](https://github.com/chalk/chalk)
   - 调试
     - [debug](https://github.com/visionmedia/debug)
   - 监控
     - [easy-monitor](https://github.com/hyj1991/easy-monitor)
-  - 命令行
-    - 输入
-    - 输出
 - Deno
   - 资料
     - [Deno 运行时入门教程：Node.js 的替代品](https://www.ruanyifeng.com/blog/2020/01/deno-intro.html)

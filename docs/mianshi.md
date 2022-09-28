@@ -533,7 +533,7 @@
     - [x] webpack 有几种 hash，它们有什么区别？一般你在项目里面是用哪种 hash？
       - hash，反映的是项目的构建版本，每次编译之后都会生成新的 hash
       - chunkhash，根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值（来源于同一个 chunk，则 hash 值就一样）
-      - **contenthash**，根据文件内容生成 hash 值，文件内容相同 hash 值就相同
+      - **contenthash**，根据最后输出的文件内容生成 hash 值
     - Webpack 了解多少
       1. webapck 的四个核心概念，并介绍一些其他的模块，例如 mode，依赖图的概念等等。
       2. 介绍几个 webpack 的插件，如压缩 gzip、如何处理 dev 中的 console.log 的模块等等
@@ -1354,7 +1354,6 @@ devtool coverage
 - 抖音 APP 与 H5 如何通信
 - 如何针对性能指标做优化，有没有了解过业界的性能指标统计方式
 - less-loader 的 less 转成 css 的底层原理
-- webpack 常用插件
 - webpack 如何做代码拆分
 - webpack 动态导入原理
 - esm 和 commonjs 的区别
@@ -1498,6 +1497,6 @@ vue 增量 diff
 
 
 - react 响应式更新
-  - 渲染 vdom
+  - 渲染 => vdom
   - diff vdom
   - patch

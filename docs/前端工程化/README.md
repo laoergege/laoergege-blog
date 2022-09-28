@@ -5,18 +5,19 @@ tags:
 desc: 前端工程化
 ---
 
-# 前端工程化及架构设计
+# 前端工程化与架构设计
 
 - 工程化：将前端工作流程`标准化`、`规范化`、`工具化`、`自动化`。**通过规范和工具来提高前端应用质量及开发效率。**
   - 代码
     - 版本管理（git）
       - 分支管理
       - 提交规范
-      - 提案请求
+      - 提案、合并请求
         - merge request & code review
         - rfc 机制
     - 规范
       - 命名规范
+      - 注释规范
       - 代码格式 prettier
       - 代码质量 eslint
       - 类型检测 typescript
@@ -24,16 +25,21 @@ desc: 前端工程化
       - Multirepo
       - Monorepo
     - 目录结构设计
-    - 项目模板及代码段
-    - 环境
-      - 运行环境
-        - node
-        - chrome
-      - 包管理
-        - [pnpm](./pnpm.md)
-        - 幽灵依赖 
-          - [dependency-check](https://github.com/dependency-check-team/dependency-check)
-      - 环境锁定
+    - 项目模板
+    - 代码片段
+      - VSCode：Snippet Generator
+        - https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets
+        - https://marketplace.visualstudio.com/items?itemName=wenfangdu.snippet-generator
+        - https://marketplace.visualstudio.com/items?itemName=dkultasev.vs-code-snippet-generator
+  - 环境
+    - 运行环境
+      - node
+      - chrome
+    - 包管理
+      - [pnpm](./pnpm.md)
+      - 幽灵依赖 
+        - [dependency-check](https://github.com/dependency-check-team/dependency-check)
+    - 环境锁定
         - node 版本
           - nvm
           - pnpm env
@@ -50,18 +56,20 @@ desc: 前端工程化
             - 如果用户显式依赖了核心库，则可以忽略各插件的 peerDependency 声明；
             - 如果用户没有显式依赖核心库，则按照插件 peerDependencies 中声明的版本将库安装到项目根目录中；
             - 当用户依赖的版本、各插件依赖的版本之间不相互兼容，会报错让用户自行修复；
+  - Lint
   - 开发
     - 框架、技术选型
-    - 代码调试
-      - 环境区分
-      - 本地服务器及服务代理
-      - API 管理及数据模拟
-      - 浏览器及 DevTools
-  - Lint
   - 构建
+    - [Web 前端构建工具的设计考量](./Web%20前端构建工具的设计考量.md)
     - webpack
     - [vite](https://github.com/vitejs/vite)
     - [parcel](https://parceljs.org/)
+  - 调试
+    - DevServer
+    - APIMock
+    - DevTools
+    - SourceMap
+    - 热模块替换
   - 测试
     - 单元测试
       - jest
@@ -87,9 +95,11 @@ desc: 前端工程化
   - 以组件化架构为代表的 UI 搭建技术
      - 原子组件
      - 原子样式
-  - BFF
-    - SSR
+  - BFF：BFF 即 Backend For Frontend，服务于前端的后端，是一种逻辑分层：在后端普遍采用微服务的技术背景下，作为适配层能够更好地为前端服务，而传统业务后端只需要关注自己的微服务即可
+    - [API Gateway](../NodeJS/BFF:%20API%20Gateway.md)
+    - SSR 同构
     - Serverless
+  - 项目脚手架
   - 微前端
     - [探索微前端的场景极限](https://mp.weixin.qq.com/s/YkUUQX1m-KzjkLVWwOxxxg)
   - Monorepo
@@ -127,17 +137,6 @@ desc: 前端工程化
 
 - [《前端代码规范实践总结》](./前端代码规范实践总结.md)
 
-## CSS
-
-
-```css
-.container {
-  :global(.ant-button) {
-    color: var(--main-color);
-  }
-}
-```
-
 ## 表单配置化
 
 - 技术
@@ -159,59 +158,6 @@ desc: 前端工程化
 
 ## 现代化前端构建工具的设计及考量
 
-- 考量
-  - 设计
-  - 功能
-  - 性能
-- 功能考量
-  - 性能优化
-    - 增量模式
-      - husky + Lint-stage
-    - 构建缓存
-    - 并行模式
-  - 开发模式
-    - 模块化
-      - 模块依赖机制
-      - 一切皆模块：非 JavaScript 类型资源支持导入
-    - 热模块替换
-    - SourceMap
-    - DevServer
-  - 生产模式
-    - 代码分割（Code Splitting）
-      - 提取公共模块
-      - 按需加载/懒加载
-    - 资源哈希（Hashing）
-      - Hash vs ChunkHash vs ContentHash
-    - 输出格式
-      - ESM
-      - CommonJS
-      - SystemJS
-      - Lib
-    - 转换
-      - 缩小、压缩
-        - 混淆：符号压缩
-          - JS
-            - [Terser](https://github.com/terser-js/terser)
-        - 对无用代码的删除（DCE/TreeShaking：指的是基于module的跨模块死代码删除技术）
-          - tree shaking负责移除未引用的top-level 语句，而DCE删除无用的语句
-          - 原理
-            - 依赖 ESModules 静态结构做分析
-            - 副作用评估
-            - 静态属性分析
-            - 范围提升和编译时间 
-              - 代码评估轻松地发现没有被调用的模块并删除它们
-          - JS
-            - [Terser](https://github.com/terser-js/terser)
-      - 符号：做环境变量替代
-        - cross-env 
-      - 转译
-        - js
-        - jsx
-        - css
-          - less
-          - scss
-          - postcss
-          - [parcel-css](https://github.com/parcel-bundler/parcel-css)
 
 packages 声明副作用
 
@@ -261,3 +207,12 @@ const x = */@__PURE__*/eliminated_if_not_called()
 ## TreeShaking 原理设计
 
 
+
+
+- 大前端方向
+  - 传统 Web 前端
+  - 前端工程
+  - 跨端：桌面端、移动端、小程序
+  - 图形：图表、3D、游戏
+  - 后端服务：Node BFF
+  - 音视频

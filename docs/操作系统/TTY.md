@@ -13,6 +13,9 @@ tags:
 >
 > - [Linux 终端(TTY)](https://mp.weixin.qq.com/s/QgYoGRC0VyalT5rKnmE2Ww)
 > - [理解 Linux 终端、终端模拟器和伪终端](https://xie.infoq.cn/article/a6153354865c225bdce5bd55e)
+> - [The TTY demystified](http://www.linusakesson.net/programming/tty/)
+
+TL;DR：
 
 1. 终端是一个附加在计算机上的输入输出设备；而过去 TTY (电传打字机 teletype 的缩写) 则是计算机一个文本输入输出的终端设备；
 2. 随着硬件终端逐渐演化成了软件的概念，出现了软件仿真终端，称为终端模拟器。如今 TTY 是计算机系统一个文本输入输出的虚拟终端的概念，运行在内核态的 TTY 都由一个特殊的设备文件 `/dev/tty[n]` 所表示，与这个虚拟终端的交互，是通过对这个设备文件的读写操作，以及使用 ioctl 系统调用操作这个设备文件进行的。通过执行 tty 命令可以查看代表当前虚拟终端的设备文件：

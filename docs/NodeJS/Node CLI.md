@@ -1,2 +1,16 @@
-- prompts
-  - [enquirer](https://github.com/enquirer/enquirer#built-in-prompts)
+- CLI
+  - 参数解析
+  - 交互
+    - [inquirer](https://github.com/SBoudrias/Inquirer.js#readme)
+    - [prompts](https://github.com/terkelg/prompts#readme)
+    - [enquirer](https://github.com/enquirer/enquirer#built-in-prompts)
+  - 格式化
+    - 文字
+      - [chalk](https://github.com/chalk/chalk)
+      - [kleur](https://github.com/lukeed/kleur)
+    - 文本框：[boxen](https://github.com/sindresorhus/boxen)
+  - 动画
+    - 进度条：[ora](https://github.com/sindresorhus/ora#readme)
+    - 任务列表：[listr](https://github.com/SamVerschueren/listr)
+  - 日志
+    - [consola](https://github.com/unjs/consola)
