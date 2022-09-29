@@ -1,9 +1,7 @@
 <template>
-  <div class="w-full sm:px-4 sm:max-w-3xl font-mono py-4">
-    <Content :page-key="key"  v-for="key in resolveKeys" :key="key" />
-    <div class="flex justify-center my-4">
-      <button v-if="hasMore" class="btn btn-ghost" @click="loadMore">加载更多</button>
-    </div>
+  <Content class="sm:max-w-3xl flex flex-col gap-6 font-mono"  :page-key="key"  v-for="key in resolveKeys" :key="key" />
+  <div class="flex justify-center my-4">
+    <button v-if="hasMore" class="btn btn-ghost" @click="loadMore">加载更多</button>
   </div>
 </template>
 

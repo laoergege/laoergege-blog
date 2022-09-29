@@ -34,7 +34,9 @@ export default {
   },
   plugins: [
     // 官方插件
-    mediumZoomPlugin(),
+    mediumZoomPlugin({
+      selector: ":not(a,.no-zoom) > img",
+    }),
     backToTopPlugin(),
     gitPlugin(),
     nprogressPlugin(),
