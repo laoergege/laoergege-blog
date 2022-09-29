@@ -32,9 +32,9 @@
           - https://yeasy.gitbook.io/docker_practice/image/commit
       - Dockerfile
       - [Containerfile](https://www.mankier.com/5/Containerfile#Introduction)
-    - 容器运行：[容器启动模式](#容器启动模式)
+    - 容器运行：[容器启动运行模式](./%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F.md)
       - `--name`：容器命名
-      - `rm`
+      - `--rm`：
     - 容器交互
       - `exec`：在容器内执行命令
       - `attach`：将我们控制台的 stdin、stdout、stderr 连接到容器里正在运行的进程
