@@ -9,7 +9,7 @@ tags:
 # Web 存储
 
 - [客户端存储限额及检查](https://web.dev/storage-for-the-web/#%E5%A4%9A%E5%B0%91)
-- WebStorageAPI
+- Web 存储
   - Cookie
     - 大小、数量：不超过 4K，每个域下最多允许有 20+ 个左右的 cookie
     - 生命周期
@@ -57,6 +57,8 @@ tags:
     - 生命周期：永久
     - 其他
       - 能够在 Web Worker 及 Service Worker 环境下访问
+  - [Back/forward cache](https://web.dev/bfcache/?utm_source=devtools)
+  - HTTP Cache
 
 ## JavaScritpt 中的 cookie 操作
 

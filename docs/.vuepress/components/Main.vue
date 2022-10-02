@@ -1,5 +1,7 @@
 <template>
-  <Content class="sm:max-w-3xl flex flex-col gap-6 font-mono"  :page-key="key"  v-for="key in resolveKeys" :key="key" />
+  <div class="sm:max-w-3xl w-full flex flex-col gap-8 sm:gap-12">
+    <Content class="flex flex-col gap-8 sm:gap-12 font-mono"  :page-key="key" v-for="key in resolveKeys" :key="key"/>
+  </div>
   <div class="flex justify-center my-4">
     <button v-if="hasMore" class="btn btn-ghost" @click="loadMore">加载更多</button>
   </div>

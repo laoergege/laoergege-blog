@@ -1506,3 +1506,6 @@ vue 增量 diff
   - 渲染 => vdom
   - diff vdom
   - patch
+
+
+- 利用 service work 预缓存用户对应的权限模块

@@ -2,54 +2,53 @@
 
 - TypeScript
   - 类型系统
-    - 数据类型
-      - 原始类型
-        - null vs undefined vs void
-          - 在 JavaScript 中，null 与 undefined 分别表示“这里有值，但是个空值”和“这里没有值”，而在 TypeScript 中，null 与 undefined 类型都是有具体意义的类型
-          - void：表示一个空值类型，常用于表示一个函数没有返回操作或者没有显式返回一个值的函数的返回值
-            - void 类型无法赋值给其他类型
-            - 如果一个变量为 void 类型，只能赋予 undefined 或者 null
-      - 复合类型
-        - 数组
-          - 只读数组
-            - `ReadonlyArray`
-            - `let arr: readonly any[] = [1, 2, 3];`
-          - 元组（Tuple）
-            - 具名元组 `const arr7: [name: string, age: number, male: boolean] = ['linbudu', 599, true];`
-        - 对象
-          - 属性修饰符
-            - readonly
-            - 可选属性 `?`
-          - Interface：声明描述对象的结构，也可以声明函数对象结构
-          - Class
-            - 访问修饰符：`public / private / protected / readonly / override`
-              - override：确保派生类尝试覆盖的方法一定在基类中存在定义
-            - 抽象类 abstract vs Interface
-              - 都是描述类的结构，Interface 还能描述函数结构
-              - Interface 编译后就不存在，而 abstract 则会存在
-          - 实践推荐
-            - 使用 interface、class 去表示描述具体对象
-            - 对于“模糊”对象，不要使用 Object 以及类似的装箱类型、{}，使用 object 去表示对象类型。更推荐进一步区分，也就是使用 `Record<string, unknown>` 表示对象，`unknown[]`表示数组，`(...args: unknown[]) => unknown` 表示函数
-        - [枚举](#枚举)
-          - 特征
-            - 枚举和对象的重要差异在于，对象是单向映射的，枚举是双向映射的，即你可以从枚举成员映射到枚举值，也可以从枚举值映射到枚举成员
-            - 字符串枚举只会进行单次映射
-            - 数字枚举在不指定初始值的情况下，枚举值会从0开始递增
-          - 枚举 vs 常量枚举
-            - 枚举是可双向映射使用，常量枚举只能单向映射使用
-            - 枚举会被编译时会编译成一个对象，可以被当作对象使用
-            - const 枚举会在 ts 编译期间被删除，对应使用的位置直接内联替换成值
-          - 实践推荐
-            - 字面量类型与联合类型 vs 枚举/常量枚举的使用区别
-              - 数字枚举得使用“枚举/常量枚举”方式
-              - 字符串枚举两者皆可
-      - 字面量类型：无论是原始类型还是对象类型的字面量类型，它们的本质都是类型而不是值，它们在编译时同样会被擦除
-        - 对象字面量：对象字面量类型就是一个结构化对象类型，并且这个对象的值全都为字面量值
-        - 字符串字面量
-        - 数字字面量
-        - 布尔字面量
-      - [函数类型](#函数类型声明)
-      - 内置特殊类型
+    - 原始类型
+      - null vs undefined vs void
+        - 在 JavaScript 中，null 与 undefined 分别表示“这里有值，但是个空值”和“这里没有值”，而在 TypeScript 中，null 与 undefined 类型都是有具体意义的类型
+        - void：表示一个空值类型，常用于表示一个函数没有返回操作或者没有显式返回一个值的函数的返回值
+          - void 类型无法赋值给其他类型
+          - 如果一个变量为 void 类型，只能赋予 undefined 或者 null
+    - 复合类型
+      - 数组
+        - 只读数组
+          - `ReadonlyArray`
+          - `let arr: readonly any[] = [1, 2, 3];`
+        - 元组（Tuple）
+          - 具名元组 `const arr7: [name: string, age: number, male: boolean] = ['linbudu', 599, true];`
+      - 对象
+        - 属性修饰符
+          - readonly
+          - 可选属性 `?`
+        - Interface：声明描述对象的结构，也可以声明函数对象结构
+        - Class
+          - 访问修饰符：`public / private / protected / readonly / override`
+            - override：确保派生类尝试覆盖的方法一定在基类中存在定义
+          - 抽象类 abstract vs Interface
+            - 都是描述类的结构，Interface 还能描述函数结构
+            - Interface 编译后就不存在，而 abstract 则会存在
+        - 实践推荐
+          - 使用 interface、class 去表示描述具体对象
+          - 对于“模糊”对象，不要使用 Object 以及类似的装箱类型、{}，使用 object 去表示对象类型。更推荐进一步区分，也就是使用 `Record<string, unknown>` 表示对象，`unknown[]`表示数组，`(...args: unknown[]) => unknown` 表示函数
+      - [枚举](#枚举)
+        - 特征
+          - 枚举和对象的重要差异在于，对象是单向映射的，枚举是双向映射的，即你可以从枚举成员映射到枚举值，也可以从枚举值映射到枚举成员
+          - 字符串枚举只会进行单次映射
+          - 数字枚举在不指定初始值的情况下，枚举值会从0开始递增
+        - 枚举 vs 常量枚举
+          - 枚举是可双向映射使用，常量枚举只能单向映射使用
+          - 枚举会被编译时会编译成一个对象，可以被当作对象使用
+          - const 枚举会在 ts 编译期间被删除，对应使用的位置直接内联替换成值
+        - 实践推荐
+          - 字面量类型与联合类型 vs 枚举/常量枚举的使用区别
+            - 数字枚举得使用“枚举/常量枚举”方式
+            - 字符串枚举两者皆可
+    - 字面量类型：无论是原始类型还是对象类型的字面量类型，它们的本质都是类型而不是值，它们在编译时同样会被擦除
+      - 对象字面量：对象字面量类型就是一个结构化对象类型，并且这个对象的值全都为字面量值
+      - 字符串字面量
+      - 数字字面量
+      - 布尔字面量
+    - [函数类型](#函数类型声明)
+    - 内置特殊类型
         - any、unkown 区别
           - any 表示任意类型，可以将其他类型赋值给 any 或者将 any 赋值给其他类型（除 never），相当于 typescript 逃生门，会跳过类型检查
           - unkown 表示未知类型，可以将任意类型的值赋值给 unknown，但 unknown 类型的值只能赋值给 unknown 或 any，并且使用 unknown，TypeScript 会强制类型检测，你必须使用**类型缩小、类型断言**手段去确定类型
@@ -59,8 +58,8 @@
           - void：表示一个空值类型，常用于表示一个函数没有返回操作或者没有显式返回一个值的函数的返回值
             - void 类型无法赋值给其他类型
             - 如果一个变量为 void 类型，只能赋予 undefined 或者 null
-    - [类型推导](./TypeScript%20类型推导.md)
-    - [类型编程及类型工具](./Typescript%20%E7%B1%BB%E5%9E%8B%E7%BC%96%E7%A8%8B.md)
+  - [类型推导](./TypeScript%20类型推导.md)
+  - [类型编程及类型工具](./Typescript%20%E7%B1%BB%E5%9E%8B%E7%BC%96%E7%A8%8B.md)
   - 编译器
     - tsc
       - `--init`

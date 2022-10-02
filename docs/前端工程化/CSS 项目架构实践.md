@@ -12,6 +12,8 @@
     - 基础样式
       - CSS 重置和 CSS 规范化
         - [Normalize CSS or CSS Reset?!](https://elad.medium.com/normalize-css-or-css-reset-9d75175c5d1e)
+          - CSS 重置：清空所有用户代理样式
+          - CSS 规范化：标准化所有用户代理样式
         - [Normalize.css](https://github.com/necolas/normalize.css)
         - [Reseter](https://github.com/resetercss/reseter.css)
       - 字体
