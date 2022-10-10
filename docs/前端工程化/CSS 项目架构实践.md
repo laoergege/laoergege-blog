@@ -15,7 +15,6 @@
           - CSS 重置：清空所有用户代理样式
           - CSS 规范化：标准化所有用户代理样式
         - [Normalize.css](https://github.com/necolas/normalize.css)
-        - [Reseter](https://github.com/resetercss/reseter.css)
       - 字体
       - 排版
     - 功能：原子样式

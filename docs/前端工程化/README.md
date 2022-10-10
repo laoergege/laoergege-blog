@@ -56,7 +56,6 @@ desc: 前端工程化
             - 如果用户显式依赖了核心库，则可以忽略各插件的 peerDependency 声明；
             - 如果用户没有显式依赖核心库，则按照插件 peerDependencies 中声明的版本将库安装到项目根目录中；
             - 当用户依赖的版本、各插件依赖的版本之间不相互兼容，会报错让用户自行修复；
-  - Lint
   - 开发
     - 框架、技术选型
   - 构建
@@ -79,9 +78,10 @@ desc: 前端工程化
       - [playwright](https://playwright.dev/)
   - 集成
     - lint
+    - build
     - test
       - [性能预测](../浏览器原理及API/Web%20前端性能优化.md)
-    - build
+    - 
       - ci-cache
     - publish
       - [NPM 发包](./pnpm.md#publish-工作流)

@@ -1,9 +1,9 @@
 <template>
   <article
-    class="article w-full sm:w-3/4 lg:w-2/3 p-4 sm:p-10"
+    class="article w-full sm:w-3/4 lg:w-2/3 p-4"
     data-theme="cupcake"
   >
-    <content class="sm:max-w-full prose sm:prose-sm md:prose-lg dark:prose-invert" :page-key="$route.matched[0].name" />
+    <content class="sm:max-w-full pb-12 prose sm:prose-sm md:prose-lg dark:prose-invert" :page-key="$route.matched[0].name" />
     <vssue
       class="not-prose"
       :key="title"
@@ -52,6 +52,6 @@ export default {
 }
 
 pre.shiki,.article img{
-  @apply drop-shadow-2xl rounded-xl
+  @apply drop-shadow-xl rounded-xl
 }
 </style>

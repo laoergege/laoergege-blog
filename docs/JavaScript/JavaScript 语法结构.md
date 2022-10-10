@@ -26,9 +26,6 @@ desc: JavaScript 语法结构体系
           - 字符串模板
           - 等
   - 语法
-    - JavaScript 有两种源文件
-      - 脚本
-      - [模块](./JavaScript%20模块.md)
     - 指令序言（JavaScript 的指令序言是只有一个字符串直接量的表达式语句，它只能出现在脚本、模块和函数体的最前面）
       - `use strict`
     - 语句
@@ -38,12 +35,8 @@ desc: JavaScript 语法结构体系
         - let
         - const
         - class
-      - 函数
-        - 普通函数/成员函数
-        - 箭头函数
-        - 生成器函数（generator）
-        - 异步函数（async）
-        - 异步生成器函数
+      - 赋值语句
+      - [表达式](#表达式)及运算符
       - 控制流
         - 分支
           - if/else
@@ -51,7 +44,7 @@ desc: JavaScript 语法结构体系
         - 循环
           - 递归
           - 遍历
-            - while/do while/for
+            - while/do、while/for
             - for
           - 属性枚举
             - for in
@@ -61,7 +54,15 @@ desc: JavaScript 语法结构体系
         - 错误跳转 try-catch-finally
           - 即使在 try 中出现了 return，finally 中的语句也一定要被先执行
           - finally 中的 return 会覆盖 try 中的 return
-      - [表达式](#表达式)及运算符
+      - 函数
+        - 普通函数/成员函数
+        - 箭头函数
+        - 生成器函数（generator）
+        - 异步函数（async）
+        - 异步生成器函数
+      - JavaScript 有两种源文件
+        - 脚本
+        - [模块](./JavaScript%20模块.md)
 
 ## 自动插入分号规则
 

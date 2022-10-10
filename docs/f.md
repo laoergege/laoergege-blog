@@ -23,8 +23,6 @@
 
 - 技术栈
   - 技术领域：Web 开发
-    - HTTP
-      - [ ] 《透视 HTTP 协议》
     - 浏览器原理及WebAPI
       - [ ] 《浏览器原理及实践》
     - 前端框架
@@ -33,7 +31,7 @@
         - [ ] 技术输出：vue 深入系文
     - [前端工程化](./前端工程化/README.md)
     - 容器技术
-  - 底层基础
+  - 软件基础
     - 软件工程化（流程化、工具自动化、框架化）
     - 软件设计：设计模式与架构
     - 程序语言设计与实现原理
@@ -48,37 +46,15 @@
       - [数据结构与算法](./数据结构与算法/README.md)
         - [ ] 熟练 leetcode 200道 简单、中度
       - 操作系统
-        - [ ] 《趣谈Linux操作系统》
+        - [ ] [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
       - 编译原理
         - [ ] 《编译原理实战课》
       - 计算机网络
+        - [HTTP](./HTTP/README.md)
+          - [ ] 《透视 HTTP 协议》
       - 计算机图形学
       - 计算机组成
     - 数学与应用
-
-## 技术栈结构
-
-
-
-    
-
-   
-
-
-1. 计算机基础
-   1. 计算机组成原理
-   2. 操作系统
-      - [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
-   3. 计算机网络
-      - [HTTP](./HTTP/README.md)
-   4. 计算机图形学
-   5. 程序语言设计及实现
-      - [计算机程序的构造和解释](https://github.com/DeathKing/Learning-SICP)
-   6. 编译原理
-      - babel
-        - [ babel 插件通关秘籍](https://juejin.cn/book/6946117847848321055/section)
-        - https://github.com/QuarkGluonPlasma/babel-plugin-exercize
-        - https://github.com/estree/estree
 
 ## 收集待看
 

@@ -1,6 +1,6 @@
 <template>
   <div class="px-4 sm:px-5">
-    <h2 class="text-secondary-focus font-semibold text-xl leading-10">
+    <h2 class="text-secondary-focus font-semibold text-xl pb-2">
       <router-link :to="{ name: routeKey }">
           {{ title }}
       </router-link>

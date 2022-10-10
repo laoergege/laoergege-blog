@@ -2,6 +2,7 @@
 release: true
 tags:
   - javascript
+description: 总结 JavaScript 代码执行过程中主要机制，如变量提升、调用栈、必报、执行上下文及作用域链。
 ---
 
 # JavaScript 代码执行机制
@@ -11,7 +12,7 @@ tags:
   - [调用栈](#调用栈)
   - [作用域](#作用域)
   - [作用域链](#作用域链)
-    - [闭包](#闭包)
+  - [闭包](#闭包)
   - 执行上下文
     - 变量环境
       - arguments
@@ -37,40 +38,40 @@ tags:
 
 有了执行上下文和可执行代码了，那么接下来就到了执行阶段了，JavaScript 引擎会从执行上下文中的变量环境去查找自定义的变量和函数。
 
-### 变量声明的提升行为总结
+### 变量声明的提升行为
 
 所有的声明 function、var、let、const 和 class 都会在 JavaScript 编译期间被提升。
 
 - var
   - var 声明永远作用于脚本、模块和函数体这个级别
   - 初始为 undefined
+- class、let、const
+  - 块级作用域
+  - 未初始化，暂存性死区
 - function
-  - 作用域：脚本、模块、函数体
+  - 作用域：脚本、模块、函数体、块级
   - 初始赋值
     - 如果一段代码如果定义了两个相同名字的函数，那么最终生效的是最后一个函数
     - 如果函数声明名称跟变量名相同，函数声明优先
   - ES6 支持函数块级声明：
-    - 函数声明会被提升到块级外但不会赋值，初始为 undefined
-    - 块内提升则会赋值
-    ```js
-      console.log(f); // outside f
-      function f() {
-        console.log("I am outside!");
-      }
-
-      (function () {
-        console.log(f); // undefined
-        if (true) {
-          console.log(f); // inside f
-          function f() {
-            console.log("I am inside!");
-          }
+    - 提升到块外，行为类似 var，且初始为 undefined
+    - 块内提升行为类似原 ES5 Function
+      ```js
+        console.log(f); // outside f
+        function f() {
+          console.log("I am outside!");
         }
-      })();
-    ```
-- class、let、const
-  - 块级作用域
-  - 未初始赋值，暂存性死区
+
+        (function () {
+          console.log(f); // undefined
+          if (true) {
+            console.log(f); // inside f
+            function f() {
+              console.log("I am inside!");
+            }
+          }
+        })();
+      ```
 
 ## 调用栈
 
@@ -82,6 +83,7 @@ tags:
 哪些情况下一段代码才会创建执行上下文？一般说来，有这么三种情况：
 
 - 全局代码
+- 模块代码（ES6）
 - 函数代码
 - eval 执行的代码
 
@@ -120,29 +122,37 @@ printSquare(5);
 
 > 作用域只是一个概念，你可以想象理解成一圈套一圈的样子，而执行上下文是 JS 引擎具体实现的东西，切勿混淆。
 
-通俗地理解，**作用域控制变量与函数的可见范围和生命周期**。作用域是让一个变量（甚至表达式）具有逻辑边界意义，让我们能够在一个程序中使用多个具有相同命名的变量，而且它们每个都可能有不同的含义和值。
+**作用域控制变量的可见范围和生命周期**。作用域是让一个变量（甚至表达式）具有逻辑边界意义，让我们能够在一个程序中使用多个具有相同命名的变量，而且它们每个都可能有不同的含义和值。
 
-JavaScript 是词法（静态）作用域，作用域在编译时静态确定，根据变量在实际源码结构中位置划分所属作用域。一般作用域划分分为
+JavaScript 是词法（静态）作用域，变量的作用域在编译时静态确定，根据变量在实际源码结构中位置划分所属作用域。一般作用域划分分为
 
 - 全局作用域
 - 函数作用域
-- 块级作用域（ES6）
+- 块级作用域（下面介绍）
 
-早期还使用 IIFE 来模拟产生“块级作用域”。
+早期还使用 IIFE 来模拟产生“块级作用域”：
 
-### 作用域链
+```js
+//es6中的块级作用域
+{
+ let a = 1;
+ console.log(a);
+}
+console.log(a); //ReferenceError
 
-作用域与作用域形成**嵌套**关系，内层作用域能够访问外层作用域的变量，当前作用域查找不到就会往外层作用域进行查找，依次类推，这一条查找链路就是作用域链。
-
-以下是 JavaScript 词法作用域形成的作用域链：
-
-![图 10](./images/db09c4e7adfde3898f824d5b5572639d585af3402a3a396419c1dabe2c8372e1.png)
+//IIFE实现
+(function() {
+    var a = 1;
+    console.log(a);
+})();
+console.log(a); //Undefined
+```
 
 ### let、const 声明的块级作用域原理及暂时性死区
 
 在 ES6 之前，ES 的作用域只有两种：全局作用域和函数作用域。
 
-var 声明的变量具有全局或者函数级别作用域，因为变量提升机制，使得变量声明都被提升到函数顶部或者全局，这就导致 JavaScript 的代码并不像其他语言直观。
+而 var 声明的变量具有全局或者函数级别作用域，因为变量提升机制，使得变量声明都被提升到函数顶部或者全局，这就导致 JavaScript 的代码并不像其他语言直观。
 
 ```js
 console.log(myname); // undefined
@@ -217,7 +227,7 @@ foo();
 
 ![图 6](./images/4045250b79269be3fb95da41a366f055a60a03c88331a333d2d8737bc963ca24.png)
 
-#### 暂时性死区（TDZ）
+### 暂时性死区（TDZ）
 
 **由于变量提升机制，所有的声明（function、var、let、const 和 class）都在 JavaScript 编译期间被提升，而 var 声明的变量提升会被初始化为 undefined，而 let 和 const 则未初始化**。
 
@@ -253,6 +263,15 @@ foo(undefined, "arg2");
 
 // Uncaught ReferenceError: arg2 is not defined
 ```
+
+## 作用域链
+
+作用域与作用域形成**嵌套**关系，**内层作用域能够访问外层作用域的变量**，当前作用域查找不到就会往外层作用域进行查找，依次类推，这一条查找链路就是作用域链。
+
+以下是 JavaScript 词法作用域形成的作用域链：
+
+![图 10](./images/db09c4e7adfde3898f824d5b5572639d585af3402a3a396419c1dabe2c8372e1.png)
+
 
 ## 闭包
 

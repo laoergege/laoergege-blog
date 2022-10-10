@@ -1,13 +1,12 @@
 ---
-title: 'NodeJS'
 tags:
   - nodejs
 ---
 ## NodeJS
 
 - NodeJS
-  - 架构  ![图 3](./images/93e7ee9714431158f6fb8e209627b8bbbdbd8adafc6af389d511ca786f34c1ff.png) 
-  - 事件驱动、非阻塞模型
+  - 组成结构  ![图 3](./images/93e7ee9714431158f6fb8e209627b8bbbdbd8adafc6af389d511ca786f34c1ff.png) 
+  - 架构：事件驱动、非阻塞模型 ![图 7](./images/1665080347023.png)  
   - [异步编程](../JavaScript/JavaScript%20异步编程.md)
   - 模块机制
     - CommonJS 模块规范
@@ -52,9 +51,14 @@ tags:
   - 数据类型验证
     - JSON Schema
     - typescript 运行验证
-  - [BFF: API Gateway](./BFF:%20API%20Gateway.md)
-  - [Node CLI](./Node%20CLI.md)
-  - Node 服务
+  - 开发
+    - [BFF: API Gateway](./BFF:%20API%20Gateway.md)
+    - [Node CLI](./Node%20CLI.md)
+  - 测试
+  - 部署
+  - 监控
+  - 性能优化
+  - Node 的 Web 服务开发
     - 路由层
     - 模板渲染
       - 模板引擎
@@ -89,8 +93,6 @@ tags:
   - [An Introduction to libuv](http://nikhilm.github.io/uvbook/)
   - [node-in-debugging](https://github.com/nswbmw/node-in-debugging)
 - 生态
-  - server example
-    - https://github.com/koajs/examples
   - file
     - watcher
       - https://github.com/paulmillr/chokidar
@@ -105,4 +107,7 @@ tags:
   - 线程池 [piscina](https://github.com/piscinajs/piscina)
 
 
+## 计算阻塞
 
+- cluster
+- thread worker

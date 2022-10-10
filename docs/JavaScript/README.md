@@ -16,20 +16,16 @@ desc: JavaScript 知识体系
     - 生成器
   - 数据结构
     - [数组](./JavaScript%20数组%20API%20总结.md)
-    - Set
-    - Map
+    - Map&Set
   - [JavaScript 异步编程](./JavaScript%20异步编程.md)
   - 运行机制
     - [JavaScript 内存管理机制](./JavaScript%20内存管理机制.md)
+    - [JavaScript 代码执行机制](./JavaScript%20代码执行机制.md)
     - 运行原理
       - [编译时](./JavaScript%20代码执行过程（编译时）.md)
-      - [JavaScript 代码执行机制](./JavaScript%20代码执行机制.md)
   - [JavaScript 元编程](./JavaScript%20%E5%85%83%E7%BC%96%E7%A8%8B.md)
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
   - 函数式编程
-    - [Master the JavaScript Interview: What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.kt48h2bfa)
-    - 柯里化（curry）
-    - 组合（compose）
     - [ts-belt](https://github.com/mobily/ts-belt)
 - api
   - [手写 call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
@@ -60,7 +56,6 @@ desc: JavaScript 知识体系
 
 
 
-所谓暂时死区，就是不能在初始化之前，使用变量。
 
 - hash：每次 hash 值的变化，浏览器不发出请求，也就不会刷新页面，还会触发hashchange
 - history：pushState 和 replaceState，通过这两个 API 可以改变 url 地址且不会发送请求
