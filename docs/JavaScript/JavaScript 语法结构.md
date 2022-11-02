@@ -3,7 +3,7 @@ release: true
 tags:
  - javascript
  - 语法
-desc: JavaScript 语法结构体系
+description: JavaScript 语法结构体系
 ---
 
 # JavaScript 语法结构
@@ -15,7 +15,7 @@ desc: JavaScript 语法结构体系
       - 空格
       - 换行
       - 注释
-      - token
+      - Token
         - 标识符
         - 关键词
         - 运算符

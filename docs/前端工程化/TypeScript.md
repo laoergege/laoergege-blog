@@ -127,6 +127,7 @@
     - 配置复用(extends)
       > 配置文件中的相对路径都是相对于它们的源配置文件，故相对路径配置选项时必须在子配置文件中，不能进行继承
   - 学习资料
+    - [TypeScript 入门教程](https://github.com/xcatliu/typescript-tutorial)
     - [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
     - [TypeScript 全面进阶指南](https://juejin.cn/book/7086408430491172901)
     - [类型体操](https://github.com/type-challenges/type-challenges)

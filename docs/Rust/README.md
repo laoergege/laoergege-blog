@@ -100,6 +100,7 @@ tags:
     - [x] [Microsoft Rust 教程](https://docs.microsoft.com/zh-cn/learn/paths/rust-first-steps/)
     - [ ] [Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/title-page.html)
     - [ ] [Rust语言圣经(Rust Course)](https://course.rs/about-book.html)
+    - [ ] [通过例子学 Rust 中文版](https://rustwiki.org/zh-CN/rust-by-example/)
     - [ ] [rust-training](https://github.com/tyrchen/rust-training)
     - [ ] [rust-learning](https://github.com/ctjhoa/rust-learning)
     - [ ] [awesome-rust](https://github.com/rust-unofficial/awesome-rust)

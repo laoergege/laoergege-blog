@@ -99,10 +99,10 @@
         - 生成器函数（generator）
         - 异步函数（async）
         - 异步生成器函数
-  - 变量&类型
     - [x] 变量交换，不要使用中间变量
       - 解构
       - 位运算：异或
+  - 类型系统
     - [x] 类型判断
       - typeof
         - 无法判断除了 function 类型以外的其他具体引用类型
@@ -205,22 +205,25 @@
       - 浅拷贝：Object.assign
       - [x] 深拷贝
         - ![图 2](./images/1646836941175.png)
-  - [x] 模块发展历程
-    - 原始阶段：
-      - 文件划分模块
-      - 对象命名空间+IIFE：解决全局污染和命名冲突、成员访问控制
-    - 社区标准化阶段
-      - AMD 适用于浏览器的异步模块加载机制
-        - RequireJS
-      - CommonJS 同步模块加载，用于服务端
-      - UMD 通用模块标准
-    - ES Modules：ECMASCript 标准
-  - [ ] common.js 和 es6 中模块引入的区别？
-    - CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用
-    - CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。
-    - CommonJs 是单个值导出，ES6 Module可以导出多个
-    - CommonJs 是动态语法可以写在判断里，ES6 Module 静态语法只能写在顶层
-    - CommonJs 的 this 是当前模块，ES6 Module的 this 是 undefined
+  - 模块
+    - [x] 模块发展历程
+      - 原始阶段：
+        - 文件划分模块
+        - 对象命名空间+IIFE：解决全局污染和命名冲突、成员访问控制
+      - 社区标准化阶段
+        - AMD 适用于浏览器的异步模块加载机制
+          - RequireJS
+        - CommonJS 同步模块加载，用于服务端
+        - UMD 通用模块标准
+      - ES Modules：ECMASCript 标准
+    - [ ] common.js 和 es6 中模块的区别？
+      - CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用
+      - CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。
+      - CommonJs 是单个值导出，ES6 Module可以导出多个
+      - CommonJs 的 this 是当前模块，ES6 Module的 this 是 undefined
+    - [x] 
+    - [ ] 为什么模块循环依赖不会导致死循环？CommonJS和ES Module的解决办法有什么不同？
+      - 解决死循环的本质还是得靠**模块缓存**，避免重复加载。但两者模块缓存的时机不同：CommonJS 是在运行时，而 ES modules 是在编译时。使用过程中需要注意的是，已执行部分的接口输出是有值，而未执行部分的接口输出可能是没有值（CommonJS）或者不可访问（ES modules）
   - 函数编程
     - [ ] 普通函数和箭头函数区别
       - 箭头函数的 this 绑定外层上下文中的 this
@@ -230,7 +233,12 @@
       - 把一个多参数的函数转成可以逐渐接受剩余参数的函数
       - ![图 13](./images/1645862554717.png)
     - [x] compose
-      - ![图 9](./images/1645805632722.png)
+      ```js
+      // compose
+      function compose(...fns) {
+        return fns.reduce((fn1, fn2) => (...args) => fn2(fn1(...args)))
+      }
+      ```
   - 数组
     - [x] 类数组转化数组
       - Array.from
@@ -1014,7 +1022,25 @@
       - 插入：从后往前插 ![图 20](./images/1648881239761.png)
       - 快排：找个中间点，分两边，反复递归 ![图 23](./images/1648915797464.png)
       - 归并：递归分两遍，再合并 ![图 22](./images/1648906128442.png)
-    - [ ] 二分查找
+    - [x] 二分查找
+      ```js
+      var search = function (nums, target) {
+          let left = 0;
+          let right = nums.length - 1;
+          while (left <= right) {
+              let mid = Math.floor((left + right) / 2)
+              let temp = nums[mid]
+              if (temp !== target) {
+                  left = temp > target ? left : mid + 1
+                  right = temp > target ? mid - 1 : right
+              } else {
+                  return mid
+              }
+          }
+
+          return -1
+      };
+      ```
     - 连续子数组的最大和
     - 顺时针打印矩阵
   - 双指针/滑动窗口
@@ -1063,6 +1089,18 @@
       - 快排
   - [ ] 递归、分治、贪心、回溯、动规
     - 递归
+      - [x] 斐波那契数列
+        ```js
+        var fib = function (n, mem = {}) {
+            if (n < 2) {
+                return n
+            }
+
+            if (typeof mem[n] !== 'undefined') return mem[n]
+
+            return mem[n] = fib(n - 1, mem) + fib(n - 2, mem)
+        };
+        ```
       - 子集
     - 分治
     - 回溯
@@ -1136,7 +1174,6 @@
       - 微前端 = 加载器 + 运行时容器（js、css隔离方案、容器通信机制）
   - Docker
     - [ ] VMware 和 Docker 的区别
-
 
 ## 其他
 

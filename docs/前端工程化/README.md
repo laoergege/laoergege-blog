@@ -12,20 +12,22 @@ desc: 前端工程化
     - 版本管理（git）
       - 分支管理
       - 提交规范
-      - 提案、合并请求
+        - commit msg
         - merge request & code review
         - rfc 机制
+    - 编辑器
+      - VSCode
     - 规范
       - 命名规范
       - 注释规范
       - 代码格式 prettier
       - 代码质量 eslint
       - 类型检测 typescript
-    - 项目依赖管理
+    - 项目模式
       - Multirepo
       - Monorepo
     - 目录结构设计
-    - 项目模板
+    - 项目搭建模板
     - 代码片段
       - VSCode：Snippet Generator
         - https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets
@@ -81,7 +83,6 @@ desc: 前端工程化
     - build
     - test
       - [性能预测](../浏览器原理及API/Web%20前端性能优化.md)
-    - 
       - ci-cache
     - publish
       - [NPM 发包](./pnpm.md#publish-工作流)

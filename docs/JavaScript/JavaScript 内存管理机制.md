@@ -223,4 +223,6 @@ function out() {
 
 
 
-先说说思考题：内存泄漏问题的定位，一般是通过chrome的devtool中memory report来观察的，nodejs环境中的mem leak case我们研究的比较多，一般通过结合memwatch等c++扩展包把report文件dump在线上机磁盘上，然后download下来在本地的chrome浏览器devtool中进行复盘。比较常见的case是一些js工程师对scope的理解不够深，复杂的闭包里出现了隐式的引用持有却没释放。此类问题一般隐蔽性比较强，而且如果不是大厂的业务线（业务高峰产生高并发环境），往往可能压根发现不了，因为就算有leak 内存逐渐增长到v8的heap limit后node进程死掉就会被pm2/forever等守护进程复活，这个重启只要不是非常频繁往往是业务无感的～
+先说说思考题：内存泄漏问题的定位，一般是通过chrome的devtool中memory report来观察的，nodejs环境中的mem leak case我们研究的比较多，一般通过结合memwatch等c++扩展包把report文件dump在线上机磁盘上，然后download下来在本地的chrome浏览器devtool中进行复盘。
+
+比较常见的case是一些js工程师对scope的理解不够深，复杂的闭包里出现了隐式的引用持有却没释放。此类问题一般隐蔽性比较强，而且如果不是大厂的业务线（业务高峰产生高并发环境），往往可能压根发现不了，因为就算有leak 内存逐渐增长到v8的heap limit后node进程死掉就会被pm2/forever等守护进程复活，这个重启只要不是非常频繁往往是业务无感的～

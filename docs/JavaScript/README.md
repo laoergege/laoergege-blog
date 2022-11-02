@@ -2,7 +2,6 @@
 release: true
 tags:
 	- javascript
-desc: JavaScript 知识体系
 ---
 
 # JavaScript
@@ -18,15 +17,15 @@ desc: JavaScript 知识体系
     - [数组](./JavaScript%20数组%20API%20总结.md)
     - Map&Set
   - [JavaScript 异步编程](./JavaScript%20异步编程.md)
-  - 运行机制
+  - 运行机制和原理
+    - [JavaScript 运行时机制](./JavaScript%20代码执行机制.md)
     - [JavaScript 内存管理机制](./JavaScript%20内存管理机制.md)
-    - [JavaScript 代码执行机制](./JavaScript%20代码执行机制.md)
-    - 运行原理
-      - [编译时](./JavaScript%20代码执行过程（编译时）.md)
+    - [编译时](./JavaScript%20代码执行过程（编译时）.md)
   - [JavaScript 元编程](./JavaScript%20%E5%85%83%E7%BC%96%E7%A8%8B.md)
+    - Proxy&Reflect
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
-  - 函数式编程
-    - [ts-belt](https://github.com/mobily/ts-belt)
+  - V8
+  - ECMASCript 规范
 - api
   - [手写 call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)
   - [手写 instanceof](https://github.com/laoergege/laoergege-blog/issues/74)
@@ -36,28 +35,13 @@ desc: JavaScript 知识体系
   - [手写节流、防抖](https://github.com/laoergege/laoergege-blog/issues/83)
   - [手写 实现柯里化](https://github.com/laoergege/laoergege-blog/issues/87)
 - 资料
-  - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
   - [ES6 入门教程](https://es6.ruanyifeng.com/)
-  - 极客《重新前端》
-  - [JavaScript 开发者应懂的 33 个概念](https://github.com/stephentian/33-js-concepts)
-  - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
+  - 极客专栏《重新前端》
   - [现代 JavaScript 教程](https://zh.javascript.info/)
-- 语言规范及生态
-  - V8
-  - ECMASCript 规范
-
-## TC39 提案流程
-
-1. 提案
-2. 完善描述
-3. 官方认可，草稿书写
-4. 候选，厂商跟进实现
-5. 正式成为 ECMAScript 标准并推出
+  - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
+  - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
 
 
 
 
-- hash：每次 hash 值的变化，浏览器不发出请求，也就不会刷新页面，还会触发hashchange
-- history：pushState 和 replaceState，通过这两个 API 可以改变 url 地址且不会发送请求
-  - 但因为没有 # 号，所以当用户刷新页面之类的操作时，浏览器还是会给服务器发送请求
-    - 为了避免出现这种情况，所以这个实现需要服务器的支持，需要把所有路由都重定向到根页面。
+
