@@ -112,8 +112,44 @@
         - instanceof 本质上是判断右边的构造函数的 prototype 对象是否存在于左边的原型链上。但根据原型链，`... instanceof Object` 都返回 true。
       - Object.prototype.toString.call
         - 能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
-        - Symbol.toTagString()
-    - [ ] 手写类型判断工具函数
+        - Symbol.toTagString
+    - [x] 手写类型工具函数
+      ```js
+      function getType(target) {
+          const type = typeof target;
+
+          if(type !== 'object') {
+              return type
+          } else {
+              return Object.prototype.toString.call(target).replace(/\[object (.*?)\]/g, "$1")
+          }
+      }
+      ```
+    - [x] 手写 instanceof
+      - 用法：左边任意值，右边必须构造器
+      - 本质：判断左值的原型链上是否存在右边的构造器函数的 prototype 对象
+      ```js
+      function instanceof2(left, right) {
+          if(left === null || typeof left !== 'object') {
+            return false
+          }
+
+          if(typeof right !== 'function') {
+              throw new Error('right must be Function')
+          }
+
+          left = object.getPrototypeOf(left)
+          while(true) {
+              if(left === null) {
+                  return false
+              }
+              if(left === right.prototype) {
+                  return true
+              }
+              left = object.getPrototypeOf(left)
+          }
+      }
+      ```
     - [x] ==、=== 区别
       - 严格相等运算符 === 在进行比较时不会做任何的类型转换。
       - undefined 与 null 相等
@@ -169,10 +205,6 @@
       3. 将 this、参数传给构造函数并执行
       4. 若构造函数返回对象则直接返回，否则使用新创建的对象返回
       5. ![图 22](images/1644824427338.png)
-    - [x] 手写 instanceof
-      - 用法：左边任意值，右边必须构造器
-      - 本质：判断左值的原型链上是否存在右边的构造函数的 prototype 对象
-      - ![图 15](./images/1645879375346.png)
     - [x] [原型及原型链](./JavaScript/JavaScript%20对象.md)
       - 原型：所有对象都有私有属性 `[[prototype]]`（目前大多数浏览器厂商非标准实现 `__proto__` 属性）保持对原型的引用
       - 原型的 5 种修改方式
@@ -745,7 +777,6 @@
       1. 当你收到 FIN 报文时，基于可靠性要求，无论是哪方收到消息后，都需要给发送方一个 ACK（Acknowledgement）响应。如果一个请求没有响应，发送方可能会认为自己需要重发这个请求
       2. 因为 TCP 是全双工通信的，当你收到 FIN 报文仅仅意味着对方不会再发送数据，但是可以继续接受数据，当你也发送 FIN 报文时才意味着连接可以断开
       3. 断开连接需要资源释放处理，因此断开连接不能像握手那样操作将两条消息合并发送
-  - [ ] TCP 可靠性
   - [x] TCP, UDP 的区别
     - TCP 是一种面向连接的传输层通信协议，提供可靠的端对端数据传输，适用于可靠传输要求的应用，例如点对点文件传输、邮件等
     - 而 UDP 则是直接面向用户的数据报文协议，不需要连接，不提供可靠性，只管发送报文。结构简单、灵活性高，适合扩展，比如 http3 的 QUIC 就是基于 UDP。UDP传输更快，适用于实时应用，比如音频、视频传输这种。

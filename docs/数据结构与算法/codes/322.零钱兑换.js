@@ -10,19 +10,20 @@
  * @param {number} amount
  * @return {number}
  */
-var coinChange = function (coins, amount) {
-    if (amount === 0) return 0
+// 动态规划
+// var coinChange = function (coins, amount) {
+//     if (amount === 0) return 0
 
-    let i = 1;
-    let temp = coins.reduce((obj, key) => (obj[key] = 1, obj), {})
-    while (i <= amount) {
-        temp[i] ??= Math.min(...coins.map(c => (temp[i - c] ??= Infinity))) + 1
-        i++
-    }
+//     let i = 1;
+//     let temp = coins.reduce((obj, key) => (obj[key] = 1, obj), {})
+//     while (i <= amount) {
+//         temp[i] ??= Math.min(...coins.map(c => (temp[i - c] ??= Infinity))) + 1
+//         i++
+//     }
 
-    return temp[amount] === Infinity ? -1 : temp[amount]
-};
-// 回溯
+//     return temp[amount] === Infinity ? -1 : temp[amount]
+// };
+// 动态规划 递归写法
 // var coinChange = function (coins, amount) {
 //     return dfs(coins, amount, 0)
 // };
@@ -42,6 +43,21 @@ var coinChange = function (coins, amount) {
 //     }
 
 //     return min === Infinity ? -1 : min
+// }
+// 回溯
+// var coinChange = function (coins, amount) {
+//     const result = []
+//     dfs(coins, amount, result)
+//     return Math.min(...result)
+// }
+// function dfs(coins, amount, result, target = 0, count = 0) {
+//     if (target >= amount) {
+//         return result.push(count)
+//     }
+
+//     for (const c of coins) {
+//         dfs(coins, amount, result, target + c, count + 1)
+//     }
 // }
 // @lc code=end
 

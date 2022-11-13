@@ -12,7 +12,7 @@ tags:
   - [何为异步编程](#何为异步编程)
   - [JavaScript 的执行环境：事件循环 + 回调队列](#javascript-的执行环境事件循环--回调队列)
   - JavaScript 异步编程范式
-    - 回调
+    - callback
     - 发布订阅模式
     - Promise
     - Generator & co

@@ -3,17 +3,17 @@ release: true
 tags:
  - javascript
  - 类型系统
-desc: JavaScript 类型系统知识体系
 ---
 # JavaScript 类型系统
 
 - JavaScript 类型系统
-  - 动态类型：运行阶段才能确定变量类型
-    - [类型判断](#类型判断)
-    - 类型相等判断
-  - [弱类型：隐式类型转换](#弱类型：隐式类型转换)
+  - 特征
+    - 动态类型：运行阶段才能确定变量类型
+      - [类型判断](#类型判断)
+      - 类型相等判断
+    - [弱类型：隐式类型转换](#弱类型：隐式类型转换)
   - 分类
-    - 原始类型
+    - 原始类型/基本类型
       - Undefined：表示未定义或未初始赋值
         - JavaScript 的代码 undefined 是一个变量，而并非是一个关键字
         - 全局 undefined 是无法修改，但可以被作为局部变量篡改
@@ -31,21 +31,21 @@ desc: JavaScript 类型系统知识体系
         - 创建唯一标识符，作为对象属性名，防止冲突
         - 创建对象的“隐藏”属性
       - BigInt
-    - 复合类型（对象类型） 
+    - 复合类型/对象类型/引用类型 
       - Object
-    - 内置特殊对象类型
-      - Boolean
-      - Number
-      - String
-      - Array
-      - RegExp
-      - Error
-      - Date
-      - Function
-        - 按值传递：即复制实参的值；引用传递，即复制实参的地址
-      - 数据结构
-        - Set、WeakSet
-        - Map、WeakMap
+        - 内置特殊对象类型
+          - Boolean
+          - Number
+          - String
+          - Array
+          - RegExp
+          - Error
+          - Date
+          - Function
+            - 按值传递：即复制实参的值；引用传递，即复制实参的地址
+          - 数据结构
+            - Set、WeakSet
+            - Map、WeakMap
 
 ## Number：为什么 0.1+0.2 不等于 0.3？
 
@@ -86,27 +86,41 @@ var isNum = function isNum(value){
   - `typeof null === 'object'`
 - instanceof
   - 可以判断具体引用类型，但是不能正确判断基础数据类型
-  - instanceof本质上是判断右边的构造函数的prototype对象是否存在于左边的原型链上。但根据原型链，`... instanceof Object` 都返回 true。
+  - instanceof 本质上是判断右边的构造函数的 prototype 对象是否存在于左边的原型链上。但根据原型链，`... instanceof Object` 都返回 true。
 - Object.prototype.toString.call
   - 能够更加准确判断数据类型并统一返回格式为 “[object Xxx]” 的字符串，`Object.prototype.toString.call(null) // '[object Null]'`
-- 数组
+  - `Symbol.toStringTag` 自定义输出
+- 类型判断工具
+  ```js
+  function getType(target) {
+      const type = typeof target;
+
+      if(type !== 'object') {
+          return type
+      } else {
+          return Object.prototype.toString.call(target).replace(/\[object (.*?)\]/g, "$1")
+      }
+  }
+  ```
+- 数组判断
   - Array.isArray
 
 ## 弱类型：隐式类型转换
 
 - 类型转换
-  - 显示转换，如 `String('123')`
-  - 隐式转换，运算符会自动触发类型转换，如 `+'123'`
+  - 显示转换，如 `String('123')`、`Boolean()`、`Number()`
+  - 隐式转换，通过运算符会自动触发类型转换，如 `+'123'`
     - 类型转换规则  
       在 JS 中类型转换情况：toNumber 、 toString 、 toBoolean、toObject
       ![图 11](./images/1642863972248.png)  
-      - StringToNumber
-        - Number
-        - parseInt
-        - parseFloat
-      - NumberToString
-        - String
-      - 对象跟基本类型之间的转换
+      - 基本类型之间的转换
+        - StringToNumber
+          - Number
+          - parseInt
+          - parseFloat
+        - NumberToString
+          - String
+      - 对象类型与基本类型之间的转换
         - 装箱转换
           - 包装类
         - 拆箱转换
