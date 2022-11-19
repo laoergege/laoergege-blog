@@ -1102,15 +1102,55 @@
     - 滑动窗口的最大值
   - [x] 树
     - 二叉树、满二叉树、完全、二叉搜索树
+    - DFS：前序遍历、中序遍历、后序遍历
+      ```js
+      function traverse(TreeNode root) {
+          if (root == null) {
+              return;
+          }
+
+          // 前序遍历代码位置
+          traverse(root.left);
+          // 中序遍历代码位置
+          traverse(root.right);
+          // 后序遍历代码位置
+      }
+      ```
     - 对二叉查找树进行中序遍历，就可以输出一个从小到大的有序数据队列
-    - 遍历(广、深)、层序遍历、深度(广)
+    - BFS：层序遍历
+      ```js
+      let queue = [root]
+      while (queue.length) {
+          let node = queue.shift()
+          let [left, right] = node
+
+          if(left) {
+            queue.push(left)
+          }
+
+          if(right) {
+            queue.push(right)
+          }
+      }
+      ```
     - 翻转二叉树  ![图 3](./images/1657350223433.png)  
     - 验证搜索二叉树  
       - ![图 4](./images/1657351202291.png) 
       - 中序遍历  ![图 5](./images/1658678887901.png)  
     - 二叉树的最大深度/最小深度
-      - ![图 1](./images/1658327216405.png) 
-      - ![图 2](./images/1658327491563.png)  
+      - ![图 2](./images/1658327491563.png) 
+      ```js
+      var maxDepth = function (root, depth = 0) {
+          if (!root) {
+              return 0
+          }
+
+          return Math.max(
+              maxDepth(root.left),
+              maxDepth(root.right),
+          ) + 1
+      };
+      ``` 
     - 按之字形顺序打印二叉树
   - [x] 堆
     - 堆实现

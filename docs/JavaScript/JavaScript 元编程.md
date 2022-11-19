@@ -18,6 +18,7 @@ tags:
     - 调解（Intercession）：字面意思是“代他人行事”。在元编程中，调解的概念类似于包装（wrapping）、捕获（trapping）、拦截（intercepting）。
       - Proxy
       - Object.defineProperty
+-  Proxy
 - JavaScript 沙箱机制
   - 沙箱逃逸（Sandbox Escape）
 

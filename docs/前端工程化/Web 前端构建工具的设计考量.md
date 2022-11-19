@@ -18,6 +18,9 @@
   - 转译
     - js
       - babel
+      - swc
+      - esbuild
+      - webpack
     - jsx
     - css
       - less
@@ -28,6 +31,8 @@
     - 环境变量：cross-env 
   - 打包
     - [lightningcss](https://github.com/parcel-bundler/lightningcss)
+    - esbuild
+    - webpack
 
 
 

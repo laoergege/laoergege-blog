@@ -20,9 +20,8 @@ desc: 前端工程化
     - 规范
       - 命名规范
       - 注释规范
-      - 代码格式 prettier
-      - 代码质量 eslint
-      - 类型检测 typescript
+      - 代码格式 prettier、rome-formatter
+      - 类型检测 eslint、typescript、stylelint、rome-linter
     - 项目模式
       - Multirepo
       - Monorepo
@@ -60,10 +59,11 @@ desc: 前端工程化
             - 当用户依赖的版本、各插件依赖的版本之间不相互兼容，会报错让用户自行修复；
   - 开发
     - 框架、技术选型
-  - 构建
-    - [Web 前端构建工具的设计考量](./Web%20前端构建工具的设计考量.md)
+  - 构建：[Web 前端构建工具的设计考量](./Web%20前端构建工具的设计考量.md)
     - webpack
     - [vite](https://github.com/vitejs/vite)
+    - esbuild
+    - rollup
     - [parcel](https://parceljs.org/)
   - 调试
     - DevServer

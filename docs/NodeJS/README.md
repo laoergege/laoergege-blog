@@ -8,6 +8,7 @@ tags:
   - 组成结构  ![图 3](./images/93e7ee9714431158f6fb8e209627b8bbbdbd8adafc6af389d511ca786f34c1ff.png) 
   - 架构：事件驱动、非阻塞模型 ![图 7](./images/1665080347023.png)  
   - [异步编程](../JavaScript/JavaScript%20异步编程.md)
+  - corepack 与包管理
   - 模块机制
     - CommonJS 模块规范
     - 模块解析以及加载机制

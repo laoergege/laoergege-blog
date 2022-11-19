@@ -2,7 +2,7 @@
   "name": "laoergege-blog",
   "version": "1.0.1",
   "description": "Laoergege's Learning Track",
-  "packageManager": "pnpm@6.32.2",
+  "packageManager": "pnpm@7.16.0",
   "scripts": {
     "docs:dev": "turbo run dev",
     "dev": "pnpm run vuepress -- dev docs",

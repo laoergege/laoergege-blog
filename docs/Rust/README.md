@@ -83,9 +83,8 @@ tags:
   - 实现
     - 基于 LLVM，具有可移植性
   - 工程化
-    - 工具链
-      - rustup：工具链管理工具
-        - rust-toolchain.toml
+    - rustup：Rust 工具链管理工具
+      - rust-toolchain.toml
       - rustc：rust 编译器
         - 支持类型推导，使得写代码时的直观感受和写脚本语言差不多👍
       - [cargo：包管理工具](#cargo包管理工具)
@@ -100,6 +99,7 @@ tags:
     - [ ] [rust-learning](https://github.com/ctjhoa/rust-learning)
     - [ ] [awesome-rust](https://github.com/rust-unofficial/awesome-rust)
     - [ ] [ Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html)
+    - [ ] 《Rust语言编程实战 》
 
 ## rust 程序骨架
 
