@@ -1,16 +1,59 @@
-# corepack 与包管理
+# Corepack 与包管理 PNPM
 
-- corepack
+- [Corepack：包管理器的管理器](https://nodejs.org/api/corepack.html)
   - 作用
-    - 不在需要专门安装包管理工具
     - 限制项目使用特定包管理工具
-  - 用法
-    - corepack enable
-- 包管理
+    - 不在需要专门安装包管理工具
+  - [用法](#corepack-用法)
+- 包管理(pnpm)
   - package.json 包描述文件
   - 创建、发布 NPM 包
     - 编写单元测试
     - 自动化版本管理和发布
+  - 安装
+  - 更新
+- Node 开发环境锁定
+  - 环境
+    - Node 版本
+    - 包管理
+    - 依赖版本
+  - [nvm](https://github.com/nvm-sh/nvm) + [corepack](https://github.com/nodejs/corepack) + lockfile
+  - [volta](https://github.com/volta-cli/volta) + lockfile
+
+## Corepack 用法
+
+```
+# 卸载全局 pnpm yarn
+npm uninstall -g yarn pnpm
+
+# 激活
+corepack enable
+
+# 禁用 npm
+corepack disable npm 
+
+# package.json 定义包管理器及限制版本 
+"packageManager": "pnpm@7.16.0"
+
+# 下载包管理，并激活为全局
+corepack prepare pnpm@latest --activate
+
+# 修改指定全局包管理
+corepack prepare pnpm@7.16.0 --activate
+
+# 离线手动安装包管理
+corepack hydrate <path/to/corepack.tgz> 【--activate】
+```
+
+## Node 开发环境锁定
+
+nvm
+          - pnpm env
+          - [Volta](https://docs.volta.sh/guide/)
+          - package: `engines` + `.npmrc: engine-strict`
+          - .npmrc: `use-node-version`
+
+
 
 ## 发包
 

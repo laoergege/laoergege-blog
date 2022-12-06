@@ -1,0 +1,121 @@
+Arguments: 
+  /Users/lianyuansheng/.nvm/versions/node/v19.0.0/bin/node /Users/lianyuansheng/.yarn/bin/yarn.js install
+
+PATH: 
+  /Users/lianyuansheng/Library/pnpm:/Users/lianyuansheng/.yarn/bin:/Users/lianyuansheng/.config/yarn/global/node_modules/.bin:/Users/lianyuansheng/.nvm/versions/node/v19.0.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Wireshark.app/Contents/MacOS:/Users/lianyuansheng/Library/pnpm:/Users/lianyuansheng/.yarn/bin:/Users/lianyuansheng/.config/yarn/global/node_modules/.bin:/Users/lianyuansheng/.nvm/versions/node/v19.0.0/bin:/Users/lianyuansheng/.cargo/bin:/usr/local/bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  19.0.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.npm.taobao.org/@laoergege%2fvuepress-plugin-blog-utils: [NOT_FOUND] @laoergege/vuepress-plugin-blog-utils not found
+      at params.callback [as _callback] (/Users/lianyuansheng/.yarn/lib/cli.js:66988:18)
+      at self.callback (/Users/lianyuansheng/.yarn/lib/cli.js:140749:22)
+      at Request.emit (node:events:513:28)
+      at Request.<anonymous> (/Users/lianyuansheng/.yarn/lib/cli.js:141721:10)
+      at Request.emit (node:events:513:28)
+      at Gunzip.<anonymous> (/Users/lianyuansheng/.yarn/lib/cli.js:141643:12)
+      at Object.onceWrapper (node:events:627:28)
+      at Gunzip.emit (node:events:513:28)
+      at endReadableNT (node:internal/streams/readable:1359:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+npm manifest: 
+  {
+    "name": "laoergege-blog",
+    "version": "1.0.1",
+    "description": "Laoergege's Learning Track",
+    "packageManager": "pnpm@7.16.0",
+    "scripts": {
+      "docs:dev": "turbo run dev",
+      "dev": "pnpm run vuepress -- dev docs",
+      "docs:build": "turbo run build",
+      "build": "pnpm run vuepress -- build docs",
+      "vuepress": "node index.mjs",
+      "release": "git push && git tag page -f && git push origin page -f",
+      "package:publish": "turbo run build --filter='./packages/*' && pnpm -r --filter ./packages/* exec publish",
+      "open": "open-cli 'https://daisyui.com/' && open-cli 'https://tailwindcss.com/docs/installation'",
+      "demo": "pnpm exec node demo.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/laoergege/laoergege-blog.git"
+    },
+    "keywords": [
+      "laoergege",
+      "blog",
+      "javascript",
+      "vue",
+      "react",
+      "webpack",
+      "pwa",
+      "node"
+    ],
+    "author": "laoergege",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/laoergege/laoergege-blog/issues"
+    },
+    "homepage": "https://github.com/laoergege/laoergege-blog#readme",
+    "dependencies": {
+      "@laoergege/vuepress-plugin-blog-utils": "workspace:^1.0.0",
+      "@laoergege/vuepress-plugin-vssue-next-compat": "workspace:^1.0.2",
+      "@tailwindcss/typography": "0.5.2",
+      "@vssue/api-github-v3": "^1.4.7",
+      "chalk": "^4.1.2",
+      "consola": "^2.15.3",
+      "daisyui": "2.8.0",
+      "vue": "^3.2.36"
+    },
+    "devDependencies": {
+      "@changesets/cli": "^2.23.0",
+      "@laoergege/scripts": "workspace:^1.0.0",
+      "@types/node": "*",
+      "@vuepress/bundler-webpack": "^2.0.0-beta.46",
+      "@vuepress/cli": "^2.0.0-beta.46",
+      "@vuepress/client": "^2.0.0-beta.46",
+      "@vuepress/core": "^2.0.0-beta.46",
+      "@vuepress/plugin-active-header-links": "^2.0.0-beta.46",
+      "@vuepress/plugin-back-to-top": "^2.0.0-beta.46",
+      "@vuepress/plugin-external-link-icon": "^2.0.0-beta.46",
+      "@vuepress/plugin-git": "^2.0.0-beta.46",
+      "@vuepress/plugin-medium-zoom": "^2.0.0-beta.46",
+      "@vuepress/plugin-nprogress": "^2.0.0-beta.46",
+      "@vuepress/plugin-pwa": "^2.0.0-beta.46",
+      "@vuepress/plugin-register-components": "^2.0.0-beta.46",
+      "@vuepress/plugin-shiki": "^2.0.0-beta.46",
+      "autoprefixer": "^10.4.7",
+      "chokidar": "^3.5.3",
+      "cssnano": "^5.1.10",
+      "dayjs": "^1.11.2",
+      "isomorphic-git": "^1.17.3",
+      "open-cli": "^7.0.1",
+      "postcss": "^8.4.14",
+      "postcss-preset-env": "^7.7.0",
+      "sass": "^1.52.1",
+      "sass-loader": "^12.6.0",
+      "stylus": "^0.58.1",
+      "stylus-loader": "^7.0.0",
+      "tailwindcss": "^3.0.24",
+      "turbo": "^1.2.15",
+      "typescript": "^4.7.2",
+      "vssue": "^1.4.8",
+      "vue-router": "^4.0.16",
+      "webpack": "^5.72.1"
+    },
+    "peerDependencies": {
+      "vue-router": "^4.0.16"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

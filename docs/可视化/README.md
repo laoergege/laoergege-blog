@@ -2,7 +2,7 @@
 
 - 可视化
   - 视觉
-    - **理论基础**
+    - 理论基础
       - 数学
         - 描述几何信息
           - 几何图形维度划分：点、线、面、体
@@ -12,16 +12,15 @@
           - 向量来描述点和线段（原点 (0,0) 到坐标 (x,y) 的一根线段）
           - 勾股定理
       - 图形学
-    - 图形系统（Web）
+    - 图形系统（Web）  ![图 1](./images/1669529212862.png)  
       - HTML 和 CSS
-      - SVG
-        - https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial
-        - viewBox
-          - https://www.zhangxinxu.com/wordpress/2014/08/svg-viewport-viewbox-preserveaspectratio/
-      - Canvas2D
-        - https://github.com/jhildenbiddle/canvas-size
-        - 局部图形、分层
+      - [SVG](https://developer.mozilla.org/zh-CN/docs/Web/SVG)
+        - SVG 作为一种浏览器支持的图像格式，既可以作为 HTML 内嵌元素使用，也可以作为图像通过 img 元素加载，或者绘制到 Canvas 内
+        - SVG 绘制可视化图形与用 Canvas 绘制有明显区别，SVG 通过创建标签来表示图形元素，然后将图形元素添加到 DOM 树中，交给 DOM 完成渲染
+        - 交互实现起来非常简单，但SVG 的图形元素会非常多，这会导致 DOM 树渲染成为性能瓶颈
+      - [Canvas2D](./Canvas.md)
       - WebGL
+      - WebGPU
     - 图形库
       - [SpriteJS](https://spritejs.org/#/)
       - ThreeJS
@@ -34,17 +33,25 @@
     - 数据建模
     - 数据分析
   - 性能优化
-  - 数据可视化（数据驱动）
+
 
 ![图 6](./images/515c2ea4bbbcc07043a02ef40c3ed220f9db0fe231ef53604aaea2776f68363e.png)  
 
-## SVG vs Canvas
+## 计算机图形系统原理
 
-1. SVG 作为一种浏览器支持的图像格式，既可以作为 HTML 内嵌元素使用，也可以作为图像通过 img 元素加载，或者绘制到 Canvas 内
-2. SVG 声明式写法
-3. SVG 通过 DOM 渲染方式，图形交互比 Canvas 方便
-4. SVG 的图形元素会非常多，这会导致 DOM 渲染成为性能瓶颈
-5. SVG 生成某些图形，然后用 Canvas 来渲染。这样，我们就既可以享受 SVG 的便利性，又可以享受 Canvas 的高性能了
+![图 2](./images/1669823790669.png)  
+
+1. 数据经过 CPU 逻辑处理，成为具有特定结构的几何信息
+2. GPU 光栅化即转成图像的像素阵列：元素坐标计算 + 着色
+3. 光栅结果会输出到帧缓存中，最后渲染到屏幕上
+
+## WebGL
+
+1. 创建 WebGL 上下文
+2. 创建 WebGL 程序（WebGL Program）
+3. 将数据存入缓冲区
+4. 将缓冲区数据读取到 GPU
+5. GPU 执行 WebGL 程序，输出结果
 
 ## 向量和向量空间
 

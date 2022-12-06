@@ -1,6 +1,6 @@
 - 命名规范：
   - BEM
-- 分层结构
+- 项目分层结构
   - 配置：UI 规范
     - 颜色
     - 字体、文本格式
@@ -85,8 +85,8 @@
     - CSS 浓郁、复杂度
 
 
-CSS 项目实践
-      - variable 主题控制
+- CSS 项目架构实践
+  - 主题变量配置
       - css utils：原子化 CSS + 工具语法扩展
       - css component：BEM + utils
 

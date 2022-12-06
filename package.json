@@ -82,5 +82,11 @@
   },
   "peerDependencies": {
     "vue-router": "^4.0.16"
+  },
+  "volta": {
+    "node": "19.2.0"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }

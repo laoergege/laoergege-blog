@@ -2,47 +2,60 @@
 tags:
   - nodejs
 ---
-## NodeJS
+# NodeJS
+
+> 参考 https://roadmap.sh/nodejs
 
 - NodeJS
-  - 组成结构  ![图 3](./images/93e7ee9714431158f6fb8e209627b8bbbdbd8adafc6af389d511ca786f34c1ff.png) 
-  - 架构：事件驱动、非阻塞模型 ![图 7](./images/1665080347023.png)  
-  - [异步编程](../JavaScript/JavaScript%20异步编程.md)
-  - corepack 与包管理
-  - 模块机制
-    - CommonJS 模块规范
-    - 模块解析以及加载机制
-  - [npm 包管理](./npm.md)
-  - [Node.js 事件循环](./Node.js%20事件循环.md)
-  - 调试
+  - 架构
+    - 组成结构  ![图 3](./images/93e7ee9714431158f6fb8e209627b8bbbdbd8adafc6af389d511ca786f34c1ff.png) 
+    - 架构：事件驱动、非阻塞模型 ![图 7](./images/1665080347023.png) 
+  - Modules
+    - 模块机制
+      - CommonJS 模块规范
+      - 模块解析以及加载机制
+    - corepack 与包管理
+  - JavaScript
+    - [异步编程](../JavaScript/JavaScript%20异步编程.md)
+    - [Node.js 事件循环](./Node.js%20事件循环.md)
+  - 错误处理及调试
     - [调试指南](https://nodejs.org/zh-cn/docs/guides/debugging-getting-started/)
     - [Debugging Node.js with Chrome DevTools](https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27)
     - [node-clinic](https://github.com/clinicjs/node-clinic)
-  - 内置模块
-    - Buffer
-      - 内存分配策略
-    - stream
+  - API：全局对象及内置模块
+    - 文件操作
+      - process.cwd()、__filename 和 __dirname
+      - FS 模块
+      - Path 模块
+      - npm
+        - [chokidar](https://github.com/paulmillr/chokidar)
+        - [node-fs-extra](https://github.com/jprichardson/node-fs-extra)
+        - [node-glob](https://github.com/isaacs/node-glob)
+        - [globby](https://github.com/sindresorhus/globby)
+      - A&Q
+        - 系统路径大小写及系统分割符号问题？
+    - 流式操作：解决大文件内存缓存限制问题
       - [Node Stream](https://github.com/zoubin/streamify-your-node-program/blob/master/README.md)
       - [Node.js Streams: Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
       - [stream-handbook](https://github.com/substack/stream-handbook)
-    - file
     - ChildProcess
     - WorkerThreads
       - [深入理解 Node.js Worker Threads](https://zhuanlan.zhihu.com/p/167920353)
     - VM
       - [NPM酷库：vm2，安全的沙箱环境](https://segmentfault.com/a/1190000012672620)
-  - 全局对象
-    - process、buffer、__filename 和 __dirname
-    - console 和 setTimeout 之类
-    - ECMAScript 语言定义的全局对象，如 Date
-- 深入
-  - [Node.js 源码剖析](https://theanarkh.github.io/understand-nodejs/)
-  - 第三方扩展
-    - C++ addons NAPI
-    - DLL
-      - [node-ffi](https://github.com/node-ffi/node-ffi)
-    - WebAssembly
-- 实战
+  - 深入
+    - [Node.js 源码剖析](https://theanarkh.github.io/understand-nodejs/)
+    - 第三方扩展
+      - C++ addons NAPI
+      - DLL
+        - [node-ffi](https://github.com/node-ffi/node-ffi)
+      - WebAssembly
+  - 实战
+    - 命令行工具
+      - [Node CLI](./Node%20CLI.md)
+    - Web 服务开发
+      - [BFF: API Gateway](./BFF:%20API%20Gateway.md)
+      - SSR
   - 开发环境
     - [nodemon](https://github.com/remy/nodemon)
   - 项目架构
@@ -52,9 +65,6 @@ tags:
   - 数据类型验证
     - JSON Schema
     - typescript 运行验证
-  - 开发
-    - [BFF: API Gateway](./BFF:%20API%20Gateway.md)
-    - [Node CLI](./Node%20CLI.md)
   - 测试
   - 部署
   - 监控
@@ -94,9 +104,6 @@ tags:
   - [An Introduction to libuv](http://nikhilm.github.io/uvbook/)
   - [node-in-debugging](https://github.com/nswbmw/node-in-debugging)
 - 生态
-  - file
-    - watcher
-      - https://github.com/paulmillr/chokidar
   - 调试
     - [debug](https://github.com/visionmedia/debug)
   - 监控

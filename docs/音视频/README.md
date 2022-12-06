@@ -1,0 +1,56 @@
+- 音视频
+  - 媒体设备
+    - 音频设备
+      - 采样率
+      - 采样大小
+    - 视频设备
+      - 通过光学传感器将光转换成数字信号，即 RGB（Red、Green、Blue）数据（每一种颜色由 8 位组成，所以一个像素就需要用 24 位表示）
+      - 图像数据还要进行压缩、传输，而编码器一般使用的输入格式为 YUV I420，所以在摄像头内部还有一个专门的模块用于将 RGB 图像转为 YUV 格式的图像
+        - 通过编码器（如 H264/H265、VP8/VP9）压缩后的帧称为编码帧
+          - 经过 H264 编码的帧包括以下三种类型
+            - I  帧：关键帧。压缩率低，可以单独解码成一幅完整的图像
+            - P 帧：参考帧。压缩率较高，解码时依赖于前面已解码的数据
+            - B 帧：前后参考帧。压缩率最高，解码时不光依赖前面已经解码的帧，而且还依赖它后面的 P 帧。换句话说就是，B 帧后面的 P 帧要优先于它进行解码，然后才能将 B 帧解码
+  - WebAPI
+    - HTMLVideoElement
+    - MediaDevices：提供访问媒体设备的接口
+      - `navigator.mediaDevices`
+      - MediaStream
+        - `navigator.mediaDevices.getUserMedia`
+          - 限制
+            - HTTPS
+            - localhost
+        - 一个媒体流包含多个轨
+        - MediaTrack
+          - “轨”在多媒体中表达的就是每条轨数据都是独立的，不会与其他轨相交
+          - MediaTrackConstraints  ![图 1](images/1669797968450.png)  
+    - MediaRecorder
+    - WebRTC 
+
+
+## 实战
+
+- 录制
+  - 服务端录制
+    - 本地高清的视频在上传服务端时由于网络带宽不足，视频的分辨率很有可能会被自动缩小到了 640x360
+  - 客户端录制
+    - 优点高清
+    - 编码耗性能
+- 多媒体文件格式
+  - 自动格式、私有播放
+  - flv
+    - 支持流式，可边录制边播放
+    - 缺点，单视频模式
+  - mp4
+- ArrayBuffer
+  - ArrayBuffer 对象表示通用的、固定长度的二进制数据缓冲区
+  - 必须使用其封装类 ArrayBufferView 进行实例化后才能进行访问
+  - ArrayBuffer 只是描述有这样一块空间可以用来存放二进制数据，但在计算机的内存中并没有真正地为其分配空间。只有当具体类型化后，它才真正地存在于内存中
+- ArrayBufferView
+  - ArrayBufferView 并不是一个具体的类型，而是代表不同类型的 Array 的描述。这些类型包括：Int8Array、Uint8Array、DataView 等
+- Blob
+  - Blob（Binary Large Object）是 JavaScript 的大型二进制对象类型
+- 协议
+  - RTP
+    - 序号
+  - RTCP
