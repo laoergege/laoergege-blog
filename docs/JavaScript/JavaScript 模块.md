@@ -245,6 +245,7 @@ b 文件里执行到加载 a 文件时，同样由于模块缓存的作用避免
   - `.js` 文件的加载取决于 package.json 里面 `type` 字段的设置
     - commonjs（默认）
     - module
+  - ES6 模块与 CommonJS 模块尽量不要混用。require命令不能加载.mjs文件，会报错，只有import命令才可以加载.mjs文件。反过来，.mjs文件里面也不能使用require命令，必须使用import
 - 模块入口
   - main
   - exports
@@ -254,6 +255,20 @@ b 文件里执行到加载 a 文件时，同样由于模块缓存的作用避免
   - 支持加载本地模块（file:协议）和data:协议
   - 不支持加载远程模块
   - 不支持绝对路径
+
+
+- 导入项目内的文件带扩展符
+- 导入其他包不带文件扩展符
+
+```
+"exports": {
+  ".": {
+    "import": "./main-module.js",
+    "require": "./main-require.cjs"
+  }
+}
+```
+
 
 ## 学习参考
 

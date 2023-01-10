@@ -4,27 +4,27 @@ tags:
 ---
 # NodeJS
 
-> 参考 https://roadmap.sh/nodejs
-
 - NodeJS
   - 架构
     - 组成结构  ![图 3](./images/93e7ee9714431158f6fb8e209627b8bbbdbd8adafc6af389d511ca786f34c1ff.png) 
-    - 架构：事件驱动、非阻塞模型 ![图 7](./images/1665080347023.png) 
-  - Modules
+    - 架构：非阻塞 IO 模型、事件驱动架构 ![图 7](./images/1665080347023.png) 
+  - 模块
     - 模块机制
-      - CommonJS 模块规范
+      - 模块规范
+        - CommonJS
+        - ESModules
       - 模块解析以及加载机制
     - corepack 与包管理
-  - JavaScript
-    - [异步编程](../JavaScript/JavaScript%20异步编程.md)
-    - [Node.js 事件循环](./Node.js%20事件循环.md)
+  - [异步编程](../JavaScript/JavaScript%20异步编程.md)
+  - [Node.js 事件循环](./Node.js%20事件循环.md)
   - 错误处理及调试
     - [调试指南](https://nodejs.org/zh-cn/docs/guides/debugging-getting-started/)
     - [Debugging Node.js with Chrome DevTools](https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27)
     - [node-clinic](https://github.com/clinicjs/node-clinic)
+    - 内存泄漏
   - API：全局对象及内置模块
     - 文件操作
-      - process.cwd()、__filename 和 __dirname
+      - global.process.cwd()、global.__filename 和 global.__dirname
       - FS 模块
       - Path 模块
       - npm
@@ -34,60 +34,30 @@ tags:
         - [globby](https://github.com/sindresorhus/globby)
       - A&Q
         - 系统路径大小写及系统分割符号问题？
+    - Event Emitter
     - 流式操作：解决大文件内存缓存限制问题
       - [Node Stream](https://github.com/zoubin/streamify-your-node-program/blob/master/README.md)
       - [Node.js Streams: Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
       - [stream-handbook](https://github.com/substack/stream-handbook)
+    - Buffer
+    - Cluster
     - ChildProcess
+      - Spawn vs Fork vs Exec
     - WorkerThreads
       - [深入理解 Node.js Worker Threads](https://zhuanlan.zhihu.com/p/167920353)
     - VM
       - [NPM酷库：vm2，安全的沙箱环境](https://segmentfault.com/a/1190000012672620)
   - 深入
-    - [Node.js 源码剖析](https://theanarkh.github.io/understand-nodejs/)
     - 第三方扩展
       - C++ addons NAPI
       - DLL
         - [node-ffi](https://github.com/node-ffi/node-ffi)
       - WebAssembly
+    - [Node.js 源码剖析](https://theanarkh.github.io/understand-nodejs/)
   - 实战
     - 命令行工具
       - [Node CLI](./Node%20CLI.md)
-    - Web 服务开发
-      - [BFF: API Gateway](./BFF:%20API%20Gateway.md)
-      - SSR
-  - 开发环境
-    - [nodemon](https://github.com/remy/nodemon)
-  - 项目架构
-    - 微服务（服务发现） + BFF（服务调用、模板渲染）
-  - [RPC 通信](./RPC 通信.md)
-  - 内存泄漏
-  - 数据类型验证
-    - JSON Schema
-    - typescript 运行验证
-  - 测试
-  - 部署
-  - 监控
-  - 性能优化
-  - Node 的 Web 服务开发
-    - 路由层
-    - 模板渲染
-      - 模板引擎
-        - ES6 模板引擎
-        - include 模板
-        - xss 过滤、模板 helper 函数
-      - SSR 同构
-        - 数据？
-    - Rest API
-    - GraphQL 专注数据聚合，前端要什么返回什么
-      - 对接后台服务？
-    - 压测 http 服务（ab）
-        - QPS
-        - 吞吐率
-  - 性能优化
-    - 性能监控
-      - [clinicjs](https://clinicjs.org/)
-      - [easy-monitor](https://github.com/hyj1991/easy-monitor)
+    - [Web 服务开发](./NodeJS：Web%20服务开发.md)
     - 性能优化
       - CPU（计算性能优化、JS Profile）
         1. 减少不必要的计算
@@ -103,11 +73,6 @@ tags:
   - Node.js 设计模式
   - [An Introduction to libuv](http://nikhilm.github.io/uvbook/)
   - [node-in-debugging](https://github.com/nswbmw/node-in-debugging)
-- 生态
-  - 调试
-    - [debug](https://github.com/visionmedia/debug)
-  - 监控
-    - [easy-monitor](https://github.com/hyj1991/easy-monitor)
 - Deno
   - 资料
     - [Deno 运行时入门教程：Node.js 的替代品](https://www.ruanyifeng.com/blog/2020/01/deno-intro.html)
@@ -119,3 +84,25 @@ tags:
 
 - cluster
 - thread worker
+
+
+- [nodemon](https://github.com/remy/nodemon)
+- Dotenv作为你的配置
+
+
+处理异步错误的其他最佳实践如下：
+
+收听所有“出错”事件
+听uncaughtException
+使用domain（软弃用）或AsyncWrap
+日志、日志、日志和跟踪
+通知（可选）
+退出并重新启动进程
+
+```
+process.on('uncaughtException', function (err) {
+  console.error('uncaughtException: ', err.message)
+  console.error(err.stack)
+  process.exit(1)
+})
+```

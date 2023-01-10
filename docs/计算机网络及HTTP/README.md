@@ -6,6 +6,7 @@ tags:
  - 计算机网络
  - https
 ---
+
 # 计算机网络及 HTTP
 
 - 计算机网络
@@ -20,9 +21,11 @@ tags:
       - [TCP & UDP](./TCP%20%26%20UDP.md)
     - 网络层：提供地址到地址的通信
       - IP
-      - 路由协议 OSPF 和 BGP
+      - 路由器
+        - 路由协议，常用的有 OSPF 和 BGP
     - 链路层
-      - ARP：获取目标 IP 的 MAC 地址？
+      - ARP
+        - 获取目标 IP 的 MAC 地址？
       - DHCP
     - 物理层
   - 网络安全

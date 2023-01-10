@@ -1,0 +1,23 @@
+# NodeJS: Web 服务开发
+
+- Web 服务开发
+  - [BFF: API Gateway](./BFF:%20API%20Gateway.md)
+  - 服务调用
+    - 路由
+      - Restful API
+      - GraphQL
+    - 数据类型验证
+      - JSON Schema
+      - typescript 运行验证
+  - 模板渲染
+  - SSR
+  - 工程
+    - 测试
+      - 压测 http 服务（ab）
+        - QPS
+        - 吞吐率
+    - 部署
+    - 监控
+      - 性能监控
+        - [clinicjs](https://clinicjs.org/)
+        - [easy-monitor](https://github.com/hyj1991/easy-monitor)
