@@ -156,3 +156,6 @@ TCP 为了传输的可靠性，它是如何做的呢？简单总结起来就是�
 为连接的每个端创建一个 RTCPeerConnection 对象，并且给 RTCPeerConnection 对象添加一个本地流，该流是从 getUserMedia() 获取的；
 获取本地媒体描述信息，即 SDP 信息，并与对端进行交换；
 获得网络信息，即 Candidate（IP 地址和端口），并与远端进行交换
+
+
+断开重连

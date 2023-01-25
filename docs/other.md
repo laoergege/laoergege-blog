@@ -80,7 +80,61 @@
   - 容器/展示
   - 依赖方向应该是由不稳定指向稳定，而UI是最不稳定的，如果任何逻辑一定要先让组件渲染出来，那一定是错的，没有什么值得讨论的。
   - 一切皆组件
-
+  - 数据逻辑优先
+  - 逻辑
+    - 组件逻辑
+    - 应用逻辑
+      - 应用
+      - 业务
+- SSR
+  - dev
+- css
+  - Tailwind 通过使用 PurgeCSS 来扫描你的大包产物并删除你不需要的规则。这得以使其在生产环境中 CSS 文件缩减为几 KB
+    - 属性化模式  
+    - 自动值推导
+    - 按需生成
+  - Icon
+    - image
+    - font
+      - css 类 伪元素
+    - svg
+      - svg
+      - css 类 bg
+        - dataUri
+  - Theme
+    - 方案
+      - CSS 预构建 + CSS 样式覆盖
+      - CSS 变量控制
+    - 行为
+      - class、dataset 切换策略
+      - 系统监听： `window.matchMedia("(prefers-color-scheme: dark)").matches`
+- SSR
+  - 原理
+    - renderToString => html
+    - 注水、客户端激活
+  - 优点
+    - 更快的首屏加载
+    - 更好的 SEO
+  - 缺点
+    - 开发中的限制
+      - 平台特有 API
+      - 响应性
+      - 组件生命周期钩子
+    - 更高的服务端负载
+- 同构渲染
+  - 同构、通用应用：应用的大部分代码同时运行在服务端和客户端
+  - 结构
+    - app
+    - server.js
+    - client.js
+- Github
+  - 开发
+    - Token
+    - Github APP
+    - OAuth APP：OAuth App 使用 GitHub 作为身份提供程序以验证为授予应用程序访问权限的用户
+  - API
+    - Github API
+    - WebHook
 
 
 vue和react都抛弃了基于class组织组件的模式，是为了解决逻辑复用带来的命名冲突问题以及依赖注入问题。
@@ -280,8 +334,66 @@ vue和react都抛弃了基于class组织组件的模式，是为了解决逻辑�
     - Blob（Binary Large Object）是 JavaScript 的大型二进制对象类型
 
 
-- 错误
-  - 标准 JavaScript 错误
+- 元编程
+  - “With” 和 “eval” — ECMAScript中的动态作用域
+    ，使用with和eval虽然加强了静态作用域，但相比之下，with和eval在实现上也可能会削弱变量查找和词法环境储存的性能（译注：因为这相当于扩充了当前作用域，增加了存储消耗和查找范围）。因此在ES5中，with在严格模式下被移除了，此外严格模式下的eval方法不再会在当前上下文创建变量。所以，ES5的严格模式下是完全遵守词法环境的实现。
+
+## NodeJS
+
+- NodeJS
+  - V8 + 标准库中提供了一组异步 I/O 原语
+- BFF
+  - SFF = Serverless + BFF
+- 错误处理
+  - 错误类型
+    - API 错误：运行时发生的**异常**
+    - 开发人员错误：错误使用 API
+  - 实践
+    - 扩展错误对象：规范化错误类型，友好
+      - 内置错误对象 Error
+        - 堆栈跟踪
+          - Error.stack 
+            - `Error.captureStackTrace(obj, func)`
+          - console.trace
+      - 中间件
+    - 传递错误
+      - return / callback 
+      - throw
+      - 异步错误
+        - promise.reject
+        - EventEmitter.emit("error")
+    - 错误处理
+      - 捕获
+        - callback error
+        - async/await 和 try-catch
+        - promise 中使用 .catch() 错误
+        - EventEmitter
+      - 全局
+        - 捕获所有未捕获的异常 process.on('uncaughtException'
+        - 捕获所有未处理的承诺拒绝 process.on('unhandledRejection', callback)
+    - 错误日志（打印、上传）及警报
+      - [consola](https://github.com/unjs/consola)
+- 。最好的方法是让应用程序崩溃，记录错误，然后使用 nodemon 或 pm2 自动重启进程。
+- 如果未正确处理 JavaScript 错误，则会发出 uncaughtException
+- 模块
+  - 使用模块代替全局变量
+  - 模块风格
+    - callback
+    - sync
+    - promise
+- 如果你要学习一门新的技术，比如 Node.js，你该怎么学？
+- 日志
+  - 记录、格式化和存储
+  - 类型
+    - error
+    - warn
+    - info
+    - verbose
+    - debug
+- NodeJS 中错误
+  - 用户指定错误
+  - 断言错误
+  - JS 错误
     - EvalError
     - RangeError
     - ReferenceError
@@ -289,20 +401,7 @@ vue和react都抛弃了基于class组织组件的模式，是为了解决逻辑�
     - TypeError
     - URIError
     - Async errors
-  - 系统错误
-  - 用户指定的错误
-  - 断言错误
-- 堆栈错误跟踪
-  - console.trace
-
-
-- 元编程
-  - “With” 和 “eval” — ECMAScript中的动态作用域
-    ，使用with和eval虽然加强了静态作用域，但相比之下，with和eval在实现上也可能会削弱变量查找和词法环境储存的性能（译注：因为这相当于扩充了当前作用域，增加了存储消耗和查找范围）。因此在ES5中，with在严格模式下被移除了，此外严格模式下的eval方法不再会在当前上下文创建变量。所以，ES5的严格模式下是完全遵守词法环境的实现。
-
-## NodeJS
-
-
+  - [Node 系统错误](https://nodejs.org/api/errors.html#errors_class_systemerror)
 
 ## 源码阅读技巧
 
@@ -429,6 +528,7 @@ vue和react都抛弃了基于class组织组件的模式，是为了解决逻辑�
     - 异常：不可恢复或者不想恢复的错误，想让程序终止运行并得到崩溃信息
   - 建议
     - 开发前定义好项目的错误类型
+    - 未捕获的异常应该让应用程序崩溃、记录并重新启动
   - 调用者角度
     - 错误发生 => 错误类型捕获 => 立即处理、延迟处理（传播）
   - 错误处理的主流方法
@@ -447,13 +547,11 @@ vue和react都抛弃了基于class组织组件的模式，是为了解决逻辑�
     - 类型系统 + 返回值
       - 错误信息既然可以通过已有的类型携带，或者通过多返回值的方式提供，那么通过类型来表征错误，使用一个内部包含正常返回类型和错误返回类型的复合类型，通过类型系统来强制错误的处理和传递
       - 可以用函数式编程的方法简化错误的处理，比如 map、fold 等函数，让代码相对不那么冗余
-  - 因为我们平时写练习代码，一般只会关注正常路径，可以对小概率发生的错误路径置之不理；但在实际生产环境中，任何错误只要没有得到妥善处理，就会给系统埋下隐患
 - 代码复用
-  - 实现本质
-    - 代码拷贝
-    - 函数指针应用
-      - 指针委托
-      - 指针拷贝
+  - 代码拷贝
+  - 函数指针应用
+    - 指针委托
+    - 指针拷贝
 - 编程技巧
   - Class 类
     - 类也是一种模块
@@ -467,6 +565,16 @@ vue和react都抛弃了基于class组织组件的模式，是为了解决逻辑�
       - 函数式编程对程序中的赋值进行了限制和规范
   - 函数式编程总结起来就是把一些功能或逻辑代码通过函数拼装方式来组织的玩法
     - 隔离可变：代码中还是需要处理数据的，这些就是所谓的“状态”，函数式编程需要我们写出无状态的代码？
+  - 纯函数
+    - 数学意义上的函数，即它就是一个输入到输出的映射：只对输入做了一些计算，得到了输出，不依赖于别的内容，也不包含别的内容
+    - 具有
+      - 封装性
+      - 稳定性
+  - 脏东西到底要怎么处理呢？
+    - 把它装进一种叫做Monad的神奇盒子里，即
+      - 在函数中对盒子进行功能计算（封装隐藏副作用）
+      - 把装了脏东西的新的盒子当做函数的输出，推到纯函数的外面执行
+    - Monad大概是个什么。它可以看做是对纯函数的一种补充。如果函数中有一些脏东西，它把脏东西装到盒子里，然后以一种假设/计划的方式描述这个脏东西，使得形成的东西仍然是一个纯函数，没有对世界产生影响。只有当我们真正打算大干一场的时候，才会真正和世界接触交互，把脏活累活给干了
 - 类型
   - 类型层次
     - 向上转型？
@@ -624,7 +732,9 @@ vue和react都抛弃了基于class组织组件的模式，是为了解决逻辑�
     - 超过 MUT
     - 指标：丢包率
   - 吞吐率
-- 链路层
+- 网络层、链路层
+  - 报文是如何传输的？
+  - 交换机、路由器的作用
   - 通信链路
   - 交换
     - 交换技术的本质，就是让数据切换路径。因为，网络中的数据是以分组或封包（Packet）的形式传输，因此这个技术也称作封包交换技术（Packet Switch）
@@ -637,7 +747,6 @@ vue和react都抛弃了基于class组织组件的模式，是为了解决逻辑�
   - 数据分片传输
     - 切分成很多个组，每个组也称作一个封包，英文都是 Packet
   - 交换传输  ![图 1](https://s0.lgstatic.com/i/image6/M00/38/82/Cgp9HWB5WbqAVlGaAHeNbdcL7hg030.gif)  
-- 网络层
 - 传输层
   - 通常TCP数据包的长度不会超过IP数据包的长度，以确保单个TCP数据包不必再分割
   - TCP
@@ -714,6 +823,22 @@ vue和react都抛弃了基于class组织组件的模式，是为了解决逻辑�
 
 -  CSS Modules
 -  Atomic CSS
+
+## Web 性能优化
+
+- 图片
+  - 懒加载：`loading="lazy"`
+    - 未指定大小的图片会降低 CLS
+  - 格式
+    - webp
+    - jpg
+    - png
+  - 响应式图片
+    - 根据屏幕大小和分辨率选择性加载
+      - DPR
+      - srcset
+      - sizes
+  - Image组件的最佳实践
 
 ## 其他
 
@@ -857,14 +982,6 @@ const build = require('../lib/commands/build');
     - [tsx](https://github.com/esbuild-kit/tsx)
 
 
-
-- 跨语言调用
-  - 进程间通信
-    - 二进制协议
-    - 序列化与反序列化
-    - 字节序
-
-
 - git
   - husky
   - lint-staged 
@@ -897,52 +1014,6 @@ const build = require('../lib/commands/build');
 
 
 object api
-
-
-
-
-
-
-
-
-
-- ES modules 和 CommonJS modules 之间的区别之一就是将模块声明算法拆分到各个阶段去执行
-  - CommonJS 在返回模块实例前就遍历完其整个依赖关系树：完成加载、实例化以及对各个依赖进行求值的操作
-
-
-
-- 请求
-- 构建
-- 执行
-
-
-
-- defer或async属性，脚本就会异步加载
-- defer与async的区别是：defer要等到整个页面在内存中正常渲染结束（DOM 结构完全生成，以及其他脚本执行完成），才会执行；async一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染。
-- 一句话，defer是“渲染完再执行”，async是“下载完就执行”。另外，如果有多个defer脚本，会按照它们在页面出现的顺序加载，而多个async脚本是不能保证加载顺序的。
-- module 加载规则默认 defer 行为
-  - ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全一致
-- module 加载代码
-  - 严格模式
-  - 模块作用域
-- CommonJS
-  - module.exports
-  - require
-- CommonJS 模块不能处理export命令。
-
-
-
-
-exports和module.exports区别是什么。
-两者指向同一块内存
-ES Module则是指向同一块内存
-
-
-- 路径解析规则
-
-
-
-
 
 
 css 重叠
@@ -1287,3 +1358,6 @@ leetcode上关于栈的题目大家可以先做20,155,232,844,224,682,496.
 
 
 因为屏幕像素密度问题，根据devicePixelRate不同要将canvas设置对大小
+
+
+code => 编译 => 运行

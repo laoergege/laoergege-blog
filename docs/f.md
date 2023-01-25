@@ -1,6 +1,6 @@
 # 技术栈
 
-- 特定技术领域：Web 开发
+- 技术领域/框架
   - 浏览器原理及 WebAPI
     - [ ] 《浏览器原理及实践》
   - Web 前端框架
@@ -8,25 +8,20 @@
       - [ ] 深入 Vue 框架源码及生态
       - [ ] 技术输出：vue 深入系文
   - [前端工程化](./前端工程化/README.md)
+  - NodeJS
   - 容器技术
   - 可视化及3D
   - 音视频
   - 跨端
-  - Web 服务
 - 软件开发基础
   - 软件工程（规范化、流程化、工具自动化、框架化）
   - 软件设计：设计模式及架构
     - 《软件设计之美》
   - 编程语言
-    - 程序语言设计与实现原理
-      - [ ]《程序是怎样跑起来的》
-      - [ ]《计算机程序的构造和解释》
-      - [ ][《程序语言理论与实现》](https://bobzhang.github.io/courses/)
     - [JavaScript](./JavaScript/README.md)
       - [ ] 《JavaScript 核心原理精讲》 
       - [ ] 《ES6 入门教程》
-    - Typescript
-    - NodeJS
+      - Typescript
     - Rust
       - [ ] 基础入门（2022.5 - 2022.12.31）
       - [ ] 应用：Webassembly
@@ -38,6 +33,10 @@
     - [ ] [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/content)
     - [ ] 《现代操作系统》
     - [ ] 《深入理解计算机系统》
+  - 程序语言设计与实现原理
+      - [ ]《程序是怎样跑起来的》
+      - [ ]《计算机程序的构造和解释》
+      - [ ][《程序语言理论与实现》](https://bobzhang.github.io/courses/)
   - 编译原理
     - [ ] 《编译原理实战课》
     - [ ] 《编译原理》龙书

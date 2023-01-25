@@ -1,4 +1,4 @@
-# Corepack 与包管理 PNPM
+# Corepack 与包管理
 
 - [Corepack：包管理器的管理器](https://nodejs.org/api/corepack.html)
   - 作用
@@ -7,18 +7,26 @@
   - [用法](#corepack-用法)
 - 包管理(pnpm)
   - package.json 包描述文件
-  - 创建、发布 NPM 包
+  - 创建现代化模块包
     - 编写单元测试
     - 自动化版本管理和发布
-  - 安装
-  - 更新
-- Node 开发环境锁定
-  - 环境
-    - Node 版本
-    - 包管理
-    - 依赖版本
+  - 依赖管理
+    - 安装
+    - 更新
+    - 删除
+  - 脚本运行
+  - Workspaces
+- 开发环境锁定
+  - Node 版本
+  - 包管理
+  - 依赖版本
   - [nvm](https://github.com/nvm-sh/nvm) + [corepack](https://github.com/nodejs/corepack) + lockfile
   - [volta](https://github.com/volta-cli/volta) + lockfile
+
+
+- 测试
+- eslint
+- typescript
 
 ## Corepack 用法
 
