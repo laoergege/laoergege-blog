@@ -7,62 +7,19 @@ tags:
 
 - Rust
   - 设计理念
-    - 性能、内存安全、并发安全
-    - 划分 Safe rust 和 Unsafe Rust（方便与其他语言沟通）
+    - 内存安全、并发安全、性能
     - 多范式编程
+    - 划分 Safe rust 和 Unsafe Rust（方便与其他语言沟通）
   - 语法特性
     - 面向表达式
       - 一切皆是表达式，即一切皆类型（表达式会产生值，值即类型，rust 就是通过一切类型检查保证内存安全、并发安全）
-        - 控制流语句
-        - 函数
       - 编译期计算
-  - 编程基础
-    - 变量、值和类型声明
-    - 表达式与运算符
-    - 控制流
-      - 顺序
-      - 调用
-      - 循环：`loop / while(条件) / for...in(迭代器)` + `break / continue / return`
-      - 跳转
-        - 分支跳转 `if ... else ...`
-        - 模式匹配
-          - `match expr {}`
-          - `if let / while let`
-        - [错误处理](./Rust%20错误处理.md)
-        - 异步跳转
-    - 函数 `fn`
-    - 模块系统：箱、模块、路径
-      - 箱 crate：一个项目也被称为一个 crate，crate 可以是可执行项目，也可以是一个库
       - 模块 `mod`：模块是一个箱内的代码组织单位，在 Rust 中声明模块的方式有两种：内联或在其他文件中声明
-      - `pub`：导出
-      - `use`：导入
-    - 数据结构
-      - 数组
-      - 矢量 `Vec`
-      - 哈希 `HashMap`
-    - 测试
-      - 单元测试
-        - `#[test]`
-        - `#[should_panic]` 预期的失败
-        - `#[ignore]` 忽略测试
-      - 文档测试 `///`
-      - 集成测试
+    - 强类型、类型一致性
+  - [Rust 编程基础](#rust-编程基础)
   - 进阶
-    - [内存安全：所有权、借用及生命周期](./内存安全：所有权、借用及生命周期.md)
     - [Rust 错误处理](./Rust%20错误处理.md)
-    - 类型系统 
-      - 类型是对值的区分，它包含了值在内存中的长度、对齐以及值可以进行的操作等信息；值是无法脱离具体的类型讨论的
-      - 内存分配
-        - 准则：栈上存放的数据是静态的，固定大小，固定生命周期；堆上存放的数据是动态的，不固定大小，不固定生命周期
-      - 分类
-        - 原生类型
-        - 组合类型/复合类型
-          - 结构体（struct）：多个类型组合在一起共同表达一个值的复杂数据结构
-            - 经典结构体
-            - 元组
-            - 单元结构
-          - 枚举（enum）：联合标签
-    - 泛型
+    - 泛型编程
       - 数据结构的泛型
       - 使用泛型结构代码的泛型化
     - 面向接口编程
@@ -81,26 +38,27 @@ tags:
         - 派生宏
         - 属性宏
     - 面向对象编程
-  - 实现
-    - 基于 LLVM，具有可移植性
-  - 工程化
-    - rustup：Rust 工具链管理工具
-      - rust-toolchain.toml
-      - rustc：rust 编译器
-        - 支持类型推导，使得写代码时的直观感受和写脚本语言差不多👍
-      - [cargo：包管理工具](#cargo包管理工具)
-  - 生态
-    - WSAI
-  - 资料
-    - [x] [Microsoft Rust 教程](https://docs.microsoft.com/zh-cn/learn/paths/rust-first-steps/)
-    - [ ] [Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/title-page.html)
-    - [ ] [Rust语言圣经(Rust Course)](https://course.rs/about-book.html)
-    - [ ] [通过例子学 Rust 中文版](https://rustwiki.org/zh-CN/rust-by-example/)
-    - [ ] [rust-training](https://github.com/tyrchen/rust-training)
-    - [ ] [rust-learning](https://github.com/ctjhoa/rust-learning)
-    - [ ] [awesome-rust](https://github.com/rust-unofficial/awesome-rust)
-    - [ ] [ Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html)
-    - [ ] 《Rust语言编程实战 》
+  - rustup：rust 开发管理工具
+    - rustc：rust 编译器
+    - cargo：rust 构建系统和包管理工具
+      - 概念
+        - package：项目
+        - crate：库
+        - workspace
+      - 命令
+        - build
+        - run
+        - check
+  - 开发领域
+    - Web Service
+    - CLI
+    - 网络编程
+    - 嵌入式
+    - 系统编程
+    - 游戏
+    - GUI
+  - 学习资料
+    - [Rust编程语言入门教程（Rust语言/Rust权威指南配套）](https://www.bilibili.com/video/BV1hp4y1k7SV)
 
 ## rust 程序骨架
 
@@ -119,26 +77,96 @@ tags:
   - 分号也是一种表达式，`; -> ()`，返回单元类型，平常只做分隔符，在块最后可做表达式
   - 块表达式会对最后表达式求值并返回
 
-## cargo：包管理工具
+## Rust 编程基础
 
-- cargo
-  - 概念
-    - workspace：多项目组织
-  - 配置：Cargo.toml
-  - 命令
-    - cargo new --bin/lib
-    - cargo build [--release]
-    - cargo test
-
-### cargo workspace
-
-[cargo workspaces](https://kaisery.github.io/trpl-zh-cn/ch14-03-cargo-workspaces.html)
-
-```toml
-[workspace]
-
-members = [
-    ...
-]
-```
-
+- 编程基础
+  - 变量、值和类型声明
+    - 变量
+      - 变量声明：`let`
+        - **不可变**
+        - 隐藏变量：即可重复声明变量
+      - 可变变量声明：`let mut`
+      - 常量声明：`const`
+        - 不可与 `mut` 配合，且使用**必须注明值的类型**
+        - 命名规范：大写，单词下划线分隔
+    - 类型声明
+      - rust 编译器会自动隐式**类型推导**，但特殊情况也需要表明数据类型，如 const 变量声明
+  - 类型系统
+    - 类型是对值的区分，它包含了值在内存中的长度、对齐以及值可以进行的操作等信息；值是无法脱离具体的类型讨论的
+    - 内存分配
+      - 栈上存放的数据是静态的，固定大小，固定生命周期
+      - 堆上存放的数据是动态的，不固定大小，不固定生命周期
+    - 分类
+      - 标量类型
+        - 整数
+          - 无符号：`u32`
+          - 有符号：`i32`
+        - 浮点
+          - IEEE-754 标准
+        - 布尔
+        - 字符
+          - 单个字符：`char`
+      - 复合类型
+        - 结构体（struct）：多个类型组合在一起共同表达一个值的复杂数据结构
+          - 元组
+            - `let tup = (32, 'A', 0.12);`
+            - 访问
+              - 解构：`let (x, y, z) = tup;`
+              - 索引：`tup.1`
+          - 数组
+            - 特点
+              - 长度固定、类型相同
+              - 存放栈内存
+            - `[类型，长度]`：`let arr: [i32; 5] = [1,2,3,4,5];`
+            - `let arr2 = [3; 5]; // let arr2 = [3,3,3,3,3]`
+          - 结构体
+          - 单元结构
+        - 枚举（enum）：联合标签
+  - 函数 `fn`
+    - 函数声明提升
+    - 函数参数类型必须声明
+    - 返回值
+      - 默认最后一个表达式
+      - `return`
+    - 命名规范：Snake Case
+  - 语句、表达式与运算符
+    - 语句是执行一些动作的指令
+    - 表达式会计算产生值
+  - 控制流
+    - 顺序
+    - 调用
+    - 循环
+      - `loop {...}`：一直循环
+      - `while(条件){...}`：条件循环
+        - 总是返回 `()` 类型
+      - `for ... in [迭代器] {...}`：集合迭代
+      - 中断
+        - `break [value]`
+        - `continue`
+        - `return [value]`
+    - 跳转
+      - 分支 `if [condition] {...} else {...}`
+        - 可相当三目运算符的作用
+      - 模式匹配
+        - `match expr {}`
+        - `if let / while let`
+      - [错误处理](./Rust%20错误处理.md)
+      - 异步跳转
+  - [所有权、借用及生命周期](./所有权、借用及生命周期.md)
+  - 模块系统：箱、模块、路径
+    - 箱 crate：一个项目也被称为一个 crate，crate 可以是可执行项目，也可以是一个库
+    - `pub`：导出
+    - `use`：导入
+  - 数据结构
+    - 集合
+      - 矢量 `Vec`
+      - 哈希 `HashMap`
+  - 注释
+    - 文档注释
+  - 测试
+    - 单元测试
+      - `#[test]`
+      - `#[should_panic]` 预期的失败
+      - `#[ignore]` 忽略测试
+    - 文档测试 `///`
+    - 集成测试
