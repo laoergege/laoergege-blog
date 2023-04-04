@@ -1,15 +1,10 @@
 # NodeJS: Web 服务开发
 
-- Web 服务开发
-  - API
-    - HTTP Server
-    - Authentication
-    - 路由
-      - Restful API
-      - GraphQL
-    - 数据类型验证
-      - JSON Schema
-      - typescript 运行验证
+- NodeJS: Web 服务开发
+  - 路由
+  - 数据检验
+    - JSON Schema
+    - typescript 运行验证
   - HTML 渲染
   - 数据库
   - 工程
@@ -48,13 +43,3 @@
   - 扩展
     - 中间件
     - 插件：Hooks 设计
-
-## 后端开发
-
-- APIs
-- Authentication
-  - Cookie-Session
-  - JWT
-- DBS
-  - ORM
-  - Native Drivers

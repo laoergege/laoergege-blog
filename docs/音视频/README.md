@@ -1,6 +1,11 @@
 # 音视频
 
 - 音视频
+  - 流媒体协议
+    - RTP/RTCP
+    - SRTP/SRTCP
+    - RTMP/RTMPS
+    - HLS
   - 媒体设备
     - 音频设备
       - 采样率
@@ -30,8 +35,55 @@
         - “轨”在多媒体中表达的就是每条轨数据都是独立的，不会与其他轨相交
         - MediaTrackConstraints  ![图 1](images/1669797968450.png) 
     - MediaRecorder：媒体录制
-    - [WebRTC](https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API) 
-      - SDP（Session Description Protocal）：用文本描述的各端支持的音频编解码器以及参数、传输协议、音视频媒体等
+    - WebRTC
+      - [SDP](#sdp)
+      - [WebRTC 建立连接](#webrtc-建立连接)
+
+## SDP
+
+- SDP（Session Description Protocal）：用文本描述的各端支持的音频编解码器以及参数、传输协议、音视频媒体等
+- SDP 是一个文本描述格式，其结构是由多个 `<type>=<value>` 组成，“=” 两边是不能有空格的 
+- SDP = 一个会话级描述（session level description）+ 多个媒体级描述（media level description）组成
+  - 会话级从 v= 行开始到第一个媒体描述 m 为止
+  - 媒体级从 m= 行开始到下一个媒体描述（即下一个 m=）为止
+  - 媒体级描述：`m=<媒体类型> <端口> <传输协议> <媒体格式>`
+  - 属性描述：用于进一步描述媒体信息
+  ```
+    v=0
+    o=- 7017624586836067756 2 IN IP4 127.0.0.1
+    s=-
+    t=0 0
+    //下面 m= 开头的两行，是两个媒体流：一个音频，一个视频。
+    m=audio 9 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+    a=rtpmap:111 opus/48000/2
+    ...
+    m=video 9 UDP/TLS/RTP/SAVPF 96 97 98 99 100 101 102 122 127 121 125 107 108 109 124 120 123 119 114 115 116
+    ...
+    ```
+- WebRTC 中的 SDP
+
+## WebRTC 建立连接
+
+- WebRTC 建立连接
+  - 原理
+    - 媒体协商：交换 SDP，了解对方媒体能力，找到共同支持的媒体能力
+      - 通信双方将它们各自的媒体信息能力按 **SDP** 格式整理好
+      - 通过**信令服务**器交换 SDP 信息，并待彼此拿到对方的 SDP 信息后，找出它们共同支持的媒体能力
+      - 最后双方进行媒体协商，才能按照协商好的媒体能力开始音视频通信
+    - ICE（Interactive Connectivity Establishment）：收集各种类型 ICE Candidate，寻找最佳连接方案
+      - Candidate 类型及收集
+        - host 类型：即本机内网的 IP 和端口
+        - srflx 类型：即本机 NAT 映射后的外网的 IP 和端口，通过 **STUN** 协议收集 srflx 类型的 Candidate
+          - prflx 类型：与 srflx 一样，但 srflx 是通过 STUN 服务获取的，而prflx 则是直接向目的主机发起请求
+        - relay 类型：即中继服务器的 IP 和端口，通过 **TURN** 协议收集 relay 类型的 Candidate
+      - WebRTC 按优先级顺序对 Candidate 进行连通性检测
+        - 首先对 host 类型的候选者进行**内网之间的连通性检测**，判断两台主机是否处于同一个局域网内
+        - 其次尝试 srflx 类型的候选者，也就是尝试让通信双方直接通过 P2P 进行连接
+          - WebRTC 首先需要对 NAT 类型做判断，检测出其类型后，才能判断出是否可以打洞成功，只有存在打洞成功的可能性时才会真正尝试打洞
+          - 对称型 NAT 与对称型 NAT 是无法进行 P2P 穿越的；而对称型 NAT 与端口限制型 NAT 也是无法进行 P2P 连接的
+        - 最后通过中继服务器进行中转
+  - 调用 RTCPeerConnection 接口创建连接  ![图 1](./images/1672507499198.png)  
+    - 通信双方链路的建立是在设置本地媒体能力，即调用 setLocalDescription 函数之后才进行的
 
 ## 实战
 
@@ -76,6 +128,29 @@
   - RTCP 协议
     - RR（Reciever Report）
     - SR(Sender Report)
+- 网络断开重连
+- 音视频服务质量优化与提升
+  - 传输速率控制
+    - 带宽限制
+  - 网络质量
+    - 物理链路质量
+      - 丢包
+      - 延迟
+      - 抖动：指的是数据传输一会儿快、一会儿慢，很不稳定。容易造成视觉抖动
+        - 缓冲
+    - 带宽大小
+      - 带宽大小指的是每秒钟可以传输多少数据，单位 bps。
+        - 比如 1M 带宽，它表达的是每秒钟可以传输 1M 个 bit 位
+        - 换算成字节就是 1Mbps/8 = 128KBps
+      - 准则：把带宽尽量占满，但千万别超出带宽的限制
+    - 传输速率
+  - 数据
+    - 分辨率
+    - 帧率
+    - 音视频压缩码率：指的是单位时间内音视频被压缩后的数据大小
+    - 传输控制码率
+- 多对多实时通信
+  - Mesh 方案，即多个终端之间两两进行连接，形成一个网状结构。
 
 
 
@@ -87,56 +162,16 @@
     - 关闭 Web RTC 的自适应码率，frameRate，width，height 设置固定值或高范围值。
 
 
-TCP 为了传输的可靠性，它是如何做的呢？简单总结起来就是“发送 -> 确认；超时 -> 重发”的反复过程。
-
-- SDP = SDP 描述格式 + SDP 结构
-- SDP 结构 = 会话描述 + 媒体信息描述
-- WebRTC 媒体协商
-  - 本地的 SDP 和远端的 SDP 都设置好后，协商就算成功了
-- WebRTC 建立连接
-  - 媒体协商：交换媒体描述信息
-    - 原理
-      - 首先，通信双方将它们各自的媒体信息，如编解码器、媒体流的 SSRC、传输协议、IP 地址和端口等，按 **SDP** 格式整理好
-      - 然后，通信双方通过**信令服务**器交换 SDP 信息，并待彼此拿到对方的 SDP 信息后，找出它们共同支持的媒体能力
-      - 最后，双方按照协商好的媒体能力开始音视频通信
-    - RTCPeerConnection 协商过程  ![图 1](./images/1672507499198.png)  
-  - ICE（Interactive Connectivity Establishment）：交换网络信息，寻找最佳连接方案
-    - Candidate 类型
-      - host 类型，即本机内网的 IP 和端口
-        - host 类型表示的内网连接
-        - 如果 host 类型候选者之间无法建立连接，那么 WebRTC 则会尝试次优先级的候选者，即 srflx 类型的候选者
-        - 如果失败，就最后尝试使用 relay 方式建立连接
-      - srflx 类型, 即本机 NAT 映射后的外网的 IP 和端口
-        - srflx 类型的 Candidate 实际上就是内网地址和端口经 NAT 映射后的外网地址和端口
-      - relay 类型，即中继服务器的 IP 和端口
-      - prflx、peer reflex
-    - WebRTC 就开始按优先级顺序对 Candidate 进行连通性检测了
-      - 首先收集所有的 host 类型的 Candidate，通过判断两台主机是否处于同一个局域网内
-      - 其次通过 NAT 打洞，即 P2P 穿越的方式，即使用 **STUN** 协议收集 srflx 类型的 Candidate
-      - 最后通过中继服务器进行中转
-        - 使用 **TURN** 协议收集 relay 类型的 Candidate
-
-  - RTCPeerConnection
-  - 通信双方链路的建立是在设置本地媒体能力，即调用 setLocalDescription 函数之后才进行的
 
 
 
 
 
 
-- 走内网
-  - 要想让 A 与 B 直接在内网连接，首先要解决的问题是： A 与 B 如何才能知道它们是在同一个网段内呢？不过，WebRTC 很好的解决了这个问题，后面我们可以看一下它是如何解决这个问题的。
-- 走外网
-  - p2p，即 NAT 打洞
-    - WebRTC 中，NAT 打洞是极其复杂的过程，它首先需要对 NAT 类型做判断，检测出其类型后，才能判断出是否可以打洞成功，只有存在打洞成功的可能性时才会真正尝试打洞。
-  - 通过中继服务器进行中转
-    - STUN 协议
-    - TURN（Traversal Using Relays around NAT）
-      - relay 服务是通过 TURN 协议实现的。所以我们经常说的 relay 服务器或 TURN 服务器它们是同一个意思，都是指中继服务器
-      - relay 服务就会在服务器端分配一个新的 relay 端口，用于中转 UDP 数据报
 
 
-我们可以用WebRTC这个桥梁当作是一种新的数据双向传输方案，现阶段已经有网站用这种方式上传用户数据或其他加密消息媒介了，而且因为WebRTC中数据传输协议非HTTP或者WebSocket协议请求，很多探测工具也就没法察觉
+
+
 
 
 - 我曾就职于多家知名互联网企业，现在在硅谷某巨头 IT 企业担任资深软件工程师，主要负责 Maps 相关产品的研发工作，参与移动产品的设计、实现及开源软件的开发和维护。
@@ -147,10 +182,6 @@ TCP 为了传输的可靠性，它是如何做的呢？简单总结起来就是�
   - 端与端之间要建立连接，但它们是如何知道彼此的外网地址呢？
   - 如果两台主机都是在 NAT 之后，它们又是如何穿越 NAT 进行连接的呢？
   - 如果 NAT 穿越不成功，又该如何保证双方之间的连通性呢？
-  - 好不容易双方连通了，如果突然丢包了，该怎么办？
-  - 如果传输过程中，传输的数据量过大，超过了网络带宽能够承受的负载，又该如何保障音视频的服务质量呢？
-  - 传输的音视频要时刻保持同步，这又该如何做到呢？
-  - 数据在传输之前要进行音视频编码，而在接收之后又要做音视频解码，但 WebRTC 支持那么多编解码器，如 H264､ H265､ VP8､ VP9 等，它是如何选择的呢？
 - adapter.js
 - 在 WebRTC 端与端之间建立连接，包括三个任务：
 为连接的每个端创建一个 RTCPeerConnection 对象，并且给 RTCPeerConnection 对象添加一个本地流，该流是从 getUserMedia() 获取的；
@@ -158,4 +189,5 @@ TCP 为了传输的可靠性，它是如何做的呢？简单总结起来就是�
 获得网络信息，即 Candidate（IP 地址和端口），并与远端进行交换
 
 
-断开重连
+- RTCDataChannel
+  - WebRTC 的 RTCDataChannel 使用的传输协议为 SCTP，即 Stream Control Transport Protocol。

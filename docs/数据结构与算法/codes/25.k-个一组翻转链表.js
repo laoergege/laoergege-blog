@@ -18,28 +18,28 @@
  * @return {ListNode}
  */
 var reverseKGroup = function (head, k) {
-    if(!head) {
-        return head
-    }
+    if (!head) return head
 
-    let arr = []
     let i = k
-    while (head && i > 0) {
-        arr.push(head)
-        head = head.next
-        i--
-    }
-    if (arr.length < k) {
-        return arr[0]
+    let p = head
+    while (i-- > 0) {
+        if (!p.next) return head
+        p = p.next
     }
 
-    arr.reverse()
-    for (let index = 0; index < arr.length - 1; index++) {
-        arr[index].next = arr[index + 1]
+    i = k
+    let prev = null;
+    let cur = head;
+    let next;
+    while (cur && i-- > 0) {
+        next = cur.next
+        cur.next = prev
+        prev = cur
+        cur = next
     }
-    arr[arr.length - 1].next = reverseKGroup(head, k)
+    head.next = reverseKGroup(cur, k)
 
-    return arr[0]
+    return prev
 };
 // @lc code=end
 

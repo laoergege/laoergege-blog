@@ -181,7 +181,7 @@ console.log(a); // [2]
       8. 逻辑运算符
          - `&&`
          - `||`
-         - 空值合并运算符 `??`：`a ?? b` a 为 null 或者 undefined 则选择 b
+         - 空值合并运算符：`??`：`a ?? b` a 为 null 或者 undefined 则选择 b
    4. 三元运算符
       - 条件表达式 ConditionalExpression：`condition ? branch1 : branch2`
 4. AssignmentExpression 赋值表达式

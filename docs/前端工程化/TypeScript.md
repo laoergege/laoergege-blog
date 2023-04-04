@@ -1,6 +1,7 @@
 # TypeScript
 
 - TypeScript
+  - 类型注释
   - 类型系统
     - 原始类型
       - null vs undefined vs void

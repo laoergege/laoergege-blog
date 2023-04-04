@@ -10,17 +10,15 @@ tags:
     - 架构：非阻塞 IO 模型、事件驱动架构 ![图 7](./images/1665080347023.png) 
   - 模块机制
     - [模块规范](../JavaScript/JavaScript%20%E6%A8%A1%E5%9D%97.md)
+      - ES Modules
       - CommonJS
-      - ESModules
     - 模块解析以及加载机制
     - [Corepack 与包管理](./Corepack%20与包管理.md)
-  - 错误处理及调试
-    - [调试指南](https://nodejs.org/zh-cn/docs/guides/debugging-getting-started/)
-    - [Debugging Node.js with Chrome DevTools](https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27)
-    - [node-clinic](https://github.com/clinicjs/node-clinic)
+  - 错误处理及代码调试
     - 错误处理
-    - 调试工具
-      - APM
+    - 代码调试
+      - [调试指南](https://nodejs.org/zh-cn/docs/guides/debugging-getting-started/)
+    - [node-clinic](https://github.com/clinicjs/node-clinic)
     - 内存泄漏
   - [异步编程](../JavaScript/JavaScript%20异步编程.md)
   - [Node.js 事件循环](./Node.js%20事件循环.md)
@@ -67,7 +65,10 @@ tags:
     - NodeJS 运行及部署
       - [PM2](https://pm2.keymetrics.io/)
     - NodeJS 日志与监控
-    - Node 性能优化
+      - 日志
+        - [winston](https://github.com/winstonjs/winston)
+        - [pino](https://github.com/pinojs/pino)
+    - NodeJS 性能优化
       - CPU（计算性能优化、JS Profile）
         1. 减少不必要的计算
         2. 空间换时间
@@ -93,14 +94,15 @@ tags:
 ## CLI
 
 - CLI
-  - 参数配置
+  - 参数
     - 命令行参数
       - process.argv
       - [commander.js](https://github.com/tj/commander.js#readme)
+      - [clipanion](https://github.com/arcanis/clipanion)
+      - [yargs](https://github.com/yargs/yargs)
     - 环境变量
       - process.env
-      - [dotenv](https://github.com/motdotla/dotenv#readme)
-    - 配置文件
+      - 环境配置文件：[dotenv](https://github.com/motdotla/dotenv#readme)
   - 用户输入
     - [process.stdin](https://nodejs.org/api/process.html#processstdin)
     - readline
@@ -119,11 +121,12 @@ tags:
       - 进度
         - [ora](https://github.com/sindresorhus/ora#readme)
       - 任务列表：[listr](https://github.com/SamVerschueren/listr)
+  - 子进程
+    - [zx](https://github.com/google/zx)
   - shellbag
   - package.json `.bin`
 
-
-## 计算阻塞
+## 错误处理
 
 
 

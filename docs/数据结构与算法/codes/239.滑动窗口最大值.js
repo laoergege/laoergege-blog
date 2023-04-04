@@ -11,22 +11,33 @@
  * @return {number[]}
  */
 var maxSlidingWindow = function (nums, k) {
-    let queue = new Array(k)
-    const result = []
+    if (!nums.length) return nums
 
-    for (let i = 0; i < nums.length; i++) {
+    // const queue = []
+    // const res = []
+    // for (const [idx, n] of nums.entries()) {
+    //     if (queue.length === k) {
+    //         queue.shift()
+    //     }
+    //     let i = 0
+    //     while (i < queue.length) {
+    //         if (n > queue[i]) {
+    //             queue[i] = n
+    //         }
+    //         i++
+    //     }
+    //     queue.push(n)
 
-        // for (let j = i; j < i + k; j++) {
+    //     if (k - 1 <= idx) {
+    //         res.push(queue[0])
+    //     }
+    // }
+    // return res
 
-        // }
-        if (i + k > nums.length) {
-            break
-        }
+    let max = -Infinity
+    let i = -1
 
-        result.push(Math.max(...nums.slice(i, i + k)))
-    }
 
-    return result
 };
 // @lc code=end
 

@@ -4,10 +4,13 @@
     - Symbol 类型
     - 特殊关键字 `__proto__`
   - 分类
-    - 自身属性
-    - 继承属性
-    - [Symbol 属性](https://zh.javascript.info/symbol#yin-cang-shu-xing)（创建对象的“隐藏”属性、防止对象属性冲突）
-    - 可枚举属性
+    - 所属范围
+      - 自身属性
+      - 原型属性
+    - 特征
+      - 普通属性
+      - [Symbol 属性](https://zh.javascript.info/symbol#yin-cang-shu-xing)（创建对象的“隐藏”属性、防止对象属性冲突）
+      - 可枚举属性
   - 对象属性存在性检测及遍历
 
     |                             | 自身属性 | 继承属性 | 枚举属性 | 不可枚举属性 | Symbol 属性 |
@@ -28,9 +31,6 @@
   - 浅拷贝
     - `Object.assign()`
   - 深拷贝
-- 属性操作
-  - Object.defineProperty
-  - Object.getOwnPropertyDescriptor
 - 原型操作
   - Object.create
   - Object.getPrototypeOf

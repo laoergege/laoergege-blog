@@ -22,7 +22,7 @@ description: Vue 技术栈
   - 组件通信
     - 父子组件
       - props、emit
-      - 直接引用 `ref`、`children`、`parent`
+      - 组件实例引用 `ref`、`children`、`parent`
     - 非父子组件：
       - 模块领域：provide/inject
       - 全局单例模式  

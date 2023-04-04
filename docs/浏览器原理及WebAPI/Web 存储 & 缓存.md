@@ -52,13 +52,13 @@ tags:
     - 生命周期：永久
     - 其他
       - 能够在 Web Worker 及 Service Worker 环境下访问
-  - CacheStorage、CacheAPI
+  - [CacheStorage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage)、[CacheAPI](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
     - 大小：一般不少于 250 MB
     - 生命周期：永久
     - 其他
       - 能够在 Web Worker 及 Service Worker 环境下访问
+  - [HTTP Cache](../计算机网络及HTTP/http%20缓存.md)
   - [Back/forward cache](https://web.dev/bfcache/?utm_source=devtools)
-  - HTTP Cache
 
 ## JavaScritpt 中的 cookie 操作
 

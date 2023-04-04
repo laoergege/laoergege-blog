@@ -89,11 +89,10 @@ PatchFlags.DYNAMIC_SLOTS 优化判断
 
 # vue 编译优化
 
-- vue 运行时优化
-  - 静态提升
-  - Patch 标记
-  - 动静分离
-  - 事件缓存
+- 带编译时信息来提升虚拟 DOM 运行时性能
+  - 静态提升、事件缓存
+  - 扁平树结构，并且用区块来做动静结构分离
+  - 更新类型标记 patch flag
 
 ```html
 <div>
@@ -123,3 +122,10 @@ export function render(_ctx, _cache, $props, $setup, $data, $options) {
   ]))
 }
 ```
+
+![图 1](./images/1677580513180.png)  
+
+
+## 学习参考
+
+- [渲染机制｜Vue.js](https://cn.vuejs.org/guide/extras/rendering-mechanism.html)

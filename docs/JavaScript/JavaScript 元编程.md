@@ -7,20 +7,51 @@ tags:
 # JavaScript 元编程
 
 - JavaScript 元编程
-  - 可以生成代码执行
-    - eval
-    - Function
-  - 可以在运行时修改语言结构，这种现象被称为反射编程或反射
-    - 自省（Introspection）：代码能够自我检查、访问内部属性，我们可以据此获得代码的底层信息。
-      - Reflect
-    - 自我修改（Self-Modification）：顾名思义，代码可以修改自身。
-      - Object
-    - 调解（Intercession）：字面意思是“代他人行事”。在元编程中，调解的概念类似于包装（wrapping）、捕获（trapping）、拦截（intercepting）。
-      - Proxy
-      - Object.defineProperty
--  Proxy
-- JavaScript 沙箱机制
-  - 沙箱逃逸（Sandbox Escape）
+  - 元编程
+    - 可以生成代码执行
+    - 可以在运行时观察、修改程序的状态或行为，这种现象被称为反射编程或反射
+      - 自省（Introspection）：代码能够自我检查、访问内部属性，我们可以据此获得代码的底层信息
+      - 自我修改（Self-Modification）：顾名思义，代码可以修改自身
+      - 调解（Intercession）：字面意思是“代他人行事”。在元编程中，调解的概念类似于包装（wrapping）、捕获（trapping）、拦截（intercepting）。
+  - eval & new Function、[with](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with)
+  - [Proxy & Reflect](#proxy--reflect)
+  - JavaScript 沙箱机制
+    - 沙箱逃逸（Sandbox Escape）
+
+## Proxy & Reflect
+
+- Proxy：代理一个对象操作的所有基本语义
+  - 属性操作
+    - 访问：get(target, property, receiver)
+    - 赋值：set(target, property, value, receiver)
+    - 遍历
+      - `for..in`/`Object.keys`
+      - 
+    - `delete` 操作符删除属性：deleteProperty(target, prop)
+    - `in` 操作符判断属性是否存在：has(target, property)
+  - 对象扩展
+    - `	Object.defineProperty, Object.defineProperties` 修改或扩展属性: defineProperty(target, property, descriptor)
+    - `Object.preventExtensions`
+    - `Object.seal`
+    - `Object.freeze`
+  - 原型操作
+    - `Object.getPrototypeOf`
+    - `Object.setPrototypeOf`
+  - 函数行为
+    - 函数调用：apply(target, thisArg, args)
+    - `new` 操作符执行构造器：construct
+
+
+  - Reflect 是一个内建对象，可简化 Proxy 的创建。访问内部方法。
+    - 但使用Reflect.defineProperty则不会，而是会返回false来代表此次操作失败
+    - Reflect.ownkeys来列举对象中的属性，这个方法会遵循以下顺序
+      - 按照数字上升排序
+按照创建顺序列举字符串属性名
+按照创建顺序列举符号属性名
+  - 撤销代理 Proxy.revocable
+  - 局限
+    - this
+    - 内部槽
 
 ## JavaScript 沙箱机制
 
@@ -133,12 +164,7 @@ ctx.window = _ctx;
 
 ### 沙箱逃逸
 
-## Proxy & Reflect
-
-## new Function & eval 区别
-
 ## 参考
 
 - [浅析JavaScript沙箱](https://mp.weixin.qq.com/s/euHJpS6rcRRqVBIPAnbUHA)
-
-new Function、eval、with 总结 Symbol.unscopables
+- [JavaScript 元编程](https://www.freecodecamp.org/chinese/news/what-is-metaprogramming-in-javascript/)

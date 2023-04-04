@@ -2,7 +2,6 @@
   "name": "laoergege-blog",
   "version": "1.0.1",
   "description": "Laoergege's Learning Track",
-  "packageManager": "pnpm@7.16.0",
   "scripts": {
     "docs:dev": "turbo run dev",
     "dev": "pnpm run vuepress -- dev docs",
@@ -84,7 +83,8 @@
     "vue-router": "^4.0.16"
   },
   "volta": {
-    "node": "19.2.0"
+    "node": "19.2.0",
+    "pnpm": "7.26.2"
   },
   "engines": {
     "node": ">=16"

@@ -14,63 +14,46 @@ var threeSum = function (nums) {
         return []
     }
 
-    const result = []
-    nums.sort((a, b) => (a - b))
+    // 三数转两数 
+    // nums.sort()
+    // const res = new Set()
+    // for (const [i, a] of nums.entries()) {
+    //     let tmp = {}
+    //     for (const b of nums.slice(i + 1)) {
+    //         let c = -(a + b)
 
-    for (let i = 0; i < nums.length; i++) {
-        const num = nums[i];
-
-        let l = i + 1
-        let r = nums.length - 1
-
-        if (i > 0 && nums[i] === nums[i - 1]) {
-            continue;
-        }
-
-        while (l < r) {
-            let res = num + nums[l] + nums[r]
-
-            if (res > 0) {
-                r--
-            } else if (res < 0) {
-                l++
-            } else {
-                result.push([num, nums[l], nums[r]])
-
-                while (l < r && (nums[l] === nums[l + 1])) l++
-                while (l < r && (nums[r] === nums[r - 1])) r--
-                l++
-                r--
-            }
-        }
-    }
-
-    // for (let i = 0; i < nums.length; i++) {
-    //     const num = nums[i];
-    //     const cache = {}
-    //     const tmp = {}
-
-    //     if (i >= 1 && num == nums[i - 1]) {
-    //         continue
-    //     }
-
-    //     for (let j = i + 1; j < nums.length; j++) {
-    //         const num2 = nums[j];
-
-    //         if (cache[num2]) {
-    //             let arr = [num, num2, -num - num2]
-    //             let key = JSON.stringify(arr)
-    //             if (!tmp[key]) {
-    //                 result.push(arr)
-    //             }
-    //             tmp[key] = 1
+    //         if (c in tmp) {
+    //             res.add([a, b, c].toString())
     //         } else {
-    //             cache[-num - num2] = 1
+    //             tmp[b] = 1
     //         }
     //     }
     // }
 
-    return result
+    // return Array.from(res).map(s => s.split(","))
+
+    // 
+    nums.sort((a, b) => a - b)
+    const res = []
+    for (const [i, a] of nums.entries()) {
+        let l = i + 1
+        let r = nums.length - 1
+
+        while (l !== r) {
+            let target = a + nums[l] + nums[r]
+
+            if (target === 0) {
+                res.push([a, nums[l], nums[r]])
+            } else {
+                while (target > 0 && nums[r] === nums[--r]) { }
+                while (target < 0 && nums[l] === nums[++l]) { }
+            }
+        }
+    }
+    return res
 };
 // @lc code=end
 
+/**
+ * 数组方法
+ */

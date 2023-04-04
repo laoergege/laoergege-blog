@@ -22,11 +22,26 @@ var levelOrder = function (root) {
         return [];
     }
 
-    let queue = [root];
-    const result = [];
+    let queue = [root]
+    const result = []
     while (queue.length) {
-        result.push(queue.map((node) => node.val));
-        queue = queue.flatMap((node) => [node.left, node.right]).filter((node) => node)
+        let _result = []
+        let _queue = []
+        for (const node of queue) {
+            const { val, left, right } = node
+            _result.push(val)
+
+            if (left) {
+                _queue.push(left)
+            }
+
+            if (right) {
+                _queue.push(right)
+            }
+        }
+
+        queue = _queue
+        result.push(_result)
     }
 
     return result;

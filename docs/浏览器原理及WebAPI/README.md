@@ -24,7 +24,7 @@ desc: 浏览器原理及API知识体系总结
   - 渲染进程，渲染页面、运行 JavaScript等。
   - 插件进程 
 - [页面导航流程](./页面导航流程.md)
-- [页面渲染原理](./%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86.md)
+- [页面渲染原理](./页面渲染原理.md)
 - [事件循环与消息队列](./消息队列与事件循环.md)
 
 ## Web 安全策略
@@ -53,17 +53,12 @@ desc: 浏览器原理及API知识体系总结
         - postMessage
         - MessageChannel
         - BroadcastChannel（同源限制）
-  - [存储&缓存（同源限制）](./Web%20%E5%AD%98%E5%82%A8.md)
-    - [浏览器缓存：http-cache](../HTTP/http%20%E7%BC%93%E5%AD%98.md#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93)
-    - Cookie
-    - LocalStorage、SessionStorage
-    - IndexDB
-    - CacheStorage&CacheAPI
+  - [存储 & 缓存](./Web%20存储%20&%20缓存.md)
   - 网络
     - 同源
       - Ajax
       - Fetch
-      - WebSocket
+      - [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
     - 非同源
       - CORS（[跨域资源共享](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS#http_%E5%93%8D%E5%BA%94%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5)）
         - 简单请求：拦截响应
@@ -96,16 +91,17 @@ desc: 浏览器原理及API知识体系总结
       - JSONP：利用了 script 标签的 src 属性来实现跨域数据交互的，因为浏览器解析HTML代码时，原生具有src属性的标签，浏览器都赋予其HTTP请求的能力，而且不受跨域限制，使用src发送HTTP请求，服务器直接返回一段JS代码的函数调用，将服务器数据放在函数实参中，前端提前写好响应的函数准备回调，接收数据，实现跨域数据交互
       - Proxy Server：服务器代理
       - WebSocket
-  - [WebWorker：多线程](./WebWork.md)
+  - [多线程：WebWorker](./WebWork.md)
     - [task-worklet](https://github.com/developit/task-worklet)
     - [workerize](https://github.com/developit/workerize)
   - [PWA](./PWA.md)
+  - 多媒体
+    - [WebRTC](https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API)
   - 其他
     - ResourceHints
       - [prerender](https://web.dev/speculative-prerendering/)
     - SanitizerAPI
       - [Safe DOM manipulation with the Sanitizer API](https://web.dev/sanitizer/)
-    - [WebRTC](https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API)
     - TaskSchedulingAPI
     - WebAssembly
 

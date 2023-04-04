@@ -14,14 +14,16 @@
     - 安装
     - 更新
     - 删除
+    - 联调
+    - 补丁
   - 脚本运行
   - Workspaces
 - 开发环境锁定
   - Node 版本
-  - 包管理
-  - 依赖版本
-  - [nvm](https://github.com/nvm-sh/nvm) + [corepack](https://github.com/nodejs/corepack) + lockfile
-  - [volta](https://github.com/volta-cli/volta) + lockfile
+    - [volta](https://github.com/volta-cli/volta)
+    - [nvm](https://github.com/nvm-sh/nvm)
+  - 包管理：[corepack](https://github.com/nodejs/corepack)
+  - 依赖版本：lockfile
 
 
 - 测试
@@ -61,7 +63,12 @@ nvm
           - package: `engines` + `.npmrc: engine-strict`
           - .npmrc: `use-node-version`
 
+## 创建现代化模块包
 
+- 自动化版本管理
+  - 语义版本控制
+    - [semantic-release](https://github.com/semantic-release/semantic-release)
+- 发包
 
 ## 发包
 
@@ -106,7 +113,8 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
      - package.json#publishConfig：
        ```json
        "publishConfig": {
-         "registry":"https://npm.pkg.github.com"
+         "registry":"https://npm.pkg.github.com",
+         "access": "public"
        }
        ```
    - 身份认证

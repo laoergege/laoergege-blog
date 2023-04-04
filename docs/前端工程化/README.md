@@ -107,7 +107,7 @@ desc: 前端工程化
       - [tabulator](https://github.com/olifolkerd/tabulator)
     - 表单
       - [表单配置化](#表单配置化)
-    - 图标
+    - [图标](#图标)
     - 跨平台
       - H5 
       - 混合应用
@@ -144,68 +144,23 @@ desc: 前端工程化
   - [ajv](https://github.com/ajv-validator/ajv)
   - Angular 表单
 
-## NodeJS ESM
+## 图标
 
-- `.js` + `"type": "module"`
-- `.mjs`
-
-## 现代化前端构建工具的设计及考量
-
-
-packages 声明副作用
-
-```json
-
-{
-    "name": "my-package",
-    "sideEffects": false
-}
-
-```
-
-内联注释
-
-```js
-const x = */@__PURE__*/eliminated_if_not_called()
-```
-
-
-
-
-- 使用 ESM
-- 确保您确切知道哪些依赖项（如果有）尚未声明sideEffects或将它们设置为true
-- 在使用带有副作用的包时，使用内联注释来声明纯粹的方法调用
-- 如果您要输出 CommonJS 模块，请确保在转换导入和导出语句之前优化您的包
-  - 避免过早的转译：这些编译器会在代码优化之前到达您的代码。而且无论是默认还是错误配置，这些编译器通常会输出 CommonJS 模块，而不是 ESM。如前一节所述，CommonJS 模块是动态的，因此无法正确评估死代码消除
-
-
-
-- ESM 导出
-- `"type": "module"`
-- `"module": "./path/entry.js"`
-
-```json
-{
-    // ...
-    "main": "./index-cjs.js",
-    "module": "./index-esm.js",
-    "exports": {
-        "require": "./index-cjs.js",
-        "import": "./index-esm.js"
-    }
-    // ...
-}
-```
-
-## TreeShaking 原理设计
-
-
-
-
-- 大前端方向
-  - 传统 Web 前端
-  - 前端工程
-  - 跨端：桌面端、移动端、小程序
-  - 图形：图表、3D、游戏
-  - 后端服务：Node BFF
-  - 音视频
+- 图标方案
+  - 图片
+    - 使用独立的图片来引入图标
+    - 使用 CSS sprites 技术
+  - 字体图标
+    - 原理：占用私有 Unicode 字符编码区域
+    - web font + class name + 伪元素（::before，::after）
+  - **SVG**
+    - inline SVG
+    - SVG Sprite
+    - **css background + DataURI + svg**
+      - svg 着色
+- 模式：在前端视图层框架中封装组件
+- 工程
+  - 按需生成
+    - 案例
+      - [iconify](https://iconify.design/)
+      - [unplugin-icons](https://github.com/antfu/unplugin-icons)

@@ -11,21 +11,17 @@
  */
 var isValid = function (s) {
     const stack = []
+    const map = {
+        ')': '(',
+        ']': '[',
+        '}': '{'
+    }
 
     for (const el of s) {
-        if (el === '(' || el === '{' || el === '[') {
+        if (!(el in map)) {
             stack.push(el)
         } else {
-            const top = stack.pop()
-            if (
-                (top === '(' && el === ')') ||
-                (top === '{' && el === '}') ||
-                (top === '[' && el === ']')
-            ) {
-                continue
-            } else {
-                return false
-            }
+            if (stack.pop() !== map(el)) return false
         }
     }
 

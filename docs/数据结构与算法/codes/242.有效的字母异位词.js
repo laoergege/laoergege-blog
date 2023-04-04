@@ -11,21 +11,23 @@
  * @return {boolean}
  */
 var isAnagram = function (s, t) {
-    const map = {}
+    if (s.length === t.length) {
+        const map = {}
 
-    for (const char of s) {
-        let num = map[char]
-        map[char] = typeof num === 'undefined' ? 1 : (num + 1)
-    }
+        for (let i = 0; i < s.length; i++) {
+            let _s = s[i]
+            let _t = t[i]
 
-    for (const char of t) {
-        if (map[char]) {
-            map[char] -= 1
-        } else {
-            return false
+            map[_s] ??= 0
+            map[_s] += 1
+
+            map[_t] ??= 0
+            map[_t] -= 1
         }
-    }
 
-    return !Object.values(map).some(e => e !== 0)
+        return !Object.values(map).some(e => e !== 0)
+    } else {
+        return false
+    }
 };
 // @lc code=end

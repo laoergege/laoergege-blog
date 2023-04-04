@@ -18,19 +18,15 @@
  * @return {boolean}
  */
 var hasCycle = function (head) {
-    let slow = head
-    let quick = head?.next
+    let slow = head;
+    let quick = head;
 
-    while (slow) {
+    while (slow && quick) {
+        slow = slow?.next
+        quick = quick?.next?.next
+
         if (slow === quick) {
             return true
-        }
-
-        slow = slow.next
-        try {
-            quick = quick.next.next
-        } catch (error) {
-            return false
         }
     }
 

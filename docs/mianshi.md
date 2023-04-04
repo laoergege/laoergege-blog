@@ -325,6 +325,14 @@
         - 创建私有变量
         - 延长变量的生命周期
           - 柯里化函数
+      - 题目
+        ```js
+        function foo(...args) {
+          const target = (...arg1s) => foo(...[...args, ...arg1s])
+          target.getValue = () => args.reduce((p, n) => p+ n, 0)
+          return target
+        }
+        ```
     - [x] this
       - 默认情况下普通函数执行上下文中的 this 是指向全局对象 window 的，但在严格模式下，this 值则是 undefined
       - 对象方法调用（指向该对象）
@@ -355,9 +363,6 @@
       - promise:Promise.race()方法可以用来竞争 Promise 可以借助这个特性 自己包装一个 空的 Promise 与要发起的 Promise 来实现
     - [x] Promise.all 原理：计数器模式  ![图 21](./images/1646032737911.png)
     - [x] 实现并发限制  ![图 2](./images/1654685954833.png)  
-    - [ ] p-reduce
-    - [ ] p-waterfall
-    - [ ] p-series
     - [x] 异步代码执行顺序
       - 事件循环模型
       - await => Promise.resolve
@@ -876,6 +881,8 @@
       - vue2 会根据环境、采用不同的降级方案使用系统异步 API，而 vue3 直接使用 Promise
         - Promise.then、MutationObserver 和 setImmediate、messagechannel，如果执行环境不支持，则会采用 setTimeout(fn, 0)
   - API
+    - [x] vue 的 data 为什么要用函数返回一个对象？
+      - 多个组件实例会共享 data 数据
     - [x] v-if和v-for哪个优先级更高？
       - 实践中不应该把v-for和v-if放一起
       - vue2中，v-for的优先级是高于v-if
@@ -926,8 +933,6 @@
       - watch 侦听属性适用于观测某个值的变化去立刻执行一段复杂的业务逻辑
   - 其他
     - [ ] 组件设计原则
-    - [x] vue 的 data 为什么要用函数返回一个对象？
-      - 多个组件实例会共享 data 数据
     - [x] MVC 与 MVVM 的区别
       - MVC 主要将代码分为
         - Model 数据模型，封装数据及业务逻辑
@@ -1045,13 +1050,74 @@
     - 进程关闭，操作系统会回收进程所占用的内存
 - 算法
   - 字符串
-    - 【 】
+    - [ ] 翻转字符串“algorithm”
   - [x] 散列表：散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实就是数组的一种扩展
     - [x] 散列冲突
-      - 开放寻执法
-      - 链表法
-    - [ ] 字母异位
-    - [ ] 两树之和
+      - 寻执法
+      - **链表法**
+    - [x] 有效字母异位
+      - ```js
+          var isAnagram = function (s, t) {
+              if (s.length === t.length) {
+                  const map = {}
+
+                  for (let i = 0; i < s.length; i++) {
+                      let _s = s[i]
+                      let _t = t[i]
+
+                      map[_s] ??= 0
+                      map[_s] += 1
+
+                      map[_t] ??= 0
+                      map[_t] -= 1
+                  }
+
+                  return !Object.values(map).some(e => e !== 0)
+              } else {
+                  return false
+              }
+          };
+        ```
+    - [x] 两数之和
+      - ```js
+          var twoSum = function (nums, target) {
+            const tmp = {}
+            for (const [i, a] of nums.entries()) {
+              let b = target - a
+              if (b in tmp) {
+                return [tmp[b], i]
+              } else {
+                tmp[a] = i
+              }
+            }
+          };
+        ```
+    - [x] 三数之和
+      - 三数转两数 
+      ```js
+          var threeSum = function (nums) {
+              if (nums.length < 3) {
+                  return []
+              }
+
+              nums.sort()
+              const res = new Set()
+              for (const [i, a] of nums.entries()) {
+                  let tmp = {}
+                  for (const b of nums.slice(i + 1)) {
+                      let c = -(a + b)
+
+                      if (c in tmp) {
+                          res.add([a, b, c].toString())
+                      } else {
+                          tmp[b] = 1
+                      }
+                  }
+              }
+
+              return Array.from(res).map(s => s.split(","))
+          };
+        ```
     - [x] LRU ![图 8](./images/1645794229880.png)
   - [ ] 数组
     - [x] 排序算法
@@ -1085,29 +1151,49 @@
     - [x] 三数之和 ![图 31](./images/1649522423434.png)
     - [x] 无重复字符的最长子串 ![图 32](./images/1649572968076.png)
   - [x] 链表
-    - 插入 b.next = a.next a.next = b
-    - 删除 a.next = a.next.next
     - 链表操作
       - 注意空指针
-      - 带头链表：简化操作，针对链表的插入、删除操作，需要对插入第一个结点和删除最后一个结点的情况进行特殊处理
-    - 反转 ![图 9](./images/1648569881674.png)
-    - 部分交换 ![图 10](./images/1648571312582.png)
-    - 有无环
-      - ![图 8](./images/1648562285833.png)
+      - 使用**带头链表**防止空指针，针对链表的插入、删除操作，需要对插入第一个结点和删除最后一个结点的情况进行特殊处理
+    - 翻转
+      - 链表翻转 ![图 9](./images/1648569881674.png)
+      - 部分交换 ![图 10](./images/1648571312582.png)
+      - k 个节点一组进行翻转  ![图 1](./images/1675935313444.png)  
+    - 环的检测
+      ```js
+      var hasCycle = function (head) {
+          let slow = head;
+          let quick = head;
+
+          while (slow && quick) {
+              slow = slow?.next
+              quick = quick?.next?.next
+
+              if (slow === quick) {
+                  return true
+              }
+          }
+
+          return false
+      };
+      ```
       - 快慢指针
       - 散列表
+    - 回文链表 ![图 11](./images/1648571590471.png)
     - 倒数第 n 节点 ![图 12](./images/1648572414848.png)
     - 中间节点 ![图 13](./images/1648573349993.png)
-    - 回文链表 ![图 11](./images/1648571590471.png)
     - 合并链表
     - 链表中环的入口节点
   - [x] 栈、队列
-    - 括号是否合法
-    - 简单说下栈和队列？如何用栈实现队列？
+    - [x] 有效的括号  ![图 2](./images/1675936357264.png)  
+    - 用栈实现队列
+      - 输出栈、输入栈
     - 用队列实现栈
-    - 滑动窗口的最大值
+    - [] 滑动窗口的最大值
+      - 双端队列
+      - 窗口最大值只需读取双端队列头部元素
+    - 求解算术表达式的结果（LeetCode 224、227、772、770)
   - [x] 树
-    - 二叉树、满二叉树、完全、二叉搜索树
+    - 二叉树、满二叉树、完全二叉树
     - DFS：前序遍历、中序遍历、后序遍历
       ```js
       function traverse(TreeNode root) {
@@ -1122,7 +1208,6 @@
           // 后序遍历代码位置
       }
       ```
-    - 对二叉查找树进行中序遍历，就可以输出一个从小到大的有序数据队列
     - BFS：层序遍历
       ```js
       let queue = [root]
@@ -1139,25 +1224,100 @@
           }
       }
       ```
-    - 翻转二叉树  ![图 3](./images/1657350223433.png)  
-    - 验证搜索二叉树  
-      - ![图 4](./images/1657351202291.png) 
-      - 中序遍历  ![图 5](./images/1658678887901.png)  
-    - 二叉树的最大深度/最小深度
-      - ![图 2](./images/1658327491563.png) 
-      ```js
-      var maxDepth = function (root, depth = 0) {
+    - 树的遍历
+      - 二叉树的层序遍历
+        ```js
+        var levelOrder = function (root) {
+            if (!root) {
+                return [];
+            }
+
+            let queue = [root]
+            const result = []
+            while (queue.length) {
+                let _result = []
+                let _queue = []
+                for (const node of queue) {
+                    const { val, left, right } = node
+                    _result.push(val)
+
+                    if (left) {
+                        _queue.push(left)
+                    }
+
+                    if (right) {
+                        _queue.push(right)
+                    }
+                }
+
+                queue = _queue
+                result.push(_result)
+            }
+
+            return result;
+        };
+        ```
+      - 按之字形顺序打印二叉树
+        ```js
+        var zigzagLevelOrder = function (root) {
           if (!root) {
-              return 0
+            return []
           }
 
-          return Math.max(
-              maxDepth(root.left),
-              maxDepth(root.right),
-          ) + 1
-      };
-      ``` 
-    - 按之字形顺序打印二叉树
+          let queue = [root]
+          let result = []
+          let i = 0
+          while (queue.length) {
+            let _queue = []
+            let _result = []
+            let op = i % 2 === 0 ? 'push' : 'unshift'
+            for (const node of queue) {
+              let { val, left, right } = node
+
+              _result[op](val)
+
+              if (left) {
+                _queue.push(left)
+              }
+
+              if (right) {
+                _queue.push(right)
+              }
+            }
+
+            i += 1;
+            result.push(_result)
+            queue = _queue
+          }
+
+          return result;
+        };
+        ```
+      - 翻转二叉树  ![图 3](./images/1657350223433.png)  
+      - 二叉树的最大深度/最小深度
+        - ![图 2](./images/1658327491563.png) 
+        ```js
+        var maxDepth = function (root, depth = 0) {
+            if (!root) {
+                return 0
+            }
+
+            return Math.max(
+                maxDepth(root.left),
+                maxDepth(root.right),
+            ) + 1
+        };
+        ``` 
+    - 二叉搜索树（BST）
+      - 特点
+        - 左子树中的每个结点的值都小于父结点
+        - 右子树中的每个结点的值都大于父结点
+        - 左右子树同样也是一个二叉搜索树
+        - 对二叉查找树进行中序遍历，就可以输出一个从小到大的有序数据队列
+        - 普通二叉树复杂度 O(n)；二叉查找树应用了二分查找的思想，复杂度则是 O(logn)
+      - 验证搜索二叉树  
+        - ![图 4](./images/1657351202291.png) 
+        - 中序遍历  ![图 5](./images/1658678887901.png)  
   - [x] 堆
     - 堆实现
     - 数据流中的中位数
@@ -1166,24 +1326,22 @@
       - 优先队列：二叉堆
       - 快排
   - [ ] 递归、分治、贪心、回溯、动规
-    - 递归
-      - [x] 斐波那契数列
-        ```js
-        var fib = function (n, mem = {}) {
-            if (n < 2) {
-                return n
-            }
+    - [x] 斐波那契数列
+      ```js
+      var fib = function (n, mem = {}) {
+          if (n < 2) {
+              return n
+          }
 
-            if (typeof mem[n] !== 'undefined') return mem[n]
+          if (typeof mem[n] !== 'undefined') return mem[n]
 
-            return mem[n] = fib(n - 1, mem) + fib(n - 2, mem)
-        };
-        ```
-      - 子集
-    - 分治
+          return mem[n] = fib(n - 1, mem) + fib(n - 2, mem)
+      };
+      ```
     - 回溯
       - 排列
       - 组合
+      - 生成有效括号组合
       - N皇后问题
     - 动规
       - 找硬币/零钱兑换
@@ -1254,14 +1412,14 @@
 
 ## 其他
 
-- [ ] 自我介绍
+- 自我介绍
   - 面试官好，我叫\*\*，今天来应聘贵公司的前端工程师岗位。我从事前端开发两年多，有 X 年多的 Vue 开发经验，一年 React 开发经验，在上家公司主要从事 H5 页面，后台管理系统，混合 App 等项目开发。平常喜欢逛一些技术社区丰富自己的技术，像思否，掘金之类，并且自己也独立开发了个人博客网站，记录自己的工作总结和学习心得。 我的性格比较温和，跟同事朋友相处时比较外向，在工作中代码开发时我喜欢全心全意的投入，对于工作我总抱着认真负责的态度。面试官，以上是我的介绍，谢谢。
-- [ ] 工作中遇到的具有挑战的事情
-- [ ] 最大的优点和缺点
-- [ ] 自己做过的项目中有那些是你值得说的
-- [ ] 开发流程一般都是怎么做的
-- [ ] 空窗期
-- [ ] 职业规划
+- 空窗期
+- 工作中遇到的具有挑战的事情
+- 最大的优点和缺点
+- 自己做过的项目中有那些是你值得说的
+- 开发流程一般都是怎么做的
+- 职业规划
   - 希望在未来的两到三年时间，拓充技术能力的同时，在业务能力上有所沉淀成为业务，形成一定的见解，同时谋求从大头兵向小组长的一个转变
 - 提问环节
   - 假如入职以后，工作职责是什么？
@@ -1392,6 +1550,7 @@ for(var i = 1;i <= 5;i++){
 - Portals
 - flatten
 - Thunk
+- recursion
 
 
   - tailwindcss 好处
@@ -1691,10 +1850,15 @@ vue 增量 diff
   - 而如果你用了class组件，就很容易出问题，因为“多个版本”的组件树，其中class组件的实例对象是共享的，
 
 
-- react 响应式更新
-  - 渲染 => vdom
-  - diff vdom
-  - patch
+## 项目经验
 
-
-- 利用 service work 预缓存用户对应的权限模块
+- monorepo
+  - 包管理原理
+- pwa
+  - 利用 service work 预缓存用户对应的权限模块
+- docker
+- h5
+- webwork
+  - Excel大文件导出
+    - 在worker线程中通过exceljs构建表格相关数据
+    - file-save
