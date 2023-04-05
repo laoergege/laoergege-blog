@@ -1,15 +1,9 @@
+import { THEMES } from "./components/theme/config";
+
 module.exports = {
   mode: 'jit',
-  content: [
-    './docs/.vuepress/**/*.{js,jsx,ts,tsx,vue,html}',
-  ],
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('daisyui'),
-  ],
+  plugins: [require("daisyui")],
   daisyui: {
-    themes: [
-      'cupcake'
-    ],
+    themes: [THEMES.dark, THEMES.light],
   },
-}
+};

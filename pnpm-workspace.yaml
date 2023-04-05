@@ -1,5 +1,2 @@
 packages:
-  - 'plugins'
-  - 'packages/*'
-  - '.'
-  - 'scripts'
+  - "markdown-plugins/*"
