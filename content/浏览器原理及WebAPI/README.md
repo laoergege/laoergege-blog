@@ -1,4 +1,5 @@
 ---
+discussionID: olsgjiILbPS3xNLtCKrGV
 release: true
 tags:
  - chrome
@@ -110,8 +111,3 @@ desc: 浏览器原理及API知识体系总结
 - 下载
   - [文件下载，搞懂这9种场景就够了](https://mp.weixin.qq.com/s/PysSe6MykjYzVrWQCKJXvg)
   - [动态表格大文件下载可以这样优化！](https://mp.weixin.qq.com/s/14bJxJ9U9mG76tw-Z93UqQ)
-
-
-
-
-

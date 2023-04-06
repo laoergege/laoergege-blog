@@ -1,4 +1,5 @@
 ---
+discussionID: kBsGfHWKqVuawgv8A0P3E
 release: true
 tags:
  - javascript
@@ -40,8 +41,3 @@ tags:
   - [现代 JavaScript 教程](https://zh.javascript.info/)
   - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
-
-
-
-
-

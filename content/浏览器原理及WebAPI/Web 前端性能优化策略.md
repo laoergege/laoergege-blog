@@ -1,4 +1,5 @@
 ---
+discussionID: ZqGyuUxDVZMEDUoP27urU
 release: true
 tags:
  - 性能优化
@@ -222,4 +223,3 @@ Stylesheet `<link>` tags in the `<head>` without a **disabled** attribute or a *
 ![图 4](./images/c08d5d2e7675be10b62946d898236eb7dbf966fcedb04f99dcd1ab9f76d4f5b6.png)
 
 **如此频繁会大大影响当前函数的执行效率，从而阻塞其他渲染任务执行**。
-

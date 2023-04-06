@@ -1,4 +1,5 @@
 ---
+discussionID: UpjaStMacYKmT9Vx8nQj0
 release: true
 top: 3
 tags:
@@ -630,5 +631,3 @@ Vue3 diff 算法的主要优势是结合**编译优化**，在编译阶段对静
 - [190.精读《DOM diff 原理详解》](https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/190.%E7%B2%BE%E8%AF%BB%E3%80%8ADOM20%diff20%%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E3%80%8B.md)
 - Vue.js 3.0 核心源码解析
 - [diff 算法原理概述](https://github.com/NervJS/nerv/issues/3)
-
-

@@ -1,4 +1,5 @@
 ---
+discussionID: KK6rIsF91nKG4e8yK8Q2-
 release: true
 tags:
  - tty
@@ -40,4 +41,4 @@ TL;DR：
 ## 远程终端
 
 > TODO: 实现一个远程终端玩具
-> ![图 4](./images/1663783077209.png)  
+> ![图 4](./images/1663783077209.png)

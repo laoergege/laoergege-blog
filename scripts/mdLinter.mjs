@@ -19,15 +19,16 @@ const lintMD = async (file) => {
   let fd;
   try {
     fd = await open(file, "r+")
-    const content = await fd.readFile({
+    const content = (await fd.readFile({
       encoding: "utf-8"
-    }).trim()
+    })).trim()
     const { frontmatter, attributes } = fm(content)
     const resolvedMD = {
       content,
       frontmatter,
       attributes,
-      fd
+      fd,
+      filePath: file
     }
     await hooks.callHook("lint", resolvedMD)
     await fd.write(resolvedMD.content, 0)

@@ -1,4 +1,5 @@
 ---
+discussionID: 5VPsjN8T34ADwsjjBNlLB
 release: true
 top: 2
 tags:
@@ -561,4 +562,4 @@ const mountElement = (
 
 > 下图为 vue 渲染流程，其中更新流程也包括在里面
 
-![图 6](./images/089ea60df2fe1490c5fb0c69e460a9681c509346e0486d52a95d131902cbbc92.png) 
+![图 6](./images/089ea60df2fe1490c5fb0c69e460a9681c509346e0486d52a95d131902cbbc92.png)

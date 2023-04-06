@@ -35,9 +35,9 @@ import type { QueryBuilderParams } from '@nuxt/content/dist/runtime/types'
 import { useDebounceFn } from '@vueuse/core'
 
 const queryPage = (page: number): QueryBuilderParams => {
-  const limit = 5;
+  const limit = 8;
 
-  return { path: "/", limit, sort: [{ updateTime: -1 }], skip: (page - 1)*limit };
+  return { path: "/", limit, sort: [{ updateTime: -1 }, { top: -1 }], skip: (page - 1)*limit };
 }
 
 const pages = ref([queryPage(1)])

@@ -1,4 +1,5 @@
 ---
+discussionID: jivp72W6efSCR40W4IVTi
 release: true
 tags:
   - http
@@ -177,5 +178,3 @@ vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在
   - Optimistic UI
 - adapter
 - net、cache
-
-

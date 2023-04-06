@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     "@nuxtjs/tailwindcss",
-    // "@nuxt/image-edge",
+    "@nuxt/image-edge",
     "nuxt-icon",
     "@vite-pwa/nuxt",
   ],
@@ -62,5 +62,5 @@ export default defineNuxtConfig({
   // image: {},
   pwa: {
     injectRegister: "inline",
-  },
+  }
 });

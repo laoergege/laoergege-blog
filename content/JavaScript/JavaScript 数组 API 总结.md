@@ -1,4 +1,5 @@
 ---
+discussionID: q-aVwW1RsqmPdzOpDFMEB
 release: true
 tags:
  - js
@@ -73,5 +74,3 @@ desc: 数组方法总结
       - map
       - **reduce(previousValue, currentValue, currentIndex, array)**
       - **reduceRight**
-
-

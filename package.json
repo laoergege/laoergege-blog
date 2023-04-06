@@ -33,6 +33,7 @@
   "devDependencies": {
     "@nuxt-themes/typography": "^0.11.0",
     "@nuxt/content": "^2.5.2",
+    "@nuxt/image-edge": "1.0.0-28008586.381b906",
     "@nuxtjs/tailwindcss": "^6.6.5",
     "@unocss/reset": "^0.50.6",
     "@vite-pwa/nuxt": "^0.0.7",

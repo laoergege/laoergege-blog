@@ -1,14 +1,13 @@
 import { nanoid } from "nanoid";
 import { hooks } from "./hooks.mjs";
 
-hooks.hook("lint", (agrs) => {
-  const { frontmatter, content } = args
-  if (frontmatter) {
-    if (frontmatter.includes("discussionID")) {
+hooks.hook("lint", (args) => {
+  if (args.frontmatter) {
+    if (args.frontmatter.includes("discussionID")) {
       return
     }
-    argv.content = content.replace("---", `---\ndiscussionID: ${nanoid()}`)
+    args.content = args.content.replace("---", `---\ndiscussionID: ${nanoid()}`)
   } else {
-    argv.content = `---\ndiscussionID: ${nanoid()}\n---\n` + content
+    args.content = `---\ndiscussionID: ${nanoid()}\n---\n` + args.content
   }
 })

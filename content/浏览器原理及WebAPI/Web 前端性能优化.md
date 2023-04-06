@@ -1,4 +1,5 @@
 ---
+discussionID: geXgLDyLyyNQk7C9XCeBI
 release: true
 tags:
   - 性能优化
@@ -252,4 +253,3 @@ Priority Hints
       - imagesrcset & imagesizes
       - 延迟加载屏幕外图像
 - 代码优化
-
