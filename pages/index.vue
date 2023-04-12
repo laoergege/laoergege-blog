@@ -31,13 +31,16 @@
 </template>
 
 <script setup lang="ts">
-import type { QueryBuilderParams } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent, QueryBuilderParams, SortFields } from '@nuxt/content/dist/runtime/types'
 import { useDebounceFn } from '@vueuse/core'
 
-const queryPage = (page: number): QueryBuilderParams => {
-  const limit = 8;
+const limit = 10;
+const sort: SortFields = { updateTime: -1, top: 1 };
+const skip = (p: number) => (p - 1)*limit;
+const without = ['body']
 
-  return { path: "/", limit, sort: [{ updateTime: -1 }, { top: -1 }], skip: (page - 1)*limit };
+const queryPage = (page: number): QueryBuilderParams => {
+  return { limit, sort: [sort as any], skip: skip(page), without };
 }
 
 const pages = ref([queryPage(1)])
@@ -52,5 +55,32 @@ const next = useDebounceFn(() => {
 const empty = () => {
   isEmpty.value = true;
   return ""
+}
+
+// SSG 模式下动态生成列表数据和文章
+if(process.server && !process.dev) {
+  const generateContentList = (page: number): any => {
+    return queryContent("/")
+      .skip(skip(page))
+      .limit(limit)
+      .sort(sort)
+      .without(without)
+      .find()
+  }
+  const generatePostContent = async (data: ParsedContent[]) => {
+    for (const {_path} of data) {
+        await queryContent(_path as string).findOne()
+      }
+  }
+
+  let idx = 2;
+  while (true) {
+    const data = await generateContentList(idx++)
+    if(!data.length) {
+      break
+    } else {
+      await generatePostContent(data)
+    }
+  }
 }
 </script>

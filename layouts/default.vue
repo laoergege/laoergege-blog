@@ -1,4 +1,5 @@
 <template>
+  <NuxtLoadingIndicator />
   <div class="min-h-screen flex flex-col">
     <Navbar />
     <main class="container mx-auto flex-1 py-6 sm:py-10 px-4">

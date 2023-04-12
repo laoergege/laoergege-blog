@@ -1,5 +1,5 @@
 import { resolve, relative } from "node:path";
-import { copyFile, existsSync, mkdir } from "node:fs";
+import { stat, mkdir, copyFile } from "node:fs/promises";
 
 interface ContentFile {
   _id: string;
@@ -27,17 +27,16 @@ export default defineNitroPlugin((nitroApp) => {
           const imageSrc = resolve(filePath, "..", g);
           const img = relative(rootDir, imageSrc);
           const imgDest = resolve(process.cwd(), OUTDIR, img);
-          if (!existsSync(imgDest)) {
-            mkdir(resolve(process.cwd(), OUTDIR), (err) => {
-              if(!err) {
-                copyFile(imageSrc, imgDest, (err) => {
-                  if(err) {
-                    console.error(err);
-                  }
+
+          ;(async () => {
+            stat(imgDest)
+              .catch(async () => {
+                await mkdir(resolve(imgDest, "../"), {
+                  recursive: true
                 });
-              }
-            })
-          }
+                await copyFile(imageSrc, imgDest);
+              })
+          })()
 
           return `(${PREFIX}${img})`;
         }

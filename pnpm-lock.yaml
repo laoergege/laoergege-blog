@@ -26,8 +26,10 @@ importers:
       nanoid: ^4.0.2
       nuxt: ^3.3.3
       nuxt-icon: ^0.3.3
+      ohash: ^1.0.0
       postcss-preset-env: ^8.3.0
       remark-directive: ^2.0.1
+      ufo: ^1.1.1
       zx: ^7.2.1
     dependencies:
       '@docsearch/css': 3.3.3
@@ -36,6 +38,7 @@ importers:
       '@unhead/vue': 1.1.25
       '@vueuse/core': 9.13.0
       medium-zoom: 1.0.8
+      ufo: 1.1.1
     devDependencies:
       '@nuxt-themes/typography': 0.11.0
       '@nuxt/content': 2.5.2
@@ -53,6 +56,7 @@ importers:
       nanoid: 4.0.2
       nuxt: 3.3.3
       nuxt-icon: 0.3.3
+      ohash: 1.0.0
       postcss-preset-env: 8.3.0
       remark-directive: 2.0.1
       zx: 7.2.1
@@ -9618,7 +9622,6 @@ packages:
 
   /ufo/1.1.1:
     resolution: {integrity: sha512-MvlCc4GHrmZdAllBc0iUDowff36Q9Ndw/UzqmEKyrfSzokTd9ZCy1i+IIk5hrYKkjoYVQyNbrw7/F8XJ2rEwTg==}
-    dev: true
 
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}

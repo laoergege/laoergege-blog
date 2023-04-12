@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
     <div class="md:max-w-screen-sm xl:max-w-screen-md mx-auto">
-      <ContentDoc />
+      <ContentDoc/>
       <div class="divider">其他文章</div>
       <div class="flex flex-col w-full lg:flex-row">
         <div

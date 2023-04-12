@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxt/image-edge",
     "nuxt-icon",
-    "@vite-pwa/nuxt",
+    // "@vite-pwa/nuxt",
   ],
   app: {
     head: {
@@ -23,7 +23,7 @@ export default defineNuxtConfig({
   },
   content: {
     documentDriven: true,
-    ignores: [".*?(png|svg|gif|jpg|jpeg)"],
+    ignores: [".*?[^(md)]$"],
     highlight: {
       theme: {
         // Default theme (same as single string)

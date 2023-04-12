@@ -1,14 +1,14 @@
 {
   "name": "laoergege-blog",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Laoergege's Learning Track",
   "scripts": {
+    "clean": "nuxt clean",
     "dev": "nuxt dev",
-    "build": "nuxt build",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "build": "nuxt generate",
+    "preview": "pnpm run build && pnpm dlx serve ./.output/public",
     "md-lint": "zx ./scripts/mdLinter.mjs",
-    "prepare": "husky install"
+    "prepare": "husky install && nuxi prepare"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
     "nanoid": "^4.0.2",
     "nuxt": "^3.3.3",
     "nuxt-icon": "^0.3.3",
+    "ohash": "^1.0.0",
     "postcss-preset-env": "^8.3.0",
     "remark-directive": "^2.0.1",
     "zx": "^7.2.1"
@@ -64,6 +65,7 @@
     "@giscus/vue": "^2.2.8",
     "@unhead/vue": "^1.1.25",
     "@vueuse/core": "^9.13.0",
-    "medium-zoom": "^1.0.8"
+    "medium-zoom": "^1.0.8",
+    "ufo": "^1.1.1"
   }
 }
