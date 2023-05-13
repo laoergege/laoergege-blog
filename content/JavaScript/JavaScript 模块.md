@@ -13,6 +13,7 @@ tags:
   - [模块化发展历程](#javascript-模块发展历程)
   - [CommonJS](#commonjs)
   - [ES Modules](#es-modules)
+- ES Modules 使用
 
 ## JavaScript 模块发展历程
 
@@ -92,7 +93,7 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
 
 - ES Modules
   - [语法](#es-modules-语法)
-    - 动态导入 `import()`
+    - 动态导入：`import()`
       - `import()` 函数与所加载的模块没有静态连接关系，即最后导入的是**值复制**效果，类似于 Node.js 的 `require()` 方法，只不过是异步加载
         ```js
         // c.mjs
@@ -115,12 +116,12 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
       - URL 路径规则
       - ES 模块的加载路径必须给出脚本的完整路径，不能省略脚本的后缀名
     - Import assertions
+    - top await
   - 特征
     - 自动采用严格模式，不管有没有声明 `use strict`
     - 模块作用域
       - 代码是在模块作用域之中运行，而不是在全局作用域运行。模块内部的顶层变量，外部不可见
       - CommonJs 的 this 是当前模块，ES6 Module的 this 是 undefined
-    - 顶层 await
   - [工作机制](#es-modules-是如何工作的)
   - [循环加载：如何解决依赖循环导致的死循环问题？](#如何解决依赖循环导致的死循环问题)
   - 应用
@@ -169,12 +170,12 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
 
 每个 ES module 的加载这几个阶段是**异步执行**：
 
-- *入口文件*：**模块加载器**第一个加载的模块
+- 入口文件：**模块加载器**第一个加载的模块
 - 依赖构建  ![](./images/1666377464170.png)  
   - 依赖解析  ![图 8](./images/1666377616506.png)  
     - Modules Resolve：模块 URL 解析
     - [Import maps](https://github.com/WICG/import-maps)
-  - 文件获取：文件的加载是
+  - 文件获取：文件的加载
   - 文件解析
     - 将文件解析成**模块记录**  ![图 9](./images/1666426485969.png)  
       - 一个模块在构建时直到所有相关依赖的文件都被获取、解析完才算构建完成

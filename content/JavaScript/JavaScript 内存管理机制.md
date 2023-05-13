@@ -4,6 +4,7 @@ release: true
 tags:
  - javascript
  - gc
+ - 内存管理
 ---
 
 # JavaScript 内存管理机制

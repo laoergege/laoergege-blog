@@ -11,7 +11,7 @@
  * @return {number}
  */
 // 动态规划
-// var coinChange = function (coins, amount) {
+var coinChange = function (coins, amount) {
 //     if (amount === 0) return 0
 
 //     let i = 1;
@@ -58,7 +58,5 @@
 //     for (const c of coins) {
 //         dfs(coins, amount, result, target + c, count + 1)
 //     }
-// }
+}
 // @lc code=end
-
-// console.log(coinChange([2], 4))

@@ -5,7 +5,7 @@ tags:
   - http
   - 缓存
   - 浏览器
-desc: 总结 http 缓存、缓存相关控制设置及前端缓存最佳实践
+description: 总结 http 缓存、缓存相关控制设置及前端缓存最佳实践
 ---
 
 # HTTP 缓存
@@ -32,7 +32,7 @@ http 中控制缓存的主要字段有一下三个：
    > HTTP 1.0 的字段，表示缓存到期时间，是一个绝对的时间 (当前时间+缓存时间)
 3. Pragma: no-cache(相当于 Cache-Control: no-cache，主要是为了兼容 HTTP/1.0)
 
-重点学习 `Cache-Control`
+> 重点学习 `Cache-Control`
 
 - Cache-Control
   - no-store，不允许存储缓存资源
@@ -62,8 +62,6 @@ http 中控制缓存的主要字段有一下三个：
 
 浏览器对资源的缓存位置分为：
 - 内存
-  - 预加载器
-  - preload 指令
 - service-work
 - http-cache
 - push-cache
@@ -152,8 +150,6 @@ vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在
 
 `stale-while-revalidate` 是一种缓存策略：优先使用缓存，然后再更新缓存。这与以往常见的缓存策略：“缓存 -> 过期 -> 更新 -> 使用” 有所不同，SWR：“缓存 -> 过期 -> 使用 -> 更新”。
 
-
-
 ## 学习参考
 
 - [MDN HTTP 缓存](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching#Cache_validation)
@@ -161,20 +157,3 @@ vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在
 - [understanding-vary-header](https://www.smashingmagazine.com/2017/11/understanding-vary-header/)
 - [A Tale of Four Caches](https://calendar.perfplanet.com/2016/a-tale-of-four-caches/)
 - [Cache-Control 的 stale-while-revalidate 指令](https://zhuanlan.zhihu.com/p/64694485)
-
-
-- API
-- core
-  - 缓存请求、缓存策略
-    - swr
-  - 请求管道
-    - 去除重复请求\接口竞态处理\接口择优使用\接口时序调整
-    - retry
-      - 聚焦时重新验证
-      - 网络恢复时重新验证
-      - 智能错误重试
-      - 轮询
-    - 中断
-  - Optimistic UI
-- adapter
-- net、cache

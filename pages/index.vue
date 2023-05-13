@@ -12,8 +12,8 @@
                   </h2>
                 </NuxtLink>
               </p>
-              <p class="flex gap-1">
-                <div class="badge badge-secondary text-xs" v-for="tag in article.tags">{{ tag }}</div>
+              <p class="flex gap-2 my-2">
+                <div class="badge badge-outline badge-secondary text-xs" v-for="tag in article.tags">{{ tag }}</div>
               </p>
               <p v-if="article.description" class="text-sm">{{ article.description }}</p>
             </div>
@@ -67,19 +67,16 @@ if(process.server && !process.dev) {
       .without(without)
       .find()
   }
-  const generatePostContent = async (data: ParsedContent[]) => {
-    for (const {_path} of data) {
-        await queryContent(_path as string).findOne()
-      }
-  }
 
   let idx = 2;
   while (true) {
-    const data = await generateContentList(idx++)
+    const data: ParsedContent[] = await generateContentList(idx++)
     if(!data.length) {
       break
     } else {
-      await generatePostContent(data)
+      for (const {_path} of data) {
+        await queryContent(_path as string).findOne()
+      }
     }
   }
 }

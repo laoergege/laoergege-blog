@@ -43,18 +43,17 @@ description: JavaScript 语法结构体系
           - if/else
           - switch
         - 循环
+          - while/do、while/for
+          - for
+            - 属性枚举：for in
+            - 迭代器模式
+              - for of
+              - for await of
           - 递归
-          - 遍历
-            - while/do、while/for
-            - for
-          - 属性枚举
-            - for in
-          - 迭代器模式
-            - for of
-            - for await of
-        - 错误跳转 try-catch-finally
-          - 即使在 try 中出现了 return，finally 中的语句也一定要被先执行
-          - finally 中的 return 会覆盖 try 中的 return
+        - 跳转 
+          - try-catch-finally
+            - 即使在 try 中出现了 return，finally 中的语句也一定要被先执行
+            - finally 中的 return 会覆盖 try 中的 return
       - 函数
         - 普通函数/成员函数
         - 箭头函数

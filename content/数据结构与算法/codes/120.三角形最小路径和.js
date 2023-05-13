@@ -10,14 +10,17 @@
  * @return {number}
  */
 var minimumTotal = function(triangle) {
-  const temp = [...triangle[0]]
-  let idx = 0
-
+  const temp = []
   
-  return temp.at(-1)
-};
-// @lc code=end
+  for (const [i, arr] of triangle.entries()) {
+    let cur = temp[i] ??= []
+    for (const j of arr.keys()) {
+      let result = Math.min(temp[i - 1]?.[j] ?? Infinity, temp[i - 1]?.[j - 1] ?? Infinity)
+      cur.push(arr[j] + (result !== Infinity ? result : 0))
+    }
+  }
 
-/**
- * f(i，j) = max[f(i - 1, j), f(i-1, j-1)] + t[i, j]
- */
+  return Math.min.apply(null, temp[temp.length - 1])
+};
+
+// @lc code=end
