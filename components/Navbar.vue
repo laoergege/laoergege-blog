@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar bg-base-100 sticky top-0 z-50 shadow-sm backdrop-blur-md">
+  <div class="navbar bg-base-100 sticky top-0 z-50">
     <div class="flex-1">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">

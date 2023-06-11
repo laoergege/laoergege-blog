@@ -1,14 +1,15 @@
 import type {} from "nuxt-icon";
 import type {} from "@vite-pwa/nuxt";
+import type {} from "@nuxtjs/tailwindcss";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  extends: "@nuxt-themes/typography",
+  extends: ["@nuxt-themes/typography", "@nuxt-themes/elements"],
   modules: [
     "@nuxt/content",
-    "@nuxtjs/tailwindcss",
+    '@nuxtjs/tailwindcss',
     "@nuxt/image-edge",
-    "nuxt-icon",
+    "@nuxt-themes/tokens"
     // "@vite-pwa/nuxt",
   ],
   app: {
@@ -23,7 +24,7 @@ export default defineNuxtConfig({
   },
   content: {
     documentDriven: true,
-    ignores: [".*?[^(md)]$"],
+    ignores: [".+\\.*?[^(md)]$"],
     highlight: {
       theme: {
         // Default theme (same as single string)

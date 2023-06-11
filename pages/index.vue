@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout>
+  <!-- <NuxtLayout> -->
     <div class="max-w-screen-md mx-auto flex flex-col gap-10 sm:gap-14">
       <template v-for="(page, idx) in pages" :key="idx">
         <ContentList :query="page" >
@@ -25,9 +25,9 @@
           </template>
         </ContentList>
       </template>
-      <button v-if="!isEmpty" class="btn btn-ghost self-center" @click="next">加载更多</button>
+      <button v-if="!isEmpty" class="btn btn-ghost self-center" @click="next">load more...</button>
     </div>
-  </NuxtLayout>
+  <!-- </NuxtLayout> -->
 </template>
 
 <script setup lang="ts">
