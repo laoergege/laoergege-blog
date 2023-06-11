@@ -29,16 +29,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Restore cache
-        uses: actions/cache@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
         with:
-          path: |
-            dist
-            .nuxt
-          key: ${{ runner.os }}-nuxt-build-${{ hashFiles('dist') }}
-          restore-keys: |
-            ${{ runner.os }}-nuxt-build-
-      - uses: ./.github/actions/setup-project
+          version: 7
+          run_install: false
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
       - name: Static HTML export with Nuxt
         run: pnpm build
       - name: Upload artifact
