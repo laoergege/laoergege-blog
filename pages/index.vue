@@ -1,21 +1,21 @@
 <template>
-  <!-- <NuxtLayout> -->
-    <div class="max-w-screen-md mx-auto flex flex-col gap-10 sm:gap-14">
+  <NuxtLayout>
+    <div class="max-w-screen-md mx-auto flex flex-col gap-12 sm:gap-14">
       <template v-for="(page, idx) in pages" :key="idx">
         <ContentList :query="page" >
           <template v-slot="{ list }">
             <div v-for="article in list" :key="article._path">
-              <p>
+              <div class="flex flex-wrap items-baseline gap-2">
                 <NuxtLink :to="article._path">
-                  <h2 class="text-xl sm:text-2xl font-medium">
+                  <h2 class="text-xl sm:text-2xl font-semibold hover:text-primary-content">
                     {{ article.title }}
                   </h2>
                 </NuxtLink>
-              </p>
-              <p class="flex gap-2 my-2">
-                <div class="badge badge-outline badge-secondary text-xs" v-for="tag in article.tags">{{ tag }}</div>
-              </p>
-              <p v-if="article.description" class="text-sm">{{ article.description }}</p>
+                <p class="flex gap-2">
+                  <span class="badge badge-ghost dark:badge-outline badge-sm" v-for="tag in article.tags">{{ tag }}</span>
+                </p>
+              </div>
+              <p v-if="article.description" class="text-sm sm:text-base">{{ article.description }}</p>
             </div>
           </template>
           <template #not-found>
@@ -25,9 +25,13 @@
           </template>
         </ContentList>
       </template>
-      <button v-if="!isEmpty" class="btn btn-ghost self-center" @click="next">load more...</button>
+      <div class="join grid grid-cols-2" v-if="!isEmpty">
+        <button class="join-item btn btn-outline">上一页</button>
+        <button class="join-item btn btn-outline" @click="next">下一页</button>
+      </div>
+      <!-- <button v-if="!isEmpty" class="btn btn-ghost self-center" @click="next">load more...</button> -->
     </div>
-  <!-- </NuxtLayout> -->
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <!-- <NuxtLayout> -->
+  <NuxtLayout>
     <article class="md:max-w-screen-sm xl:max-w-screen-md mx-auto">
       <ContentDoc>
         <template #not-found>
@@ -27,5 +27,5 @@
         </template>
       </ContentDoc>
     </article>
-  <!-- </NuxtLayout> -->
+  </NuxtLayout>
 </template>

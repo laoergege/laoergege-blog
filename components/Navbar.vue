@@ -10,13 +10,13 @@
     <div class="flex-none gap-2">
       <div class="form-control" ref="docsearchRef"></div>
       <Icon name="uil:github" />
-      <ThemeChangeBtn />
+      <ThemeChangeBtn/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import ThemeChangeBtn from "./theme/ThemeChangeBtn.vue";
+
 import docsearch from "@docsearch/js";
 import "@docsearch/css";
 

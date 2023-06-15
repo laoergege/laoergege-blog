@@ -19,13 +19,10 @@
 
 <script setup>
 import Giscus from "@giscus/vue";
-import { theme, THEMES } from "./theme/useTheme";
-const compThemes = {
-  dark: "dark_dimmed",
-  light: "light",
-};
+const colorMode = useColorMode();
+const { commentThemes } = useAppConfig();
 const compTheme = computed(() => {
-  return compThemes[THEMES[theme.value]];
+  return commentThemes[colorMode.value];
 });
 
 const { page } = useContent();
