@@ -29,7 +29,6 @@
         <button class="join-item btn btn-outline">上一页</button>
         <button class="join-item btn btn-outline" @click="next">下一页</button>
       </div>
-      <!-- <button v-if="!isEmpty" class="btn btn-ghost self-center" @click="next">load more...</button> -->
     </div>
   </NuxtLayout>
 </template>
