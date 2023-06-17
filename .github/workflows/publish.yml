@@ -45,6 +45,8 @@ jobs:
         run: pnpm install
       - name: Static HTML export with Nuxt
         run: pnpm build
+      - name: CNAME
+        run: echo "blog.laoergege.cn" > CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
