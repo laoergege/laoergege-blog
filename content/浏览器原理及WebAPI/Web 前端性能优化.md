@@ -55,7 +55,7 @@ desc: web 前端能优化知识体系
   - 画面流畅度
     - 帧率（FPS）
   - 内存占用
-- 以用户为中心的核心 Web 指标：Core Web Vitals ![图 2](images/1651501624892.png)
+- 以用户为中心的核心 Web 指标：Core Web Vitals ![图 2](./images/1651501624892.png)
   > 其中 FID 无法在某些实验工具中测量，如 lighthouse 使用 TBT 代替 FID
 
 ## 前端监控

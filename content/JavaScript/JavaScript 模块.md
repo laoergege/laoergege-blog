@@ -92,7 +92,35 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
 ## ES Modules
 
 - ES Modules
-  - [语法](#es-modules-语法)
+  - 语法规范
+    - export 声明
+      - `export let a` 单变量声明导出
+      - `export {a, b, c}`  变量名列表导出
+      - `export {a as x}`  导出重命名
+      - `export default let a` 默认导出 
+        - `export default` 就是输出一个叫做 default 的变量或方法，然后系统允许你为它取任意名字
+          ```js
+          // modules.js
+          function add(x, y) {
+            return x * y;
+          }
+          export {add as default};
+          // 等同于
+          // export default add;
+
+          // app.js
+          import { default as foo } from 'modules';
+          // 等同于
+          // import foo from 'modules';
+          ```
+      - `export default a` 表达式导出 
+    - import 声明
+      - `import x from "./a.js"` 默认引入
+      - `import {a as x, modify} from "./a.js"` 成员引入及重命名
+      - `import * as x from "./a.js"` 把模块中所有的变量以类似对象属性的方式引入
+    - 导入导出
+      - `export { foo, bar } from 'my_module';`
+      - `export * as ns from "mod";`
     - 动态导入：`import()`
       - `import()` 函数与所加载的模块没有静态连接关系，即最后导入的是**值复制**效果，类似于 Node.js 的 `require()` 方法，只不过是异步加载
         ```js
@@ -111,7 +139,8 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
         ```
     - `import.meta`
       - `import.meta` 只能在模块内部使用，如果在模块外部使用会报错
-      - import.meta.url
+      - `import.meta.url`
+      - `import.meta.resolve`
     - 加载路径
       - URL 路径规则
       - ES 模块的加载路径必须给出脚本的完整路径，不能省略脚本的后缀名
@@ -127,37 +156,6 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
   - 应用
     - [在浏览器中使用 ES modules](#在浏览器中使用-es-modules)
     - [在 Node.js 中使用 ES modules](#在-nodejs-中使用-es-modules)
-
-### ES Modules 语法
-
-- export 声明
-  - `export let a` 单变量声明导出
-  - `export {a, b, c}`  变量名列表导出
-  - `export {a as x}`  导出重命名
-  - `export default let a` 默认导出 
-    - `export default` 就是输出一个叫做 default 的变量或方法，然后系统允许你为它取任意名字
-      ```js
-      // modules.js
-      function add(x, y) {
-        return x * y;
-      }
-      export {add as default};
-      // 等同于
-      // export default add;
-
-      // app.js
-      import { default as foo } from 'modules';
-      // 等同于
-      // import foo from 'modules';
-      ```
-  - `export default a` 表达式导出 
-- import 声明
-  - `import x from "./a.js"` 默认引入
-  - `import {a as x, modify} from "./a.js"` 成员引入及重命名
-  - `import * as x from "./a.js"` 把模块中所有的变量以类似对象属性的方式引入
-- 导入导出
-  - `export { foo, bar } from 'my_module';`
-  - `export * as ns from "mod";`
 
 ### ES modules 是如何工作的？
 
@@ -319,11 +317,6 @@ ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全�
 ### 在 Node.js 中使用 ES modules
 
 - ES 模块加载规则
-  - `.mjs` 文件总是以 ES6 模块加载
-  - `.cjs` 文件总是以 CommonJS 模块加载
-  - `.js` 文件的加载取决于 package.json 里面 `type` 字段的设置
-    - commonjs（默认）
-    - module
   - CommonJS 模块加载 ES6 模块
     - `require` 命令不能加载 `.mjs` 文件
     - 只能使用`import()`这个方法加载
@@ -341,25 +334,9 @@ ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全�
 - package.json 的入口文件
   - `main`
   - `exports`
-    - `exports` 字段的优先级高于 main 字段
     - `exports` 给了我们一个很好的方法来“隐藏”我们的内部模块而不是将它们暴露在包之外，但需要手动一一列举需要暴露的文件
     - 用法：
       ```js
-      // 子目录别名
-      // 路径必须以 . 开头
-      {
-        "exports": {
-          "./submodule": "./src/submodule.js"
-        }
-      }
-      
-      // 默认主入口
-      {
-        "exports": {
-          ".": "./main.js" // 可简写 "exports": "./main.js"
-        }
-      }
-
       // 条件加载
       {
         "type": "module",
@@ -371,10 +348,6 @@ ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全�
         }
       }
       ```
-- 加载路径
-  - URL 只支持本地模块（file:协议）和 data:协议
-  - 不支持加载远程模块
-  - 不支持绝对路径
 - 模块内部变量限制：为了保证 ES6 模块在浏览器和 Node 通用，禁止以下变量
   - arguments
   - require

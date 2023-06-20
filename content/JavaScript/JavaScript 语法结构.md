@@ -36,8 +36,18 @@ description: JavaScript 语法结构体系
         - let
         - const
         - class
-      - 赋值语句
       - [表达式](#表达式)及运算符
+      - 赋值语句
+        - Rest 参数与 Spread 语法
+          - Spread 语法只适用于可迭代对象，内部使用了迭代器来收集元素，与 `for..of` 的方式相同
+        - 解构赋值
+          - 数组解构
+            - 默认值、逗号忽略元素、剩余参数 `let [item1 = default, item2, , , ...rest] = array`
+            - 等号右侧可以是任何可迭代对象
+            - 赋值等号左侧的任何内容
+          - 对象解构 
+            - 默认值、重新命名、剩余参数 `let {prop : varName = default, ...rest} = object`
+          - 嵌套解构
       - 控制流
         - 分支
           - if/else

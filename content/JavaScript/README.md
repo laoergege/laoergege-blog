@@ -12,7 +12,7 @@ tags:
   - [JavaScript 模块](./JavaScript%20模块.md)
   - [JavaScript 类型系统](./JavaScript%20类型系统.md)
   - [JavaScript 对象](./JavaScript%20对象.md)
-    - [迭代器](#迭代器)
+    - [迭代器和生成器](#迭代器和生成器)
   - 数据结构
     - [数组](./JavaScript%20数组%20API%20总结.md)
     - Map&Set
@@ -41,35 +41,42 @@ tags:
   - [Deep JavaScript](https://exploringjs.com/deep-js/toc.html)
   - [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
 
-## 迭代器
+## 迭代器和生成器
 
 - 迭代器（Iterators）
   - 迭代协议
-    - next
-      - value
-      - done
-    - return：结束迭代
-    - throw
-  - Symbol.iterator：创建可迭代对象
-  - Generator：生成器是一种特殊的迭代器,但提供了更强大的功能。如果仅仅需要自定义迭代行为,使用普通迭代器就够了;但如果要使用 yield 等高级功能,生成器会更合适
+    - next: `(val?: any) => { value, done }`
+    - return: 可选，`(value?: any) => { value, done: true }`
+    - throw: 可选，`(value?: any) => { value, done: true }`
+  - `Symbol.iterator`：定义**可迭代**对象
+    ```js
+    // Satisfies both the Iterator Protocol and Iterable
+    const myIterator = {
+      next() {
+        // ...
+      },
+      [Symbol.iterator]() {
+        return this;
+      },
+    };
+    ```
+  - `for...of...`：自动迭代，调用迭代器 next 方法并解构 value
+  - 生成器（Generator）
+    - 生成器是一种特殊的迭代器，除了迭代行为，还可以使用 yield 等高级功能,生成器会更合适
     - `function*`
       - `yield [exp]`
       - `return [exp]`
-    - 返回迭代器对象
-    - 嵌套迭代器：`yield*`
-      - 暂停执行，并且将执行权转移到另一个 Generator 函数或可迭代对象中。直到这个函数或对象迭代结束后，执行权才会返回到原 Generator 函数中
+      - `yield*`：嵌套生成器。暂停执行，并且将执行权转移到另一个 Generator 函数或可迭代对象中。直到这个函数或对象迭代结束后，执行权才会返回到原 Generator 函数中
     - 数据交互：`generator.next(val)`、`generator.throw(val)` <=> `yield [exp]`
-  - 迭代
-    - `for...of...`：自动调用迭代器 next 方法并解构 value
-  - 异步迭代器：next 方法可返回 `Promise<{ value, done }>` 对象
+  - 异步迭代器
+    - 类似迭代器，但 next: `(val?: any) => Promise<{ value, done }>` 
     - `Symbol.asyncIterator` 
     - 异步生成器：`async function*`
       - yield 命令后面的值，会被自动包装成一个 Promise 对象
-      - `yield [exp]` => `yield Promise.resolve(exp).then(value => ({ value, done }))`
-    - `for await (...)`
+      - `yield [exp]` => `yield Promise.resolve({ value: exp, done })`
+    - 异步迭代：`for await (...)`
   - 生成器场景
-    - 异步编程
-      - 协程
+    - 协程
     - 惰性迭代器
     - 无限迭代器、多值、数据流、流式处理
     - 状态机
