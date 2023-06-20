@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <div class="md:max-w-screen-sm xl:max-w-screen-md mx-auto">
+    <article class="md:max-w-screen-sm xl:max-w-screen-md mx-auto">
       <ContentDoc>
         <template #not-found>
           <div class="flex flex-col items-baseline">
@@ -26,6 +26,6 @@
           </ClientOnly>
         </template>
       </ContentDoc>
-    </div>
+    </article>
   </NuxtLayout>
 </template>

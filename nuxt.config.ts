@@ -1,14 +1,18 @@
 import type {} from "nuxt-icon";
 import type {} from "@vite-pwa/nuxt";
+import type {} from "@nuxtjs/tailwindcss";
+import config from "./app.config";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   extends: "@nuxt-themes/typography",
+  typescript: { includeWorkspace: true },
   modules: [
     "@nuxt/content",
-    "@nuxtjs/tailwindcss",
+    '@nuxtjs/tailwindcss',
     "@nuxt/image-edge",
     "nuxt-icon",
+    "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
   ],
   app: {
@@ -23,15 +27,13 @@ export default defineNuxtConfig({
   },
   content: {
     documentDriven: true,
-    ignores: [".*?[^(md)]$"],
+    ignores: [".+\\.*?[^(md)]$"],
     highlight: {
       theme: {
         // Default theme (same as single string)
         default: "github-light",
         // Theme used if `html.dark`
         dark: "github-dark",
-        // Theme used if `html.sepia`
-        sepia: "monokai",
       },
       preload: [
         "markdown",
@@ -59,8 +61,11 @@ export default defineNuxtConfig({
       },
     },
   },
-  // image: {},
   pwa: {
     injectRegister: "inline",
+  },
+  colorMode: {
+    classSuffix: '',
+    storageKey: config.themes.storageKey
   }
 });
