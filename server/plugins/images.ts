@@ -1,44 +1,29 @@
-import { resolve, relative } from "node:path";
-import { stat, mkdir, copyFile } from "node:fs/promises";
-
-interface ContentFile {
-  _id: string;
-  body: string;
-}
-
-const ROOTDIR = "content"
-const OUTDIR = "public/images"
-const PREFIX = "/images/"
+import { resolve, basename } from "node:path";
+import { mkdir } from "node:fs/promises";
+import { symlinkSync, accessSync } from "node:fs";
+import { URL, pathToFileURL, fileURLToPath } from "node:url";
 
 export default defineNitroPlugin((nitroApp) => {
-  // content dir
-  const rootDir = resolve(process.cwd(), ROOTDIR);
-  
+  const destDir = resolve("public", "images")
+  mkdir(destDir, { recursive: true });
+
   nitroApp.hooks.hook("content:file:beforeParse", (file: ContentFile) => {
     if (file._id.endsWith(".md")) {
       file.body = file.body.replace(
-        /\(([^)]*?\.(png|gif|jpg|jpeg))\)/g,
-        (match, g) => {
+        /(?<=\!\[.*?\]\().*?\.(png|gif|jpg|jpeg|svg)(?=\))/g,
+        (img: string) => {
           let { _id } = file;
-          const id = _id.replaceAll(":", "/");
-          
-          const filePath = resolve(process.cwd(), id);
+          const resolveImgPath = fileURLToPath(new URL(img, pathToFileURL(resolve(..._id.split(":")))))
+          const imgName = basename(resolveImgPath)
+          const destImg = resolve(destDir, imgName)
 
-          const imageSrc = resolve(filePath, "..", g);
-          const img = relative(rootDir, imageSrc);
-          const imgDest = resolve(process.cwd(), OUTDIR, img);
+          try {
+            accessSync(destImg)
+          } catch (error) {
+            symlinkSync(resolveImgPath, destImg)
+          }
 
-          ;(async () => {
-            stat(imgDest)
-              .catch(async () => {
-                await mkdir(resolve(imgDest, "../"), {
-                  recursive: true
-                });
-                await copyFile(imageSrc, imgDest);
-              })
-          })()
-
-          return `(${PREFIX}${img})`;
+          return `/images/${imgName}`;
         }
       );
     }
