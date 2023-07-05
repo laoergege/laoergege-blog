@@ -1,23 +1,27 @@
 <template>
   <NuxtLoadingIndicator />
-  <div class="min-h-screen flex flex-col">
-    <Navbar />
-    <main class="container mx-auto flex-1 py-6 sm:py-10 px-4">
+  <div class="drawer md:drawer-open">
+    <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+    <SideNavBar />
+    <main class="drawer-content">
+      <!-- <div class="sticky top-0">
+        <button class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+          Button
+        </button>
+      </div> -->
       <slot />
+      <MyFooter />
+      <BottomNavBar />
     </main>
-    <footer class="footer footer-center p-4 bg-base-300 text-base-content">
-      <div>
-        <p>©2017-2021 laoergege.cn. All right reserved.</p>
-        <p>
-          <a
-            href="https://beian.miit.gov.cn"
-            target="_blank"
-            class="link link-hover"
-            >粤ICP备2022020679号</a
-          >
-        </p>
-      </div>
-    </footer>
   </div>
   <BackToTop />
 </template>
+
+<script setup>
+import SideNavBar from "~/components/NavBar/SideNavBar.vue";
+import BottomNavBar from "~/components/NavBar/BottomNavBar.vue";
+</script>
