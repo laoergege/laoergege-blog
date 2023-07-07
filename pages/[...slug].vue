@@ -1,11 +1,15 @@
 <template>
   <NuxtLayout>
-    <article class="md:max-w-screen-sm xl:max-w-screen-md mx-auto">
+    <article class="md:max-w-screen-sm xl:max-w-screen-md mx-auto px-4 py-12 box-content">
       <ContentDoc>
         <template #not-found>
           <div class="flex flex-col items-baseline">
-            <p><Icon name="tabler:error-404" size="88"/></p>
-            <p class="font-bold pl-3">文章找不到或已删除<Icon name="material-symbols:delete-forever"/></p>
+            <p>
+              <Icon name="tabler:error-404" size="88" />
+            </p>
+            <p class="font-bold pl-3">文章找不到或已删除
+              <Icon name="material-symbols:delete-forever" />
+            </p>
           </div>
         </template>
         <template v-slot:default="{ doc }">

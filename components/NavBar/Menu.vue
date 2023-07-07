@@ -7,7 +7,8 @@
         </div>
       </div>
     </li>
-    <li class="ml-2 md:mt-2 md:ml-0">
+    <div class="divider mx-0 md:m-0 md:mx-auto md:w-1/3 divider-horizontal md:divider-vertical"></div>
+    <li>
       <div class="place-content-center" @click="$router.back()">
         <Icon name="mingcute:back-2-line" />
       </div>
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router';
+import { useRouter } from "vue-router";
 
 // import docsearch from "@docsearch/js";
 // import "@docsearch/css";
@@ -56,4 +57,8 @@ import { RouterLink } from 'vue-router';
 //     apiKey: "YOUR_SEARCH_API_KEY",
 //   });
 // });
+
+const router = useRouter()
+
+const isHome = () => (router.currentRoute.value.path === "/")
 </script>

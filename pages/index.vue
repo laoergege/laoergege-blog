@@ -1,8 +1,8 @@
 <template>
   <NuxtLayout>
-    <div class="max-w-screen-md mx-auto flex flex-col gap-12 sm:gap-14">
+    <div class="max-w-screen-md mx-auto flex flex-col gap-12 sm:gap-14 px-4 py-12">
       <template v-for="(page, idx) in pages" :key="idx">
-        <ContentList :query="page" >
+        <ContentList :query="page">
           <template v-slot="{ list }">
             <div v-for="article in list" :key="article._path">
               <div class="flex flex-wrap items-baseline gap-2">
@@ -20,7 +20,7 @@
           </template>
           <template #not-found>
             <p class="text-center my-4 text-sm">
-              {{ empty() || "暂无更多"}}
+              {{ empty() || "暂无更多" }}
             </p>
           </template>
         </ContentList>
@@ -39,7 +39,7 @@ import { useDebounceFn } from '@vueuse/core'
 
 const limit = 10;
 const sort: SortFields = { updateTime: -1, top: 1 };
-const skip = (p: number) => (p - 1)*limit;
+const skip = (p: number) => (p - 1) * limit;
 const without = ['body']
 
 const queryPage = (page: number): QueryBuilderParams => {
@@ -50,8 +50,8 @@ const pages = ref([queryPage(1)])
 const isEmpty = ref(false)
 
 const next = useDebounceFn(() => {
-  if(!isEmpty.value) {
-    pages.value.push(queryPage(pages.value.length +1))
+  if (!isEmpty.value) {
+    pages.value.push(queryPage(pages.value.length + 1))
   }
 }, 1000)
 
@@ -61,7 +61,7 @@ const empty = () => {
 }
 
 // SSG 模式下动态生成列表数据和文章
-if(process.server && !process.dev) {
+if (process.server && !process.dev) {
   const generateContentList = (page: number): any => {
     return queryContent("/")
       .skip(skip(page))
@@ -74,10 +74,10 @@ if(process.server && !process.dev) {
   let idx = 2;
   while (true) {
     const data: ParsedContent[] = await generateContentList(idx++)
-    if(!data.length) {
+    if (!data.length) {
       break
     } else {
-      for (const {_path} of data) {
+      for (const { _path } of data) {
         await queryContent(_path as string).findOne()
       }
     }
