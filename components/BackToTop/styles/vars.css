@@ -1,6 +1,0 @@
-:root {
-  --back-to-top-z-index: 5;
-
-  --back-to-top-color: hsl(var(--p));
-  --back-to-top-color-hover: hsl(var(--pf));
-}

@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <article class="md:max-w-screen-sm xl:max-w-screen-md mx-auto px-4 py-12 box-content">
+    <article class="md:max-w-screen-sm xl:max-w-screen-md mx-auto px-4 py-12 box-content" ref="elRef">
       <ContentDoc>
         <template #not-found>
           <div class="flex flex-col items-baseline">
@@ -33,3 +33,16 @@
     </article>
   </NuxtLayout>
 </template>
+
+<script setup lang="ts">
+import mediumZoom from "medium-zoom";
+import { articleMounted$ } from "~/components/Toc.vue";
+
+const elRef = ref<HTMLElement>();
+onMounted(() => {
+  mediumZoom(elRef.value?.querySelectorAll('[data-zoomable]'));
+
+  // #region 
+  articleMounted$.emit(elRef.value)
+});
+</script>

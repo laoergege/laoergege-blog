@@ -7,4 +7,4 @@
   color: theme("textColor.accent-content");
   background-color: theme("textColor.accent");
 }
-</style>
+</style>~/utils/event-emiter

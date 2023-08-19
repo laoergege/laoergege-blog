@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar sticky bottom-0 md:hidden">
+  <div class="sticky bottom-0 md:hidden">
     <Menu class="menu-horizontal w-full" />
   </div>
 </template>

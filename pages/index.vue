@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <div class="max-w-screen-md mx-auto flex flex-col gap-12 sm:gap-14 px-4 py-12">
+    <div class="max-w-screen-md mx-auto flex flex-col gap-14 sm:gap-16 px-4 py-12">
       <template v-for="(page, idx) in pages" :key="idx">
         <ContentList :query="page">
           <template v-slot="{ list }">
@@ -20,47 +20,49 @@
           </template>
           <template #not-found>
             <p class="text-center my-4 text-sm">
-              {{ empty() || "暂无更多" }}
+              {{ empty("暂无更多") }}
             </p>
           </template>
         </ContentList>
       </template>
-      <div class="join grid grid-cols-2" v-if="!isEmpty">
-        <button class="join-item btn btn-outline">上一页</button>
-        <button class="join-item btn btn-outline" @click="next">下一页</button>
+      <div class="flex justify-end">
+        <button class="btn btn-ghost" @click="next">
+          <span class="loading loading-spinner"></span>
+          加载更多
+        </button>
       </div>
     </div>
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import type { ParsedContent, QueryBuilderParams, SortFields } from '@nuxt/content/dist/runtime/types'
-import { useDebounceFn } from '@vueuse/core'
+import type { ParsedContent, QueryBuilderParams, SortFields } from '@nuxt/content/dist/runtime/types';
+import { useDebounceFn } from '@vueuse/core';
 
+definePageMeta({
+  name: "home"
+})
+
+// #region 分页
 const limit = 10;
 const sort: SortFields = { updateTime: -1, top: 1 };
 const skip = (p: number) => (p - 1) * limit;
-const without = ['body']
-
-const queryPage = (page: number): QueryBuilderParams => {
-  return { limit, sort: [sort as any], skip: skip(page), without };
+const without = ['body'];
+const pageQuery = (page: number): QueryBuilderParams => ({ limit, sort: [sort as any], skip: skip(page), without })
+const pages = ref([pageQuery(1)]);
+const isEmpty = ref(false);
+const empty = (text: string) => {
+  isEmpty.value = true;
+  return text
 }
-
-const pages = ref([queryPage(1)])
-const isEmpty = ref(false)
-
 const next = useDebounceFn(() => {
   if (!isEmpty.value) {
-    pages.value.push(queryPage(pages.value.length + 1))
+    pages.value.push(pageQuery(pages.value.length + 1))
   }
 }, 1000)
+// #endregion
 
-const empty = () => {
-  isEmpty.value = true;
-  return ""
-}
-
-// SSG 模式下动态生成列表数据和文章
+// #region SSG 模式下动态生成列表数据和文章
 if (process.server && !process.dev) {
   const generateContentList = (page: number): any => {
     return queryContent("/")
@@ -83,4 +85,6 @@ if (process.server && !process.dev) {
     }
   }
 }
+    // #endregion
+
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="drawer-side p-1">
+  <div class=" h-screen sticky top-0">
     <Menu />
   </div>
 </template>

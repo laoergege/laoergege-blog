@@ -11,8 +11,8 @@ Thanks for the help of the following projects.
 
 ## Progress
 
-- [x] 使用 NuxtContent 构建博客
-- [x] 评论功能
+- [x] nuxt-content 构建博客
+- [x] giscus 评论功能
 - [x] 主题切换及暗黑模式支持
 - [ ] 图标
 - [ ] 图片优化
