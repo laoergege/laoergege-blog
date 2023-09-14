@@ -1,5 +1,5 @@
 <template>
-  <ul class="menu menu-xs h-full bg-base-200">
+  <ul class="menu menu-xs h-full bg-base-200 items-center gap-1">
     <li>
       <div class="avatar place-content-center">
         <div class="w-8 rounded-full">
@@ -7,21 +7,17 @@
         </div>
       </div>
     </li>
-    <div class="divider mx-0 md:m-0 md:mx-auto md:w-1/3 divider-horizontal md:divider-vertical"></div>
+    <!-- 动态菜单 -->
     <li v-if="!isHome">
       <div class="place-content-center" @click="backHome">
         <Icon name="uil:home-alt" />
       </div>
     </li>
     <li v-if="isHome">
-      <div class="place-content-center">
-        <Icon name="uil:tag-alt" @click="openTagsSide" />
-      </div>
+      <TagBtn />
     </li>
     <li v-if="isPostPage">
-      <div class="place-content-center" @click="openTocSide">
-        <Icon name="uil:list-ui-alt" />
-      </div>
+      <TocBtn />
     </li>
     <li v-if="isPostPage">
       <div class="place-content-center" @click="scrollToTop">
@@ -32,8 +28,7 @@
       <div class="form-control" ref="docsearchRef"></div>
     </li> -->
     <!-- 固定菜单 -->
-    <i class="ml-auto md:mt-auto md:ml-0"></i>
-    <div class="divider mx-0 md:m-0 md:mx-auto md:w-1/3 divider-horizontal md:divider-vertical"></div>
+    <i class="ml-auto sm:mt-auto"></i>
     <li>
       <div class="place-content-center">
         <Icon name="uil:search" />
@@ -57,8 +52,12 @@
 
 <script setup lang="tsx">
 import { useRouter } from "vue-router";
-import { useSide } from "./Side.vue";
+import { useSideCtx } from "./Side.vue";
 import Toc from "~/components/Toc.vue";
+import Tags, { useTagsCtx } from "~/components/Tags.vue";
+import { resolveComponent, defineComponent } from "vue";
+
+const Icon = resolveComponent("Icon");
 
 const router = useRouter();
 const { path, name } = router.currentRoute.value;
@@ -74,27 +73,39 @@ const backHome = () => { router.replace({ name: "home" }) }
 
 
 // #region 标签侧边
-const showTagsBtn = /\/posts\/.+/.test(path);
-const Tags = {
-  setup() {
-    return () => (
-      <div>
-        <div class="badge">{ }</div>
-      </div>
-    )
+const TagBtn = defineComponent(() => {
+  const { side } = useSideCtx();
+  const tagsSide = computed(() => {
+    return side.value?.from(Tags)
+  })
+  const openTagsSide = () => {
+    tagsSide.value?.open()
   }
-}
-const tagsSide = useSide(Tags);
-const openTagsSide = () => {
-  tagsSide.open()
-}
+  const { selectedTags$ } = useTagsCtx()
+
+  return () => (
+    <div class="place-content-center">
+      <Icon name="uil:tag-alt" onClick={openTagsSide} />
+    </div>
+  )
+})
 // #endregion
 
 // #region 文章内容目录
-const tocSide = useSide(Toc)
-const openTocSide = () => {
-  tocSide.open()
-}
+const TocBtn = defineComponent(() => {
+  const { side } = useSideCtx();
+  const tocSide = computed(() => {
+    return side.value?.from(Toc)
+  })
+  const openTocSide = () => {
+    tocSide.value?.open()
+  }
+  return () => (
+    <div class="place-content-center">
+      <Icon name="uil:list-ui-alt" onClick={openTocSide} />
+    </div>
+  )
+})
 // #endregion
 
 // import docsearch from "@docsearch/js";

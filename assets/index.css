@@ -1,0 +1,18 @@
+.main-container {
+  display: grid;
+
+  .place-main {
+    grid-column: main;
+  }
+}
+
+@media screen(sm) {
+  .main-container {
+    display: grid;
+    grid-template-columns: 1fr [main-start] minmax(0, 3fr) [main-end] 1fr;
+
+    .place-main {
+      grid-column: main;
+    }
+  }
+}

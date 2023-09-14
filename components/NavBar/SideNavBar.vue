@@ -1,5 +1,5 @@
 <template>
-  <div class=" h-screen sticky top-0">
+  <div class="h-screen sticky top-0 none">
     <Menu />
   </div>
 </template>

@@ -1,13 +1,11 @@
 <script lang="tsx">
-import { createEventEmitter } from "~/utils/event-emiter";
 import { useSubscription } from "@vueuse/rxjs";
 import { fromEvent, from, startWith } from "~/node_modules/rxjs";
 import {
   debounceTime, switchMap, filter, tap, throttleTime
 } from "~/node_modules/rxjs/operators";
 import { ref } from "vue";
-
-export const articleMounted$ = createEventEmitter("articleMounted");
+import { articleMounted$ } from "~/pages/[...slug].vue";
 
 export default defineComponent({
   setup() {
@@ -32,7 +30,7 @@ export default defineComponent({
               }),
               filter(([idx, offsetTop]) => {
                 let d = window.scrollY
-                return d <= (offsetTop - 10) // 10 误差调整
+                return d <= (offsetTop) // 10 误差调整
               }),
               throttleTime(10),
               tap(([idx, offsetTop]) => {
@@ -47,7 +45,7 @@ export default defineComponent({
     let i = 0
     const tree = (list: any[]) => {
       return (
-        <ul>
+        <ul class="whitespace-normal">
           {list.map(item => {
             return (
               <li>
@@ -61,14 +59,16 @@ export default defineComponent({
     }
     const { toc, page } = useContent();
 
-    return () => archors.value.length ? (
-      <ul class="menu menu-md">
-        <li>
-          <a class="menu-title" ref={itemsRef} ref_for={true} href={`#${archors.value[i++].id}`}>{page.value.title}</a>
-          {tree(toc.value.links)}
-        </li>
-      </ul >
-    ) : null
+    return () => (
+      archors.value.length ? (
+        <ul class="menu menu-md whitespace-normal">
+          <li>
+            <a class="menu-title" ref={itemsRef} ref_for={true} href={`#${archors.value[i++].id}`}>{page.value.title}</a>
+            {tree(toc.value.links)}
+          </li>
+        </ul >
+      ) : null
+    )
   }
 })
 </script>

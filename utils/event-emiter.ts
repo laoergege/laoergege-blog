@@ -1,10 +1,17 @@
 import { customRef } from "vue";
 
-export type EventEmitter = Ref & {
-  emit: (data: unknown) => void
+/**
+ * EventEmitter 基于 vue ref 扩展 emit
+ * let e$ = createEventEmitter(event, initVal)
+ * e$.value
+ * e$.emit(val)
+ */
+
+export type EventEmitter<T> = Ref<T> & {
+  emit: (data: T) => void
 }
 
-export const createEventEmitter = (event: string, val?: unknown): EventEmitter => {
+export const createEventEmitter = <T>(event: string, val: T | null = null): EventEmitter<T> => {
   let _trigger: () => void;
   return Object.create(
     customRef((track, trigger) => {
@@ -21,7 +28,7 @@ export const createEventEmitter = (event: string, val?: unknown): EventEmitter =
     }),
     {
       emit: {
-        value(data: unknown): void {
+        value(data: T): void {
           console.debug(`emit ${event}`, data);
 
           val = data;

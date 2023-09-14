@@ -1,65 +1,94 @@
 <template>
-  <input id="my-drawer" type="checkbox" class="drawer-toggle" v-model="data.checked" />
+  <input id="my-drawer" type="checkbox" class="drawer-toggle" v-model="checked" />
   <div class="drawer-side z-10">
     <label for="my-drawer" class="drawer-overlay xl:hidden"></label>
-    <div class="w-full sm:w-auto h-screen bg-base-200 text-base-content">
+    <div class="h-screen bg-base-200 text-base-content side-width">
       <div class="flex justify-end">
         <button class="btn btn-circle" @click="closeSide">
           <Icon name="uil:times" />
         </button>
       </div>
-      <component :is="data.comp"></component>
+      <component :is="getComp()" v-if="getComp"></component>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { VueInstance } from "@vueuse/core";
-import type { Component } from "vue";
+// import { articleMounted$ } from "~/pages/[...slug].vue";
+import { defineComponent, InjectionKey, ref, getCurrentInstance } from "vue";
+import { createEventEmitter } from "~/utils/event-emiter";
 
-const SideComponent = {
-  setup() {
-    const data = reactive({
-      checked: false,
-      comp: null
-    })
+const SideComponent = defineComponent({
+  setup(props, { emit }) {
+    const checked = ref(false);
+
+    let comp: Component | null = null;
+    const open = function (c: Component) {
+      comp = c;
+      checked.value = true;
+    }
+
+    const self = getCurrentInstance();
+    const { sideClosed$ } = useSideCtx();
+    const closeSide = () => {
+      checked.value = false;
+      sideClosed$.emit(Date.now())
+    }
+
+    // const sideWidth = computed(() => (articleMounted$.value?.getBoundingClientRect().left + 20 + 'px' ?? "auto"));
 
     return {
-      data,
-      open(comp: Component) {
-        data.comp = comp;
-        data.checked = true;
+      checked,
+      // sideWidth,
+      getComp() {
+        console.log("side comp: ", comp)
+        return comp
       },
-      close() {
-        data.comp = null;
-        data.checked = false;
+      from(c: Component) {
+        let _comp = c;
+        return Object.create(self, {
+          open: {
+            value: (c?: Component) => {
+              return open.call(self, c || _comp)
+            }
+          }
+        }) as SideComponentInstance2
       },
-      closeSide() {
-        data.checked = false;
-      }
+      open,
+      closeSide,
+      close,
     }
   }
+})
+
+type SideComponentInstance = InstanceType<typeof SideComponent>
+type SideComponentInstance2 = SideComponentInstance & {
+  open: (c?: Component) => void
 }
+type SideInstanceRef = Ref<SideComponentInstance2 | null>
 
-type SideCompnentType = typeof SideComponent;
-
-export const SIDE_KEY = "SIDE_KEY";
-
-export const useSideContext = (ref: Ref<VueInstance>) => {
-  provide<Ref<VueInstance>>(SIDE_KEY, ref);
-}
-
-export const useSide = (comp: Component) => {
-  const sideRef = inject<Ref<VueInstance>>(SIDE_KEY);
-  return {
-    open() {
-      sideRef?.value.open(comp);
-    },
-    close() {
-      sideRef?.value.close();
-    }
+export const SIDE_KEY = Symbol("side") as InjectionKey<{
+  side: SideInstanceRef,
+  sideClosed$: any
+}>;
+export const createSideCtx = (side: SideInstanceRef) => {
+  const sideClosed$ = createEventEmitter("side closed")
+  const t = {
+    sideClosed$,
+    side
   }
+  provide(SIDE_KEY, t);
+  return t;
+}
+export const useSideCtx = () => {
+  return inject(SIDE_KEY)!
 }
 
 export default SideComponent;
 </script>
+
+<!-- <style scoped>
+.side-width {
+  width: v-bind(sideWidth);
+}
+</style> -->
