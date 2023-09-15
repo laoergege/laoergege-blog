@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "nuxt clean",
     "dev": "nuxt dev",
-    "build": "nuxt build",
+    "build": "nuxt generate",
     "preview": "pnpm run build && pnpm dlx serve ./.output/public",
     "md-lint": "zx ./scripts/mdLinter.mjs",
     "prepare": "husky install && nuxi prepare"

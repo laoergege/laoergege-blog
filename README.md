@@ -20,6 +20,7 @@ Thanks for the help of the following projects.
   - [ ] 多端适配
 - [ ] 标签页
   - [x] 列表筛选
+  - [ ] SSG 支持
 - [x] giscus 评论功能
 - [x] 主题切换及暗黑模式支持
 - [ ] 图标

@@ -15,6 +15,11 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
   ],
+  runtimeConfig: {
+    public: {
+
+    }
+  },
   app: {
     head: {
       link: [

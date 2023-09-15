@@ -53,8 +53,7 @@ definePageMeta({
 
 // #region 分页
 const { selectedTags$ } = useTagsCtx();
-const usePageQuery = () => {
-  const limit = 10;
+const usePageQuery = (limit = 10) => {
   const sort: SortFields = { updateTime: -1, top: 1 };
   const skip = (p: number) => (p - 1) * limit;
   const without = ["body"];
