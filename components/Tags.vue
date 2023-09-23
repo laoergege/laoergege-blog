@@ -1,15 +1,21 @@
 <template>
   <div class="flex flex-wrap gap-2 p-2">
     <div class="cursor-pointer badge badge-lg" v-for="tag in tags$" :key="tag"
-      :class="{ 'badge-primary text-primary-content': isSelected(tag) }" @click="selectTag(tag)">
+      :class="{ 'badge-primary text-base-100': isSelected(tag) }" @click="selectTag(tag)">
       {{ tag }}
     </div>
   </div>
+  <Teleport :to="actionsRef">
+    <button class="btn btn-circle" @click="clearTagsSelected">
+      重置
+    </button>
+  </Teleport>
 </template>
 
 <script lang="ts">
 import { computedAsync } from "@vueuse/core";
 import { defineComponent, inject, InjectionKey, provide, ref } from "vue";
+import { useSideCtx } from "~/components/NavBar/Side.vue";
 
 export const useTags = () => {
   const tags$ = computedAsync(async () => {
@@ -25,6 +31,7 @@ export const useTags = () => {
     return [...new Set(flatTags)].filter(t => t).sort((a, b) => (stat[b] - stat[a]))
   }, [])
   const selectedTags$ = ref<Record<string, number>>({});
+  const selectedTags = computed(() => Object.keys(selectedTags$.value))
   const selectTag = (tag: string) => {
     selectedTags$.value[tag] ??= 0;
     selectedTags$.value[tag] = selectedTags$.value[tag] ? 0 : 1;
@@ -32,12 +39,16 @@ export const useTags = () => {
   const isSelected = (key: string) => {
     return selectedTags$.value[key]
   }
+  const clearTagsSelected = () => {
+    selectedTags$.value = {}
+  }
 
   return {
     tags$,
-    selectedTags$,
+    selectedTags,
     selectTag,
-    isSelected
+    isSelected,
+    clearTagsSelected
   }
 }
 const key = Symbol("tag") as InjectionKey<ReturnType<typeof useTags>>
@@ -52,16 +63,23 @@ export default defineComponent({
   setup() {
     const {
       tags$,
-      selectedTags$,
+      selectedTags,
       selectTag,
-      isSelected
+      isSelected,
+      clearTagsSelected
     } = useTagsCtx();
+
+    const { side } = useSideCtx()
 
     return {
       tags$,
-      selectedTags$,
+      selectedTags,
       selectTag,
-      isSelected
+      isSelected,
+      clearTagsSelected,
+      actionsRef: computed(() => {
+        return side.value?.actionsRef
+      })
     }
   }
 })

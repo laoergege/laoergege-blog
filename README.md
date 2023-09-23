@@ -13,14 +13,13 @@ Thanks for the help of the following projects.
 
 - [x] nuxt-content 构建博客
 - [ ] 首页列表
-  - [ ] 自动化生成
+  - [x] 分页
   - [ ] 请求进度
   - [ ] 多端适配
+- [x] 标签页
+  - [x] 列表筛选
 - [ ] 导航、工具栏
   - [ ] 多端适配
-- [ ] 标签页
-  - [x] 列表筛选
-  - [ ] SSG 支持
 - [x] giscus 评论功能
 - [x] 主题切换及暗黑模式支持
 - [ ] 图标

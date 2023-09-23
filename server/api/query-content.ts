@@ -1,17 +1,24 @@
-// import { prefixStorage, createStorage } from 'unstorage'
+import { prefixStorage, createStorage } from 'unstorage'
 // // @ts-ignore
-// import { useNitroApp, useRuntimeConfig, useStorage } from '#imports'
+import { useNitroApp, useRuntimeConfig, useStorage } from '#imports'
 // console.log(prefixStorage, useStorage)
+import { getContentQuery } from "nuxt-content/utils/query.ts";
 
-// // @ts-ignore
-// export const sourceStorage = prefixStorage(useStorage(), 'content:source')
-// export const cacheStorage = prefixStorage(useStorage(), 'cache:content')
-// export const cacheParsedStorage = prefixStorage(useStorage(), 'cache:content:parsed')
+import { getContentIndex } from "nuxt-content/server/content-index.ts";
+import handler from "nuxt-content/server/api/query.ts";
 
-export default defineEventHandler((event) => {
-  // cacheStorage.getKeys().then((keys) => {
-  //   console.log(keys)
-  // })
+import httpDriver from "unstorage/drivers/http";
+const storage = createStorage({
+  driver: httpDriver({
+    base: "http://localhost:3001"
+  })
+})
 
-  // return 'Hello World!'
+export default defineEventHandler(async (event) => {
+  const res = await handler(event)
+  console.log(res)
+
+
+
+  return 'Hello World!'
 })

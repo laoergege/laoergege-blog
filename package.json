@@ -48,6 +48,7 @@
     "nanoid": "^4.0.2",
     "nuxt": "^3.7.1",
     "nuxt-icon": "^0.4.2",
+    "nuxt-content": "workspace:@nuxt/content@*",
     "ohash": "^1.0.0",
     "pinceau": "^0.18.9",
     "remark-directive": "^2.0.1",

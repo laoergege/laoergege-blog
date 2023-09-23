@@ -15,11 +15,16 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
   ],
-  runtimeConfig: {
-    public: {
-
-    }
-  },
+  // ssr: false,
+  // experimental: {
+  //   noVueServer: true,
+  // },
+  // generate: {
+  //   routes: [],
+  // },
+  // nitro: {
+  //   preset: "service-worker"
+  // },
   app: {
     head: {
       link: [

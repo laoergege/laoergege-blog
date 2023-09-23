@@ -81,7 +81,6 @@ const TagBtn = defineComponent(() => {
   const openTagsSide = () => {
     tagsSide.value?.open()
   }
-  const { selectedTags$ } = useTagsCtx()
 
   return () => (
     <div class="place-content-center">

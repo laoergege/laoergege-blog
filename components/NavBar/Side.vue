@@ -1,9 +1,12 @@
 <template>
   <input id="my-drawer" type="checkbox" class="drawer-toggle" v-model="checked" />
-  <div class="drawer-side z-10">
+  <div class="drawer-side" v-show="checked">
     <label for="my-drawer" class="drawer-overlay xl:hidden"></label>
     <div class="h-screen bg-base-200 text-base-content side-width">
       <div class="flex justify-end">
+        <solt name="actions">
+          <div ref="actionsRef"></div>
+        </solt>
         <button class="btn btn-circle" @click="closeSide">
           <Icon name="uil:times" />
         </button>
@@ -35,6 +38,7 @@ const SideComponent = defineComponent({
       sideClosed$.emit(Date.now())
     }
 
+    const actionsRef = ref<HTMLElement | null>(null)
     // const sideWidth = computed(() => (articleMounted$.value?.getBoundingClientRect().left + 20 + 'px' ?? "auto"));
 
     return {
@@ -57,6 +61,7 @@ const SideComponent = defineComponent({
       open,
       closeSide,
       close,
+      actionsRef
     }
   }
 })

@@ -1,4 +1,6 @@
-import { type StorageValue, prefixStorage } from 'unstorage'
+import { type StorageValue, prefixStorage, createStorage } from 'unstorage'
+import httpDriver from "unstorage/drivers/http"
+import githubDriver from "unstorage/drivers/github";
 import { joinURL, withLeadingSlash, withoutTrailingSlash } from 'ufo'
 import { hash as ohash } from 'ohash'
 import type { H3Event } from 'h3'
@@ -33,9 +35,16 @@ interface ParseContentOptions {
   [key: string]: any
 }
 
-export const sourceStorage = prefixStorage(useStorage(), 'content:source')
-export const cacheStorage = prefixStorage(useStorage(), 'cache:content')
-export const cacheParsedStorage = prefixStorage(useStorage(), 'cache:content:parsed')
+// export const sourceStorage = prefixStorage(createStorage({
+//   driver: httpDriver({
+//     base: "http://localhost:3001"
+//   })
+// }), 'content:source')
+export const sourceStorage = createStorage({
+  driver: httpDriver({ base: "http://localhost:3002" }),
+});
+export const cacheStorage = prefixStorage(createStorage(), 'cache:content')
+export const cacheParsedStorage = prefixStorage(createStorage(), 'cache:content:parsed')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -155,7 +164,7 @@ export const getContent = async (event: H3Event, id: string): Promise<ParsedCont
 
   const parsed = await parseContent(contentId, body) as ParsedContent
 
-  await cacheParsedStorage.setItem(id, { parsed, hash }).catch(() => {})
+  await cacheParsedStorage.setItem(id, { parsed, hash }).catch(() => { })
 
   return parsed
 }
@@ -205,7 +214,7 @@ export const createServerQueryFetch = <T = ParsedContent>(event: H3Event) => (qu
 export function serverQueryContent<T = ParsedContent>(event: H3Event): ContentQueryBuilder<T>;
 export function serverQueryContent<T = ParsedContent>(event: H3Event, params?: ContentQueryBuilderParams): ContentQueryBuilder<T>;
 export function serverQueryContent<T = ParsedContent>(event: H3Event, query?: string, ...pathParts: string[]): ContentQueryBuilder<T>;
-export function serverQueryContent<T = ParsedContent> (event: H3Event, query?: string | ContentQueryBuilderParams, ...pathParts: string[]) {
+export function serverQueryContent<T = ParsedContent>(event: H3Event, query?: string | ContentQueryBuilderParams, ...pathParts: string[]) {
   const { advanceQuery } = useRuntimeConfig().public.content.experimental
   const queryBuilder = advanceQuery
     ? createQuery<T>(createServerQueryFetch(event), { initialParams: typeof query !== 'string' ? query || {} : {}, legacy: false })
@@ -224,8 +233,8 @@ export function serverQueryContent<T = ParsedContent> (event: H3Event, query?: s
     if (path) {
       params.where = params.where || []
       if (params.first && (params.where || []).length === 0) {
-      // If query contains `path` and does not contain any `where` condition
-      // Then can use `path` as `where` condition to find exact match
+        // If query contains `path` and does not contain any `where` condition
+        // Then can use `path` as `where` condition to find exact match
         params.where.push({ _path: withoutTrailingSlash(path) })
       } else {
         params.where.push({ _path: new RegExp(`^${path.replace(/[-[\]{}()*+.,^$\s/]/g, '\\$&')}`) })
