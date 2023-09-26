@@ -31,7 +31,7 @@ export const useTags = () => {
     return [...new Set(flatTags)].filter(t => t).sort((a, b) => (stat[b] - stat[a]))
   }, [])
   const selectedTags$ = ref<Record<string, number>>({});
-  const selectedTags = computed(() => Object.keys(selectedTags$.value))
+  const selectedTags = computed(() => Object.keys(selectedTags$.value).filter(key => selectedTags$.value[key]))
   const selectTag = (tag: string) => {
     selectedTags$.value[tag] ??= 0;
     selectedTags$.value[tag] = selectedTags$.value[tag] ? 0 : 1;

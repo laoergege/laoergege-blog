@@ -29,21 +29,21 @@
     </li> -->
     <!-- 固定菜单 -->
     <i class="ml-auto sm:mt-auto"></i>
-    <li>
+    <!-- <li>
       <div class="place-content-center">
         <Icon name="uil:search" />
       </div>
-    </li>
+    </li> -->
     <li>
       <ThemeChangeBtn />
     </li>
-    <li>
+    <!-- <li>
       <a href="" class="place-content-center">
         <Icon name="uil:rss-interface" />
       </a>
-    </li>
+    </li> -->
     <li>
-      <a href="" class="place-content-center">
+      <a href="https://github.com/laoergege" class="place-content-center">
         <Icon name="line-md:github-loop" />
       </a>
     </li>
@@ -54,7 +54,7 @@
 import { useRouter } from "vue-router";
 import { useSideCtx } from "./Side.vue";
 import Toc from "~/components/Toc.vue";
-import Tags, { useTagsCtx } from "~/components/Tags.vue";
+import Tags from "~/components/Tags.vue";
 import { resolveComponent, defineComponent } from "vue";
 
 const Icon = resolveComponent("Icon");

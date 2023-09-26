@@ -1,3 +1,2 @@
 packages:
   - "markdown-plugins/*"
-  - "nuxt-content"

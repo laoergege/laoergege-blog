@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <div class="main-container box-content">
+    <div class="main-container box-content mt-8">
       <article ref="elRef" class="place-main">
         <ContentDoc>
           <template #not-found>
@@ -43,14 +43,14 @@ import { defineComponent, onMounted } from "vue";
 import { createSideCtx } from "~/components/NavBar/Side.vue";
 import { ref } from "vue";
 
-export const articleMounted$ = createEventEmitter("articleMounted");
+export const articleMounted$ = createEventEmitter<HTMLElement>("articleMounted");
 
 export default defineComponent({
   setup() {
     const elRef = ref<HTMLElement>();
     onMounted(() => {
       mediumZoom(elRef.value?.querySelectorAll('[data-zoomable]'));
-      articleMounted$.emit(elRef.value)
+      articleMounted$.emit(elRef.value!)
     });
 
     createSideCtx(ref(null));

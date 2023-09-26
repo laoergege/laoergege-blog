@@ -19,7 +19,8 @@ interface Options {
   limit?: number,
   filter?: Filter | Ref<Filter>,
   sort?: Sorter | Ref<Sorter>,
-  mode?: Mode
+  mode?: Mode,
+  page?: number
 }
 
 export const createContentList = (options: Options) => {
@@ -49,17 +50,23 @@ export const createContentList = (options: Options) => {
   const filtedIndexs = computed(() => filter.value ? sortedIndexs.value.filter(filter.value) : sortedIndexs.value)
   const list = computed(() => {
     if (mode === "infinite") {
-      return filtedIndexs.value
+      return filtedIndexs.value.slice(0, limit.value * page.value)
     } else {
       return filtedIndexs.value.slice(skip(page.value), limit.value)
     }
   })
 
-  let _page = 1
+  const total = computed(() => {
+    return Math.ceil(filtedIndexs.value.length / limit.value)
+  })
+  let _page = options?.page ?? 1
   const page = customRef<number>((track, trigger) => ({
     set(value) {
-      if (value < rawIndexs.value.length) {
+      if (value < total.value) {
         _page = value
+        trigger()
+      } else if (value >= total.value) {
+        _page = total.value
         trigger()
       } else if (value <= 0) {
         _page = 1
@@ -72,7 +79,9 @@ export const createContentList = (options: Options) => {
     }
   }))
 
-  const isEnd = computed(() => Math.ceil(filtedIndexs.value.length / limit.value) === page.value)
+  const isEnd = computed(() => {
+    return page.value >= total.value
+  })
 
   return {
     page,
@@ -80,5 +89,7 @@ export const createContentList = (options: Options) => {
     sort,
     filter,
     isEnd,
+    rawIndexs,
+    sortedIndexs
   }
 }

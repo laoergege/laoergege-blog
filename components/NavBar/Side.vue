@@ -1,6 +1,6 @@
 <template>
   <input id="my-drawer" type="checkbox" class="drawer-toggle" v-model="checked" />
-  <div class="drawer-side" v-show="checked">
+  <div class="drawer-side">
     <label for="my-drawer" class="drawer-overlay xl:hidden"></label>
     <div class="h-screen bg-base-200 text-base-content side-width">
       <div class="flex justify-end">
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-// import { articleMounted$ } from "~/pages/[...slug].vue";
+import { articleMounted$ } from "~/pages/[...slug].vue";
 import { defineComponent, InjectionKey, ref, getCurrentInstance } from "vue";
 import { createEventEmitter } from "~/utils/event-emiter";
 
@@ -39,11 +39,11 @@ const SideComponent = defineComponent({
     }
 
     const actionsRef = ref<HTMLElement | null>(null)
-    // const sideWidth = computed(() => (articleMounted$.value?.getBoundingClientRect().left + 20 + 'px' ?? "auto"));
+    const sideWidth = computed(() => (articleMounted$.value?.getBoundingClientRect().left - 20 + 'px' ?? "auto"));
 
     return {
       checked,
-      // sideWidth,
+      sideWidth,
       getComp() {
         console.log("side comp: ", comp)
         return comp
@@ -92,8 +92,8 @@ export const useSideCtx = () => {
 export default SideComponent;
 </script>
 
-<!-- <style scoped>
+<style scoped>
 .side-width {
   width: v-bind(sideWidth);
 }
-</style> -->
+</style>

@@ -15,17 +15,9 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
   ],
-  // ssr: false,
-  // experimental: {
-  //   noVueServer: true,
-  // },
-  // generate: {
-  //   routes: [],
-  // },
-  // nitro: {
-  //   preset: "service-worker"
-  // },
+  ssr: true,
   app: {
+    baseURL: "",
     head: {
       link: [
         {
@@ -34,6 +26,20 @@ export default defineNuxtConfig({
         },
       ],
     },
+    keepalive: true,
+    pageTransition: true,
+  },
+  nitro: {
+    prerender: {
+      routes: ["/generate"],
+      ignore: ["."],
+    }
+  },
+  experimental: {
+    payloadExtraction: false
+  },
+  sourcemap: {
+    client: true
   },
   content: {
     documentDriven: true,

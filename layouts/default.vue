@@ -1,9 +1,9 @@
 <template>
   <NuxtLoadingIndicator />
   <div class="drawer">
-    <main class="drawer-content">
+    <main class="drawer-content flex flex-col min-h-screen">
       <slot />
-      <MyFooter class="mt-10" />
+      <MyFooter class="mt-auto" />
       <BottomNavBar class="sm:hidden" />
     </main>
     <SideNavBar class="hidden sm:block" />
@@ -17,10 +17,8 @@
 import SideNavBar from "~/components/NavBar/SideNavBar.vue";
 import BottomNavBar from "~/components/NavBar/BottomNavBar.vue";
 import Side from "~/components/NavBar/Side.vue";
-import { useResponsiveSizeCtx } from "~/utils/window-size";
 import { useSideCtx } from "~/components/NavBar/Side.vue";
 
-// const { sm } = useResponsiveSizeCtx();
 let { side } = useSideCtx()
 </script>
 
