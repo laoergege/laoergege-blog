@@ -9,10 +9,10 @@ export default {
     light: "light",
   },
   nuxtIcon: {
-    size: "1.25em",
+    size: "1.8em",
   },
   prose: {
-    // Default icon for all headings on hover
+    // Default icon for all headings on ho·ver
     headings: {
       icon: 'ph:anchor'
     },

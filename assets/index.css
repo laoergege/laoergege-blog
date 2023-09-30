@@ -1,0 +1,17 @@
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr [main-start] minmax(0, 768px) [main-end] 1fr;
+  gap: 4em 2em;
+
+  .place-main {
+    grid-column: main;
+  }
+}
+
+@media screen(2xl) {
+  .main-container {
+    display: grid;
+    grid-template-columns: 1fr [main-start] minmax(0, 1024px) [main-end] 1fr;
+    gap: 4em;
+  }
+}

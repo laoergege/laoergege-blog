@@ -1,6 +1,6 @@
-import type {} from "nuxt-icon";
-import type {} from "@vite-pwa/nuxt";
-import type {} from "@nuxtjs/tailwindcss";
+import type { } from "nuxt-icon";
+import type { } from "@vite-pwa/nuxt";
+import type { } from "@nuxtjs/tailwindcss";
 import config from "./app.config";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
@@ -10,12 +10,14 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     '@nuxtjs/tailwindcss',
-    "@nuxt/image-edge",
+    "@nuxt/image",
     "nuxt-icon",
     "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
   ],
+  ssr: true,
   app: {
+    baseURL: "",
     head: {
       link: [
         {
@@ -24,6 +26,19 @@ export default defineNuxtConfig({
         },
       ],
     },
+    keepalive: true,
+    // pageTransition: true,
+  },
+  nitro: {
+    prerender: {
+      ignore: ["."],
+    }
+  },
+  experimental: {
+    payloadExtraction: false
+  },
+  sourcemap: {
+    client: true
   },
   content: {
     documentDriven: true,

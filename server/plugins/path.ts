@@ -4,6 +4,11 @@ interface ContentFile {
   _id: string;
   _source: string;
   _path: string;
+  parsed: {
+    title: string;
+    body: string;
+    tags?: string[];
+  }
 }
 
 export default defineNitroPlugin((nitroApp) => {
@@ -12,4 +17,6 @@ export default defineNitroPlugin((nitroApp) => {
       file._path = `/posts/${hash(file._id)}`
     }
   });
-});
+})
+
+

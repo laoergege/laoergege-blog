@@ -1,19 +1,9 @@
 <template>
-  <nuxt-img
-    :src="src"
-    :alt="alt"
-    :width="width"
-    :height="height || '60vh'"
-    fit="outside"
-    class="mx-auto"
-    loading="lazy"
-    ref="imgRef"
-  />
+  <nuxt-picture format="avif,webp" legacy-format="jpeg" :src="src" :img-attrs="attrs" ref="elRef"
+    loading="lazy"></nuxt-picture>
 </template>
 
 <script setup lang="ts">
-import mediumZoom from "medium-zoom";
-
 defineProps({
   src: {
     type: String,
@@ -31,15 +21,10 @@ defineProps({
     type: [String, Number],
     default: undefined,
   },
-  sizes: {
-    type: String,
-    default: "xs:50vw md:50vw",
-  },
 });
 
-const imgRef = ref();
-
-onMounted(() => {
-  const zoom = mediumZoom(imgRef.value.$.vnode.el);
-});
+const attrs = {
+  "class": "w-auto max-h-[90vh] mx-auto bg-base-100",
+  "data-zoomable": 1
+}
 </script>
