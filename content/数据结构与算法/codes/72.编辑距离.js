@@ -10,8 +10,8 @@
  * @param {string} word2
  * @return {number}
  */
-var minDistance = function(word1, word2) {
+var minDistance = function (word1, word2) {};
 
-};
+// 回溯
+function dfs(word1, word2) {}
 // @lc code=end
-

@@ -2,7 +2,7 @@
  * @lc app=leetcode.cn id=47 lang=javascript
  *
  * [47] 全排列 II
- * 
+ *
  * 回溯、状态复制
  */
 
@@ -12,30 +12,26 @@
  * @return {number[][]}
  */
 var permuteUnique = function (nums) {
-    const result = []
-    dfs(0, [], nums, result)
-    return result
+  const result = [];
+  dfs(0, [], nums, result);
+  return result;
 };
 
-function dfs(idx, state, nums, result) {
-    if (!nums.length) {
-        result.push(state)
-        return;
-    }
-    const repeat = {}
-    for (let index = 0; index < nums.length; index++) {
-        const el = nums[index];
+function dfs(idx, state, nums, result, selected = {}) {
+  if (idx === nums.length) {
+    result.push([...state]);
+  }
 
-        if (repeat[el]) {
-            continue;
-        } else {
-            repeat[el] = true
-        }
-
-        const _nums = [...nums];
-        _nums.splice(index, 1)
-        dfs(idx + 1, [...state, el], _nums, result)
+  const repeat = {};
+  for (const [i, n] of Object.entries(nums)) {
+    if (!repeat[n] && !selected[i]) {
+      state.push(n);
+      repeat[n] = true;
+      selected[i] = true;
+      dfs(idx + 1, state, nums, result, selected);
+      state.pop();
+      selected[i] = false;
     }
+  }
 }
 // @lc code=end
-

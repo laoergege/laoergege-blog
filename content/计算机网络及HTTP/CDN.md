@@ -10,7 +10,8 @@ tags:
 
 CDN，内容分发网络（Content Dilivery Network，CDN）是一个专门用来分发静态内容的分布式应用。通过部署各地网络节点，根据**就近原则**让不同地域的用户可以就近获取内容，从而达到加速访问的效果。
 
-![图 1](../../images/0ae49e36dc088430e9a288f746accb2e4187f9e4fc1b106957cda6dfde6ee678.png)  
+![图 1](./images/b4e237bf33cd7c478d7b0af2ceeb061aff0966b250de5daccf10d75754f98f94.png)  
+
 
 CDN 的核心技术组成有两块：
 

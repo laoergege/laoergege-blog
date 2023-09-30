@@ -348,19 +348,6 @@ ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全�
         }
       }
       ```
-- 模块内部变量限制：为了保证 ES6 模块在浏览器和 Node 通用，禁止以下变量
-  - arguments
-  - require
-  - module
-  - exports
-  - __filename、__dirname
-    - 使用 URL 模块去获取文件路径：
-      ```js
-      import url from "url"
-
-      const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
-      ```
-
 ## 学习参考
 
 - [ES modules: A cartoon deep-dive](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/)

@@ -4,9 +4,16 @@ release: true
 tags:
  - web
  - 安全
-desc: 总结 Web 安全相关知识体系
 ---
 # Web 安全
+
+web 安全
+  - XSS
+  - CSRF
+    - 防御方案
+      - 请求来源限制，比如限制 HTTP Referer 才能完成操作
+      - token 验证机制，比如请求数据字段中添加一个 token，响应请求时校验其有效性
+      - 用户操作限制，比如验证码
 
 - Web 安全
   - 页面安全
@@ -65,6 +72,7 @@ XSS 全称是 Cross Site Scripting，为了与“CSS”区分开来，故简称 
 ## 防止 XSS 攻击
 
 XSS 攻击有两大要素：
+
 1. 攻击者提交恶意代码。(输入来源)
 2. 浏览器执行恶意代码。（输出执行）
 

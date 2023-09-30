@@ -3,10 +3,10 @@ discussionID: Gv2C1H6mdnkUgseyTVmfC
 release: true
 tags:
  - http
-desc: 了解 HTTP 各版本的关键设计变化以及每个变化背后的动机
+description: 了解 HTTP 各版本的关键设计变化以及每个变化背后的动机。
 ---
 
-# HTTP 各版本协议对比
+# HTTP 各版本协议对比发展
 
 - HTTP/0.9
   - 只传输 ASCII 编码的超文本内容 HTML，并且只有一个请求行且只支持GET请求

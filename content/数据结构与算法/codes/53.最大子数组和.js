@@ -10,21 +10,17 @@
  * @return {number}
  */
 var maxSubArray = function (nums) {
-    return dfs(nums, 0, 0)
+    const temp = [...new Array(6)].map(e => [])
+    return dfs(nums, temp, 0, nums.length - 1)
 };
 
-function dfs(nums, i, max) {
-    if (i === nums.length) {
-        return max
-    }
+function dfs(nums, temp, left, right) {
+    let _right = right - 1
 
-    max += nums[i]
-
-    return Math.max(
-        max,
-        dfs(nums, i + 1, max),
-        dfs(nums, i + 1, 0)
-    )
+    return temp[left][right] ??= Math.max(
+        ...nums.slice(left, _right)
+            .map((e, idx) => dfs(nums, idx, _right))
+    ) + nums[right]
 }
 // @lc code=end
 
