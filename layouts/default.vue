@@ -2,9 +2,7 @@
   <NuxtLoadingIndicator />
   <div class="drawer">
     <main class="drawer-content flex flex-col min-h-screen">
-      <Suspense>
-        <slot />
-      </Suspense>
+      <slot></slot>
       <MyFooter class="mt-auto" />
       <BottomNavBar class="sm:hidden" />
     </main>

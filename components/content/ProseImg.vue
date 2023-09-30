@@ -1,5 +1,6 @@
 <template>
-  <nuxt-picture format="webp" :src="src" :img-attrs="attrs" ref="elRef" loading="lazy" class="bg-base-100" />
+  <nuxt-picture format="avif,webp" legacy-format="jpeg" :src="src" :img-attrs="attrs" ref="elRef"
+    loading="lazy"></nuxt-picture>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +24,7 @@ defineProps({
 });
 
 const attrs = {
-  "class": "w-auto max-h-[90vh] mx-auto",
+  "class": "w-auto max-h-[90vh] mx-auto bg-base-100",
   "data-zoomable": 1
 }
 </script>

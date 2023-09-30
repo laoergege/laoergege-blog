@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     '@nuxtjs/tailwindcss',
-    "@nuxt/image-edge",
+    "@nuxt/image",
     "nuxt-icon",
     "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
@@ -27,7 +27,7 @@ export default defineNuxtConfig({
       ],
     },
     keepalive: true,
-    pageTransition: true,
+    // pageTransition: true,
   },
   nitro: {
     prerender: {
