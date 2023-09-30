@@ -15,13 +15,15 @@
     - Interactive Rebase Editor
   - 仓库
     - `git push —set-upstream origin my-new-branch`
-  - 分支、Commit 节点、标签
+  - 分支
+    - 分支树的本质是一颗 commidID 树，无论我们 `git checkout <commitID> | <branch> | <tag>`，所有本质都是切换到对应的 commitID 节点快照，故 Git 的分支，其实本质上仅仅是指向提交对象的可变指针
     - `git branch <branch> <base_branch>`：创建分支
     - `git checkout <branch|commit>`：切换分支/Commit 节点
     - `git checkout -b <new_branch> <base_branch>`：创建新的分支
     - `git switch <branch>`：切换分支
     - `git switch -d <commit>`：切换到 Commit 节点
     - `git switch -c <new_branch>`:：创建新的分支
+    - 合并分支
     - 删除分支：`git branch -d <branch>`
       - `-d`：删除分支，删除前 Git 会判断在该分支上开发的功能是否被 merge 到其它分支，如果有则无法删除
       - `-D`：强制删除分支
@@ -42,10 +44,17 @@
 
 git 的分支合并有四种合并方式：
 
-- fast-forward merge 快速合并
-- merge 普通合并
-- rebase 变基
-- cherry-pick 挑选
+- merge
+  - 快速合并：当源节点 master 与目标节点 bugfix 同处一条 Commit 对象树的分支上，进行合并时，git 只是简单的将 master 分支指针向前移动
+  - 普通合并：当源节点 master 与目标节点 bugfix 不在同一条 Commit 对象树的分支上，进行合并时，会创建新的 commit 节点，其 parent 即为 master、bugfix 的最新提交对象
+    - `git merge --no-ff`：命令 git 不要快合并
+- rebase：变基是将一系列提交按照原有次序依次应用到另一分支上，而合并是把最终结果合在一起
+  - 首先找到这两个分支的最近共同祖先 B，然后对比当前分支相对于该祖先的历次提交，提取相应的修改并存为临时文件，然后将当前分支指向目标基底 D, 最后以此将之前另存为临时文件的修改依序应用
+    ![](https://backlog.com/git-tutorial/cn/img/post/stepup/capture_stepup1_4_8.png)
+  - `git rebase [basebranch] [topicbranch]`
+    - 可以直接将将当前分支变基到目标分支上，省去了切换分支的操作
+- cherry-pick：可以选择任意 Commit，合并到当前分支
+  - `git cherry-pick <commit-ish>...`
 
 ## Subtree
 
