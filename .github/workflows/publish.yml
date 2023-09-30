@@ -40,13 +40,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'pnpm'
+          cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
       - name: Static HTML export with Nuxt
         run: pnpm build
-      - name: CNAME
-        run: echo "blog.laoergege.cn" > CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
