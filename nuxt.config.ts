@@ -7,10 +7,15 @@ import config from "./app.config";
 export default defineNuxtConfig({
   extends: "@nuxt-themes/typography",
   typescript: { includeWorkspace: true },
+  vite: {
+    build: {
+      outDir: "./docs"
+    }
+  },
   modules: [
     "@nuxt/content",
     '@nuxtjs/tailwindcss',
-    "@nuxt/image",
+    // "@nuxt/image",
     "nuxt-icon",
     "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
