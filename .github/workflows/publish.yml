@@ -8,11 +8,6 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["master"]
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 jobs:
   # Build job
   publish:

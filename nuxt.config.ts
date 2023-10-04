@@ -7,11 +7,6 @@ import config from "./app.config";
 export default defineNuxtConfig({
   extends: "@nuxt-themes/typography",
   typescript: { includeWorkspace: true },
-  vite: {
-    build: {
-      outDir: "./docs"
-    }
-  },
   modules: [
     "@nuxt/content",
     '@nuxtjs/tailwindcss',
@@ -41,9 +36,6 @@ export default defineNuxtConfig({
   },
   experimental: {
     payloadExtraction: false
-  },
-  sourcemap: {
-    client: true
   },
   content: {
     documentDriven: true,
