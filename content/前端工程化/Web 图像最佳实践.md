@@ -1,22 +1,59 @@
+- 执行
+  - 大小
+    - 网络
+    - 执行
+  - 调度
+
+
+
+- 网络性能
+  - 带宽
+  - 时延
+    - 排队时延
+    - 处理时延
+    - 发送时延
+    - 传播时延
+  - 抖动
+  - 丢包
+
+
+
+业的精英，我其实活得游刃有余。
+一共有四点，一点认知、一点执行和两点方法论：认知就是收集信息的能力，执行即自驱力，来源于你的野心；方法论有两个，一个是拆解问题的能力，以及第二个，变通思维的能力
+
 - Web 图像最佳实践
-  - 尽量避免使用 background-image
-    - 延长请求链（Fetch Html => Fetch CSS => Fetch Image）
-    - 屏幕尺寸和分辨率-媒体查询和图像集结合
-  - 延迟加载： `loading="lazy"`
-    - 延迟非视口内或者靠近视口的图像加载
-    - [如果对视口内的图像使用该属性会导致加载变较慢](https://web.dev/learn/images/performance-issues/#deferring-image-requests)
-  - 优先加载关键图像
-    - preload
-    - `fetchpriority="high"`
-      - 允许您将资源标记为相对于相同类型资源的“高”和“低”优先级
-      - [fetchpriority 不同于 loading 的是它不会从根本上改变浏览器的行为：它不会指示浏览器在其他资源之前加载某些资源，而是为其围绕请求资源做出的决策提供重要的上下文](https://web.dev/learn/images/performance-issues/#fetch-priority)
+  - 关键图像
+    - 优先加载
+      - `<link preload />`
+      - `fetchpriority="high"`
+        - 允许您将资源标记为相对于相同类型资源的“高”和“低”优先级
+    - 尽量避免使用 `background-image`
+      - 延长请求链（Fetch Html => Fetch CSS => Fetch Image）
+      - 屏幕尺寸和分辨率-媒体查询和图像集结合
+  - 延迟加载非视口内的图像
+    - [延迟加载图像方法](https://web.dev/lazy-loading-images/)
   - 避免布局偏移
     - 设置 `width` 和 `height` 固定值
-    - [现代浏览器行为](https://caniuse.com/mdn-html_elements_img_aspect_ratio_computed_from_attributes)：将 `width` 和 `height` 作为计算图像的长宽比，而不是使用这些属性的值来确定布局中元素的固定大小
-    - `{max-width: 100%;height: auto}`
+    - `<img width height />` + `{max-width: 100%;height: auto}`
+      - [现代浏览器行为](https://caniuse.com/mdn-html_elements_img_aspect_ratio_computed_from_attributes)会将 `width` 和 `height` 作为计算图像的长宽比
+      - 通过 CSS 样式覆盖 HTML 属性的高度即可，进行响应式宽高而不是使用这些属性的值来确定布局中元素的固定大小
     - aspect-ratio
+  - 选择正确的图像编码格式与压缩：需要在性能、图像场景及体验之间找合适的平衡点，选择正确的图像压缩格式
+    - 矢量图像
+    - 光栅图像
+      - 光栅图像格式：一组逐像素的描述指令，用于渲染二维网格
+        - 服务器不会通过网络将图像数据发送到浏览器，而是发送描述像素网格的字节流，再该像素网格构成该图像以供客户端
+        - 图像压缩是用更少的字符来描述相同的图像，这是叫做无损压缩的方式。但我们的眼睛也不具有完美的保真度，选择有损压缩可更近一步降低图像大小
+      - 常见格式
+        - GIF
+        - JPEG
+        - PNG
+        - WebP
+        - AVIF
+      > 更多了解 https://web.dev/learn/images/raster-images/
+    - 图像源所需的替代尺寸将是由这些图像在页面布局中占据的位置决定
   - 响应式图像
-    - 图片效果与像素密度关系
+    - 图片显示效果与像素密度关系
       - 屏幕
         - 物理像素，分辨率，即构成屏幕本身的硬件像素数量
         - 设备像素比(DPR)：物理像素与逻辑像素之间的比率
@@ -31,17 +68,9 @@
         - `sizes="calc(100vw-2em)"`
         - 断点：`sizes="(min-width: 1200px) calc(80vw - 2em), 100vw"`
         - [细节描述](https://web.dev/learn/images/descriptive/#describing-usage-with-sizes)
-    - `max-width: 100%;height: auto`
-    - 保证不会溢出容器，并且随着容器大小缩放。但为了保证图像现实效果，必须使用最大尺寸的图像源
+    - `max-width: 100%`
+      - 保证不会溢出容器，并且随着容器大小缩放。但为了保证图像现实效果，必须使用最大尺寸的图像源
     - 随着第一批“视网膜”设备的出现，情况变得更加糟糕，因为显示密度与视口大小一起成为一个问题。图像源需要更大的固有宽度才能适应高密度显示。简单来说，密度加倍的显示器需两倍的图像像素才能尽可能清晰地渲染图像
-  - 选择正确的图像编码格式与压缩
-    > https://web.dev/learn/images/raster-images/
-    - 光栅图像格式定义图像内容（像素网格）的描述指令，服务器不会通过网络将图像数据发送到浏览器，而是发送描述像素网格的字节流，再该像素网格构成该图像以供客户端
-    - 图像压缩是用更少的字符来描述相同的图像，这是叫做无损压缩的方式。但我们的眼睛也不具有完美的保真度，选择有损压缩可更近一步降低图像大小
-    - 我们需要在性能、图像场景及体验之间找合适的平衡点，选择正确的图像压缩格式
-      - 内容场景
-        - 在为摄影图像目录选择编码时，AVIF在质量和传输大小方面明显胜出，但支持有限，WebP提供优化的现代后备，而JPEG是最可靠的默认值
-    - 图像源所需的替代尺寸将是由这些图像在页面布局中占据的位置决定
   - img
     - 浏览器进行计算并选择向用户显示的最佳尺寸
     - `<picture>`：配置不同格式的图片
@@ -132,4 +161,17 @@
           -  Lazysizes
              -  sizes="auto"
       - img
-- 性能优化
+- 图像性能优化
+  - 编码格式
+
+    - 响应式图片
+      - 根据屏幕大小和分辨率选择性加载
+        - DPR
+        - srcset
+        - sizes
+    - Image 组件的最佳实践
+    - Img
+      - loading="lazy"：延迟加载
+        - 未指定大小的图片会降低 CLS
+      - srcset/img-set
+      - sizes

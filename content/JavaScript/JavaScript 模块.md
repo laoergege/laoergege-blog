@@ -13,7 +13,6 @@ tags:
   - [模块化发展历程](#javascript-模块发展历程)
   - [CommonJS](#commonjs)
   - [ES Modules](#es-modules)
-- ES Modules 使用
 
 ## JavaScript 模块发展历程
 
@@ -30,7 +29,8 @@ tags:
 ### 原始阶段：文件划分、对象命名空间方式、IIFE
 
 - 文件划分：以文件形式上模块化划分变量
-- IIFE + 对象命名空间：解决了全局污染、命名冲突、成员访问控制
+- 对象命名空间：解决了全局污染、大部分命名冲突问题
+- IIFE：实现成员访问控制
 
 ```js
 // module-a.js
@@ -56,8 +56,9 @@ tags:
     method1: method1
   }
 })()
+```
 
-
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,11 +76,11 @@ tags:
 </html>
 ```
 
-上面还存留一个最明显的问题就是：**模块依赖的加载**，这也是后面模块化规范和模块打包工具的出现的原因。
+上面还存留一个最明显的问题就是：**模块依赖的加载**，这也是后面社区模块化规范和模块打包工具的出现的原因。
 
 ## CommonJS
 
-模块包装函数
+原代码会被进行模块包装输出：
 
 ```js
 (function(exports, require, module, __filename, __dirname) {
@@ -87,13 +88,13 @@ tags:
 });
 ```
 
-CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导出的是module.export，所以不能直接给 export 赋值，会导致指向丢失。
+CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导出的是 module.export，所以不能直接给 export 赋值，会导致指向丢失。
 
 ## ES Modules
 
 - ES Modules
   - 语法规范
-    - export 声明
+    - export
       - `export let a` 单变量声明导出
       - `export {a, b, c}`  变量名列表导出
       - `export {a as x}`  导出重命名
@@ -114,7 +115,7 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
           // import foo from 'modules';
           ```
       - `export default a` 表达式导出 
-    - import 声明
+    - import
       - `import x from "./a.js"` 默认引入
       - `import {a as x, modify} from "./a.js"` 成员引入及重命名
       - `import * as x from "./a.js"` 把模块中所有的变量以类似对象属性的方式引入
@@ -134,26 +135,27 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
         // index.mjs
         import('./c.mjs').then(({ c, printC }) => {
           c = 4;
-          printC();
+          printC(); // 3
         });
         ```
     - `import.meta`
       - `import.meta` 只能在模块内部使用，如果在模块外部使用会报错
       - `import.meta.url`
       - `import.meta.resolve`
-    - 加载路径
+    - 模块路径
       - URL 路径规则
       - ES 模块的加载路径必须给出脚本的完整路径，不能省略脚本的后缀名
-    - Import assertions
-    - top await
+    - Import Assertions
+    - Top Await
+    - Import Maps
   - 特征
     - 自动采用严格模式，不管有没有声明 `use strict`
     - 模块作用域
       - 代码是在模块作用域之中运行，而不是在全局作用域运行。模块内部的顶层变量，外部不可见
       - CommonJs 的 this 是当前模块，ES6 Module的 this 是 undefined
-  - [工作机制](#es-modules-是如何工作的)
+  - [ES modules 是如何工作的？](#es-modules-是如何工作的)
   - [循环加载：如何解决依赖循环导致的死循环问题？](#如何解决依赖循环导致的死循环问题)
-  - 应用
+  - 使用
     - [在浏览器中使用 ES modules](#在浏览器中使用-es-modules)
     - [在 Node.js 中使用 ES modules](#在-nodejs-中使用-es-modules)
 
@@ -161,10 +163,11 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
 
 模块加载的原理离不开以下四步：
 
+- 路径解析
 - 文件加载
 - 依赖构建
-- 编译
-- 执行
+- 链接编译
+- 执行求值
 
 每个 ES module 的加载这几个阶段是**异步执行**：
 
@@ -316,6 +319,32 @@ ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全�
 
 ### 在 Node.js 中使用 ES modules
 
+- ES 模块中限制变量访问：`__filename`、`__dirname`，`module`
+  - 访问与当前模块相关的路径
+    ```js
+    import url from "url";
+
+    const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+    ```
+  - ESM 模块没有简单的内置方法来检查模块是否是主模块
+    ```js
+    // CommonJS
+    // if (require.main === module) {
+      // Main CommonJS module
+    // } 
+    
+    // ES Modules 
+    import * as url from "node:url";
+
+    if (import.meta.url.startsWith("file:")) {
+      // (A)
+      const modulePath = url.fileURLToPath(import.meta.url);
+      if (process.argv[1] === modulePath) {
+        // (B)
+        // Main ESM module
+      }
+    }
+    ```
 - ES 模块加载规则
   - CommonJS 模块加载 ES6 模块
     - `require` 命令不能加载 `.mjs` 文件
@@ -348,6 +377,7 @@ ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全�
         }
       }
       ```
+
 ## 学习参考
 
 - [ES modules: A cartoon deep-dive](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/)
