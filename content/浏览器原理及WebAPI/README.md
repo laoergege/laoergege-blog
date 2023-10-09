@@ -40,10 +40,10 @@ desc: 浏览器原理及API知识体系总结
 - WeAPI
   - 页面
     - DOM
-      - [视图中的各种宽高偏移](./视图中的各种宽高偏移.md)
-      - [DOM 事件模型](./DOM%20事件模型.md)
-      - [WebComponent](./WebComponent.md)
-    - [Canvas](./Canvas.md)
+      - [视图中的各种宽高偏移](./视图中的各种宽高偏移概念.md)
+      - DOM 事件模型
+      - WebComponent
+    - Canvas
     - 不同上下文（窗口、iframe、worker）通信
       - 同源
         - 引用通信：window.opener + iframe.contentWindow
@@ -92,10 +92,9 @@ desc: 浏览器原理及API知识体系总结
       - JSONP：利用了 script 标签的 src 属性来实现跨域数据交互的，因为浏览器解析HTML代码时，原生具有src属性的标签，浏览器都赋予其HTTP请求的能力，而且不受跨域限制，使用src发送HTTP请求，服务器直接返回一段JS代码的函数调用，将服务器数据放在函数实参中，前端提前写好响应的函数准备回调，接收数据，实现跨域数据交互
       - Proxy Server：服务器代理
       - WebSocket
-  - [多线程：WebWorker](./WebWork.md)
+  - WebWorker
     - [task-worklet](https://github.com/developit/task-worklet)
     - [workerize](https://github.com/developit/workerize)
-  - [PWA](./PWA.md)
   - 多媒体
     - [WebRTC](https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API)
   - 其他

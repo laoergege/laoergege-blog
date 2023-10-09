@@ -27,7 +27,7 @@ web 安全
     - [CSRF 攻击与 cookie 机制](#csrf-攻击与-cookie-机制)
       - [防止 CSRF 攻击](#防止-csrf-攻击)
   - 网络安全
-    - [HTTPS](../HTTP/https.md)：解决 HTTP 劫持（明文传输，内容篡改）
+    - [HTTPS](../计算机网络及HTTP/HTTPS.md)：解决 HTTP 劫持（明文传输，内容篡改）
       - 点击嵌套劫持
       - 广告
   - 浏览器系统安全

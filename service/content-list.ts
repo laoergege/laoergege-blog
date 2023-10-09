@@ -1,8 +1,7 @@
 
 import { asyncComputed } from "@vueuse/core";
-import { ref, computed, customRef, isRef } from "vue";
+import { computed, customRef, isRef } from "vue";
 import type { Ref } from "vue";
-// import { Par } from "@nuxt/content";
 
 // module "@nuxt/content" {
 interface ParsedContent {

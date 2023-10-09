@@ -23,7 +23,6 @@ description: JavaScript 语法结构体系
         - 字面量
           - 数字直接量
           - 字符串直接量
-            - [转义字符串](./JavaScript%20转义字符串.md)
           - 字符串模板
           - 等
   - 语法

@@ -24,7 +24,7 @@ tags:
           - 图标：雪碧图
           - 代码打包
       - TTFB：第一字节时间 ![](./images/timestamp-diagram.svg)
-        - [HTTP 缓存](../HTTP/http%20缓存.md)
+        - [HTTP 缓存](../计算机网络及HTTP/HTTP%20缓存.md)
         - [preconnect（预连接）、dns-prefetch（DNS 预查询）](https://web.dev/preconnect-and-dns-prefetch/)
         - HTTP/1 keep-alive
         - 减少请求数据大小
@@ -114,16 +114,16 @@ tags:
 
 [Chrome 资源优先级文档](https://docs.google.com/document/d/1bCDuq9H1ih9iNjgzyAL0gpwNFiEP4TZS-YLRp_RuMlc/edit)
 
-| 资源类型 | 优先级 |
-| -------- | ------ |
-| HTML      | Highest        |
-| Font | Highest|
-| Font (preload) | High|
-| CSS | Highest |
-| CSS | Highest |
-| Images | 默认是 Low，在初始视口中渲染时升级为 High |
-| JS | Highest |
-| Ajax, XHR, or fetch() API | High |
+| 资源类型                  | 优先级                                    |
+| ------------------------- | ----------------------------------------- |
+| HTML                      | Highest                                   |
+| Font                      | Highest                                   |
+| Font (preload)            | High                                      |
+| CSS                       | Highest                                   |
+| CSS                       | Highest                                   |
+| Images                    | 默认是 Low，在初始视口中渲染时升级为 High |
+| JS                        | Highest                                   |
+| Ajax, XHR, or fetch() API | High                                      |
 
 ## 关键资源
 

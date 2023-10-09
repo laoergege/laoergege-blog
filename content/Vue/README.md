@@ -62,19 +62,10 @@ description: Vue 技术栈
 
 ## Vue3 系文
 
-1. [vue3 的升级优化](./vue3的升级优化.md)
-2. [vue 组件渲染机制](./vue%20组件渲染机制.md)
-3. [Vue Diff 更新流程](./Vue%20Diff%20%E6%9B%B4%E6%96%B0%E6%B5%81%E7%A8%8B.md)
-4. [vue 的响应式系统](./vue%20的响应式系统.md)
-5. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
-6. [vue props&slots](./vue%20props%26slots.md)
-7. 模板编译优化
-8. vue 指令原理
-9. [Vue 组件生命周期](./Vue%20%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
-10. vue 异步组件及 Suspense
-11. Teleport 实现原理
-12. Fragment
-13. Vue & WebComponent
+1. [vue 组件渲染机制](./vue%20组件渲染机制.md)
+2. [vue diff 更新流程](./vue%20diff%20更新流程.md)
+3. [vue 的响应式系统](./vue%20的响应式系统.md)
+4. [vue 的响应式渲染机制](./vue%20的响应式渲染机制.md)
 
 
 

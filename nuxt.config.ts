@@ -15,7 +15,9 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
   ],
-  ssr: true,
+  nitro: {
+    errorHandler: "~/error",
+  },
   app: {
     baseURL: "",
     head: {
@@ -27,15 +29,6 @@ export default defineNuxtConfig({
       ],
     },
     keepalive: true,
-    // pageTransition: true,
-  },
-  nitro: {
-    prerender: {
-      ignore: ["."],
-    }
-  },
-  experimental: {
-    payloadExtraction: false
   },
   content: {
     documentDriven: true,

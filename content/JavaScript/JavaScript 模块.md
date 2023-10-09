@@ -360,23 +360,6 @@ ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全�
       import { method } from 'commonjs-package';
       ```
       - 这是因为 ES6 模块需要支持静态代码分析，而 CommonJS 模块的输出接口是module.exports 是一个对象，无法被静态分析，所以只能整体加载。
-- package.json 的入口文件
-  - `main`
-  - `exports`
-    - `exports` 给了我们一个很好的方法来“隐藏”我们的内部模块而不是将它们暴露在包之外，但需要手动一一列举需要暴露的文件
-    - 用法：
-      ```js
-      // 条件加载
-      {
-        "type": "module",
-        "exports": {
-          ".": {
-            "require": "./main.cjs",
-            "import": "./src/main.js"
-          }
-        }
-      }
-      ```
 
 ## 学习参考
 

@@ -23,8 +23,7 @@ tags:
   - 运行机制和原理
     - [JavaScript 运行时机制](./JavaScript%20代码执行机制.md)
     - [JavaScript 内存管理机制](./JavaScript%20内存管理机制.md)
-    - [编译时](./JavaScript%20代码执行过程（编译时）.md)
-  - [JavaScript 元编程](./JavaScript%20%E5%85%83%E7%BC%96%E7%A8%8B.md)
+  - JavaScript 元编程
   - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
   - ECMASCript 规范 & V8
 - api

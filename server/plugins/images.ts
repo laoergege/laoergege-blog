@@ -11,7 +11,7 @@ export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook("content:file:beforeParse", (file: ContentFile) => {
     if (file._id.endsWith(".md")) {
       file.body = file.body.replace(
-        /(?<=\!\[.*?\]\(\.\/).*?\.(png|gif|jpg|jpeg|svg)(?=\))/g,
+        /(?<=\!\[.*?\]\()\.\/.*?\.(png|gif|jpg|jpeg|svg)(?=\))/g,
         (img: string) => {
           let { _id } = file;
           const resolveImgPath = fileURLToPath(new URL(img, pathToFileURL(encodeURI(resolve(..._id.split(":"))))))

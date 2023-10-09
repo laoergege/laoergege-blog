@@ -1,25 +1,11 @@
-- 执行
-  - 大小
-    - 网络
-    - 执行
-  - 调度
+---
+release: true
+tags:
+ - web
+ - 图像
+---
 
-
-
-- 网络性能
-  - 带宽
-  - 时延
-    - 排队时延
-    - 处理时延
-    - 发送时延
-    - 传播时延
-  - 抖动
-  - 丢包
-
-
-
-业的精英，我其实活得游刃有余。
-一共有四点，一点认知、一点执行和两点方法论：认知就是收集信息的能力，执行即自驱力，来源于你的野心；方法论有两个，一个是拆解问题的能力，以及第二个，变通思维的能力
+# Web 图像最佳实践
 
 - Web 图像最佳实践
   - 关键图像
@@ -29,15 +15,17 @@
         - 允许您将资源标记为相对于相同类型资源的“高”和“低”优先级
     - 尽量避免使用 `background-image`
       - 延长请求链（Fetch Html => Fetch CSS => Fetch Image）
-      - 屏幕尺寸和分辨率-媒体查询和图像集结合
   - 延迟加载非视口内的图像
     - [延迟加载图像方法](https://web.dev/lazy-loading-images/)
   - 避免布局偏移
     - 设置 `width` 和 `height` 固定值
-    - `<img width height />` + `{max-width: 100%;height: auto}`
+    - `<img width height />` + css `{max-width: 100%;height: auto}`
       - [现代浏览器行为](https://caniuse.com/mdn-html_elements_img_aspect_ratio_computed_from_attributes)会将 `width` 和 `height` 作为计算图像的长宽比
       - 通过 CSS 样式覆盖 HTML 属性的高度即可，进行响应式宽高而不是使用这些属性的值来确定布局中元素的固定大小
-    - aspect-ratio
+    - `aspect-ratio`：避免布局偏移
+      ```html
+      <img style="aspect-ratio: 5 / 3; width: 100%" ... />
+      ```
   - 选择正确的图像编码格式与压缩：需要在性能、图像场景及体验之间找合适的平衡点，选择正确的图像压缩格式
     - 矢量图像
     - 光栅图像
@@ -51,60 +39,33 @@
         - WebP
         - AVIF
       > 更多了解 https://web.dev/learn/images/raster-images/
-    - 图像源所需的替代尺寸将是由这些图像在页面布局中占据的位置决定
   - 响应式图像
-    - 图片显示效果与像素密度关系
-      - 屏幕
-        - 物理像素，分辨率，即构成屏幕本身的硬件像素数量
-        - 设备像素比(DPR)：物理像素与逻辑像素之间的比率
-        - 逻辑像素：抽象独立的像素单位，用于面向开发
-      - 它只有浏览器级别的信息：用户视口的大小、用户显示器的像素密度、用户首选项等。
-    - 根据尺寸和分辨率，使用 `srcset` 和 `sizes` 合理控制图像源
-      - `srcset`：预设图像源集，让浏览器选择
-        - `srcset=1.png 2x`，x 描述像素密度 
-        - `srcset=2.png 600w`，w 描述图像宽度 
-      - `sizes`：描述图像相对视口的布局大小，协助浏览器决策图像源
-        - `sizes="80vw"`
-        - `sizes="calc(100vw-2em)"`
-        - 断点：`sizes="(min-width: 1200px) calc(80vw - 2em), 100vw"`
-        - [细节描述](https://web.dev/learn/images/descriptive/#describing-usage-with-sizes)
-    - `max-width: 100%`
-      - 保证不会溢出容器，并且随着容器大小缩放。但为了保证图像现实效果，必须使用最大尺寸的图像源
-    - 随着第一批“视网膜”设备的出现，情况变得更加糟糕，因为显示密度与视口大小一起成为一个问题。图像源需要更大的固有宽度才能适应高密度显示。简单来说，密度加倍的显示器需两倍的图像像素才能尽可能清晰地渲染图像
-  - img
-    - 浏览器进行计算并选择向用户显示的最佳尺寸
-    - `<picture>`：配置不同格式的图片
-      ```html
-      <picture>
-        <source
-          type="image/avif"
-          srcset="
-            /image.avif?width=100 100w,
-            /image.avif?width=200 200w,
-            /image.avif?width=400 400w,
-            /image.avif?width=800 800w,
-            ...
-          "
-        />
-        <source
-          type="image/webp"
-          srcset="
-            /image.webp?width=100 100w,
-            /image.webp?width=200 200w,
-            /image.webp?width=400 400w,
-            /image.webp?width=800 800w,
-            ...
-          "
-        />
-        <img ... />
-      </picture>
-      ```
-    - `aspect-ratio`：避免布局偏移
-      ```html
-      <img style="aspect-ratio: 5 / 3; width: 100%" ... />
-      ```
-    - `decoding="async"`：异步图像解码
-    - `alt`：提高可访问性和 SEO
+    - 响应式布局
+      - `max-width: 100%`
+        - 保证不会溢出容器，并且随着容器大小缩放。但为了保证图像现实效果，必须使用最大尺寸的图像源
+    - 响应式加载：动态加载合适的图像
+      - 图片显示效果与像素密度关系
+        - 像素概念
+          - 物理像素，分辨率，即构成屏幕本身的硬件像素数量
+          - 设备像素比(DPR)：物理像素与逻辑像素之间的比率
+          - 逻辑像素：抽象独立的像素单位，用于面向开发
+        - 理想情况下，图片像素与物理像素呈现 1:1 的显示比例最佳
+          - 在 DPR 为 的 2 显示器上，渲染 400 逻辑像素宽的布局中的图像时，要渲染的图像必须具有至少 800 像素的固有宽度，才能防止被拉大
+          - 在 DPR 为 的 1 显示器上，800 像素的图像和 400 像素的图像渲染在 400 逻辑像素宽的布局中的效果差不多，但会造成性能浪费
+      - **根据布局尺寸和分辨率**，`<img>` 使用 `srcset` 和 `sizes` 合理控制图像源
+        - `srcset`：预设图像源集，让浏览器选择
+          - `srcset=1.png 2x`，x 描述像素密度 
+          - `srcset=2.png 600w`，w 描述图像宽度 
+        - `sizes`：描述图像相对视口的布局大小，协助浏览器决策图像源
+          - `sizes="80vw"`
+          - `sizes="calc(100vw-2em)"`
+          - `sizes="(min-width: 1200px) calc(80vw - 2em), 100vw"`
+          - [更多了解](https://web.dev/learn/images/descriptive/#describing-usage-with-sizes)
+
+
+
+
+
 
 
     - 框架 Image 组件
@@ -122,22 +83,9 @@
 
 ## 图像工程化架构
 
-
-
 ![](./images/image-project.excalidraw.svg)
 
 - 带图像服务的 CDN
-
-## 参考
-
-
-- 物理像素
-  - 设备像素、分辨率，宽*高
-- 逻辑像素
-- 像素密度 DPR
-
-![图 0](./images/e6c8f769b8dd9bd43b08da68eda9d452e5e02b0a0f089534fbfb5c3dca7ce90b.png)  
-
 
 
 - 自动执行压缩和编码
@@ -149,7 +97,7 @@
 - 使用形式
   - 响应式图片组件
     - pictrue
-      - source
+      - source：配置图片格式
         - type
         - media
           - `<source media="(prefers-color-scheme: dark)" srcset="hero-dark.jpg">`
@@ -170,8 +118,3 @@
         - srcset
         - sizes
     - Image 组件的最佳实践
-    - Img
-      - loading="lazy"：延迟加载
-        - 未指定大小的图片会降低 CLS
-      - srcset/img-set
-      - sizes

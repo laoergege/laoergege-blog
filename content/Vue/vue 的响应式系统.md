@@ -114,7 +114,7 @@ const B = effect(() => {
 });
 ```
 
-嵌套场景主要是 vue 组件嵌套，vue 组件的渲染也是一种副作用（[vue 组件响应式更新渲染机制](./vue%20组件响应式更新渲染机制.md)）。
+嵌套场景主要是 vue 组件嵌套，vue 组件的渲染也是一种副作用（[vue 组件响应式更新渲染机制](./vue%20的响应式渲染机制.md)）。
 
 #### `cleanup(activeEffect)`，解决动态依赖场景。
 
@@ -628,7 +628,7 @@ const wasTracked = (dep) => (dep.w & trackOpBit) > 0;
 
 #### ReactiveEffect.allowRecurse
 
-ReactiveEffect.allowRecurse 是否允许副作用递归（重复）执行，默认 allowRecurse 是 undefined 为不允许，[场景应用了解](./vue%20的响应式渲染机制.md#Effect.allowRecurse)。
+ReactiveEffect.allowRecurse 是否允许副作用递归（重复）执行，默认 allowRecurse 是 undefined 为不允许，[场景应用了解](./vue%20的响应式渲染机制.md)。
 
 #### ReactiveEffect.scheduler 副作用调度器
 
