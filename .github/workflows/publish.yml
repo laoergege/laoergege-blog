@@ -41,9 +41,10 @@ jobs:
         run: pnpm install
       - name: Static HTML export with Nuxt
         run: pnpm build
-      - name: test
-        run: ls ./.output/public
-          cat ./.output/public/index.html
+      - name: Move Images
+        run:
+          find .output/public/images -type l -exec ln -f {} .output/public/images2/ \; &&
+          mv .output/public/images2 .output/public/images
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
