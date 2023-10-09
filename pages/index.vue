@@ -75,7 +75,7 @@ watch(sideClosed$, useDebounceFn(() => {
 // #region SSG 模式下动态生成列表数据和文章
 if (import.meta.server) {
   await new Promise((resolve) => {
-    setTimeout(() => resolve(null), 500)
+    setTimeout(() => resolve(null), 1000)
   })
 }
 // #endregion
