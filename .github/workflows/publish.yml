@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: test
+        run: ls
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
