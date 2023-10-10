@@ -27,9 +27,8 @@ Thanks for the help of the following projects.
 - [x] giscus 评论功能
 - [x] 主题切换及暗黑模式支持
 - [ ] 图片优化
-- [ ] 通过  GithubActions 自动化部署到 GithubPage
-  - [ ] CDN
-  - [ ] GithubActions 构建优化
+- [x] 通过 GithubActions 自动化部署到 GithubPage
+- [x] CDN 加速国内访问
 - [ ] PWA
 - [ ] 内容搜索
 - [ ] 用户订阅 

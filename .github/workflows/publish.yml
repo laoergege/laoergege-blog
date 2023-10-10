@@ -46,6 +46,8 @@ jobs:
       - run: mkdir .output/public/images
       - run: find public/images -type l -exec ln -f {} .output/public/images \;
       - run: ls .output/public/images
+      - name: Add cname
+        run: echo "blog.laoergege.cn" > .output/public/CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
