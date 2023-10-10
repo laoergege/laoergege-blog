@@ -44,7 +44,12 @@ jobs:
       - name: Static HTML export with Nuxt
         run: pnpm build
       - name: Move Images
-        run: find public/images -type l -exec ln -f {} .output/public/images/ \; && ls .output/public/images
+        run: ｜
+          if [ ! -d .output/public/images ]; then
+          mkdir .output/public/images
+          fi
+          find public/images -type l -exec ln -f {} .output/public/images \;
+          ls .output/public/images
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
