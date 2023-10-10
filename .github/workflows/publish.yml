@@ -45,7 +45,7 @@ jobs:
         run: pnpm build
       - name: Move Images
         run: ｜
-          if [ ! -d .output/public/images ]; then {mkdir .output/public/images} fi
+          mkdir .output/public/images
           find public/images -type l -exec ln -f {} .output/public/images \;
           ls .output/public/images
       - name: Upload artifact
