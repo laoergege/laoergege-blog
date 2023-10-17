@@ -43,12 +43,11 @@ jobs:
         run: pnpm install
       - name: Static HTML export with Nuxt
         run: pnpm build
-      - name: Move images
-        run: |
+      - name: Move Images
+        run: ｜
           mkdir .output/public/images
           find public/images -type l -exec ln -f {} .output/public/images \;
-      - name: Add cname
-        run: echo "blog.laoergege.cn" > .output/public/CNAME
+          ls .output/public/images
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:

@@ -1,8 +1,8 @@
 ---
 release: true
 tags:
- - web
- - 图像
+  - web
+  - 图像
 ---
 
 # Web 图像最佳实践
@@ -26,7 +26,7 @@ tags:
       ```html
       <img style="aspect-ratio: 5 / 3; width: 100%" ... />
       ```
-  - 选择正确的图像编码格式与压缩：需要在性能、图像场景及体验之间找合适的平衡点，选择正确的图像压缩格式
+  - 选择正确的图像编码格式与压缩：需要在性能（传输、解码）、图像场景及体验（图像质量）之间找合适的平衡点，选择正确的图像压缩格式
     - 矢量图像
     - 光栅图像
       - 光栅图像格式：一组逐像素的描述指令，用于渲染二维网格
@@ -38,12 +38,12 @@ tags:
         - PNG
         - WebP
         - AVIF
-      > 更多了解 https://web.dev/learn/images/raster-images/
+          > 更多了解 https://web.dev/learn/images/raster-images/
   - 响应式图像
     - 响应式布局
       - `max-width: 100%`
         - 保证不会溢出容器，并且随着容器大小缩放。但为了保证图像现实效果，必须使用最大尺寸的图像源
-    - 响应式加载：动态加载合适的图像
+    - 响应式加载：根据显示大小和分辨率选择性加载最佳图像
       - 图片显示效果与像素密度关系
         - 像素概念
           - 物理像素，分辨率，即构成屏幕本身的硬件像素数量
@@ -52,69 +52,60 @@ tags:
         - 理想情况下，图片像素与物理像素呈现 1:1 的显示比例最佳
           - 在 DPR 为 的 2 显示器上，渲染 400 逻辑像素宽的布局中的图像时，要渲染的图像必须具有至少 800 像素的固有宽度，才能防止被拉大
           - 在 DPR 为 的 1 显示器上，800 像素的图像和 400 像素的图像渲染在 400 逻辑像素宽的布局中的效果差不多，但会造成性能浪费
-      - **根据布局尺寸和分辨率**，`<img>` 使用 `srcset` 和 `sizes` 合理控制图像源
-        - `srcset`：预设图像源集，让浏览器选择
-          - `srcset=1.png 2x`，x 描述像素密度 
-          - `srcset=2.png 600w`，w 描述图像宽度 
-        - `sizes`：描述图像相对视口的布局大小，协助浏览器决策图像源
-          - `sizes="80vw"`
-          - `sizes="calc(100vw-2em)"`
-          - `sizes="(min-width: 1200px) calc(80vw - 2em), 100vw"`
-          - [更多了解](https://web.dev/learn/images/descriptive/#describing-usage-with-sizes)
-
-
-
-
-
-
-
-    - 框架 Image 组件
-      - 完全省略sizes不仅违反了 HTML 规范，而且会导致默认行为，相当于sizes="100vw"通知浏览器该图像仅受视口本身的约束，从而导致选择最大可能的候选源。
-      - [respImageLint](https://web.dev/learn/images/automating/)
-      - LCP
-      - Lazysizes
-      - sizes="auto"
-    - 图像 CDN 服务：集成图像处理服务和 CDN 功能
-      - 使用特殊的配置路径，如 `https://res.cloudinary.com/demo/image/upload/w_400,q_60/sample.jpg`
-      - 编码格式和内容协商
-        - 请求 `Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8`
-        - 响应 `Content-Type: image/avif`
-    - CMS 图像管理流程：一个是针对构建和维护站点时使用的图像资产（背景、图标、徽标等）的开发级任务，另一个是与通过使用网站，例如编辑团队嵌入帖子中的照片，或用户上传的头像。虽然上下文可能不同，但最终目标是相同的：根据开发团队定义的设置进行自动编码和压缩 
+      - **根据图像分辨率和布局尺寸**，使用 `srcset` 和 `sizes` 合理控制图像源
 
 ## 图像工程化架构
 
 ![](./images/image-project.excalidraw.svg)
 
-- 带图像服务的 CDN
-
-
-- 自动执行压缩和编码
-  - 服务
+- 自动编码和压缩
+  - CDN 图像服务：集成图像处理服务和 CDN 功能
+    - 使用特殊的配置路径，如 `https://res.cloudinary.com/demo/image/upload/w_400,q_60/sample.jpg`
+    - 编码格式和内容协商
+      - 请求 `Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8`
+      - 响应 `Content-Type: image/avif`
   - 构建时
     - [imagemin](https://github.com/imagemin/imagemin)
     - [sharp](https://sharp.pixelplumbing.com/)
-- 尺寸适配
-- 使用形式
-  - 响应式图片组件
-    - pictrue
-      - source：配置图片格式
-        - type
-        - media
-          - `<source media="(prefers-color-scheme: dark)" srcset="hero-dark.jpg">`
-        - srcset
-          - w
-        - size
-          - sizes 完全省略不仅违反了 HTML 规范，而且会导致默认行为等效于 sizes="100vw"
-          - respImageLint
-          -  Lazysizes
-             -  sizes="auto"
-      - img
-- 图像性能优化
-  - 编码格式
+- 响应式 Image 组件
 
-    - 响应式图片
-      - 根据屏幕大小和分辨率选择性加载
-        - DPR
-        - srcset
-        - sizes
-    - Image 组件的最佳实践
+  - pictrue
+
+    - source：声明图像支持格式
+      - type
+        - 指定的图片来源的媒体类型（以前称为 MIME 类型）
+      - media
+        - `<source media="(prefers-color-scheme: dark)" srcset="hero-dark.jpg">`
+      - srcset
+        - `srcset`：预设图像源集，让浏览器选择
+          - `srcset=1.png 2x`，x 描述像素密度
+          - `srcset=2.png 600w`，w 描述图像宽度
+        - `sizes`：描述图像相对视口的布局大小，协助浏览器决策图像源
+          - `sizes="80vw"`
+          - `sizes="calc(100vw-2em)"`
+          - `sizes="(min-width: 1200px) calc(80vw - 2em), 100vw"`
+          - [更多了解](https://web.dev/learn/images/descriptive/#describing-usage-with-sizes)
+      - size
+        - sizes 完全省略不仅违反了 HTML 规范，而且会导致默认行为等效于 sizes="100vw"
+        - respImageLint
+        - Lazysizes
+          - sizes="auto"
+    - height 和 width：减少布局偏移
+    - img
+
+      - [respImageLint](https://web.dev/learn/images/automating/)
+      - LCP
+      - Lazysizes
+      - sizes="auto"
+
+    - CMS 图像管理流程：一个是针对构建和维护站点时使用的图像资产（背景、图标、徽标等）的开发级任务，另一个是与通过使用网站，例如编辑团队嵌入帖子中的照片，或用户上传的头像。虽然上下文可能不同，但最终目标是相同的：根据开发团队定义的设置进行自动编码和压缩
+
+```html
+<picture>
+  <!-- 图像决策源 -->>
+  <source …>
+  <source …>
+  <!-- 为旧版浏览器提供了可靠的回退模式 -->
+  <img …>
+</picture …>
+```

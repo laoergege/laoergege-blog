@@ -1,9 +1,10 @@
 <template>
   <NuxtLoadingIndicator />
   <div class="drawer">
-    <main class="drawer-content flex flex-col min-h-screen col-start-1">
+    <main class="drawer-content flex flex-col min-h-screen">
       <slot></slot>
       <MyFooter class="mt-auto" />
+      <BottomNavBar class="sm:hidden" />
     </main>
     <SideNavBar class="hidden sm:block" />
     <ClientOnly>
@@ -13,21 +14,20 @@
 </template>
 
 <script setup>
-import SideNavBar from "~/components/NavBar.vue";
-import Side from "~/components/Side.vue";
-import { useSideCtx } from "~/components/Side.vue";
+import SideNavBar from "~/components/NavBar/SideNavBar.vue";
+import BottomNavBar from "~/components/NavBar/BottomNavBar.vue";
+import Side from "~/components/NavBar/Side.vue";
+import { useSideCtx } from "~/components/NavBar/Side.vue";
 
 let { side } = useSideCtx()
 </script>
 
-<style lang="postcss"  scoped>
+<style scoped>
 .drawer {
-  grid-auto-columns: auto;
-}
+  grid-template-columns: auto max-content;
 
-@media screen(md) {
-  .drawer {
-    grid-template-columns: auto max-content;
+  .drawer-content {
+    grid-column-start: 1;
   }
 }
 </style>

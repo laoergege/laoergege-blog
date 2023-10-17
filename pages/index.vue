@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { useDebounceFn } from "@vueuse/core";
 import { useTagsCtx } from "~/components/Tags.vue";
-import { createSideCtx } from "~/components/Side.vue";
+import { createSideCtx } from "~/components/NavBar/Side.vue";
 import { createContentList } from "~/service/content-list";
 import type { Filter } from "~/service/content-list";
 import { computed, ref } from "vue";
