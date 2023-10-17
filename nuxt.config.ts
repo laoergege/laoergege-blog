@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     '@nuxtjs/tailwindcss',
-    // "@nuxt/image",
+    "@nuxt/image",
     "nuxt-icon",
     "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
