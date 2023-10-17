@@ -1,53 +1,55 @@
 <template>
-  <ul class="menu menu-xs h-full bg-base-200 items-center gap-1">
-    <li>
-      <div class="avatar place-content-center">
-        <div class="w-8 rounded-full">
-          <img src="/avatar.webp" />
+  <div class="md:h-screen sticky bottom-0 md:top-0 none">
+    <ul class="menu menu-xs menu-horizontal md:menu-vertical w-full h-full bg-base-200 items-center gap-1">
+      <li>
+        <div class="avatar place-content-center">
+          <div class="w-8 rounded-full">
+            <img src="/avatar.webp" />
+          </div>
         </div>
-      </div>
-    </li>
-    <!-- 动态菜单 -->
-    <li v-if="!isHome">
-      <div class="place-content-center" @click="backHome">
-        <Icon name="uil:home-alt" />
-      </div>
-    </li>
-    <li v-if="isHome">
-      <TagBtn />
-    </li>
-    <li v-if="isPostPage">
-      <TocBtn />
-    </li>
-    <li v-if="isPostPage">
-      <div class="place-content-center" @click="scrollToTop">
-        <Icon name="uil:top-arrow-to-top" />
-      </div>
-    </li>
-    <!-- <li>
+      </li>
+      <!-- 动态菜单 -->
+      <li v-if="!isHome">
+        <div class="place-content-center" @click="backHome">
+          <Icon name="uil:home-alt" />
+        </div>
+      </li>
+      <li v-if="isHome">
+        <TagBtn />
+      </li>
+      <li v-if="isPostPage">
+        <TocBtn />
+      </li>
+      <li v-if="isPostPage">
+        <div class="place-content-center" @click="scrollToTop">
+          <Icon name="uil:top-arrow-to-top" />
+        </div>
+      </li>
+      <!-- <li>
       <div class="form-control" ref="docsearchRef"></div>
     </li> -->
-    <!-- 固定菜单 -->
-    <i class="ml-auto sm:mt-auto"></i>
-    <!-- <li>
+      <!-- 固定菜单 -->
+      <i class="ml-auto sm:mt-auto"></i>
+      <!-- <li>
       <div class="place-content-center">
         <Icon name="uil:search" />
       </div>
     </li> -->
-    <li>
-      <ThemeChangeBtn />
-    </li>
-    <!-- <li>
+      <li>
+        <ThemeChangeBtn />
+      </li>
+      <!-- <li>
       <a href="" class="place-content-center">
         <Icon name="uil:rss-interface" />
       </a>
     </li> -->
-    <li>
-      <a href="https://github.com/laoergege" class="place-content-center">
-        <Icon name="line-md:github-loop" />
-      </a>
-    </li>
-  </ul>
+      <li>
+        <a href="https://github.com/laoergege" class="place-content-center">
+          <Icon name="line-md:github-loop" />
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="tsx">

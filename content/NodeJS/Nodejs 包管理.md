@@ -1,9 +1,5 @@
 ---
 discussionID: xwJdUgnvRfm2UYF8Ju4tG
-release: true
-tags:
-  - pnpm
-  - 包管理
 ---
 
 # Nodejs 包管理
