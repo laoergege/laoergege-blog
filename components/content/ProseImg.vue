@@ -1,11 +1,11 @@
 <template>
-  <NuxtImg :src="src" class="w-auto max-h-[90vh] mx-auto bg-base-100" data-zoomable="1" ref="elRef"
-    :loading="isLazy ? 'lazy' : 'eager'" :preload="!isLazy" :width="imgSize.width" :height="imgSize.height" quality="80">
+  <NuxtImg :src="src" class="w-auto max-h-[90vh] mx-auto bg-white p-2" ref="elRef" data-zoomable="1"
+    :loading="isLazy ? 'lazy' : 'eager'" :preload="!isLazy" :width="width" :height="height" quality="80" densities="x1">
   </NuxtImg>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, toRefs } from "vue";
 import { useRoute } from "vue-router";
 
 // #region 指定前几张图像预加载、其后的懒加载
@@ -48,20 +48,27 @@ export default defineComponent({
       default: undefined,
     },
   },
-  async setup({ src, width, height }) {
+  async setup(props) {
+    const { width, height, src } = props;
     const { isLazy } = useImgLoading();
 
-    let imgSize = useState("img-size", () => ({ width, height }))
+    // FIX: nuxt-content 和 ipx 会重复对 link 编码
+    const _src = decodeURIComponent(src)
+
+    let imgSize = useState(`img-size-${i}`, () => ({ width, height }))
     if (!(width || height) && import.meta.server) {
-      const { fetchImgSize } = await import("~/utils/image-size");
-      const res = await fetchImgSize(src);
-      imgSize.value.width = res?.width;
-      imgSize.value.height = res?.height;
+      const { fetchImgSize } = await import("~/server/utils/image-size");
+      const { width, height } = await fetchImgSize(_src);
+      imgSize.value = {
+        width,
+        height
+      }
     }
 
     return {
       isLazy,
-      imgSize
+      ...toRefs(imgSize.value),
+      src: _src,
     };
   },
 });

@@ -2,6 +2,7 @@ import type { } from "nuxt-icon";
 import type { } from "@vite-pwa/nuxt";
 import type { } from "@nuxtjs/tailwindcss";
 import config from "./app.config";
+import topLevelAwait from "vite-plugin-top-level-await";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -15,6 +16,13 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode"
     // "@vite-pwa/nuxt",
   ],
+  vite: {
+    build: {
+      rollupOptions: {
+        external: [/node\:.*?/]
+      },
+    }
+  },
   nitro: {
     errorHandler: "~/error",
   },
@@ -72,5 +80,8 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: '',
     storageKey: config.themes.storageKey
+  },
+  image: {
+    densities: [1]
   }
 });

@@ -17,7 +17,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, InjectionKey, ref, getCurrentInstance } from "vue";
+import { defineComponent, ref, getCurrentInstance } from "vue";
+import type { InjectionKey } from "vue";
 import { createEventEmitter } from "~/utils/event-emiter";
 
 const SideComponent = defineComponent({
