@@ -39,7 +39,6 @@
     "@vite-pwa/nuxt": "^0.0.7",
     "autoprefixer": "^10.4.14",
     "daisyui": "^3.1.0",
-    "details-collapsible": "workspace:^1.0.0",
     "execa": "^7.1.1",
     "front-matter": "^4.0.2",
     "hookable": "^5.5.3",
