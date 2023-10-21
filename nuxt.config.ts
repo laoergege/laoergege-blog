@@ -70,7 +70,7 @@ export default defineNuxtConfig({
     markdown: {
       remarkPlugins: {
         // "remark-directive": {},
-        "details-collapsible": {},
+        // "details-collapsible": {},
       },
     },
   },
