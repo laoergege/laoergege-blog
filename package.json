@@ -2,6 +2,7 @@
   "name": "laoergege-blog",
   "version": "2.0.0",
   "description": "Laoergege's Learning Track",
+  "packageManager": "pnpm@8.9.2",
   "scripts": {
     "clean": "rm -rf public/images && nuxi cleanup",
     "dev": "nuxt dev",
@@ -53,12 +54,8 @@
     "vite-plugin-top-level-await": "^1.3.1",
     "zx": "^7.2.1"
   },
-  "volta": {
-    "node": "19.2.0",
-    "pnpm": "8.9.2"
-  },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "dependencies": {
     "@docsearch/css": "^3.3.3",
