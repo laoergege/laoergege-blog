@@ -5,7 +5,7 @@
       <slot></slot>
       <MyFooter class="mt-auto" />
     </main>
-    <SideNavBar class="hidden sm:block" />
+    <SideNavBar />
     <ClientOnly>
       <Side ref="side" />
     </ClientOnly>
@@ -20,7 +20,7 @@ import { useSideCtx } from "~/components/Side.vue";
 let { side } = useSideCtx()
 </script>
 
-<style lang="postcss"  scoped>
+<style scoped>
 .drawer {
   grid-auto-columns: auto;
 }
