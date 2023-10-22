@@ -30,6 +30,7 @@ Thanks for the help of the following projects.
 - [x] 通过 GithubActions 自动化部署到 GithubPage
   - [x] 自定义域名
 - [ ] PWA
+  - [ ] SW 缓存
 - [ ] 全文搜索
 - [ ] 用户订阅 
 - [ ] 优化体验
