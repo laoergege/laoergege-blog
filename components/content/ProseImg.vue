@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs } from "vue";
+import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 
 // #region 指定前几张图像预加载、其后的懒加载
@@ -48,26 +48,14 @@ export default defineComponent({
       default: undefined,
     },
   },
-  async setup(props) {
-    const { width, height, src } = props;
+  async setup({ src }) {
     const { isLazy } = useImgLoading();
 
     // FIX: nuxt-content 和 ipx 会重复对 link 编码
     const _src = decodeURIComponent(src)
 
-    let imgSize = useState(`img-size-${i}`, () => ({ width, height }))
-    if (!(width || height) && import.meta.server) {
-      const { fetchImgSize } = await import("~/server/utils/image-size");
-      const { width, height } = await fetchImgSize(_src);
-      imgSize.value = {
-        width,
-        height
-      }
-    }
-
     return {
       isLazy,
-      ...toRefs(imgSize.value),
       src: _src,
     };
   },
