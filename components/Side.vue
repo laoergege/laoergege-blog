@@ -74,7 +74,7 @@ export const SIDE_KEY = Symbol("side") as InjectionKey<{
   side: SideInstanceRef,
   sideClosed$: any
 }>;
-export const createSideCtx = (side: SideInstanceRef) => {
+export const createSideCtx = (side: SideInstanceRef = ref(null)) => {
   const sideClosed$ = createEventEmitter("side closed")
   const t = {
     sideClosed$,

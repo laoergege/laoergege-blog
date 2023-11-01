@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <div class="main-container py-12">
+    <div class="main-container py-12 gap-x-6 gap-y-16 sm:gap-16">
       <div v-for="article in list" :key="article._path" class="place-main">
         <div class="flex flex-wrap items-baseline gap-2">
           <NuxtLink :to="article._path">

@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <div class="main-container box-content mt-8">
+    <div class="main-container box-content mt-8 gap-4">
       <div class="place-main">
         <article ref="elRef">
           <ContentDoc>
@@ -20,14 +20,14 @@
           </ContentDoc>
         </article>
         <div class="divider">其他文章</div>
-        <div class="flex flex-col w-full lg:flex-row">
-          <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-            content
-          </div>
-          <div class="divider lg:divider-horizontal">OR</div>
-          <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-            content
-          </div>
+        <div class="flex flex-wrap">
+          <NuxtLink :to="pre._path" class="link link-hover blod my-2">
+            <Icon name="uil:angle-left" />{{ pre.title }}
+          </NuxtLink>
+          <NuxtLink :to="next._path" class="link link-hover ml-auto my-2">
+            {{ next.title }}
+            <Icon name="uil:angle-right" />
+          </NuxtLink>
         </div>
         <div class="divider">交流区</div>
         <ClientOnly fallback-tag="span" fallback="加载中...">
@@ -42,8 +42,8 @@
 import mediumZoom from "medium-zoom";
 import { createEventEmitter } from "~/utils/event-emiter";
 import { defineComponent, onMounted } from "vue";
-import { createSideCtx } from "~/components/Side.vue";
 import { ref } from "vue";
+import { createSideCtx } from "~/components/Side.vue";
 
 export const articleMounted$ = createEventEmitter<HTMLElement>("articleMounted");
 
@@ -55,10 +55,15 @@ export default defineComponent({
       articleMounted$.emit(elRef.value!)
     });
 
-    createSideCtx(ref(null));
+    createSideCtx();
+
+    const { surround } = useContent();
+    const [pre, next] = surround.value
 
     return {
-      elRef
+      elRef,
+      pre,
+      next
     }
   }
 })

@@ -14,8 +14,7 @@
 
 <script setup>
 import SideNavBar from "~/components/NavBar.vue";
-import Side from "~/components/Side.vue";
-import { useSideCtx } from "~/components/Side.vue";
+import Side, { useSideCtx } from "~/components/Side.vue";
 
 let { side } = useSideCtx()
 </script>

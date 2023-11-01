@@ -1,7 +1,6 @@
 .main-container {
   display: grid;
   grid-template-columns: 1fr [main-start] minmax(0, 768px) [main-end] 1fr;
-  gap: 2em 1.5em;
 
   .place-main {
     grid-column: main;
@@ -12,6 +11,5 @@
   .main-container {
     display: grid;
     grid-template-columns: 1fr [main-start] minmax(0, 1024px) [main-end] 1fr;
-    gap: 4em;
   }
 }
