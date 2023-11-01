@@ -21,10 +21,10 @@
         </article>
         <div class="divider">其他文章</div>
         <div class="flex flex-wrap">
-          <NuxtLink :to="pre._path" class="link link-hover blod my-2">
+          <NuxtLink v-if="pre" :to="pre._path" class="link link-hover blod my-2">
             <Icon name="uil:angle-left" />{{ pre.title }}
           </NuxtLink>
-          <NuxtLink :to="next._path" class="link link-hover ml-auto my-2">
+          <NuxtLink v-if="next" :to="next._path" class="link link-hover ml-auto my-2">
             {{ next.title }}
             <Icon name="uil:angle-right" />
           </NuxtLink>
@@ -58,7 +58,9 @@ export default defineComponent({
     createSideCtx();
 
     const { surround } = useContent();
-    const [pre, next] = surround.value
+    const [pre, next] = surround.value;
+    console.log(surround)
+
 
     return {
       elRef,
