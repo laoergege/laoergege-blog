@@ -1,14 +1,12 @@
 ---
 discussionID: xwJdUgnvRfm2UYF8Ju4tG
-release: true
-tags:
-  - pnpm
-  - 包管理
 ---
 
 # Nodejs 包管理
 
-- 包管理（[Pnpm](https://pnpm.io/)）
+> [Pnpm](https://pnpm.io/) 为主
+
+- 包管理
   - [包描述文件：package.json](#packagejson-常见字段)
   - 创建现代化模块包
     - 构建 CommonJS (CJS) 和 ECMAScript (ESM) 模块格式
@@ -25,7 +23,16 @@ tags:
     - 查看
   - 脚本运行
   - Workspaces
-- [Node 开发环境锁定](#node-开发环境锁定)
+- Node 开发环境锁定
+  - Node 版本
+    - [nvm](https://github.com/nvm-sh/nvm)
+    - [volta](https://github.com/volta-cli/volta)
+  - 包管理
+    - [corepack](https://github.com/nodejs/corepack)
+    - package: `engines` + `.npmrc: engine-strict`
+    - .npmrc: `use-node-version`
+    - pnpm env
+  - 依赖版本：lockfile
 
 ## 创建现代化模块包
 
@@ -33,6 +40,7 @@ tags:
   - 构建 CommonJS (CJS) 和 ECMAScript (ESM) 模块格式
   - 配置 package.json
     - 常见字段
+    - 
   - 编写单元测试
   - 自动化版本管理和发布
     - 语义版本控制
@@ -69,15 +77,13 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
 
 > 以下基于 [github package npm 注册源](https://docs.github.com/cn/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)为例
 
-1. Running unit tests 运行单元测试
-2. 确认 package 相关信息（[package.json 常见字段](#packagejson-常见字段)）
-3. npm publish --dry-run
-4. Pack
-5. Versions
+1. 确认 package 相关信息（[package.json 常见字段](#packagejson-常见字段)）
+2. Pack
+3. Versions
   - 自动化版本管理
     - [semantic-release](https://github.com/semantic-release/semantic-release)
-6. Changelog
-7. Register & Oauth
+4. Changelog
+5. Register & Oauth
 
    - 注册源配置
      - .npmrc：`@laoergege:registry=https://npm.pkg.github.com/`
@@ -102,7 +108,7 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
        > Email: PUBLIC-EMAIL-ADDRESS
        ```
 
-8. `pnpm publish`
+6. `pnpm publish`
 
 ## package.json 常见字段
 
@@ -152,25 +158,9 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
   - minor version：当以向后兼容的方式添加功能时，次要版本增加
   - patch version：当进行向后兼容的错误修复时，补丁版本递增
   - 修饰符
-    - `*`：匹配任何版本
-    - `>=version`：表示安装的版本必须是version或更高
-    - `<=version`表示安装的版本必须是version或更低
-    - `version1-version2`：等同于>=version1 <=version2
-    - `^version`：主版本必须相同，升级次版本号和修订号
-    - `~version`：只升级修订号
-
-## Node 开发环境锁定
-
-![](./images/node-env-lock.excalidraw.svg)
-
-- 使用 Node 版本管理工具对项目进行 Node 环境安装和版本切换
-  - [fnm](https://github.com/Schniz/fnm)
-  - [nvm](https://github.com/nvm-sh/nvm)
-  - [volta](https://github.com/volta-cli/volta)
-- 包管理
-  - [corepack](https://github.com/nodejs/corepack)
-    - `corepack enable`
-    - `corepack use <name@version>`
-      - package.json `"packageManager": "pnpm@8.9.2"`
-  - package.json `engines` + .npmrc `engine-strict=true`
-- 依赖版本：lockfile
+    - * 匹配任何版本
+    - >=version表示安装的版本必须是version或更高
+    - <=version表示安装的版本必须是version或更低
+    - version1-version2 等同于>=version1 <=version2
+    - ^version：主版本必须相同
+    - 
