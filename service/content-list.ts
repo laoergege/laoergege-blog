@@ -1,7 +1,6 @@
 
 import { asyncComputed } from "@vueuse/core";
-import { computed, customRef, isRef, provide, inject } from "vue";
-import type { InjectionKey } from "vue";
+import { computed, customRef, isRef } from "vue";
 import type { Ref } from "vue";
 
 // module "@nuxt/content" {
@@ -92,10 +91,4 @@ export const createContentList = (options: Options) => {
     rawIndexs,
     sortedIndexs
   }
-}
-
-export const key = Symbol("indexs") as InjectionKey<ReturnType<typeof createContentList>>
-
-const useContentListCtx = (ctx: ReturnType<typeof createContentList>) => {
-  return inject(key) || provide(key, ctx)
 }

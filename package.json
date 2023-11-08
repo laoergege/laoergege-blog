@@ -2,14 +2,13 @@
   "name": "laoergege-blog",
   "version": "2.0.0",
   "description": "Laoergege's Learning Track",
-  "packageManager": "pnpm@8.9.2",
   "scripts": {
     "clean": "rm -rf public/images && nuxi cleanup",
     "dev": "nuxt dev",
     "build": "nuxi generate",
     "preview": "pnpm run build && pnpm dlx serve ./.output/public",
     "md-lint": "zx ./scripts/mdLinter.mjs",
-    "prepare": "pnpm clean && husky install && nuxi prepare"
+    "prepare": "corepack enable && pnpm clean && husky install && nuxi prepare"
   },
   "repository": {
     "type": "git",
@@ -33,29 +32,29 @@
   "homepage": "https://github.com/laoergege/laoergege-blog#readme",
   "devDependencies": {
     "@nuxt-themes/typography": "^1.0.1",
-    "@nuxt/content": "^2.9.0",
-    "@nuxt/image": "^1.0.0",
+    "@nuxt/content": "^2.8.2",
+    "@nuxt/image": "1.0.0-rc.2",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@vite-pwa/nuxt": "^0.0.7",
     "autoprefixer": "^10.4.14",
     "daisyui": "^3.1.0",
+    "details-collapsible": "workspace:^1.0.0",
     "execa": "^7.1.1",
     "front-matter": "^4.0.2",
     "hookable": "^5.5.3",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.0",
     "nanoid": "^4.0.2",
-    "nuxt": "^3.8.0",
+    "nuxt": "^3.7.1",
     "nuxt-icon": "^0.4.2",
     "ohash": "^1.0.0",
     "pinceau": "^0.18.9",
-    "unified": "^11.0.4",
-    "unist-util-visit": "^4.1.2",
+    "remark-directive": "^2.0.1",
     "zx": "^7.2.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@docsearch/css": "^3.3.3",
@@ -64,7 +63,6 @@
     "@unhead/vue": "^1.1.25",
     "@vueuse/core": "^10.3.0",
     "@vueuse/rxjs": "^10.3.0",
-    "image-size": "^1.0.2",
     "medium-zoom": "^1.0.8",
     "rxjs": "^7.8.1",
     "ufo": "^1.1.1",
