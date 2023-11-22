@@ -19,12 +19,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: test
-        run: ls public/images
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
       - name: Install Node
         uses: actions/setup-node@v3
         with:
@@ -43,11 +41,12 @@ jobs:
         run: pnpm install
       - name: Static HTML export with Nuxt
         run: pnpm build
-      - name: Move Images
-        run: ｜
+      - name: Move images
+        run: |
           mkdir .output/public/images
           find public/images -type l -exec ln -f {} .output/public/images \;
-          ls .output/public/images
+      - name: Add cname
+        run: echo "blog.laoergege.cn" > .output/public/CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
