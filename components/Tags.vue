@@ -14,9 +14,8 @@
 
 <script lang="ts">
 import { computedAsync } from "@vueuse/core";
-import { defineComponent, inject, provide, ref } from "vue";
-import type { InjectionKey } from "vue";
-import { useSideCtx } from "~/components/Side.vue";
+import { defineComponent, inject, InjectionKey, provide, ref } from "vue";
+import { useSideCtx } from "~/components/NavBar/Side.vue";
 
 export const useTags = () => {
   const tags$ = computedAsync(async () => {
