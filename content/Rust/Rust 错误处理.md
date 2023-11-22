@@ -7,40 +7,12 @@ tags:
 
 # Rust 错误处理
 
-- Rust 错误处理
+- Rust 错误处理：主要用类型系统来处理错误，辅以异常来应对不可恢复的错误
+  - 返回值 + 类型系统
+    - 通过类型来表征错误，使用一个内部包含正常返回类型和错误返回类型的复合类型([Result / Option](#result--option))，**通过类型系统来强制错误的处理和传递**
+      - 函数式错误处理
+      - [使用 ? 操作符自动传播错误](#使用--操作符自动传播错误)
   - [异常：panic! 和 catch_unwind](#异常panic-和-catch_unwind)
-  - 返回值 + 类型系统：使用一个内部包含正常返回类型和错误返回类型的复合类型（[Result / Option](#result--option)），**通过类型系统来强制错误的处理和传递**
-  - 错误处理及传递
-    - [错误匹配](#错误匹配)
-    - [unwrap、expect](#unwrapexpect)
-    - [? 操作符](#操作符)
-    - 函数式错误处理
-
-
-## 异常：panic! 和 catch_unwind
-
-异常是不可恢复的严重错误，Rust 使用 `panic!` 抛出异常，程序将可有两种形式：
-
-- 展开（默认）
-  - 调用栈往回走
-  - 清理栈帧数据
-- 终止
-  - 直接停止程序，让 OS 清理数据
-  - cargo.toml 配置 `panic = abort`
-
-> 使用 `panic::catch_unwind` 可以捕获异常并将其转成 `Result`
-
-```rust
-fn main() {
-    // 手动抛出错误，并捕获
-    if let Err(error) = panic::catch_unwind(error) {
-        println!("panic captured: {:#?}", error)
-    };
-}
-fn error() {
-    panic!("发生错误")
-}
-```
 
 ## Result / Option
 
@@ -70,63 +42,35 @@ pub enum Result<T, E> {
 ```rs
 use std::{
     fs::File,
-    io::{Error, ErrorKind, Read},
+    io::{Error, Read, ErrorKind},
 };
-
-fn main() {
+fn main(){
     let path = "./Cargo.toml";
+    let file_res = File::open(path);
 
-    // 打开对应路径的文件，不存在则直接创建
-    match File::open(path) {
-        Ok(file) => file,
-        Err(err) => match err.kind() {
-            ErrorKind::NotFound => match File::create(path) {
-                Ok(file) => file,
-                Err(e) => panic!("Problem creating the file: {:?}", e),
-            },
-            _ => panic!("Problem opening the file: {:?}", err),
-        },
+    let file = {
+        if let Err(err) = file_res {
+            match err.kind() {
+                ErrorKind::NotFound => match File::create(path) {
+                    Ok(fc) => fc,
+                    Err(e) => panic!("Problem creating the file: {:?}", e),
+                },
+                _ => panic!("Problem opening the file: {:?}", err)
+            }
+        } else {
+            file_res.unwrap()
+        }
     };
+
+    println!("file metata is: {:?}", file.metadata().unwrap())
 }
 ```
 
-使用错误匹配必须处理正确、错误两种情况，有时我们可能仅仅关注正确的逻辑路径，而希望错误自动传播，Rust 为我们提供以下方法：
+## 使用 ? 操作符自动传播错误
 
-- `unwrap()`、`expect()`
-- `?` 操作符
+用 `?` 操作符可以直接获取料想结果简化代码，并且自动传播错误：
 
-## unwrap、expect
-
-在使用 Option 和 Result 类型时，开发者也可以对其 `unwarp()` 或者 `expect()` 强制把 Option 和 Result 转换成 T，如果无法完成这种转换，也会 panic 出来：
-
-> expect 跟 unwarp 类似，但可以自定义错误信息 
-
-```rs
-use std::{
-    fs::File,
-    io::{Error, ErrorKind, Read},
-};
-use std::panic;
-fn unwrap_demo() {
-    fn read_file_contents(path: &str) -> usize {
-        let mut content = String::new();
-
-        File::open(path)
-            .unwrap()
-            .read_to_string(&mut content)
-            .unwrap()
-    }
-
-    panic::catch_unwind(|| read_file_contents("./Cargo.toml")).unwrap();
-}
-```
-
-## `?` 操作符
-
-- `?` 操作符可以直接获取 `Result/Option` 内容并且自动传播错误
-  - 被 `?` 所应用的错误发生时会隐式得调用其 from 函数
-  - `Trait std::convert::From` 上的 from 函数用于错误类型之间的转换
-  - `?` 所应用的错误类型必须能够通过 from 转换为函数所返回的错误类型才行
+> `?` 只能跟随方法调用后解构 Result、Option
 
 ```rust
 use std::{
@@ -146,3 +90,58 @@ fn main() -> Result<(), Error>{
     Ok(())
 }
 ```
+
+? 操作符内部被展开成类似这样的代码：
+
+```rust
+match result {
+  Ok(v) => v,
+  Err(e) => return Err(e.into())
+}
+```
+
+## 异常：panic! 和 catch_unwind
+
+异常意味着程序进入了一个未知的，不确定的状态
+
+异常是不可恢复的严重错误，Rust 使用 `panic!` ，程序终止运行并得到崩溃信息。
+
+Rust 也提供了特殊的异常处理能力：
+
+- `panic!` 抛出异常
+- `panic::catch_unwind` 捕获异常
+
+```rust
+fn main() {
+    // 手动抛出错误，并捕获
+    if let Err(error) = panic::catch_unwind(error) {
+        println!("panic captured: {:#?}", error)
+    };
+}
+fn error() {
+    panic!("发生错误")
+}
+```
+
+在使用 Option 和 Result 类型时，开发者也可以对其 unwarp() 或者 expect()，强制把 Option 和 Result 转换成 T，如果无法完成这种转换，也会 panic! 出来：
+
+```rs
+fn main() {
+    fn read_file_contents(path: &str) -> Result<String, Error> {
+        let mut content = String::new();
+
+        File::open(path)
+            .unwrap()
+            .read_to_string(&mut content)
+            .unwrap();
+
+        Ok(content)
+    }
+
+    read_file_contents("./Cargo.toml").unwrap();
+}
+```
+
+## 学习参考
+
+- 极客时间 -《陈天 · Rust 编程第一课》

@@ -179,7 +179,7 @@ function track(target, key) {
 }
 ```
 
-![图 3](./images/ee125fb4132319ddfa602c751d70f938510597caf5fdcc0b8788517fa0ee4207.svg)
+![图 3](./images/ee125fb4132319d.png)
 
 响应式数据修改触发副作用执行，即相当于观察者模式下的变更通知。
 
