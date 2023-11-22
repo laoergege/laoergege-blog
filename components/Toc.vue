@@ -30,7 +30,7 @@ export default defineComponent({
               }),
               filter(([idx, offsetTop]) => {
                 let d = window.scrollY
-                return d + 2 <= (offsetTop) // 2 误差调整
+                return d <= (offsetTop) // 10 误差调整
               }),
               throttleTime(10),
               tap(([idx, offsetTop]) => {
@@ -49,7 +49,7 @@ export default defineComponent({
           {list.map(item => {
             return (
               <li>
-                <a href={`#${archors.value[i++]?.id}`} ref={itemsRef} ref_for={true}>{item.text} </a>
+                <a href={`#${archors.value[i++].id}`} ref={itemsRef} ref_for={true}>{item.text} </a>
                 {Array.isArray(item.children) && tree(item.children)}
               </li>
             )
@@ -59,17 +59,16 @@ export default defineComponent({
     }
     const { toc, page } = useContent();
 
-    return () => {
-      i = 0
-      return archors.value.length ? (
+    return () => (
+      archors.value.length ? (
         <ul class="menu menu-md whitespace-normal">
           <li>
-            <a class="menu-title" ref={itemsRef} ref_for={true} href={`#${archors.value[i++]?.id}`}>{page.value.title}</a>
+            <a class="menu-title" ref={itemsRef} ref_for={true} href={`#${archors.value[i++].id}`}>{page.value.title}</a>
             {tree(toc.value.links)}
           </li>
         </ul >
       ) : null
-    }
+    )
   }
 })
 </script>
