@@ -214,13 +214,13 @@ PRPL 模式
 问题-原则-策略
 
 
-Priority Hints
-- preload
-- dns-prefetch
-- prefetch
-- preconnect
-- prerender
-- fetchpriority
+- Priority Hints
+  - preload
+  - dns-prefetch
+  - prefetch
+  - preconnect
+  - prerender
+  - fetchpriority
 
 
 压缩/缩小、延迟加载（既阻塞又不占其他资源宽带）
@@ -229,27 +229,3 @@ Priority Hints
   media
   preload =》 stylesheet
 避免在 CSS 文件中使用 @import
-
-
-
-
-
-代码拆分
-- 业务代码
-- 公共代码
-- 第三方代码
-  - 运行时
-  - 库工具
-
-
-- 网络层
-- 资源/包大小
-  - 图像
-    - 格式
-    - 压缩
-    - 响应式图片
-      - `@media`
-      - `image-set`
-      - imagesrcset & imagesizes
-      - 延迟加载屏幕外图像
-- 代码优化

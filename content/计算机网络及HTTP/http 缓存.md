@@ -116,7 +116,7 @@ Last-modified 也同样类似。
 
 ### 通过 response 进行缓存控制
 
-![](./images/server-cache-control.png)  
+![](./images/server-cache-control.svg)  
 
 ### 通过 request 进行缓存控制
 
