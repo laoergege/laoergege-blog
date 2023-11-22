@@ -4,7 +4,13 @@
   - 参数
     - 命令行参数
       - process.argv
-        - process.argv 始终以用于运行代码的 Node.js 二进制文件的路径开头。接下来是我们脚本的路径。数组以传递给脚本的实际参数结束。换句话说：脚本的参数总是从索引 2 开始。
+        - `[Node.js 二进制文件的路径, 脚本的路径, ...脚本的参数]`
+        - 参数  
+          - 主参数
+          - 选项
+            - `--option`
+            - `-o`
+        - `util.parseArgs()` 解析命令行参数
       - [commander.js](https://github.com/tj/commander.js#readme)
       - [clipanion](https://github.com/arcanis/clipanion)
       - [yargs](https://github.com/yargs/yargs)
@@ -58,12 +64,14 @@
 
 
 
-- Shell 脚本
+- Nodejs Shell 脚本
   - Unix Shellbag
     - `#!/usr/bin/node`：并非所有 Unix 都在该路径上安装 Node.js 二进制文件
     - `#!/usr/bin/env node`（优先）
       - 参数传递：`#!/usr/bin/env -S node --disable-proto=throw`
+    - Hashbang陷阱：在Windows上创建hashbangs
   - chmod u+x hello.mjs
+  - 创建跨平台shell脚本
 - Npm bin
   - package.json `bin`
   - 如果我们全局安装软件包，链接将添加到 $PATH 中列出的目录中
@@ -105,8 +113,6 @@ We increase patch if we made small fixes that don’t really change the API.
 
 
 - spawn
-  - exec
-  - execFile
   - 模式
     - 仅命令模式： args 被省略， command 包含整个shell命令
     - 参数模式： command 只包含命令的名称， args 包含其参数
@@ -149,3 +155,48 @@ We increase patch if we made small fixes that don’t really change the API.
       - 进程被杀死
     - .on('error', (err: Error) => {})
       - 无法派生子进程
+  - 派生
+    - exec(
+        command: string,
+        options?: Object,
+        callback?: (error, stdout, stderr) => void
+      ): ChildProcess
+      - options.shell 的默认值为 true 。
+      - callback?: (error, stdout, stderr) => void
+        - 错误原因：子进程不能被派生，shell错误，子进程被杀死
+    - execFile(file, args?, options?, callback?): ChildProcess
+  - 在 spawn() 和 exec() 或 execFile() 之间选择
+    - exec() 和 execFile() 有两个好处：
+      - 失败更容易处理，因为它们都以相同的方式报告-通过第一个回调参数
+      - 获取stdout和stderr作为字符串更容易--因为有回调
+    - spawn
+      - 适合流式操作
+- fork
+  - 生成一个新的Node.js进程，并调用一个指定的模块，建立一个IPC通信通道，允许在父进程和子进程之间发送消息
+
+
+
+
+- npm script run
+  - path
+  - 默认情况下，npm通过Windows上的 cmd.exe 和Unix上的 /bin/sh 运行包脚本。我们可以通过npm配置设置 script-shell 来改变这一点
+  - life
+    - Pre and post scripts
+    - Life cycle scripts
+      - npm publish
+      - npm pack
+      - npm install （不带参数，用于为从npm注册表以外的源下载的包安装依赖项）
+  - node -p <expr>
+    - 它运行#0 #中的JavaScript代码并将结果打印到终端
+  - 穿惨
+    - npm -s run xx xx1
+    - npm -s run args -- --arg1='first arg' --arg2='second arg' 
+
+
+
+
+type Options = {
+  type: 'boolean' | 'string', // required
+  short?: string, // optional
+  multiple?: boolean, // optional, default `false`
+};

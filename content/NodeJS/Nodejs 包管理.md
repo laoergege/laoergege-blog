@@ -24,6 +24,9 @@ tags:
       - `link`
     - 查看
   - 脚本运行
+    - pnpm run
+    - pnpm dlx
+    - pnpm exec/npx
   - Workspaces
 - [Node 开发环境锁定](#node-开发环境锁定)
 
@@ -145,19 +148,6 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
   - 环境声明
     - engines
 
-### 语义版本控制
-
-- `major[.minor][.patch]`
-  - major version：当进行不兼容的 API 更改时，主要版增加
-  - minor version：当以向后兼容的方式添加功能时，次要版本增加
-  - patch version：当进行向后兼容的错误修复时，补丁版本递增
-  - 修饰符
-    - `*`：匹配任何版本
-    - `>=version`：表示安装的版本必须是version或更高
-    - `<=version`表示安装的版本必须是version或更低
-    - `version1-version2`：等同于>=version1 <=version2
-    - `^version`：主版本必须相同，升级次版本号和修订号
-    - `~version`：只升级修订号
 
 ## Node 开发环境锁定
 
@@ -170,6 +160,13 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
 - 启动 [corepack](https://github.com/nodejs/corepack) 对包管理默认
   - `corepack enable`
   - `corepack use <name@version>`
-    - package.json `"packageManager": "pnpm@8.9.2"`
-- package.json `engines` + .npmrc `engine-strict=true`
+  - package.json 配置
+    ```json
+    {
+      "packageManager": "pnpm@8.9.2",
+      "scripts": { "prepare": "corepack enable" }
+    }
+    ```
+- 指定项目 scripts run 的版本环境
+  - package.json `engines` + .npmrc `engine-strict=true`
 - 依赖版本：lockfile

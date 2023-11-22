@@ -8,7 +8,7 @@
     "build": "nuxi generate",
     "preview": "pnpm run build && pnpm dlx serve ./.output/public",
     "md-lint": "zx ./scripts/mdLinter.mjs",
-    "prepare": "corepack enable && pnpm clean && husky install && nuxi prepare"
+    "prepare": "corepack enable && husky install && nuxi prepare"
   },
   "repository": {
     "type": "git",

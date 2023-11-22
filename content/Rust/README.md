@@ -7,22 +7,57 @@ tags:
 
 # Rust
 
+::tl
 - Rust
   - [Rust 编程基础](#rust-编程基础)
   - 数据结构
     - 数组（长度固定、类型相同）：`[T; N]`
       - `let arr: [i32; 5] = [1,2,3,4,5];`
       - `let arr2 = [3; 5]; // let arr2 = [3,3,3,3,3]`
-      - 索引访问：`let a = arr[3];`
     - 元组：`(), (T,), (T1, T2), …`
       - `let tup = (32, 'A', 0.12);`
       - 解构：`let (x, y, z) = tup;`
       - 索引：`tup.1`
     - 切片
       - 切片 (slice) 的作用是提供对集合 (collection) 的视图 (view)
-    - 集合
-      - 矢量 `Vec`
-      - 哈希 `HashMap`
+      - 类型 `&[type]`
+      - `&xx[闭..开]`
+    - 字符串 String
+      - 字符串本质：byte 集合 + 方法（将字节解析成文本）
+      - 创建
+        - `String::new()`
+        - `to_string()`
+        - `String::from()`
+      - 拼接
+        - s1 + &s2
+          - 类似效果：`fn add(self, &str) -> String`
+        - `fomate!("{}-{}", s1, s2)`
+          - 不会获取参数所有权
+          - 返回新的字符串
+      - 访问
+        - 无法索引
+          - UTF-8 可变长编码
+      - 字符串切片 &str
+        - 切片如果跨越字符边界，程序会 panic
+      - 遍历
+        - 字节
+        - 标量值
+        - 字形簇
+    - 矢量 `Vec`
+      - 创建
+        - `let v: Vec<i32> = Vec::new();`
+        - `let v = vec![1,2,3]`
+      - 访问
+        - 索引：`&v[2]`，在运行时进行越界检查，越界会导致程序 panic
+        - get：`v.get(2)`
+      - Vector + Enum：使用枚举来储存多种类型
+    - 哈希 `HashMap`
+      - `HashMap::new()`
+      - `hashMap.insert(key, value)` 值所有权移动
+      - `entry()`、`or_insert()`
+  - [模块系统](#rust-模块系统)
+  - [Rust 错误处理](./Rust%20错误处理.md)
+  - [Rust 泛型、Trait](./Rust%20泛型、Trait.md)
   - [所有权、借用及生命周期](./所有权、借用及生命周期.md)
   - 代码调试
     - 日志
@@ -38,13 +73,14 @@ tags:
         - `#[ignore]` 忽略测试
       - 文档测试 `///`
       - 集成测试
-  - [Rust 错误处理](./Rust%20错误处理.md)
   - 学习资料
     - [Rust编程语言入门教程（Rust语言/Rust权威指南配套）](https://www.bilibili.com/video/BV1hp4y1k7SV)
     - [tour_of_rust](https://github.com/richardanaya/tour_of_rust)
+::
 
 ## Rust 编程基础
 
+:: tl
 - Rust 编程基础
   - 变量、值和类型声明
     - 变量
@@ -164,42 +200,4 @@ tags:
     - 不支持函数重载
     - 闭包
       - 使用两个竖线符号`||`定义，而不是用`fn ()`来定义
-  - 模块系统
-    - Workspace：多个 Package 工作空间
-    - Package：Cargo 功能工作的基本单位
-      - 包中可以包含至多一个库 crate(library crate)，可以包含任意多个二进制 crate(binary crate)，但是必须至少包含一个 crate（无论是库的还是二进制的）
-        - 通过将文件放在 `src/bin` 目录下，一个包可以拥有多个二进制 crate：每个 `src/bin` 下的文件都会被编译成一个独立的二进制 crate
-    - Crate：crate 是 rustc 编译的代码单位，表示单个二进制项目或库
-      - crate 对外使用有两种形式
-        - library crate
-        - binary crate
-      - crate 是一颗模块树，可以类比文件系统，对模块的引用路径则是基于该模块树
-      - crate root 是一个源文件，Rust 编译器以它为起始点，并构成你的 crate 的根模块
-        - Cargo 遵循的一个约定：`src/main.rs` 就是一个与包同名的二进制 crate 的 crate root；而 `src/lib.rs` 则是与包同名的库 crate 的 crate root。crate root 将由 Cargo 传递给 rustc 来实际构建库或者二进制项目
-    - Module
-      - `mod xxx {...}`：定义模块
-      - 模块成员默认私有
-        - `pub`：公开模块成员
-        - `pub struct{ pub xxx, ... }`：即使 struct 公开，但内部字段依旧私有，需要 `pub` 指定字段成员
-        - `pub emnu`：所有变体都是公共的
-      - `mod xxx;`：可将模块拆分成多个文件，仅声明模块，自动加载链接
-        - 编译器会在下列路径中寻找模块代码
-          - `./xxx.rs`
-          - `./xxx/mod.rs`（旧风格，编译器只允许其中一个风格）
-          - `./xxx/child.rs` 其子文件模块
-      - 使用 `use` 关键字来引入外部包的模块
-    - Path
-      - 通过模块路径引用模块的公开成员
-        - `::`：rust 语言中引用路径分割符
-        - 路径有两种形式
-          - 绝对路径（absolute path）是以 crate root 为准 `crate` 字面量开头的全路径
-          - 相对路径（relative path）从当前模块开始，以 `self`、`super` 或模块的标识符开头
-      - `use`：减少重复路径
-        - 嵌套路径
-          - `use xxx::{ ... }`
-          - `::{self, ... }`
-        - `::*`：引入所有公开成员
-        - `pub use`：导入导出
-      - as 定义成员别名：`use std::io::Result as IoResult;`
-      - 最佳实践
-        - 路径只指定到父级，保留父级标识能更好区分变量
+::
