@@ -24,6 +24,7 @@ tags:
     - [JavaScript 运行时机制](./JavaScript%20代码执行机制.md)
     - [JavaScript 内存管理机制](./JavaScript%20内存管理机制.md)
   - JavaScript 元编程
+  - [JavaScript 正则表达式](./JavaScript%20正则表达式.md)
   - ECMASCript 规范 & V8
 - api
   - [手写 call、apply、bind](https://github.com/laoergege/laoergege-blog/issues/79)

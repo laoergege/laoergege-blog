@@ -7,7 +7,7 @@ tags:
  - storage
 ---
 
-# Web 存储
+# Web 存储 & 缓存
 
 - [客户端存储限额及检查](https://web.dev/storage-for-the-web/#%E5%A4%9A%E5%B0%91)
 - Web 存储
