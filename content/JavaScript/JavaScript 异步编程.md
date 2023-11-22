@@ -84,7 +84,7 @@ setTimeout(foo, 3000)
 
 > 以下是浏览器事件循环模型中 JavaScript 交互的部分
 
-![](./images/1*iHhUyO4DliDwa6x_cO5E3A.gif)
+![](./images/1iHhUyO4DliDwa6xcO5E3A.gif)
 
 ES5 之后，JavaScript 引入了 Promise。我们不需要宿主的安排任务，JavaScript 引擎本身也可以发起异步任务了。我们把宿主环境调度的任务称为宏观任务，把 JavaScript 引擎内部调度任务称为微观任务。
 
