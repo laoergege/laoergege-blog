@@ -1,2 +1,2 @@
 packages:
-  - "markdown-plugins/*"
+  - "markdown-plugins"
