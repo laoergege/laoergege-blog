@@ -1,0 +1,26 @@
+- WebAssembly
+  - WebAssembly（缩写为 Wasm）是一种基于堆栈式虚拟机的二进制指令集。Wasm 被设计成为一种编程语言的可移植编译目标，并且可以通过将其部署在 Web 平台上，以便为客户端及服务端应用程序提供服务
+    - 虚拟机-[计算模型分类](https://time.geekbang.org/column/article/283436)
+      - **堆栈机**
+      - 累加器机
+      - 寄存器机
+  - Wasm 核心标准（Core Interfaces）
+  - API
+    - MVP
+    - WASI（POSIX syscall）
+    - WCGI
+    - [Emscripten](https://emscripten.org/)
+  - 运行时
+    - [Wasmer](https://github.com/wasmerio/wasmer)
+    - [wasm3](https://github.com/wasm3/wasm3)
+    - [wasmtime](https://github.com/bytecodealliance/wasmtime)
+    - [WasmEdge](https://github.com/WasmEdge/WasmEdge)
+    - [wasm-micro-runtime](https://github.com/bytecodealliance/wasm-micro-runtime)
+  - [支持语言](https://github.com/appcypher/awesome-wasm-langs)
+  - 应用场景
+    - 嵌入-沙盒环境
+      - Serverless
+        - fc
+        - service work
+    - 插件系统
+    - 语言互操：将不同的编程语言编译成 WASM 来提供它们之间的互操作的可能
