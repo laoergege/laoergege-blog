@@ -9,19 +9,9 @@
  * @param {number} n
  * @return {number}
  */
-var climbStairs = function (n) {
-    if (n === 1) {
-        return 1
-    }
-    if (n === 2) {
-        return 2
-    }
-    // 缓存计算
-    if (!climbStairs.tmp) {
-        climbStairs.tmp = {}
-    }
+var climbStairs = function (n, mem = {}) {
+  if (n === 1 || n === 2) return n;
 
-    return climbStairs.tmp[n] || (climbStairs.tmp[n] = climbStairs(n - 1) + climbStairs(n - 2))
+  return mem[n] || (mem[n] = climbStairs(n - 1, mem) + climbStairs(n - 2, mem));
 };
 // @lc code=end
-

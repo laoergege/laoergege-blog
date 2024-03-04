@@ -253,3 +253,93 @@ Priority Hints
       - imagesrcset & imagesizes
       - 延迟加载屏幕外图像
 - 代码优化
+
+
+## Web
+
+- 抓包
+  - whistle
+  - Charles
+- 调试
+
+  - vConsole
+  - eruda
+  - Chrome、Safari 远程调试
+
+- 可视化大屏幕
+  - 定宽高
+  - 等比缩放
+
+- 关键请求链
+  - 预加载 preload
+    - 关键 CSS
+- 页面加载
+  - 资源的网络请求
+    - 连接复用
+    - 并发连接
+    - Http 缓存
+      - CDN
+  - 关键资源
+    - 请求数量
+    - 大小/体积
+      - 代码拆分、延迟加载非关键代码
+        - 使用 DevTools 代码覆盖确定可以删除或延迟加载的代码的机会
+      - 缩小
+        - 混淆
+        - 删除未使用的代码
+        - 使用 babel-preset-env 和 browserlist 来避免转译现代浏览器中已有的功能
+        - tree-shaking
+      - 压缩
+  - 关键请求：如何确定请求的优先级以提高速度
+  - 初始渲染
+    - 减少阻塞渲染的请求
+      - 将脚本标签放在 body 标签的底部；
+      - 使用 async 异步加载脚本；
+      - 内联小型 JS 或 CSS 代码段（如果它们需要同步加载）
+    - 避免阻塞渲染的顺序请求链
+      - 内联合并
+      - 预加载或预连接
+- 页面交互
+- [延迟加载非关键 CSS](https://web.dev/defer-non-critical-css/)
+
+- devtool
+  - 测量 Performance
+  - 优化 Coverage
+- 提取关键 css
+  - [critical](https://github.com/addyosmani/critical)
+- 异步加载非关键 CSS
+  - `<link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="styles.css"></noscript>`
+- 预加载关键资产以提高加载速度
+
+- preconnect
+- prefetch
+- preload
+
+
+- 页面
+  - 加载
+    - 减少资源文件的请求数量
+    - 减小每个资源文件的大小
+      - 懒加载
+        - 按路线拆分代码
+      - 分析大小、组成
+        - 使用 webpack-dashboard 和 webpack-bundle-analyzer 等工具来了解您的应用程序有多大。每隔几个月重新审视一下您应用的整体性能
+        - bundlesize 验证 webpack 资产不超过指定的大小。将它与 CI 集成，以便在应用程序变得太大时得到通知
+    - 提高每个资源的加载速度
+      - 缓存代码
+  - 交互
+- 评审工具
+  - Lighthouse
+
+
+- 资源
+  - 关键资源：初始
+    - Critical CSS
+      - [critters](https://github.com/GoogleChromeLabs/critters)
+
+
+- 预加载 preload：`<link rel="preload">`
+  - 浏览器会根据情况执行诸如 preconnect 和 prefetch 等资源提示。而另一方面，preload 对浏览器来说是强制性的。现代浏览器已经非常擅长对资源进行优先级排序，这就是为什么谨慎使用 preload 并且只预加载最关键的资源那么重要
+  - as
+    - 提供 as 属性可帮助浏览器根据其类型来设置预获取资源的优先级，设置正确的标头，以及确定资源是否已存在于缓存中。此属性可接受的值包括： script 、style 、font 和 image 等等
+    - 省略 as 属性或使用了无效值，就相当于 XHR 请求，这时浏览器不知道它获取的内容，因此无法确定正确的优先级。它还可能导致某些资源（例如脚本）被获取两次

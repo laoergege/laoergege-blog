@@ -10,35 +10,35 @@ tags:
 ::tl
 - Rust 模块系统
   - Workspace：多个 Package 工作空间
-    - Package：Cargo 功能工作的基本单位
-      - 至多包含一个库 crate(library crate)；可以包含任意多个二进制 crate(binary crate)
-      - 通过将文件放在 `src/bin` 目录下，一个包可以拥有多个二进制 crate：每个 `src/bin` 下的文件都会被编译成一个独立的二进制 crate
-    - Crate：crate 是 rustc 编译的代码单位
-      - crate 对外使用有两种形式
-        - library crate
-        - binary crate
-      - **crate 是一颗模块树，可以类比文件系统，对模块的引用路径则是基于该模块树**
-      - crate root 是一个源文件，Rust 编译器以它为起始点，并构成你的 crate 的根模块
-        - `src/main.rs` 就是一个与包同名的二进制 crate 的 crate root
-        - `src/lib.rs` 则是与包同名的库 crate 的 crate root
+  - Package：Cargo 功能工作的基本单位
+    - 至多包含一个库 crate(library crate)；可以包含任意多个二进制 crate(binary crate)
+    - 通过将文件放在 `src/bin` 目录下，一个包可以拥有多个二进制 crate：每个 `src/bin` 下的文件都会被编译成一个独立的二进制 crate
+  - Crate：crate 是 rustc 编译的代码单位
+    - crate 有两种形式
+      - library crate
+      - binary crate
+    - **crate 是一颗模块树，可以类比文件系统，对模块的引用路径则是基于该模块树**
+    - crate root 是一个源文件，Rust 编译器以它为起始点，并构成你的 crate 的根模块
+      - `src/main.rs` 就是一个与包同名的二进制 crate 的 crate root
+      - `src/lib.rs` 则是与包同名的库 crate 的 crate root
   - 模块定义：`mod xxx {...}`
     - 模块成员默认私有
       - `pub`：公开模块成员
       - `pub struct{ pub xxx, ... }`：即使 struct 公开，但内部字段依旧私有，需要 `pub` 指定字段成员
       - `pub emnu`：所有变体都是公开的
     - `mod xxx;`：可将功能拆分成多个**文件模块**，自动加载链接到目标模块成为其子模块
-      - 同个文件模块只能通过 `mod` 声明一次，其他地方引入则需要通过 `use` + 模块路径
+      - 同个文件模块只能通过 `mod` 声明一次，其他地方引入则需要通过 `use` + **模块路径**
       - 编译器会在下列路径中寻找模块代码
         - `aaa/xxx.rs`
         - `aaa/xxx/mod.rs`（旧风格，编译器只允许其中一个风格）
   - 模块路径
-    - `::`：rust 语言中引用路径分割符
+    - `::`：rust 语言中的路径分割符
     - 路径有两种形式
       - 绝对路径（absolute path）是以 crate root 为准 `crate` 字面量开头的全路径
       - 相对路径（relative path）从当前模块开始，以 `self`、`super` 或模块/包标识符开头
     - `use`
-      - 使用 `use` 关键字将其他路径模块引入当前作用域
-      - 使用 `use` 关键字来引入外部包的模块
+      - 使用 `use` 关键字将其他路径的模块内容引入当前作用域
+      - 使用 `use` 关键字来引入外部包的模块内容引入当前作用域
       - 嵌套路径，消除重复路径
         - `use xxx::{ ... }`
         - `use xxx::{self, ... }`

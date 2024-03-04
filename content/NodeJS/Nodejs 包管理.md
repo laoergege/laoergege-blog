@@ -163,14 +163,13 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
   - [fnm](https://github.com/Schniz/fnm)
   - [nvm](https://github.com/nvm-sh/nvm)
   - [volta](https://github.com/volta-cli/volta)
-- 使用 [corepack](https://github.com/nodejs/corepack) 指定包管理
+- 使用 [corepack](https://github.com/nodejs/corepack) 指定包管理器
   - `corepack enable`
   - `corepack use <name@version>`
   - package.json 配置
     ```json
     {
       "packageManager": "pnpm@8.9.2",
-      "scripts": { "prepare": "corepack enable" }
     }
     ```
 - 指定项目运行的 Node 版本环境
