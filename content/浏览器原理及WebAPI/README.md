@@ -6,9 +6,8 @@ tags:
  - 浏览器原理
  - web
  - html
-description: 浏览器原理及API知识体系总结
+desc: 浏览器原理及API知识体系总结
 ---
-
 # 浏览器原理及API
 
 本系列都是以 chrome/chromium 为主，参考学习资料：
@@ -39,15 +38,12 @@ description: 浏览器原理及API知识体系总结
 
 - [Web 前端性能优化](./Web%20前端性能优化.md)
 - WeAPI
-  - Web 图形API
-    - HTML + CSS 
-    - SVG
-    - Canvas2D
-    - WebGL
-    - WebGPU
-  - DOM
-    - [视图中的各种宽高偏移](./视图中的各种宽高偏移概念.md)
-    - DOM 事件模型
+  - 页面
+    - DOM
+      - [视图中的各种宽高偏移](./视图中的各种宽高偏移概念.md)
+      - DOM 事件模型
+      - WebComponent
+    - Canvas
     - 不同上下文（窗口、iframe、worker）通信
       - 同源
         - 引用通信：window.opener + iframe.contentWindow
@@ -101,7 +97,6 @@ description: 浏览器原理及API知识体系总结
     - [workerize](https://github.com/developit/workerize)
   - 多媒体
     - [WebRTC](https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API)
-  - WebComponent
   - 其他
     - ResourceHints
       - [prerender](https://web.dev/speculative-prerendering/)
