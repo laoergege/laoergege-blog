@@ -1,38 +1,22 @@
 # Review
 
-- 专业工作
-  - 外包工作
-  - 外包项目
-  - 兼职
-  - [量化交易](#量化交易)
-- [专业技术学习](#计算机技术栈)
-  - [Rust](#rust)
-  - 算法
+- 重新正轨
+  - 重塑内核，修心养性
+  - 找工作
+    - 外包工作、外包项目
+    - 面试、刷题
+- [技术学习](#计算机技术栈)
+  - Rust
+    - WebAssembly
+  - 数据结构与算法
   - Web
     - JS 
-    - 前端
+    - 前端框架
     - 图表
     - 音视频
     - Nodejs
-- 英语学习
-- 金融学习
-  - 股票
 
-## 量化交易
-
-- 量化交易
-  - 金融知识
-    - 金融市场的交易
-      - what 金融市场
-      - how 金融市场是怎么交易的
-        - 股票，基金，期权，债券
-        - 一级市场，二级市场
-    - CFA课程
-      - CFA一级二级就是金融知识的学习与补充，如果题主能够掌握一级和二级的内容的话，金融基础也就掌握了
-  - 数学建模、交易策略
-  - A+和机器学习提高分析能力
-
-## 计算机技术栈
+## 软件开发技术栈
 
 - 计算机技术栈
   - 领域
@@ -53,9 +37,6 @@
         - [NodeJS](./NodeJS)
       - 音视频
         - [ ] 《从 0 打造音视频直播系统》
-      - 可视化、3D、XR
-      - 跨端
-      - 游戏
     - 容器
       - [ ] 《Kubernetes 入门实战课》
   - 软件设计及架构、软件工程及软件工具
@@ -74,6 +55,7 @@
     - Rust
       - [ ] [《Rust 程序设计语言》](https://kaisery.github.io/trpl-zh-cn/title-page.html)
       - [ ] 如何用 napi-rs 搭建一个 Node.js 可以调用的 Rust 库
+      - WebAssembly
     - 语言实现原理、编译原理
       - [ ] https://craftinginterpreters.com/contents.html
       - [ ] 《手把手带你写一门编程语言》
@@ -84,21 +66,16 @@
       - 《编译原理》龙书
       - https://www.edx.org/course/compilers
   - 计算机基础
-    - 数据库
-      - [ ] SQL 必知必会
     - 计算机网络
       - [ ] 《计算机网络通关 29 讲》
       - [ ] 《趣谈网络协议》
-      - [ ]《网络是怎样连接的》
-      - [ ] 《抓包》
+      - [ ] 《计算机网络-自顶向下方法》
       - [The TCP/IP Guide](http://www.tcpipguide.com/free/t_TCPSlidingWindowAcknowledgmentSystemForDataTranspo-6.htm)
         - RFC：https://datatracker.ietf.org/doc/rfc1644/
-      - 《计算机网络-自顶向下方法》
     - 操作系统
       - [ ] 《重学操作系统》
-      - 《趣谈 Linux 操作系统》
+      - [ ]《趣谈 Linux 操作系统》
       - 《现代操作系统：原理与实现》
-      - https://wiki.osdev.org/Main_Page
     - [数据结构与算法](./数据结构与算法/README.md)
       - [ ] leetcode 200 道
       - [ ] 《数据结构与算法之美》
@@ -106,9 +83,20 @@
       - [ ] [Hello 算法](https://www.hello-algo.com/)
     - 计算机组成原理
       - [ ]《程序是怎样跑起来的》
-      - 《计算机是怎样跑起来的》
-      - https://www.bilibili.com/video/BV1iW411d7hd
+      - [ ] https://www.bilibili.com/video/BV1iW411d7hd
   - 数学与应用
+
+## 计算机基础知识
+
+- 计算机基础知识
+  - 文本编码
+    - Unicode
+      - Unicode 只是一个符号集，它只规定了符号的二进制代码
+    - 二进制存储格式
+      - UTF-8
+        - 一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度
+    - 阅读推荐
+      - [字符编码笔记：ASCII，Unicode 和 UTF-8](https://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html)
 
 ## Rust
 
@@ -394,8 +382,79 @@ window.alert("Billing the user...");
 
 
 
-- GitButler
-  - 多分支工作
-    - 单独修改
-    - 独立推送
-- 多分支工作
+- Prisma 从数据库模型中为后端应用程序生成类型，而 tRPC 则从后端为前端 API 层维护类型安全
+- tRPC 使用 JSON-RPC 作为规范，HTTP 作为传输层
+- RSC
+- oxc
+- 孤岛
+  - https://mp.weixin.qq.com/s/hLDtOz2AEbLCdRVBHkb3MQ
+  - https://mp.weixin.qq.com/s/AR4schTcEkc0lOObZA-jRQ
+- WASM
+  - Emscripten
+  - wasm explorer
+  - 编译工具链的优化，WebAssembly 的运行效率同时取决于两部分，第一个是生成代码的编译器，第二个是运行它的虚拟机。WebAssembly 对其编译器进行了更多的优化，使用 Binaryen 编译器代替了 Emscripten，这部分所带来的的速度提升大约在5%-7%
+  - 在最大性能上，特殊编写的原生 JS 是可以跟 Wasm 大致持平的。其原因在于JS可以通过 ArrayBuffer 来模拟成一个"memory managed language"
+  - 场景
+    - web
+    - serverless
+    - 容器
+    - 插件
+    - 开发可移植的应用程序
+  - Figma 可以说是典型的 WebAssembly 应用了，使用了 zaplib(一款基于 wasm 和 Rust 的高性能 Web 应用框架)来进行开发。外围的交互操作还是用原生的 JS+CSS+HTML 来实现的，中间核心绘图区域是一个由 wasm+webGL 来驱动的的 canvas 模块
+  - Emscripten 是一个功能齐全的工具链，它不仅可以帮你将 C++ 编译为 Wasm，还提供了一个转换层，可以将 POSIX API 调用转换为 Web API 调用，将 OpenGL 转换为 WebGL
+  - WASI
+    - WebAssembly 运行在浏览器内，与系统交互靠的是 JS 胶水语言的能力，JS 通过浏览器内核再到操作系统内核。而 WebAssembly 脱离了浏览器后，运行在各个操作系统中也需要抹平系统 api 的差异性，这就是 WASI 需要解决的问题
+    - wasm runtime
+      - Wasmtime1.0
+  - 容器化
+    - 虚拟机
+    - 应用容器
+    - 语言VM
+- ocr 服务
+- Cache-Control
+  - 主要是解决了 Expires 一个重大的缺陷，就是它设置的是一个固定的时间点，客户端时间和服务端时间可能有误差
+- test
+  - https://www.browsercat.com/post/ultimate-guide-visual-testing-playwright
+- Blog
+  - `nitroApp.hooks.hook("content:file:beforeParse", (file: ContentFile)` 类型问题
+  - Toc、JSX 组件更新问题
+  - vueuse pr、类似 rxjs 响应式 api 设计
+    - 思考
+      - computed 单个计算
+        - (cb) => ref
+      - pipe 压缩计算
+        - (ref, cb) => ref
+    - api
+      - event-emitter
+      - untilValue
+  - provide/inject ts 体操
+  - https://metascraper.js.org/#/
+  - 命令式组件 Side
+    - 创建命令式组件
+      - create
+      - destroy
+      - Comp
+    - 动态组件内容配置
+      - slot
+      - component
+      - teleport
+- bun = node.js + 性能 + 工具链（包管理、打包、测试） + serverless + web
+- 计算机
+  - 存储
+    - 缓存
+  - 计算
+  - I/O
+    - 网络
+  - 调度
+- 虚拟化技术
+  - VMware 为应用提供虚拟的计算机（虚拟机）；Docker 为应用提供虚拟的执行环境，被称作容器（Container）
+  - Linux 容器技术
+    - Cgroups：用来限制某组进程使用的 CPU 资源和内存资源，控制进程的资源能使用
+    - Namespace：设置每个容器能看到能够使用的目录和文件
+- 微服务（Micro Service），指的是服务从逻辑上不可再分，是宏服务（Mono Service）的反义词
+- 机器人流程自动化 RPA
+- 缓存置换算法
+  - FIFO：先进先出算法，当缓存空间不足时，优先删除最先加入缓存的数据项，该算法主要适用于实时性较强的数据
+  - LRU：最近最少使用算法，当缓存空间不足时，优先删除最久没有被使用到的数据，该算法主要适用于热点数据
+  - LFU：最不常使用算法，当缓存空间不足时，优先删除使用频率较少的数据，该算法主要适用于数据访问模式不会频繁发生变化的数据
+- 应用 shell
