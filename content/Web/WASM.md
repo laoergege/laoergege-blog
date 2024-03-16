@@ -1,26 +1,29 @@
 - WebAssembly
+  - [WebAssembly 规范](https://webassembly.github.io/spec/core/index.html)
   - WebAssembly（缩写为 Wasm）是一种基于堆栈式虚拟机的二进制指令集。Wasm 被设计成为一种编程语言的可移植编译目标，并且可以通过将其部署在 Web 平台上，以便为客户端及服务端应用程序提供服务
-    - 虚拟机-[计算模型分类](https://time.geekbang.org/column/article/283436)
-      - **堆栈机**
-      - 累加器机
-      - 寄存器机
-  - Wasm 核心标准（Core Interfaces）
-  - API
-    - MVP
-    - WASI（POSIX syscall）
-    - WCGI
-    - [Emscripten](https://emscripten.org/)
-  - 运行时
+  - WASM Runtime
     - [Wasmer](https://github.com/wasmerio/wasmer)
     - [wasm3](https://github.com/wasm3/wasm3)
     - [wasmtime](https://github.com/bytecodealliance/wasmtime)
     - [WasmEdge](https://github.com/WasmEdge/WasmEdge)
     - [wasm-micro-runtime](https://github.com/bytecodealliance/wasm-micro-runtime)
+  - API
+    - MVP
+    - WASI（POSIX syscall）
+    - WCGI
   - [支持语言](https://github.com/appcypher/awesome-wasm-langs)
+    - [Emscripten](https://emscripten.org/) 是一个功能齐全的工具链，它不仅可以帮你将 C++ 编译为 Wasm，还提供了一个转换层，可以将 POSIX API 调用转换为 Web API 调用，将 OpenGL 转换为 WebGL
   - 应用场景
-    - 嵌入-沙盒环境
+    - 跨平台、可移植 
+      - Web + WASM
       - Serverless
-        - fc
-        - service work
-    - 插件系统
+    - 沙盒
+      - 插件系统
     - 语言互操：将不同的编程语言编译成 WASM 来提供它们之间的互操作的可能
+- 其他
+  - 虚拟机-[计算模型分类](https://time.geekbang.org/column/article/283436)
+    - **堆栈机**
+      - 使用“栈”这种结构来实现数据的存储和交换过程
+    - 累加器机
+    - 寄存器机
+      - 使用特定的 CPU 寄存器组，来作为指令执行过程中数据的存储和交换容器

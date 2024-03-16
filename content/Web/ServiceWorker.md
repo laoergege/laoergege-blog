@@ -1,4 +1,4 @@
-# Service Worker
+# Service Worker 笔记
 
 - Service Worker
   - 安全限制：HTTPS/localhost
@@ -19,6 +19,7 @@
       - 在离线状态下，很难将用户的网络请求缓存起来，并在网络恢复正常后再次进行请求
     - 重试机制
   - 推送通知
+  - [实践](#service-worker-最佳实践)
 
 ## SW 生命周期
 
@@ -137,7 +138,7 @@
     });
   ```
 
-## 最佳实践
+## Service Worker 最佳实践
 
 - 作用域冲突
   - 功能拆封，各个域的服务主动引入
@@ -146,6 +147,7 @@
   - 避免更改你的 sw 脚本的 URL。在离线模式下 index 会被缓存，导致 sw 的脚本依旧是旧内容
   - 避免缓存 sw 脚本
   - 更新通知：慎用 skipWaiting 去直接控制页面，最好通知用户刷新更新
+    - [SW 更新通知示例](#sw-更新通知示例)
 - 资源缓存
   - 缓存时机
   - 请求策略
@@ -156,9 +158,68 @@
     - SWR(Stale-while-revalidate)：先缓存后网络。如果在缓存中匹配到相关请求的响应，在返回该响应的同时依旧会发起网络请求，并更新相关缓存，否则直接请求
 - 导航预加载
 
+### SW 更新通知示例
+
+```html
+<script>
+  console.log(navigator.serviceWorker.controller);
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then(function (registration) {
+        const showTip = (newWorker) => {
+          // 提醒用户
+          if (confirm("有新版本，请点击更新")) {
+            setTimeout(() => {
+              newWorker.postMessage("skipWaiting");
+            }, 100);
+          }
+        };
+
+        // 检查是否已存在新版本的 sw
+        const newWorker = registration.waiting;
+        if (newWorker) {
+          showTip(newWorker);
+        } else { // 手动触发更新检查
+          registration.addEventListener("updatefound", () => {
+            const newWorker = registration.installing;
+            newWorker.addEventListener("statechange", () => {
+              if (newWorker.state === "installed") {
+                showTip(newWorker);
+              }
+            });
+          });
+          registration.update();
+        }
+      })
+      .catch(function (err) {
+        // do domething...
+        console.log(err);
+        console.log("register failure");
+      });
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      // This fires when the service worker controlling this page
+      // changes, eg a new worker has skipped waiting and become
+      // the new active worker.
+      alert("页面更新完毕，即将刷新页面");
+      location.reload();
+    });
+  }
+</script>
+```
+
+```js
+// sw 收到指令，触发 skipWaiting
+self.addEventListener("message", (e) => {
+  console.log("refresh message");
+  if (e.data === "skipWaiting") {
+    self.skipWaiting();
+  }
+});
+```
+
 ## 学习参考
 
 - [The service worker lifecycle](https://web.dev/service-worker-lifecycle/)
 - [Fresher service workers, by default](https://developer.chrome.com/blog/fresher-sw/#checks_for_updates_to_imported_scripts)
-
-- [GlacierJS](https://github.com/JerryC8080/glacierjs)

@@ -6,37 +6,28 @@
     - 外包工作、外包项目
     - 面试、刷题
 - [技术学习](#计算机技术栈)
-  - Rust
-    - WebAssembly
-  - 数据结构与算法
-  - Web
-    - JS 
-    - 前端框架
-    - 图表
-    - 音视频
-    - Nodejs
 
 ## 软件开发技术栈
 
 - 计算机技术栈
   - 领域
     - Web
-      - HTML/CSS/JS
+      - HTML/CSS
+      - WebAPI
+        - [ ] PWA：博客 + PWA
       - HTTP
         - [ ]《透视 HTTP 协议》
       - 浏览器
         - [ ] 《浏览器原理及实践》
       - 前端框架及工程化
-        - Vue
-          - [ ] 深入 Vue 框架源码及生态
-          - [ ] 技术输出：vue 深入系文
-        - 低代码框架
-          - [amis](https://github.com/baidu/amis)
+        - [Vue](./前端框架/README.md)
+        - React
         - [前端工程化](./content/前端工程化/README.md)
-      - 后端
+      - 后端服务
         - [NodeJS](./NodeJS)
       - 音视频
         - [ ] 《从 0 打造音视频直播系统》
+      - 图表
     - 容器
       - [ ] 《Kubernetes 入门实战课》
   - 软件设计及架构、软件工程及软件工具
@@ -55,7 +46,8 @@
     - Rust
       - [ ] [《Rust 程序设计语言》](https://kaisery.github.io/trpl-zh-cn/title-page.html)
       - [ ] 如何用 napi-rs 搭建一个 Node.js 可以调用的 Rust 库
-      - WebAssembly
+      - [ ] WebAssembly + 前端
+      - [ ] Rust CLI
     - 语言实现原理、编译原理
       - [ ] https://craftinginterpreters.com/contents.html
       - [ ] 《手把手带你写一门编程语言》
@@ -382,39 +374,15 @@ window.alert("Billing the user...");
 
 
 
-- GitButler
-  - 多分支工作
-    - 单独修改
-    - 独立推送
-- 多分支工作
+
 - Prisma 从数据库模型中为后端应用程序生成类型，而 tRPC 则从后端为前端 API 层维护类型安全
 - tRPC 使用 JSON-RPC 作为规范，HTTP 作为传输层
 - RSC
-- oxc
+- 基于 Rust 的 JavaScript 工具链
+  - [oxc](https://oxc-project.github.io/)
 - 孤岛
   - https://mp.weixin.qq.com/s/hLDtOz2AEbLCdRVBHkb3MQ
   - https://mp.weixin.qq.com/s/AR4schTcEkc0lOObZA-jRQ
-- WASM
-  - Emscripten
-  - wasm explorer
-  - 编译工具链的优化，WebAssembly 的运行效率同时取决于两部分，第一个是生成代码的编译器，第二个是运行它的虚拟机。WebAssembly 对其编译器进行了更多的优化，使用 Binaryen 编译器代替了 Emscripten，这部分所带来的的速度提升大约在5%-7%
-  - 在最大性能上，特殊编写的原生 JS 是可以跟 Wasm 大致持平的。其原因在于JS可以通过 ArrayBuffer 来模拟成一个"memory managed language"
-  - 场景
-    - web
-    - serverless
-    - 容器
-    - 插件
-    - 开发可移植的应用程序
-  - Figma 可以说是典型的 WebAssembly 应用了，使用了 zaplib(一款基于 wasm 和 Rust 的高性能 Web 应用框架)来进行开发。外围的交互操作还是用原生的 JS+CSS+HTML 来实现的，中间核心绘图区域是一个由 wasm+webGL 来驱动的的 canvas 模块
-  - Emscripten 是一个功能齐全的工具链，它不仅可以帮你将 C++ 编译为 Wasm，还提供了一个转换层，可以将 POSIX API 调用转换为 Web API 调用，将 OpenGL 转换为 WebGL
-  - WASI
-    - WebAssembly 运行在浏览器内，与系统交互靠的是 JS 胶水语言的能力，JS 通过浏览器内核再到操作系统内核。而 WebAssembly 脱离了浏览器后，运行在各个操作系统中也需要抹平系统 api 的差异性，这就是 WASI 需要解决的问题
-    - wasm runtime
-      - Wasmtime1.0
-  - 容器化
-    - 虚拟机
-    - 应用容器
-    - 语言VM
 - ocr 服务
 - Cache-Control
   - 主要是解决了 Expires 一个重大的缺陷，就是它设置的是一个固定的时间点，客户端时间和服务端时间可能有误差
@@ -463,3 +431,8 @@ window.alert("Billing the user...");
   - LRU：最近最少使用算法，当缓存空间不足时，优先删除最久没有被使用到的数据，该算法主要适用于热点数据
   - LFU：最不常使用算法，当缓存空间不足时，优先删除使用频率较少的数据，该算法主要适用于数据访问模式不会频繁发生变化的数据
 - 应用 shell
+
+- 打包工具
+  - 构建优化
+  - 生产优化
+- [unplugin-parcel-macros](https://github.com/devongovett/unplugin-parcel-macros)
