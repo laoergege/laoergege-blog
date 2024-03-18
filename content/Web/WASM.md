@@ -10,6 +10,7 @@
   - API
     - MVP
     - WASI（POSIX syscall）
+      - [WASIX](https://github.com/wasix-org)
     - WCGI
   - [支持语言](https://github.com/appcypher/awesome-wasm-langs)
     - [Emscripten](https://emscripten.org/) 是一个功能齐全的工具链，它不仅可以帮你将 C++ 编译为 Wasm，还提供了一个转换层，可以将 POSIX API 调用转换为 Web API 调用，将 OpenGL 转换为 WebGL
