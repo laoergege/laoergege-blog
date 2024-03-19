@@ -1,6 +1,7 @@
 import type { } from "nuxt-icon";
 import type { } from "@vite-pwa/nuxt";
 import type { } from "@nuxtjs/tailwindcss";
+import type { } from "@nuxt/content";
 import config from "./app.config";
 import { resolve } from "node:path";
 

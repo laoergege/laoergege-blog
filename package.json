@@ -9,7 +9,7 @@
     "build": "nuxi generate",
     "preview": "pnpm run build && pnpm dlx serve ./.output/public",
     "md-lint": "zx ./scripts/mdLinter.mjs",
-    "prepare": "corepack enable && husky install && nuxi prepare"
+    "prepare": "corepack enable && pnpm run clean && husky install && nuxi prepare"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
   "homepage": "https://github.com/laoergege/laoergege-blog#readme",
   "devDependencies": {
     "@nuxt-themes/typography": "^1.0.1",
-    "@nuxt/content": "^2.9.0",
+    "@nuxt/content": "^2.12.1",
     "@nuxt/image": "^1.0.0",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
