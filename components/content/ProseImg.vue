@@ -1,7 +1,7 @@
 <template>
-  <NuxtImg :src="src" class="w-auto max-h-[90vh] mx-auto bg-white p-2" ref="elRef" data-zoomable="1"
+  <!-- <NuxtImg :src="src" class="w-auto max-h-[90vh] mx-auto bg-white p-2" ref="elRef" data-zoomable="1"
     :loading="isLazy ? 'lazy' : 'eager'" :preload="!isLazy" :width="width" :height="height" quality="80" densities="x1">
-  </NuxtImg>
+  </NuxtImg> -->
 </template>
 
 <script lang="ts">
@@ -52,7 +52,7 @@ export default defineComponent({
     const { isLazy } = useImgLoading();
 
     // FIX: nuxt-content 和 ipx 会重复对 link 编码
-    const _src = decodeURIComponent(src)
+    const _src = decodeURIComponent(src);
 
     return {
       isLazy,

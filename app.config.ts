@@ -1,8 +1,8 @@
 export default {
   themes: {
-    dark: "black",
+    dark: "dark",
     light: "cupcake",
-    storageKey: "themeKey"
+    _storageKey: "theme"
   },
   commentThemes: {
     dark: "dark_dimmed",

@@ -9,14 +9,17 @@ import { resolve } from "node:path";
 export default defineNuxtConfig({
   extends: ["@nuxt-themes/typography"],
   typescript: { includeWorkspace: true },
+
   modules: [
     "@nuxt/content",
     '@nuxtjs/tailwindcss',
-    "@nuxt/image",
+    // "@nuxt/image",
     "nuxt-icon",
     "@nuxtjs/color-mode",
     // "@vite-pwa/nuxt",
+    "@pinia/nuxt"
   ],
+
   vite: {
     build: {
       rollupOptions: {
@@ -24,9 +27,11 @@ export default defineNuxtConfig({
       },
     }
   },
+
   nitro: {
     errorHandler: "~/error",
   },
+
   app: {
     baseURL: "",
     head: {
@@ -39,7 +44,11 @@ export default defineNuxtConfig({
     },
     keepalive: true,
   },
+
   content: {
+    experimental: {
+      search: true
+    },
     documentDriven: true,
     ignores: [".+\\.*?[^(md)]$"],
     highlight: {
@@ -67,14 +76,16 @@ export default defineNuxtConfig({
         "py",
         "rust",
         "c",
+        "go"
       ],
     },
-    markdown: {
-      remarkPlugins: {
-        [resolve("./markdown-plugins/details-collapsible.mjs")]: {}
-      }
-    },
+    // markdown: {
+    //   remarkPlugins: {
+    //     [resolve("./markdown-plugins/details-collapsible.mjs")]: {}
+    //   }
+    // },
   },
+
   pwa: {
     injectRegister: "inline",
     registerType: "prompt",
@@ -84,8 +95,12 @@ export default defineNuxtConfig({
       globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,gif}']
     }
   },
+
   colorMode: {
     classSuffix: '',
-    storageKey: config.themes.storageKey
+    storageKey: config.themes._storageKey,
+    dataValue: 'theme'
   },
+
+  compatibilityDate: "2025-08-27",
 });

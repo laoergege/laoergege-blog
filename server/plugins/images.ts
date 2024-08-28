@@ -5,6 +5,7 @@ import { URL, pathToFileURL, fileURLToPath } from "node:url";
 import { visit } from 'unist-util-visit'
 
 export default defineNitroPlugin((nitroApp) => {
+  return;
   const destDir = resolve("public", "images")
   mkdir(destDir, { recursive: true });
 

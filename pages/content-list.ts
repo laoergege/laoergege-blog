@@ -31,17 +31,24 @@ export const createContentList = (options: Options) => {
 
   const limit = computed(() => options.limit ?? 10);
   const skip = (p: number) => (p - 1) * limit.value;
+  const where = {
+    release: {
+      $eq: true,
+    },
+  }
 
   const only = [
     "description",
     "tags",
     "title",
     "updateTime",
+    "top",
     "_path"
   ];
 
   const rawIndexs = asyncComputed(async () => {
     return queryContent("/")
+      .where(where)
       .sort({ updateTime: -1, top: 1 })
       .only(only)
       .find()

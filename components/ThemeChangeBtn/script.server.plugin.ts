@@ -9,6 +9,6 @@ const reg = new RegExp(`<script.*?id="${tbtnscript}".*?\/script>`)
 
 export default ((nitroApp) => {
   nitroApp.hooks.hook('render:html', (html) => {
-    html.body[0] = html.body[0].replace(reg, `<script id="${tbtnscript}" key="${tbtnscript}">document.body.querySelector("#${btnID}").checked = localStorage.getItem('${config.themes.storageKey}') === "dark"</script>`)
+    html.body[0] = html.body[0].replace(reg, `<script id="${tbtnscript}" key="${tbtnscript}">document.body.querySelector("#${btnID}").checked = localStorage.getItem('${config.themes._storageKey}') === "${config.themes.dark}"</script>`)
   })
 }) as T

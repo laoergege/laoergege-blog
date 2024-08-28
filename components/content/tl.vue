@@ -14,9 +14,13 @@
 
   ul {
     list-style: none !important;
-    padding-left: 0 !important;
+    display: lis;
 
-    &::before {
+    &::first-child {
+      padding-left: 0;
+    }
+
+    /* &::before {
       content: "";
       display: block;
       width: var(--pl);
@@ -60,7 +64,6 @@
         left: 0;
       }
 
-      /**遮挡竖线 */
       &:last-child::after {
         content: "";
         display: block;
@@ -74,7 +77,7 @@
         z-index: 1;
         left: 0;
       }
-    }
+    } */
   }
 }
 </style>
