@@ -5,4 +5,6 @@ import releasefn from "./md-lint-release.mjs";
 
 export const hooks = createHooks();
 
-hooks.addHooks("lint", [disidfn, releasefn, linkfn]);
+hooks.hook("lint", disidfn);
+hooks.hook("lint", releasefn);
+hooks.hook("lint", linkfn);

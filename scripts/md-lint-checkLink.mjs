@@ -21,7 +21,7 @@ export default ({ content, fileURL }) => {
       fs.stat(subfilePath, (err, stats) => {
         if (err) {
           console.error(
-            `Local link File ${subfilePath} not found in \n ${fileURL} \n ${err}`
+            `${_link} Local link File ${subfilePath} not found in \n ${fileURL}`
           );
         }
       });

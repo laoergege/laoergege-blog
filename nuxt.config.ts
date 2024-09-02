@@ -38,9 +38,15 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    errorHandler: "~/error",
     prerender: {
       failOnError: false,
+      ignore: [
+        // (path) => {
+        //   console.log(path)
+        //   return true
+        // }
+        /^http/
+      ]
     }
   },
 

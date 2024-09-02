@@ -4,13 +4,14 @@ import "zx/globals";
 import { open } from "node:fs/promises";
 import { hooks } from "./hooks.mjs";
 import fm from "front-matter";
-import { URL, fileURLToPath, pathToFileURL } from "node:url";
+import { pathToFileURL } from "node:url";
 import path from "node:path";
 
-const files = argv["_"];
+// const files = argv["_"];
+const files = await glob(["content/*.md", "content/**/*.md"]);
 const MAX = 5;
-const HooksDir = fileURLToPath(new URL(".", import.meta.url));
 
+// const HooksDir = fileURLToPath(new URL(".", import.meta.url));
 // const loadHooks = async () => {
 //   const paths = await glob(`${HooksDir}/md-lint-*.(js|mjs)`);
 //   return Promise.all(paths.map((_path) => import(_path)));
