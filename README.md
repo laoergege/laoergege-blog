@@ -13,13 +13,17 @@ Thanks for the help of the following projects.
 - [x] 使用 nuxt-content 构建博客
 - [x] 列表页
   - [x] 数据分页
-- [x] 工具栏
-  - [ ] 图标标亮
 - [x] 标签页
   - [x] 列表筛选
 - [x] 文章
   - [x] 目录导航
 - [x] giscus 评论功能
+- [x] 夜间模式
+- 部署
+  - [ ] 
+- [x] 工具栏
+  - [ ] 图标标亮
+  - [ ] 侧边栏
 - [x] 图片优化
 - [x] 通过 GithubActions 自动化部署到 GithubPage
   - [x] 自定义域名

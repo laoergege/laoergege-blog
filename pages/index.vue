@@ -12,9 +12,12 @@
         </NuxtLink>
         <p class="flex gap-2">
           <span
-            class="link link-hover badge badge-ghost badge-md"
+            class="link link-hover badge badge-md hover:text-secondary"
+            :class="{
+              'badge-ghost': !tagsStore.isSelected(tag),
+            }"
             v-for="tag in article.tags"
-            @click="selectTag(tag)">
+            @click="tagsStore.selectTagAndMarkURLQuery(tag)">
             #{{ tag }}
           </span>
         </p>
@@ -41,42 +44,19 @@ import { createSideCtx } from "~/components/Side.vue";
 import { createContentList } from "~/pages/content-list";
 import type { Filter } from "~/pages/content-list";
 import { computed, ref } from "vue";
-import { onBeforeRouteUpdate } from "vue-router";
 
 definePageMeta({
   name: "home",
 });
 
-const router = useRouter();
-
 // #region 分页
 const tagsStore = useTagsStore();
-const selectTag = (tag: string) => {
-  // 将 tags 添加到 url hash
-  router.push({
-    ...router.currentRoute,
-    query: {
-      tags: tagsStore.selectedTags.join(","),
-    },
-  });
-};
-onBeforeRouteUpdate((to, from) => {
-  const toTags = to.query.tags as string;
-  const fromTags = from.query.tags as string;
-  console.log(fromTags, toTags);
-  for (const tag of fromTags?.split(",") ?? []) {
-    tagsStore.selectTag(tag);
-  }
-  for (const tag of toTags?.split(",") ?? []) {
-    tagsStore.selectTag(tag);
-  }
-});
 const filter = computed<Filter>(() => (content) => {
   if (!tagsStore.selectedTags.length) {
     return true;
   }
 
-  const tags = content.tags ?? [];
+  const tags = content?.tags ?? [];
   return tags.some((t) => tagsStore.selectedTags.includes(t));
 });
 let { page, list, isEnd } = createContentList({ filter, mode: "infinite" });
@@ -102,10 +82,10 @@ watch(
 // #endregion
 
 // #region SSG 模式下动态生成列表数据和文章
-if (import.meta.server) {
-  await new Promise((resolve) => {
-    setTimeout(() => resolve(null), 1000);
-  });
-}
+// if (import.meta.server) {
+//   await new Promise((resolve) => {
+//     setTimeout(() => resolve(null), 1000);
+//   });
+// }
 // #endregion
 </script>

@@ -1,6 +1,5 @@
 
-import { asyncComputed } from "@vueuse/core";
-import { computed, customRef, isRef, provide, inject } from "vue";
+import { computed, customRef, isRef } from "vue";
 import type { InjectionKey } from "vue";
 import type { Ref } from "vue";
 
@@ -11,23 +10,25 @@ interface ParsedContent {
 }
 // }
 
-export type Filter = (content: ParsedContent) => boolean
+export type Filter = typeof Array.prototype.filter
 export type Sorter = typeof Array.prototype.sort
 export type Mode = "page" | "infinite"
 
 interface Options {
   limit?: number,
   filter?: Filter | Ref<Filter>,
-  sort?: Sorter | Ref<Sorter>,
   mode?: Mode,
   page?: number
 }
 
 export const createContentList = (options: Options) => {
-  const { mode = "page" } = options
+  const { mode = "page", filter: _filter } = options
 
-  const sort = computed(() => (isRef(options.sort) ? options.sort.value : options.sort));
-  const filter = computed(() => (isRef(options.filter) ? options.filter.value : options.filter))
+  const filter = (list: any[]) => {
+    const f = isRef(_filter) ? _filter.value : _filter
+
+    return f ? list.filter(f) : list
+  }
 
   const limit = computed(() => options.limit ?? 10);
   const skip = (p: number) => (p - 1) * limit.value;
@@ -46,15 +47,13 @@ export const createContentList = (options: Options) => {
     "_path"
   ];
 
-  const rawIndexs = asyncComputed(async () => {
-    return queryContent("/")
-      .where(where)
-      .sort({ updateTime: -1, top: 1 })
-      .only(only)
-      .find()
-  }, [])
-  const sortedIndexs = computed(() => sort.value ? rawIndexs.value.sort(sort.value) : rawIndexs.value)
-  const filtedIndexs = computed(() => filter.value ? sortedIndexs.value.filter(filter.value) : sortedIndexs.value)
+
+  const { data } = useAsyncData("list", () => queryContent("/")
+    .where(where)
+    .sort({ updateTime: -1, top: 1 })
+    .only(only)
+    .find())
+  const filtedIndexs = computed(() => filter(data.value ?? []))
   const list = computed(() => {
     if (mode === "infinite") {
       return filtedIndexs.value.slice(0, limit.value * page.value)
@@ -93,16 +92,8 @@ export const createContentList = (options: Options) => {
   return {
     page,
     list,
-    sort,
-    filter,
     isEnd,
-    rawIndexs,
-    sortedIndexs
   }
 }
 
 export const key = Symbol("indexs") as InjectionKey<ReturnType<typeof createContentList>>
-
-const useContentListCtx = (ctx: ReturnType<typeof createContentList>) => {
-  return inject(key) || provide(key, ctx)
-}

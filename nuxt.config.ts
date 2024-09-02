@@ -46,9 +46,6 @@ export default defineNuxtConfig({
   },
 
   content: {
-    experimental: {
-      search: true
-    },
     documentDriven: true,
     ignores: [".+\\.*?[^(md)]$"],
     highlight: {
@@ -103,4 +100,6 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: "2025-08-27",
+
+  devtools: { enabled: false }
 });

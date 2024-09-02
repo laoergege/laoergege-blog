@@ -18,9 +18,7 @@ export const useTagsStore = defineStore('tags', () => {
   const selectedTags$ = ref<Record<string, number>>({});
   const selectedTags = computed(() => Object.keys(selectedTags$.value).filter(key => selectedTags$.value[key]))
   const selectTag = (tag: string) => {
-    selectedTags$.value[tag] ??= 0;
-    selectedTags$.value[tag] = selectedTags$.value[tag] ? 0 : 1;
-    console.log(tag, selectedTags$.value[tag])
+    selectedTags$.value[tag] = selectedTags$.value[tag] ? 0 : 1
   }
   const isSelected = (key: string) => {
     return selectedTags$.value[key]
@@ -28,12 +26,56 @@ export const useTagsStore = defineStore('tags', () => {
   const clearTagsSelected = () => {
     selectedTags$.value = {}
   }
+  const selectTagAndMarkURLQuery = async (tag: string) => {
+    const query = router.currentRoute.value.query;
+
+    const tags = (query?.tags as string)?.split(",") ?? [];
+    if (tags.includes(tag)) {
+      tags.splice(tags.indexOf(tag), 1);
+    } else {
+      tags.push(tag);
+    }
+
+    if (tags.length == 0) {
+      delete query.tags
+    } else {
+      query.tags = tags.toString()
+    }
+    router.push({
+      query,
+      force: true
+    })
+  }
+  const clearTagsSelectedAndMarkURLQuery = () => {
+    const query = router.currentRoute.value.query;
+    delete query.tags;
+    router.push({
+      query,
+      force: true
+    })
+    clearTagsSelected()
+  }
+  const router = useRouter();
+  type Route = Parameters<Parameters<typeof router.beforeEach>[0]>[0]
+  const makeTagsByQuery = (to: Route) => {
+    clearTagsSelected();
+    for (const tag of (to?.query?.tags as string)?.split(",") ?? []) {
+      selectTag(tag);
+    }
+  }
+  makeTagsByQuery(router.currentRoute.value)
+  router.beforeEach((to) => {
+    makeTagsByQuery(to)
+  })
 
   return {
     tags$,
     selectedTags,
     selectTag,
     isSelected,
-    clearTagsSelected
+    clearTagsSelected,
+    selectTagAndMarkURLQuery,
+    clearTagsSelectedAndMarkURLQuery,
+    makeTagsByQuery
   }
 })
