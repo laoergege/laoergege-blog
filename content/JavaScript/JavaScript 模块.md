@@ -13,6 +13,11 @@ tags:
   - [模块化发展历程](#javascript-模块发展历程)
   - [CommonJS](#commonjs)
   - [ES Modules](#es-modules)
+    - [ES modules 是如何工作的？](#es-modules-是如何工作的)
+    - [循环加载：如何解决依赖循环导致的死循环问题？](#如何解决依赖循环导致的死循环问题)
+    - 使用
+      - [在浏览器中使用 ES modules](#在浏览器中使用-es-modules)
+      - [在 Node.js 中使用 ES modules](#在-nodejs-中使用-es-modules)
 
 ## JavaScript 模块发展历程
 
@@ -88,7 +93,7 @@ tags:
 });
 ```
 
-CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导出的是 module.export，所以不能直接给 export 赋值，会导致指向丢失。
+注意一点的是：CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导出的是 module.export，所以不能直接给 export 赋值，会导致指向丢失。
 
 ## ES Modules
 
@@ -144,7 +149,7 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
       - `import.meta.resolve`
     - 模块路径
       - URL 路径规则
-      - ES 模块的加载路径必须给出脚本的完整路径，不能省略脚本的后缀名
+      - 必须给出脚本的完整路径，不能省略脚本的后缀名
     - Import Assertions
     - Top Await
     - Import Maps
@@ -153,30 +158,26 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
     - 模块作用域
       - 代码是在模块作用域之中运行，而不是在全局作用域运行。模块内部的顶层变量，外部不可见
       - CommonJs 的 this 是当前模块，ES6 Module的 this 是 undefined
-  - [ES modules 是如何工作的？](#es-modules-是如何工作的)
-  - [循环加载：如何解决依赖循环导致的死循环问题？](#如何解决依赖循环导致的死循环问题)
-  - 使用
-    - [在浏览器中使用 ES modules](#在浏览器中使用-es-modules)
-    - [在 Node.js 中使用 ES modules](#在-nodejs-中使用-es-modules)
 
 ### ES modules 是如何工作的？
 
-模块加载的原理离不开以下四步：
+使用一个模块时的原理大致离不开以下几步：
 
-- 路径解析
-- 文件加载
-- 依赖构建
-- 链接编译
-- 执行求值
+- 模块加载
+  - 路径解析
+  - 文件加载（获取、解析）
+  - 依赖构建
+  - 链接编译
+- 求值执行
 
-每个 ES module 的加载这几个阶段是**异步执行**：
+在 ES modules 中模块加载是**异步执行**，主要设计是为了防止阻塞主线程：
 
 - 入口文件：**模块加载器**第一个加载的模块
 - 依赖构建  ![](./images/1666377464170.png)  
   - 依赖解析  ![图 8](./images/1666377616506.png)  
     - Modules Resolve：模块 URL 解析
-    - [Import maps](https://github.com/WICG/import-maps)
-  - 文件获取：文件的加载
+      - [Import maps](https://github.com/WICG/import-maps)
+  - 文件获取
   - 文件解析
     - 将文件解析成**模块记录**  ![图 9](./images/1666426485969.png)  
       - 一个模块在构建时直到所有相关依赖的文件都被获取、解析完才算构建完成
@@ -185,11 +186,11 @@ CommonJS 的 export 和 module.export 指向同一块内存，但由于最后导
       - "use strict"
       - 顶层 await
     - [**Module Map**：缓存模块](https://html.spec.whatwg.org/multipage/webappapis.html#module-map)  ![图 10](./images/1666426535130.png)  
-- 编译：编译模块，并将模块所有导入导出的内存地址关联起来
+- 编译链接：编译模块，并将模块所有导入导出的内存地址关联起来
   - 编译模块时，JS 引擎会创建一条**模块环境的记录**，管理模块导出内容的内存位置
     - 所有被导出的函数声明将会在这个阶段被初始化，而普通变量则未初始化，只有在执行求值过程才会被填充  ![图 11](./images/1666427745313.png)  
   - 根据依赖树引擎将会采用深度优先后续遍历的算法，也就是在完成子模块导出成员的内存记录后，在返回上层模块才能获取导入成员的内存**引用**  ![图 12](./images/1666428438674.png)  
-- 执行求值
+- 求值执行
   - 执行代码，对模块的导出内存地址写值
   - 由于模块缓存，每一个模块**只执行一次求值**
 
@@ -257,7 +258,7 @@ console.log(b)
 - CommonJS 模块遇到循环加载时，返回的是当前已经执行的部分的值，而不是代码全部执行后的值
 - CommonJS 输入的是被输出值的拷贝，不是引用
 
-相比较 CommonJS 的运行时模块缓存，**ES Modules 则是在编译时就生成一个模块记录并缓存，且其记录模块的导出接口（地址）**。
+相比较 CommonJS 的运行时模块缓存，**ES Modules 则是在编译时就生成一个模块环境记录并缓存，且其记录模块的导出接口（地址）**。
 
 ```js
 // a.mjs
@@ -292,10 +293,9 @@ b 文件里执行到加载 a 文件时，同样由于模块缓存的作用避免
 
 ### ES modules 与 CommonJS 的区别
 
-- ES6 模块与 CommonJS 模块的区别
-  - CommonJS 模块导出的是一个值的拷贝，ES6 模块导出的是值的引用
-  - CommonJS 模块是运行时加载，ES6 模块是编译时加载，并且输出接口的引用地址
-  - CommonJS 模块的 require() 是同步加载模块，ES6 模块的 import 命令是异步加载，有一个独立的模块依赖的解析阶段
+- CommonJS 模块导出的是一个值的拷贝，ES6 模块导出的是值的引用
+- CommonJS 模块是运行时加载，ES6 模块是编译时加载，并且输出接口的引用地址
+- CommonJS 模块的 require() 是同步加载模块，ES6 模块的 import 命令是异步加载，有一个独立的模块依赖的解析阶段
 
 ### 在浏览器中使用 ES modules
 
@@ -345,21 +345,13 @@ ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全�
       }
     }
     ```
-- ES 模块加载规则
-  - CommonJS 模块加载 ES6 模块
-    - `require` 命令不能加载 `.mjs` 文件
-    - 只能使用`import()`这个方法加载
-  - ES6 模块加载 CommonJS 模块
-    - `.mjs`文件里面也不能使用 `require` 命令，必须使用 `import`
-    - `import` 命令可以加载 CommonJS 模块，但是只能整体加载，不能只加载单一的输出项
-      ```js
-      // 正确
-      import packageMain from 'commonjs-package';
-
-      // 报错
-      import { method } from 'commonjs-package';
-      ```
-      - 这是因为 ES6 模块需要支持静态代码分析，而 CommonJS 模块的输出接口是module.exports 是一个对象，无法被静态分析，所以只能整体加载。
+- ES 与 CommonJS 互操
+  - ES6 模块可以加载 CommonJS 模块
+    - [CommonJS Namespaces](https://nodejs.org/api/esm.html#commonjs-namespaces)
+  - CommonJS
+    - 不能使用 `require(esm)`：CommonJS 是同步加载，而 ES6 模块内部可以使用顶层 await 命令，导致无法被同步加载
+      - Node 22 版本后支持同步加载 ESM。当模块图（所有模块及其依赖的结构）不包含顶层await时，ESM 也可以同步执行。[Loading ECMAScript modules using require()](https://nodejs.org/api/modules.html#loading-ecmascript-modules-using-require)
+    - 只能使用`import()`这个方法加载 esm
 
 ## 学习参考
 

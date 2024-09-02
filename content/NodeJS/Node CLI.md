@@ -1,15 +1,12 @@
 # Nodejs CLI
 
+## CLI
+
 - CLI
   - 参数
     - 命令行参数
       - process.argv
         - `[Node.js 二进制文件的路径, 脚本的路径, ...脚本的参数]`
-        - 参数  
-          - 主参数
-          - 选项
-            - `--option`
-            - `-o`
         - `util.parseArgs()` 解析命令行参数
       - [commander.js](https://github.com/tj/commander.js#readme)
       - [clipanion](https://github.com/arcanis/clipanion)
@@ -41,6 +38,17 @@
       - 列表
         - [listr](https://github.com/SamVerschueren/listr)
   - 子进程
+    - [execa](https://github.com/sindresorhus/execa)
+- 配置
+  - shellbag：`#!/usr/bin/env node`
+  - package.json `bin`
+- 工具包
+  - [zx](https://github.com/google/zx)
+
+
+
+  
+  - 子进程
   - 配置
 
     - 运行本地安装的 bin 脚本
@@ -57,7 +65,6 @@
 /node_modules/.bin
   - 运行
     - pnpm run
-- 工具包：[zx](https://github.com/google/zx)
 
 
 

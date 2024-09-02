@@ -8,45 +8,23 @@ discussionID: xwJdUgnvRfm2UYF8Ju4tG
 
 - 包管理
   - [包描述文件：package.json](#packagejson-常见字段)
-  - 创建现代化模块包
-    - 构建 CommonJS (CJS) 和 ECMAScript (ESM) 模块格式
-    - 编写单元测试
-    - 自动化版本管理和发布
-      - 语义版本控制
   - 依赖管理
     - 安装
-    - 更新
+    - 更新 `pnpm up <...>`
       - 补丁
     - 删除
     - 联调
       - `link`
     - 查看
+      - 查看整个项目的依赖树 `pnpm list`
+      - 查看依赖包的具体版本及依赖树 `pnpm list <package-name> --depth <level>`
   - 脚本运行
     - pnpm run
     - pnpm dlx
     - pnpm exec/npx
   - Workspaces
-- Node 开发环境锁定
-  - Node 版本
-    - [nvm](https://github.com/nvm-sh/nvm)
-    - [volta](https://github.com/volta-cli/volta)
-  - 包管理
-    - [corepack](https://github.com/nodejs/corepack)
-    - package: `engines` + `.npmrc: engine-strict`
-    - .npmrc: `use-node-version`
-    - pnpm env
-  - 依赖版本：lockfile
-
-## 创建现代化模块包
-
-- 创建现代化模块包
-  - 构建 CommonJS (CJS) 和 ECMAScript (ESM) 模块格式
-  - 配置 package.json
-    - 常见字段
-    - 
-  - 编写单元测试
-  - 自动化版本管理和发布
-    - 语义版本控制
+  - 创建现代化模块包
+    - https://snyk.io/blog/best-practices-create-modern-npm-package/
 
 ## 发包
 
@@ -155,23 +133,4 @@ pnpm 在默认情况下，如果可用的 packages 与已声明的可用范围�
     - engines
 
 
-## Node 开发环境锁定
 
-![](./images/node-env-lock.excalidraw.svg)
-
-- 使用 Node 版本管理工具对项目进行 Node 环境安装和版本切换
-  - [fnm](https://github.com/Schniz/fnm)
-  - [nvm](https://github.com/nvm-sh/nvm)
-  - [volta](https://github.com/volta-cli/volta)
-- 使用 [corepack](https://github.com/nodejs/corepack) 指定包管理器
-  - `corepack enable`
-  - `corepack use <name@version>`
-  - package.json 配置
-    ```json
-    {
-      "packageManager": "pnpm@8.9.2",
-    }
-    ```
-- 指定项目运行的 Node 版本环境
-  - npm script + package.json `engines` + .npmrc `engine-strict=true`
-- 依赖版本：lockfile

@@ -9,32 +9,27 @@ tags:
 
 - Rust 错误处理
   - [异常：panic! 和 catch_unwind](#异常panic-和-catch_unwind)
-  - 返回值 + 类型系统：使用一个内部包含正常返回类型和错误返回类型的复合类型（[Result / Option](#result--option)），**通过类型系统来强制错误的处理和传递**
-  - 错误处理及传递
+  - 返回值形式 + 类型系统：使用一个内部包含正常返回类型和错误返回类型的复合类型（[Result / Option](#result--option)），**通过类型系统来强制错误的处理和传递**
     - [错误匹配](#错误匹配)
-    - [unwrap、expect](#unwrapexpect)
-    - [? 操作符](#操作符)
+    - [自动传播](#unwrapexpect-操作符)
+      - unwrap、expect
+      - ? 操作符
     - 函数式错误处理
-
 
 ## 异常：panic! 和 catch_unwind
 
 异常是不可恢复的严重错误，Rust 使用 `panic!` 抛出异常，程序将可有两种形式：
 
-- 展开（默认）
-  - 调用栈往回走
-  - 清理栈帧数据
-- 终止
-  - 直接停止程序，让 OS 清理数据
-  - cargo.toml 配置 `panic = abort`
+- 展开（默认）：调用栈往回走，清理栈帧数据
+- 终止（通过 cargo.toml 配置 `panic = abort` 修改默认行为）：直接停止程序，让 OS 清理数据
 
 > 使用 `panic::catch_unwind` 可以捕获异常并将其转成 `Result`
 
 ```rust
 fn main() {
     // 手动抛出错误，并捕获
-    if let Err(error) = panic::catch_unwind(error) {
-        println!("panic captured: {:#?}", error)
+    if let Err(err) = panic::catch_unwind(error) {
+        println!("panic captured: {:#?}", err)
     };
 }
 fn error() {
@@ -95,11 +90,12 @@ fn main() {
 - `unwrap()`、`expect()`
 - `?` 操作符
 
-## unwrap、expect
+## unwrap、expect、`?` 操作符
 
-在使用 Option 和 Result 类型时，开发者也可以对其 `unwarp()` 或者 `expect()` 强制把 Option 和 Result 转换成 T，如果无法完成这种转换，也会 panic 出来：
-
-> expect 跟 unwarp 类似，但可以自定义错误信息 
+- unwrap、expect：如果把 Option 和 Result 转换成 T 失败则会自动 panic 出来
+  - expect 跟 unwarp 类似，但可以自定义错误信息 
+- `?` 操作符：如果把 Option 和 Result 转换成 T 失败则会自动返回传播 Error
+  - 被 `?` 所应用的错误发生时会隐式得调用其 from 函数（`Trait std::convert::From`）
 
 ```rs
 use std::{
@@ -120,13 +116,6 @@ fn unwrap_demo() {
     panic::catch_unwind(|| read_file_contents("./Cargo.toml")).unwrap();
 }
 ```
-
-## `?` 操作符
-
-- `?` 操作符可以直接获取 `Result/Option` 内容并且自动传播错误
-  - 被 `?` 所应用的错误发生时会隐式得调用其 from 函数
-  - `Trait std::convert::From` 上的 from 函数用于错误类型之间的转换
-  - `?` 所应用的错误类型必须能够通过 from 转换为函数所返回的错误类型才行
 
 ```rust
 use std::{

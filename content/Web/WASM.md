@@ -1,6 +1,6 @@
 - WebAssembly
-  - [WebAssembly 规范](https://webassembly.github.io/spec/core/index.html)
   - WebAssembly（缩写为 Wasm）是一种基于堆栈式虚拟机的二进制指令集。Wasm 被设计成为一种编程语言的可移植编译目标，并且可以通过将其部署在 Web 平台上，以便为客户端及服务端应用程序提供服务
+  - [WebAssembly 规范](https://webassembly.github.io/spec/core/index.html)
   - WASM Runtime
     - [Wasmer](https://github.com/wasmerio/wasmer)
     - [wasm3](https://github.com/wasm3/wasm3)

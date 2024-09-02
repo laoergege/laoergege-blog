@@ -3,255 +3,233 @@ const FULFILLED = "fulfilled";
 const REJECTED = "rejected";
 
 class Bromise {
-    status = PENDING;
-    result = null;
-    reason = "";
-    cbs = []
+  status = PENDING;
+  result = null;
+  reason = "";
+  cbs = [];
 
-    constructor(executor) {
-        try {
-            executor(this.resolve, this.reject)
-        } catch (error) {
-            this.reject(error)
-        }
+  constructor(executor) {
+    try {
+      executor(this.resolve, this.reject);
+    } catch (error) {
+      this.reject(error);
     }
+  }
 
-    resolve = (value) => {
-        if (this.status === PENDING) {
-            this.status = FULFILLED
-            this.result = value
-            setTimeout(() => {
-                for (const cb of this.cbs) {
-                    this.handleCb(cb)
-                }
-            })
+  resolve = (value) => {
+    if (this.status === PENDING) {
+      this.status = FULFILLED;
+      this.result = value;
+      setTimeout(() => {
+        for (const cb of this.cbs) {
+          this.handleCb(cb);
         }
+      });
     }
+  };
 
-    reject = (reason) => {
-        if (this.status === PENDING) {
-            this.status = REJECTED
-            this.reason = reason
-            setTimeout(() => {
-                for (const cb of this.cbs) {
-                    this.handleCb(cb)
-                }
-            })
+  reject = (reason) => {
+    if (this.status === PENDING) {
+      this.status = REJECTED;
+      this.reason = reason;
+      setTimeout(() => {
+        for (const cb of this.cbs) {
+          this.handleCb(cb);
         }
+      });
     }
+  };
 
-    handleCb = (cb) => {
-        const { onResolve, onReject, resolve, reject } = cb
-        const handler = this.status === FULFILLED ? onResolve : onReject
+  handleCb = (cb) => {
+    const { onResolve, onReject, resolve, reject } = cb;
+    const handler = this.status === FULFILLED ? onResolve : onReject;
 
-        try {
-            const value = handler(this.result)
-            this.resolvePromise(value, resolve, reject)
-        } catch (error) {
-            reject(error)
+    try {
+      const value = handler(this.result);
+      this.resolvePromise(value, resolve, reject);
+    } catch (error) {
+      reject(error);
+    }
+  };
+
+  /**
+   * 只实现标准情况，具体情况请参考
+   * https://promisesaplus.com/#the-promise-resolution-procedure
+   */
+  resolvePromise = (value, resolve, reject) => {
+    if (this === value) {
+      reject(new TypeError("Chaining cycle detected for promise!"));
+    } else if (value instanceof XPromise) {
+      // 返回值穿透
+      value.then(resolve, reject);
+
+      // theable 对象
+    } else if (
+      (value !== null && typeof value === "object") ||
+      typeof value === "function"
+    ) {
+      const then = value.then;
+      try {
+        if (typeof then === "function") {
+          new Promise(then.bind(value)).then(resolve, reject);
         }
+      } catch (error) {
+        reject(error);
+      }
+    } else {
+      // 将 value 作为当前 promise 结果
+      resolve(value);
     }
+  };
 
-    /**
-     * 只实现标准情况，具体情况请参考
-     * https://promisesaplus.com/#the-promise-resolution-procedure
-     */
-    resolvePromise = (value, resolve, reject) => {
-        if (this === value) {
-            reject(new TypeError('Chaining cycle detected for promise!'))
-        } else if (value instanceof XPromise) {
-            // 返回值穿透
-            value.then(resolve, reject)
+  then = (onResolve, onReject) => {
+    // 链式调用
+    return new Promise((resolve, reject) => {
+      const cb = {
+        onResolve:
+          typeof onResolve === "function" ? onResolve : (value) => value, // 值穿透
+        onReject:
+          typeof onReject === "function" ? onReject : (reason) => reason,
+        resolve,
+        reject,
+      };
 
-            // theable 对象
-        } else if (value !== null && typeof value === 'object' || typeof value === 'function') {
-            const then = value.then
-            try {
-                if (typeof then === 'function') {
-                    new Promise(then.bind(value)).then(resolve, reject)
-                }
-            } catch (error) {
-                reject(error)
-            }
-        } else {
-            // 将 value 作为当前 promise 结果
-            resolve(value)
-        }
-    }
+      if (this.status === PENDING) {
+        // 延迟绑定
+        this.cbs.push(cb);
+      } else {
+        setTimeout(() => {
+          this.handleCb(cb);
+        });
+      }
+    });
+  };
 
-    then = (onResolve, onReject) => {
-        // 链式调用
-        return new Promise((resolve, reject) => {
-            const cb = {
-                onResolve: typeof onResolve === 'function' ? onResolve : (value => value), // 值穿透
-                onReject: typeof onReject === 'function' ? onReject : (reason => reason),
-                resolve,
-                reject
-            }
+  catch(onReject) {
+    // 链式调用
+    return this.then(null, onReject);
+  }
 
-            if (this.status === PENDING) {
-                // 延迟绑定
-                this.cbs.push(cb)
-            } else {
-                setTimeout(() => {
-                    this.handleCb(cb)
-                });
-            }
+  finally(cb) {
+    // 链式调用
+    return new Promise((resolve, reject) => {
+      try {
+        // 不接收任何参数，不应用其结果
+        cb();
+        // 值穿透
+        this.then(resolve, reject);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  static resolve(value) {
+    if (value instanceof Bromise) return value;
+    if ("then" in value) return;
+    return new Bromise((resolve) => resolve(value));
+  }
+
+  static reject(reason) {
+    return new Bromise((resolve, reject) => reject(reason));
+  }
+
+  static all(promises) {
+    const result = [];
+
+    return promises
+      .reduce((pre, next) =>
+        pre.then((res) => {
+          result.push(res);
+          return next;
         })
-    }
+      )
+      .then(() => result);
+  }
 
-    catch(onReject) {
-        // 链式调用
-        return this.then(null, onReject);
-    }
-
-    finally(cb) {
-        // 链式调用
-        return new Promise((resolve, reject) => {
-            try {
-                // 不接收任何参数，不应用其结果
-                cb()
-                // 值穿透
-                this.then(resolve, reject)
-            } catch (error) {
-                reject(error)
-            }
+  static allSettled(promises) {
+    return promises.map((p) =>
+      p.then(
+        (value) => ({
+          statue: FULFILLED,
+          value,
+        }),
+        (err) => ({
+          statue: REJECTED,
+          reason: err,
         })
-    }
+      )
+    );
+  }
 
-    static resolve(value) {
-        if (value instanceof Bromise) return value;
-        if ('then' in value) return
-        return new Bromise((resolve) => resolve(value));
-    }
+  static race(promises) {
+    return new Bromise((resolve, reject) => {
+      for (const p of promises) {
+        p.then(
+          (val) => resolve(val),
+          (err) => reject(err)
+        );
+      }
+    });
+  }
 
-    static reject(reason) {
-        return new Bromise((resolve, reject) => reject(reason));
-    }
-}
-
-class Bromise {
-
-
-
-
-
-
-
-
-
-
-
-    static all(promises) {
-        return new Bromise((resolve, reject) => {
-            const result = [];
-            const count = 0;
-            promises.forEach((p, idx) => {
-                p.then(
-                    (value) => {
-                        result[idx] = value;
-                        if (++count === promises.length) {
-                            resolve(result);
-                        }
-                    },
-                    (err) => reject(err)
-                );
-            });
-        });
-    }
-
-    allSettled(promises) {
-        return new Bromise((resolve) => {
-            const result = [];
-            const count = 0;
-            promises.forEach((p, idx) => {
-                p.then(
-                    (value) => {
-                        result[idx] = {
-                            statue: FULFILLED,
-                            value,
-                        };
-                        if (++count === promises.length) {
-                            resolve(result);
-                        }
-                    },
-                    (err) => {
-                        result[idx] = {
-                            statue: REJECTED,
-                            reason: err,
-                        };
-                        if (++count === promises.length) {
-                            resolve(result);
-                        }
-                    }
-                );
-            });
-        });
-    }
-
-    race(promises) {
-        return new Bromise((resolve, reject) => {
-            promises.forEach((p) => {
-                p.then(
-                    (val) => resolve(val),
-                    (err) => reject(err)
-                );
-            });
-        });
-    }
-
-    any(promises) {
-        return new Bromise((resolve, reject) => {
-            const count = 0;
-            promises.forEach((p) => {
-                p.then(
-                    (val) => resolve(val),
-                    () => {
-                        if (++count === promises.length) {
-                            reject("All promises were rejected");
-                        }
-                    }
-                );
-            });
-        });
-    }
+  static any(promises) {
+    return new Bromise((resolve, reject) => {
+      for (const p of promises) {
+        p.then(
+          (val) => resolve(val),
+          (err) => reject(err)
+        );
+      }
+      promises.forEach((p) => {
+        p.then(
+          (val) => resolve(val),
+          () => {
+            if (++count === promises.length) {
+              reject("All promises were rejected");
+            }
+          }
+        );
+      });
+    });
+  }
 }
 
 Bromise.resolve()
-    .then(() => {
-        console.log(0);
-        return Bromise.resolve(4);
-    })
-    .then((res) => {
-        console.log(res);
-    });
+  .then(() => {
+    console.log(0);
+    return Bromise.resolve(4);
+  })
+  .then((res) => {
+    console.log(res);
+  });
 
 Bromise.resolve()
-    .then(() => {
-        console.log(1);
-    })
-    .then(() => {
-        console.log(2);
-    })
-    .then(() => {
-        console.log(3);
-    })
-    .then(() => {
-        console.log(5);
-    })
-    .then(() => {
-        console.log(6);
-    });
+  .then(() => {
+    console.log(1);
+  })
+  .then(() => {
+    console.log(2);
+  })
+  .then(() => {
+    console.log(3);
+  })
+  .then(() => {
+    console.log(5);
+  })
+  .then(() => {
+    console.log(6);
+  });
 
 function executor(resolve, reject) {
-    resolve(100);
+  resolve(100);
 }
 
 let demo = new Bromise(executor);
 
 function onResolve(value) {
-    console.log(value);
-    return value;
+  console.log(value);
+  return value;
 }
 
 // 链式调用
@@ -294,11 +272,11 @@ function onResolve(value) {
 
 // all
 function sleep(time) {
-    return new Bromise((resolve) => {
-        setTimeout(() => {
-            resolve();
-        }, time);
-    });
+  return new Bromise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
 }
 // Bromise.all([
 //     sleep(500).then(e => { console.log(500); return 500 }),
