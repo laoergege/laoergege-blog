@@ -5,7 +5,7 @@ top: 3
 tags:
  - vue
  - diff
-desc: 了解 vue 的 diff 算法过程
+description: 了解 vue 的 diff 算法过程
 ---
 
 # Vue Diff 更新流程

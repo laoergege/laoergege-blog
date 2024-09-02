@@ -1,8 +1,7 @@
-import { hooks } from "./hooks.mjs";
 import fs from "node:fs";
 
-hooks.hook("lint", ({ content, fileURL }) => {
-  const fileLinks = content.match(/\[(.*?)\]\((.*?\.md)\)/g);
+export default ({ content, fileURL }) => {
+  const fileLinks = content.match(/\[(.*?)\]\(\.(.*?).md\)/g);
 
   if (fileLinks) {
     for (let link of fileLinks) {
@@ -10,20 +9,22 @@ hooks.hook("lint", ({ content, fileURL }) => {
       let subfilePath;
 
       try {
-        subfilePath = new URL(_link, fileURL).pathname;
+        subfilePath = new URL(decodeURI(_link), fileURL);
       } catch (error) {
-        console.error(`
-          File not found: ${fileURL} /n ${_link}
-        `);
+        console.error(
+          `${_link} Local link File ${subfilePath} not found in \n ${fileURL}`
+        );
         continue;
       }
 
       // 检查文件是否存在
       fs.stat(subfilePath, (err, stats) => {
         if (err) {
-          console.error(`Not Found： ${fileURL} /n ${_link}`);
+          console.error(
+            `Local link File ${subfilePath} not found in \n ${fileURL} \n ${err}`
+          );
         }
       });
     }
   }
-});
+};

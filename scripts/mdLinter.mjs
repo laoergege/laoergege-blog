@@ -11,10 +11,10 @@ const files = argv["_"];
 const MAX = 5;
 const HooksDir = fileURLToPath(new URL(".", import.meta.url));
 
-const loadHooks = async () => {
-  const paths = await glob(`${HooksDir}/md-lint-*.(js|mjs)`);
-  return Promise.all(paths.map((_path) => import(_path)));
-};
+// const loadHooks = async () => {
+//   const paths = await glob(`${HooksDir}/md-lint-*.(js|mjs)`);
+//   return Promise.all(paths.map((_path) => import(_path)));
+// };
 
 const lintMD = async (file) => {
   let fd;
@@ -66,5 +66,5 @@ const runs = async (tasks) => {
   }
 };
 
-await loadHooks();
+// await loadHooks();
 runs(files.map((f) => () => lintMD(f)));

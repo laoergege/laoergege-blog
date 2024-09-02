@@ -20,7 +20,7 @@ description: 总结 http 缓存、缓存相关控制设置及前端缓存最佳�
   - [缓存设置控制](#缓存设置控制)
     - [通过 response 进行缓存控制](#通过-response-进行缓存控制)
     - [通过 request 进行缓存控制](#通过-request-进行缓存控制)
-  - [前端缓存最佳实践](../前端工程化/前端缓存最佳实践.md)
+  - [前端 HTTP 缓存最佳实践](#前端-http-缓存最佳实践)
   - SWR：stale-while-revalidate
 
 ## Cache-Control
@@ -149,6 +149,15 @@ vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在
 ## SWR：stale-while-revalidate
 
 `stale-while-revalidate` 是一种缓存策略：优先使用缓存，然后再更新缓存。这与以往常见的缓存策略：“缓存 -> 过期 -> 更新 -> 使用” 有所不同，SWR：“缓存 -> 过期 -> 使用 -> 更新”。
+
+## 前端 HTTP 缓存最佳实践
+
+原则：依据是否可 URL 版本化控制，分为永不缓存（协商），或永远缓存
+
+1. 可做 URL 版本化控制的文件：长期缓存 `Cache-Control: public,max-age=31536000,immutable`，如 webpack 模块化打包出来 js、css 等这类能够通过工具自动化打包链接的文件
+   > 切勿打包过大变动时导致缓存失效，需代码分割，进行细粒度控制缓存
+   > 代码分割划分：业务代码、公共代码、第三方库
+2. 不可 URL 版本化控制的文件：协商缓存 `Cache-Control: no-cache` 与 `etag/last-modified`，如 index.html 等
 
 ## 学习参考
 

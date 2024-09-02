@@ -9,7 +9,8 @@
     "serve": "pnpm dlx serve -p 8080 ./.output/public",
     "clean": "rm -rf public/images && nuxi cleanup",
     "prepare": "pnpm run clean && husky install && nuxi prepare",
-    "md-lint": "zx ./scripts/mdLinter.mjs content/**/*.md"
+    "md-lint": "zx ./scripts/mdLinter.mjs content/**/*.md",
+    "lint-md": "zx ./scripts/mdLinter.mjs"
   },
   "lint-staged": {
     "*.md": "zx ./scripts/mdLinter.mjs"
