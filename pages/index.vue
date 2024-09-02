@@ -41,8 +41,8 @@
 import { useDebounceFn } from "@vueuse/core";
 import { useTagsStore } from "~/store/tags";
 import { createSideCtx } from "~/components/Side.vue";
-import { createContentList } from "~/pages/content-list";
-import type { Filter } from "~/pages/content-list";
+import { createContentList } from "~/store/content-list";
+import type { Filter } from "~/store/content-list";
 import { computed, ref } from "vue";
 
 definePageMeta({
@@ -82,10 +82,10 @@ watch(
 // #endregion
 
 // #region SSG 模式下动态生成列表数据和文章
-// if (import.meta.server) {
-//   await new Promise((resolve) => {
-//     setTimeout(() => resolve(null), 1000);
-//   });
-// }
+if (import.meta.prerender) {
+  await new Promise((resolve) => {
+    setTimeout(() => resolve(null), 1000);
+  });
+}
 // #endregion
 </script>

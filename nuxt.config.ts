@@ -28,8 +28,20 @@ export default defineNuxtConfig({
     }
   },
 
+  hooks: {
+    "prerender:routes"(ctx) {
+      console.log(ctx.routes.values())
+    },
+    "build:error"(error) {
+      console.log(error)
+    }
+  },
+
   nitro: {
     errorHandler: "~/error",
+    prerender: {
+      failOnError: false,
+    }
   },
 
   app: {

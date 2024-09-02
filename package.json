@@ -4,12 +4,12 @@
   "description": "Day day learn and keep up",
   "packageManager": "pnpm@9.3.0+sha512.ee7b93e0c2bd11409c6424f92b866f31d3ea1bef5fbe47d3c7500cdc3c9668833d2e55681ad66df5b640c61fa9dc25d546efa54d76d7f8bf54b13614ac293631",
   "scripts": {
-    "clean": "rm -rf public/images && nuxi cleanup",
     "dev": "nuxt dev",
     "build": "nuxi generate",
-    "preview": "pnpm run build && pnpm dlx serve ./.output/public",
-    "md-lint": "zx ./scripts/mdLinter.mjs content/**/*.md",
-    "prepare": "pnpm run clean && husky install && nuxi prepare"
+    "serve": "pnpm dlx serve -p 8080 ./.output/public",
+    "clean": "rm -rf public/images && nuxi cleanup",
+    "prepare": "pnpm run clean && husky install && nuxi prepare",
+    "md-lint": "zx ./scripts/mdLinter.mjs content/**/*.md"
   },
   "lint-staged": {
     "*.md": "zx ./scripts/mdLinter.mjs"

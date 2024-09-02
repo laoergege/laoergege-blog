@@ -4,7 +4,8 @@ import "zx/globals";
 import { open } from "node:fs/promises";
 import { hooks } from "./hooks.mjs";
 import fm from "front-matter";
-import { URL, fileURLToPath } from "node:url";
+import { URL, fileURLToPath, pathToFileURL } from "node:url";
+import path from "node:path";
 
 const files = argv["_"];
 const MAX = 5;
@@ -31,6 +32,7 @@ const lintMD = async (file) => {
       attributes,
       fd,
       filePath: file,
+      fileURL: pathToFileURL(path.resolve(file)),
     };
     await hooks.callHook("lint", resolvedMD);
     await fd.write(resolvedMD.content, 0);
