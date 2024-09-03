@@ -61,8 +61,8 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@docsearch/css": "^3.3.3",
-    "@docsearch/js": "^3.3.3",
+    "@docsearch/css": "^3.6.1",
+    "@docsearch/js": "^3.6.1",
     "@giscus/vue": "^2.2.8",
     "@pinia/nuxt": "^0.5.4",
     "@unhead/vue": "^1.1.25",

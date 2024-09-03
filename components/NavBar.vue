@@ -10,9 +10,7 @@
         </div>
       </li>
       <li>
-        <div class="place-content-center" @click="openSearchDialog">
-          <Icon name="uil:search" />
-        </div>
+        <Search class="place-content-center" />
       </li>
       <!-- 动态菜单 -->
       <li v-if="!isHome">
@@ -59,22 +57,13 @@ import { useSideCtx } from "./Side.vue";
 import Toc from "~/components/Toc.vue";
 import Tags from "~/components/Tags.vue";
 import { resolveComponent, defineComponent } from "vue";
+import Search from "~/components/Search/Search.vue";
 
 const Icon = resolveComponent("Icon");
 
 const router = useRouter();
 const { path, name } = router.currentRoute.value;
 const isPostPage = /\/posts\/.+/.test(path);
-
-// #region 搜索功能
-const openSearchDialog = async () => {
-  // const { dialog } = useDialogCtx();
-  // const searchDialog = dialog.value?.from(SearchDialog);
-  // searchDialog?.open();
-  const results = await searchContent("rust");
-  console.log(results);
-};
-// #endregion
 
 // 置顶
 const scrollToTop = (): void => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -120,17 +109,4 @@ const TocBtn = defineComponent(() => {
   );
 });
 // #endregion
-
-// import docsearch from "@docsearch/js";
-// import "@docsearch/css";
-
-// const docsearchRef = ref();
-// onMounted(() => {
-//   docsearch({
-//     container: docsearchRef.value,
-//     appId: "YOUR_APP_ID",
-//     indexName: "YOUR_INDEX_NAME",
-//     apiKey: "YOUR_SEARCH_API_KEY",
-//   });
-// });
 </script>
