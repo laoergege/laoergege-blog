@@ -2,7 +2,11 @@
 import { useSubscription } from "@vueuse/rxjs";
 import { fromEvent, from, startWith } from "~/node_modules/rxjs";
 import {
-  debounceTime, switchMap, filter, tap, throttleTime
+  debounceTime,
+  switchMap,
+  filter,
+  tap,
+  throttleTime,
 } from "~/node_modules/rxjs/operators";
 import { ref } from "vue";
 import { articleMounted$ } from "~/pages/[...slug].vue";
@@ -10,14 +14,16 @@ import { articleMounted$ } from "~/pages/[...slug].vue";
 export default defineComponent({
   setup() {
     const archors = computed<HTMLElement[]>(() => {
-      return Array.from(articleMounted$.value?.querySelectorAll("h1, h2, h3") ?? [])
-    })
-    const itemsRef = ref<HTMLElement[]>([])
+      return Array.from(
+        articleMounted$.value?.querySelectorAll("h1, h2, h3") ?? []
+      );
+    });
+    const itemsRef = ref<HTMLElement[]>([]);
 
     // #region 滚动自动目录定位
-    if (process.client) {
+    if (import.meta.browser) {
       onMounted(() => {
-        const archorsOffsetTop = archors.value.map(e => e.offsetTop)
+        const archorsOffsetTop = archors.value.map((e) => e.offsetTop);
 
         useSubscription(
           fromEvent(document, "scroll")
@@ -29,47 +35,59 @@ export default defineComponent({
                 itemsRef.value[+idx]?.classList.remove("active");
               }),
               filter(([idx, offsetTop]) => {
-                let d = window.scrollY
-                return d + 2 <= (offsetTop) // 2 误差调整
+                let d = window.scrollY;
+                return d + 2 <= offsetTop; // 2 误差调整
               }),
               throttleTime(10),
               tap(([idx, offsetTop]) => {
                 itemsRef.value[+idx - 1]?.classList.add("active");
-              }),
-            ).subscribe()
-        )
-      })
+              })
+            )
+            .subscribe()
+        );
+      });
     }
     // #endregion
 
-    let i = 0
+    let i = 0;
     const tree = (list: any[]) => {
       return (
         <ul class="whitespace-normal">
-          {list.map(item => {
+          {list.map((item) => {
             return (
               <li>
-                <a href={`#${archors.value[i++]?.id}`} ref={itemsRef} ref_for={true}>{item.text} </a>
+                <a
+                  href={`#${archors.value[i++]?.id}`}
+                  ref={itemsRef}
+                  ref_for={true}>
+                  {item.text}{" "}
+                </a>
                 {Array.isArray(item.children) && tree(item.children)}
               </li>
-            )
+            );
           })}
         </ul>
-      )
-    }
+      );
+    };
     const { toc, page } = useContent();
 
     return () => {
-      i = 0
+      i = 0;
       return archors.value.length ? (
         <ul class="menu menu-md whitespace-normal">
           <li>
-            <a class="menu-title" ref={itemsRef} ref_for={true} href={`#${archors.value[i++]?.id}`}>{page.value.title}</a>
+            <a
+              class="menu-title"
+              ref={itemsRef}
+              ref_for={true}
+              href={`#${archors.value[i++]?.id}`}>
+              {page.value.title}
+            </a>
             {tree(toc.value.links)}
           </li>
-        </ul >
-      ) : null
-    }
-  }
-})
+        </ul>
+      ) : null;
+    };
+  },
+});
 </script>

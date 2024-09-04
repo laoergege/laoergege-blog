@@ -68,6 +68,8 @@ export default defineComponent({
     const { surround } = useContent();
     const [pre, next] = surround.value;
 
+    provide("imgFlag", 0);
+
     return {
       elRef,
       pre,

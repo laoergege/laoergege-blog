@@ -3,7 +3,6 @@ import type { } from "@vite-pwa/nuxt";
 import type { } from "@nuxtjs/tailwindcss";
 import type { } from "@nuxt/content";
 import config from "./app.config";
-import { resolve } from "node:path";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -13,7 +12,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     '@nuxtjs/tailwindcss',
-    // "@nuxt/image",
+    "@nuxt/image",
     "nuxt-icon",
     "@nuxtjs/color-mode",
     // "@vite-pwa/nuxt",
@@ -28,23 +27,10 @@ export default defineNuxtConfig({
     }
   },
 
-  hooks: {
-    "prerender:routes"(ctx) {
-      console.log(ctx.routes.values())
-    },
-    "build:error"(error) {
-      console.log(error)
-    }
-  },
-
   nitro: {
     prerender: {
       failOnError: false,
       ignore: [
-        // (path) => {
-        //   console.log(path)
-        //   return true
-        // }
         /^http/
       ]
     }

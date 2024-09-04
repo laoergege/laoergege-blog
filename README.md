@@ -19,15 +19,12 @@ Thanks for the help of the following projects.
   - [x] 目录导航
 - [x] giscus 评论功能
 - [x] 夜间模式
+- [x] algolia docsearch 文档搜索
+- [x] 图片优化
 - 部署
-  - [ ] 
+  - [x] cloudflare page
 - [x] 工具栏
   - [ ] 图标标亮
   - [ ] 侧边栏
-- [x] 图片优化
-- [x] 通过 GithubActions 自动化部署到 GithubPage
-  - [x] 自定义域名
 - [ ] PWA 安装
   - [ ] SW 缓存
-- [ ] 全文搜索
-- [ ] 用户订阅

@@ -659,7 +659,7 @@ queueJob 中 `isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex` 里 
 
 > 这里有个 [issue](https://github.com/vuejs/vue-next/issues/1801) 上面的示例可以去调试看看。
 
-## [ReactiveEffect.allowRecurse](#Effect.allowRecurse)
+## ReactiveEffect.allowRecurse
 
 ReactiveEffect.allowRecurse 并没有过多的注释，但我们可以从 `packages/runtime-core/src/scheduler.ts` 中发现相关注释，其实 Render ReactiveEffect 就是 SchedulerJob。
 

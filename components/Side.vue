@@ -47,7 +47,6 @@ const SideComponent = defineComponent({
     return {
       checked,
       getComp() {
-        console.log("side comp: ", comp);
         return comp;
       },
       from(c: Component) {
