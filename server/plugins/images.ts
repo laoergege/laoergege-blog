@@ -30,7 +30,11 @@ export default defineNitroPlugin((nitroApp) => {
         const r1 = await fs.stat(d).then(e => false).catch(e => true)
         const r2 = await fs.stat(o).then(e => true).catch(e => false)
         if (r1 && r2) {
-          await fs.symlink(o, d)
+          try {
+            await fs.symlink(o, d)
+          } catch (error) {
+            console.error(error)
+          }
         }
       }
     }
