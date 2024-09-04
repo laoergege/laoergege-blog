@@ -27,13 +27,11 @@ export default defineNitroPlugin((nitroApp) => {
       );
 
       for (const [o, d] of arr) {
-        const r1 = await fs.stat(d).then(e => false).catch(e => true)
-        const r2 = await fs.stat(o).then(e => true).catch(e => false)
-        if (r1 && r2) {
+        if (await fs.stat(o).then(e => true).catch(e => false)) {
           try {
-            await fs.symlink(o, d)
+            await fs.copyFile(o, d)
           } catch (error) {
-            console.error(error)
+            console.log(`The file could not be copied: ${o} \n to \n ${d}`);
           }
         }
       }

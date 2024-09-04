@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxi generate",
-    "build-cp": "nuxi generate && rm -rf /dist/images",
     "serve": "pnpm dlx serve -p 8080 ./.output/public",
     "clean": "rm -rf public/images && nuxi cleanup",
     "prepare": "pnpm run clean && husky install && nuxi prepare",
