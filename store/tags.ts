@@ -4,7 +4,9 @@ import { computedAsync } from "@vueuse/core";
 export const useTagsStore = defineStore('tags', () => {
 
   const tags$ = computedAsync(async () => {
-    const contentQuery = await queryContent("/").only("tags").find();
+    const contentQuery = await queryContent("/").where({
+      "release": { $eq: true }
+    }).only("tags").find();
     const flatTags = contentQuery.flatMap(d => d.tags);
     const stat = flatTags.reduce((res, tag) => {
       if (tag) {

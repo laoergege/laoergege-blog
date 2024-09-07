@@ -44,7 +44,7 @@ export const createContentList = (options: Options) => {
     "title",
     "updateTime",
     "top",
-    "_path"
+    "_path",
   ];
 
 

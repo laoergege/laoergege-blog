@@ -11,6 +11,7 @@ const query = {
   path: "/",
   query: {
     only: ["title", "_path", "release"],
+    where: { release: { $eq: true }}
   },
 };
 </script>
