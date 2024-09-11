@@ -13,7 +13,7 @@ article {
     width: 1px;
     background-color: oklch(var(--b3));
     left: -1em;
-    top: 1.2em;
+    top: 0.9em;
   }
 
   ul {
@@ -29,7 +29,7 @@ article {
         content: "-";
         font-size: 1.3em;
         position: absolute;
-        left: -1em;
+        left: -0.95em;
         color: oklch(var(--nc));
         top: -0.25em;
       }

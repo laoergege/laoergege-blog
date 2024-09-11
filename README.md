@@ -1,14 +1,15 @@
-## Features
+# Introduction
+
+This is my personal blog，using Nuxt for generated static data.
 
 Thanks for the help of the following projects.
 
 - [vue](https://cn.vuejs.org/)
+- [nuxt](https://nuxt.com/)
 - [nuxt-content](https://github.com/nuxt/content)
-- [github](https://github.com/)
 - [daisyui](https://github.com/saadeghi/daisyui)
-- [tailwindcss](https://tailwindcss.com/)
 
-### Progress
+## TODO
 
 - [x] 使用 nuxt-content 构建博客
 - [x] 列表页
