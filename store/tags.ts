@@ -65,10 +65,6 @@ export const useTagsStore = defineStore('tags', () => {
       selectTag(tag);
     }
   }
-  makeTagsByQuery(router.currentRoute.value)
-  router.beforeEach((to) => {
-    makeTagsByQuery(to)
-  })
 
   return {
     tags$,

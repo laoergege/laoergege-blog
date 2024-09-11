@@ -49,8 +49,17 @@ definePageMeta({
   name: "home",
 });
 
+const router = useRouter();
+const route = useRoute()
+
 // #region 分页
 const tagsStore = useTagsStore();
+tagsStore.makeTagsByQuery(router.currentRoute.value)
+router.beforeEach((to) => {
+  if(route.path === to.path) {
+    tagsStore.makeTagsByQuery(to)
+  }
+})
 const filter = computed<Filter>(() => (content) => {
   if (!tagsStore.selectedTags.length) {
     return true;
