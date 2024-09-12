@@ -44,7 +44,9 @@ export default defineNitroPlugin((nitroApp) => {
       // @ts-ignore
       const imgNodes = []
       visit(file.body, (n: any) => n.tag === 'img', (node) => {
-        imgNodes.push(node)
+        if (!(node?.props?.src?.startsWith('http') ?? false)) {
+          imgNodes.push(node)
+        }
       })
 
       // @ts-ignore

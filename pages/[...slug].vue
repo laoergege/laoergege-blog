@@ -59,7 +59,16 @@ export default defineComponent({
   setup() {
     const elRef = ref<HTMLElement>();
     onMounted(() => {
-      mediumZoom(elRef.value?.querySelectorAll("[data-zoomable]"));
+      const zoom = mediumZoom(elRef.value?.querySelectorAll("[data-zoomable]"));
+      // #region Fix: 滚动穿透
+      const body = document.body;
+      zoom.on("open", () => {
+        body.style.overflow = "hidden";
+      })
+      zoom.on("close", () => {
+        body.style.overflow = "auto";
+      })
+      // #endregion
       articleMounted$.emit(elRef.value!);
     });
 
