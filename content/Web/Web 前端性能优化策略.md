@@ -6,7 +6,42 @@ tags:
  - web
 ---
 
-# Web 前端性能优化策略
+# Web 性能优化
+
+- Web 性能优化
+  - [Web 性能指标](#web-性能指标)
+
+## Web 性能指标
+
+- 性能指标分类
+  - 加载速度
+    - Time to First Byte (TTFB)：第一个字节的响应时间
+    - First Paint（FP）首次绘制
+    - [First Contentful Paint 首次内容绘制 (FCP)](https://web.dev/fcp/)：文本、图像首次渲染出现的时间
+      - 图像：图片、背景图、`<svg>` 元素或非白色的 `<canvas>` 元素
+    - [Largest Contentful Paint 最大内容绘制 (LCP)](https://web.dev/lcp/)：视窗内最大的元素绘制的时间
+      - 最大的元素：文本块、图像（图片、背景图）
+      - LCP 与 FCP 区别
+        ![图 12](./images/1650618189088.png)
+    - FMP
+  - 响应速度
+    - [First Input Delay 首次输入延迟 (FID)](https://web.dev/fid/)：标识用户第一次与页面交互到浏览器真正能够开始处理事件处理程序以响应该交互的时间（不包括处理时间）
+      - 如果交互没有事件侦听器怎么办？测量接收到输入事件的时间点与主线程下一次空闲的时间点之间的差值
+      - FID 只关注不连续操作对应的输入事件，如点击、轻触和按键
+    - [Time to Interactive 可交互时间 (TTI)](https://web.dev/tti/)：表示网页首次完全达到可交互状态的时间点
+      - TTI 在主线程至少有五秒钟没有长任务且不超过两个正在处理的网络 GET 请求时，即为最后一个长任务结束时间点，如果没有找到长任务，则相当于 FCP 的时间点。
+        ![](./images/WZM0n4aXah67lEyZugOT.svg)
+    - [Total Blocking Time 总阻塞时间 (TBT)](https://web.dev/tbt/)：FCP 和 TTI 之间发生的每个长任务的阻塞时间总和，用于量化在页面交互性变为可靠前，不可交互程度的严重性
+      ![图 16](./images/xKxwKagiz8RliuOI2Xtc.svg)
+    - Long Task
+  - 页面稳定性
+    - [Cumulative Layout Shift 累积布局偏移 (CLS)](https://web.dev/cls/)
+  - 画面流畅度
+    - 帧率（FPS）
+- 以用户为中心的核心 Web 指标：Core Web Vitals ![图 2](./images/1651501624892.png)
+  > 其中 FID 无法在某些实验工具中测量，如 lighthouse 使用 TBT 代替 FID
+
+## Web 前端性能优化策略
 
 > [性能指标了解](./Web%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.md)
 
@@ -15,27 +50,40 @@ tags:
     - 白屏（FP、FCP）：浏览器发起页面请求后到提交数据阶段，这时页面展示出来的还是之前页面的内容。当渲染进程“确认提交”之后会创建一个空白页面，我们通常把这段时间称为**解析白屏**（这也就是 Web 应用与原生应用体验最大的区别之一，这对用户体验影响很大）。
     - 首屏可交互时间（FID、TBT、TTI）
   - 优化策略
-    - 资源网络请求（可打开 Chrome Devtools 工具的网络面板做性能分析）
+    - 资源网络请求
+      > Chrome Devtools 工具的网络面板做性能分析
       - Queuing：请求排队，因为[资源优先级](#资源优先级)以及 TCP 连接数量限制（HTTP/1.1 浏览器为每个域名最多维护 6 个连接导致的）
-        - 并发请求
+        - 并发连接
           - 域名分片
           - HTTP/2（多路复用）
-        - 请求合并（资源合并）
-          - 图标：雪碧图
-          - 代码打包
+        - 连接复用
+          - HTTP/1 keep-alive
+          - 请求合并/资源合并
+            - 图标：雪碧图
+            - 代码打包
       - TTFB：第一字节时间 ![](./images/timestamp-diagram.svg)
-        - [HTTP 缓存](../计算机网络及HTTP/HTTP%20缓存.md)
         - [preconnect（预连接）、dns-prefetch（DNS 预查询）](https://web.dev/preconnect-and-dns-prefetch/)
-        - HTTP/1 keep-alive
-        - 减少请求数据大小
-          - HTTP/2（头部压缩）
         - 提高服务器性能
       - Content Download：资源下载时间
-        - 减少资源大小：压缩/缩小
-        - 提高宽带吞吐
-        - CDN
-    - 关键渲染路径
-      - 消除[渲染阻塞资源](#渲染阻塞资源)
+        - 减少资源大小
+          - 资源压缩/缩小
+            - 数据压缩
+              - Gzip
+              - Brotli
+            - 代码缩小
+              - 删除空格、注释、混淆
+              - 消除未使用代码
+                - TreeShaking
+                - 代码按需引入：第三方库依赖过大，会给首屏加载带来很大的压力，一般解决方式是按需求引入对应文件。
+              - 发布传输现代化代码
+          - HTTP/2 头部压缩
+        - 提高每个资源的加载速度
+          - 提高宽带吞吐
+          - CDN
+          - [HTTP 缓存](../计算机网络及HTTP/HTTP%20缓存.md)
+    - 关键渲染路径：提高关键请求优先级，缩短关键路径长度
+      - 消除非关键资源的渲染阻塞
+        > [渲染阻塞资源](#渲染阻塞资源)
         - JS
           - defer
             - 异步加载
@@ -45,42 +93,27 @@ tags:
             - 异步加载
             - 加载就绪时运行
         - CSS
+          - [延迟加载非关键 CSS](https://web.dev/defer-non-critical-css/)
           - media: [loadCSS](https://github.com/filamentgroup/loadCSS)
-      - 减少关键资源大小：以减少下载时间（往返次数 RTT）
-        - 数据压缩
-          - Gzip
-          - Brotli
-        - 代码缩小
-          - 删除空格、注释、混淆
-          - 消除未使用代码
-            - TreeShaking
-            - 代码按需引入：第三方库依赖过大，会给首屏加载带来很大的压力，一般解决方式是按需求引入对应文件。
-          - 发布传输现代化代码
+      - 减少关键资源大小
       - 减少[关键资源](#关键资源)数量
         - 延迟加载非关键资源
           - 代码（非关键内容）拆分 + 懒加载
             - [代码拆分分析](#代码拆分分析)
             - [延迟加载非关键 CSS](https://web.dev/defer-non-critical-css/)
           - 图片懒加载
-      - 最小化关键请求链路：提高关键请求优先级，缩短关键路径长度
+      - 最小化关键请求链路
         - 页面结构设计：将 CSS 放在文件头部，JavaScript 文件放在底部
         - 资源内联：通过 HTML 内联 JavaScript、CSS 来移除文件下载时间
           - 内联内容不易过大，否则拆分成单文件，利用缓存
           - 内容大小参考 [TCP 慢启动](https://hpbn.co/building-blocks-of-tcp/#slow-start-restart)，首屏内容保持在 14 KB （压缩）以下，即 1-RTT 最佳 🤔
         - Resource Priority Hints
-          - preload
-          - prefetch
-          - fetchpriority
-    - 渲染模式
-      - CSR
-        - SSR
-        - prerender（预渲染）
 - 交互渲染
   - 指标
     - 帧率
     - 交互响应速度
   - 绘制一帧生命周期  ![](./images/main-thread.svg)
-  - 生成一帧的方式：
+  - 生成新的一帧的方式：
     - [重排(reflow)、重绘(repaint)](#重排重绘)
     - 合成线程直接进行页面合成
   - 优化原则：避免抢占主线程过多时间，让渲染引擎稳定生成更多帧，提高帧率
@@ -97,7 +130,6 @@ tags:
           - 使用 DOMFragment 缓存批量化 DOM 操作
           - 隐藏元素，进行批修改再显示
           - 拷贝元素，进行批修改再替换
-      - 尽可能减少 reflow、repaint 的工作
       - 合理利用分层合成机制：合成操作是在合成线程上完成的，这也就意味着在执行合成操作时，是不会影响到主线程执行的
         - 利用 CSS3 实现动画
         - 将元素提升单独图层：减少重排重绘范围
@@ -194,14 +226,27 @@ HTML、JS、CSS 资源加载行为会导致浏览器关键渲染路径（Critica
 `<script>` tags in the `<head>` which do not have at least one of the following attributes: **async, defer, module**
 Stylesheet `<link>` tags in the `<head>` without a **disabled** attribute or a **media query** which does not match (e.g., print)
 
-## 资源优先级
+##  Resource Priority Hints
+
+- Priority Hints
+  - preload
+    - `<link rel="preload" as>`
+    - as
+      - 提供 as 属性可帮助浏览器根据其类型来设置预获取资源的优先级，设置正确的标头，以及确定资源是否已存在于缓存中。此属性可接受的值包括： script 、style 、font 和 image 等等
+      - 省略 as 属性或使用了无效值，就相当于 XHR 请求，这时浏览器不知道它获取的内容，因此无法确定正确的优先级。它还可能导致某些资源（例如脚本）被获取两次
+  - dns-prefetch
+  - prefetch
+  - preconnect
+  - prerender
+  - fetchpriority
 
 ## 重排、重绘
 
 ![图 2](./images/1655746490005.png)  
 
 1. 重排、重绘分别对应浏览器渲染流程中 Layout、Paint 阶段，Layout 位于Paint 前，重排一定会导致重绘，重绘不一定会导致重排
-2. 浏览器会自动合并更改，在达到某个数量或时间后，会合并为一次 reflow，而 reflow 是渲染页面的重要一步，打开浏览器就一定会至少 reflow 一次，所以我们不可能避免 reflow
+2. 浏览器会自动合并更改，在达到某个数量或时间后，会合并
+3. 为一次 reflow，而 reflow 是渲染页面的重要一步，打开浏览器就一定会至少 reflow 一次，所以我们不可能避免 reflow
 
 > 触发重排重绘的属性列表：https://csstriggers.com/
 
@@ -217,8 +262,6 @@ Stylesheet `<link>` tags in the `<head>` without a **disabled** attribute or a *
 
 ![图 2](./images/da73a240becf5bd248a113b69137c7d1fe234f8af405840808d38dcaae8395a7.png)
 
-布局抖动，是指在一次 JavaScript 执行过程中，多次执行强制布局和抖动操作。
+布局抖动，是指在一次 JavaScript 执行过程中，多次执行强制布局和抖动操作。如此频繁会大大影响当前函数的执行效率，从而阻塞其他渲染任务执行，降低帧率。
 
 ![图 4](./images/c08d5d2e7675be10b62946d898236eb7dbf966fcedb04f99dcd1ab9f76d4f5b6.png)
-
-**如此频繁会大大影响当前函数的执行效率，从而阻塞其他渲染任务执行**。

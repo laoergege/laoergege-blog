@@ -4,7 +4,6 @@ release: true
 tags:
   - 性能优化
   - web
-desc: web 前端能优化知识体系
 ---
 
 # Web 前端性能优化
@@ -25,38 +24,7 @@ desc: web 前端能优化知识体系
   - 调试工具
     - [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
 - [前端性能监控](#前端监控)
-- [性能优化策略](./Web%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5.md)
 
-## Web 性能指标
-
-- 性能指标分类
-  - 加载速度
-    - Time to First Byte (TTFB)：第一个字节的响应时间
-    - First Paint（FP）首次绘制
-    - [First Contentful Paint 首次内容绘制 (FCP)](https://web.dev/fcp/)：文本、图像首次渲染出现的时间
-      - 图像：图片、背景图、`<svg>` 元素或非白色的 `<canvas>` 元素
-    - [Largest Contentful Paint 最大内容绘制 (LCP)](https://web.dev/lcp/)：视窗内最大的元素绘制的时间
-      - 最大的元素：文本块、图像（图片、背景图）
-      - LCP 与 FCP 区别
-        ![图 12](./images/1650618189088.png)
-    - FMP
-  - 响应速度
-    - [First Input Delay 首次输入延迟 (FID)](https://web.dev/fid/)：标识用户第一次与页面交互到浏览器真正能够开始处理事件处理程序以响应该交互的时间（不包括处理时间）
-      - 如果交互没有事件侦听器怎么办？测量接收到输入事件的时间点与主线程下一次空闲的时间点之间的差值
-      - FID 只关注不连续操作对应的输入事件，如点击、轻触和按键
-    - [Time to Interactive 可交互时间 (TTI)](https://web.dev/tti/)：表示网页首次完全达到可交互状态的时间点
-      - TTI 在主线程至少有五秒钟没有长任务且不超过两个正在处理的网络 GET 请求时，即为最后一个长任务结束时间点，如果没有找到长任务，则相当于 FCP 的时间点。
-        ![](./images/WZM0n4aXah67lEyZugOT.svg)
-    - [Total Blocking Time 总阻塞时间 (TBT)](https://web.dev/tbt/)：FCP 和 TTI 之间发生的每个长任务的阻塞时间总和，用于量化在页面交互性变为可靠前，不可交互程度的严重性
-      ![图 16](./images/xKxwKagiz8RliuOI2Xtc.svg)
-    - Long Task
-  - 页面稳定性
-    - [Cumulative Layout Shift 累积布局偏移 (CLS)](https://web.dev/cls/)
-  - 画面流畅度
-    - 帧率（FPS）
-  - 内存占用
-- 以用户为中心的核心 Web 指标：Core Web Vitals ![图 2](./images/1651501624892.png)
-  > 其中 FID 无法在某些实验工具中测量，如 lighthouse 使用 TBT 代替 FID
 
 ## 前端监控
 
@@ -192,17 +160,6 @@ RAIL
 
 
 
-- webpack
-  - 缩小
-    - mini-css-extract-plugin
-    - terser
-  - 文本压缩
-  - 压缩
-    - compression-webpack-plugin
-  - [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
-
-
-
 PRPL 模式
 
 推送 (Push)（或预加载）最重要的资源。
@@ -211,16 +168,7 @@ PRPL 模式
 延迟加载 (Lazy load) 其他路线和非关键资产。
 
 
-问题-原则-策略
 
-
-Priority Hints
-- preload
-- dns-prefetch
-- prefetch
-- preconnect
-- prerender
-- fetchpriority
 
 
 压缩/缩小、延迟加载（既阻塞又不占其他资源宽带）
@@ -234,15 +182,7 @@ Priority Hints
 
 
 
-代码拆分
-- 业务代码
-- 公共代码
-- 第三方代码
-  - 运行时
-  - 库工具
 
-
-- 网络层
 - 资源/包大小
   - 图像
     - 格式
@@ -252,27 +192,12 @@ Priority Hints
       - `image-set`
       - imagesrcset & imagesizes
       - 延迟加载屏幕外图像
-- 代码优化
 
 
 ## Web
 
-- 抓包
-  - whistle
-  - Charles
-- 调试
 
-  - vConsole
-  - eruda
-  - Chrome、Safari 远程调试
 
-- 可视化大屏幕
-  - 定宽高
-  - 等比缩放
-
-- 关键请求链
-  - 预加载 preload
-    - 关键 CSS
 - 页面加载
   - 资源的网络请求
     - 连接复用
@@ -292,42 +217,26 @@ Priority Hints
       - 压缩
   - 关键请求：如何确定请求的优先级以提高速度
   - 初始渲染
-    - 减少阻塞渲染的请求
-      - 将脚本标签放在 body 标签的底部；
-      - 使用 async 异步加载脚本；
-      - 内联小型 JS 或 CSS 代码段（如果它们需要同步加载）
     - 避免阻塞渲染的顺序请求链
       - 内联合并
       - 预加载或预连接
-- 页面交互
-- [延迟加载非关键 CSS](https://web.dev/defer-non-critical-css/)
 
-- devtool
-  - 测量 Performance
-  - 优化 Coverage
+
+
 - 提取关键 css
   - [critical](https://github.com/addyosmani/critical)
 - 异步加载非关键 CSS
   - `<link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="styles.css"></noscript>`
 - 预加载关键资产以提高加载速度
 
-- preconnect
-- prefetch
-- preload
 
 
-- 页面
-  - 加载
-    - 减少资源文件的请求数量
-    - 减小每个资源文件的大小
-      - 懒加载
-        - 按路线拆分代码
-      - 分析大小、组成
-        - 使用 webpack-dashboard 和 webpack-bundle-analyzer 等工具来了解您的应用程序有多大。每隔几个月重新审视一下您应用的整体性能
-        - bundlesize 验证 webpack 资产不超过指定的大小。将它与 CI 集成，以便在应用程序变得太大时得到通知
-    - 提高每个资源的加载速度
-      - 缓存代码
-  - 交互
+
+- Coverage
+- webpack-bundle-analyzer 分析包内容
+- bundlesize 验证 webpack 资产不超过指定的大小
+
+
 - 评审工具
   - Lighthouse
 
@@ -338,8 +247,11 @@ Priority Hints
       - [critters](https://github.com/GoogleChromeLabs/critters)
 
 
-- 预加载 preload：`<link rel="preload">`
-  - 浏览器会根据情况执行诸如 preconnect 和 prefetch 等资源提示。而另一方面，preload 对浏览器来说是强制性的。现代浏览器已经非常擅长对资源进行优先级排序，这就是为什么谨慎使用 preload 并且只预加载最关键的资源那么重要
-  - as
-    - 提供 as 属性可帮助浏览器根据其类型来设置预获取资源的优先级，设置正确的标头，以及确定资源是否已存在于缓存中。此属性可接受的值包括： script 、style 、font 和 image 等等
-    - 省略 as 属性或使用了无效值，就相当于 XHR 请求，这时浏览器不知道它获取的内容，因此无法确定正确的优先级。它还可能导致某些资源（例如脚本）被获取两次
+- JavaScript 性能
+  - tree-shaking
+  - 代码分割
+  - Web Workers
+
+
+- 懒加载
+- 按需加载

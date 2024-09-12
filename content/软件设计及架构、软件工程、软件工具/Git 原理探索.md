@@ -1,81 +1,21 @@
 ---
 discussionID: 1Q6z1Y7g1uUioPvtGrbTC
+release: true
+tags:
+ - git
 ---
-## Table Content
-- [Table Content](#table-content)
-- [Git 用法](#git-用法)
-  - [开始](#开始)
-  - [配置设置](#配置设置)
-  - [基本使用](#基本使用)
-  - [进阶使用](#进阶使用)
-    - [git commit](#git-commit)
+
 - [Git 原理探索](#git-原理探索)
   - [探索 .git 目录](#探索-git-目录)
   - [commit、tree 和 blob 关系](#committree-和-blob-关系)
   - [分离头指针](#分离头指针)
     - [应用场景](#应用场景)
   - [HEAD^ 和 HEAD~ 区别](#head-和-head-区别)
-  - [Git 工作流](#git-工作流)
-- [GitLab](#gitlab)
-- [参考学习](#参考学习)
+  - [参考学习](#参考学习)
 
-## Git 用法
-### 开始
-学习使用命令行时，最好的方式就是多用 help 命令查看其他命令的相关用法。在控制台输入 `git help` 可查看 git 不同命令使用场景:
+# Git 原理探索
 
-![git 命令](https://raw.githubusercontent.com/laoergege/laoergege-blog/master/images/gc.png)
-
-> `git help <command>` 可查看相关命令文档，`git <command> -h` 可在控制台直接简洁打印查看用法。
-
-### 配置设置
-git 使用前必须设置 git 用户信息（邮箱、用户名），主要用于记录提交得用户信息。
-
-```
-git config --list
-
-git config --local user.username "xxx"
-git config --local user.email "xxx"
-```
-
-配置信息有三种不同级别，优先级分别是:  
-local > global > system
-
-### 基本使用
-```
-// 初始化
-git init
-
-// 暂存文件
-git add . // 暂存所有文件
-git add <file> // 仅暂存对应文件
-
-// 提交版本
-git commit -m "xxx"
-```
-
-### 进阶使用
-```
-// 面向工作区 
-git add -u // 只暂存已跟踪文件，避免把工作区没准备好的新文件直接加到暂存区了。
-git rm <file> // 删除文件
-git mv <source> <destination>
-
-// 面向暂存区
-git rm --cached <file> // 取消文件暂存
-git reset --hard <commit> // 重置工作区和暂存区
-
-// 面向储存版本
-```
-**Tip**:
-- 多用 `git status` 查看文件状态，git 会有接下来相关操作提示。
-- 使用 `git log` 和 `gitk` 能够查看提交日志，`gitk` 会打开图形化界面。(windows 下 gitk 界面乱码，可输入配置命令 `git config gui.encoding utf-8`，重新打开即可。)
-
-#### git commit
-- `git commit --amend` 修改最新commit的message。会创建一个将暂存区的内容生成一个commit，再将当前最新的commit替换成新生成的那一个。
-
-## Git 原理探索
-
-### 探索 .git 目录
+## 探索 .git 目录
 一个 `git init` 的初始化项目，隐藏的 `.git` 会有以下基础的目录结构:
 ```
 // power shell
@@ -257,7 +197,7 @@ Hello Git!
 
 可参考阮一峰的 [Git 原理入门](http://www.ruanyifeng.com/blog/2018/10/git-internals.html)，去尝试使用下底层相关命令。
 
-### commit、tree 和 blob 关系
+## commit、tree 和 blob 关系
 在上面操作过程中，我们可能发现一种关系：commit 包含 tree，tree 包含 blob。我们再添加新的文件夹src，里面再加入 index.html 文件然后提交。 
 
 ```shell
@@ -306,7 +246,7 @@ Hello Git!
 
 
 
-### 分离头指针
+## 分离头指针
 分离头指针，即 HEAD 指针没有跟分支进行挂钩。在此 HEAD 上产生的 commit 由于没有跟 `branch` 和 `tag` 挂钩，在 git 眼里，这种 commit 日后都是要被清除的。
 ```
 
@@ -338,23 +278,17 @@ Merge made by the 'recursive' strategy.
 
 进一步操作发现，当切换 master 分支并 merge 刚刚分离头指针提交的版本时，**我们始终在 git commit 树上工作，无论我们 `git merge <commitID> | <branch> | <HEAD>`，所有本质都是操作到对应的 commitID 节点**。
 
-#### 应用场景
+### 应用场景
 那么 `git checkout commitId` 会出现分离头指针的情况，这种情况下比较危险，因为这个时候你提交的代码没有和分支对应起来，当切换到其他分支的时候(比如master分支)，容易丢失代码。
     
 但是分离头指针也有它的应用场景，就是在自己做尝试或者测试的时候可以分离头指针，当尝试完毕没有用的时候可以随时丢弃，但是如果觉得尝试有用，那么可以新建一个分支，使用 `git branch <新分支的名称> commitId `
 
-
-
-### HEAD^ 和 HEAD~ 区别
+## HEAD^ 和 HEAD~ 区别
 一个节点可由多个父节点 merge 而来。
 - HEAD^n 第几个父节点
 - HEAD~n 第前几代父节点（类似树的层级关系）
 
 可组合使用，比如 `HEAD^2~2`：第前二代第2个父节点。
-
-### Git 工作流
-
-## GitLab
 
 ## 参考学习
 

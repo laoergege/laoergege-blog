@@ -38,6 +38,7 @@ tags:
   - 其他
     - instanceof 运算符原理及实现
     - new 运算符原理及实现
+    - Object API
 
 ## JavaScript 的原型机制
 
@@ -314,6 +315,24 @@ C.prototype.constructor = C;
 
 console.log(_new(C, "lys", 123) instanceof A);
 ```
+
+## Object API
+
+- 属性名
+    - 字符串（其他类型会被自动转成字符串）
+    - Symbol 类型
+    - 特殊关键字 `__proto__`
+- 属性排序
+  - 先按照自然数升序进行排序
+  - 然后按照非数字的 String 的加入时间排序
+  - 然后按照 Symbol 的时间顺序进行排序
+- 属性遍历
+  - `for..in` 循环在其自身和继承的属性上进行迭代
+  - 所有其他的键/值获取方法仅对对象本身起作用
+- 属性封印（以下顶层属性）
+  - Object.preventExtensions 阻止添加新的属性
+  - Object.seal 阻止添加、修改删除属性，但可以写入值
+  - Object.freeze 阻止添加、修改删除属性，且不可写入值
 
 ## 参考
 

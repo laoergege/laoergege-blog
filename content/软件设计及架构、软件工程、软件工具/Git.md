@@ -1,16 +1,36 @@
+---
+release: true
+tags:
+ - git
+---
+
 # Git
 
 - Git
-  - setUp
-    - Git SSH Key
-  - 提交规范
-    - 保持主干分支干净，使用快速合并策略
-      - nff
-        - pull --rebase
-    - 保护分支，禁止强力推送
-  - 分支规范
-    - MR & Code Review
-    - Tag & 版本管理
+  - 命令查看
+    - `git help <command>` 可查看相关命令文档
+    - `git <command> -h` 可在控制台直接简洁打印查看用法
+  - 配置设置
+    - 配置信息有三种不同级别，优先级分别是: local > global > system
+    - 身份设置
+      ```shell
+        git config --local user.username "xxx"
+        git config --local user.email "xxx"
+      ```
+    - [多个 Git 身份](https://garrit.xyz/posts/2023-10-13-organizing-multiple-git-identities)
+    - 远程 Git：Git SSH Key
+  - [Git 原理探索](./Git%20原理探索.md)
+  - Git 默认的合并策略
+      - 本地远程分支、远程分支：快进合并策略
+      - 本地远程分支、本地分支：合并提交策略
+        - `pull --rebase` ：变基策略
+    - 合并规范
+      - 保护主分支，禁止强力推送
+      - 使用快速合并策略保持主分支干净
+      - 推送代码前先执行一次 `git pull --rebase`，本地解决冲突
+      - 分支规范
+        - 推送主分支发起 Merge Request 进行 Code Review
+        - 打标签 Tag 管理版本
   - 仓库
   - 分支
     - 分支树的本质是一颗 commidID 树，无论我们 `git checkout <commit> | <branch> | <tag>`，所有本质都是切换到对应的 commitID 节点快照，故 Git 的分支，其实本质上仅仅是指向 Commit 对象的可变指针
@@ -40,48 +60,48 @@
         - 本地分支 master
         - 本地远程分支 origin/master，用于追踪远程分支
         - 远程分支 master
-      - Refspec
-        - 规范 `[+]＜src＞:＜dst＞`
-          - `+` 告诉 Git 强制更新引用，即使不是**快进合并**策略
-        - git 通过这种格式来表示本地分支与远程分支的对应关系。通常，refspec 用于在执行 push 或 fetch 操作时定义本地引用与远程引用之间的对应关系
-          - `git branch -vv`：查看分支映射关系
+      - Refspec `[+]＜src＞:＜dst＞`
+        - `+` 告诉 Git 强制更新引用，即使不是**快进合并**策略
+        - `＜src＞:＜dst＞` 是上下游分支关联
+        - `git branch -vv`：查看分支映射关系
+        - `git branch -u` 设置上游分支
+        - Refspec 用于在执行 push 或 fetch 操作时定义上下游分支，设置 Refspec 关系后可省去该参数
       - `git fetch <repository> <refspec>`：更新本地远程分支
       - `git pull`
-        - git branch -u 
         - git pull 使用给定参数运行 git fetch ，然后根据配置选项或命令行标志，将调用 git rebase 或 git merge 协调不同的分支
-          - 默认值 “remote”和“merge”
         - `git pull = git fetch + git merge`
           - 执行 `git fetch`，范围限定为 HEAD 所指向的本地分支对应的远程分支
           - 内容下载完成后，`git pull` 将进入合并工作流程。将创建一个新的合并提交，并更新 HEAD 以指向新提交
         - `git pull --rebase`：使用变基合并策略而不是合并提交
         - `--depth <depth>`：deepen history of shallow clone
         - `git pull <remote> <refspec>`：从远程获取最新版本并将其合并到本地
-      - `git push`：默认将当前本地分支推送到默认仓库的同名远程分支
-        - `-u`：建立本地分支与远程分支之间的关联，简化同名分支的推送操作，后续操作可以直接 `git push` 简化
-        - `git push <repository>`：将当前本地分支推送到指定仓库的同名远程分支
-          - `git push <repository> <refspec>`：手动指定本地和远程分支的推送
+      - `git push`：将下游分支推送合并到上游分支
+        - `-u`：推送同时设置绑定上游分支
+        - `git push <repository>`：将当前本地仓库分支推送到指定仓库的同名远程分支
+        - `git push <repository> <refspec>`：手动指定本地和远程分支的推送
           - 缺省 `:＜dst＞`： eg，`git push origin master`：推送本地 master 到远程 master 分支
       - 删除远程分支 `git push origin :<branch>`
+  - 历史、diff
   - 恢复
-    - `git checkout <commit> -- <pathspec>`
-    - `git checkout -b <new_branch> <base_branch>`：恢复并创建新的分支
-    - `git restore -- <path>`
+    - `git checkout <commit>` 将整个工作空间恢复到指定的提交状态
+    - `git checkout <commit> -- <pathspec>` 将指定路径的文件恢复到指定的提交状态
+    - `git checkout -b <new_branch> <base_branch>`：创建新的分支
+    - `git restore <path>` 
+    - `git restore --staged <path>`
+    - `git restore --source <path>`
   - Worktrees：创建多个工作区间
-    - `git worktree add -b <new_branch> <worktree/path> <branch>`
+    - `git worktree add <path>`：添加工作空间
+    - `git worktree add -b <new_branch> <path> <base_branch>`：基于指定分支创建新的分支工作空间
     - `git worktree list`：列出工作空间
     - `git worktree remove <worktree>`：删除工作空间
   - Subtree
+    - 不在提交中混合超级和子项目代码的责任在于您
+    - 为子项目在上游贡献代码稍微复杂一些
+    - 您必须了解新的合并策略
+    - 创建 `git subtree add   --prefix=<prefix> <repository> <ref>`
+    - 更新
+    - 修改提交
+    - 远程仓库
+      - git remote add -f tpope-vim-surround https://bitbucket.org/vim-plugins-mirror/vim-surround.git
 - 工具
   - [gitbutler](https://github.com/gitbutlerapp/gitbutler)
-
-## Subtree
-
-- Subtree
-  - 不在提交中混合超级和子项目代码的责任在于您
-  - 为子项目在上游贡献代码稍微复杂一些
-  - 您必须了解新的合并策略
-  - 创建 `git subtree add   --prefix=<prefix> <repository> <ref>`
-  - 更新
-  - 修改提交
-  - 远程仓库
-    - git remote add -f tpope-vim-surround https://bitbucket.org/vim-plugins-mirror/vim-surround.git
