@@ -1,5 +1,4 @@
 ---
-discussionID: 8-5H3rPtuCMyS2Qby2F2s
 release: true
 tags:
  - web
@@ -15,8 +14,8 @@ tags:
       - `fetchpriority="high"`
         - 允许您将资源标记为相对于相同类型资源的“高”和“低”优先级
     - 尽量避免使用 `background-image`：延长请求链（Fetch Html => Fetch CSS => Fetch Image）
-  - 延迟加载非视口内的图像
-    - [延迟加载图像方法](https://web.dev/lazy-loading-images/)
+    - 延迟加载非视口内的图像
+      - [延迟加载图像方法](https://web.dev/lazy-loading-images/)
   - 避免布局偏移
     - 设置 `width` 和 `height` 固定值
     - `<img width height />` + css `{max-width: 100%;height: auto}`

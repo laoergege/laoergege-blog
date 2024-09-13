@@ -5,6 +5,8 @@ tags:
  - git
 ---
 
+# Git 原理探索
+
 - [Git 原理探索](#git-原理探索)
   - [探索 .git 目录](#探索-git-目录)
   - [commit、tree 和 blob 关系](#committree-和-blob-关系)
@@ -12,8 +14,6 @@ tags:
     - [应用场景](#应用场景)
   - [HEAD^ 和 HEAD~ 区别](#head-和-head-区别)
   - [参考学习](#参考学习)
-
-# Git 原理探索
 
 ## 探索 .git 目录
 一个 `git init` 的初始化项目，隐藏的 `.git` 会有以下基础的目录结构:
