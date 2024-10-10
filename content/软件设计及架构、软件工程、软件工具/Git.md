@@ -74,16 +74,15 @@ tags:
         - `+` 告诉 Git 强制更新引用，即使不是**快进合并**策略
         - `＜src＞:＜dst＞` 是上下游分支关联
         - `git branch -vv`：查看分支映射关系
-        - `git branch -u` 设置上游分支
-        - Refspec 用于在执行 push 或 fetch 操作时定义上下游分支，设置 Refspec 关系后可省去该参数
-      - `git fetch <repository> <refspec>`：更新本地远程分支
-      - `git pull`
+        - `git branch -u` 设置上游分支，为默认进行推送（push）和拉取（pull）的分支
+      - `git fetch <repository> <refspec>`：获取指定远程分支到本地分支
+      - `git pull`：将远程分支的更改合并到
         - `git pull = git fetch + git merge`
           - `git pull` 使用给定参数执行 `git fetch`
-          - 内容下载完成后，根据配置选项或命令行标志，将调用 `git rebase` 或 `git merge` 来合并上游分支到本地分支
+          - 内容下载完成后，根据配置选项或命令行标志，将调用 `git rebase` 或 `git merge` 来合并到当前分支
         - `git pull --rebase`：使用变基合并策略而不是合并提交
         - `--depth <depth>`：deepen history of shallow clone
-        - `git pull <remote> <refspec>`：从远程获取最新版本并将其合并到本地
+        - `git pull <repository> <refspec>`：将远程分支的更改合并到指定分支
       - `git push`：将下游分支推送合并到上游分支
         - `-u`：推送同时设置绑定上游分支
         - `git push <repository>`：将当前本地仓库分支推送到指定仓库的同名远程分支

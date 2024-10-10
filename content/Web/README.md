@@ -2,11 +2,7 @@
 discussionID: olsgjiILbPS3xNLtCKrGV
 release: true
 tags:
- - chrome
- - 浏览器原理
  - web
- - html
-desc: 浏览器原理及API知识体系总结
 ---
 # 浏览器原理及API
 

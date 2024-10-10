@@ -25,9 +25,7 @@ tags:
 
 > 这里可能需要提及一点的是多线程和异步的区别关系：线程是系统功能的执行单位，而异步描述的是任务之间的协作关系，我们可以将多条异步的任务流分别应用于多线程当中去并发执行，但并发不一定是用多线程也可以是用单线程，具体要看异步框架/运行时的实现方式。故多线程只是异步编程实现的一种技术实现。
 
-总的来说，异步编程是一种语言级别实现的并发编程模型，旨在非阻塞地执行代码，允许程序在等待长时间操作时继续执行其他任务。
-
-> **异步编程 = 异步运行时 + 并发模型**
+总的来说，异步编程是一种应用程序级别、语言或框架层面实现的并发编程模型，旨在非阻塞地执行代码，允许程序在等待长时间操作时继续执行其他任务。
 
 ## JavaScript 的异步原理：事件循环 + 回调队列
 
@@ -101,7 +99,17 @@ Promise 代表着一种未来的承诺，本质是一种数据结构，可以看
 
 ### Promise 异步错误
 
-我们把 Promise 当作着一种异步结果，当产生错误时，自然不会抛出原 Promise 代码外部，因为语言的异常机制需要在同一调用栈中才能被捕获,而异步代码的执行发生是在另一个调用栈。
+```js
+try {
+  setTimeout(() => throw new Error("Whoops!"));
+} catch (e) {
+  console.log(e) // no happend
+}
+```
+
+异步错误无法被 try catch 直接捕获，因为异步代码的执行不与 try catch 的代码在同一个调用栈中。
+
+如果我们把 Promise 当作着一种异步结果，当产生错误时，自然不会抛出原 Promise 代码外部。
 
 看个例子：
 
@@ -202,7 +210,7 @@ async function g() {
 }
 ```
 
-把async 函数转成生成器：
+把 async 函数转成生成器：
 
 - function* 相当于 async
 - yield 相当于 await
@@ -215,28 +223,32 @@ const _g = async(function* () {
     return res;
 })
 
-export function async(gen) {
-    function _async() {
-        return new Promise((resolve, reject) => {
-            const g = gen()
-            const next = (val) => {
-                try {
-                    const { value, done } = g.next(val)
-                    if (done) {
-                        resolve(value)
-                    } else {
-                        Promise.resolve(value).then(next, reject)
-                    }
-                } catch (error) {
-                    reject(error)
+function async(gen) {
+  function _async() {
+      return new Promise((resolve, reject) => {
+          const g = gen()
+          const next = (val, key = "next") => {
+              try {
+                const { value, done } = g[key](val)
+
+                if (done) {
+                    resolve(value)
+                } else {
+                    Promise.resolve(value).then(
+                        (val) => next(val),
+                        (e) => next(e, "throw")
+                    )
                 }
-            }
+              } catch (error) {
+                  reject(error)
+              }
+          }
 
-            next()
-        })
-    }
+          next()
+      })
+  }
 
-    return _async
+  return _async
 }
 ```
 

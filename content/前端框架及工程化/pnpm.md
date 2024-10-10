@@ -4,27 +4,32 @@ release: true
 tags:
   - pnpm
   - 包管理
-description: 记录 pnpm 的核心原理，如依赖机制等、工程上 Monorepo 的搭配方案、一些 npm/pnpm 用法...
 ---
 
 # Pnpm
 
 - Pnpm
+  - 特性
+    - 节省磁盘：全局安装、而且基于内容寻址的方式可以做到同个包不同版本内容文件只需差异存储
+    - 安装速度快：软链构建依赖结构、然后硬链到全局存储
+    - 消除幻影依赖
   - 依赖管理
     - [依赖安装机制](#依赖安装机制)
       - [半严格模式](#半严格模式)
-    - auto-install-peers=true
-  - 存储机制
-    - store
-    - 基于内容寻址
-    - hardlink
+      - pkg.peerDependencies
+        - 声明需要一个和宿主环境对等的包
+          - 如果用户显式依赖了核心库，则可以忽略各插件的 peerDependency 声明；
+          - 如果用户没有显式依赖核心库，则按照插件 peerDependencies 中声明的版本将库安装到项目根目录中；
+          - 当用户依赖的版本、各插件依赖的版本之间不相互兼容，会报错让用户自行修复；
+    - 存储机制
+      - store
+      - 基于内容寻址
   - [Monorepo](#monorepo)
     - [pnpm + turborepo + changeset](#pnpm--turborepo--changeset)
-  - npm scripts
 
 ## 依赖安装机制
 
-pnpm 对比 yarn/npm
+pnpm 对比 yarn/npm 的依赖结构
 
 - yarn/npm
   - npm@3 之前： `嵌套结构`
@@ -96,40 +101,39 @@ shamefully-hoist=true
 
 ## Monorepo
 
-Monorepo 的设计及需求要点总结：
-
-- 项目管理
-  - *引用约束：对项目间的引用、约束进行管理*
-- 依赖管理
-  - 工程依赖
-  - 项目依赖
-    - 本地 link 模式
-    - 线上版本模式
-- 任务管理
-  - 编排
-    - 拓扑：根据项目依赖关系，构建一个有向无环图（DAG）进行拓扑排序并执行过程
-    - 过滤
-    - 并行
-    - 增量
-      - How to Check Change?
-        - 文件监听
-        - 产物 Hash
-      - 缓存
-        - 本地缓存
-        - 分布式缓存
-  - 监听模式
-- 发包
-  - 版本管理 version
-    - 版本语义 semver
-    - 发版模式（monorepo 模式特有）
-      - independent
-      - fixed
-  - 发版日志 changelog
-  - 包的发布 publish
-- 流行组合方案
-  - pnpm（依赖管理 + 任务管理） + changeset（发包）
-  - pnpm（依赖管理）+ [rush](https://github.com/microsoft/rushstack)（任务管理 + 发包）
-  - pnpm（依赖管理）+ Turborepo（任务管理） + changeset（发包）
+- 架构设计
+  - 项目管理
+    - 引用约束：对项目间的引用、约束进行管理
+    - 开发约束
+  - 依赖管理
+    - 工程依赖
+    - 项目依赖
+      - 本地 link 模式
+      - 线上版本模式
+  - 任务管理
+    - 编排
+      - 拓扑：根据项目依赖关系，构建一个有向无环图（DAG）进行拓扑排序并执行过程
+      - 过滤
+      - 并行
+      - 增量
+        - How to Check Change?
+          - 文件监听
+          - 产物 Hash
+        - 缓存
+          - 本地缓存
+          - 分布式缓存
+    - 监听模式
+  - 版本管理
+    - 发布模式
+      - independent 独立
+      - fixed 固定
+- 开源工具
+  - 任务管理
+    - [lage](https://github.com/microsoft/lage)
+    - [rush](https://github.com/microsoft/rushstack)
+  - 版本管理
+    - [beachball](https://github.com/microsoft/beachball)
+    - changeset
 
 ## pnpm + turborepo + changeset
 

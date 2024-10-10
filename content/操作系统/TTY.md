@@ -2,19 +2,18 @@
 discussionID: KK6rIsF91nKG4e8yK8Q2-
 release: true
 tags:
-  - tty
-  - linux
-  - unix
   - 操作系统
 ---
 
 # TTY
 
-- TTY(TeleTYpewriter)，电传打字机，后连接到计算机作为输入输出的终端设备，操作系统内核内置了 TTY 驱动  ![图 1](./images/1aac543024f545443e7b5332931ac12c1bf67271863b8b4ca51dd886017a6a85.png)
-  - line discipline
-    - 行编辑：如退格、擦除字、清空行等
-    - 字符缓存
-      - 当按下回车键时，缓冲的数据被传递给与 TTY 相关的前台用户进程
+- TTY(TeleTYpewriter)，电传打字机，作为输入输出的终端设备连接到计算机进行交互，后泛指计算机的文本命令行终端  ![图 1](./images/1aac543024f545443e7b5332931ac12c1bf67271863b8b4ca51dd886017a6a85.png)
+- TTY 驱动
+  - line discipline 是一个逻辑组件
+    - 可通过 `stty` 查看设置 TTY 的特征和 line discipline 规则
+    - line discipline 主要有以下功能：
+      - 缓存字符，回车发送给与 TTY 相关的前台用户进程
+      - 拦截处理一些特殊的功能键，发送进程信号，如当用户按 `CTRL+c` 时，它向连接到 PTY slave 的进程发送 `kill -2（SIGINT）` 信号
   - 会话管理
     - 同时运行多个程序
 - 随着硬件终端逐渐演化成了软件的概念，出现了软件仿真终端，称为**终端模拟器**（terminal emulator），其直接运行在内核态。就像过去的物理终端一样，它监听来自键盘的事件将其发送到 TTY 驱动，并从 TTY 驱动读取响应，通过显卡驱动将结果渲染到显示器上 ![图 2](./images/fa2f03d5301daa28808053d63b7adcc85af52666da788f429fa8b9fe2d0fe6b2.png)
@@ -47,11 +46,6 @@ tags:
     - fork 一个 shell 子进程，并让 shell 持有 PTY slave 的设备文件 `/dev/pts/[n]`，即让其标准输入、标准输出和标准错误都设置为 PTY slave
     - PTY master 和 PTY slave 之间通过 TTY 驱动会话交流
     - 输入的命令由 shell 子进程执行
-- TTY 驱动包含的 line discipline 是一个逻辑组件
-  - 可通过 `stty` 查看设置 TTY 的特征和 line discipline 规则
-  - line discipline 主要有以下功能：
-    - 缓存字符，回车发送
-    - 拦截处理一些特殊的功能键，发送进程信号，如当用户按 `CTRL+c` 时，它向连接到 PTY slave 的进程发送 `kill -2（SIGINT）` 信号
 
 ## 远程终端
 
@@ -59,7 +53,7 @@ tags:
 >
 > ![图 4](./images/1663783077209.png)
 
-## 参考
+## 学习参考
 
 - [理解 Linux 终端、终端模拟器和伪终端](https://mazhen.tech/p/%E7%90%86%E8%A7%A3linux-%E7%BB%88%E7%AB%AF%E7%BB%88%E7%AB%AF%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%92%8C%E4%BC%AA%E7%BB%88%E7%AB%AF/)
 - [The TTY demystified](http://www.linusakesson.net/programming/tty/)

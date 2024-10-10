@@ -3,7 +3,6 @@ discussionID: PQ-GvOdyshuZdMLo6iSc-
 release: true
 tags:
   - javascript
-  - 面向对象编程
 ---
 
 # JavaScript 对象
@@ -14,7 +13,8 @@ tags:
       - 在 JavaScript 中，对象的状态和行为其实都被抽象为了**属性**
       - 对象是一个**属性集合**，属性是一个**key-value 的索引结构**
       - 运行时对象具有动态修改属性的能力
-    - 属性（key-value）
+    - 属性
+      - `key-value` 结构
       - 属性分为数据属性和访问器属性两类（一个属性仅可以是其中一种类型）
         - 数据属性
           - `[[Value]]`，就是属性的值
@@ -26,15 +26,16 @@ tags:
           - `[[Set]]`，在设置属性值时被调用
           - `[[Enumerable]]`，可枚举
           - `[[Configurable]]`，决定该属性能否被删除或者改变特征值
-      - 隐藏类
-        - [Object Structure in JavaScript Engines](https://blog.frontend-almanac.com/js-object-structure?utm_source=ECMAScript.news&utm_medium=Weekly+Newsletter&utm_campaign=2024-04-09)
-        - [JavaScript engine fundamentals: Shapes and Inline Caches](https://mathiasbynens.be/notes/shapes-ics)
-    - [原型机制](#javascript-的原型机制)
-      - 原型链
+      - [属性操作](#属性操作)
+    - [原型及原型链](#javascript-的原型机制)
   - JavaScript 面向对象编程
     - [new + 构造器模拟“类”行为](#new--构造器模拟类行为)
     - [ES6 中的类 class](#es6-中的类-class)
     - [继承](#继承)
+  - 深入
+    - 隐藏类
+      - [Object Structure in JavaScript Engines](https://blog.frontend-almanac.com/js-object-structure?utm_source=ECMAScript.news&utm_medium=Weekly+Newsletter&utm_campaign=2024-04-09)
+      - [JavaScript engine fundamentals: Shapes and Inline Caches](https://mathiasbynens.be/notes/shapes-ics)
   - 其他
     - instanceof 运算符原理及实现
     - new 运算符原理及实现
@@ -78,6 +79,7 @@ console.log(Object.prototype.toString.call(o)); // '[object MyObject]'
 ```
 
 ```js
+// es6 写法
 class ValidatorClass {
   get [Symbol.toStringTag]() {
     return "Validator";
@@ -316,12 +318,13 @@ C.prototype.constructor = C;
 console.log(_new(C, "lys", 123) instanceof A);
 ```
 
-## Object API
+## 属性操作
 
-- 属性名
-    - 字符串（其他类型会被自动转成字符串）
-    - Symbol 类型
-    - 特殊关键字 `__proto__`
+- 属性分类
+  - 字符串（其他类型会被自动转成字符串）
+  - Symbol 类型
+  - *特殊关键字 `__proto__`*
+- `in` 对象属性存在判断，包含所有属性类型
 - 属性排序
   - 先按照自然数升序进行排序
   - 然后按照非数字的 String 的加入时间排序
@@ -329,6 +332,9 @@ console.log(_new(C, "lys", 123) instanceof A);
 - 属性遍历
   - `for..in` 循环在其自身和继承的属性上进行迭代
   - 所有其他的键/值获取方法仅对对象本身起作用
+    - Object.keys/Object.values/Object.entries
+      - 遍历不可枚举 Object.getOwnPropertyNames
+    - Symbol 属性遍历 Object.getOwnPropertySymbols
 - 属性封印（以下顶层属性）
   - Object.preventExtensions 阻止添加新的属性
   - Object.seal 阻止添加、修改删除属性，但可以写入值

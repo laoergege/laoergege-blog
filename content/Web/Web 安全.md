@@ -3,17 +3,9 @@ discussionID: flZWE34OY4dICBvd4Yka7
 release: true
 tags:
  - web
- - 安全
 ---
-# Web 安全
 
-web 安全
-  - XSS
-  - CSRF
-    - 防御方案
-      - 请求来源限制，比如限制 HTTP Referer 才能完成操作
-      - token 验证机制，比如请求数据字段中添加一个 token，响应请求时校验其有效性
-      - 用户操作限制，比如验证码
+# Web 安全
 
 - Web 安全
   - 页面安全
@@ -24,17 +16,13 @@ web 安全
         - [防止 XSS 攻击](#防止-csrf-攻击)
       - 跨域资源共享（CORS）
       - 跨文档通信机制（window.postMessage）
-    - [CSRF 攻击与 cookie 机制](#csrf-攻击与-cookie-机制)
+    - [CSRF](#csrf-攻击跨站请求伪造)
       - [防止 CSRF 攻击](#防止-csrf-攻击)
-  - 网络安全
-    - [HTTPS](../计算机网络及HTTP/HTTPS.md)：解决 HTTP 劫持（明文传输，内容篡改）
-      - 点击嵌套劫持
-      - 广告
+  - 网络安全 [HTTPS](../计算机网络及HTTP/HTTPS.md)：解决 HTTP 劫持（明文传输，内容篡改）
   - 浏览器系统安全
     - 多进程架构 + 渲染进程沙箱机制（将操作系统和渲染进程进行隔离，通过 IPC 来通信的）
       ![图 12](./images/1642869618173.png)  
     - [站点隔离策略](#站点隔离策略)：将不同站点隔离在不同沙箱（进程）内
-  - Web 身份认证及授权
 
 ## 同源策略
 
@@ -94,14 +82,9 @@ XSS 攻击有两大要素：
   - cookie 使用 HttpOnly 属性
   - 验证码：防止脚本冒充用户提交危险操作
 
-### 推荐阅读
-
-- [前端安全系列（一）：如何防止XSS攻击？](https://tech.meituan.com/2018/09/27/fe-security.html)
-- [AwesomeXSS](https://github.com/s0md3v/AwesomeXSS)
-
 ## CSRF 攻击（跨站请求伪造）
 
-CSRF（Cross-site request forgery），称为“跨站请求伪造”，攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。
+CSRF（Cross-site request forgery），称为“跨站请求伪造”，攻击原理：**浏览器发起请求自动携带 Cookie，而 Cookie 通常拥有身份凭证信息**，因此如果攻击者能够通过某种手段欺骗用户的浏览器，让请求携带了正确的 Cookie，那么服务器就会认为这是用户本人发起的操作，从而允许攻击者执行一些敏感操作。
 
 CSRF的特点
 
@@ -151,16 +134,13 @@ CSRF的特点
 
 ### 防止 CSRF 攻击
 
-> 根据 CSRF 的特点进行防备
-
 - CSRF（通常）发生在第三方域名，对第三方域限制
   - 验证请求的来源站点（通过 HTTP 请求头中的 Referer 和 Origin 属性）
   - 充分利用好 Cookie 的 SameSite 属性
     - Cookie 正是浏览器和服务器之间维护登录状态的一个关键数据，通常 CSRF 攻击都是从第三方站点发起的，要防止 CSRF 攻击，我们最好能实现从第三方站点发送请求时禁止 Cookie 的发送
-- CSRF 攻击不是将恶意代码注入用户的页面，不能获取页面数据信息
-  - 重要接口加验证参数
-    - CSRF Token
-    - 图片、短信验证
+- CSRF 攻击不是将恶意代码注入用户的页面，不能获取页面数据信息。在重要接口加验证参数
+  - CSRF Token
+  - 短信验证
 
 ## 站点隔离策略
 

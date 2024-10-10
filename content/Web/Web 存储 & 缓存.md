@@ -84,24 +84,3 @@ document.cookie = encodeURIComponent("name") + '=' + encodeURIComponent("value")
 ## 第三方 Cookie
 
 如果 cookie 的注册域与当前页面 URL 的 [eTLD+1](https://web.dev/same-site-same-origin/) 相匹配，则认为 cookie 与页面来自同一站点，通常称为第一方 cookie，不同站点的则称为第三方 cookie。
-
-### 行为跟踪
-
-使用 Cookie 最大的优势是可跨站设置、同站共享、跨站请求自动携带。这也是为什么利用 Cookie 进行用户行为跟踪最佳选择：
-
-1. 通过透明小图片等方法访问第三方网站以便植入 Cookie 标记身份、记录行为
-2. 通过跨站请求自动携带第三方 Cookie 数据传送到第三方网站
-
-> [附录：第三方 cookie](https://zh.javascript.info/cookie#fu-lu-di-san-fang-cookie)
-
-> [当浏览器全面禁用三方 Cookie](https://mp.weixin.qq.com/s?__biz=Mzk0MDMwMzQyOA==&mid=2247490361&idx=1&sn=ebc8dcc4d095cc7ba748827dff158f2b&source=41#wechat_redirect)
-
-当第三方 Cookie 被全面禁止时，
-
-1. 使用一方 Cookie 替代三方 Cookie
-2. Cookie 数据携带改成请求参数
-3. 一方 Cookie 的数据无法获取，将数据改为后端记录
-
-## 参考
-
-- [Cookie，document.cookie](https://zh.javascript.info/cookie)

@@ -3,8 +3,6 @@ discussionID: I-lMm_wmXSH2zqtOkoqsg
 release: true
 tags:
  - javascript
- - 语法
-description: JavaScript 语法结构体系
 ---
 
 # JavaScript 语法结构
@@ -28,50 +26,45 @@ description: JavaScript 语法结构体系
   - 语法
     - 指令序言（JavaScript 的指令序言是只有一个字符串直接量的表达式语句，它只能出现在脚本、模块和函数体的最前面）
       - `use strict`
-    - 语句
-      - 变量声明
-        - var
-        - function
-        - let
-        - const
-        - class
-      - [表达式](#表达式)及运算符
-      - 赋值语句
-        - Rest 参数与 Spread 语法
-          - Spread 语法只适用于可迭代对象，内部使用了迭代器来收集元素，与 `for..of` 的方式相同
-        - 解构赋值
-          - 数组解构
-            - 默认值、逗号忽略元素、剩余参数 `let [item1 = default, item2, , , ...rest] = array`
-            - 等号右侧可以是任何可迭代对象
-            - 赋值等号左侧的任何内容
-          - 对象解构 
-            - 默认值、重新命名、剩余参数 `let {prop : varName = default, ...rest} = object`
-          - 嵌套解构
-      - 控制流
-        - 分支
-          - if/else
-          - switch
-        - 循环
-          - while/do、while/for
-          - for
-            - 属性枚举：for in
-            - 迭代器模式
-              - for of
-              - for await of
-          - 递归
-        - 跳转 
-          - try-catch-finally
-            - 即使在 try 中出现了 return，finally 中的语句也一定要被先执行
-            - finally 中的 return 会覆盖 try 中的 return
-      - 函数
-        - 普通函数/成员函数
-        - 箭头函数
-        - 生成器函数（generator）
-        - 异步函数（async）
-        - 异步生成器函数
-      - JavaScript 有两种源文件
-        - 脚本
-        - [模块](./JavaScript%20模块.md)
+    - 变量声明
+      - var
+      - function
+      - let
+      - const
+      - class
+    - [表达式](#表达式)及运算符
+    - 赋值语句
+      - 解构赋值
+        - 数组解构
+          - 默认值、逗号忽略元素、剩余参数 `let [item1 = default, item2, , , ...rest] = array`
+          - 等号右侧可以是任何可迭代对象，包括数组、字符串、Map、Set、类数组对象、Generator 对象、arguments 对象等
+        - 对象解构 
+          - 默认值、重新命名、剩余参数 `let {prop : varName = default, ...rest} = object`
+        - 嵌套解构 `let {a: { b }} = {a: {b:1}}`
+    - 控制流
+      - 分支
+        - if/else
+        - switch
+      - 循环
+        - while/do、while/for
+        - for
+          - 属性枚举：for in
+          - 迭代器模式
+            - for of
+            - for await of
+      - 跳转 
+        - try-catch-finally
+          - 即使在 try 中出现了 return，finally 中的语句也一定要被先执行
+          - finally 中的 return 会覆盖 try 中的 return
+    - 函数
+      - 普通函数/成员函数
+      - 箭头函数
+      - 生成器函数（generator）
+      - 异步函数（async）
+      - 异步生成器函数
+    - JavaScript 有两种源文件
+      - 脚本
+      - [模块](./JavaScript%20模块.md)
 
 ## 自动插入分号规则
 
