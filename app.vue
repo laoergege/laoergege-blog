@@ -11,8 +11,12 @@ useHead({
   link: [
     {
       rel: "icon",
-      href: "/avatar.webp",
-      type: "image/webp",
+      href: "/favicon.ico",
+      sizes: "48x48"
+    },
+    {
+      rel: "apple-touch-icon",
+      href: "/apple-touch-icon-180x180.png",
     },
   ],
 });

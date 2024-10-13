@@ -21,7 +21,7 @@ description: 总结 http 缓存、缓存相关控制设置及前端缓存最佳�
     - [通过 response 进行缓存控制](#通过-response-进行缓存控制)
     - [通过 request 进行缓存控制](#通过-request-进行缓存控制)
   - [前端 HTTP 缓存最佳实践](#前端-http-缓存最佳实践)
-  - SWR：stale-while-revalidate
+  - SWR（stale-while-revalidate）：是一种缓存策略：优先使用缓存，然后再更新缓存
 
 ## Cache-Control
 
@@ -146,9 +146,6 @@ vary 虽然不是 cache-control 的属性值，是内容协商的结果，带在
 
 ![图 9](./images/7d679f31875e7cfb7cc3f3f99efc6030698374dbedcc437da771db25f34c7551.png)
 
-## SWR：stale-while-revalidate
-
-`stale-while-revalidate` 是一种缓存策略：优先使用缓存，然后再更新缓存。这与以往常见的缓存策略：“缓存 -> 过期 -> 更新 -> 使用” 有所不同，SWR：“缓存 -> 过期 -> 使用 -> 更新”。
 
 ## 前端 HTTP 缓存最佳实践
 

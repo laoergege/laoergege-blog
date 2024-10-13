@@ -5,16 +5,16 @@
         v-for="article in list"
         :key="article._path"
         class="place-main flex flex-col gap-2">
-        <NuxtLink :to="article._path">
+        <NuxtLink :to="article._path" target="_blank">
           <h2 class="text-xl sm:text-2xl font-semibold hover:text-secondary">
             {{ article.title }}
           </h2>
         </NuxtLink>
-        <p class="flex gap-2">
+        <p class="flex gap-2 flex-wrap">
           <span
             class="link link-hover badge badge-md hover:text-secondary"
             :class="{
-              'badge-ghost': !tagsStore.isSelected(tag),
+              'badge-ghost': tagsStore.isSelected(tag),
             }"
             v-for="tag in article.tags"
             @click="tagsStore.selectTagAndMarkURLQuery(tag)">

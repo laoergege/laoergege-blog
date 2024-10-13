@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxi generate",
-    "serve": "pnpm dlx serve -p 8080 ./.output/public",
+    "dev-build": "DEV_BUILD=true nuxt generate",
+    "serve": "pnpm exec serve -p 8080 ./.output/public",
+    "preview": "pnpm run dev-build && pnpm run serve",
     "clean": "rm -rf public/images && nuxi cleanup",
     "prepare": "pnpm run clean && husky install && nuxi prepare",
     "md-lint": "zx ./scripts/mdLinter.mjs",
-    "lint-md": "zx ./scripts/mdLinter.mjs"
+    "lint-all-md": "zx ./scripts/mdLinter.mjs content/*.md content/**/*.md"
   },
   "lint-staged": {
     "*.md": "zx ./scripts/mdLinter.mjs"
@@ -41,6 +43,7 @@
     "@nuxt/image": "^1.8.0",
     "@nuxtjs/color-mode": "^3.4.1",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@vite-pwa/assets-generator": "^0.2.6",
     "@vite-pwa/nuxt": "^0.6.0",
     "autoprefixer": "^10.4.14",
     "daisyui": "^4.12.10",
@@ -53,6 +56,7 @@
     "nuxt": "^3.13.0",
     "nuxt-icon": "^0.6.10",
     "ohash": "^1.0.0",
+    "serve": "^14.2.3",
     "unified": "^11.0.4",
     "unist-util-visit": "^4.1.2",
     "zx": "^7.2.1"
@@ -73,6 +77,11 @@
     "pinia": "^2.2.2",
     "rxjs": "^7.8.1",
     "vue": "^3.5.0",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "workbox-cacheable-response": "^7.1.0",
+    "workbox-expiration": "^7.1.0",
+    "workbox-recipes": "^7.1.0",
+    "workbox-routing": "^7.1.0",
+    "workbox-strategies": "^7.1.0"
   }
 }

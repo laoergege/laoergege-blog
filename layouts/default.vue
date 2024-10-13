@@ -1,4 +1,5 @@
 <template>
+  <VitePwaManifest />
   <NuxtLoadingIndicator />
   <div class="drawer">
     <main class="drawer-content flex flex-col min-h-screen col-start-1">
@@ -9,12 +10,16 @@
     <ClientOnly>
       <Side ref="side" />
     </ClientOnly>
+    <ClientOnly>
+      <PWA/>
+    </ClientOnly>
   </div>
 </template>
 
 <script setup>
 import SideNavBar from "~/components/NavBar.vue";
 import Side, { useSideCtx } from "~/components/Side.vue";
+import PWA from "~/components/PWA.vue";
 
 let { side } = useSideCtx()
 </script>

@@ -1,5 +1,6 @@
 <template>
   <Giscus
+    v-if="discussionID"
     id="comments"
     repo="laoergege/laoergege-blog"
     repoId="MDEwOlJlcG9zaXRvcnkxMjM4OTQ4MDE="
@@ -26,7 +27,7 @@ const compTheme = computed(() => {
 });
 
 const { page } = useContent();
-const { discussionID, _path } = page.value;
+const { discussionID, _path } = page.value ?? {};
 
 useHead({
   meta: [

@@ -1,46 +1,38 @@
 <template>
   <NuxtLayout>
     <div class="main-container box-content mt-8 gap-4">
-      <div class="place-main">
-        <article ref="elRef">
-          <ContentDoc>
-            <template #not-found>
-              <div class="flex flex-col items-baseline">
-                <p>
-                  <Icon name="tabler:error-404" size="88" />
-                </p>
-                <p class="font-bold pl-3">
-                  文章找不到或已删除
-                  <Icon name="material-symbols:delete-forever" />
-                </p>
-              </div>
-            </template>
-            <template v-slot:default="{ doc }">
-              <ContentRenderer :value="doc" class="slide-enter-content" />
-            </template>
-          </ContentDoc>
-        </article>
-        <div class="divider">其他文章</div>
-        <div class="flex flex-wrap">
-          <NuxtLink
-            v-if="pre"
-            :to="pre._path"
-            class="link link-hover blod my-2">
-            <Icon name="uil:angle-left" />{{ pre.title }}
-          </NuxtLink>
-          <NuxtLink
-            v-if="next"
-            :to="next._path"
-            class="link link-hover ml-auto my-2">
-            {{ next.title }}
-            <Icon name="uil:angle-right" />
-          </NuxtLink>
-        </div>
-        <div class="divider">交流区</div>
-        <ClientOnly fallback-tag="span" fallback="加载中...">
-          <Comments />
-        </ClientOnly>
-      </div>
+      <article class="place-main" ref="elRef">
+        <ContentDoc :key="contentRefreshKey">
+          <template #not-found>
+            <p class="font-bold">
+              {{ appStore.isOnline ? "文章找不到或已删除" : "您目前处于离线状态，该页面暂时无法访问。"}}
+            </p>
+          </template>
+          <template v-slot:default="{ doc }">
+            <ContentRenderer :value="doc" class="slide-enter-content"/>
+            <div class="divider">其他文章</div>
+            <div class="flex flex-wrap">
+              <NuxtLink
+                v-if="prev"
+                :to="prev._path"
+                class="link link-hover blod my-2">
+                <Icon name="uil:angle-left" />{{ prev.title }}
+              </NuxtLink>
+              <NuxtLink
+                v-if="next"
+                :to="next._path"
+                class="link link-hover ml-auto my-2">
+                {{ next.title }}
+                <Icon name="uil:angle-right" />
+              </NuxtLink>
+            </div>
+            <div class="divider">交流区</div>
+            <ClientOnly fallback-tag="span" fallback="加载中...">
+              <Comments />
+            </ClientOnly>
+          </template>
+        </ContentDoc>
+      </article>
     </div>
   </NuxtLayout>
 </template>
@@ -51,12 +43,15 @@ import { createEventEmitter } from "~/utils/event-emiter";
 import { defineComponent, onMounted } from "vue";
 import { ref } from "vue";
 import { createSideCtx } from "~/components/Side.vue";
+import { useAppStore } from "~/store/app.js";
 
 export const articleMounted$ =
   createEventEmitter<HTMLElement>("articleMounted");
 
 export default defineComponent({
   setup() {
+    const appStore = useAppStore();
+
     const elRef = ref<HTMLElement>();
     onMounted(() => {
       const zoom = mediumZoom(elRef.value?.querySelectorAll("[data-zoomable]"));
@@ -74,15 +69,25 @@ export default defineComponent({
 
     createSideCtx();
 
-    const { surround } = useContent();
-    const [pre, next] = surround.value;
+    const { prev, next, page } = useContent();
+
+    //#region 刷新文章内容
+    const contentRefreshKey = ref(0);
+    watchEffect(() => {
+      if(appStore.isOnline && !page.value) {
+        contentRefreshKey.value++
+      }
+    })
+    //#endregion
 
     provide("imgFlag", 0);
 
     return {
       elRef,
-      pre,
+      prev, 
       next,
+      appStore,
+      contentRefreshKey
     };
   },
 });

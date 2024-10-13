@@ -6,14 +6,21 @@
 
 <style>
 article {
-  li ul::before {
-    content: "";
-    position: absolute;
-    height: calc(100% - 16px);
-    width: 1px;
-    background-color: oklch(var(--b3));
-    left: -1em;
-    top: 0.9em;
+  li {
+    ul::before {
+      content: "";
+      position: absolute;
+      height: calc(100% - 1.2em);
+      width: 2px;
+      background-color: oklch(var(--nc));
+      left: -1em;
+      top: 1em;
+    }
+
+    ul:hover::before {
+      background-color: oklch(var(--bc));
+      transition: all 0.2s;
+    }
   }
 
   ul {
@@ -27,11 +34,16 @@ article {
 
       &::before {
         content: "-";
-        font-size: 1.3em;
+        font-size: 1.5em;
         position: absolute;
-        left: -0.95em;
+        left: -0.85em;
         color: oklch(var(--nc));
         top: -0.25em;
+      }
+
+      &:hover::before {
+        color: oklch(var(--bc));
+        transition: all 0.2s;
       }
     }
   }

@@ -9,7 +9,7 @@ Thanks for the help of the following projects.
 - [nuxt-content](https://github.com/nuxt/content)
 - [daisyui](https://github.com/saadeghi/daisyui)
 
-## TODO
+## Features and Todos
 
 - [x] 使用 nuxt-content 构建博客
 - [x] 列表页
@@ -24,8 +24,6 @@ Thanks for the help of the following projects.
 - [x] 图片优化
 - 部署
   - [x] cloudflare page
-- [x] 工具栏
-  - [ ] 图标标亮
-  - [ ] 侧边栏
-- [ ] PWA 安装
-  - [ ] SW 缓存
+- [x] PWA
+  - 独立窗口
+  - 离线模式: 按需缓存-SWR

@@ -1,8 +1,12 @@
-import type { } from "nuxt-icon";
-import type { } from "@vite-pwa/nuxt";
-import type { } from "@nuxtjs/tailwindcss";
-import type { } from "@nuxt/content";
 import config from "./app.config";
+import path from "node:path";
+import process from "node:process";
+
+// 开发模式下的构建
+const isDevBuild = Boolean(process.env.DEV_BUILD);
+if (isDevBuild) {
+  process.env.NODE_ENV = "development"
+}
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -15,7 +19,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-icon",
     "@nuxtjs/color-mode",
-    // "@vite-pwa/nuxt",
+    "@vite-pwa/nuxt",
     "@pinia/nuxt"
   ],
 
@@ -24,15 +28,24 @@ export default defineNuxtConfig({
       rollupOptions: {
         external: [/node\:.*?/]
       },
+      minify: !isDevBuild
     }
+  },
+  sourcemap: {
+    client: isDevBuild,
+    server: isDevBuild
   },
 
   nitro: {
     prerender: {
       failOnError: false,
       ignore: [
-        /^http/
-      ]
+        /^http/,
+        /generate/,
+      ],
+    },
+    routeRules: {
+      "/offline": { static: true }
     }
   },
 
@@ -88,13 +101,48 @@ export default defineNuxtConfig({
   },
 
   pwa: {
-    injectRegister: "inline",
+    strategies: 'injectManifest',
+    srcDir: path.resolve(),
+    filename: 'sw.ts',
+    injectManifest: {
+      injectionPoint: undefined,
+      sourcemap: true
+    },
+    injectRegister: "script",
     registerType: "prompt",
     scope: "/", // 全局控制
-    workbox: {
-      // 预缓存
-      globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,gif}']
-    }
+    // devOptions: {
+    //   enabled: true,
+    //   type: "module"
+    // },
+    manifest: {
+      name: 'Laoergege-Blog',
+      short_name: 'Fuck',
+      theme_color: "#FD9C92",
+      "icons": [
+        {
+          "src": "pwa-64x64.png",
+          "sizes": "64x64",
+          "type": "image/png"
+        },
+        {
+          "src": "pwa-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
+          "src": "pwa-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        },
+        {
+          "src": "maskable-icon-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "maskable"
+        }
+      ],
+    },
   },
 
   colorMode: {

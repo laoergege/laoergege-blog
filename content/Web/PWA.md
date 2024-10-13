@@ -1,5 +1,6 @@
 ---
 discussionID: 3k_7aC2ri9lgf-gcm7-7S
+release: true
 tags:
  - web
  - pwa
@@ -8,43 +9,39 @@ tags:
 # PWA
 
 - PWA：渐进式 Web 应用程序，是一系列技术集合
-  - [Manifest](https://developer.mozilla.org/zh-CN/docs/Web/Manifest)
+  - [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
   - [Service Worker](#service-worker)
   - CacheStorage
   - Notification
   - Push Message
 - PWA 实践
-  - 设计标准
-    - 移动优先、响应式设计
-    - 渐进增强，功能检测
-      - 使用 `@supports` 检查浏览器是否支持 CSS 功能
-      - 发布现代 JavaScript，您可以使用 module/nomodule 模式
-    - 提供快速且良好的用户体验
-      - Web Vitals 
-        - 加载中
-        - 交互的
-        - 视觉稳定性
-  - 应用分发与安装
-    - 分发
-      - 应用商城
-      - Web 搜素
-    - Manifest + 离线模式
-      - 图标
-      - 主题
-        - 主题颜色
-        - 背景颜色
-        - 强调色
-  - 应用更新
-    - 更新类型
-      - Manifest
-      - 应用程序数据
-      - [Service Worker 实践](#service-worker-实战)
-        - 版本管理
-        - 资源缓存
-    - 更新提醒
-      - 使用 DOM 或画布 API在屏幕上呈现通知
-      - Message push
-      - 图标提示：[Badging API](https://developer.mozilla.org/en-US/docs/Web/API/Badging_API)
+  - 独立窗口、离线模式
+  - ServiceWorker 作用域冲突
+    - 功能拆封成各个域的服务
+    - 功能提升：全部整合到根作用域，以插件机制动态注册功能
+  - 版本管理
+    - 基于 URL 版本地址，避免 index.html 缓存
+    - 保持 URL 地址不变，由 SW 内部机制触发更新检测
+      > 离线模式下 index 会被缓存，避免更改你的 service worker 脚本的 URL，会导致 sw 的脚本依旧是旧内容
+  - [更新提示](https://developer.chrome.com/docs/workbox/handling-service-worker-updates)
+  - 资源缓存
+    - [ServiceWorker 缓存与 HTTP 缓存](https://mp.weixin.qq.com/s/OlOMm20cSRaQESiZ_DC7mQ)
+    - 原则：合理使用空间和带宽，在快速或离线体验之间找到平衡点
+    - 缓存时机
+      - 预缓存
+      - [运行时缓存](https://developer.chrome.com/docs/workbox/caching-strategies-overview)
+        - 仅缓存  
+        - 仅限网络
+        - 缓存优先：优先使用缓存，资源不存在则退为网络请求 
+        - 网络优先：优先网络请求，网络失败则退为使用缓存 
+        - SWR(Stale-while-revalidate)
+    - 跨域资源
+      - 响应必须返回 2xx 状态代码，否则 `cache.add()`、`cache.addAll()` 会失败
+      - 将被当作**不透明响应**：意味着您的代码将无法查看或修改该响应的内容或标头，及其大小
+    - 更新及清除
+  - [Service Worker 启动可能会延迟网络请求](https://developer.chrome.com/docs/workbox/service-worker-deployment#service_worker_startup_can_delay_network_requests)
+    - [Service Worker 注册](https://web.dev/articles/service-workers-registration?hl=zh-cn)
+    - [导航预加载提高 Service Worker 启动速度](https://web.dev/blog/navigation-preload)
 
 ## Service Worker
 
@@ -57,11 +54,9 @@ tags:
   - `navigator.serviceWorker.controller` 获取当前作用域的 Service Worker 实例
   - **作用域冲突**
     - 每个范围只允许一个 ServiceWorker 实例
-    - 子域注册的服务会优先于父域的服务，这就导致一些全局功能失效：
-      - 功能拆封，各个域的服务主动引入
-      - 功能提升：全部整合到根作用域，以插件机制动态注册功能
+    - 子域注册的服务会优先于父域的服务
 - [生命周期](#生命周期)
-  - [SW 更新触发](#sw-更新触发)
+- [更新触发](#更新触发)
 
 ### 生命周期
 
@@ -112,21 +107,27 @@ tags:
   - `sync`
   - `notification`
   - `periodic-sync`
+  - `message`
 - 终止与启动
+  - Service Worker 并不会一直运行在后台。相较于传统的 Web Workers，Service Worker 是事件驱动的，它的生命周期和运行方式受到浏览器的管理，以节省资源和电量。具体来说，Service Worker 只会在需要时启动，完成任务后就会在没有任何事件处理且闲置，一段时间后会被自动关闭
 - 废弃
   - 安装失败
   - 激活失败
   - 用户执行了注销操作 `registration.unregister();`
   - 新版本的 Service Worker 替换了旧版本
 
-### SW 更新触发
+### 更新触发
 
 - 更新触发
   - Scope 内导航
   - 注册的 SW 的 URL 或者 Scope 发生改变
   - A functional events such as push and sync, unless there's been an update check within the previous 24 hours.
-- 检测原理
+- 检测原理（[Fresher service workers, by default](https://developer.chrome.com/blog/fresher-sw)）
   - 检测 SW 及 importScript 内容字节是否发生变化
+  - updateViaCache 
+    - import（默认）：请求 Service Worker 更新时将忽略 HTTP 缓存，对 importScripts 的请求仍将通过 HTTP 缓存
+    - all
+    - none
 - 手动触发更新检查
   ```js
   navigator.serviceWorker.register('/sw.js').then(reg => {
@@ -167,74 +168,8 @@ tags:
     });
   ```
 
-### Service Worker 实战
-
-- SW 版本管理
-  - 原则：更新检测时机最好在不影响应用的体验的时候
-  - SW 自动更新
-  - SW 版本降级
-- 资源缓存
-  - 原则
-    - 合理使用空间和带宽，在快速或离线体验之间找到平衡点
-    - 不要一次性缓存所有资产，在 PWA 的生命周期内合理得安排多次缓存资产
-  - 缓存时机
-    - 在安装 service worker 时缓存最少的资产集
-    - 网络空闲或者主线空闲的时候
-    - 当用户导航到某个部分或路线时按需缓存
-    - 激活时清除旧版本
-    - 响应式缓存
-  - 缓存策略
-    - 预缓存
-    - 按需缓存
-    - 运行时缓存：指在运行时从网络请求资源时的缓存策略（[代码示例](https://web.dev/learn/pwa/serving/)）
-      - 仅缓存  
-      - 仅限网络
-      - 缓存优先：优先使用缓存，资源不存在则退为网络请求 
-      - 网络优先：优先网络请求，网络失败则退为使用缓存 
-      - SWR(Stale-while-revalidate)
-  - 跨域资源
-    - 响应必须返回 2xx 状态代码，否则 `cache.add()`、`cache.addAll()` 会失败
-    - 将被当作**不透明响应**：意味着您的代码将无法查看或修改该响应的内容或标头，及其大小
-  - 更新及清除
-  - WorkBox
-    - 路由拦截
-    - Workbox 模块在不同的上下文中工作
-      - 
-
-### SW 版本管理（注册更新）
-
-避免更改你的 service worker 脚本的 URL
-
-```html
- <!-- In index.html, for example: -->
- <script>
-   // Don't register the service worker
-   // until the page has fully loaded
-   window.addEventListener("load", () => {
-     // Is service worker available?
-     if ("serviceWorker" in navigator) {
-       navigator.serviceWorker
-         .register("/sw.js")
-         .then(() => {
-           console.log("Service worker registered!");
-         })
-         .catch((error) => {
-           console.warn("Error registering service worker:");
-           console.warn(error);
-         });
-     }
-   });
- </script>
- ```
-
-
-
-- 离线模式下 index 会被缓存，导致 sw 的脚本依旧是旧内容
-  - 避免更改 Service Worker 脚本的 URL
-  - 由 SW 内部机制触发更新检测
-
 ## 学习参考
 
-- [Progressive Web Apps](https://web.dev/progressive-web-apps/)
 - [Learn PWA](https://web.dev/learn/pwa/)
 - [The service worker lifecycle](https://web.dev/service-worker-lifecycle/)
+- [【第2596期】如何构建可控,可靠,可扩展的 PWA 应用](https://mp.weixin.qq.com/s/4fuP1puANOOGdGj0oAny1Q)
