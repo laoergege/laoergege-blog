@@ -57,13 +57,10 @@ registerRoute(
 setCatchHandler(async ({ request }) => {
   // 离线状态，请求的是文档，返回离线页面
   if (request.destination === 'document' && request.mode === "navigate" && !navigator.onLine) {
-    const resp = (await caches.match('/offline')) ?? Response.error();
-    const res = new Response(resp.body)
-    return res
-  } else {
-    // 对于其他类型的请求，返回 Response 对象，标示请求失败
-    return Response.error()
+    return (await caches.match('/offline')) || Response.error();
   }
+
+  return Response.error()
 })
 
 self.addEventListener('message', (event) => {

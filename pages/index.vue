@@ -5,7 +5,7 @@
         v-for="article in list"
         :key="article._path"
         class="place-main flex flex-col gap-2">
-        <NuxtLink :to="article._path" target="_blank">
+        <NuxtLink :to="article._path">
           <h2 class="text-xl sm:text-2xl font-semibold hover:text-secondary">
             {{ article.title }}
           </h2>
