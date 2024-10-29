@@ -10,8 +10,18 @@ if (isDevBuild) {
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  extends: ["@nuxt-themes/typography"],
+  extends: "@nuxt-themes/typography",
   typescript: { includeWorkspace: true },
+
+  features: {
+    inlineStyles: false
+  },
+  routeRules: {
+    "/offline": {
+      static: true,
+      experimentalNoScripts: true
+    }
+  },
 
   modules: [
     "@nuxt/content",
@@ -20,7 +30,7 @@ export default defineNuxtConfig({
     "nuxt-icon",
     "@nuxtjs/color-mode",
     "@vite-pwa/nuxt",
-    "@pinia/nuxt"
+    "@pinia/nuxt",
   ],
 
   vite: {
@@ -43,9 +53,6 @@ export default defineNuxtConfig({
         /^http/,
         /generate/,
       ],
-    },
-    routeRules: {
-      "/offline": { static: true }
     }
   },
 
