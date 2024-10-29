@@ -2,21 +2,24 @@ import { defineStore } from 'pinia'
 import { computedAsync } from "@vueuse/core";
 
 export const useTagsStore = defineStore('tags', () => {
-
   const tags$ = computedAsync(async () => {
-    const contentQuery = await queryContent("/").where({
-      "release": { $eq: true }
-    }).only("tags").find();
-    const flatTags = contentQuery.flatMap(d => d.tags);
-    const stat = flatTags.reduce((res, tag) => {
-      if (tag) {
-        res[tag] ??= 0;
-        res[tag]++;
-      }
-      return res;
-    }, {})
-    return [...new Set(flatTags)].filter(t => t).sort((a, b) => (stat[b] - stat[a]))
-  }, [])
+    const { data } = await useAsyncData("tags", async () => {
+      const contentQuery = await queryContent("/")
+        .where({ "release": { $eq: true } })
+        .only("tags")
+        .find()
+      const flatTags = contentQuery.flatMap(d => d.tags);
+      const stat = flatTags.reduce((res, tag) => {
+        if (tag) {
+          res[tag] ??= 0;
+          res[tag]++;
+        }
+        return res;
+      }, {})
+      return [...new Set(flatTags)].filter(t => t).sort((a, b) => (stat[b] - stat[a]))
+    })
+    return data.value ?? []
+  }, []);
   const selectedTags$ = ref<Record<string, number>>({});
   const selectedTags = computed(() => Object.keys(selectedTags$.value).filter(key => selectedTags$.value[key]))
   const selectTag = (tag: string) => {
