@@ -1,6 +1,7 @@
 import config from "./app.config";
 import path from "node:path";
 import process from "node:process";
+import { THEME_PATH } from "./server/plugins/pinceau"
 
 // 开发模式下的构建
 const isDevBuild = Boolean(process.env.DEV_BUILD);
@@ -20,6 +21,9 @@ export default defineNuxtConfig({
     "/offline": {
       static: true,
       experimentalNoScripts: true
+    },
+    "/pinceau-theme.css": {
+      prerender: true
     }
   },
 

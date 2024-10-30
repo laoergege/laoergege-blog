@@ -3,7 +3,7 @@ import type { NitroAppPlugin } from 'nitropack'
 // @ts-ignore - Nitro virtual import
 import { useStorage } from '#internal/nitro'
 
-const THEME_PATH = "/pinceau-theme"
+export const THEME_PATH = "/pinceau-theme.css"
 
 // 消除 html 内联 pinceau theme 样式
 export default <NitroAppPlugin>async function (nitro) {
