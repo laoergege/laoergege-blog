@@ -16,14 +16,15 @@ tags:
   - Push Message
 - PWA 实践
   - 独立窗口、离线模式
-  - ServiceWorker 作用域冲突
-    - 功能拆封成各个域的服务
-    - 功能提升：全部整合到根作用域，以插件机制动态注册功能
-  - 版本管理
-    - 基于 URL 版本地址，避免 index.html 缓存
-    - 保持 URL 地址不变，由 SW 内部机制触发更新检测
-      > 离线模式下 index 会被缓存，避免更改你的 service worker 脚本的 URL，会导致 sw 的脚本依旧是旧内容
-  - [更新提示](https://developer.chrome.com/docs/workbox/handling-service-worker-updates)
+  - ServiceWorker 
+    - 作用域冲突
+      - 功能拆封成各个域的服务
+      - 功能提升：全部整合到根作用域，以插件机制动态注册功能
+    - 版本管理
+      - 基于 URL 版本地址，避免 index.html 缓存
+      - 保持 URL 地址不变，由 SW 内部机制触发更新检测
+        > 离线模式下 index 会被缓存，避免更改你的 service worker 脚本的 URL，会导致 sw 的脚本依旧是旧内容
+    - [更新提示](https://developer.chrome.com/docs/workbox/handling-service-worker-updates)
   - 资源缓存
     - [ServiceWorker 缓存与 HTTP 缓存](https://mp.weixin.qq.com/s/OlOMm20cSRaQESiZ_DC7mQ)
     - 原则：合理使用空间和带宽，在快速或离线体验之间找到平衡点
